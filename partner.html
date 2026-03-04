@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BizTechoff – שותפי מכירות</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4ff; color: #1a1a2e; direction: rtl; }
+
+  header {
+    background: linear-gradient(135deg, #1a3a6b 0%, #2563b0 100%);
+    color: white; padding: 60px 40px; text-align: center;
+  }
+  header h1 { font-size: 2.6rem; margin-bottom: 10px; letter-spacing: 1px; }
+  header p { font-size: 1.2rem; opacity: 0.85; margin-bottom: 6px; }
+  header .tagline { font-size: 1rem; opacity: 0.65; }
+
+  .badge {
+    display: inline-block; background: #f0b429; color: #1a1a2e;
+    padding: 6px 18px; border-radius: 20px; font-weight: 700;
+    margin-top: 20px; font-size: 0.95rem;
+  }
+
+  .section { max-width: 860px; margin: 50px auto; padding: 0 20px; }
+
+  .card {
+    background: white; border-radius: 16px; padding: 36px 40px;
+    box-shadow: 0 4px 20px rgba(37,99,176,0.10); margin-bottom: 32px;
+  }
+  .card h2 { color: #1a3a6b; font-size: 1.5rem; margin-bottom: 20px; border-right: 4px solid #2563b0; padding-right: 14px; }
+
+  .earn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  .earn-box {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8efff 100%);
+    border: 2px solid #c7d9ff; border-radius: 12px; padding: 22px 16px; text-align: center;
+  }
+  .earn-box .pct { font-size: 2rem; font-weight: 800; color: #1a3a6b; }
+  .earn-box .range { font-size: 0.85rem; color: #555; margin-top: 4px; }
+  .earn-box .amount { font-size: 1.1rem; font-weight: 700; color: #2563b0; margin-top: 8px; }
+  .earn-box.highlight { background: linear-gradient(135deg, #1a3a6b 0%, #2563b0 100%); border-color: #1a3a6b; }
+  .earn-box.highlight .pct, .earn-box.highlight .amount { color: #f0b429; }
+  .earn-box.highlight .range { color: rgba(255,255,255,0.8); }
+
+  .steps { counter-reset: step; }
+  .step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+  .step-num {
+    background: #2563b0; color: white; width: 36px; height: 36px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; flex-shrink: 0; font-size: 1rem;
+  }
+  .step-text h3 { font-size: 1rem; color: #1a3a6b; margin-bottom: 4px; }
+  .step-text p { font-size: 0.9rem; color: #555; line-height: 1.5; }
+
+  .checkmark-list { list-style: none; }
+  .checkmark-list li { padding: 8px 0; font-size: 0.95rem; color: #333; border-bottom: 1px solid #f0f0f0; }
+  .checkmark-list li:last-child { border-bottom: none; }
+  .checkmark-list li::before { content: "✅ "; }
+
+  .xmark-list { list-style: none; }
+  .xmark-list li { padding: 8px 0; font-size: 0.95rem; color: #333; }
+  .xmark-list li::before { content: "❌ "; }
+
+  .cta {
+    background: linear-gradient(135deg, #1a3a6b 0%, #2563b0 100%);
+    border-radius: 16px; padding: 40px; text-align: center; color: white; margin-bottom: 50px;
+  }
+  .cta h2 { font-size: 1.8rem; margin-bottom: 12px; }
+  .cta p { opacity: 0.85; font-size: 1rem; margin-bottom: 24px; }
+  .cta a {
+    display: inline-block; background: #f0b429; color: #1a1a2e;
+    padding: 14px 36px; border-radius: 30px; font-weight: 800; font-size: 1.1rem;
+    text-decoration: none; transition: transform 0.2s;
+  }
+  .cta a:hover { transform: scale(1.04); }
+
+  .example-box {
+    background: #f8fbff; border: 1px solid #c7d9ff; border-radius: 10px;
+    padding: 18px 22px; margin-top: 16px;
+  }
+  .example-box p { font-size: 0.9rem; line-height: 1.7; }
+  .example-box strong { color: #2563b0; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.8rem; }
+    .earn-grid { grid-template-columns: 1fr; }
+    .card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💼 BizTechoff</h1>
+  <p>פיתוח פלטפורמות SaaS מותאמות אישית</p>
+  <p class="tagline">Node.js · Angular · Remult · PostgreSQL</p>
+  <div class="badge">🤝 מחפשים שותפי מכירות</div>
+</header>
+
+<div class="section">
+
+  <div class="card">
+    <h2>💰 כמה תרוויח?</h2>
+    <div class="earn-grid">
+      <div class="earn-box">
+        <div class="pct">10%</div>
+        <div class="range">פרויקטים עד 20,000 ₪</div>
+        <div class="amount">עד 2,000 ₪ לסגירה</div>
+      </div>
+      <div class="earn-box">
+        <div class="pct">12%</div>
+        <div class="range">20,001 – 50,000 ₪</div>
+        <div class="amount">עד 6,000 ₪ לסגירה</div>
+      </div>
+      <div class="earn-box highlight">
+        <div class="pct">15%</div>
+        <div class="range">מעל 50,000 ₪</div>
+        <div class="amount">7,500 ₪+</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <p>🧮 <strong>דוגמה:</strong> הבאת לקוח שחתם על פרויקט ב-40,000 ₪ —
+      קיבלת <strong>4,800 ₪</strong> עמלה. פסיבי לגמרי — אתה מביא, אנחנו סוגרים ומבצעים.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🚀 איך זה עובד?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>מאתר לקוח פוטנציאלי</h3>
+          <p>עסק שצריך אפליקציה, מערכת ניהול, פורטל לקוחות, אוטומציה — כל עסק שצריך פיתוח מותאם.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>מעביר לנו את הליד</h3>
+          <p>שם + טלפון + תיאור קצר של הצורך. הכל בוואטסאפ. זהו.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>אנחנו מטפלים בהכל</h3>
+          <p>פגישה, הצעת מחיר, פיתוח, ליווי. אתה לא צריך לדעת כלום בפיתוח.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h3>הפרויקט נסגר → מקבל עמלה</h3>
+          <p>תוך 14 יום מהתשלום הראשון של הלקוח, העמלה מועברת אליך.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✅ מה כן / לא נדרש ממך?</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div>
+        <p style="font-weight:700; color:#16a34a; margin-bottom:10px;">כן נדרש:</p>
+        <ul class="checkmark-list">
+          <li>קשרים עם עסקים</li>
+          <li>הבנה בסיסית בצרכי עסקים</li>
+          <li>תקשורת טובה</li>
+          <li>רצון להרוויח</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700; color:#dc2626; margin-bottom:10px;">לא נדרש:</p>
+        <ul class="xmark-list">
+          <li>ידע בפיתוח</li>
+          <li>ניסיון מכירות</li>
+          <li>שעות קבועות</li>
+          <li>מינימום לידים</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 אילו לקוחות מתאימים?</h2>
+    <ul class="checkmark-list">
+      <li>עסקים שמנהלים תהליכים ידנית (אקסל, WhatsApp, נייר)</li>
+      <li>חברות שרוצות פורטל לקוחות או מערכת ניהול פנימית</li>
+      <li>סטארטאפים שצריכים MVP מהיר</li>
+      <li>עמותות / ארגונים עם תהליכים מורכבים</li>
+      <li>עסקים שמחפשים אוטומציה של תהליכים</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <h2>🤝 מוכן להצטרף?</h2>
+    <p>שלח לנו ווטסאפ ונשלח הסכם + כל הפרטים</p>
+    <a href="https://wa.me/972XXXXXXXXX?text=שלום, אני מעוניין להצטרף כשותף מכירות של BizTechoff" target="_blank">📲 שלח ווטסאפ עכשיו</a>
+    <p style="margin-top: 16px; font-size: 0.85rem; opacity: 0.6;">אין התחייבות · אין בלעדיות · בתוקף מיידי</p>
+  </div>
+
+</div>
+</body>
+</html>
