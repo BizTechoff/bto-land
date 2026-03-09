@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShomaTech — מערכת ניהול שמאי מקרקעין</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1629;
+    --navy-mid: #112240;
+    --navy-light: #1a3358;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --cream: #F5EDD6;
+    --white: #FFFFFF;
+    --gray: #8892A0;
+    --text: #CCD6F6;
+    --accent: #64FFDA;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    overflow-x: hidden;
+    direction: rtl;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(11,22,41,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .logo {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
+  .nav-links a {
+    color: var(--gray); text-decoration: none;
+    font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 100%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 700px; position: relative; z-index: 2; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--gold-dim);
+    background: var(--gold-dim);
+    color: var(--gold);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500;
+    margin-bottom: 2rem;
+    animation: fadeSlideDown 0.8s ease both;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    animation: fadeSlideDown 0.8s ease 0.1s both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; right: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    border-radius: 2px;
+  }
+
+  .hero p {
+    font-size: 1.15rem; line-height: 1.8;
+    color: var(--gray);
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+    animation: fadeSlideDown 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeSlideDown 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 0.9rem 2.2rem;
+    font-size: 1rem; font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 40px rgba(201,168,76,0.3);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 60px rgba(201,168,76,0.5);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(204,214,246,0.3);
+    padding: 0.9rem 2.2rem;
+    font-size: 1rem; font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    animation: fadeSlideDown 0.8s ease 0.4s both;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-label { font-size: 0.8rem; color: var(--gray); margin-top: 0.3rem; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 7rem 4rem; position: relative; }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.2; margin-bottom: 1.2rem;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--gray);
+    line-height: 1.8; max-width: 580px;
+  }
+
+  /* ── PAIN SECTION ── */
+  .pain { background: var(--navy-mid); }
+  .pain-inner { max-width: 1100px; margin: 0 auto; }
+  .pain-header { margin-bottom: 4rem; }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .pain-card {
+    background: var(--navy-mid);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .pain-card:hover { background: var(--navy-light); }
+  .pain-card::before {
+    content: attr(data-num);
+    position: absolute; top: 1.5rem; left: 2rem;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 5rem; font-weight: 900;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+  }
+
+  .pain-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .pain-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.7rem; }
+  .pain-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── FEATURES ── */
+  .features { }
+  .features-inner { max-width: 1100px; margin: 0 auto; }
+  .features-header { margin-bottom: 4rem; }
+
+  .features-tabs {
+    display: flex; gap: 0.5rem; margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: transparent;
+    border: 1px solid rgba(204,214,246,0.15);
+    color: var(--gray);
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.85rem; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .feature-card:hover::after { opacity: 1; }
+
+  .feature-icon {
+    width: 48px; height: 48px;
+    background: var(--gold-dim);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.3rem;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .feature-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+  .feature-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.7; }
+
+  .feature-tag {
+    display: inline-block;
+    background: var(--gold-dim); color: var(--gold);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 1px;
+    padding: 0.2rem 0.7rem; border-radius: 4px;
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+  .feature-tag.soon {
+    background: rgba(100,255,218,0.08);
+    color: var(--accent);
+  }
+
+  /* ── INTEGRATIONS ── */
+  .integrations { background: var(--navy-mid); }
+  .integrations-inner { max-width: 1100px; margin: 0 auto; }
+  .integrations-header { margin-bottom: 4rem; text-align: center; }
+  .integrations-header .section-sub { margin: 0 auto; }
+
+  .integration-row {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .integration-pill {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 100px;
+    padding: 0.9rem 2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .integration-pill:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .pill-icon { font-size: 1.3rem; }
+  .pill-name { font-weight: 600; color: var(--white); font-size: 0.9rem; }
+  .pill-status {
+    font-size: 0.7rem; color: var(--gray);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    padding-right: 0.8rem;
+    margin-right: 0.2rem;
+  }
+
+  /* ── USERS ── */
+  .users { }
+  .users-inner { max-width: 1100px; margin: 0 auto; }
+  .users-header { margin-bottom: 4rem; }
+
+  .users-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .user-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: flex; gap: 2rem;
+    align-items: flex-start;
+    transition: border-color 0.3s;
+  }
+  .user-card:hover { border-color: rgba(201,168,76,0.35); }
+
+  .user-avatar {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--gold-dim);
+    border: 2px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; flex-shrink: 0;
+  }
+  .user-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .user-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.7; }
+  .user-perks {
+    margin-top: 1rem; display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .user-perk {
+    font-size: 0.8rem; color: var(--accent);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .user-perk::before { content: '✓'; font-weight: 700; }
+
+  /* ── WORKFLOW ── */
+  .workflow { background: var(--navy-mid); }
+  .workflow-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .workflow-header { margin-bottom: 4rem; }
+
+  .workflow-steps {
+    display: flex; gap: 0;
+    position: relative;
+  }
+  .workflow-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px; right: 14%; left: 14%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .step {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    gap: 1rem; padding: 0 1rem;
+    position: relative;
+  }
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.2rem; font-weight: 900;
+    color: var(--gold);
+    position: relative; z-index: 1;
+    box-shadow: 0 0 30px rgba(201,168,76,0.2);
+  }
+  .step h4 { font-size: 0.9rem; font-weight: 700; color: var(--white); }
+  .step p { font-size: 0.8rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 8rem 4rem;
+    position: relative; overflow: hidden;
+  }
+
+  .cta-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      var(--navy);
+  }
+
+  .cta-box {
+    position: relative; z-index: 2;
+    max-width: 680px; margin: 0 auto;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 24px;
+    padding: 5rem 4rem;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 60px rgba(201,168,76,0.06);
+  }
+
+  .cta-box h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--white);
+    margin-bottom: 1.2rem;
+  }
+  .cta-box p { color: var(--gray); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2.5rem; }
+
+  .cta-form {
+    display: flex; gap: 0.75rem; max-width: 460px; margin: 0 auto;
+  }
+  .cta-input {
+    flex: 1;
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px;
+    padding: 0.9rem 1.2rem;
+    color: var(--white);
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    direction: rtl;
+  }
+  .cta-input::placeholder { color: var(--gray); }
+  .cta-input:focus { border-color: var(--gold); }
+
+  .cta-note { font-size: 0.78rem; color: var(--gray); margin-top: 1.2rem; opacity: 0.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E1A;
+    padding: 3rem 4rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.2rem; font-weight: 900; color: var(--white);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy { font-size: 0.8rem; color: var(--gray); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.8rem; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 2rem; border-radius: 2px;
+  }
+
+  /* hero floating card */
+  .hero-visual {
+    position: absolute;
+    left: 4rem; top: 50%;
+    transform: translateY(-50%);
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .hero-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    width: 300px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.2rem;
+  }
+  .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .card-title { font-size: 0.8rem; font-weight: 600; color: var(--gray); }
+  .card-value {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .card-label { font-size: 0.75rem; color: var(--gray); }
+  .card-bar-wrap { margin-top: 1.2rem; background: rgba(255,255,255,0.05); border-radius: 4px; height: 6px; }
+  .card-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 4px; width: 72%; }
+  .mini-list { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .mini-item { display: flex; justify-content: space-between; font-size: 0.75rem; }
+  .mini-key { color: var(--gray); }
+  .mini-val { color: var(--text); font-weight: 500; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, .hero { padding: 4rem 1.5rem; }
+    .pain-grid, .features-grid, .users-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .workflow-steps { flex-direction: column; align-items: center; gap: 2rem; }
+    .workflow-steps::before { display: none; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .cta-form { flex-direction: column; }
+    .cta-box { padding: 3rem 2rem; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="logo">Shoma<span>Tech</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">תכונות</a></li>
+    <li><a href="#integrations">אינטגרציות</a></li>
+    <li><a href="#users">למי זה מיועד</a></li>
+    <li><a href="#demo" class="nav-cta">תיאום הדגמה</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      פלטפורמה מקצועית לשמאי מקרקעין בישראל
+    </div>
+
+    <h1>ניהול <em>שומות</em><br>בעידן החדש</h1>
+
+    <p>
+      כל מה שצריך שמאי מקרקעין — בפלטפורמה אחת.
+      ניהול תיקים, הפקת דוחות, חיבור לטאבו, מדלן ורשות המסים,
+      ניהול לקוחות ותשלומים — הכל אינטגרטיבי, מאובטח ומוכן לעבודה.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#demo" class="btn-primary">🚀 &nbsp;לתיאום הדגמה חינם</a>
+      <a href="#features" class="btn-ghost">← גלה את הפלטפורמה</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">8<span>+</span></div>
+        <div class="stat-label">מודולים פעילים</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">ישראלי ועברי</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">אינטגרציות חיצוניות</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating card -->
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-header">
+        <div class="card-dot" style="background:#64FFDA"></div>
+        <div class="card-title">תיק שומה פעיל</div>
+      </div>
+      <div class="card-value">₪2.4M</div>
+      <div class="card-label">שווי שומה — דירת 5 חדרים, תל אביב</div>
+      <div class="card-bar-wrap"><div class="card-bar"></div></div>
+      <div class="mini-list">
+        <div class="mini-item">
+          <span class="mini-key">סטטוס</span>
+          <span class="mini-val" style="color:#64FFDA">טיוטת דוח ✓</span>
+        </div>
+        <div class="mini-item">
+          <span class="mini-key">עסקאות השוואה</span>
+          <span class="mini-val">12 Comps</span>
+        </div>
+        <div class="mini-item">
+          <span class="mini-key">נתוני טאבו</span>
+          <span class="mini-val" style="color:#C9A84C">סונכרנו ✓</span>
+        </div>
+        <div class="mini-item">
+          <span class="mini-key">חשבונית</span>
+          <span class="mini-val">נשלחה ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PAIN POINTS ── -->
+<section class="pain" id="pain">
+  <div class="pain-inner">
+    <div class="pain-header reveal">
+      <span class="section-tag">האתגר</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">שמאי מקרקעין ב-2025<br>עובד בכלים של 2005</h2>
+      <p class="section-sub">אקסל, PDF ידני, מיילים לכל כיוון — ובסוף שוכחים על תשלום.
+      זה הזמן לשדרג.</p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal" data-num="01">
+        <div class="pain-icon">📁</div>
+        <h3>פיזור מידע</h3>
+        <p>תיקים בדרופבוקס, לקוחות באקסל, חשבוניות בגוגל-שיטס. אין תמונה שלמה אף פעם.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-1" data-num="02">
+        <div class="pain-icon">⏱️</div>
+        <h3>בזבוז זמן על ביורוקרטיה</h3>
+        <p>שעות על שעות מושקעות בחיפוש נתוני טאבו, כתיבה ידנית של דוחות ושליחת חשבוניות.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-2" data-num="03">
+        <div class="pain-icon">🔍</div>
+        <h3>עסקאות השוואה ידנית</h3>
+        <p>איסוף Comps ממדלן ויד2 לוקח שעות — ועדיין לא בטוחים שאספתם את הנכוניות.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-1" data-num="04">
+        <div class="pain-icon">💸</div>
+        <h3>תשלומים שנשכחים</h3>
+        <p>חשבוניות שלא נשלחו, תשלומים שלא נגבו. כסף שנשאר על השולחן.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-2" data-num="05">
+        <div class="pain-icon">🏢</div>
+        <h3>קושי לגדול</h3>
+        <p>הוספת שמאי נוסף למשרד הופכת לסיוט לוגיסטי — כי אין כלים לשתף עבודה.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-3" data-num="06">
+        <div class="pain-icon">🔐</div>
+        <h3>אבטחת מידע לקויה</h3>
+        <p>מסמכים רגישים בדרופבוקס פרטי, ללא הרשאות, ללא מעקב גישה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="features-header reveal">
+      <span class="section-tag">הפתרון</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">כל הכלים שצריך,<br>במקום אחד</h2>
+      <p class="section-sub">פלטפורמה מודולרית שגדלה איתך — ממשרד של שמאי יחיד ועד חברה גדולה.</p>
+    </div>
+
+    <div class="features-tabs">
+      <button class="tab-btn active">הכל</button>
+      <button class="tab-btn">ניהול תיקים</button>
+      <button class="tab-btn">אינטגרציות</button>
+      <button class="tab-btn">דוחות</button>
+      <button class="tab-btn">כספים</button>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <div class="feature-icon">📋</div>
+        <h3>ניהול תיקי שומה</h3>
+        <p>מעקב מלא אחרי כל תיק — מהזמנה ועד דוח חתום. סטטוסים, תאריכים, הערות פנימיות ומשימות.</p>
+        <span class="feature-tag">Core</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🏘️</div>
+        <h3>עסקאות השוואה (Comps)</h3>
+        <p>שליפה אוטומטית של עסקאות נדל"ן מטאבו, מדלן ויד2 — עם פילטרים חכמים לפי אזור, שטח ומחיר.</p>
+        <span class="feature-tag">אינטגרציה</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📄</div>
+        <h3>הפקת דוחות PDF</h3>
+        <p>תבניות מקצועיות ומותאמות לשוק הישראלי. יצירת דוח PDF חתום בלחיצת כפתור.</p>
+        <span class="feature-tag">דוחות</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">👥</div>
+        <h3>ניהול לקוחות (CRM)</h3>
+        <p>כרטיס לקוח מלא — פרטי קשר, היסטוריית תיקים, תשלומים, ולקוחות מיוחדים כמו בנקים וגופים מממנים.</p>
+        <span class="feature-tag">Core</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">💰</div>
+        <h3>תשלומים וחשבוניות</h3>
+        <p>הפקת חשבוניות מס דרך Green Invoice, מעקב תשלומים, תזכורות אוטומטיות.</p>
+        <span class="feature-tag">כספים</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">🏛️</div>
+        <h3>נתוני טאבו בזמן אמת</h3>
+        <p>שליפה ישירה מרשם המקרקעין — גוש, חלקה, זכויות רשומות, שעבודים, ועסקאות עבר.</p>
+        <span class="feature-tag">אינטגרציה</span>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>לוח בקרה מנהלי</h3>
+        <p>תמונת מצב בזמן אמת — כמה תיקים פתוחים, גביה, שמאים עמוסים, תיקים מאחרים.</p>
+        <span class="feature-tag">Core</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🏢</div>
+        <h3>ריבוי שמאים ומשרד</h3>
+        <p>הרשאות לפי תפקיד — מנהל משרד, שמאי, עוזר שמאי. כל אחד רואה רק מה שרלוונטי לו.</p>
+        <span class="feature-tag">Multi-tenant</span>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Valuation Assistant</h3>
+        <p>ניתוח נתונים חכם, הצעת ערך ראשונית בהתבסס על Comps וערכי שוק. בקרוב.</p>
+        <span class="feature-tag soon">Phase 4</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── INTEGRATIONS ── -->
+<section class="integrations" id="integrations">
+  <div class="integrations-inner">
+    <div class="integrations-header reveal">
+      <span class="section-tag">אינטגרציות</span>
+      <div class="gold-divider" style="margin: 0 auto 1.5rem;"></div>
+      <h2 class="section-title">מחובר למקורות הנתונים הרשמיים</h2>
+      <p class="section-sub">ShomaTech מתממשק ישירות עם גופי הנתונים הרלוונטיים לשוק הנדל"ן הישראלי.</p>
+    </div>
+
+    <div class="integration-row">
+      <div class="integration-pill reveal">
+        <span class="pill-icon">🏛️</span>
+        <span class="pill-status">Phase 1</span>
+        <span class="pill-name">רשם המקרקעין (טאבו)</span>
+      </div>
+      <div class="integration-pill reveal reveal-delay-1">
+        <span class="pill-icon">📋</span>
+        <span class="pill-status">Phase 1</span>
+        <span class="pill-name">רשות המסים</span>
+      </div>
+      <div class="integration-pill reveal reveal-delay-2">
+        <span class="pill-icon">🏠</span>
+        <span class="pill-status">Phase 1</span>
+        <span class="pill-name">מדלן — עסקאות נדל"ן</span>
+      </div>
+      <div class="integration-pill reveal reveal-delay-3">
+        <span class="pill-icon">📦</span>
+        <span class="pill-status">Phase 2</span>
+        <span class="pill-name">יד2 — מחירון</span>
+      </div>
+      <div class="integration-pill reveal reveal-delay-4">
+        <span class="pill-icon">🧾</span>
+        <span class="pill-status">Phase 1</span>
+        <span class="pill-name">Green Invoice — חשבוניות</span>
+      </div>
+      <div class="integration-pill reveal reveal-delay-5">
+        <span class="pill-icon">✉️</span>
+        <span class="pill-status">Phase 1</span>
+        <span class="pill-name">SMS / Email ללקוחות</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── USERS ── -->
+<section class="users" id="users">
+  <div class="users-inner">
+    <div class="users-header reveal">
+      <span class="section-tag">למי זה מיועד</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">מותאם לכל סוג<br>של שמאי מקרקעין</h2>
+    </div>
+
+    <div class="users-grid">
+      <div class="user-card reveal">
+        <div class="user-avatar">👤</div>
+        <div>
+          <h3>שמאי יחיד</h3>
+          <p>ניהול מלא של כל תיק, לקוח ותשלום — בלי עוזר מינהלי. חוסך שעות בשבוע.</p>
+          <div class="user-perks">
+            <span class="user-perk">הפקת דוחות מהירה</span>
+            <span class="user-perk">חשבוניות אוטומטיות</span>
+            <span class="user-perk">נתוני טאבו בשניות</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-card reveal reveal-delay-1">
+        <div class="user-avatar">🏢</div>
+        <div>
+          <h3>משרד שמאות</h3>
+          <p>ניהול מרובה שמאים, הרשאות לפי תפקיד, לוח בקרה מנהלי ומעקב ביצועים.</p>
+          <div class="user-perks">
+            <span class="user-perk">ריבוי משתמשים ותפקידים</span>
+            <span class="user-perk">לוח בקרה מנהלי</span>
+            <span class="user-perk">ניהול עומסים בין שמאים</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-card reveal reveal-delay-2">
+        <div class="user-avatar">🏦</div>
+        <div>
+          <h3>בנקים וגופים מממנים</h3>
+          <p>גישה מוגדרת לשומות שהוזמנו, אישור ודחייה, ממשק API ייעודי לאינטגרציה.</p>
+          <div class="user-perks">
+            <span class="user-perk">גישה ממוקדת לשומות</span>
+            <span class="user-perk">API לאינטגרציה</span>
+            <span class="user-perk">אישור דיגיטלי</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-card reveal reveal-delay-3">
+        <div class="user-avatar">👨‍💼</div>
+        <div>
+          <h3>לקוחות קצה</h3>
+          <p>פורטל לקוח — מעקב סטטוס תיק, הורדת דוחות ותשלום מקוון. חוויה מקצועית ושקופה.</p>
+          <div class="user-perks">
+            <span class="user-perk">עדכוני סטטוס בזמן אמת</span>
+            <span class="user-perk">הורדת דוחות</span>
+            <span class="user-perk">תשלום מקוון</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORKFLOW ── -->
+<section class="workflow" id="workflow">
+  <div class="workflow-inner">
+    <div class="workflow-header reveal">
+      <span class="section-tag">תהליך העבודה</span>
+      <div class="gold-divider" style="margin: 0 auto 1.5rem;"></div>
+      <h2 class="section-title">מהזמנה ועד שומה חתומה</h2>
+      <p class="section-sub" style="margin: 0 auto;">תהליך עבודה מובנה ואחיד לכל תיק שומה.</p>
+    </div>
+
+    <div class="workflow-steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h4>קליטת הזמנה</h4>
+        <p>פרטי לקוח, נכס ומטרת שומה</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h4>שליפת נתונים</h4>
+        <p>טאבו, עסקאות, מידע עירוני</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h4>ניתוח ושומה</h4>
+        <p>הזנת נתוני שטח ו-Comps</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <h4>הפקת דוח</h4>
+        <p>PDF מקצועי וחתימה דיגיטלית</p>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">5</div>
+        <h4>גבייה</h4>
+        <p>חשבונית ותשלום אוטומטי</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="demo">
+  <div class="cta-bg"></div>
+  <div class="cta-box reveal">
+    <span class="section-tag" style="display:block; margin-bottom:1rem;">מוכן להתחיל?</span>
+    <h2>הדגמה חינם,<br>ללא התחייבות</h2>
+    <p>
+      השאירו פרטים ונחזור אליכם לתיאום הדגמה אישית —
+      כולל הגדרת המערכת לפי צרכי המשרד שלכם.
+    </p>
+    <div class="cta-form">
+      <input class="cta-input" type="text" placeholder="שם מלא">
+      <input class="cta-input" type="tel" placeholder="טלפון">
+      <button class="btn-primary" onclick="handleSubmit()">שלח</button>
+    </div>
+    <p class="cta-note">ללא כרטיס אשראי · אנחנו מחזירים תוך יום עסקים</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Shoma<span>Tech</span></div>
+  <div class="footer-links">
+    <a href="#">תנאי שימוש</a>
+    <a href="#">פרטיות</a>
+    <a href="#">צור קשר</a>
+  </div>
+  <div class="footer-copy">© 2025 ShomaTech by BizTechoff. כל הזכויות שמורות.</div>
+</footer>
+
+<script>
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Tab filtering ──
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // ── Nav highlight ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+    });
+  });
+
+  // ── CTA submit ──
+  function handleSubmit() {
+    const btn = document.querySelector('.cta-form .btn-primary');
+    btn.textContent = '✓ נשלח! נחזור אליך בקרוב';
+    btn.style.background = '#64FFDA';
+    btn.style.color = '#0B1629';
+    btn.disabled = true;
+  }
+
+  // ── Parallax on hero glow ──
+  document.addEventListener('mousemove', (e) => {
+    const glow = document.querySelector('.hero-glow');
+    if (!glow) return;
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    glow.style.transform = `translate(${x * 40 - 20}px, ${y * 40 - 20}px)`;
+  });
+</script>
+</body>
+</html>
