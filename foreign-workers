@@ -1,1 +1,278 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CRM – מערכת כוח אדם</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f1e3d;--navy2:#1a2f52;--blue:#1d6af5;--blue2:#1350cc;
+  --green:#059669;--red:#dc2626;--amber:#d97706;--teal:#0d9488;
+  --bg:#eef1f7;--surface:#fff;--border:#e2e8f0;--text:#1a2332;--muted:#64748b;
+  --r:10px;--sh:0 1px 4px rgba(0,0,0,.07);--sh2:0 6px 24px rgba(0,0,0,.14);
+}
+html,body{height:100%;font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);direction:rtl}
+body{display:flex;overflow:hidden}
 
+/* SIDEBAR */
+#sb{width:232px;background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;height:100vh;overflow-y:auto}
+#sb::-webkit-scrollbar{width:3px}#sb::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1)}
+.logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px}
+.logo-ico{width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.logo h1{font-size:14.5px;font-weight:700;color:#fff;line-height:1.2}
+.logo p{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px}
+.nsec{padding:9px 14px 3px;font-size:10px;font-weight:700;color:rgba(255,255,255,.22);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.sb nav a{display:flex;align-items:center;gap:8px;padding:8.5px 12px;color:rgba(255,255,255,.58);font-size:13px;font-weight:500;cursor:pointer;border-radius:7px;margin:1px 8px;transition:.13s;border:none;background:none;width:calc(100%-16px);text-align:right}
+.sb nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb nav a.on{background:var(--blue);color:#fff}
+.sb nav a .ic{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.nb{background:rgba(255,255,255,.18);color:#fff;font-size:10.5px;padding:1px 6px;border-radius:9px;margin-right:auto;min-width:18px;text-align:center}
+.on .nb{background:rgba(255,255,255,.3)}
+.nb-r{background:rgba(220,38,38,.7)!important}
+.sb-foot{padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);margin-top:auto}
+.sb-btn{width:100%;background:rgba(255,255,255,.07);border:none;color:rgba(255,255,255,.45);padding:6px 10px;border-radius:7px;font-size:11.5px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;margin-bottom:5px;transition:.13s}
+.sb-btn:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+
+/* MAIN */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#tb{background:var(--surface);border-bottom:1px solid var(--border);padding:0 22px;height:54px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:var(--sh)}
+#tb-l{font-size:16px;font-weight:700;display:flex;align-items:center;gap:9px}
+#tb-r{display:flex;gap:7px;align-items:center}
+#pg{flex:1;overflow-y:auto;padding:20px 22px}
+#pg::-webkit-scrollbar{width:5px}#pg::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+
+/* STATS */
+.srow{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:13px;margin-bottom:20px}
+.sc{background:var(--surface);border-radius:var(--r);padding:15px 16px;box-shadow:var(--sh);border-right:3px solid var(--blue);cursor:pointer;transition:.15s}
+.sc:hover{transform:translateY(-1px);box-shadow:var(--sh2)}
+.sc.g{border-color:var(--green)}.sc.r{border-color:var(--red)}.sc.a{border-color:var(--amber)}.sc.t{border-color:var(--teal)}
+.sc .n{font-size:26px;font-weight:800;line-height:1}.sc .l{font-size:11.5px;color:var(--muted);margin-top:4px;font-weight:500}
+
+/* CARDS */
+.card{background:var(--surface);border-radius:var(--r);box-shadow:var(--sh);padding:18px;margin-bottom:16px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ch h3{font-size:14.5px;font-weight:700}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* TABLES */
+.tw{overflow-x:auto;border-radius:8px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:#f8fafc}
+th{padding:8px 12px;font-weight:600;color:var(--muted);font-size:11.5px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#f9fafb}
+.lnk{color:var(--blue);cursor:pointer;font-weight:600}.lnk:hover{text-decoration:underline}
+.mono{font-family:monospace;font-size:11.5px;color:var(--muted)}
+.amt{font-weight:700;font-family:monospace;font-size:13px}
+
+/* BADGES */
+.bd{display:inline-flex;align-items:center;padding:2px 9px;border-radius:16px;font-size:11.5px;font-weight:600}
+.bd.g{background:#dcfce7;color:#15803d}.bd.r{background:#fee2e2;color:#b91c1c}
+.bd.a{background:#fef3c7;color:#b45309}.bd.b{background:#dbeafe;color:#1d4ed8}
+.bd.t{background:#ccfbf1;color:#0f766e}.bd.gr{background:#f1f5f9;color:#475569}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.13s;font-family:inherit;white-space:nowrap}
+.bp{background:var(--blue);color:#fff}.bp:hover{background:var(--blue2)}
+.bg{background:var(--green);color:#fff}.bg:hover{background:#047857}
+.br{background:var(--red);color:#fff}
+.bo{background:#fff;color:var(--text);border:1px solid var(--border)}.bo:hover{background:#f8fafc}
+.bgh{background:transparent;color:var(--muted);border:none;padding:5px 7px;border-radius:6px;cursor:pointer;font-size:15px;transition:.12s}.bgh:hover{background:#f1f5f9}
+.bsm{padding:4px 10px;font-size:12px}
+.bxs{padding:3px 7px;font-size:11.5px}
+
+/* FORMS */
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:12px;font-weight:700;color:var(--text)}
+.fg input,.fg select,.fg textarea{padding:7px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;direction:rtl;width:100%;transition:.13s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,106,245,.1)}
+.fg textarea{resize:vertical;min-height:68px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.full{grid-column:1/-1}
+
+/* MODAL */
+#ov{position:fixed;inset:0;background:rgba(10,20,45,.55);z-index:500;display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px)}
+#ov.open{display:flex}
+#md{background:#fff;border-radius:13px;box-shadow:var(--sh2);width:100%;max-width:660px;max-height:91vh;display:flex;flex-direction:column;animation:pop .17s ease}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+.mh{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mh h3{font-size:15.5px;font-weight:700}
+.mb{padding:20px;overflow-y:auto;flex:1}.mb::-webkit-scrollbar{width:4px}.mb::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px}
+.mf{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:7px;flex-shrink:0}
+
+/* TABS */
+.tabs{display:flex;gap:1px;border-bottom:2px solid var(--border);margin-bottom:16px}
+.tab{padding:7px 14px;background:none;border:none;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:inherit;transition:.12s;border-radius:6px 6px 0 0}
+.tab.on{color:var(--blue);border-color:var(--blue);background:#eff6ff}
+
+/* MISC */
+.empty{text-align:center;padding:38px 16px;color:var(--muted)}
+.empty .ei{font-size:38px;margin-bottom:8px}.empty p{font-size:13.5px}
+#toasts{position:fixed;bottom:18px;left:18px;z-index:999;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 16px;border-radius:9px;color:#fff;font-size:13px;font-weight:600;animation:ts .2s ease;box-shadow:var(--sh2)}
+.toast.ok{background:var(--green)}.toast.err{background:var(--red)}.toast.info{background:var(--blue)}
+@keyframes ts{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+.pill{background:#eff6ff;color:var(--blue);border-radius:5px;padding:1px 7px;font-size:11px;font-weight:600;font-family:monospace}
+.hl{background:#fffbeb!important}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px}
+.ii label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:2px}
+.ii .v{font-size:13.5px;font-weight:500}
+.stl{font-size:12.5px;font-weight:700;color:var(--navy2);padding:12px 0 5px;display:flex;align-items:center;gap:6px}
+.stl::after{content:'';flex:1;height:1px;background:var(--border)}
+.ftree{font-family:'Courier New',monospace;font-size:12px;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:14px 16px;line-height:2;color:#334155;overflow-x:auto;white-space:pre}
+.ft-b{color:var(--blue);font-weight:700}
+.flex{display:flex}.gap4{gap:4px}.gap8{gap:8px}
+</style>
+</head>
+<body>
+
+<nav id="sb" class="sb">
+  <div class="logo">
+    <div class="logo-ico">💼</div>
+    <div><h1>CRM מערכת</h1><p>כוח אדם</p></div>
+  </div>
+  <nav>
+    <div class="nsec">ראשי</div>
+    <a onclick="go('dash')" id="n-dash" class="on"><span class="ic">📊</span> דשבורד</a>
+    <div class="nsec">ניהול</div>
+    <a onclick="go('clients')" id="n-clients"><span class="ic">👥</span> לקוחות <span class="nb" id="nb-c">0</span></a>
+    <a onclick="go('suppliers')" id="n-suppliers"><span class="ic">🏭</span> ספקים <span class="nb" id="nb-s">0</span></a>
+    <a onclick="go('corps')" id="n-corps"><span class="ic">🏢</span> תאגידים <span class="nb" id="nb-co">0</span></a>
+    <div class="nsec">מסמכים</div>
+    <a onclick="go('contracts')" id="n-contracts"><span class="ic">📋</span> חוזים</a>
+    <a onclick="go('invoices')" id="n-invoices"><span class="ic">🧾</span> חשבוניות</a>
+    <div class="nsec">שטח</div>
+    <a onclick="go('visits')" id="n-visits"><span class="ic">📍</span> ביקורים</a>
+    <a onclick="go('apts')" id="n-apts"><span class="ic">🏠</span> דירות</a>
+    <a onclick="go('services')" id="n-services"><span class="ic">🔧</span> פניות שירות</a>
+    <div class="nsec">כספים</div>
+    <a onclick="go('collect')" id="n-collect"><span class="ic">💰</span> גבייה <span class="nb nb-r" id="nb-ov" style="display:none">0</span></a>
+    <a onclick="go('payments')" id="n-payments"><span class="ic">🏛️</span> תשלומי מוסדות</a>
+    <div class="nsec" style="margin-top:8px"></div>
+    <a onclick="go('tree')" id="n-tree"><span class="ic">📁</span> מבנה תיקיות</a>
+  </nav>
+  <div class="sb-foot">
+    <button class="sb-btn" onclick="exportData()">💾 גיבוי נתונים</button>
+    <button class="sb-btn" onclick="importData()">📥 ייבוא נתונים</button>
+  </div>
+</nav>
+
+<div id="main">
+  <div id="tb">
+    <div id="tb-l"><span id="tb-ic">📊</span><span id="tb-tx">דשבורד</span></div>
+    <div id="tb-r"></div>
+  </div>
+  <div id="pg"></div>
+</div>
+
+<div id="ov" onclick="oc(event)">
+  <div id="md">
+    <div class="mh"><h3 id="mt"></h3><button class="bgh" onclick="CM()" style="font-size:17px">✕</button></div>
+    <div class="mb" id="mb"></div>
+    <div class="mf" id="mf"></div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+// ── STORAGE ──────────────────────────────────────────
+const K='crm3';
+let D=function(){try{const r=localStorage.getItem(K);if(r)return JSON.parse(r);}catch(e){}
+  return{clients:{},suppliers:{},corps:{},contracts:{},invoices:{},visits:{},apts:{},apt_visits:{},services:{},payments:{}};}();
+
+function save(){try{localStorage.setItem(K,JSON.stringify(D));}catch(e){}updateBadges();}
+function uid(p){return p+'-'+new Date().getFullYear()+'-'+Math.random().toString(36).slice(2,8).toUpperCase();}
+function td(){return new Date().toISOString().split('T')[0];}
+function fd(d){if(!d)return'—';return d.split('-').reverse().join('/');}
+function fm(n){if(n===null||n===undefined||n==='')return'—';const x=parseFloat(n);if(isNaN(x))return'—';return'₪'+x.toLocaleString('he-IL');}
+function daysDiff(d){if(!d)return null;return Math.floor((new Date()-new Date(d))/86400000);}
+
+// ── TOAST ────────────────────────────────────────────
+function T(msg,type='ok'){const e=document.createElement('div');e.className='toast '+type;e.textContent=msg;document.getElementById('toasts').appendChild(e);setTimeout(()=>e.remove(),3000);}
+
+// ── MODAL ─────────────────────────────────────────────
+function OM(title,body,foot=''){document.getElementById('mt').textContent=title;document.getElementById('mb').innerHTML=body;document.getElementById('mf').innerHTML=foot;document.getElementById('ov').classList.add('open');}
+function CM(){document.getElementById('ov').classList.remove('open');}
+function oc(e){if(e.target===document.getElementById('ov'))CM();}
+function $v(id){const e=document.getElementById(id);return e?e.value.trim():'';}
+
+// ── BADGES ────────────────────────────────────────────
+function sb(s){const m={'active':'g','פעיל':'g','שולמה':'g','שולם':'g','סגורה':'gr','inactive':'gr','לא פעיל':'gr','הסתיים':'gr','פג תוקף':'gr','ממתינה':'a','ממתין':'a','בטיפול':'a','חלקית':'a','מוקפא':'a','בפיגור':'r','דחוף':'r','קריטי':'r','פתוחה':'b','רגיל':'gr','בינוני':'a'};const c=m[s]||'gr';const L={'active':'פעיל','inactive':'לא פעיל'};return`<span class="bd ${c}">${L[s]||s||'—'}</span>`;}
+
+function updateBadges(){
+  document.getElementById('nb-c').textContent=Object.keys(D.clients).length;
+  document.getElementById('nb-s').textContent=Object.keys(D.suppliers).length;
+  document.getElementById('nb-co').textContent=Object.keys(D.corps).length;
+  const ov=Object.values(D.invoices).filter(i=>i.entity_type==='client'&&i.payment_status!=='שולמה'&&i.due_date&&i.due_date<td()).length;
+  const el=document.getElementById('nb-ov');el.textContent=ov;el.style.display=ov?'':'none';
+}
+
+// ── NAV ────────────────────────────────────────────────
+const PAGES={dash:['📊','דשבורד',rDash],clients:['👥','לקוחות',rClients],suppliers:['🏭','ספקים',rSuppliers],corps:['🏢','תאגידים',rCorps],contracts:['📋','חוזים',rContracts],invoices:['🧾','חשבוניות',rInvoices],visits:['📍','ביקורים',rVisits],apts:['🏠','דירות',rApts],services:['🔧','פניות שירות',rServices],collect:['💰','גבייה',rCollect],payments:['🏛️','תשלומי מוסדות',rPayments],tree:['📁','מבנה תיקיות',rTree]};
+let PAGE='dash';
+function go(p){PAGE=p;document.querySelectorAll('.sb nav a').forEach(a=>a.classList.remove('on'));const el=document.getElementById('n-'+p);if(el)el.classList.add('on');const[ic,tx,fn]=PAGES[p]||['','',()=>{}];document.getElementById('tb-ic').textContent=ic;document.getElementById('tb-tx').textContent=tx;document.getElementById('tb-r').innerHTML='';fn();}
+function emptyR(cols,msg,ic='📭'){return`<tr><td colspan="${cols}"><div class="empty"><div class="ei">${ic}</div><p>${msg}</p></div></td></tr>`;}
+function emptyE(ic,msg){return`<div class="empty"><div class="ei">${ic}</div><p>${msg}</p></div>`;}
+function ii(l,v){return`<div class="ii"><label>${l}</label><div class="v">${v||'—'}</div></div>`;}
+
+// ══════════════════════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════════════════════
+function rDash(){
+  const cls=Object.values(D.clients),sups=Object.values(D.suppliers),cors=Object.values(D.corps);
+  const allI=Object.values(D.invoices),allS=Object.values(D.services),allC=Object.values(D.contracts);
+  const cliI=allI.filter(i=>i.entity_type==='client');
+  const openI=cliI.filter(i=>i.payment_status!=='שולמה');
+  const ovI=openI.filter(i=>i.due_date&&i.due_date<td());
+  const openS=allS.filter(s=>s.status==='פתוחה');
+  const actC=allC.filter(c=>c.status==='פעיל');
+  const totR=openI.reduce((s,i)=>s+(parseFloat(i.amount)||0),0);
+  const pendP=Object.values(D.payments).filter(p=>p.status==='ממתין');
+  document.getElementById('pg').innerHTML=`
+  <div class="srow">
+    <div class="sc" onclick="go('clients')"><div class="n">${cls.length}</div><div class="l">👥 לקוחות</div></div>
+    <div class="sc t" onclick="go('suppliers')"><div class="n">${sups.length}</div><div class="l">🏭 ספקים</div></div>
+    <div class="sc" onclick="go('corps')"><div class="n">${cors.length}</div><div class="l">🏢 תאגידים</div></div>
+    <div class="sc a" onclick="go('contracts')"><div class="n">${actC.length}</div><div class="l">📋 חוזים פעילים</div></div>
+    <div class="sc r" onclick="go('collect')"><div class="n">${ovI.length}</div><div class="l">⚠️ בפיגור</div></div>
+    <div class="sc a" onclick="go('invoices')"><div class="n">${openI.length}</div><div class="l">🧾 חשבוניות פתוחות</div></div>
+    <div class="sc" onclick="go('services')"><div class="n">${openS.length}</div><div class="l">🔧 פניות פתוחות</div></div>
+    <div class="sc g" onclick="go('collect')"><div class="n" style="font-size:18px">${fm(totR)}</div><div class="l">💰 לגבייה</div></div>
+  </div>
+  ${pendP.length?`<div class="card" style="border-right:3px solid var(--amber)">
+    <div class="ch"><h3>⏰ תשלומי מוסדות ממתינים</h3><button class="btn bo bsm" onclick="go('payments')">הכל</button></div>
+    <div class="tw"><table><thead><tr><th>מוסד</th><th>סכום</th><th>לפירעון</th></tr></thead><tbody>
+    ${pendP.slice(0,3).map(p=>`<tr><td><b>${p.institution}</b></td><td class="amt">${fm(p.amount)}</td><td>${fd(p.due_date)}</td></tr>`).join('')}
+    </tbody></table></div></div>`:''}
+  <div class="g2">
+    <div class="card"><div class="ch"><h3>🔧 פניות שירות אחרונות</h3><button class="btn bo bsm" onclick="go('services')">הכל</button></div>
+    ${allS.length?`<div class="tw"><table><thead><tr><th>לקוח</th><th>נושא</th><th>סטטוס</th></tr></thead><tbody>
+    ${allS.slice(-5).reverse().map(s=>`<tr><td>${s._cn||'—'}</td><td>${s.subject||'—'}</td><td>${sb(s.status)}</td></tr>`).join('')}
+    </tbody></table></div>`:emptyE('📭','אין פניות')}</div>
+    <div class="card"><div class="ch"><h3>🧾 חשבוניות אחרונות</h3><button class="btn bo bsm" onclick="go('invoices')">הכל</button></div>
+    ${cliI.length?`<div class="tw"><table><thead><tr><th>לקוח</th><th>סכום</th><th>סטטוס</th></tr></thead><tbody>
+    ${cliI.slice(-5).reverse().map(i=>`<tr><td>${i._en||'—'}</td><td class="amt">${fm(i.amount)}</td><td>${sb(i.payment_status)}</td></tr>`).join('')}
+    </tbody></table></div>`:emptyE('📭','אין חשבוניות')}</div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════
+// CLIENTS
+// ══════════════════════════════════════════════════════
+function rClients(f=''){
+  document.getElementById('tb-r').innerHTML=`
+    <div style="position:relative"><input placeholder="חיפוש..." oninput="rClients(this.value)" value="${f}" style="padding:7px 32px 7px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;width:180px;direction:rtl"><span style="position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:13px">🔍</span></div>
+    <button class="btn bp" onclick="eClient()">+ לקוח חדש</button>`;
+  let list=Object.values(D.clients);
+  if(f)list=list.filter(c=>(c.name+c.contact+c.phone||'').toLowerCase().includes(f.toLowerCase()));
+  document.getElementById('pg').innerHTML=`<div class="card" style="padding:0"><div class="tw"><table>
+    <thead><tr><th>שם</th><th>איש קשר</th><th>טלפון</th><th>תנאי תשלום</th><th>תעריף</th><th>סטטוס</th><th></th></tr></thead>
+    <tbody>${list.length?list.map(c=>`<tr>
+      <td><span class="lnk" onclick="cDetail('${c.id}')">${c.name}</span></td>
+      <td>${c.contact||'—'}</td><td dir="ltr">${c.phone||'—'}</td>
+      <td>${c.payment_terms||'—'}</td><td class="amt">${c.tariff?fm(c.tariff):'—'}</td>
+      <td>${sb(c.status||'active')}</td>
+      <td class="flex gap4"><button class="bgh" onclick="cDetail('${c.id}')">👁</button><button class="bgh" onclick="eClient('${c.id}')">✏️</button><b
