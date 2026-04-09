@@ -17,6 +17,8 @@
         .slide-title { font-size: 30px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; margin-bottom: 8px; }
         .slide-title span { color: #6ee7b7; }
         .slide-sub { font-size: 14px; color: rgba(255, 255, 255, 0.6); text-align: center; line-height: 1.7; margin-bottom: 16px; max-width: 340px; }
+        
+        /* צבעי קטגוריות */
         .prof-grid { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
         .prof-chip { padding: 6px 13px; border-radius: 999px; font-size: 13px; font-weight: 700; }
         .chip-green { background: rgba(110, 231, 183, 0.15); border: 1.5px solid rgba(110, 231, 183, 0.4); color: #6ee7b7; }
@@ -24,37 +26,35 @@
         .chip-blue { background: rgba(96, 165, 250, 0.12); border: 1.5px solid rgba(96, 165, 250, 0.35); color: #93c5fd; }
         .chip-pink { background: rgba(244, 114, 182, 0.12); border: 1.5px solid rgba(244, 114, 182, 0.35); color: #f9a8d4; }
         .chip-white { background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.8); }
-        .feat-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 310px; }
-        .feat-item { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 9px 14px; }
-        .feat-icon { font-size: 17px; width: 26px; text-align: center; flex-shrink: 0; }
-        .feat-text { font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 700; }
-        .cta-big { background: #25D366; color: #fff; font-family: 'Heebo', sans-serif; font-weight: 900; font-size: 16px; border: none; border-radius: 12px; padding: 14px 30px; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; direction: rtl; }
-        .cta-note { font-size: 13px; color: rgba(255, 255, 255, 0.45); text-align: center; line-height: 1.7; }
 
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 20; color: #fff; font-size: 15px; transition: background 0.2s; }
-        .nav-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        /* כפתורים וניווט */
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 20; color: #fff; font-size: 15px; }
         .nav-prev { right: 10px; }
         .nav-next { left: 10px; }
-        .nav-btn:disabled { opacity: 0.25; cursor: default; }
-
+        .nav-btn:disabled { opacity: 0.25; }
         .dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
-        .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.2s; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; }
         .dot.active { background: #6ee7b7; width: 22px; border-radius: 4px; }
 
-        .logo-bar { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 7px 0; background: rgba(0, 0, 0, 0.28); border-top: 1px solid rgba(255, 255, 255, 0.06); direction: rtl; }
-        .logo-bar img { width: 26px; height: 26px; display: block; flex-shrink: 0; }
-        .bar-text { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.65); white-space: nowrap; }
-        .bar-text span { color: #6ee7b7; }
+        /* לוגו */
+        .logo-bar { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 7px 0; background: rgba(0, 0, 0, 0.28); border-top: 1px solid rgba(255, 255, 255, 0.06); }
+        .logo-bar img { width: 26px; height: 26px; }
+        .bar-text { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.65); }
 
-        .bubble-wrap { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-        .mb { position: absolute; border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; opacity: 0; animation: mbpop 1.8s ease-in-out var(--d) infinite; }
+        /* בועות צבעוניות */
+        .bubble-wrap { position: absolute; inset: 0; pointer-events: none; }
+        .mb { position: absolute; border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; opacity: 0; animation: mbpop 1.8s ease-in-out var(--d) infinite; white-space: nowrap; }
         
         @keyframes mbpop {
             0% { opacity: 0; transform: scale(0.6) translateY(20px); }
             20% { opacity: 1; transform: scale(1.1) translateY(0); }
-            70% { opacity: 0.7; }
+            70% { opacity: 0.8; }
             100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
         }
+
+        .feat-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 310px; }
+        .feat-item { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 9px 14px; }
+        .cta-big { background: #25D366; color: #fff; font-weight: 900; font-size: 16px; border: none; border-radius: 12px; padding: 14px 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
     </style>
 </head>
 <body>
@@ -73,7 +73,7 @@
         <div class="slide-sub">הגיע הזמן שמישהו יזכור את הכל בשבילך</div>
         <div style="font-size:13px;color:#6ee7b7;font-weight:700;">החלק לגלות ←</div>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
     </div>
 
     <div class="slide">
@@ -83,15 +83,13 @@
         <div class="slide-num">02 / 07</div>
         <div class="slide-icon">🔧</div>
         <div class="slide-title">בניה <span>&</span> שיפוץ</div>
-        <div class="slide-sub">מי מנהל את הלקוחות, העבודות וההצעות מחיר שלך?</div>
         <div class="prof-grid">
           <div class="prof-chip chip-amber">שרברב</div><div class="prof-chip chip-amber">חשמלאי</div>
           <div class="prof-chip chip-amber">נגר</div><div class="prof-chip chip-amber">טפסן</div>
-          <div class="prof-chip chip-amber">ריצוף וחיפוי</div><div class="prof-chip chip-amber">צבעי</div>
-          <div class="prof-chip chip-amber">מיזוג אוויר</div><div class="prof-chip chip-white">ועוד...</div>
+          <div class="prof-chip chip-amber">צבעי</div><div class="prof-chip chip-amber">מיזוג אוויר</div>
         </div>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"></div>
     </div>
 
     <div class="slide">
@@ -101,15 +99,13 @@
         <div class="slide-num">03 / 07</div>
         <div class="slide-icon">💅</div>
         <div class="slide-title">יופי <span>&</span> טיפוח</div>
-        <div class="slide-sub">תורים, לקוחות חוזרים, תשלומים — הכל בלבלה?</div>
         <div class="prof-grid">
           <div class="prof-chip chip-pink">מאפרת</div><div class="prof-chip chip-pink">קוסמטיקאית</div>
-          <div class="prof-chip chip-pink">ספרית / ספר</div><div class="prof-chip chip-pink">מניקוריסטית</div>
-          <div class="prof-chip chip-pink">מעצב שיער</div><div class="prof-chip chip-pink">מטפלת הוליסטית</div>
-          <div class="prof-chip chip-white">ועוד...</div>
+          <div class="prof-chip chip-pink">ספרית</div><div class="prof-chip chip-pink">מניקוריסטית</div>
+          <div class="prof-chip chip-pink">מעצב שיער</div>
         </div>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"></div>
     </div>
 
     <div class="slide">
@@ -119,33 +115,27 @@
         <div class="slide-num">04 / 07</div>
         <div class="slide-icon">💪</div>
         <div class="slide-title">בריאות <span>&</span> כושר</div>
-        <div class="slide-sub">הלקוחות שלך מצפים לקצועיות — תן להם את זה</div>
         <div class="prof-grid">
           <div class="prof-chip chip-blue">פיזיותרפיסט</div><div class="prof-chip chip-blue">מאמן כושר</div>
-          <div class="prof-chip chip-blue">דיאטנית</div><div class="prof-chip chip-blue">אופטיקאי</div>
-          <div class="prof-chip chip-blue">מרפאה סינית</div><div class="prof-chip chip-blue">נטורופת</div>
-          <div class="prof-chip chip-white">ועוד...</div>
+          <div class="prof-chip chip-blue">דיאטנית</div><div class="prof-chip chip-blue">נטורופת</div>
         </div>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"></div>
     </div>
 
     <div class="slide">
       <div class="bg-dots"></div>
-      <div class="bg-glow" style="width:200px;height:200px;background:#a78bfa;top:-50px;right:-50px;"></div>
+      <div class="bg-glow" style="width:200px;height:200px;background:#6ee7b7;top:-50px;right:-50px;"></div>
       <div style="position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center;">
         <div class="slide-num">05 / 07</div>
         <div class="slide-icon">🎉</div>
         <div class="slide-title">אירועים <span>&</span> מזון</div>
-        <div class="slide-sub">הזמנות, תשלומים, תאריכים — אל תאבד אפילו אחד</div>
         <div class="prof-grid">
           <div class="prof-chip chip-green">קייטרינג</div><div class="prof-chip chip-green">צלם אירועים</div>
-          <div class="prof-chip chip-green">מוזיקאי / DJ</div><div class="prof-chip chip-green">עורך וידאו</div>
-          <div class="prof-chip chip-green">בעל קפה</div><div class="prof-chip chip-green">שף פרטי</div>
-          <div class="prof-chip chip-white">ועוד...</div>
+          <div class="prof-chip chip-green">DJ</div><div class="prof-chip chip-green">שף פרטי</div>
         </div>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"></div>
     </div>
 
     <div class="slide">
@@ -154,37 +144,25 @@
         <div class="slide-num">06 / 07</div>
         <div class="slide-title" style="font-size:24px;margin-bottom:16px;">מה <span>מקבלים</span>?</div>
         <div class="feat-list">
-          <div class="feat-item"><div class="feat-icon">👥</div><div class="feat-text">ניהול לקוחות מסודר במקום אחד</div></div>
-          <div class="feat-item"><div class="feat-icon">📋</div><div class="feat-text">משימות, עבודות ויומן דיגיטלי</div></div>
-          <div class="feat-item"><div class="feat-icon">💰</div><div class="feat-text">הצעות מחיר וחשבוניות בלחיצה</div></div>
-          <div class="feat-item"><div class="feat-icon">👷</div><div class="feat-text">מעקב עובדים ושליטה מלאה</div></div>
-          <div class="feat-item"><div class="feat-icon">📊</div><div class="feat-text">דוחות וסטטיסטיקות בזמן אמת</div></div>
+          <div class="feat-item"><span>👥</span> <b>ניהול לקוחות במקום אחד</b></div>
+          <div class="feat-item"><span>📋</span> <b>משימות ויומן דיגיטלי</b></div>
+          <div class="feat-item"><span>💰</span> <b>הצעות מחיר וחשבוניות</b></div>
         </div>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"></div>
     </div>
 
     <div class="slide">
       <div class="bg-dots"></div>
-      <div class="bg-glow" style="width:350px;height:350px;background:#6ee7b7;top:-100px;left:-80px;"></div>
       <div style="position:relative;z-index:5;text-align:center;display:flex;flex-direction:column;align-items:center;">
         <div class="slide-num">07 / 07</div>
-        <div class="slide-title" style="font-size:32px;margin-bottom:8px;">מוכן <span>לסדר</span><br>את העסק שלך?</div>
-        <div class="slide-sub">נשמח לספר לך הכל — שלח הודעה ונחזור אליך בהקדם</div>
-        <button class="cta-big" onclick="openWA()">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          שלחו לנו הודעה עכשיו
-        </button>
-        <div class="cta-note">
-          נחזור אליך תוך יום עסקים<br>
-          <span style="color:rgba(255,255,255,0.3);font-size:11px;">ללא התחייבות · שיחת היכרות חינם</span>
-        </div>
+        <div class="slide-title" style="font-size:32px;margin-bottom:8px;">מוכן <span>לסדר</span> בעסק?</div>
+        <button class="cta-big" onclick="openWA()">שלחו הודעה בווטסאפ</button>
       </div>
-      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" src="" alt="BizTechoff"></div>
     </div>
 
   </div>
-
   <button class="nav-btn nav-prev" id="prev" onclick="move(-1)">&#8249;</button>
   <button class="nav-btn nav-next" id="next" onclick="move(1)">&#8250;</button>
 </div>
@@ -192,12 +170,10 @@
 </div>
 
 <script>
-const LOGO = "data:image/png;base64,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";
+const LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADw..."; // הלוגו שלך
 
-// Update all logos
 document.querySelectorAll('.logo-img').forEach(img => img.src = LOGO);
 
-// Carousel logic
 let cur=0; const total=7;
 const slides=document.getElementById('slides');
 const dotsEl=document.getElementById('dots');
@@ -217,30 +193,28 @@ function goTo(n){
 function move(dir){goTo(cur+dir);}
 goTo(0);
 
-// WhatsApp
 function openWA(){
-  const msg = encodeURIComponent('שלום, ראיתי את המודעה של BizTechoff ואני מעוניין לשמוע פרטים על הפלטפורמה לניהול העסק שלי 🙏');
-  window.open('https://wa.me/972526526063?text='+msg,'_blank');
+  window.open('https://wa.me/972526526063?text='+encodeURIComponent('שלום, אני מעוניין בפרטים על BizTechoff'),'_blank');
 }
 
-// Optimized Bubbles - ALL professions included
-const floaters=["שרברב","חשמלאי","נגר","טפסן","צבעי","מאפרת","קוסמטיקאית","ספרית","מניקוריסטית","פיזיותרפיסט","מאמן כושר","דיאטנית","קייטרינג","צלם אירועים","DJ","שף פרטי","מתקין מזגנים","אופטיקאי"];
+// בועות צבעוניות לפי קטגוריה
+const profs = [
+  {t:"שרברב", c:"chip-amber"}, {t:"חשמלאי", c:"chip-amber"}, {t:"נגר", c:"chip-amber"}, {t:"צבעי", c:"chip-amber"},
+  {t:"מאפרת", c:"chip-pink"}, {t:"קוסמטיקאית", c:"chip-pink"}, {t:"ספרית", c:"chip-pink"}, {t:"מניקוריסטית", c:"chip-pink"},
+  {t:"פיזיותרפיסט", c:"chip-blue"}, {t:"מאמן כושר", c:"chip-blue"}, {t:"דיאטנית", c:"chip-blue"}, {t:"נטורופת", c:"chip-blue"},
+  {t:"קייטרינג", c:"chip-green"}, {t:"צלם אירועים", c:"chip-green"}, {t:"DJ", c:"chip-green"}, {t:"שף פרטי", c:"chip-green"}
+];
+
 const bw=document.getElementById('bw0');
-floaters.forEach((t,i)=>{
+profs.forEach((p, i) => {
   const el=document.createElement('div');
-  el.className='mb chip-white';
-  el.textContent=t;
-  el.style.setProperty('--d',(i*0.35)+'s'); // קצב הופעה מהיר ודינמי
-  el.style.left=(5+Math.random()*85)+'%';
-  el.style.top=(10+Math.random()*75)+'%';
+  el.className = `mb ${p.c}`; // הגדרת הצבע לפי הקטגוריה
+  el.textContent = p.t;
+  el.style.setProperty('--d', (i * 0.3) + 's'); 
+  el.style.left = (5 + Math.random() * 80) + '%';
+  el.style.top = (10 + Math.random() * 70) + '%';
   bw.appendChild(el);
 });
-
-// Swipe support
-const car=document.getElementById('car');
-let sx=0;
-car.addEventListener('touchstart',e=>sx=e.touches[0].clientX);
-car.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)move(dx>0?-1:1);});
 </script>
 </body>
 </html>
