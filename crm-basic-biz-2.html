@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BizTechoff CRM</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
+        /* מרכוז הקרוסלה למרכז המסך */
         body { 
             background: #080f1a; 
             display: flex; 
@@ -18,53 +18,41 @@
             overflow: hidden;
         }
 
-        .wrap { width: 100%; max-width: 540px; padding: 10px; }
+        .wrap { direction: rtl; width: 100%; max-width: 540px; padding: 10px; position: relative; }
+        .carousel { position: relative; background: #0f1b2d; border-radius: 16px; overflow: hidden; aspect-ratio: 1/1; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .slides { display: flex; transition: transform 0.45s cubic-bezier(.77, 0, .18, 1); height: 100%; }
+        .slide { min-width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 28px 52px; position: relative; overflow: hidden; }
         
-        .carousel { 
-            position: relative; 
-            background: #0f1b2d; 
-            border-radius: 16px; 
-            overflow: hidden; 
-            aspect-ratio: 1/1; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .slides { display: flex; transition: transform 0.6s cubic-bezier(.77, 0, .18, 1); height: 100%; }
-        
-        .slide { 
-            min-width: 100%; height: 100%; 
-            display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; 
-            padding: 28px 28px 52px; position: relative; overflow: hidden; 
-        }
-
         .bg-dots { position: absolute; inset: 0; opacity: 0.04; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 28px 28px; }
         .bg-glow { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.18; }
-
         .slide-num { font-size: 11px; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px; opacity: 0.5; color: #fff; }
-        .slide-icon { font-size: 42px; margin-bottom: 12px; }
-        .slide-title { font-size: 30px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; }
+        .slide-icon { font-size: 42px; margin-bottom: 12px; line-height: 1; }
+        .slide-title { font-size: 30px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; margin-bottom: 8px; }
         .slide-title span { color: #6ee7b7; }
-        .slide-sub { font-size: 14px; color: rgba(255, 255, 255, 0.6); text-align: center; line-height: 1.5; margin-top: 8px; max-width: 340px; }
-
-        .prof-grid { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; margin-top: 15px; }
+        .slide-sub { font-size: 14px; color: rgba(255, 255, 255, 0.6); text-align: center; line-height: 1.7; margin-bottom: 16px; max-width: 340px; }
+        
+        .prof-grid { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
         .prof-chip { padding: 6px 13px; border-radius: 999px; font-size: 13px; font-weight: 700; }
         
-        .chip-amber { background: rgba(251, 191, 36, 0.12); border: 1.5px solid rgba(251, 191, 36, 0.35); color: #fde68a; }
-        .chip-pink { background: rgba(244, 114, 182, 0.12); border: 1.5px solid rgba(244, 114, 182, 0.35); color: #f9a8d4; }
-        .chip-blue { background: rgba(96, 165, 250, 0.12); border: 1.5px solid rgba(96, 165, 250, 0.35); color: #93c5fd; }
+        /* צבעי קטגוריות */
         .chip-green { background: rgba(110, 231, 183, 0.15); border: 1.5px solid rgba(110, 231, 183, 0.4); color: #6ee7b7; }
+        .chip-amber { background: rgba(251, 191, 36, 0.12); border: 1.5px solid rgba(251, 191, 36, 0.35); color: #fde68a; }
+        .chip-blue { background: rgba(96, 165, 250, 0.12); border: 1.5px solid rgba(96, 165, 250, 0.35); color: #93c5fd; }
+        .chip-pink { background: rgba(244, 114, 182, 0.12); border: 1.5px solid rgba(244, 114, 182, 0.35); color: #f9a8d4; }
         .chip-white { background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.8); }
 
-        .feat-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 310px; margin-top: 15px; }
-        .feat-item { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 9px 14px; color: #fff; }
-
-        .cta-big { background: #25D366; color: #fff; font-weight: 900; font-size: 16px; border: none; border-radius: 12px; padding: 14px 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+        .feat-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 310px; }
+        .feat-item { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 9px 14px; }
+        .feat-icon { font-size: 17px; width: 26px; text-align: center; flex-shrink: 0; }
+        .feat-text { font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 700; }
         
+        .cta-big { background: #25D366; color: #fff; font-weight: 900; font-size: 16px; border: none; border-radius: 12px; padding: 14px 30px; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .cta-note { font-size: 13px; color: rgba(255, 255, 255, 0.45); text-align: center; }
+
+        /* ניווט */
         .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 20; color: #fff; }
         .nav-prev { right: 10px; }
         .nav-next { left: 10px; }
-
         .dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
         .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; }
         .dot.active { background: #6ee7b7; width: 22px; border-radius: 4px; }
@@ -85,149 +73,187 @@
 <body>
 
 <div class="wrap">
-    <div class="carousel" id="car">
-        <div class="slides" id="slides">
-            <div class="slide">
-                <div class="bg-dots"></div>
-                <div class="bg-glow" style="width:300px;height:300px;background:#6ee7b7;top:-80px;right:-80px;"></div>
-                <div class="bubble-wrap" id="bw0"></div>
-                <div style="position:relative;z-index:5;text-align:center;">
-                    <div class="slide-num">01 / 07</div>
-                    <div class="slide-title">אתה מנהל עסק<br>עם <span>מאות פרטים</span><br>בראש?</div>
-                    <div class="slide-sub">הגיע הזמן שמישהו יזכור את הכל בשבילך</div>
-                </div>
-                <div class="logo-bar"><span class="bar-text">™BizTechoff</span><img class="logo-img" alt="Logo"><div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
-            </div>
+<div class="carousel" id="car">
+  <div class="slides" id="slides">
 
-            <div class="slide">
-                <div class="bg-dots"></div>
-                <div class="slide-num">02 / 07</div>
-                <div class="slide-icon">🔧</div>
-                <div class="slide-title">בניה <span>&</span> שיפוץ</div>
-                <div class="prof-grid">
-                    <div class="prof-chip chip-amber">שרברב</div><div class="prof-chip chip-amber">חשמלאי</div>
-                    <div class="prof-chip chip-amber">נגר</div><div class="prof-chip chip-amber">טפסן</div>
-                    <div class="prof-chip chip-amber">צבעי</div><div class="prof-chip chip-white">ועוד...</div>
-                </div>
-                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
-            </div>
-
-            <div class="slide">
-                <div class="bg-dots"></div>
-                <div class="slide-num">03 / 07</div>
-                <div class="slide-icon">💅</div>
-                <div class="slide-title">יופי <span>&</span> טיפוח</div>
-                <div class="prof-grid">
-                    <div class="prof-chip chip-pink">מאפרת</div><div class="prof-chip chip-pink">קוסמטיקאית</div>
-                    <div class="prof-chip chip-pink">ספרית</div><div class="prof-chip chip-pink">מניקוריסטית</div>
-                </div>
-                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
-            </div>
-
-            <div class="slide">
-                <div class="bg-dots"></div>
-                <div class="slide-num">04 / 07</div>
-                <div class="slide-icon">💪</div>
-                <div class="slide-title">בריאות <span>&</span> כושר</div>
-                <div class="prof-grid">
-                    <div class="prof-chip chip-blue">פיזיותרפיסט</div><div class="prof-chip chip-blue">מאמן כושר</div>
-                    <div class="prof-chip chip-blue">דיאטנית</div><div class="prof-chip chip-blue">נטורופת</div>
-                </div>
-                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
-            </div>
-
-            <div class="slide">
-                <div class="bg-dots"></div>
-                <div class="slide-num">05 / 07</div>
-                <div class="slide-icon">🎉</div>
-                <div class="slide-title">אירועים <span>&</span> מזון</div>
-                <div class="prof-grid">
-                    <div class="prof-chip chip-green">קייטרינג</div><div class="prof-chip chip-green">צלם אירועים</div>
-                    <div class="prof-chip chip-green">DJ</div><div class="prof-chip chip-green">שף פרטי</div>
-                </div>
-                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
-            </div>
-
-            <div class="slide">
-                <div class="slide-num">06 / 07</div>
-                <div class="slide-title" style="font-size:24px;">מה <span>מקבלים</span>?</div>
-                <div class="feat-list">
-                    <div class="feat-item"><span>👥</span> ניהול לקוחות מסודר</div>
-                    <div class="feat-item"><span>💰</span> הצעות מחיר וחשבוניות</div>
-                    <div class="feat-item"><span>📊</span> דוחות בזמן אמת</div>
-                </div>
-                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
-            </div>
-
-            <div class="slide">
-                <div class="slide-num">07 / 07</div>
-                <div class="slide-title">מוכן <span>לסדר</span> בעסק?</div>
-                <button class="cta-big" onclick="openWA()">שלחו הודעה עכשיו</button>
-                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
-            </div>
-        </div>
-
-        <button class="nav-btn nav-prev" onclick="move(-1)">&#8249;</button>
-        <button class="nav-btn nav-next" onclick="move(1)">&#8250;</button>
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div class="bg-glow" style="width:300px;height:300px;background:#6ee7b7;top:-80px;right:-80px;"></div>
+      <div class="bubble-wrap" id="bw0"></div>
+      <div style="position:relative;z-index:5;text-align:center;">
+        <div class="slide-num">01 / 07</div>
+        <div class="slide-title" style="font-size:36px;">אתה מנהל עסק<br>עם <span>מאות פרטים</span><br>בראש?</div>
+        <div class="slide-sub">הגיע הזמן שמישהו יזכור את הכל בשבילך</div>
+        <div style="font-size:13px;color:#6ee7b7;font-weight:700;">החלק לגלות ←</div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
     </div>
-    <div class="dots" id="dots"></div>
+
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div class="bg-glow" style="width:200px;height:200px;background:#fbbf24;bottom:-60px;left:-60px;"></div>
+      <div style="position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div class="slide-num">02 / 07</div>
+        <div class="slide-icon">🔧</div>
+        <div class="slide-title">בניה <span>&</span> שיפוץ</div>
+        <div class="slide-sub">מי מנהל את הלקוחות, העבודות וההצעות מחיר שלך?</div>
+        <div class="prof-grid">
+          <div class="prof-chip chip-amber">שרברב</div><div class="prof-chip chip-amber">חשמלאי</div>
+          <div class="prof-chip chip-amber">נגר</div><div class="prof-chip chip-amber">טפסן</div>
+          <div class="prof-chip chip-amber">ריצוף וחיפוי</div><div class="prof-chip chip-amber">צבעי</div>
+          <div class="prof-chip chip-amber">מיזוג אוויר</div><div class="prof-chip chip-white">ועוד...</div>
+        </div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+    </div>
+
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div class="bg-glow" style="width:200px;height:200px;background:#f472b6;top:-60px;left:-40px;"></div>
+      <div style="position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div class="slide-num">03 / 07</div>
+        <div class="slide-icon">💅</div>
+        <div class="slide-title">יופי <span>&</span> טיפוח</div>
+        <div class="slide-sub">תורים, לקוחות חוזרים, תשלומים — הכל בלבלה?</div>
+        <div class="prof-grid">
+          <div class="prof-chip chip-pink">מאפרת</div><div class="prof-chip chip-pink">קוסמטיקאית</div>
+          <div class="prof-chip chip-pink">ספרית / ספר</div><div class="prof-chip chip-pink">מניקוריסטית</div>
+          <div class="prof-chip chip-pink">מעצב שיער</div><div class="prof-chip chip-pink">מטפלת הוליסטית</div>
+          <div class="prof-chip chip-white">ועוד...</div>
+        </div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+    </div>
+
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div class="bg-glow" style="width:200px;height:200px;background:#60a5fa;bottom:-60px;right:-40px;"></div>
+      <div style="position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div class="slide-num">04 / 07</div>
+        <div class="slide-icon">💪</div>
+        <div class="slide-title">בריאות <span>&</span> כושר</div>
+        <div class="slide-sub">הלקוחות שלך מצפים לקצועיות — תן להם את זה</div>
+        <div class="prof-grid">
+          <div class="prof-chip chip-blue">פיזיותרפיסט</div><div class="prof-chip chip-blue">מאמן כושר</div>
+          <div class="prof-chip chip-blue">דיאטנית</div><div class="prof-chip chip-blue">אופטיקאי</div>
+          <div class="prof-chip chip-blue">מרפאה סינית</div><div class="prof-chip chip-blue">נטורופת</div>
+          <div class="prof-chip chip-white">ועוד...</div>
+        </div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+    </div>
+
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div class="bg-glow" style="width:200px;height:200px;background:#a78bfa;top:-50px;right:-50px;"></div>
+      <div style="position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div class="slide-num">05 / 07</div>
+        <div class="slide-icon">🎉</div>
+        <div class="slide-title">אירועים <span>&</span> מזון</div>
+        <div class="slide-sub">הזמנות, תשלומים, תאריכים — אל תאבד אפילו אחד</div>
+        <div class="prof-grid">
+          <div class="prof-chip chip-green">קייטרינג</div><div class="prof-chip chip-green">צלם אירועים</div>
+          <div class="prof-chip chip-green">מוזיקאי / DJ</div><div class="prof-chip chip-green">עורך וידאו</div>
+          <div class="prof-chip chip-green">בעל קפה</div><div class="prof-chip chip-green">שף פרטי</div>
+          <div class="prof-chip chip-white">ועוד...</div>
+        </div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+    </div>
+
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div style="position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div class="slide-num">06 / 07</div>
+        <div class="slide-title" style="font-size:24px;margin-bottom:16px;">מה <span>מקבלים</span>?</div>
+        <div class="feat-list">
+          <div class="feat-item"><div class="feat-icon">👥</div><div class="feat-text">ניהול לקוחות מסודר במקום אחד</div></div>
+          <div class="feat-item"><div class="feat-icon">📋</div><div class="feat-text">משימות, עבודות ויומן דיגיטלי</div></div>
+          <div class="feat-item"><div class="feat-icon">💰</div><div class="feat-text">הצעות מחיר וחשבוניות בלחיצה</div></div>
+          <div class="feat-item"><div class="feat-icon">👷</div><div class="feat-text">מעקב עובדים ושליטה מלאה</div></div>
+          <div class="feat-item"><div class="feat-icon">📊</div><div class="feat-text">דוחות וסטטיסטיקות בזמן אמת</div></div>
+        </div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+    </div>
+
+    <div class="slide">
+      <div class="bg-dots"></div>
+      <div class="bg-glow" style="width:350px;height:350px;background:#6ee7b7;top:-100px;left:-80px;"></div>
+      <div style="position:relative;z-index:5;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        <div class="slide-num">07 / 07</div>
+        <div class="slide-title" style="font-size:32px;margin-bottom:8px;">מוכן <span>לסדר</span><br>את העסק שלך?</div>
+        <div class="slide-sub">נשמח לספר לך הכל — שלח הודעה ונחזור אליך בהקדם</div>
+        <button class="cta-big" onclick="openWA()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          שלחו לנו הודעה עכשיו
+        </button>
+        <div class="cta-note">נחזור אליך תוך יום עסקים</div>
+      </div>
+      <div class="logo-bar"><span class="bar-text"> ™BizTechoff </span><img class="logo-img" alt="BizTechoff"> <span class="bar-text"> - </span> <div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
+    </div>
+
+  </div>
+
+  <button class="nav-btn nav-prev" id="prev" onclick="move(-1)">&#8249;</button>
+  <button class="nav-btn nav-next" id="next" onclick="move(1)">&#8250;</button>
+</div>
+<div class="dots" id="dots"></div>
 </div>
 
 <script>
-    const LOGO = "https://biztechoff.co.il/bto.logo.png";
-    document.querySelectorAll('.logo-img').forEach(img => img.src = LOGO);
+const LOGO = "https://biztechoff.co.il/assets/img/logo.png";
+document.querySelectorAll('.logo-img').forEach(img => img.src = LOGO);
 
-    let cur = 0;
-    const total = 7;
-    const slides = document.getElementById('slides');
-    const dotsEl = document.getElementById('dots');
-    let autoTimer;
+let cur = 0;
+const total = 7;
+const slides = document.getElementById('slides');
+const dotsEl = document.getElementById('dots');
+let timer;
 
-    for (let i = 0; i < total; i++) {
-        const d = document.createElement('div');
-        d.className = 'dot' + (i === 0 ? ' active' : '');
-        d.onclick = () => { stopAuto(); goTo(i); };
-        dotsEl.appendChild(d);
-    }
+// יצירת נקודות
+for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => { stopAuto(); goTo(i); };
+    dotsEl.appendChild(d);
+}
 
-    function goTo(n) {
-        cur = (n + total) % total;
-        slides.style.transform = `translateX(${cur * 100}%)`;
-        document.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i === cur ? ' active' : ''));
-    }
+function goTo(n) {
+    cur = (n + total) % total; // לופ
+    slides.style.transform = `translateX(${cur * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i === cur ? ' active' : ''));
+}
 
-    function move(dir) { stopAuto(); goTo(cur + dir); }
+function move(dir) { stopAuto(); goTo(cur + dir); }
 
-    function startAuto() {
-        autoTimer = setInterval(() => { goTo(cur + 1); }, 3500);
-    }
-    
-    function stopAuto() { clearInterval(autoTimer); }
+// דפדוף אוטומטי
+function startAuto() { timer = setInterval(() => goTo(cur + 1), 3500); }
+function stopAuto() { clearInterval(timer); }
+startAuto();
 
-    // התחלת ריצה אוטומטית
-    startAuto();
+function openWA() {
+    window.open('https://wa.me/972526526063?text=' + encodeURIComponent('שלום מוטי, אשמח לשמוע פרטים על ה-CRM'), '_blank');
+}
 
-    function openWA() {
-        window.open('https://wa.me/972526526063?text=' + encodeURIComponent('שלום מוטי, אשמח לשמוע פרטים על ה-CRM'), '_blank');
-    }
+// בועות צבעוניות לפי קטגוריה
+const profs = [
+    {t: "שרברב", c: "chip-amber"}, {t: "חשמלאי", c: "chip-amber"}, {t: "נגר", c: "chip-amber"},
+    {t: "מאפרת", c: "chip-pink"}, {t: "קוסמטיקאית", c: "chip-pink"}, {t: "ספרית", c: "chip-pink"},
+    {t: "מאמן כושר", c: "chip-blue"}, {t: "דיאטנית", c: "chip-blue"}, {t: "נטורופת", c: "chip-blue"},
+    {t: "קייטרינג", c: "chip-green"}, {t: "DJ", c: "chip-green"}, {t: "שף פרטי", c: "chip-green"}
+];
 
-    const profs = [
-        {t: "שרברב", c: "chip-amber"}, {t: "חשמלאי", c: "chip-amber"}, {t: "נגר", c: "chip-amber"},
-        {t: "מאפרת", c: "chip-pink"}, {t: "קוסמטיקאית", c: "chip-pink"}, {t: "ספרית", c: "chip-pink"},
-        {t: "מאמן כושר", c: "chip-blue"}, {t: "דיאטנית", c: "chip-blue"}, {t: "נטורופת", c: "chip-blue"},
-        {t: "קייטרינג", c: "chip-green"}, {t: "DJ", c: "chip-green"}, {t: "שף פרטי", c: "chip-green"}
-    ];
-
-    const bw = document.getElementById('bw0');
-    profs.forEach((p, i) => {
-        const el = document.createElement('div');
-        el.className = `mb ${p.c}`;
-        el.textContent = p.t;
-        el.style.setProperty('--d', (i * 0.22) + 's');
-        el.style.left = (5 + Math.random() * 80) + '%';
-        el.style.top = (10 + Math.random() * 70) + '%';
-        bw.appendChild(el);
-    });
+const bw = document.getElementById('bw0');
+profs.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = `mb ${p.c}`;
+    el.textContent = p.t;
+    el.style.setProperty('--d', (i * 0.22) + 's');
+    el.style.left = (5 + Math.random() * 80) + '%';
+    el.style.top = (10 + Math.random() * 70) + '%';
+    bw.appendChild(el);
+});
 </script>
 </body>
 </html>
