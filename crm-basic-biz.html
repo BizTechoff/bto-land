@@ -193,54 +193,75 @@
 
 <script>
 const LOGO = "https://biztechoff.co.il/assets/img/logo.png";
-
-// Update all logos
 document.querySelectorAll('.logo-img').forEach(img => img.src = LOGO);
 
-// Carousel logic
-let cur=0; const total=7;
-const slides=document.getElementById('slides');
-const dotsEl=document.getElementById('dots');
-for(let i=0;i<total;i++){
-  const d=document.createElement('div');
-  d.className='dot'+(i===0?' active':'');
-  d.onclick=()=>goTo(i);
-  dotsEl.appendChild(d);
+let cur = 0;
+const total = 7;
+const slides = document.getElementById('slides');
+const dotsEl = document.getElementById('dots');
+
+// יצירת נקודות הניווט (Dots)
+for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
 }
-function goTo(n){
-  cur=Math.max(0,Math.min(total-1,n));
-  slides.style.transform=`translateX(${cur*100}%)`;
-  document.querySelectorAll('.dot').forEach((d,i)=>d.className='dot'+(i===cur?' active':''));
-  document.getElementById('prev').disabled=cur===0;
-  document.getElementById('next').disabled=cur===total-1;
+
+function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    slides.style.transform = `translateX(${cur * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i === cur ? ' active' : ''));
+    document.getElementById('prev').disabled = (cur === 0);
+    document.getElementById('next').disabled = (cur === total - 1);
 }
-function move(dir){goTo(cur+dir);}
+
+function move(dir) {
+    goTo(cur + dir);
+}
+
+// אתחול מצב כפתורים
 goTo(0);
 
-// WhatsApp
-function openWA(){
-  const msg = encodeURIComponent('שלום, ראיתי את המודעה של BizTechoff ואני מעוניין לשמוע פרטים על הפלטפורמה לניהול העסק שלי 🙏');
-  window.open('https://wa.me/972526526063?text='+msg,'_blank');
+// פתיחת וואטסאפ עם הודעה מובנית
+function openWA() {
+    const message = encodeURIComponent('שלום מוטי, הגעתי מהדף של ה-CRM, אשמח לשמוע פרטים נוספים על המערכת לעסק שלי.');
+    window.open('https://wa.me/972526526063?text=' + message, '_blank');
 }
 
-// Optimized Bubbles - ALL professions included
-const floaters=["שרברב","חשמלאי","נגר","טפסן","צבעי","מאפרת","קוסמטיקאית","ספרית","מניקוריסטית","פיזיותרפיסט","מאמן כושר","דיאטנית","קייטרינג","צלם אירועים","DJ","שף פרטי","מתקין מזגנים","אופטיקאי"];
-const bw=document.getElementById('bw0');
-floaters.forEach((t,i)=>{
-  const el=document.createElement('div');
-  el.className='mb chip-white';
-  el.textContent=t;
-  el.style.setProperty('--d',(i*0.35)+'s'); // קצב הופעה מהיר ודינמי
-  el.style.left=(5+Math.random()*85)+'%';
-  el.style.top=(10+Math.random()*75)+'%';
-  bw.appendChild(el);
-});
+// מערך מקצועות עם צבעים תואמים לקטגוריות
+const profs = [
+    // בנייה (צהוב/אמבר)
+    {t: "שרברב", c: "chip-amber"}, {t: "חשמלאי", c: "chip-amber"}, 
+    {t: "נגר", c: "chip-amber"}, {t: "צבעי", c: "chip-amber"},
+    // יופי (ורוד)
+    {t: "מאפרת", c: "chip-pink"}, {t: "קוסמטיקאית", c: "chip-pink"}, 
+    {t: "ספרית", c: "chip-pink"}, {t: "מניקוריסטית", c: "chip-pink"},
+    // בריאות (כחול)
+    {t: "פיזיותרפיסט", c: "chip-blue"}, {t: "מאמן כושר", c: "chip-blue"}, 
+    {t: "דיאטנית", c: "chip-blue"}, {t: "נטורופת", c: "chip-blue"},
+    // אירועים (ירוק)
+    {t: "קייטרינג", c: "chip-green"}, {t: "צלם אירועים", c: "chip-green"}, 
+    {t: "DJ", c: "chip-green"}, {t: "שף פרטי", c: "chip-green"}
+];
 
-// Swipe support
-const car=document.getElementById('car');
-let sx=0;
-car.addEventListener('touchstart',e=>sx=e.touches[0].clientX);
-car.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)move(dx>0?-1:1);});
+const bw = document.getElementById('bw0');
+
+// יצירת הבועות בשקף הראשון
+profs.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = `mb ${p.c}`; // כאן מוצמד הצבע הספציפי
+    el.textContent = p.t;
+    
+    // פיזור זמנים ליצירת עניין ויזואלי
+    el.style.setProperty('--d', (i * 0.22) + 's');
+    
+    // מיקום רנדומלי בתוך השקף
+    el.style.left = (5 + Math.random() * 80) + '%';
+    el.style.top = (10 + Math.random() * 70) + '%';
+    
+    bw.appendChild(el);
+});
 </script>
 </body>
 </html>
