@@ -7,94 +7,225 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #080f1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Heebo', sans-serif; overflow: hidden; }
-        .wrap { width: 100%; max-width: 500px; padding: 15px; }
-        .carousel { position: relative; background: #0f1b2d; border-radius: 24px; overflow: hidden; aspect-ratio: 1/1; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); }
+        
+        body { 
+            background: #080f1a; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            font-family: 'Heebo', sans-serif; 
+            overflow: hidden;
+        }
+
+        .wrap { width: 100%; max-width: 540px; padding: 10px; }
+        
+        .carousel { 
+            position: relative; 
+            background: #0f1b2d; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            aspect-ratio: 1/1; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
         .slides { display: flex; transition: transform 0.6s cubic-bezier(.77, 0, .18, 1); height: 100%; }
-        .slide { min-width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; position: relative; }
-        .slide-title { font-size: 34px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; z-index: 10; }
+        
+        .slide { 
+            min-width: 100%; height: 100%; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            padding: 28px 28px 52px; position: relative; overflow: hidden; 
+        }
+
+        .bg-dots { position: absolute; inset: 0; opacity: 0.04; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 28px 28px; }
+        .bg-glow { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.18; }
+
+        .slide-num { font-size: 11px; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px; opacity: 0.5; color: #fff; }
+        .slide-icon { font-size: 42px; margin-bottom: 12px; }
+        .slide-title { font-size: 30px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; }
         .slide-title span { color: #6ee7b7; }
-        .mb { position: absolute; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; opacity: 0; animation: mbpop 2s ease-in-out var(--d) infinite; white-space: nowrap; }
+        .slide-sub { font-size: 14px; color: rgba(255, 255, 255, 0.6); text-align: center; line-height: 1.5; margin-top: 8px; max-width: 340px; }
+
+        .prof-grid { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; margin-top: 15px; }
+        .prof-chip { padding: 6px 13px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+        
+        .chip-amber { background: rgba(251, 191, 36, 0.12); border: 1.5px solid rgba(251, 191, 36, 0.35); color: #fde68a; }
+        .chip-pink { background: rgba(244, 114, 182, 0.12); border: 1.5px solid rgba(244, 114, 182, 0.35); color: #f9a8d4; }
+        .chip-blue { background: rgba(96, 165, 250, 0.12); border: 1.5px solid rgba(96, 165, 250, 0.35); color: #93c5fd; }
+        .chip-green { background: rgba(110, 231, 183, 0.15); border: 1.5px solid rgba(110, 231, 183, 0.4); color: #6ee7b7; }
+        .chip-white { background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.8); }
+
+        .feat-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 310px; margin-top: 15px; }
+        .feat-item { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 9px 14px; color: #fff; }
+
+        .cta-big { background: #25D366; color: #fff; font-weight: 900; font-size: 16px; border: none; border-radius: 12px; padding: 14px 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+        
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 20; color: #fff; }
+        .nav-prev { right: 10px; }
+        .nav-next { left: 10px; }
+
+        .dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; }
+        .dot.active { background: #6ee7b7; width: 22px; border-radius: 4px; }
+
+        .logo-bar { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 7px 0; background: rgba(0, 0, 0, 0.28); border-top: 1px solid rgba(255, 255, 255, 0.06); }
+        .logo-bar img { width: 26px; height: 26px; }
+        .bar-text { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.65); }
+
+        .bubble-wrap { position: absolute; inset: 0; pointer-events: none; }
+        .mb { position: absolute; border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; opacity: 0; animation: mbpop 1.8s ease-in-out var(--d) infinite; }
         @keyframes mbpop {
             0% { opacity: 0; transform: scale(0.6) translateY(20px); }
             20% { opacity: 1; transform: scale(1.1) translateY(0); }
-            100% { opacity: 0; transform: translateY(-45px) scale(0.8); }
+            100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
         }
-        .chip-amber { background: rgba(251, 191, 36, 0.2); border: 1.5px solid #fbbf24; color: #fde68a; }
-        .chip-pink { background: rgba(244, 114, 182, 0.2); border: 1.5px solid #f472b6; color: #f9a8d4; }
-        .chip-blue { background: rgba(96, 165, 250, 0.2); border: 1.5px solid #60a5fa; color: #93c5fd; }
-        .chip-green { background: rgba(110, 231, 183, 0.2); border: 1.5px solid #6ee7b7; color: #6ee7b7; }
-        .dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: 0.3s; }
-        .dot.active { background: #6ee7b7; width: 25px; border-radius: 4px; }
-        .logo-bar { position: absolute; bottom: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.3); }
-        .logo-bar img { width: 25px; height: 25px; }
-        .cta-btn { background: #25D366; color: #fff; font-weight: 900; border: none; border-radius: 12px; padding: 15px 30px; cursor: pointer; font-size: 18px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="wrap">
-    <div class="carousel">
+    <div class="carousel" id="car">
         <div class="slides" id="slides">
             <div class="slide">
-                <div id="bw0" class="bubble-wrap"></div>
-                <div class="slide-title">העסק שלך בראש?<br>הגיע זמן ל-<span>CRM</span></div>
-                <div class="logo-bar"><img src="https://biztechoff.co.il/assets/img/logo.png" alt="logo"></div>
+                <div class="bg-dots"></div>
+                <div class="bg-glow" style="width:300px;height:300px;background:#6ee7b7;top:-80px;right:-80px;"></div>
+                <div class="bubble-wrap" id="bw0"></div>
+                <div style="position:relative;z-index:5;text-align:center;">
+                    <div class="slide-num">01 / 07</div>
+                    <div class="slide-title">אתה מנהל עסק<br>עם <span>מאות פרטים</span><br>בראש?</div>
+                    <div class="slide-sub">הגיע הזמן שמישהו יזכור את הכל בשבילך</div>
+                </div>
+                <div class="logo-bar"><span class="bar-text">™BizTechoff</span><img class="logo-img" alt="Logo"><div class="bar-text"><span>CRM</span> לעסק שלך</div></div>
             </div>
+
             <div class="slide">
-                <div class="slide-title">סדר ב-<span>בנייה ושיפוץ</span></div>
-                <div class="logo-bar"><img src="https://biztechoff.co.il/assets/img/logo.png" alt="logo"></div>
+                <div class="bg-dots"></div>
+                <div class="slide-num">02 / 07</div>
+                <div class="slide-icon">🔧</div>
+                <div class="slide-title">בניה <span>&</span> שיפוץ</div>
+                <div class="prof-grid">
+                    <div class="prof-chip chip-amber">שרברב</div><div class="prof-chip chip-amber">חשמלאי</div>
+                    <div class="prof-chip chip-amber">נגר</div><div class="prof-chip chip-amber">טפסן</div>
+                    <div class="prof-chip chip-amber">צבעי</div><div class="prof-chip chip-white">ועוד...</div>
+                </div>
+                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
             </div>
+
             <div class="slide">
-                <div class="slide-title">מוכן להתקדם?</div>
-                <button class="cta-btn" onclick="window.open('https://wa.me/972526526063')">דבר איתי בוואטסאפ</button>
+                <div class="bg-dots"></div>
+                <div class="slide-num">03 / 07</div>
+                <div class="slide-icon">💅</div>
+                <div class="slide-title">יופי <span>&</span> טיפוח</div>
+                <div class="prof-grid">
+                    <div class="prof-chip chip-pink">מאפרת</div><div class="prof-chip chip-pink">קוסמטיקאית</div>
+                    <div class="prof-chip chip-pink">ספרית</div><div class="prof-chip chip-pink">מניקוריסטית</div>
+                </div>
+                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
+            </div>
+
+            <div class="slide">
+                <div class="bg-dots"></div>
+                <div class="slide-num">04 / 07</div>
+                <div class="slide-icon">💪</div>
+                <div class="slide-title">בריאות <span>&</span> כושר</div>
+                <div class="prof-grid">
+                    <div class="prof-chip chip-blue">פיזיותרפיסט</div><div class="prof-chip chip-blue">מאמן כושר</div>
+                    <div class="prof-chip chip-blue">דיאטנית</div><div class="prof-chip chip-blue">נטורופת</div>
+                </div>
+                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
+            </div>
+
+            <div class="slide">
+                <div class="bg-dots"></div>
+                <div class="slide-num">05 / 07</div>
+                <div class="slide-icon">🎉</div>
+                <div class="slide-title">אירועים <span>&</span> מזון</div>
+                <div class="prof-grid">
+                    <div class="prof-chip chip-green">קייטרינג</div><div class="prof-chip chip-green">צלם אירועים</div>
+                    <div class="prof-chip chip-green">DJ</div><div class="prof-chip chip-green">שף פרטי</div>
+                </div>
+                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
+            </div>
+
+            <div class="slide">
+                <div class="slide-num">06 / 07</div>
+                <div class="slide-title" style="font-size:24px;">מה <span>מקבלים</span>?</div>
+                <div class="feat-list">
+                    <div class="feat-item"><span>👥</span> ניהול לקוחות מסודר</div>
+                    <div class="feat-item"><span>💰</span> הצעות מחיר וחשבוניות</div>
+                    <div class="feat-item"><span>📊</span> דוחות בזמן אמת</div>
+                </div>
+                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
+            </div>
+
+            <div class="slide">
+                <div class="slide-num">07 / 07</div>
+                <div class="slide-title">מוכן <span>לסדר</span> בעסק?</div>
+                <button class="cta-big" onclick="openWA()">שלחו הודעה עכשיו</button>
+                <div class="logo-bar"><img class="logo-img" alt="Logo"></div>
             </div>
         </div>
+
+        <button class="nav-btn nav-prev" onclick="move(-1)">&#8249;</button>
+        <button class="nav-btn nav-next" onclick="move(1)">&#8250;</button>
     </div>
     <div class="dots" id="dots"></div>
 </div>
 
 <script>
+    const LOGO = "https://biztechoff.co.il/bto.logo.png";
+    document.querySelectorAll('.logo-img').forEach(img => img.src = LOGO);
+
     let cur = 0;
-    const total = 3; // שנה למספר השקפים האמיתי שלך
+    const total = 7;
     const slides = document.getElementById('slides');
     const dotsEl = document.getElementById('dots');
+    let autoTimer;
 
-    // יצירת נקודות
-    for(let i=0; i<total; i++) {
+    for (let i = 0; i < total; i++) {
         const d = document.createElement('div');
-        d.className = 'dot' + (i===0?' active':'');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => { stopAuto(); goTo(i); };
         dotsEl.appendChild(d);
     }
 
     function goTo(n) {
-        cur = n % total;
+        cur = (n + total) % total;
         slides.style.transform = `translateX(${cur * 100}%)`;
         document.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i === cur ? ' active' : ''));
     }
 
-    // לופ אוטומטי כל 3 שניות
-    setInterval(() => {
-        cur++;
-        goTo(cur);
-    }, 3000);
+    function move(dir) { stopAuto(); goTo(cur + dir); }
 
-    // בועות צבעוניות
+    function startAuto() {
+        autoTimer = setInterval(() => { goTo(cur + 1); }, 3500);
+    }
+    
+    function stopAuto() { clearInterval(autoTimer); }
+
+    // התחלת ריצה אוטומטית
+    startAuto();
+
+    function openWA() {
+        window.open('https://wa.me/972526526063?text=' + encodeURIComponent('שלום מוטי, אשמח לשמוע פרטים על ה-CRM'), '_blank');
+    }
+
     const profs = [
-        {t:"שרברב", c:"chip-amber"}, {t:"חשמלאי", c:"chip-amber"},
-        {t:"מאפרת", c:"chip-pink"}, {t:"ספרית", c:"chip-pink"},
-        {t:"מאמן כושר", c:"chip-blue"}, {t:"דיאטנית", c:"chip-blue"},
-        {t:"צלם", c:"chip-green"}, {t:"DJ", c:"chip-green"}
+        {t: "שרברב", c: "chip-amber"}, {t: "חשמלאי", c: "chip-amber"}, {t: "נגר", c: "chip-amber"},
+        {t: "מאפרת", c: "chip-pink"}, {t: "קוסמטיקאית", c: "chip-pink"}, {t: "ספרית", c: "chip-pink"},
+        {t: "מאמן כושר", c: "chip-blue"}, {t: "דיאטנית", c: "chip-blue"}, {t: "נטורופת", c: "chip-blue"},
+        {t: "קייטרינג", c: "chip-green"}, {t: "DJ", c: "chip-green"}, {t: "שף פרטי", c: "chip-green"}
     ];
+
     const bw = document.getElementById('bw0');
     profs.forEach((p, i) => {
         const el = document.createElement('div');
         el.className = `mb ${p.c}`;
         el.textContent = p.t;
-        el.style.setProperty('--d', (i * 0.25) + 's');
-        el.style.left = (Math.random() * 80 + 5) + '%';
-        el.style.top = (Math.random() * 70 + 10) + '%';
+        el.style.setProperty('--d', (i * 0.22) + 's');
+        el.style.left = (5 + Math.random() * 80) + '%';
+        el.style.top = (10 + Math.random() * 70) + '%';
         bw.appendChild(el);
     });
 </script>
