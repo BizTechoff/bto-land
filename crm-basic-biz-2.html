@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizTechoff CRM</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #080f1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Heebo', sans-serif; overflow: hidden; }
+        .wrap { width: 100%; max-width: 500px; padding: 15px; }
+        .carousel { position: relative; background: #0f1b2d; border-radius: 24px; overflow: hidden; aspect-ratio: 1/1; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); }
+        .slides { display: flex; transition: transform 0.6s cubic-bezier(.77, 0, .18, 1); height: 100%; }
+        .slide { min-width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; position: relative; }
+        .slide-title { font-size: 34px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; z-index: 10; }
+        .slide-title span { color: #6ee7b7; }
+        .mb { position: absolute; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; opacity: 0; animation: mbpop 2s ease-in-out var(--d) infinite; white-space: nowrap; }
+        @keyframes mbpop {
+            0% { opacity: 0; transform: scale(0.6) translateY(20px); }
+            20% { opacity: 1; transform: scale(1.1) translateY(0); }
+            100% { opacity: 0; transform: translateY(-45px) scale(0.8); }
+        }
+        .chip-amber { background: rgba(251, 191, 36, 0.2); border: 1.5px solid #fbbf24; color: #fde68a; }
+        .chip-pink { background: rgba(244, 114, 182, 0.2); border: 1.5px solid #f472b6; color: #f9a8d4; }
+        .chip-blue { background: rgba(96, 165, 250, 0.2); border: 1.5px solid #60a5fa; color: #93c5fd; }
+        .chip-green { background: rgba(110, 231, 183, 0.2); border: 1.5px solid #6ee7b7; color: #6ee7b7; }
+        .dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: 0.3s; }
+        .dot.active { background: #6ee7b7; width: 25px; border-radius: 4px; }
+        .logo-bar { position: absolute; bottom: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.3); }
+        .logo-bar img { width: 25px; height: 25px; }
+        .cta-btn { background: #25D366; color: #fff; font-weight: 900; border: none; border-radius: 12px; padding: 15px 30px; cursor: pointer; font-size: 18px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <div class="carousel">
+        <div class="slides" id="slides">
+            <div class="slide">
+                <div id="bw0" class="bubble-wrap"></div>
+                <div class="slide-title">העסק שלך בראש?<br>הגיע זמן ל-<span>CRM</span></div>
+                <div class="logo-bar"><img src="https://biztechoff.co.il/assets/img/logo.png" alt="logo"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-title">סדר ב-<span>בנייה ושיפוץ</span></div>
+                <div class="logo-bar"><img src="https://biztechoff.co.il/assets/img/logo.png" alt="logo"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-title">מוכן להתקדם?</div>
+                <button class="cta-btn" onclick="window.open('https://wa.me/972526526063')">דבר איתי בוואטסאפ</button>
+            </div>
+        </div>
+    </div>
+    <div class="dots" id="dots"></div>
+</div>
+
+<script>
+    let cur = 0;
+    const total = 3; // שנה למספר השקפים האמיתי שלך
+    const slides = document.getElementById('slides');
+    const dotsEl = document.getElementById('dots');
+
+    // יצירת נקודות
+    for(let i=0; i<total; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i===0?' active':'');
+        dotsEl.appendChild(d);
+    }
+
+    function goTo(n) {
+        cur = n % total;
+        slides.style.transform = `translateX(${cur * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i === cur ? ' active' : ''));
+    }
+
+    // לופ אוטומטי כל 3 שניות
+    setInterval(() => {
+        cur++;
+        goTo(cur);
+    }, 3000);
+
+    // בועות צבעוניות
+    const profs = [
+        {t:"שרברב", c:"chip-amber"}, {t:"חשמלאי", c:"chip-amber"},
+        {t:"מאפרת", c:"chip-pink"}, {t:"ספרית", c:"chip-pink"},
+        {t:"מאמן כושר", c:"chip-blue"}, {t:"דיאטנית", c:"chip-blue"},
+        {t:"צלם", c:"chip-green"}, {t:"DJ", c:"chip-green"}
+    ];
+    const bw = document.getElementById('bw0');
+    profs.forEach((p, i) => {
+        const el = document.createElement('div');
+        el.className = `mb ${p.c}`;
+        el.textContent = p.t;
+        el.style.setProperty('--d', (i * 0.25) + 's');
+        el.style.left = (Math.random() * 80 + 5) + '%';
+        el.style.top = (Math.random() * 70 + 10) + '%';
+        bw.appendChild(el);
+    });
+</script>
+</body>
+</html>
