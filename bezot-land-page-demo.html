@@ -18,7 +18,7 @@
             position: relative;
         }
         
-        /* עיצוב הלוגו */
+        /* עיצוב הלוגו מוטמע Base64 */
         .logo-container { 
             position: absolute; 
             top: 20px; 
@@ -27,11 +27,9 @@
             z-index: 10;
         }
         .logo-container img { 
-            height: 55px; 
+            height: 60px; /* גובה מותאם ללוגו המלא */
             width: auto; 
             display: block;
-            /* הבטחת תצוגה */
-            min-width: 100px;
         }
         .logo-container:hover { transform: scale(1.05); }
 
@@ -114,7 +112,7 @@
 <body>
 
 <a href="https://bezotcapital.com/" target="_blank" class="logo-container">
-    <img src="https://bezotcapital.com/wp-content/uploads/2022/09/Logo-Bezot-Gold.png" alt="Bezot Capital" onerror="this.src='https://via.placeholder.com/150x50?text=BEZOT+CAPITAL'">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKMAAABhCAMAAABfC5fUAAAAVFBMVEVHcEwdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR2H8fP1AAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2b23KiMBAAByIgiIigInr//69dcAsS09NoO9OT6Xyf7DAnpY9uAtu6LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwI9S6m9fS/2uK/9Y69X/W6of6/W3L6UisK091+uF8v2hE9B3P6+K0r9B/f4uiv+S8I/uIn4I6vt30X+Uf6GZf3QX8S6Xv+n6z0I7/+gu4jTzn4X+/Xf6P67Lp+VfoP76mG6mGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y/Y7ZfI/Xv4ZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDv+AUPUAYXatZ2zAAAAABJRU5ErkJggg==" alt="Bezot Capital">
 </a>
 
 <div class="card">
