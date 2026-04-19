@@ -3,54 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>החלטת ריבית רבעונית - BEZOT</title>
+    <title>החלטת ריבית רבעונית - BEZOT CAPITAL</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; position: relative; }
         
-        /* עיצוב הלוגו */
-        .logo-container { position: absolute; top: 20px; right: 20px; transition: transform 0.3s ease-in-out; cursor: pointer; text-decoration: none; }
-        .logo-container img { height: 50px; /* גובה הלוגו - ניתן לשינוי */ width: auto; display: block; }
+        /* עיצוב הלוגו הרשמי */
+        .logo-container { position: absolute; top: 30px; right: 30px; transition: transform 0.3s ease-in-out; cursor: pointer; text-decoration: none; }
+        .logo-container img { height: 60px; /* גובה מותאם ללוגו של בזות */ width: auto; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
         
-        /* Placeholder ללוגו אם אין קובץ */
-        .logo-placeholder { height: 50px; width: 120px; background-color: #3498db; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2em; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-
         /* אפקט Hover - הגדלה והבלטה */
-        .logo-container:hover { transform: scale(1.1); /* הגדלה ב-10% */ filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15)); /* הבלטה */ }
+        .logo-container:hover { transform: scale(1.08); filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15)); }
 
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; margin-top: 60px; /* רווח מהלוגו */ }
-        h2 { color: #2c3e50; margin-bottom: 10px; }
-        .intro-text { color: #5a6c7d; font-size: 0.95em; line-height: 1.5; margin-bottom: 15px; background: #fff9f0; padding: 10px; border-radius: 8px; border-right: 4px solid #f39c12; text-align: right; }
-        .amount-box { background: #eef2f3; padding: 15px; border-radius: 10px; margin: 20px 0; font-size: 1.2em; font-weight: bold; color: #2ecc71; }
+        .card { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 480px; text-align: center; margin-top: 80px; border-top: 5px solid #1a2b3c; }
+        h2 { color: #1a2b3c; margin-bottom: 10px; font-weight: 800; }
+        .intro-text { color: #4a5a6a; font-size: 1em; line-height: 1.6; margin-bottom: 20px; background: #fdfaf3; padding: 15px; border-radius: 10px; border-right: 5px solid #c9a55c; text-align: right; box-shadow: inset 0 0 10px rgba(0,0,0,0.02); }
+        .amount-box { background: #1a2b3c; padding: 20px; border-radius: 12px; margin: 25px 0; font-size: 1.5em; font-weight: bold; color: #c9a55c; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
-        .slider-container { margin: 25px 0 10px 0; }
-        input[type=range] { width: 100%; cursor: pointer; }
+        .slider-container { margin: 30px 0 10px 0; }
+        input[type=range] { width: 100%; cursor: pointer; accent-color: #1a2b3c; }
         
-        .quick-picks { display: flex; justify-content: space-between; margin-bottom: 25px; }
-        .quick-btn { background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 5px; font-size: 0.85em; cursor: pointer; flex: 1; margin: 0 3px; transition: all 0.2s; }
-        .quick-btn:hover { background: #f0f0f0; border-color: #3498db; }
-        .quick-btn.active { background: #3498db; color: white; border-color: #2980b9; }
+        .quick-picks { display: flex; justify-content: space-between; margin-bottom: 30px; gap: 8px; }
+        .quick-btn { background: #fff; border: 1px solid #d1d9e0; padding: 10px; border-radius: 8px; font-size: 0.9em; cursor: pointer; flex: 1; transition: all 0.2s; font-weight: 600; color: #1a2b3c; }
+        .quick-btn:hover { background: #f8f9fa; border-color: #1a2b3c; }
+        .quick-btn.active { background: #1a2b3c; color: #fff; border-color: #1a2b3c; }
 
-        .stats { display: flex; justify-content: space-between; margin-top: 20px; text-align: right; }
-        .stats div { width: 48%; background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
-        .label { font-size: 0.8em; color: #95a5a6; display: block; }
-        .val { font-size: 1.1em; font-weight: bold; color: #34495e; }
+        .stats { display: flex; justify-content: space-between; margin-top: 25px; gap: 15px; }
+        .stats div { width: 50%; background: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px solid #edf0f2; text-align: center; }
+        .label { font-size: 0.85em; color: #718096; display: block; margin-bottom: 5px; }
+        .val { font-size: 1.2em; font-weight: 700; color: #1a2b3c; }
         
-        .btn { color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 25px; transition: background 0.3s; font-weight: bold; }
-        .btn.active { background: #3498db; }
-        .btn.active:hover { background: #2980b9; }
-        .btn.declined { background: #e74c3c; }
-        .btn.declined:hover { background: #c0392b; }
+        .btn { color: white; border: none; padding: 18px 30px; border-radius: 10px; font-size: 1.15em; cursor: pointer; width: 100%; margin-top: 30px; transition: all 0.3s; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn.active { background: #c9a55c; color: #1a2b3c; }
+        .btn.active:hover { background: #b8944a; transform: translateY(-2px); }
+        .btn.declined { background: #e53e3e; }
+        .btn.declined:hover { background: #c53030; transform: translateY(-2px); }
     </style>
 </head>
 <body>
 
-<a href="https://www.bezot.com" target="_blank" class="logo-container" title="עבור לאתר Bezot">
-    <div class="logo-placeholder">BEZOT</div>
+<a href="https://bezotcapital.com/" target="_blank" class="logo-container" title="עבור לאתר Bezot Capital">
+    <img src="https://bezotcapital.com/wp-content/uploads/2022/09/Logo-Bezot-Gold.png" alt="Bezot Capital Logo">
 </a>
 
 <div class="card">
     <h2>שלום ישראל ישראלי,</h2>
-    <p style="color: #7f8c8d; margin-bottom: 5px;">סכום הריבית שנצבר לזכותך ברבעון זה:</p>
+    <p style="color: #718096; margin-bottom: 5px;">סכום הריבית שנצבר לזכותך ברבעון זה:</p>
     <div class="amount-box">₪10,000</div>
     
     <div class="intro-text">
@@ -58,7 +55,7 @@
     </div>
 
     <div class="slider-container">
-        <label style="display:block; margin-bottom: 15px; font-weight: bold; color: #2c3e50;">בחר את אופן חלוקת הריבית:</label>
+        <label style="display:block; margin-bottom: 15px; font-weight: 700; color: #1a2b3c; text-align: right;">בחר את אופן חלוקת הריבית:</label>
         <input type="range" id="rollover-slider" min="0" max="10000" value="10000" step="100" oninput="updateValues(this.value, true)">
     </div>
 
@@ -102,7 +99,6 @@
         document.getElementById('rollover-val').innerText = '₪' + rollover.toLocaleString();
         document.getElementById('withdraw-val').innerText = '₪' + withdraw.toLocaleString();
         
-        // עדכון דינמי של הכפתור
         if (rollover === 0) {
             submitBtn.innerText = "לא מעוניין בגלגול";
             submitBtn.classList.remove('active');
