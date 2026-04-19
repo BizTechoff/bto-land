@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>החלטת ריבית רבעונית - הדמיה</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        h2 { color: #2c3e50; margin-bottom: 10px; }
+        p { color: #7f8c8d; font-size: 0.9em; }
+        .amount-box { background: #eef2f3; padding: 15px; border-radius: 10px; margin: 20px 0; font-size: 1.2em; font-weight: bold; color: #2ecc71; }
+        .slider-container { margin: 30px 0; }
+        input[type=range] { width: 100%; cursor: pointer; }
+        .stats { display: flex; justify-content: space-between; margin-top: 20px; text-align: right; }
+        .stats div { width: 48%; background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
+        .label { font-size: 0.8em; color: #95a5a6; display: block; }
+        .val { font-size: 1.1em; font-weight: bold; color: #34495e; }
+        .btn { background: #3498db; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1em; cursor: pointer; width: 100%; margin-top: 20px; transition: background 0.3s; }
+        .btn:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>שלום ישראל ישראלי,</h2>
+    <p>סכום הריבית שנצבר לזכותך ברבעון זה:</p>
+    <div class="amount-box">₪10,000</div>
+    
+    <div class="slider-container">
+        <label for="rollover-slider" style="display:block; margin-bottom: 10px; font-weight: bold;">בחר את אופן חלוקת הריבית:</label>
+        <input type="range" id="rollover-slider" min="0" max="10000" value="10000" step="100" oninput="updateValues(this.value)">
+    </div>
+
+    <div class="stats">
+        <div>
+            <span class="label">גלגול להשקעה</span>
+            <span class="val" id="rollover-val">₪10,000</span>
+        </div>
+        <div>
+            <span class="label">משיכה לבנק</span>
+            <span class="val" id="withdraw-val">₪0</span>
+        </div>
+    </div>
+
+    <p id="bonus-text" style="color: #e67e22; font-weight: bold; margin-top: 15px;">הגדלת הקרן מעניקה לך צפי רווח משופר לרבעון הבא!</p>
+
+    <button class="btn">אישור וחתימה דיגיטלית</button>
+</div>
+
+<script>
+    function updateValues(val) {
+        const total = 10000;
+        const rollover = parseInt(val);
+        const withdraw = total - rollover;
+        
+        document.getElementById('rollover-val').innerText = '₪' + rollover.toLocaleString();
+        document.getElementById('withdraw-val').innerText = '₪' + withdraw.toLocaleString();
+        
+        const bonusText = document.getElementById('bonus-text');
+        if (rollover > 5000) {
+            bonusText.style.visibility = 'visible';
+        } else {
+            bonusText.style.visibility = 'hidden';
+        }
+    }
+</script>
+
+</body>
+</html>
