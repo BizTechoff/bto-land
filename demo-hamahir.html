@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המהיר — הדגמת פלטפורמה</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: #0a0a1a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ====== INTRO SCREEN ====== */
+.intro-screen {
+  position: fixed; inset: 0; z-index: 1000;
+  background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #0a0a2e 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.8s, transform 0.8s;
+}
+.intro-screen.hidden { opacity: 0; pointer-events: none; transform: scale(1.1); }
+
+.intro-logo {
+  font-size: 4rem; font-weight: 900;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: pulseGlow 2s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+.intro-subtitle {
+  font-size: 1.3rem; color: rgba(255,255,255,0.6);
+  margin-bottom: 3rem; text-align: center; line-height: 1.8;
+}
+.intro-subtitle span { color: #667eea; font-weight: 600; }
+
+.start-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none; color: white; padding: 1rem 3rem;
+  border-radius: 50px; font-size: 1.3rem; font-weight: 700;
+  cursor: pointer; font-family: 'Heebo', sans-serif;
+  transition: all 0.3s; box-shadow: 0 10px 40px rgba(102,126,234,0.4);
+}
+.start-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(102,126,234,0.6); }
+
+@keyframes pulseGlow {
+  0%,100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+/* ====== MAIN STAGE ====== */
+.stage {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+}
+.stage.active { display: block; }
+
+/* ====== STEP INDICATOR ====== */
+.step-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,30,0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(102,126,234,0.3);
+  padding: 0.8rem 2rem; display: flex; align-items: center;
+  justify-content: center; gap: 0.5rem;
+}
+.step-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); transition: all 0.5s;
+  position: relative;
+}
+.step-dot.active { background: #667eea; box-shadow: 0 0 15px rgba(102,126,234,0.6); transform: scale(1.3); }
+.step-dot.done { background: #4caf50; }
+.step-line { width: 30px; height: 2px; background: rgba(255,255,255,0.1); }
+.step-line.done { background: #4caf50; }
+
+/* ====== PHONE MOCKUP ====== */
+.scene {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; padding: 5rem 2rem 2rem;
+  gap: 3rem; flex-wrap: wrap;
+}
+
+.phone {
+  width: 320px; min-height: 580px;
+  background: #1a1a2e; border-radius: 35px;
+  border: 3px solid #333; padding: 15px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  position: relative; overflow: hidden;
+}
+.phone-notch {
+  width: 120px; height: 25px; background: #000;
+  border-radius: 0 0 15px 15px; margin: 0 auto 10px;
+}
+.phone-screen { background: #0d1117; border-radius: 20px; overflow: hidden; min-height: 500px; }
+
+/* WhatsApp style */
+.wa-header {
+  background: #1f2c34; padding: 12px 15px;
+  display: flex; align-items: center; gap: 10px;
+}
+.wa-avatar { width: 35px; height: 35px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.wa-name { font-weight: 600; font-size: 0.95rem; }
+.wa-chat { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+
+.wa-bubble {
+  max-width: 85%; padding: 8px 12px; border-radius: 10px;
+  font-size: 0.82rem; line-height: 1.5; position: relative;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.wa-bubble.show { opacity: 1; transform: translateY(0); }
+.wa-bubble.incoming {
+  background: #1f2c34; align-self: flex-start;
+  border-top-right-radius: 2px;
+}
+.wa-bubble.outgoing {
+  background: #005c4b; align-self: flex-end;
+  border-top-left-radius: 2px;
+}
+.wa-time { font-size: 0.65rem; color: rgba(255,255,255,0.4); text-align: left; margin-top: 3px; }
+
+/* ====== PLATFORM MOCKUP ====== */
+.platform {
+  width: 650px; min-height: 500px;
+  background: #fff; border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  overflow: hidden; color: #333; direction: rtl;
+}
+
+.plat-header {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+  color: white; padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.plat-header h3 { font-size: 1rem; font-weight: 600; }
+
+.plat-sidebar {
+  width: 100%; background: #f8f9fa; padding: 8px;
+  display: flex; gap: 6px; border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;
+}
+.plat-nav-item {
+  padding: 6px 14px; border-radius: 20px; font-size: 0.78rem;
+  font-weight: 500; white-space: nowrap; cursor: pointer;
+  transition: all 0.3s; background: white; border: 1px solid #e0e0e0;
+}
+.plat-nav-item.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+
+.plat-content { padding: 15px; min-height: 380px; }
+
+/* Customer card in platform */
+.customer-card {
+  border: 1px solid #e0e0e0; border-radius: 12px; padding: 12px;
+  margin-bottom: 10px; background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  opacity: 0; transform: translateX(30px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.customer-card.show { opacity: 1; transform: translateX(0); }
+.customer-card.highlight {
+  border-color: #667eea;
+  box-shadow: 0 0 20px rgba(102,126,234,0.2);
+  animation: cardPulse 1s ease-in-out;
+}
+
+@keyframes cardPulse {
+  0%,100% { box-shadow: 0 0 20px rgba(102,126,234,0.2); }
+  50% { box-shadow: 0 0 30px rgba(102,126,234,0.4); }
+}
+
+.cc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.cc-name { font-weight: 700; font-size: 0.95rem; color: #1e3a8a; }
+.cc-phone { font-size: 0.8rem; color: #666; }
+.cc-badge {
+  background: #e3f2fd; color: #1565c0; padding: 2px 8px;
+  border-radius: 10px; font-size: 0.7rem; font-weight: 600;
+}
+.cc-preview {
+  font-size: 0.82rem; color: #555; padding: 6px 10px;
+  background: #f8f9fa; border-radius: 8px; margin-bottom: 8px;
+  border-right: 3px solid #667eea; line-height: 1.5;
+}
+.cc-actions {
+  display: flex; gap: 5px; flex-wrap: wrap;
+}
+.cc-btn {
+  padding: 5px 12px; border-radius: 15px; border: none;
+  font-size: 0.72rem; font-weight: 600; cursor: pointer;
+  font-family: 'Heebo', sans-serif; transition: all 0.3s;
+  color: white;
+}
+.cc-btn:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
+.cc-btn.green { background: linear-gradient(135deg, #25d366, #20b558); }
+.cc-btn.blue { background: linear-gradient(135deg, #007bff, #0056b3); }
+.cc-btn.orange { background: linear-gradient(135deg, #ff9800, #f57c00); }
+.cc-btn.purple { background: linear-gradient(135deg, #9c27b0, #7b1fa2); }
+.cc-btn.gray { background: #607d8b; }
+.cc-btn.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Second row actions */
+.cc-actions-row2 {
+  display: flex; gap: 5px; margin-top: 5px;
+  opacity: 0; max-height: 0; overflow: hidden;
+  transition: all 0.5s ease;
+}
+.cc-actions-row2.show { opacity: 1; max-height: 50px; }
+
+/* ====== ORDER MODAL ====== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: all 0.4s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: white; border-radius: 12px; width: 90%; max-width: 500px;
+  color: #333; direction: rtl; transform: scale(0.8); transition: transform 0.4s;
+  overflow: hidden; max-height: 80vh; overflow-y: auto;
+}
+.modal-overlay.show .modal { transform: scale(1); }
+
+.modal-header {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+  color: white; padding: 15px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.modal-header h3 { font-size: 1.1rem; }
+.modal-close { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
+
+.modal-body { padding: 20px; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-weight: 500; margin-bottom: 4px; font-size: 0.85rem; color: #555; }
+.form-input {
+  width: 100%; padding: 8px 12px; border: 1px solid #ddd;
+  border-radius: 6px; font-size: 0.9rem; font-family: 'Heebo';
+  transition: border 0.3s;
+}
+.form-input:focus { outline: none; border-color: #667eea; }
+
+.modal-footer {
+  padding: 15px 20px; border-top: 1px solid #eee;
+  display: flex; gap: 10px; justify-content: center;
+}
+.modal-btn {
+  padding: 10px 25px; border-radius: 25px; border: none;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  font-family: 'Heebo'; transition: all 0.3s;
+}
+.modal-btn.primary { background: #25d366; color: white; }
+.modal-btn.primary:hover { background: #20b558; transform: translateY(-2px); }
+.modal-btn.secondary { background: #f0f0f0; color: #333; }
+
+/* ====== REPLY DIALOG ====== */
+.reply-modal .modal { max-width: 450px; }
+.reply-preview {
+  background: #f5f5f5; padding: 12px; border-radius: 8px;
+  border-right: 4px solid #667eea; margin-bottom: 12px;
+  font-size: 0.85rem; line-height: 1.6; white-space: pre-line;
+}
+.reply-textarea {
+  width: 100%; padding: 10px; border: 1px solid #ddd;
+  border-radius: 8px; font-family: 'Heebo'; font-size: 0.9rem;
+  resize: none; min-height: 100px;
+}
+.reply-textarea:focus { outline: none; border-color: #667eea; }
+
+/* ====== SUCCESS NOTIFICATION ====== */
+.notification {
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-100px);
+  background: linear-gradient(135deg, #25d366, #20b558);
+  color: white; padding: 12px 30px; border-radius: 25px;
+  font-weight: 600; font-size: 0.95rem; z-index: 300;
+  box-shadow: 0 10px 30px rgba(37,211,102,0.4);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.notification.show { transform: translateX(-50%) translateY(0); }
+.notification.payment { background: linear-gradient(135deg, #9c27b0, #7b1fa2); box-shadow: 0 10px 30px rgba(156,39,176,0.4); }
+.notification.courier { background: linear-gradient(135deg, #ff9800, #f57c00); box-shadow: 0 10px 30px rgba(255,152,0,0.4); }
+
+/* ====== NARRATION ====== */
+.narration {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,30,0.95); backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(102,126,234,0.3);
+  padding: 1rem 2rem; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+}
+.narration-text {
+  font-size: 1.05rem; font-weight: 500; color: rgba(255,255,255,0.9);
+  max-width: 600px; line-height: 1.6;
+}
+.narration-text .highlight { color: #667eea; font-weight: 700; }
+.narration-text .green { color: #25d366; font-weight: 700; }
+.narration-text .orange { color: #ff9800; font-weight: 700; }
+
+.next-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none; color: white; padding: 10px 25px;
+  border-radius: 25px; font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; font-family: 'Heebo'; transition: all 0.3s;
+  white-space: nowrap; min-width: 100px;
+}
+.next-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+.next-btn.pulse { animation: btnPulse 1.5s ease-in-out infinite; }
+@keyframes btnPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(102,126,234,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(102,126,234,0); }
+}
+
+/* ====== DASHBOARD SCENE ====== */
+.dashboard-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-bottom: 15px;
+}
+.dash-card {
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  border-radius: 10px; padding: 15px; color: white; text-align: center;
+  opacity: 0; transform: scale(0.8);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dash-card.show { opacity: 1; transform: scale(1); }
+.dash-card .value { font-size: 1.8rem; font-weight: 800; }
+.dash-card .label { font-size: 0.75rem; opacity: 0.9; margin-top: 3px; }
+
+.dash-chart {
+  background: #f8f9fa; border-radius: 10px; padding: 15px;
+  opacity: 0; transition: all 0.6s; height: 140px;
+  position: relative; overflow: hidden;
+}
+.dash-chart.show { opacity: 1; }
+.dash-chart h4 { font-size: 0.85rem; color: #555; margin-bottom: 10px; }
+
+.chart-bars {
+  display: flex; align-items: flex-end; gap: 6px;
+  height: 90px; padding: 0 10px;
+}
+.chart-bar {
+  flex: 1; background: linear-gradient(180deg, #667eea, #764ba2);
+  border-radius: 4px 4px 0 0; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.chart-bar .bar-label {
+  position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+  font-size: 0.6rem; color: #999; white-space: nowrap;
+}
+
+/* ====== FINAL SCREEN ====== */
+.final-screen {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 2rem;
+}
+.final-screen.show { display: flex; }
+.final-title {
+  font-size: 2.5rem; font-weight: 900;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+.final-subtitle { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; line-height: 1.8; }
+.final-features {
+  display: flex; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center;
+}
+.final-feature {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1.2rem 1.5rem; min-width: 160px;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.final-feature.show { opacity: 1; transform: translateY(0); }
+.final-feature .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.final-feature .text { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+
+.final-cta {
+  background: linear-gradient(135deg, #25d366, #20b558);
+  border: none; color: white; padding: 1rem 3rem;
+  border-radius: 50px; font-size: 1.2rem; font-weight: 700;
+  cursor: pointer; font-family: 'Heebo'; margin-top: 2rem;
+  box-shadow: 0 10px 40px rgba(37,211,102,0.4); transition: all 0.3s;
+}
+.final-cta:hover { transform: translateY(-3px) scale(1.05); }
+
+/* ====== PIN INDICATOR ====== */
+.pin-icon {
+  opacity: 0; transition: all 0.4s;
+  font-size: 0.9rem;
+}
+.pin-icon.show { opacity: 1; }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+  .scene { flex-direction: column; gap: 1.5rem; }
+  .platform { width: 95%; min-width: 0; }
+  .phone { width: 280px; min-height: 480px; }
+  .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .intro-logo { font-size: 2.5rem; }
+  .narration-text { font-size: 0.85rem; }
+  .narration { flex-direction: column; gap: 0.8rem; padding: 0.8rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== INTRO ====== -->
+<div class="intro-screen" id="intro">
+  <div class="intro-logo">המהיר</div>
+  <div class="intro-subtitle">
+    <span>הווטסאפ שלך</span> הופך ל<span>כלי ניהול</span><br>
+    הודעה → הזמנה → הצעת מחיר → תשלום → שליח<br>
+    <span>הכל מקום אחד.</span>
+  </div>
+  <button class="start-btn" onclick="startDemo()">▶ התחל הדגמה</button>
+</div>
+
+<!-- ====== STEP BAR ====== -->
+<div class="step-bar" id="stepBar" style="display:none">
+  <div class="step-dot" id="dot0"></div><div class="step-line" id="line0"></div>
+  <div class="step-dot" id="dot1"></div><div class="step-line" id="line1"></div>
+  <div class="step-dot" id="dot2"></div><div class="step-line" id="line2"></div>
+  <div class="step-dot" id="dot3"></div><div class="step-line" id="line3"></div>
+  <div class="step-dot" id="dot4"></div><div class="step-line" id="line4"></div>
+  <div class="step-dot" id="dot5"></div><div class="step-line" id="line5"></div>
+  <div class="step-dot" id="dot6"></div><div class="step-line" id="line6"></div>
+  <div class="step-dot" id="dot7"></div>
+</div>
+
+<!-- ====== NARRATION ====== -->
+<div class="narration" id="narration" style="display:none">
+  <div class="narration-text" id="narrationText"></div>
+  <button class="next-btn pulse" id="nextBtn" onclick="nextStep()">הבא ←</button>
+</div>
+
+<!-- ====== NOTIFICATION ====== -->
+<div class="notification" id="notification"></div>
+
+<!-- ====== SCENE: STEP 1 - WhatsApp Messages ====== -->
+<div class="stage" id="stage1">
+  <div class="scene">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="wa-header">
+          <div class="wa-avatar">👤</div>
+          <div><div class="wa-name">דני כהן</div><div style="font-size:0.7rem;color:rgba(255,255,255,0.5)">אונליין</div></div>
+        </div>
+        <div class="wa-chat" id="waChat">
+          <div class="wa-bubble incoming" id="msg1">שלום, אני צריך שליח היום<div class="wa-time">09:32</div></div>
+          <div class="wa-bubble incoming" id="msg2">איסוף מרחוב הרצל 15 תל אביב<div class="wa-time">09:33</div></div>
+          <div class="wa-bubble incoming" id="msg3">מסירה לרחוב ז׳בוטינסקי 7 רמת גן<div class="wa-time">09:33</div></div>
+          <div class="wa-bubble incoming" id="msg4">חבילה קטנה, מסמכים משפטיים<div class="wa-time">09:34</div></div>
+          <div class="wa-bubble incoming" id="msg5" style="font-weight:600;color:#ffcc00">⚡ דחוף! צריך להגיע לפני 12:00<div class="wa-time">09:34</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:3rem;animation:pulseGlow 1.5s infinite" id="arrow1">➡️</div>
+
+    <div class="platform" id="platform1">
+      <div class="plat-header">
+        <h3>📋 סדרן עבודה — הודעות נכנסות</h3>
+        <div style="font-size:0.8rem;opacity:0.8">🟢 אונליין</div>
+      </div>
+      <div class="plat-sidebar">
+        <div class="plat-nav-item active">📋 סדרן עבודה</div>
+        <div class="plat-nav-item">📦 הזמנות</div>
+        <div class="plat-nav-item">👥 לקוחות</div>
+        <div class="plat-nav-item">🚚 שליחים</div>
+      </div>
+      <div class="plat-content" id="platContent1">
+        <!-- Cards inserted by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SCENE: STEP 2+ - Create Order & Actions ====== -->
+<div class="stage" id="stage2">
+  <div class="scene">
+    <div class="platform" style="width:750px;max-width:95%">
+      <div class="plat-header">
+        <h3>📋 סדרן עבודה</h3>
+        <div style="font-size:0.8rem;opacity:0.8">🟢 3 הודעות ממתינות</div>
+      </div>
+      <div class="plat-sidebar">
+        <div class="plat-nav-item active">📋 סדרן עבודה</div>
+        <div class="plat-nav-item">📦 הזמנות</div>
+        <div class="plat-nav-item">👥 לקוחות</div>
+        <div class="plat-nav-item">🚚 שליחים</div>
+        <div class="plat-nav-item">📊 דאשבורד</div>
+      </div>
+      <div class="plat-content" id="platContent2">
+        <!-- Main customer card -->
+        <div class="customer-card show" id="mainCard" style="border-right:4px solid #dc3545">
+          <div class="cc-header">
+            <div>
+              <span class="pin-icon" id="pinIcon">📌</span>
+              <span class="cc-name">דני כהן</span>
+              <span class="cc-phone" style="margin-right:8px">972-50-1234567</span>
+            </div>
+            <span class="cc-badge" style="background:#ffebee;color:#c62828">⚡ דחוף</span>
+          </div>
+          <div class="cc-preview" id="cardPreview">
+            שלום, אני צריך שליח היום<br>
+            איסוף מרחוב הרצל 15 ת״א<br>
+            מסירה לז׳בוטינסקי 7 רמת גן<br>
+            <strong>⚡ דחוף! צריך להגיע לפני 12:00</strong>
+          </div>
+          <div class="cc-actions" id="cardActions">
+            <button class="cc-btn green" id="btnCreateOrder" onclick="showOrderModal()">📦 צור הזמנה</button>
+            <button class="cc-btn blue" id="btnReply">💬 השב</button>
+            <button class="cc-btn gray" id="btnAssign" onclick="assignCourier()">🚚 שייך שליח</button>
+            <button class="cc-btn" style="background:#f5f5f5;color:#666;border:1px solid #ddd" id="btnPin" onclick="togglePin()">📌</button>
+          </div>
+          <div class="cc-actions-row2" id="actionsRow2">
+            <button class="cc-btn orange" id="btnQuote" onclick="showQuoteReply()">💰 שלח הצעת מחיר</button>
+            <button class="cc-btn purple" id="btnPayment" onclick="showPaymentReply()">💳 שלח חשבונית לתשלום</button>
+          </div>
+          <!-- Note/tag area -->
+          <div id="noteArea" style="margin-top:8px;opacity:0;transition:all 0.4s">
+            <span style="display:inline-block;background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#1565c0;padding:3px 10px;border-radius:10px;font-size:0.75rem;font-weight:500;border:1px solid #90caf9">VIP — לקוח קבוע</span>
+          </div>
+        </div>
+
+        <!-- Other cards -->
+        <div class="customer-card show" style="opacity:0.6;border-right:4px solid #ffc107">
+          <div class="cc-header">
+            <div><span class="cc-name">שרה לוי</span><span class="cc-phone" style="margin-right:8px">972-52-9876543</span></div>
+            <span class="cc-badge">2 הודעות</span>
+          </div>
+          <div class="cc-preview" style="border-right-color:#ffc107">צריכה להעביר ארגז מהמחסן...</div>
+          <div class="cc-actions">
+            <button class="cc-btn green" style="opacity:0.5">📦 צור הזמנה</button>
+            <button class="cc-btn blue" style="opacity:0.5">💬 השב</button>
+          </div>
+        </div>
+
+        <div class="customer-card show" style="opacity:0.5;border-right:4px solid #28a745">
+          <div class="cc-header">
+            <div><span class="cc-name">יוסי אברהם</span><span class="cc-phone" style="margin-right:8px">972-54-5551234</span></div>
+            <span class="cc-badge">1 הודעה</span>
+          </div>
+          <div class="cc-preview" style="border-right-color:#28a745">שלום, רציתי לברר מחירים...</div>
+          <div class="cc-actions">
+            <button class="cc-btn green" style="opacity:0.5">📦 צור הזמנה</button>
+            <button class="cc-btn blue" style="opacity:0.5">💬 השב</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SCENE: DASHBOARD ====== -->
+<div class="stage" id="stage3">
+  <div class="scene">
+    <div class="platform" style="width:750px;max-width:95%">
+      <div class="plat-header">
+        <h3>📊 דאשבורד — מצב העסק</h3>
+        <div style="font-size:0.8rem;opacity:0.8">אפריל 2026</div>
+      </div>
+      <div class="plat-sidebar">
+        <div class="plat-nav-item">📋 סדרן עבודה</div>
+        <div class="plat-nav-item">📦 הזמנות</div>
+        <div class="plat-nav-item">👥 לקוחות</div>
+        <div class="plat-nav-item">🚚 שליחים</div>
+        <div class="plat-nav-item active">📊 דאשבורד</div>
+      </div>
+      <div class="plat-content">
+        <div class="dashboard-grid">
+          <div class="dash-card" id="dc1" style="--c1:#667eea;--c2:#764ba2"><div class="value" id="dcv1">0</div><div class="label">הזמנות היום</div></div>
+          <div class="dash-card" id="dc2" style="--c1:#25d366;--c2:#20b558"><div class="value" id="dcv2">₪0</div><div class="label">הכנסות היום</div></div>
+          <div class="dash-card" id="dc3" style="--c1:#ff9800;--c2:#f57c00"><div class="value" id="dcv3">0</div><div class="label">לקוחות חדשים</div></div>
+          <div class="dash-card" id="dc4" style="--c1:#e91e63;--c2:#c2185b"><div class="value" id="dcv4">₪0</div><div class="label">הכנסות החודש</div></div>
+          <div class="dash-card" id="dc5" style="--c1:#00bcd4;--c2:#0097a7"><div class="value" id="dcv5">0 דק׳</div><div class="label">זמן תגובה ממוצע</div></div>
+          <div class="dash-card" id="dc6" style="--c1:#4caf50;--c2:#388e3c"><div class="value" id="dcv6">0%</div><div class="label">שביעות רצון</div></div>
+        </div>
+        <div class="dash-chart" id="dashChart">
+          <h4>📈 הכנסות — 7 ימים אחרונים</h4>
+          <div class="chart-bars" id="chartBars">
+            <div class="chart-bar" id="bar0" style="height:0"><div class="bar-label">ראשון</div></div>
+            <div class="chart-bar" id="bar1" style="height:0"><div class="bar-label">שני</div></div>
+            <div class="chart-bar" id="bar2" style="height:0"><div class="bar-label">שלישי</div></div>
+            <div class="chart-bar" id="bar3" style="height:0"><div class="bar-label">רביעי</div></div>
+            <div class="chart-bar" id="bar4" style="height:0"><div class="bar-label">חמישי</div></div>
+            <div class="chart-bar" id="bar5" style="height:0"><div class="bar-label">שישי</div></div>
+            <div class="chart-bar" id="bar6" style="height:0"><div class="bar-label">שבת</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ORDER MODAL ====== -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📦 הזמנה חדשה — דני כהן</h3>
+      <button class="modal-close" onclick="closeOrderModal()">✖</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>👤 לקוח</label>
+        <input class="form-input" value="דני כהן — 050-1234567" disabled style="background:#f5f5f5">
+      </div>
+      <div class="form-group">
+        <label>📍 כתובת איסוף</label>
+        <input class="form-input" value="הרצל 15, תל אביב" id="pickupAddr">
+      </div>
+      <div class="form-group">
+        <label>📍 כתובת מסירה</label>
+        <input class="form-input" value="ז׳בוטינסקי 7, רמת גן" id="deliveryAddr">
+      </div>
+      <div class="form-group">
+        <label>📄 תוכן המשלוח</label>
+        <input class="form-input" value="מסמכים משפטיים" id="packageContent">
+      </div>
+      <div style="display:flex;gap:10px">
+        <div class="form-group" style="flex:1">
+          <label>💰 מחיר ללקוח</label>
+          <input class="form-input" value="₪ 85" id="price">
+        </div>
+        <div class="form-group" style="flex:1">
+          <label>⏰ זמן הגעה</label>
+          <input class="form-input" value="עד 12:00" id="deadline">
+        </div>
+      </div>
+      <div style="background:#fff3e0;padding:10px;border-radius:8px;font-size:0.82rem;color:#e65100;margin-top:5px">
+        ⚡ סומן כדחוף על ידי הלקוח
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn primary" onclick="saveOrder()">✓ שמור הזמנה</button>
+      <button class="modal-btn secondary" onclick="closeOrderModal()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== QUOTE REPLY MODAL ====== -->
+<div class="modal-overlay reply-modal" id="quoteModal">
+  <div class="modal">
+    <div class="modal-header" style="background:linear-gradient(135deg,#ff9800,#f57c00)">
+      <h3>💰 שלח הצעת מחיר — דני כהן</h3>
+      <button class="modal-close" onclick="closeQuoteModal()">✖</button>
+    </div>
+    <div class="modal-body">
+      <div class="reply-preview">
+        <strong>פרטי ההזמנה:</strong><br>
+        איסוף: הרצל 15, ת״א → מסירה: ז׳בוטינסקי 7, ר״ג<br>
+        תוכן: מסמכים משפטיים | דחוף עד 12:00
+      </div>
+      <textarea class="reply-textarea" id="quoteText">שלום דני,
+
+מצ"ב הצעת מחיר עבור השירות המבוקש:
+
+📍 איסוף: הרצל 15, תל אביב
+📍 מסירה: ז׳בוטינסקי 7, רמת גן
+📄 תוכן: מסמכים משפטיים
+⏰ הגעה: עד 12:00
+💰 מחיר: ₪85
+
+נשמח לעמוד לרשותך.
+בברכה, המהיר 🚀</textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn primary" style="background:#ff9800" onclick="sendQuote()">📤 שלח בווטסאפ</button>
+      <button class="modal-btn secondary" onclick="closeQuoteModal()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== PAYMENT REPLY MODAL ====== -->
+<div class="modal-overlay reply-modal" id="paymentModal">
+  <div class="modal">
+    <div class="modal-header" style="background:linear-gradient(135deg,#9c27b0,#7b1fa2)">
+      <h3>💳 שלח חשבונית לתשלום — דני כהן</h3>
+      <button class="modal-close" onclick="closePaymentModal()">✖</button>
+    </div>
+    <div class="modal-body">
+      <div class="reply-preview">
+        <strong>הזמנה #1042:</strong><br>
+        מסמכים משפטיים | הרצל 15 → ז׳בוטינסקי 7<br>
+        סטטוס: ✅ הושלמה | סכום: ₪85
+      </div>
+      <textarea class="reply-textarea" id="paymentText">שלום דני,
+
+תודה שבחרת בשירות המהיר! 🙏
+
+להלן פרטי התשלום עבור הזמנה #1042:
+💰 סכום: ₪85
+📄 חשבונית: מצורפת לאימייל
+
+🔗 לינק לתשלום מאובטח:
+https://pay.hamahir.co.il/inv/1042
+
+ניתן לשלם באשראי, ביט או PayBox.
+
+תודה רבה,
+המהיר 🚀</textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn primary" style="background:#9c27b0" onclick="sendPayment()">📤 שלח בווטסאפ + אימייל</button>
+      <button class="modal-btn secondary" onclick="closePaymentModal()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FINAL SCREEN ====== -->
+<div class="final-screen" id="finalScreen">
+  <div class="final-title">המהיר</div>
+  <div class="final-subtitle">
+    הווטסאפ שלך הפך לכלי ניהול מלא.<br>
+    בלי להתקין אפליקציה. בלי לשנות הרגלים.
+  </div>
+  <div class="final-features" id="finalFeatures">
+    <div class="final-feature"><div class="icon">📱</div><div class="text">הודעות נכנסות<br>אוטומטית</div></div>
+    <div class="final-feature"><div class="icon">📦</div><div class="text">הזמנה<br>בלחיצה</div></div>
+    <div class="final-feature"><div class="icon">💰</div><div class="text">הצעת מחיר<br>בווטסאפ</div></div>
+    <div class="final-feature"><div class="icon">💳</div><div class="text">חשבונית<br>+ לינק תשלום</div></div>
+    <div class="final-feature"><div class="icon">🚚</div><div class="text">שיוך שליח<br>מיידי</div></div>
+    <div class="final-feature"><div class="icon">📊</div><div class="text">דאשבורד<br>בזמן אמת</div></div>
+  </div>
+  <div class="final-subtitle" style="font-size:1rem;color:rgba(255,255,255,0.5)">
+    BizTechoff™ — התאמת העסק לעידן הדיגיטלי
+  </div>
+  <button class="final-cta" onclick="restartDemo()">🔄 צפה שוב</button>
+</div>
+
+<script>
+// ====== STATE ======
+let currentStep = -1;
+const totalSteps = 8;
+
+const steps = [
+  // Step 0: Messages arrive
+  {
+    stage: 'stage1',
+    narration: 'לקוח שולח הודעות בווטסאפ — <span class="highlight">כל ההודעות נקלטות אוטומטית</span> לתוך הפלטפורמה',
+    action: () => {
+      showMessages();
+    }
+  },
+  // Step 1: Grouped in platform
+  {
+    stage: 'stage1',
+    narration: 'ההודעות <span class="highlight">מתרכזות תחת שם הלקוח</span> — בלי לחפש, בלי לגלול. הכל מסודר',
+    action: () => {
+      showCustomerCards();
+    }
+  },
+  // Step 2: Actions panel
+  {
+    stage: 'stage2',
+    narration: 'כל לקוח מציג את ההודעות שלו ומאפשר <span class="green">ליצור הזמנה</span>, <span class="highlight">להשיב</span>, או <span class="orange">לשייך שליח</span> — ישירות',
+    action: () => {}
+  },
+  // Step 3: Create order
+  {
+    stage: 'stage2',
+    narration: 'לוחצים <span class="green">״צור הזמנה״</span> — הפרטים כבר מולאו מההודעות. מזינים מחיר, שומרים, וזהו!',
+    action: () => {
+      showOrderModal();
+    }
+  },
+  // Step 4: Order saved → new buttons
+  {
+    stage: 'stage2',
+    narration: 'ההזמנה נשמרה! עכשיו <span class="orange">״שלח הצעת מחיר״</span> ו<span class="highlight" style="color:#9c27b0">״שלח חשבונית לתשלום״</span> — נפתחו אוטומטית',
+    action: () => {
+      closeOrderModal();
+      showRow2();
+    }
+  },
+  // Step 5: Send quote
+  {
+    stage: 'stage2',
+    narration: 'לוחצים <span class="orange">״שלח הצעת מחיר״</span> — נפתח חלון עם הצעה מוכנה. <span class="highlight">שולחים ישירות בווטסאפ</span> ללקוח',
+    action: () => {
+      showQuoteReply();
+    }
+  },
+  // Step 6: Payment + courier
+  {
+    stage: 'stage2',
+    narration: 'אחרי אישור — <span class="highlight" style="color:#9c27b0">חשבונית + לינק תשלום</span> נשלחים בווטסאפ ובאימייל. <span class="orange">שליח משויך</span> ויוצא לדרך!',
+    action: () => {
+      closeQuoteModal();
+      setTimeout(() => showPaymentReply(), 600);
+    }
+  },
+  // Step 7: Dashboard
+  {
+    stage: 'stage3',
+    narration: 'ובסוף — <span class="highlight">דאשבורד חי</span> שמראה את מצב העסק: הכנסות, הזמנות, לקוחות. הכל <span class="green">בזמן אמת</span>',
+    action: () => {
+      closePaymentModal();
+      animateDashboard();
+    }
+  }
+];
+
+// ====== INTRO ======
+function startDemo() {
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('stepBar').style.display = 'flex';
+  document.getElementById('narration').style.display = 'flex';
+  setTimeout(() => nextStep(), 500);
+}
+
+// ====== NAVIGATION ======
+function nextStep() {
+  currentStep++;
+  if (currentStep >= steps.length) {
+    showFinal();
+    return;
+  }
+
+  const step = steps[currentStep];
+
+  // Update step dots
+  for (let i = 0; i < totalSteps; i++) {
+    const dot = document.getElementById('dot' + i);
+    const line = document.getElementById('line' + i);
+    if (i < currentStep) { dot.className = 'step-dot done'; if (line) line.className = 'step-line done'; }
+    else if (i === currentStep) { dot.className = 'step-dot active'; }
+    else { dot.className = 'step-dot'; }
+  }
+
+  // Show correct stage
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  document.getElementById(step.stage).classList.add('active');
+
+  // Update narration
+  document.getElementById('narrationText').innerHTML = step.narration;
+
+  // Button text
+  const btn = document.getElementById('nextBtn');
+  if (currentStep === steps.length - 1) btn.textContent = 'סיום ✓';
+  else btn.textContent = 'הבא ←';
+
+  // Run action
+  setTimeout(() => step.action(), 300);
+}
+
+// ====== STEP ACTIONS ======
+function showMessages() {
+  const msgs = ['msg1','msg2','msg3','msg4','msg5'];
+  msgs.forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).classList.add('show');
+    }, i * 500);
+  });
+}
+
+function showCustomerCards() {
+  const content = document.getElementById('platContent1');
+  content.innerHTML = '';
+
+  const card = document.createElement('div');
+  card.className = 'customer-card';
+  card.innerHTML = `
+    <div class="cc-header">
+      <div><span class="cc-name">דני כהן</span><span class="cc-phone" style="margin-right:8px">972-50-1234567</span></div>
+      <span class="cc-badge" style="background:#ffebee;color:#c62828">⚡ דחוף — 5 הודעות</span>
+    </div>
+    <div class="cc-preview">שלום, אני צריך שליח היום...<br>⚡ דחוף! צריך להגיע לפני 12:00</div>
+    <div class="cc-actions">
+      <button class="cc-btn green">📦 צור הזמנה</button>
+      <button class="cc-btn blue">💬 השב</button>
+    </div>`;
+  card.style.borderRight = '4px solid #dc3545';
+  content.appendChild(card);
+  setTimeout(() => card.classList.add('show'), 100);
+
+  // Second card
+  setTimeout(() => {
+    const card2 = document.createElement('div');
+    card2.className = 'customer-card';
+    card2.innerHTML = `
+      <div class="cc-header">
+        <div><span class="cc-name">שרה לוי</span><span class="cc-phone" style="margin-right:8px">972-52-9876543</span></div>
+        <span class="cc-badge">2 הודעות</span>
+      </div>
+      <div class="cc-preview" style="border-right-color:#ffc107">צריכה להעביר ארגז מהמחסן למשרד...</div>
+      <div class="cc-actions">
+        <button class="cc-btn green" style="opacity:0.6">📦 צור הזמנה</button>
+        <button class="cc-btn blue" style="opacity:0.6">💬 השב</button>
+      </div>`;
+    card2.style.borderRight = '4px solid #ffc107';
+    card2.style.opacity = '0.7';
+    content.appendChild(card2);
+    setTimeout(() => card2.classList.add('show'), 100);
+  }, 400);
+}
+
+function showOrderModal() {
+  document.getElementById('orderModal').classList.add('show');
+}
+
+function closeOrderModal() {
+  document.getElementById('orderModal').classList.remove('show');
+}
+
+function saveOrder() {
+  closeOrderModal();
+  showNotification('✅ הזמנה #1042 נשמרה בהצלחה!');
+  setTimeout(() => showRow2(), 800);
+}
+
+function showRow2() {
+  document.getElementById('actionsRow2').classList.add('show');
+  document.getElementById('mainCard').classList.add('highlight');
+  document.getElementById('noteArea').style.opacity = '1';
+  setTimeout(() => document.getElementById('mainCard').classList.remove('highlight'), 1500);
+}
+
+function togglePin() {
+  const pin = document.getElementById('pinIcon');
+  pin.classList.toggle('show');
+  if (pin.classList.contains('show')) {
+    document.getElementById('btnPin').style.background = 'linear-gradient(135deg,#ff9800,#f57c00)';
+    document.getElementById('btnPin').style.color = 'white';
+    document.getElementById('btnPin').style.borderColor = '#ff9800';
+    showNotification('📌 הלקוח ננעץ למעלה!', 'courier');
+  }
+}
+
+function showQuoteReply() {
+  document.getElementById('quoteModal').classList.add('show');
+}
+function closeQuoteModal() {
+  document.getElementById('quoteModal').classList.remove('show');
+}
+function sendQuote() {
+  closeQuoteModal();
+  showNotification('💰 הצעת מחיר נשלחה בווטסאפ ללקוח!');
+}
+
+function showPaymentReply() {
+  document.getElementById('paymentModal').classList.add('show');
+}
+function closePaymentModal() {
+  document.getElementById('paymentModal').classList.remove('show');
+}
+function sendPayment() {
+  closePaymentModal();
+  showNotification('💳 חשבונית + לינק תשלום נשלחו!', 'payment');
+  setTimeout(() => {
+    assignCourier();
+  }, 1500);
+}
+
+function assignCourier() {
+  showNotification('🚚 שליח "אבי" שויך להזמנה — יוצא לדרך!', 'courier');
+}
+
+function showNotification(text, type) {
+  const n = document.getElementById('notification');
+  n.textContent = text;
+  n.className = 'notification' + (type ? ' ' + type : '');
+  setTimeout(() => n.classList.add('show'), 50);
+  setTimeout(() => n.classList.remove('show'), 2500);
+}
+
+// ====== DASHBOARD ======
+function animateDashboard() {
+  const cards = ['dc1','dc2','dc3','dc4','dc5','dc6'];
+  const values = ['12', '₪4,280', '3', '₪38,500', '8 דק׳', '96%'];
+
+  cards.forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).classList.add('show');
+      animateValue(id + '', values[i]);
+    }, i * 200);
+  });
+
+  setTimeout(() => {
+    document.getElementById('dashChart').classList.add('show');
+    const heights = [45, 65, 55, 80, 70, 90, 30];
+    heights.forEach((h, i) => {
+      setTimeout(() => {
+        document.getElementById('bar' + i).style.height = h + 'px';
+      }, i * 150);
+    });
+  }, 1400);
+}
+
+function animateValue(cardId, finalVal) {
+  const el = document.querySelector('#' + cardId + ' .value');
+  if (!el) return;
+
+  if (finalVal.includes('₪')) {
+    const num = parseInt(finalVal.replace(/[^\d]/g, ''));
+    let current = 0;
+    const step = Math.ceil(num / 20);
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= num) { current = num; clearInterval(interval); }
+      el.textContent = '₪' + current.toLocaleString();
+    }, 40);
+  } else if (finalVal.includes('%')) {
+    const num = parseInt(finalVal);
+    let current = 0;
+    const interval = setInterval(() => {
+      current += 4;
+      if (current >= num) { current = num; clearInterval(interval); }
+      el.textContent = current + '%';
+    }, 40);
+  } else if (finalVal.includes('דק')) {
+    el.textContent = finalVal;
+  } else {
+    const num = parseInt(finalVal);
+    let current = 0;
+    const interval = setInterval(() => {
+      current++;
+      if (current >= num) { current = num; clearInterval(interval); }
+      el.textContent = current;
+    }, 80);
+  }
+}
+
+// ====== FINAL ======
+function showFinal() {
+  document.getElementById('stepBar').style.display = 'none';
+  document.getElementById('narration').style.display = 'none';
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  document.getElementById('finalScreen').classList.add('show');
+
+  const features = document.querySelectorAll('.final-feature');
+  features.forEach((f, i) => {
+    setTimeout(() => f.classList.add('show'), i * 200);
+  });
+}
+
+function restartDemo() {
+  currentStep = -1;
+  document.getElementById('finalScreen').classList.remove('show');
+  document.querySelectorAll('.final-feature').forEach(f => f.classList.remove('show'));
+  document.getElementById('actionsRow2').classList.remove('show');
+  document.getElementById('pinIcon').classList.remove('show');
+  document.getElementById('noteArea').style.opacity = '0';
+
+  // Reset messages
+  ['msg1','msg2','msg3','msg4','msg5'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+
+  // Reset dashboard
+  ['dc1','dc2','dc3','dc4','dc5','dc6'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+  document.getElementById('dashChart').classList.remove('show');
+  for(let i=0;i<7;i++) document.getElementById('bar'+i).style.height='0';
+
+  // Reset step dots
+  for(let i=0;i<totalSteps;i++){
+    document.getElementById('dot'+i).className='step-dot';
+    const line=document.getElementById('line'+i);
+    if(line) line.className='step-line';
+  }
+
+  document.getElementById('intro').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
