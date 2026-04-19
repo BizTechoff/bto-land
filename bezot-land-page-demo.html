@@ -7,34 +7,34 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; position: relative; }
         
-        /* עיצוב הלוגו הרשמי */
+        /* עיצוב הלוגו מוטמע Base64 */
         .logo-container { position: absolute; top: 30px; right: 30px; transition: transform 0.3s ease-in-out; cursor: pointer; text-decoration: none; }
-        .logo-container img { height: 60px; /* גובה מותאם ללוגו של בזות */ width: auto; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .logo-container img { height: 65px; width: auto; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
         
-        /* אפקט Hover - הגדלה והבלטה */
         .logo-container:hover { transform: scale(1.08); filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15)); }
 
-        .card { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 480px; text-align: center; margin-top: 80px; border-top: 5px solid #1a2b3c; }
-        h2 { color: #1a2b3c; margin-bottom: 10px; font-weight: 800; }
-        .intro-text { color: #4a5a6a; font-size: 1em; line-height: 1.6; margin-bottom: 20px; background: #fdfaf3; padding: 15px; border-radius: 10px; border-right: 5px solid #c9a55c; text-align: right; box-shadow: inset 0 0 10px rgba(0,0,0,0.02); }
-        .amount-box { background: #1a2b3c; padding: 20px; border-radius: 12px; margin: 25px 0; font-size: 1.5em; font-weight: bold; color: #c9a55c; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .card { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 480px; text-align: center; margin-top: 80px; border-top: 5px solid #002349; }
+        h2 { color: #002349; margin-bottom: 10px; font-weight: 800; }
+        .intro-text { color: #4a5a6a; font-size: 1em; line-height: 1.6; margin-bottom: 20px; background: #fdfaf3; padding: 15px; border-radius: 10px; border-right: 5px solid #b39359; text-align: right; }
+        
+        .amount-box { background: #002349; padding: 20px; border-radius: 12px; margin: 25px 0; font-size: 1.5em; font-weight: bold; color: #b39359; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
         .slider-container { margin: 30px 0 10px 0; }
-        input[type=range] { width: 100%; cursor: pointer; accent-color: #1a2b3c; }
+        input[type=range] { width: 100%; cursor: pointer; accent-color: #002349; }
         
         .quick-picks { display: flex; justify-content: space-between; margin-bottom: 30px; gap: 8px; }
-        .quick-btn { background: #fff; border: 1px solid #d1d9e0; padding: 10px; border-radius: 8px; font-size: 0.9em; cursor: pointer; flex: 1; transition: all 0.2s; font-weight: 600; color: #1a2b3c; }
-        .quick-btn:hover { background: #f8f9fa; border-color: #1a2b3c; }
-        .quick-btn.active { background: #1a2b3c; color: #fff; border-color: #1a2b3c; }
+        .quick-btn { background: #fff; border: 1px solid #d1d9e0; padding: 10px; border-radius: 8px; font-size: 0.9em; cursor: pointer; flex: 1; transition: all 0.2s; font-weight: 600; color: #002349; }
+        .quick-btn:hover { background: #f8f9fa; border-color: #002349; }
+        .quick-btn.active { background: #002349; color: #fff; border-color: #002349; }
 
         .stats { display: flex; justify-content: space-between; margin-top: 25px; gap: 15px; }
         .stats div { width: 50%; background: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px solid #edf0f2; text-align: center; }
         .label { font-size: 0.85em; color: #718096; display: block; margin-bottom: 5px; }
-        .val { font-size: 1.2em; font-weight: 700; color: #1a2b3c; }
+        .val { font-size: 1.2em; font-weight: 700; color: #002349; }
         
         .btn { color: white; border: none; padding: 18px 30px; border-radius: 10px; font-size: 1.15em; cursor: pointer; width: 100%; margin-top: 30px; transition: all 0.3s; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .btn.active { background: #c9a55c; color: #1a2b3c; }
-        .btn.active:hover { background: #b8944a; transform: translateY(-2px); }
+        .btn.active { background: #b39359; color: #002349; }
+        .btn.active:hover { background: #a28248; transform: translateY(-2px); }
         .btn.declined { background: #e53e3e; }
         .btn.declined:hover { background: #c53030; transform: translateY(-2px); }
     </style>
@@ -42,7 +42,7 @@
 <body>
 
 <a href="https://bezotcapital.com/" target="_blank" class="logo-container" title="עבור לאתר Bezot Capital">
-    <img src="https://bezotcapital.com/wp-content/uploads/2022/09/Logo-Bezot-Gold.png" alt="Bezot Capital Logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABhCAMAAAAf799OAAAAVFBMVEVHcEwAAAAAAAD///8AAABmZmZxcXFhYWGhoaGampqtra23t7fAwMDHx8fLy8vPz8/V1dXb29vf39/l5eXq6urs7Ozv7+/19fX4+Pj8/Pz9/f3///9uonR3AAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2b23KiMBAAByIgiIigInr//69dcAsS09NoO9OT6Xyf7DAnpY9uAtu6LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwI9S6m9fS/2uK/9Y69X/W6of6/W3L6UisK091+uF8v2hE9B3P6+K0r9B/f4uiv+S8I/uIn4I6vt30X+Uf6GZf3QX8S6Xv+n6z0I7/+gu4jTzn4X+/Xf6P67Lp+VfoP76mG6mGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y/Y7ZfI/Xv4ZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDv+AUPUAYXatZ2zAAAAABJRU5ErkJggg==" alt="Bezot Capital Logo">
 </a>
 
 <div class="card">
@@ -55,7 +55,7 @@
     </div>
 
     <div class="slider-container">
-        <label style="display:block; margin-bottom: 15px; font-weight: 700; color: #1a2b3c; text-align: right;">בחר את אופן חלוקת הריבית:</label>
+        <label style="display:block; margin-bottom: 15px; font-weight: 700; color: #002349; text-align: right;">בחר את אופן חלוקת הריבית:</label>
         <input type="range" id="rollover-slider" min="0" max="10000" value="10000" step="100" oninput="updateValues(this.value, true)">
     </div>
 
