@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>החלטת ריבית רבעונית - הדמיה</title>
+    <title>החלטת ריבית רבעונית - BEZOT</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; position: relative; }
+        
+        /* עיצוב הלוגו */
+        .logo-container { position: absolute; top: 20px; right: 20px; transition: transform 0.3s ease-in-out; cursor: pointer; text-decoration: none; }
+        .logo-container img { height: 50px; /* גובה הלוגו - ניתן לשינוי */ width: auto; display: block; }
+        
+        /* Placeholder ללוגו אם אין קובץ */
+        .logo-placeholder { height: 50px; width: 120px; background-color: #3498db; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2em; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+        /* אפקט Hover - הגדלה והבלטה */
+        .logo-container:hover { transform: scale(1.1); /* הגדלה ב-10% */ filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15)); /* הבלטה */ }
+
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; margin-top: 60px; /* רווח מהלוגו */ }
         h2 { color: #2c3e50; margin-bottom: 10px; }
         .intro-text { color: #5a6c7d; font-size: 0.95em; line-height: 1.5; margin-bottom: 15px; background: #fff9f0; padding: 10px; border-radius: 8px; border-right: 4px solid #f39c12; text-align: right; }
         .amount-box { background: #eef2f3; padding: 15px; border-radius: 10px; margin: 20px 0; font-size: 1.2em; font-weight: bold; color: #2ecc71; }
@@ -27,11 +38,15 @@
         .btn { color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 25px; transition: background 0.3s; font-weight: bold; }
         .btn.active { background: #3498db; }
         .btn.active:hover { background: #2980b9; }
-        .btn.declined { background: #e74c3c; } /* אדום ל"לא מעוניין" */
+        .btn.declined { background: #e74c3c; }
         .btn.declined:hover { background: #c0392b; }
     </style>
 </head>
 <body>
+
+<a href="https://www.bezot.com" target="_blank" class="logo-container" title="עבור לאתר Bezot">
+    <div class="logo-placeholder">BEZOT</div>
+</a>
 
 <div class="card">
     <h2>שלום ישראל ישראלי,</h2>
