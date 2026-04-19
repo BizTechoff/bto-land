@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>המהיר — הדגמת פלטפורמה</title>
+<title>המהיר לעיר — הדגמת פלטפורמה</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -389,6 +389,52 @@ body {
 }
 .final-cta:hover { transform: translateY(-3px) scale(1.05); }
 
+/* ====== ORDER STATUS PIPELINE ====== */
+.order-status-bar {
+  display: flex; align-items: center; gap: 3px;
+  margin: 8px 0; padding: 6px 8px;
+  background: #f8f9fa; border-radius: 8px;
+  overflow-x: auto; flex-wrap: nowrap;
+  opacity: 0; max-height: 0; transition: all 0.5s ease;
+}
+.order-status-bar.show { opacity: 1; max-height: 50px; }
+
+.status-step {
+  display: flex; align-items: center; gap: 3px;
+  white-space: nowrap;
+}
+.status-badge {
+  padding: 3px 8px; border-radius: 10px;
+  font-size: 0.65rem; font-weight: 600;
+  background: #e0e0e0; color: #999;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid transparent;
+}
+.status-badge.active {
+  background: #e8f5e9; color: #2e7d32;
+  border-color: #4caf50;
+  animation: statusPop 0.5s ease;
+}
+.status-badge.done {
+  background: #e8f5e9; color: #388e3c;
+  border-color: #a5d6a7;
+}
+.status-badge.cancelled {
+  background: #ffebee; color: #c62828;
+  border-color: #ef9a9a;
+}
+.status-arrow {
+  color: #ccc; font-size: 0.6rem;
+  transition: color 0.3s;
+}
+.status-arrow.done { color: #4caf50; }
+
+@keyframes statusPop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 /* ====== PIN INDICATOR ====== */
 .pin-icon {
   opacity: 0; transition: all 0.4s;
@@ -414,10 +460,10 @@ body {
 
 <!-- ====== INTRO ====== -->
 <div class="intro-screen" id="intro">
-  <div class="intro-logo">המהיר</div>
+  <a href="https://www.hamahir.co.il/" target="_blank" class="intro-logo" style="text-decoration:none;cursor:pointer">המהיר לעיר</a>
   <div class="intro-subtitle">
     <span>הווטסאפ שלך</span> הופך ל<span>כלי ניהול</span><br>
-    הודעה → הזמנה → הצעת מחיר → תשלום → שליח<br>
+    הודעה ← הזמנה ← הצעת מחיר ← תשלום ← שליח<br>
     <span>הכל מקום אחד.</span>
   </div>
   <button class="start-btn" onclick="startDemo()">▶ התחל הדגמה</button>
@@ -516,6 +562,33 @@ body {
             מסירה לז׳בוטינסקי 7 רמת גן<br>
             <strong>⚡ דחוף! צריך להגיע לפני 12:00</strong>
           </div>
+          <!-- סרגל סטטוס הזמנה -->
+          <div class="order-status-bar" id="orderStatusBar">
+            <div class="status-step">
+              <span class="status-badge" id="st-created">📦 נוצרה</span>
+              <span class="status-arrow" id="ar-1">◀</span>
+            </div>
+            <div class="status-step">
+              <span class="status-badge" id="st-quote">💰 נשלחה הצעת מחיר</span>
+              <span class="status-arrow" id="ar-2">◀</span>
+            </div>
+            <div class="status-step">
+              <span class="status-badge" id="st-paid">💳 שולמה</span>
+              <span class="status-arrow" id="ar-3">◀</span>
+            </div>
+            <div class="status-step">
+              <span class="status-badge" id="st-assigned">🚚 שובצה לשליח</span>
+              <span class="status-arrow" id="ar-4">◀</span>
+            </div>
+            <div class="status-step">
+              <span class="status-badge" id="st-picked">📤 נאספה</span>
+              <span class="status-arrow" id="ar-5">◀</span>
+            </div>
+            <div class="status-step">
+              <span class="status-badge" id="st-delivered">✅ נמסרה</span>
+            </div>
+          </div>
+
           <div class="cc-actions" id="cardActions">
             <button class="cc-btn green" id="btnCreateOrder" onclick="showOrderModal()">📦 צור הזמנה</button>
             <button class="cc-btn blue" id="btnReply">💬 השב</button>
@@ -583,7 +656,7 @@ body {
           <div class="dash-card" id="dc3" style="--c1:#ff9800;--c2:#f57c00"><div class="value" id="dcv3">0</div><div class="label">לקוחות חדשים</div></div>
           <div class="dash-card" id="dc4" style="--c1:#e91e63;--c2:#c2185b"><div class="value" id="dcv4">₪0</div><div class="label">הכנסות החודש</div></div>
           <div class="dash-card" id="dc5" style="--c1:#00bcd4;--c2:#0097a7"><div class="value" id="dcv5">0 דק׳</div><div class="label">זמן תגובה ממוצע</div></div>
-          <div class="dash-card" id="dc6" style="--c1:#4caf50;--c2:#388e3c"><div class="value" id="dcv6">0%</div><div class="label">שביעות רצון</div></div>
+          <div class="dash-card" id="dc6" style="--c1:#4caf50;--c2:#388e3c"><div class="value" id="dcv6">0</div><div class="label">שליחים פעילים</div></div>
         </div>
         <div class="dash-chart" id="dashChart">
           <h4>📈 הכנסות — 7 ימים אחרונים</h4>
@@ -671,7 +744,7 @@ body {
 💰 מחיר: ₪85
 
 נשמח לעמוד לרשותך.
-בברכה, המהיר 🚀</textarea>
+בברכה, המהיר לעיר 🚀</textarea>
     </div>
     <div class="modal-footer">
       <button class="modal-btn primary" style="background:#ff9800" onclick="sendQuote()">📤 שלח בווטסאפ</button>
@@ -695,7 +768,7 @@ body {
       </div>
       <textarea class="reply-textarea" id="paymentText">שלום דני,
 
-תודה שבחרת בשירות המהיר! 🙏
+תודה שבחרת בשירות המהיר לעיר! 🙏
 
 להלן פרטי התשלום עבור הזמנה #1042:
 💰 סכום: ₪85
@@ -718,7 +791,7 @@ https://pay.hamahir.co.il/inv/1042
 
 <!-- ====== FINAL SCREEN ====== -->
 <div class="final-screen" id="finalScreen">
-  <div class="final-title">המהיר</div>
+  <a href="https://www.hamahir.co.il/" target="_blank" class="final-title" style="text-decoration:none;cursor:pointer">המהיר לעיר</a>
   <div class="final-subtitle">
     הווטסאפ שלך הפך לכלי ניהול מלא.<br>
     בלי להתקין אפליקציה. בלי לשנות הרגלים.
@@ -915,7 +988,12 @@ function closeOrderModal() {
 function saveOrder() {
   closeOrderModal();
   showNotification('✅ הזמנה #1042 נשמרה בהצלחה!');
-  setTimeout(() => showRow2(), 800);
+  // Show status bar and activate "created"
+  setTimeout(() => {
+    document.getElementById('orderStatusBar').classList.add('show');
+    setOrderStatus('created');
+  }, 400);
+  setTimeout(() => showRow2(), 1000);
 }
 
 function showRow2() {
@@ -945,6 +1023,7 @@ function closeQuoteModal() {
 function sendQuote() {
   closeQuoteModal();
   showNotification('💰 הצעת מחיר נשלחה בווטסאפ ללקוח!');
+  setOrderStatus('quote');
 }
 
 function showPaymentReply() {
@@ -956,6 +1035,7 @@ function closePaymentModal() {
 function sendPayment() {
   closePaymentModal();
   showNotification('💳 חשבונית + לינק תשלום נשלחו!', 'payment');
+  setOrderStatus('paid');
   setTimeout(() => {
     assignCourier();
   }, 1500);
@@ -963,6 +1043,50 @@ function sendPayment() {
 
 function assignCourier() {
   showNotification('🚚 שליח "אבי" שויך להזמנה — יוצא לדרך!', 'courier');
+  setOrderStatus('assigned');
+  // Simulate pickup after 1.5s
+  setTimeout(() => {
+    setOrderStatus('picked');
+    showNotification('📤 השליח אסף את החבילה!', 'courier');
+  }, 2000);
+  // Simulate delivery after 3.5s
+  setTimeout(() => {
+    setOrderStatus('delivered');
+    showNotification('✅ החבילה נמסרה בהצלחה!');
+  }, 4000);
+}
+
+// ====== ORDER STATUS MANAGEMENT ======
+const statusOrder = ['created', 'quote', 'paid', 'assigned', 'picked', 'delivered'];
+const statusIds = {
+  created: 'st-created',
+  quote: 'st-quote',
+  paid: 'st-paid',
+  assigned: 'st-assigned',
+  picked: 'st-picked',
+  delivered: 'st-delivered'
+};
+const arrowIds = { created: 'ar-1', quote: 'ar-2', paid: 'ar-3', assigned: 'ar-4', picked: 'ar-5' };
+
+function setOrderStatus(status) {
+  const idx = statusOrder.indexOf(status);
+  if (idx === -1) return;
+
+  statusOrder.forEach((s, i) => {
+    const badge = document.getElementById(statusIds[s]);
+    const arrow = arrowIds[s] ? document.getElementById(arrowIds[s]) : null;
+
+    if (i < idx) {
+      badge.className = 'status-badge done';
+      if (arrow) arrow.className = 'status-arrow done';
+    } else if (i === idx) {
+      badge.className = 'status-badge active';
+      if (arrow) arrow.className = 'status-arrow done';
+    } else {
+      badge.className = 'status-badge';
+      if (arrow) arrow.className = 'status-arrow';
+    }
+  });
 }
 
 function showNotification(text, type) {
@@ -976,7 +1100,7 @@ function showNotification(text, type) {
 // ====== DASHBOARD ======
 function animateDashboard() {
   const cards = ['dc1','dc2','dc3','dc4','dc5','dc6'];
-  const values = ['12', '₪4,280', '3', '₪38,500', '8 דק׳', '96%'];
+  const values = ['12', '₪4,280', '3', '₪38,500', '8 דק׳', '4'];
 
   cards.forEach((id, i) => {
     setTimeout(() => {
@@ -1048,8 +1172,14 @@ function restartDemo() {
   document.getElementById('finalScreen').classList.remove('show');
   document.querySelectorAll('.final-feature').forEach(f => f.classList.remove('show'));
   document.getElementById('actionsRow2').classList.remove('show');
+  document.getElementById('orderStatusBar').classList.remove('show');
   document.getElementById('pinIcon').classList.remove('show');
   document.getElementById('noteArea').style.opacity = '0';
+  // Reset status badges
+  statusOrder.forEach(s => {
+    document.getElementById(statusIds[s]).className = 'status-badge';
+    if (arrowIds[s]) document.getElementById(arrowIds[s]).className = 'status-arrow';
+  });
 
   // Reset messages
   ['msg1','msg2','msg3','msg4','msg5'].forEach(id => {
