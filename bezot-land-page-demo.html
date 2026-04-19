@@ -18,6 +18,7 @@
             position: relative;
         }
         
+        /* עיצוב הלוגו */
         .logo-container { 
             position: absolute; 
             top: 20px; 
@@ -25,7 +26,14 @@
             transition: transform 0.3s ease-in-out; 
             z-index: 10;
         }
-        .logo-container img { height: 50px; width: auto; display: block; }
+        .logo-container img { 
+            height: 55px; 
+            width: auto; 
+            display: block;
+            /* הבטחת תצוגה */
+            min-width: 100px;
+        }
+        .logo-container:hover { transform: scale(1.05); }
 
         .card { 
             background: white; 
@@ -79,12 +87,11 @@
         .label { font-size: 0.75em; color: #718096; display: block; }
         .val { font-size: 1.1em; font-weight: 700; color: #002349; }
         
-        /* המלל הדינמי מעל הכפתור */
         #dynamic-summary {
             margin-top: 20px;
             font-weight: 700;
-            color: #002349;
-            font-size: 1em;
+            color: #b39359; 
+            font-size: 1.1em;
             min-height: 1.2em;
         }
 
@@ -107,7 +114,7 @@
 <body>
 
 <a href="https://bezotcapital.com/" target="_blank" class="logo-container">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAABhCAMAAAAf799OAAAAVFBMVEVHcEwAAAAAAAD///8AAABmZmZxcXFhYWGhoaGampqtra23t7fAwMDHx8fLy8vPz8/V1dXb29vf39/l5eXq6urs7Ozv7+/19fX4+Pj8/Pz9/f3///9uonR3AAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2b23KiMBAAByIgiIigInr//69dcAsS09NoO9OT6Xyf7DAnpY9uAtu6LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwI9S6m9fS/2uK/9Y69X/W6of6/W3L6UisK091+uF8v2hE9B3P6+K0r9B/f4uiv+S8I/uIn4I6vt30X+Uf6GZf3QX8S6Xv+n6z0I7/+gu4jTzn4X+/Xf6P67Lp+VfoP76mG6mGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y6afmGmmGzO9Y/Y7ZfI/Xv4ZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDv+AUPUAYXatZ2zAAAAABJRU5ErkJggg==" alt="Bezot Capital Logo">
+    <img src="https://bezotcapital.com/wp-content/uploads/2022/09/Logo-Bezot-Gold.png" alt="Bezot Capital" onerror="this.src='https://via.placeholder.com/150x50?text=BEZOT+CAPITAL'">
 </a>
 
 <div class="card">
@@ -166,13 +173,13 @@
         document.getElementById('withdraw-val').innerText = '₪' + withdraw.toLocaleString();
         
         if (rollover === 0) {
-            dynamicSummary.innerText = ""; // נעלם כשזה 0
+            dynamicSummary.innerText = ""; 
             submitBtn.innerText = "לא מעוניין בגלגול";
-            submitBtn.classList.replace('active', 'declined');
+            if(submitBtn.classList.contains('active')) submitBtn.classList.replace('active', 'declined');
         } else {
             dynamicSummary.innerText = `גלגלו לי ₪${rollover.toLocaleString()} מהסכום`;
             submitBtn.innerText = "אישור וחתימה דיגיטלית";
-            submitBtn.classList.replace('declined', 'active');
+            if(submitBtn.classList.contains('declined')) submitBtn.classList.replace('declined', 'active');
         }
 
         if (fromSlider) {
