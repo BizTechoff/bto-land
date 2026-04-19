@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>החלטת ריבית רבעונית - הדמיה</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
         h2 { color: #2c3e50; margin-bottom: 10px; }
-        p { color: #7f8c8d; font-size: 0.9em; }
+        .intro-text { color: #5a6c7d; font-size: 0.95em; line-height: 1.5; margin-bottom: 15px; background: #fff9f0; padding: 10px; border-radius: 8px; border-right: 4px solid #f39c12; text-align: right; }
         .amount-box { background: #eef2f3; padding: 15px; border-radius: 10px; margin: 20px 0; font-size: 1.2em; font-weight: bold; color: #2ecc71; }
         
         .slider-container { margin: 25px 0 10px 0; }
         input[type=range] { width: 100%; cursor: pointer; }
         
         .quick-picks { display: flex; justify-content: space-between; margin-bottom: 25px; }
-        .quick-btn { background: #fff; border: 1px solid #ddd; padding: 5px 10px; border-radius: 5px; font-size: 0.8em; cursor: pointer; flex: 1; margin: 0 2px; transition: all 0.2s; }
+        .quick-btn { background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 5px; font-size: 0.85em; cursor: pointer; flex: 1; margin: 0 3px; transition: all 0.2s; }
         .quick-btn:hover { background: #f0f0f0; border-color: #3498db; }
         .quick-btn.active { background: #3498db; color: white; border-color: #2980b9; }
 
@@ -24,19 +24,26 @@
         .label { font-size: 0.8em; color: #95a5a6; display: block; }
         .val { font-size: 1.1em; font-weight: bold; color: #34495e; }
         
-        .btn { background: #3498db; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1em; cursor: pointer; width: 100%; margin-top: 20px; transition: background 0.3s; }
-        .btn:hover { background: #2980b9; }
+        .btn { color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 25px; transition: background 0.3s; font-weight: bold; }
+        .btn.active { background: #3498db; }
+        .btn.active:hover { background: #2980b9; }
+        .btn.declined { background: #e74c3c; } /* אדום ל"לא מעוניין" */
+        .btn.declined:hover { background: #c0392b; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h2>שלום ישראל ישראלי,</h2>
-    <p>סכום הריבית שנצבר לזכותך ברבעון זה:</p>
+    <p style="color: #7f8c8d; margin-bottom: 5px;">סכום הריבית שנצבר לזכותך ברבעון זה:</p>
     <div class="amount-box">₪10,000</div>
     
+    <div class="intro-text">
+        ניתן לגלגל את סכום הרווח לסכום ההלוואה הכולל ובכך להגדיל את הרווח ברבעונים הבאים.
+    </div>
+
     <div class="slider-container">
-        <label style="display:block; margin-bottom: 15px; font-weight: bold;">בחר את אופן חלוקת הריבית:</label>
+        <label style="display:block; margin-bottom: 15px; font-weight: bold; color: #2c3e50;">בחר את אופן חלוקת הריבית:</label>
         <input type="range" id="rollover-slider" min="0" max="10000" value="10000" step="100" oninput="updateValues(this.value, true)">
     </div>
 
@@ -58,24 +65,18 @@
         </div>
     </div>
 
-    <p id="bonus-text" style="color: #e67e22; font-weight: bold; margin-top: 15px;">הגדלת הקרן מעניקה לך צפי רווח משופר לרבעון הבא!</p>
-
-    <button class="btn">אישור וחתימה דיגיטלית</button>
+    <button id="submit-btn" class="btn active">אישור וחתימה דיגיטלית</button>
 </div>
 
 <script>
     const totalAmount = 10000;
     const slider = document.getElementById('rollover-slider');
+    const submitBtn = document.getElementById('submit-btn');
 
     function setQuickPick(val, btn) {
-        // עדכון הסליידר
         slider.value = val;
-        
-        // עדכון מצב הכפתורים
         document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
-        // עדכון הערכים
         updateValues(val, false);
     }
 
@@ -86,19 +87,27 @@
         document.getElementById('rollover-val').innerText = '₪' + rollover.toLocaleString();
         document.getElementById('withdraw-val').innerText = '₪' + withdraw.toLocaleString();
         
-        // אם השינוי הגיע מהסליידר, נסיר את הסימון מהכפתורים המהירים (אלא אם זה בדיוק על הערך)
+        // עדכון דינמי של הכפתור
+        if (rollover === 0) {
+            submitBtn.innerText = "לא מעוניין בגלגול";
+            submitBtn.classList.remove('active');
+            submitBtn.classList.add('declined');
+        } else {
+            submitBtn.innerText = "אישור וחתימה דיגיטלית";
+            submitBtn.classList.remove('declined');
+            submitBtn.classList.add('active');
+        }
+
         if (fromSlider) {
             document.querySelectorAll('.quick-btn').forEach(b => {
-                if(parseInt(b.innerText) / 100 * totalAmount == val) {
+                const btnVal = (parseInt(b.innerText) / 100) * totalAmount;
+                if(btnVal == val) {
                     b.classList.add('active');
                 } else {
                     b.classList.remove('active');
                 }
             });
         }
-
-        const bonusText = document.getElementById('bonus-text');
-        bonusText.style.visibility = (rollover > 5000) ? 'visible' : 'hidden';
     }
 </script>
 
