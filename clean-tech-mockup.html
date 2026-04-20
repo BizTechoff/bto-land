@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Tech — מערכת ניהול הזמנות ולקוחות</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Heebo', sans-serif; }
+  body { background: #0b1020; }
+  .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); }
+  .card { background: #ffffff; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+  .gradient-text { background: linear-gradient(90deg,#38bdf8,#a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .gradient-bg { background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 60%, #a78bfa 100%); }
+  .mock-shadow { box-shadow: 0 30px 80px rgba(14,165,233,0.15), 0 10px 30px rgba(0,0,0,0.3); }
+  .chip { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:500; }
+  .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .scroll-snap { scroll-snap-type: y mandatory; }
+  section { scroll-snap-align: start; }
+  .kbd { font-family: monospace; background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 11px; border: 1px solid #e5e7eb; }
+</style>
+</head>
+<body class="text-slate-100">
+
+<!-- HERO -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 gradient-bg opacity-20"></div>
+  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-sky-500/20 blur-3xl"></div>
+  <div class="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-purple-500/20 blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-14">
+    <!-- top bar - space between -->
+    <div class="flex items-center justify-between gap-4 mb-10 md:mb-14">
+      <div class="flex items-center gap-3 shrink-0">
+        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center font-black text-white text-xl shrink-0">C</div>
+        <div>
+          <div class="font-bold text-base md:text-lg">Clean <span class="text-sky-400">Tech</span></div>
+          <div class="text-[10px] md:text-xs text-slate-400">מערכת ניהול מקצועית</div>
+        </div>
+      </div>
+      <div class="text-xs md:text-sm leading-tight min-w-0 text-center flex flex-col items-center justify-center">
+        <div class="text-slate-400">הדגמה עבור</div>
+        <div id="dyn-name" class="text-white font-semibold text-sm md:text-base break-words"><span dir="ltr">BizTechoff™</span></div>
+        <div id="dyn-site" class="text-slate-400 break-all">biztechoff.co.il</div>
+      </div>
+    </div>
+
+    <!-- headline - centered -->
+    <div class="text-center mb-12 md:mb-16">
+      <div class="chip bg-sky-500/10 text-sky-300 mb-5 mx-auto inline-flex">
+        <span class="dot bg-sky-400"></span>
+        מערכת מלאה · לא רק אתר
+      </div>
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-5 md:mb-6">
+        מה אם כל <span class="gradient-text">הזמנה</span>, לקוח,<br>
+        ויומן היו במקום <span class="gradient-text">אחד</span>?
+      </h1>
+      <p class="text-base md:text-lg text-slate-300 mb-6 md:mb-8 leading-relaxed max-w-2xl mx-auto">
+        במקום מענה ידני בוואטסאפ, רישום בטלפון וחיפוש לקוחות באקסל —
+        מערכת אחת שהלקוח מזמין דרכה לבד, היומן מתעדכן אוטומטית,
+        ואתה רואה את כל העסק במבט אחד.
+      </p>
+      <div class="flex flex-wrap gap-2 md:gap-3 justify-center">
+        <div class="chip bg-white/10 text-white">🗓️ יומן חכם</div>
+        <div class="chip bg-white/10 text-white">👥 CRM לקוחות</div>
+        <div class="chip bg-white/10 text-white">💬 SMS אוטומטי</div>
+        <div class="chip bg-white/10 text-white">💳 סליקה</div>
+        <div class="chip bg-white/10 text-white">📊 דוחות</div>
+      </div>
+    </div>
+
+    <!-- dashboard preview - centered below -->
+    <div class="max-w-2xl mx-auto">
+      <!-- floating dashboard preview -->
+      <div class="relative">
+        <div class="card p-5 mock-shadow text-slate-800 relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <div class="font-bold">לוח בקרה · היום</div>
+            <div class="text-xs text-slate-500">ראשון · 20.04</div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 md:gap-3 mb-4">
+            <div class="bg-sky-50 rounded-xl p-2 md:p-3">
+              <div class="text-xl md:text-2xl font-black text-sky-600">7</div>
+              <div class="text-[10px] md:text-xs text-slate-500">הזמנות היום</div>
+            </div>
+            <div class="bg-emerald-50 rounded-xl p-2 md:p-3">
+              <div class="text-xl md:text-2xl font-black text-emerald-600">₪2,340</div>
+              <div class="text-[10px] md:text-xs text-slate-500">הכנסות</div>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-2 md:p-3">
+              <div class="text-xl md:text-2xl font-black text-amber-600">3</div>
+              <div class="text-[10px] md:text-xs text-slate-500">ממתינים</div>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs font-bold">09</div>
+                <div>
+                  <div class="text-sm font-semibold">רונית מזרחי · רמת השרון</div>
+                  <div class="text-xs text-slate-500">ספה תלת-מושבית + שטיח</div>
+                </div>
+              </div>
+              <span class="chip bg-emerald-100 text-emerald-700">אושר</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center text-xs font-bold">11</div>
+                <div>
+                  <div class="text-sm font-semibold">אלון כהן · הרצליה</div>
+                  <div class="text-xs text-slate-500">2 ספות + כורסא</div>
+                </div>
+              </div>
+              <span class="chip bg-amber-100 text-amber-700">בדרך</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-bold">14</div>
+                <div>
+                  <div class="text-sm font-semibold">משפחת ברק · כפ"ס</div>
+                  <div class="text-xs text-slate-500">פינת אוכל + 6 כסאות</div>
+                </div>
+              </div>
+              <span class="chip bg-slate-200 text-slate-700">ממתין</span>
+            </div>
+          </div>
+        </div>
+        <!-- glow -->
+        <div class="absolute -inset-4 gradient-bg blur-3xl opacity-30 -z-10"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 1: Customer booking flow -->
+<section class="bg-white text-slate-900 py-14 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div>
+        <div class="chip bg-sky-100 text-sky-700 mb-4">מסך 1 · הלקוח</div>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">הלקוח מזמין לבד. 24/7.</h2>
+        <p class="text-base md:text-lg text-slate-600 mb-6 leading-relaxed">
+          במקום שהלקוח יתקשר אליך בשעה 22:00 בלילה ויחכה למענה —
+          הוא בוחר ספות, רואה מחיר מיידי, בוחר תאריך מהיומן שלך
+          ומזמין. אתה מקבל הודעה וזהו.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-1">✓</div>
+            <div>
+              <div class="font-bold">תמחור אוטומטי</div>
+              <div class="text-sm text-slate-600">מחיר לפי סוג ריהוט + שטיחים + מרחק</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-1">✓</div>
+            <div>
+              <div class="font-bold">זמנים בלבד שאתה פנוי</div>
+              <div class="text-sm text-slate-600">היומן שלך מסנכרן — לא יראו שעות תפוסות</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-1">✓</div>
+            <div>
+              <div class="font-bold">אישור אוטומטי ב-SMS + וואטסאפ</div>
+              <div class="text-sm text-slate-600">הלקוח מקבל אישור, תזכורת יום לפני, והודעה "בדרך אליך"</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Booking form mockup -->
+      <div class="bg-slate-50 rounded-3xl p-6 shadow-2xl">
+        <div class="bg-white rounded-2xl p-6">
+          <div class="text-center mb-6">
+            <div id="dyn-site-form" class="text-sm text-slate-500">Biztechoff.co.il</div>
+            <h3 class="text-xl font-bold">הזמנה מהירה</h3>
+            <div class="text-xs text-slate-400">שלב 2 מתוך 3</div>
+          </div>
+
+          <div class="mb-5">
+            <label class="text-sm font-semibold mb-2 block">מה צריך לנקות?</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button class="border-2 border-sky-500 bg-sky-50 rounded-xl p-3 text-right">
+                <div class="text-xs text-slate-500">ספה</div>
+                <div class="font-bold">תלת-מושבית ×1</div>
+                <div class="text-sky-600 font-bold">₪180</div>
+              </button>
+              <button class="border-2 border-slate-200 rounded-xl p-3 text-right">
+                <div class="text-xs text-slate-500">כורסא</div>
+                <div class="font-bold">×2</div>
+                <div class="text-slate-600 font-bold">₪120</div>
+              </button>
+              <button class="border-2 border-slate-200 rounded-xl p-3 text-right">
+                <div class="text-xs text-slate-500">שטיח</div>
+                <div class="font-bold">גדול ×1</div>
+                <div class="text-slate-600 font-bold">₪90</div>
+              </button>
+              <button class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-slate-400">
+                + עוד פריט
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label class="text-sm font-semibold mb-2 block">מתי?</label>
+            <div class="grid grid-cols-4 gap-2 text-center">
+              <div class="rounded-lg p-2 border-2 border-slate-200">
+                <div class="text-xs text-slate-500">ב'</div>
+                <div class="font-bold">21/4</div>
+              </div>
+              <div class="rounded-lg p-2 border-2 border-sky-500 bg-sky-50">
+                <div class="text-xs text-sky-600">ג'</div>
+                <div class="font-bold text-sky-700">22/4</div>
+              </div>
+              <div class="rounded-lg p-2 border-2 border-slate-200">
+                <div class="text-xs text-slate-500">ד'</div>
+                <div class="font-bold">23/4</div>
+              </div>
+              <div class="rounded-lg p-2 border-2 border-slate-200 opacity-40">
+                <div class="text-xs text-slate-500">ה'</div>
+                <div class="font-bold">24/4</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-emerald-50 rounded-xl p-4 mb-4">
+            <div class="flex justify-between items-center">
+              <div class="text-sm text-emerald-700">סה"כ לתשלום</div>
+              <div class="text-2xl font-black text-emerald-700">₪390</div>
+            </div>
+          </div>
+
+          <button class="w-full gradient-bg text-white font-bold py-4 rounded-xl shadow-lg">
+            המשך לתשלום ←
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 2: Calendar -->
+<section class="bg-slate-100 text-slate-900 py-14 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-8 md:mb-12">
+      <div class="chip bg-purple-100 text-purple-700 mb-4 mx-auto inline-flex">מסך 2 · היומן שלך</div>
+      <h2 class="text-3xl md:text-4xl font-black mb-3">כל השבוע. מבט אחד.</h2>
+      <p class="text-sm md:text-lg text-slate-600">גרור הזמנה כדי להעביר שעה · לחץ כדי לראות פרטים · צבעים לפי סטטוס</p>
+    </div>
+
+    <div class="card p-4 md:p-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <button class="w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center">→</button>
+          <div class="font-bold text-base md:text-lg">שבוע 16 · 20-26 אפריל</div>
+          <button class="w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center">←</button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="chip bg-sky-100 text-sky-700"><span class="dot bg-sky-500"></span>מאושר</span>
+          <span class="chip bg-amber-100 text-amber-700"><span class="dot bg-amber-500"></span>ממתין</span>
+          <span class="chip bg-emerald-100 text-emerald-700"><span class="dot bg-emerald-500"></span>הושלם</span>
+          <span class="chip bg-rose-100 text-rose-700"><span class="dot bg-rose-500"></span>בוטל</span>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto -mx-4 md:mx-0 px-4 md:px-0">
+      <div class="grid grid-cols-7 gap-2 min-w-[700px]">
+        <!-- day headers -->
+        <div class="text-center text-sm font-bold text-slate-500 pb-2">ראשון 20</div>
+        <div class="text-center text-sm font-bold text-slate-500 pb-2">שני 21</div>
+        <div class="text-center text-sm font-bold text-slate-500 pb-2">שלישי 22</div>
+        <div class="text-center text-sm font-bold text-slate-500 pb-2">רביעי 23</div>
+        <div class="text-center text-sm font-bold text-slate-500 pb-2">חמישי 24</div>
+        <div class="text-center text-sm font-bold text-slate-500 pb-2">שישי 25</div>
+        <div class="text-center text-sm font-bold text-slate-400 pb-2">שבת 26</div>
+
+        <!-- day columns -->
+        <div class="space-y-2 min-h-[400px] bg-slate-50 rounded-lg p-2">
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">09:00 · רונית מזרחי</div>
+            <div class="opacity-80">ספה + שטיח</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">11:30 · אלון כהן</div>
+            <div class="opacity-80">2 ספות</div>
+          </div>
+          <div class="bg-amber-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">14:00 · ברק</div>
+            <div class="opacity-80">פינת אוכל</div>
+          </div>
+        </div>
+
+        <div class="space-y-2 bg-slate-50 rounded-lg p-2">
+          <div class="bg-emerald-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">08:30 · שרה לוי</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">10:00 · דני אברהם</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">13:00 · רחל בן-דוד</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">16:30 · יובל שלום</div>
+          </div>
+        </div>
+
+        <div class="space-y-2 bg-gradient-to-b from-sky-50 to-slate-50 rounded-lg p-2 ring-2 ring-sky-400">
+          <div class="text-xs text-sky-600 font-bold mb-1">היום</div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">09:00 · משפחת גל</div>
+          </div>
+          <div class="bg-amber-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">12:00 · נועה שחר</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">15:00 · עידן רז</div>
+          </div>
+        </div>
+
+        <div class="space-y-2 bg-slate-50 rounded-lg p-2">
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">10:00 · משפ' כהן</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">13:30 · יעל ברק</div>
+          </div>
+        </div>
+
+        <div class="space-y-2 bg-slate-50 rounded-lg p-2">
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">08:00 · אבי נחום</div>
+          </div>
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">11:00 · דליה</div>
+          </div>
+          <div class="bg-amber-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">15:30 · בקשה חדשה</div>
+          </div>
+        </div>
+
+        <div class="space-y-2 bg-slate-50 rounded-lg p-2">
+          <div class="bg-sky-500 text-white p-2 rounded-lg text-xs">
+            <div class="font-bold">09:00 · חגית</div>
+          </div>
+          <div class="text-center text-xs text-slate-400 p-4">פנוי</div>
+        </div>
+
+        <div class="space-y-2 bg-slate-50/50 rounded-lg p-2 opacity-50">
+          <div class="text-center text-xs text-slate-400 p-4">לא עובד</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 3: CRM -->
+<section class="bg-white text-slate-900 py-14 md:py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+      <!-- CRM mockup -->
+      <div class="card p-4 md:p-6 order-2 lg:order-1 w-full min-w-0">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+          <div class="font-bold text-lg">לקוחות (1,247)</div>
+          <div class="flex gap-2">
+            <input type="text" placeholder="🔍 חיפוש..." class="px-3 py-1.5 rounded-lg border border-slate-200 text-sm w-full md:w-auto min-w-0">
+            <button class="px-3 py-1.5 rounded-lg gradient-bg text-white text-sm font-bold shrink-0">+ לקוח</button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[500px]">
+          <thead>
+            <tr class="text-slate-500 text-xs border-b border-slate-200">
+              <th class="py-2 text-right font-semibold">שם</th>
+              <th class="py-2 text-right font-semibold">טלפון</th>
+              <th class="py-2 text-right font-semibold">עיר</th>
+              <th class="py-2 text-right font-semibold">עבודות</th>
+              <th class="py-2 text-right font-semibold">סה"כ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100 hover:bg-slate-50">
+              <td class="py-3 font-semibold">רונית מזרחי</td>
+              <td class="py-3 text-slate-600">050-555-1234</td>
+              <td class="py-3 text-slate-600">רמת השרון</td>
+              <td class="py-3"><span class="chip bg-sky-100 text-sky-700">4</span></td>
+              <td class="py-3 font-bold">₪1,560</td>
+            </tr>
+            <tr class="border-b border-slate-100 hover:bg-slate-50">
+              <td class="py-3 font-semibold">אלון כהן</td>
+              <td class="py-3 text-slate-600">052-123-4567</td>
+              <td class="py-3 text-slate-600">הרצליה</td>
+              <td class="py-3"><span class="chip bg-emerald-100 text-emerald-700">8 · VIP</span></td>
+              <td class="py-3 font-bold">₪3,240</td>
+            </tr>
+            <tr class="border-b border-slate-100 hover:bg-slate-50 bg-amber-50">
+              <td class="py-3 font-semibold">משפחת ברק</td>
+              <td class="py-3 text-slate-600">054-987-6543</td>
+              <td class="py-3 text-slate-600">כפר סבא</td>
+              <td class="py-3"><span class="chip bg-amber-100 text-amber-700">2 · חדש</span></td>
+              <td class="py-3 font-bold">₪780</td>
+            </tr>
+            <tr class="border-b border-slate-100 hover:bg-slate-50">
+              <td class="py-3 font-semibold">דליה שחר</td>
+              <td class="py-3 text-slate-600">053-111-2222</td>
+              <td class="py-3 text-slate-600">תל אביב</td>
+              <td class="py-3"><span class="chip bg-sky-100 text-sky-700">3</span></td>
+              <td class="py-3 font-bold">₪1,100</td>
+            </tr>
+            <tr class="border-b border-slate-100 hover:bg-slate-50">
+              <td class="py-3 font-semibold">יובל שלום</td>
+              <td class="py-3 text-slate-600">050-333-4444</td>
+              <td class="py-3 text-slate-600">רעננה</td>
+              <td class="py-3"><span class="chip bg-rose-100 text-rose-700">1 · לא חזר</span></td>
+              <td class="py-3 font-bold">₪280</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="py-3 font-semibold">עידן רז</td>
+              <td class="py-3 text-slate-600">054-555-6789</td>
+              <td class="py-3 text-slate-600">הוד השרון</td>
+              <td class="py-3"><span class="chip bg-sky-100 text-sky-700">2</span></td>
+              <td class="py-3 font-bold">₪620</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <div class="chip bg-emerald-100 text-emerald-700 mb-4">מסך 3 · CRM</div>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">כל לקוח. כל ההיסטוריה.</h2>
+        <p class="text-base md:text-lg text-slate-600 mb-6 leading-relaxed">
+          כל לקוח שהזמין אצלך פעם אחת נשאר במערכת —
+          עם כל הפרטים, סוג הריהוט שיש לו בבית, הערות שלך,
+          וכמה הוא שווה לך.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-slate-50 rounded-xl p-4">
+            <div class="text-3xl font-black text-sky-600">87%</div>
+            <div class="text-sm text-slate-600">לקוחות חוזרים (היום: לא יודע כמה)</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4">
+            <div class="text-3xl font-black text-purple-600">0₪</div>
+            <div class="text-sm text-slate-600">עולה לך לחפש לקוח</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4">
+            <div class="text-3xl font-black text-emerald-600">SMS</div>
+            <div class="text-sm text-slate-600">בקליק אחד לכל הרשימה</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4">
+            <div class="text-3xl font-black text-amber-600">🏷️</div>
+            <div class="text-sm text-slate-600">תיוג: VIP · חדש · לא חזר</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 4: Automations -->
+<section class="bg-slate-900 text-white py-14 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-8 md:mb-12">
+      <div class="chip bg-sky-500/20 text-sky-300 mb-4 mx-auto inline-flex">מסך 4 · אוטומציות</div>
+      <h2 class="text-3xl md:text-4xl font-black mb-3">המערכת עובדת בזמן ש<span class="gradient-text">אתה ישן</span>.</h2>
+      <p class="text-base md:text-lg text-slate-400">תזכורות, תשלומים, הודעות — לא משכיחים יותר</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 md:gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="text-4xl mb-3">💬</div>
+        <h3 class="font-bold text-xl mb-2">תזכורת יום לפני</h3>
+        <p class="text-slate-400 text-sm mb-4">ב-20:00 יום לפני, הלקוח מקבל SMS:<br>"שלום רונית, מחר ב-9:00 נגיע לניקוי..."</p>
+        <div class="text-xs text-sky-400">↓ פחות ביטולים של הרגע האחרון</div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="text-4xl mb-3">📍</div>
+        <h3 class="font-bold text-xl mb-2">"בדרך אליך"</h3>
+        <p class="text-slate-400 text-sm mb-4">כשאתה לוחץ "יוצא" במערכת —<br>הלקוח מקבל הודעה אוטומטית עם זמן הגעה משוער.</p>
+        <div class="text-xs text-sky-400">↓ פחות טלפונים של "מתי אתה מגיע?"</div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="text-4xl mb-3">⭐</div>
+        <h3 class="font-bold text-xl mb-2">בקשת ביקורת</h3>
+        <p class="text-slate-400 text-sm mb-4">יום אחרי העבודה: לינק לביקורת בגוגל,<br>רק ללקוחות שסימנת "מרוצה".</p>
+        <div class="text-xs text-sky-400">↓ דירוג גוגל עולה = עוד לקוחות</div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="text-4xl mb-3">💳</div>
+        <h3 class="font-bold text-xl mb-2">תשלום דיגיטלי</h3>
+        <p class="text-slate-400 text-sm mb-4">סליקה מיידית באשראי / ביט.<br>חשבונית נוצרת וישלחה אוטומטית.</p>
+        <div class="text-xs text-sky-400">↓ אין יותר "העברתי לך בביט?"</div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="text-4xl mb-3">🎯</div>
+        <h3 class="font-bold text-xl mb-2">קמפיין ללקוחות ישנים</h3>
+        <p class="text-slate-400 text-sm mb-4">לקוח שלא הזמין 6 חודשים?<br>SMS אוטומטי עם הנחה של 10%.</p>
+        <div class="text-xs text-sky-400">↓ לקוחות רדומים חוזרים</div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="text-4xl mb-3">📊</div>
+        <h3 class="font-bold text-xl mb-2">דוח חודשי</h3>
+        <p class="text-slate-400 text-sm mb-4">ב-1 לחודש: כמה עבודות, כמה הכנסות,<br>מה הערים הכי רווחיות.</p>
+        <div class="text-xs text-sky-400">↓ מחליטים על בסיס נתונים</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modularity & Customization -->
+<section class="bg-white text-slate-900 py-14 md:py-24 relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-64 md:w-96 h-64 md:h-96 bg-sky-500/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-10 md:mb-14">
+      <div class="chip bg-slate-900 text-white mb-4 mx-auto inline-flex">🧩 הערך המבדל</div>
+      <h2 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+        בנויה ב-<span class="gradient-text">מודולים</span>.<br>
+        מותאמת <span class="gradient-text">אליך</span>.
+      </h2>
+      <p class="text-base md:text-xl text-slate-600 max-w-2xl mx-auto">
+        לא חבילת SaaS נוקשה. מערכת שגדלה, מתכווצת ומשתנה לפי העסק שלך — בדיוק לפי הצורך, בלי עודף.
+      </p>
+    </div>
+
+    <!-- Visual modules grid -->
+    <div class="bg-slate-50 rounded-3xl p-4 md:p-8 mb-8 md:mb-12">
+      <div class="text-center mb-6">
+        <div class="text-xs md:text-sm text-slate-500 font-semibold uppercase tracking-wider">המודולים הזמינים</div>
+        <div class="text-sm md:text-base text-slate-700 mt-1">בוחרים מה שצריך. מתחילים בקטן. מוסיפים תוך כדי.</div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+        <div class="bg-gradient-to-br from-sky-500 to-sky-600 text-white rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-white/20 rounded px-2 py-0.5">פעיל</div>
+          <div class="text-2xl mb-1">🗓️</div>
+          <div class="font-bold text-sm md:text-base">יומן הזמנות</div>
+          <div class="text-[10px] md:text-xs opacity-80 mt-1">בסיסי</div>
+        </div>
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-white/20 rounded px-2 py-0.5">פעיל</div>
+          <div class="text-2xl mb-1">👥</div>
+          <div class="font-bold text-sm md:text-base">CRM לקוחות</div>
+          <div class="text-[10px] md:text-xs opacity-80 mt-1">בסיסי</div>
+        </div>
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-white/20 rounded px-2 py-0.5">פעיל</div>
+          <div class="text-2xl mb-1">💬</div>
+          <div class="font-bold text-sm md:text-base">SMS אוטומטי</div>
+          <div class="text-[10px] md:text-xs opacity-80 mt-1">תוספת</div>
+        </div>
+        <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-white/20 rounded px-2 py-0.5">פעיל</div>
+          <div class="text-2xl mb-1">💳</div>
+          <div class="font-bold text-sm md:text-base">סליקה וחשבוניות</div>
+          <div class="text-[10px] md:text-xs opacity-80 mt-1">תוספת</div>
+        </div>
+        <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-slate-100 text-slate-500 rounded px-2 py-0.5">בהמשך</div>
+          <div class="text-2xl mb-1 grayscale opacity-60">📊</div>
+          <div class="font-bold text-sm md:text-base text-slate-700">דוחות מתקדמים</div>
+          <div class="text-[10px] md:text-xs text-slate-500 mt-1">בכל עת</div>
+        </div>
+        <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-slate-100 text-slate-500 rounded px-2 py-0.5">בהמשך</div>
+          <div class="text-2xl mb-1 grayscale opacity-60">👷</div>
+          <div class="font-bold text-sm md:text-base text-slate-700">ניהול עובדים</div>
+          <div class="text-[10px] md:text-xs text-slate-500 mt-1">בכל עת</div>
+        </div>
+        <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-3 md:p-4 relative">
+          <div class="absolute top-2 left-2 text-[10px] bg-slate-100 text-slate-500 rounded px-2 py-0.5">בהמשך</div>
+          <div class="text-2xl mb-1 grayscale opacity-60">🏢</div>
+          <div class="font-bold text-sm md:text-base text-slate-700">ריבוי סניפים</div>
+          <div class="text-[10px] md:text-xs text-slate-500 mt-1">בכל עת</div>
+        </div>
+        <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-3 md:p-4 relative flex items-center justify-center">
+          <div class="text-center">
+            <div class="text-2xl text-slate-400">＋</div>
+            <div class="text-xs md:text-sm text-slate-500 font-semibold">מודול מותאם<br>לך</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 value props -->
+    <div class="grid md:grid-cols-3 gap-4 md:gap-6">
+      <div class="border-2 border-sky-100 bg-sky-50/50 rounded-2xl p-5 md:p-6">
+        <div class="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center text-xl mb-3">🧩</div>
+        <div class="text-sky-700 font-black text-lg mb-2">מודולרי מהיסוד</div>
+        <p class="text-slate-700 text-sm leading-relaxed">כל פיצ'ר הוא מודול עצמאי. רוצה רק יומן? יש. רוצה להוסיף CRM בעוד חודש? מוסיפים בלי לגעת בקיים.</p>
+      </div>
+      <div class="border-2 border-purple-100 bg-purple-50/50 rounded-2xl p-5 md:p-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-500 text-white flex items-center justify-center text-xl mb-3">✨</div>
+        <div class="text-purple-700 font-black text-lg mb-2">התאמות אישיות ללא גבול</div>
+        <p class="text-slate-700 text-sm leading-relaxed">תמחור לפי הכללים שלך, הודעות בשפה שלך, תהליכי עבודה שלך. לא "עוד לקוח" בתוך SaaS גנרי — <strong>אתה במרכז</strong>.</p>
+      </div>
+      <div class="border-2 border-emerald-100 bg-emerald-50/50 rounded-2xl p-5 md:p-6">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl mb-3">📈</div>
+        <div class="text-emerald-700 font-black text-lg mb-2">גדלה איתך — בלי להחליף</div>
+        <p class="text-slate-700 text-sm leading-relaxed">עובד נוסף? סניף? סוג שירות חדש? מוסיפים מודול. המערכת תמיד עדכנית, תמיד בדיוק במידה של העסק שלך.</p>
+      </div>
+    </div>
+
+    <!-- Bottom callout -->
+    <div class="mt-8 md:mt-12 bg-slate-900 text-white rounded-2xl p-6 md:p-8 text-center">
+      <div class="text-sm md:text-base text-slate-400 mb-2">השורה התחתונה:</div>
+      <div class="text-lg md:text-2xl font-bold leading-relaxed">
+        אתה לא משלם על פיצ'רים שלא תשתמש בהם,<br class="hidden md:block">
+        ולא מתפשר על פיצ'רים ש<span class="gradient-text">חייב</span> שיהיו.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="gradient-bg py-14 md:py-20">
+  <div class="max-w-4xl mx-auto px-4 md:px-6 text-center text-white">
+    <h2 id="dyn-cta-heading" class="text-3xl md:text-4xl font-black mb-4">מוכן לדבר?</h2>
+    <p class="text-base md:text-xl opacity-90 mb-8">פגישה קצרה של 20 דקות — אני מראה לך את זה רץ, אתה אומר מה חסר לך בעסק היום, ויוצאים עם הצעה מדויקת.</p>
+    <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center">
+      <a href="tel:+972526526063" class="bg-white text-sky-600 font-bold px-6 md:px-8 py-4 rounded-xl shadow-xl text-center">📞 התקשר אליי</a>
+      <a href="https://wa.me/972526526063" class="bg-slate-900 text-white font-bold px-6 md:px-8 py-4 rounded-xl shadow-xl text-center">💬 וואטסאפ</a>
+    </div>
+    <div class="mt-8 md:mt-10 text-xs md:text-sm opacity-70">
+      <span dir="ltr">BizTechoff™</span> · פיתוח פלטפורמות ווב מקצה לקצה
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+
+    // Raw params
+    const rawName = params.get('name');
+    const rawSite = params.get('site');
+
+    // ---- Sanitize site input ----
+    // Accepts: "cleanz.co.il" | "https://cleanz.co.il/" | "user@cleanz.co.il" | " cleanz.co.il. "
+    function cleanSite(input) {
+      if (!input) return null;
+      let s = input.trim();
+      if (!s) return null;
+
+      // strip protocol
+      s = s.replace(/^https?:\/\//i, '');
+      // if it's an email, take the domain only
+      if (s.includes('@')) s = s.split('@').pop();
+      // strip path / trailing slash / trailing dot / whitespace
+      s = s.split('/')[0].replace(/\.+$/, '').trim().toLowerCase();
+
+      // must contain a dot to look like a domain
+      if (!s.includes('.')) return null;
+      return s;
+    }
+
+    const name = rawName ? rawName.trim() : null;
+    const site = cleanSite(rawSite);
+
+    // Helpers
+    const setText = (id, val) => {
+      const el = document.getElementById(id);
+      if (el && val) el.textContent = val;
+    };
+
+    // Apply to DOM
+    if (name) {
+      setText('dyn-name', name);
+      // Personalized CTA: "{firstname}, מוכן לדבר?"
+      const first = name.split(/\s+/)[0];
+      const cta = document.getElementById('dyn-cta-heading');
+      if (cta) cta.innerHTML = first + ', מוכן לדבר?';
+    }
+
+    if (site) {
+      setText('dyn-site', site);
+      // Booking form shows site with capitalized brand part
+      const parts = site.split('.');
+      const cap = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+      setText('dyn-site-form', cap + '.' + parts.slice(1).join('.'));
+    }
+
+    // Dynamic <title> — brand stays "Clean" (fixed)
+    if (name) {
+      document.title = 'Clean Tech — הדגמה עבור ' + name;
+    }
+  })();
+</script>
+</body>
+</html>
