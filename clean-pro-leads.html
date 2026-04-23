@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לידים - חברות ניקוי ספות ת"א</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Heebo', sans-serif; }
+  body { background: #0b1020; color: #e2e8f0; }
+  .gradient-text { background: linear-gradient(90deg,#38bdf8,#a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .gradient-bg { background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 60%, #a78bfa 100%); }
+  .card { background: #ffffff; color: #0f172a; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+  .chip { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:8px 12px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; transition: all 0.15s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-wa { background: #25D366; color: white; }
+  .btn-call { background: #0ea5e9; color: white; }
+  .btn-site { background: #f1f5f9; color: #0f172a; border: 1px solid #e2e8f0; }
+  .btn-demo { background: linear-gradient(135deg, #6366f1, #a78bfa); color: white; }
+  .stars { color: #f59e0b; }
+  .status-new { background: #e0f2fe; color: #0369a1; }
+  .status-done { background: #dcfce7; color: #166534; }
+  .status-skip { background: #fee2e2; color: #991b1b; }
+  .row:hover { background: #f8fafc; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<section class="relative overflow-hidden">
+  <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-sky-500/20 blur-3xl"></div>
+  <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-3xl"></div>
+  <div class="relative max-w-7xl mx-auto px-4 md:px-6 py-10">
+    <div class="chip bg-sky-500/20 text-sky-300 mb-4 inline-flex">
+      <span class="w-2 h-2 rounded-full bg-sky-400"></span> לידים · איסוף מ-Google Maps
+    </div>
+    <h1 class="text-3xl md:text-5xl font-black mb-3">
+      <span class="gradient-text">37 לידים</span> — חברות ניקוי ספות
+    </h1>
+    <p class="text-base md:text-lg text-slate-400 max-w-2xl">
+      איסוף מ-Google Maps (מידע פומבי) · אזור תל אביב והסביבה · ממוין לפי איכות (דירוג × מספר ביקורות)
+    </p>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="card p-4 text-center">
+      <div class="text-3xl font-black text-sky-600">37</div>
+      <div class="text-xs text-slate-500">סה"כ לידים</div>
+    </div>
+    <div class="card p-4 text-center">
+      <div class="text-3xl font-black text-emerald-600">28</div>
+      <div class="text-xs text-slate-500">עם אתר (ICP חזק)</div>
+    </div>
+    <div class="card p-4 text-center">
+      <div class="text-3xl font-black text-purple-600">12</div>
+      <div class="text-xs text-slate-500">100+ ביקורות</div>
+    </div>
+    <div class="card p-4 text-center">
+      <div class="text-3xl font-black text-amber-600">4.7★</div>
+      <div class="text-xs text-slate-500">דירוג ממוצע</div>
+    </div>
+  </div>
+</section>
+
+<!-- Filters -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 mb-6">
+  <div class="card p-4 flex flex-wrap gap-2 items-center">
+    <input type="text" id="search" placeholder="🔍 חיפוש בשם העסק..." class="flex-1 min-w-[200px] px-3 py-2 rounded-lg border border-slate-200 text-sm">
+    <button onclick="filterBy('all')" class="chip bg-slate-900 text-white cursor-pointer">הכל</button>
+    <button onclick="filterBy('hot')" class="chip bg-rose-100 text-rose-700 cursor-pointer">🔥 חמים (100+ ביקורות)</button>
+    <button onclick="filterBy('site')" class="chip bg-emerald-100 text-emerald-700 cursor-pointer">🌐 יש אתר</button>
+    <button onclick="filterBy('nosite')" class="chip bg-amber-100 text-amber-700 cursor-pointer">⚠️ בלי אתר</button>
+  </div>
+</section>
+
+<!-- Leads table -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 mb-12">
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm min-w-[900px]">
+        <thead class="bg-slate-50 border-b border-slate-200">
+          <tr class="text-slate-600 text-xs uppercase">
+            <th class="py-3 px-3 text-right font-bold">#</th>
+            <th class="py-3 px-3 text-right font-bold">שם העסק</th>
+            <th class="py-3 px-3 text-center font-bold">דירוג</th>
+            <th class="py-3 px-3 text-center font-bold">ביקורות</th>
+            <th class="py-3 px-3 text-right font-bold">אתר</th>
+            <th class="py-3 px-3 text-center font-bold w-72">פעולות</th>
+            <th class="py-3 px-3 text-center font-bold">סטטוס</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WhatsApp Template -->
+<section class="max-w-4xl mx-auto px-4 md:px-6 mb-12">
+  <div class="card p-6 md:p-8">
+    <h2 class="text-2xl font-black mb-2">💬 הודעת וואטסאפ לפנייה אישית (B2B)</h2>
+    <p class="text-sm text-slate-500 mb-6">העתק, החלף <code class="bg-slate-100 px-1 rounded">[שם]</code> בשם אמיתי, ושלח אישית</p>
+
+    <div class="bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-5 relative">
+      <div class="text-slate-800 whitespace-pre-line text-sm md:text-base leading-relaxed" id="wa-template">שלום [שם],
+
+ראיתי שאתה בעל עסק בתחום ניקוי ספות בתל אביב — אני מפתח תוכנה בונה פלטפורמות דיגיטליות מותאמות לעסקים.
+
+הכנתי הדגמה אישית לעסק שלך — איך יכולה להיראות מערכת הזמנות + CRM שמתאימה בדיוק לסוג השירות שלך:
+
+[קישור_להדגמה]
+
+מה היא כוללת:
+🗓️ טופס הזמנה באתר (הלקוח מזמין לבד 24/7)
+📋 יומן אוטומטי מסונכרן
+👥 CRM עם היסטוריית לקוחות ותיוג
+💬 תזכורות SMS אוטומטיות
+💳 סליקה וחשבוניות
+
+נשמח לשיחה קצרה של 15 דק' אם רלוונטי — אם לא, אין בעיה והצלחה!
+
+BizTechoff
+052-652-6063</div>
+
+      <button onclick="copyTemplate()" class="absolute top-4 left-4 chip bg-sky-500 text-white cursor-pointer">📋 העתק</button>
+    </div>
+
+    <div class="mt-6 space-y-2 text-sm text-slate-600">
+      <div class="font-bold text-slate-900 mb-2">⚠️ כללי זהב לפי חוק הספאם הישראלי:</div>
+      <div>✓ פנייה אישית בלבד (לא מסיבית) — עד 5-10 עסקים ביום</div>
+      <div>✓ ערך אמיתי להם (הדגמה מותאמת) — לא רק קידום מוצר</div>
+      <div>✓ אופציה פשוטה להגיד "לא" — "אם לא רלוונטי, אין בעיה"</div>
+      <div>✓ אחרי 3 ימים בלי מענה — תזכורת אחת, ואז לעזוב</div>
+    </div>
+  </div>
+</section>
+
+<!-- Personalized demo URL helper -->
+<section class="max-w-4xl mx-auto px-4 md:px-6 mb-12">
+  <div class="card p-6 md:p-8">
+    <h2 class="text-2xl font-black mb-2">🎯 צור לינק אישי להדגמה</h2>
+    <p class="text-sm text-slate-500 mb-6">הכנס שם ואתר → קבל לינק מותאם אישית לכל לקוח</p>
+
+    <div class="grid md:grid-cols-2 gap-3">
+      <input type="text" id="demo-name" placeholder="שם העסק/בעל העסק (למשל: זוהר אסי)" class="px-3 py-3 rounded-lg border border-slate-200">
+      <input type="text" id="demo-site" placeholder="האתר (למשל: cleanz.co.il)" class="px-3 py-3 rounded-lg border border-slate-200">
+    </div>
+
+    <div class="mt-4 p-4 bg-slate-900 text-white rounded-xl font-mono text-sm break-all" id="demo-url" dir="ltr">
+      cleanz-mockup.html
+    </div>
+
+    <button onclick="copyDemoUrl()" class="mt-3 btn btn-demo w-full md:w-auto">
+      📋 העתק לינק אישי
+    </button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-8 text-center text-slate-500 text-sm">
+  <div>BizTechoff · עודכן: אפריל 2026</div>
+  <div class="mt-1 text-xs">המידע נאסף מ-Google Maps (פומבי) · לשימוש פנימי בלבד</div>
+</footer>
+
+<script>
+const leads = [
+  {name: "מוריה - חברת ניקיון אחזקה ושמירה בע\"מ", rating: 4.0, reviews: 4, phone: "077-996-9339", site: "", addr: "שירותי ניקיון · 4 בר כוכבא", sponsored: true},
+  {name: "שירותי ניקוי ספות - Master Clean", rating: 4.8, reviews: 285, phone: "050-783-1020", site: "cleansofa.co.il", addr: "שירותי ניקיון · דרך השלום 7א"},
+  {name: "נובה קלין - ניקוי ספות/מזגנים/שטיחים", rating: 4.6, reviews: 44, phone: "054-286-6010", site: "novaclean.co.il", addr: ""},
+  {name: "ניקוי ספות ושטיחים", rating: 4.9, reviews: 43, phone: "052-483-9474", site: "sofacleaning.co.il", addr: "שירות לניקוי ריפוד · אחד העם 38"},
+  {name: "ניקוי ספות (הרצל 57)", rating: 5.0, reviews: 3, phone: "054-449-1884", site: "", addr: "שירות לניקוי בתים · הרצל 57"},
+  {name: "5 כוכבים - ניקוי שטיחים ווילונות", rating: 4.9, reviews: 121, phone: "052-231-7888", site: "5-stars.co.il", addr: "שירות ניקוי שטיחים · אריה בראון 2"},
+  {name: "SOS Clean - ניקוי ספות/שטיחים (פ\"ת)", rating: 5.0, reviews: 384, phone: "053-300-6162", site: "sosclean.co.il", addr: ""},
+  {name: "חולה ניקיון - ניקוי שטיחים/ספות/ריפודים", rating: 5.0, reviews: 64, phone: "050-936-6557", site: "hole-nikayon.co.il", addr: ""},
+  {name: "זאוס קלין - ניקוי ספות/שטיחים/מזרנים", rating: 4.9, reviews: 81, phone: "050-921-7080", site: "zeusnikayon.com", addr: "שירות ניקוי שטיחים · תובל 8"},
+  {name: "כרישים בניקיון - ניקוי ספות/מזרונים/שטיחים", rating: null, reviews: null, phone: "072-394-3771", site: "krishim.co.il", addr: ""},
+  {name: "לוי - ניקוי ספות/שטיחים/מזרנים", rating: 5.0, reviews: 31, phone: "053-777-0494", site: "", addr: ""},
+  {name: "ניקוי ריפודים (נורדאו 94)", rating: 5.0, reviews: 3, phone: "054-926-8789", site: "", addr: "שירות לניקוי ריפוד · שדרות נורדאו 94"},
+  {name: "מג'יק קלין", rating: 4.7, reviews: 453, phone: "050-889-5140", site: "magic-clean.co.il", addr: ""},
+  {name: "Squeaky - ניקוי ספות והנדימן בת\"א", rating: 4.9, reviews: 20, phone: "054-283-0072", site: "squeaky.co.il", addr: ""},
+  {name: "מכבסה לניקוי יבש בן חור (צהלה)", rating: 4.9, reviews: 9, phone: "03-649-7897", site: "", addr: "מכבסה · צה\"ל 71"},
+  {name: "iClean - ניקוי ספות ושטיחים", rating: 5.0, reviews: 13, phone: "053-919-5222", site: "", addr: "שירות ניקיון · הרי הגלעד 4"},
+  {name: "הברקה בדקה", rating: 5.0, reviews: 23, phone: "058-500-5617", site: "havraka-bdaka.com", addr: ""},
+  {name: "אורגניק קלין - ניקוי ספות/שטיחים/מזרנים", rating: 5.0, reviews: 348, phone: "053-283-3886", site: "organiclean.co.il", addr: ""},
+  {name: "new clean - ניקוי ספות/שטיחים/מזרונים", rating: 4.7, reviews: 13, phone: "052-272-1351", site: "new-clean.co.il", addr: ""},
+  {name: "ניקוי ספות - ניקוי מקצועי בבית הלקוח", rating: 4.3, reviews: 4, phone: "052-222-0323", site: "we-clean.co.il", addr: ""},
+  {name: "המבריקים - ניקוי ספות/שטיחים/שאיבת מים", rating: 5.0, reviews: 4, phone: "055-925-0899", site: "", addr: "שירות ניקוי שטיחים · כרם חמד 10"},
+  {name: "גברו בע\"מ", rating: 3.2, reviews: 44, phone: "03-688-8860", site: "", addr: "שירות לניקוי בתים · 5 הפרדס", sponsored: true},
+  {name: "אליאור קלין - ניקוי ספות/ריפודים", rating: 5.0, reviews: 24, phone: "050-556-6357", site: "eliorclean.co.il", addr: ""},
+  {name: "גל אור", rating: 4.7, reviews: 246, phone: "053-611-3002", site: "gal-ore.co.il", addr: "שירות לניקוי ריפוד · בעל שם טוב 3"},
+  {name: "DeepClean - ניקוי ספות וריפודים", rating: 5.0, reviews: 1, phone: "055-775-6820", site: "deepclean.co.il", addr: ""},
+  {name: "פלא קלין - ניקוי ספות", rating: 5.0, reviews: 15, phone: "050-700-2533", site: "", addr: ""},
+  {name: "Renew clean - שירותי ניקוי ריפודים", rating: 5.0, reviews: 10, phone: "050-934-0309", site: "", addr: ""},
+  {name: "זוהר בניקיון - ניקוי ספות בת\"א", rating: 5.0, reviews: 1, phone: "055-945-5689", site: "cleanz.co.il", addr: "", highlight: true},
+  {name: "Royal Finish - רויאל פיניש", rating: 5.0, reviews: 37, phone: "055-991-2942", site: "royalfinish.co.il", addr: ""},
+  {name: "קלין & קוויק - ניקוי ספות וריפודים", rating: 5.0, reviews: 1, phone: "050-404-0959", site: "", addr: ""},
+  {name: "טופ שטיחים", rating: 4.6, reviews: 55, phone: "077-604-9644", site: "top-carpets.co.il", addr: "שירות ניקוי שטיחים · נחל איילון 20ב"},
+  {name: "ריל קלין", rating: 5.0, reviews: 14, phone: "054-632-8730", site: "realclean.be-website.com", addr: ""},
+  {name: "Lee Rodan - ניקוי ספות וריפודים", rating: 5.0, reviews: 4, phone: "050-378-8813", site: "liroden-cleanse.co.il", addr: ""},
+  {name: "ניקוי ספות בהוד השרון - מאסטרקלין", rating: 5.0, reviews: 1, phone: "050-800-4481", site: "", addr: ""},
+  {name: "ניקוי ספות המצחצחים", rating: 3.0, reviews: 2, phone: "058-740-7077", site: "", addr: ""},
+  {name: "הפנתרים בלבן", rating: 5.0, reviews: 43, phone: "077-231-2051", site: "", addr: ""},
+  {name: "קלין פרו - אומנים בניקיון", rating: 5.0, reviews: 357, phone: "055-927-4082", site: "cleanpro.co.il", addr: ""},
+];
+
+function phoneToWa(phone) {
+  const digits = phone.replace(/\D/g, '');
+  return digits.startsWith('0') ? '972' + digits.slice(1) : digits;
+}
+
+function buildDemoUrl(name, site) {
+  const params = new URLSearchParams();
+  if (name) params.set('name', name);
+  if (site) params.set('site', site);
+  return 'cleanz-mockup.html' + (params.toString() ? '?' + params.toString() : '');
+}
+
+function statusKey(idx) { return 'lead_status_' + idx; }
+
+function render(filter = 'all', query = '') {
+  const tbody = document.getElementById('leads-tbody');
+  tbody.innerHTML = '';
+  // sort by quality = rating * log(reviews)
+  const sorted = leads.map((l, i) => ({ ...l, idx: i, quality: (l.rating || 0) * Math.log((l.reviews || 1) + 1) }))
+    .sort((a, b) => b.quality - a.quality);
+
+  let n = 0;
+  for (const l of sorted) {
+    if (query && !l.name.toLowerCase().includes(query.toLowerCase())) continue;
+    if (filter === 'hot' && (!l.reviews || l.reviews < 100)) continue;
+    if (filter === 'site' && !l.site) continue;
+    if (filter === 'nosite' && l.site) continue;
+    n++;
+
+    const status = localStorage.getItem(statusKey(l.idx)) || 'new';
+    const statusLabels = { new: 'חדש', contacted: 'נשלח', responded: 'השיב', closed: 'נסגר', notrelevant: 'לא רלוונטי' };
+    const statusColors = { new: 'status-new', contacted: 'status-new', responded: 'status-done', closed: 'status-done', notrelevant: 'status-skip' };
+
+    const tr = document.createElement('tr');
+    tr.className = 'row border-b border-slate-100';
+    if (l.highlight) tr.style.background = '#fef3c7';
+    tr.innerHTML = `
+      <td class="py-3 px-3 text-slate-400 font-mono">${n}</td>
+      <td class="py-3 px-3">
+        <div class="font-semibold text-slate-900">${l.name}${l.highlight ? ' ⭐' : ''}</div>
+        <div class="text-xs text-slate-500">${l.addr || ''}${l.sponsored ? ' · <span class="text-amber-600">ממומן</span>' : ''}</div>
+      </td>
+      <td class="py-3 px-3 text-center">
+        ${l.rating ? `<div class="font-bold text-amber-600">★ ${l.rating}</div>` : '<div class="text-slate-400">-</div>'}
+      </td>
+      <td class="py-3 px-3 text-center text-slate-600 text-xs">${l.reviews || '-'}</td>
+      <td class="py-3 px-3" dir="ltr">
+        ${l.site ? `<a href="https://${l.site}" target="_blank" class="text-sky-600 hover:underline text-xs">${l.site}</a>` : '<span class="text-slate-400 text-xs">—</span>'}
+      </td>
+      <td class="py-3 px-3">
+        <div class="flex flex-wrap gap-1.5 justify-center">
+          <a href="https://wa.me/${phoneToWa(l.phone)}" target="_blank" class="btn btn-wa">💬 וואטסאפ</a>
+          <a href="tel:${l.phone}" class="btn btn-call">📞 חיוג</a>
+          <button onclick='openDemo(${JSON.stringify(l.name)}, ${JSON.stringify(l.site || "")})' class="btn btn-demo">🎯 הדגמה</button>
+        </div>
+      </td>
+      <td class="py-3 px-3 text-center">
+        <select onchange="updateStatus(${l.idx}, this.value)" class="${statusColors[status]} chip cursor-pointer border-0">
+          <option value="new" ${status==='new'?'selected':''}>חדש</option>
+          <option value="contacted" ${status==='contacted'?'selected':''}>נשלח</option>
+          <option value="responded" ${status==='responded'?'selected':''}>השיב</option>
+          <option value="closed" ${status==='closed'?'selected':''}>נסגר ✓</option>
+          <option value="notrelevant" ${status==='notrelevant'?'selected':''}>לא רלוונטי</option>
+        </select>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  }
+}
+
+function updateStatus(idx, value) {
+  localStorage.setItem(statusKey(idx), value);
+  render(currentFilter, document.getElementById('search').value);
+}
+
+function openDemo(name, site) {
+  const url = buildDemoUrl(name, site);
+  window.open(url, '_blank');
+}
+
+let currentFilter = 'all';
+function filterBy(f) {
+  currentFilter = f;
+  render(f, document.getElementById('search').value);
+}
+
+document.getElementById('search').addEventListener('input', e => render(currentFilter, e.target.value));
+
+// Demo URL builder
+function updateDemoUrl() {
+  const name = document.getElementById('demo-name').value.trim();
+  const site = document.getElementById('demo-site').value.trim();
+  document.getElementById('demo-url').textContent = buildDemoUrl(name, site);
+}
+document.getElementById('demo-name').addEventListener('input', updateDemoUrl);
+document.getElementById('demo-site').addEventListener('input', updateDemoUrl);
+
+function copyDemoUrl() {
+  navigator.clipboard.writeText(document.getElementById('demo-url').textContent);
+  alert('הועתק!');
+}
+
+function copyTemplate() {
+  navigator.clipboard.writeText(document.getElementById('wa-template').textContent);
+  alert('תבנית הועתקה! אל תשכח להחליף [שם] ולהוסיף לינק אישי');
+}
+
+render();
+</script>
+
+</body>
+</html>
