@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עקידת יצחק — הריגת ה"בן"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 80px -20px var(--shadow),
+      0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  /* Header */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 56px);
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 50px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    gap: 20px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+
+  .divider-symbol {
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  /* Content Sections */
+  .section {
+    margin-bottom: 38px;
+  }
+
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--crimson);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::before {
+    content: "❖";
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  strong {
+    color: var(--crimson);
+    font-weight: 700;
+  }
+
+  em {
+    color: var(--gold-deep);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* Pasuk box */
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px;
+    margin: 18px 0;
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .pasuk-source {
+    display: block;
+    font-size: 13px;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* Highlight key terms */
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+
+  /* Gematria Card */
+  .gematria-card {
+    margin: 50px 0;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+
+  .gematria-card::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .gematria-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .gematria-number {
+    font-family: 'Bellefair', serif;
+    font-size: 96px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(184, 138, 44, 0.4);
+  }
+
+  .gematria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.2);
+  }
+
+  .gematria-item {
+    text-align: center;
+  }
+
+  .gematria-word {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 6px;
+  }
+
+  .gematria-meaning {
+    font-size: 13px;
+    color: rgba(245, 236, 217, 0.6);
+    letter-spacing: 1px;
+  }
+
+  /* Final message */
+  .final-message {
+    margin-top: 50px;
+    padding: 30px;
+    background: rgba(140, 42, 30, 0.05);
+    border-top: 2px solid var(--crimson);
+    border-bottom: 2px solid var(--crimson);
+    text-align: center;
+  }
+
+  .final-message-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .final-message p {
+    font-size: 19px;
+    color: var(--ink);
+    font-style: italic;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Footer ornament */
+  .footer-ornament {
+    text-align: center;
+    margin-top: 60px;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 24px; }
+    .container::before { inset: 8px; }
+    .gematria-number { font-size: 72px; }
+    .gematria-grid { grid-template-columns: 1fr; gap: 24px; }
+    .gematria-word { font-size: 28px; }
+    p { font-size: 17px; }
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+  }
+
+  /* Subtle entrance animation */
+  .container {
+    animation: fadeUp 1s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>עקידת יצחק</h1>
+    <p class="subtitle">הריגת ה"בן" — מחשבת הנפש הבהמית</p>
+
+    <div class="divider">
+      <span class="divider-symbol">✦</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">מהו ה"בן" בעבודת ה'</h2>
+      <p>
+        ה<span class="key-term">"בן"</span> אינו רק ילד ביולוגי —
+        אלא <strong>כל מחשבה שנולדת בראש האדם</strong>.
+        כמו שהאם יולדת בן, כך השכל "מוליד" מחשבות בלי הפסק.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">גזירת פרעה — בעומק הרוחני</h2>
+      <p>
+        פרעה הוא דימוי לכוח הרע, ליצר ולנפש הבהמית.
+        הגזירה אינה רק היסטורית — היא קורית בכל אדם, בכל יום:
+      </p>
+      <div class="pasuk">
+        וַיְצַו פַּרְעֹה לְכׇל עַמּוֹ לֵאמֹר: כׇּל הַבֵּן הַיִּלּוֹד הַיְאֹרָה תַּשְׁלִיכֻהוּ
+        <span class="pasuk-source">— שמות א, כב</span>
+      </div>
+      <p>
+        כל <strong>"בן"</strong> (מחשבה) <strong>היּלוד</strong> (שיוצא מהראש)
+        — <strong>"היאורה תשליכוהו"</strong> — שייפול לתוך עניני העולם הזה.
+      </p>
+      <p>
+        ולמה דווקא <em>יאור</em>? — כי <strong>יאור = "לי אור"</strong>.
+        פרעה רוצה שהניצוץ הקדוש שבמחשבה ילך <em>אליו</em>,
+        לצד הסטרא־אחרא, אל הבלי העולם הזה.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">פרעה כ"תנין הגדול"</h2>
+      <div class="pasuk">
+        פַּרְעֹה מֶלֶךְ מִצְרַיִם הַתַּנִּים הַגָּדוֹל הָרֹבֵץ בְּתוֹךְ יְאֹרָיו,
+        אֲשֶׁר אָמַר: לִי יְאֹרִי וַאֲנִי עֲשִׂיתִנִי
+        <span class="pasuk-source">— יחזקאל כט, ג</span>
+      </div>
+      <p>
+        "<strong>לי יאורי ואני עשיתני</strong>" — זוהי תמצית האגו:
+        "אני בעל הבית, אני יצרתי את עצמי".
+        ההיפך הגמור מביטול לה'.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">אברהם — הראשון שעקד את ה"בן"</h2>
+      <p>
+        בעקידה, אברהם היה הראשון שהצליח <strong>"להרוג את הבן" ברוחניות</strong>.
+        לא ח"ו את יצחק כפשוטו — אלא את
+        <em>הדעת של הנפש הבהמית</em>,
+        אותן מחשבות שנופלות לעולם הזה.
+      </p>
+      <p>
+        הוא לקח את ה"בן" שלו והעלה אותו לה' —
+        במקום לתת לפרעה לקחת אותו.
+      </p>
+    </div>
+
+    <!-- Gematria Card -->
+    <div class="gematria-card">
+      <div class="gematria-label">סוד הגימטריא</div>
+      <div class="gematria-number">52</div>
+      <div class="gematria-grid">
+        <div class="gematria-item">
+          <div class="gematria-word">בֵּן</div>
+          <div class="gematria-meaning">המחשבה</div>
+        </div>
+        <div class="gematria-item">
+          <div class="gematria-word">בְּהֵמָה</div>
+          <div class="gematria-meaning">הדעת הבהמית</div>
+        </div>
+        <div class="gematria-item">
+          <div class="gematria-word">אֵלִיָּהוּ</div>
+          <div class="gematria-meaning">הגילוי</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        ה"בן" שצריך לעקוד — הוא הדעת ה<strong>בהמית</strong>.
+        ומי שיש לו האומץ להעלות את ה"בן" שלו —
+        זוכה לגילוי <strong>אליהו</strong>, להתגלות אלוקית.
+      </p>
+    </div>
+
+    <!-- Final Message -->
+    <div class="final-message">
+      <div class="final-message-label">המסר המעשי</div>
+      <p>
+        בכל יום יש לכל אחד "עקידה" קטנה —<br>
+        לקחת מחשבה שמושכת לעולם הזה,<br>
+        ולהעלות אותה לקדושה.<br><br>
+        זוהי "הריגת הבן" שמביאה לגילוי אליהו.
+      </p>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
