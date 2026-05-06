@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אין קדושין תופסין בעריות — תיקון הגוף</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 80px -20px var(--shadow),
+      0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  /* בעז"ה at top */
+  .bezras {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    color: var(--gold-deep);
+    margin-bottom: 40px;
+    opacity: 0.85;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(32px, 5.5vw, 50px);
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 50px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    gap: 20px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+
+  .divider-symbol {
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  /* Content Sections */
+  .section {
+    margin-bottom: 38px;
+  }
+
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--crimson);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::before {
+    content: "❖";
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  strong {
+    color: var(--crimson);
+    font-weight: 700;
+  }
+
+  em {
+    color: var(--gold-deep);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* Halacha quote box */
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px;
+    margin: 18px 0;
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .pasuk-source {
+    display: block;
+    font-size: 13px;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* Highlight key terms */
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+
+  /* Three sins card */
+  .sins-card {
+    margin: 40px 0;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.06) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border: 1px solid rgba(140, 42, 30, 0.2);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .sins-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .sins-source {
+    font-size: 13px;
+    color: var(--gold-deep);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .sins-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .sin-item {
+    padding: 16px 10px;
+    background: rgba(245, 236, 217, 0.6);
+    border: 1px solid rgba(184, 138, 44, 0.2);
+    border-radius: 3px;
+  }
+
+  .sin-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* Two sides card - left/right of heart */
+  .duality-card {
+    margin: 40px 0;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+
+  .duality-card::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .duality-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .duality-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .duality-side {
+    text-align: center;
+  }
+
+  .duality-side-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .duality-side-name.right {
+    color: var(--gold);
+  }
+
+  .duality-side-name.left {
+    color: #c75c4f;
+  }
+
+  .duality-meaning {
+    font-size: 13px;
+    color: rgba(245, 236, 217, 0.7);
+    letter-spacing: 1px;
+  }
+
+  .duality-vs {
+    font-family: 'Bellefair', serif;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+
+  /* Final message */
+  .final-message {
+    margin-top: 50px;
+    padding: 30px;
+    background: rgba(140, 42, 30, 0.05);
+    border-top: 2px solid var(--crimson);
+    border-bottom: 2px solid var(--crimson);
+    text-align: center;
+  }
+
+  .final-message-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .final-message p {
+    font-size: 19px;
+    color: var(--ink);
+    font-style: italic;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Attribution at bottom */
+  .attribution {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+  }
+
+  .attribution-line {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px;
+    color: var(--gold-deep);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  /* Footer ornament */
+  .footer-ornament {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 24px; }
+    .container::before { inset: 8px; }
+    .sins-grid { grid-template-columns: 1fr; gap: 10px; }
+    .duality-grid { grid-template-columns: 1fr; gap: 16px; }
+    .duality-side-name { font-size: 24px; }
+    p { font-size: 17px; }
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+  }
+
+  /* Subtle entrance animation */
+  .container {
+    animation: fadeUp 1s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>אֵין קִדּוּשִׁין תּוֹפְסִין בָּעֲרָיוֹת</h1>
+    <p class="subtitle">סוד תיקון הגוף — הכלה הראויה לחתן</p>
+
+    <div class="divider">
+      <span class="divider-symbol">✦</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הכלל ההלכתי</h2>
+      <p>
+        בנגלה: אדם שהתחתן עם <strong>ספק אשת איש</strong> —
+        הקידושין אינם תופסים, כי <em>"אין קדושין תופסין בעריות"</em>.
+      </p>
+      <p>
+        אך בפנימיות — זה כלל עמוק על <strong>הקשר בין הקב"ה לגוף האדם</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הקב"ה — חתן, הגוף — כלה</h2>
+      <p>
+        <span class="key-term">הקב"ה נקרא "הבעל"</span>
+        <span class="key-term">והגוף שלנו הוא בחינת "הכלה"</span>.
+      </p>
+      <p>
+        אך כל עוד אדם <strong>לא תיקן גילוי עריות רוחני שבו</strong> —
+        הקב"ה לא יכול לרדת לגופו.
+        כי "אין קדושין תופסין בעריות".
+      </p>
+    </div>
+
+    <!-- Three sins card -->
+    <div class="sins-card">
+      <div class="sins-label">שלוש עבירות נכנסו באדם</div>
+      <div class="sins-source">מאז חטא עץ הדעת</div>
+      <div class="sins-grid">
+        <div class="sin-item">
+          <div class="sin-name">עבודה זרה</div>
+        </div>
+        <div class="sin-item">
+          <div class="sin-name">שפיכות דמים</div>
+        </div>
+        <div class="sin-item">
+          <div class="sin-name">גילוי עריות</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">גילוי האהבה המסותרת</h2>
+      <p>
+        עד שאדם <strong>מגלה את האבות</strong> —
+        שהיא <em>האהבה המסותרת</em> (תניא) —
+        ועד שהוא זוכה ל<strong>בחינת יעקב</strong>,
+        שנלחם עם המלאך, שרו של עשו.
+      </p>
+    </div>
+
+    <!-- Duality card - heart sides -->
+    <div class="duality-card">
+      <div class="duality-label">המאבק בלב האדם</div>
+      <div class="duality-grid">
+        <div class="duality-side">
+          <div class="duality-side-name right">נשמה</div>
+          <div class="duality-meaning">צד ימין · קדושה</div>
+        </div>
+        <div class="duality-vs">⚔</div>
+        <div class="duality-side">
+          <div class="duality-side-name left">שׂרוֹ של עשו</div>
+          <div class="duality-meaning">צד שמאל · טומאה</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        כשטומאה וקדושה יושבות יחד באדם —
+        <strong>זוהי בחינת "עריות"</strong>.
+        על ידי שיעקב נלחם עם שרו של עשו ומנצחו —
+        הוא <em>מתקן את גילוי העריות</em>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הגוף נטהר — הכלה לחתן</h2>
+      <p>
+        אז הגוף נעשה <strong>נקי וטהור</strong>,
+        והכלה <em>מותרת לחתן</em>.
+      </p>
+      <p>
+        כי כעת מתבטל הכלל ההלכתי "אין קדושין תופסין בעריות" —
+        מאחר ש<strong>אין עוד עריות</strong>,
+        הקידושין מתקיימים.
+      </p>
+    </div>
+
+    <!-- Final Message -->
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p>
+        וככה זוכים ל<strong>קדושה ראשונה</strong><br>
+        בעולם הבריאה —<br>
+        חב״ד של עולם הבריאה.
+      </p>
+    </div>
+
+    <!-- Attribution -->
+    <div class="attribution">
+      <div class="attribution-line">מדברי ציון אבירם הי״ו</div>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
