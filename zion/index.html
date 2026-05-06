@@ -105,6 +105,30 @@
     letter-spacing: 0.05em;
   }
 
+  /* ============== STATS ============== */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 24px;
+    font-family: 'Bellefair', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stat-num {
+    font-size: 1.3rem;
+    color: var(--crimson);
+    font-weight: 700;
+  }
+
   /* ============== SEARCH ============== */
   .search-wrap {
     max-width: 600px;
@@ -221,6 +245,14 @@
     color: var(--ink-fade);
     font-size: 1rem;
     margin-top: 4px;
+  }
+
+  .section-count {
+    font-family: 'Bellefair', serif;
+    color: var(--gold-bright);
+    font-size: 1.1rem;
+    margin-right: 12px;
+    opacity: 0.7;
   }
 
   /* ============== TORAH LIST ============== */
@@ -341,6 +373,7 @@
   .header h1.title { animation-delay: 0.3s; }
   .header .subtitle { animation-delay: 0.4s; }
   .header .author { animation-delay: 0.5s; }
+  .header .stats-bar { animation-delay: 0.55s; }
 
   .search-wrap { animation: fadeUp 0.8s 0.6s ease-out backwards; }
 
@@ -357,6 +390,7 @@
     .torah-link .meta { display: block; float: none; margin-top: 4px; }
     .container { padding: 30px 16px 50px; }
     .section-header { gap: 14px; margin-bottom: 24px; }
+    .stats-bar { gap: 20px; font-size: 0.8rem; }
   }
 </style>
 </head>
@@ -379,6 +413,17 @@
     <h1 class="title">אוֹצַר תּוֹרוֹת וְחֲסִידוּת</h1>
     <p class="subtitle">ליקוטי דברי תורה, מוסר וחסידות</p>
     <p class="author">— מדברי ציון אבירם הי״ו —</p>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span>תורות</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span>קטגוריות</span>
+      </div>
+    </div>
   </header>
 
   <!-- SEARCH -->
@@ -401,8 +446,8 @@
     <section class="section" data-section="עבודת ה'">
       <div class="section-header">
         <div class="section-number">א</div>
-        <div>
-          <h2 class="section-title">עבודת השם</h2>
+        <div style="flex:1;">
+          <h2 class="section-title">עבודת השם <span class="section-count">(2)</span></h2>
           <div class="section-subtitle">בעבודת הבורא יתברך</div>
         </div>
       </div>
@@ -413,6 +458,12 @@
             <span class="meta">תהלים ל״ד</span>
           </a>
         </li>
+        <li class="torah-item">
+          <a class="torah-link" href="/hamaaseh-vehalimud">
+            <span class="torah-text">המעשה והלימוד — לפרוץ את החומות</span>
+            <span class="meta">פנימיות התורה</span>
+          </a>
+        </li>
       </ul>
     </section>
 
@@ -420,16 +471,16 @@
     <section class="section" data-section="חסידות">
       <div class="section-header">
         <div class="section-number">ב</div>
-        <div>
-          <h2 class="section-title">חסידוּת</h2>
+        <div style="flex:1;">
+          <h2 class="section-title">חסידוּת <span class="section-count">(1)</span></h2>
           <div class="section-subtitle">תורות מאוצר החסידות</div>
         </div>
       </div>
       <ul class="torah-list">
-        <!-- כאן יתווספו תורות נוספות -->
-        <li class="torah-item placeholder">
-          <a class="torah-link" href="#" style="opacity:0.5; cursor:default;" onclick="event.preventDefault()">
-            <span class="torah-text">בקרוב יתווספו תורות נוספות...</span>
+        <li class="torah-item">
+          <a class="torah-link" href="/ein-kiddushin-tofsin-baarayot">
+            <span class="torah-text">אין קדושין תופסין בעריות — תיקון הגוף</span>
+            <span class="meta">סוד הכלה והחתן</span>
           </a>
         </li>
       </ul>
@@ -439,7 +490,7 @@
     <section class="section" data-section="מועדים">
       <div class="section-header">
         <div class="section-number">ג</div>
-        <div>
+        <div style="flex:1;">
           <h2 class="section-title">מוֹעֲדִים וזמנים</h2>
           <div class="section-subtitle">לזמני השנה ולמועדי ה'</div>
         </div>
@@ -457,15 +508,16 @@
     <section class="section" data-section="פרשת השבוע">
       <div class="section-header">
         <div class="section-number">ד</div>
-        <div>
-          <h2 class="section-title">פרשת השבוע</h2>
+        <div style="flex:1;">
+          <h2 class="section-title">פרשת השבוע <span class="section-count">(1)</span></h2>
           <div class="section-subtitle">דברי תורה על סדר הפרשיות</div>
         </div>
       </div>
       <ul class="torah-list">
-        <li class="torah-item placeholder">
-          <a class="torah-link" href="#" style="opacity:0.5; cursor:default;" onclick="event.preventDefault()">
-            <span class="torah-text">בקרוב יתווספו תורות נוספות...</span>
+        <li class="torah-item">
+          <a class="torah-link" href="/akeidat-yitzchak-haregat-haben">
+            <span class="torah-text">עקידת יצחק — הריגת ה״בן״</span>
+            <span class="meta">פרשת וירא</span>
           </a>
         </li>
       </ul>
