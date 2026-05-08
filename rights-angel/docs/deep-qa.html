@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מלאך הזכויות · תשובות טכניות מעמיקות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#F5F1E8; --paper-shade:#ECE6D5; --paper-deep:#E0D9C2;
+  --ink:#1A1F2E; --ink-soft:#4A5060; --ink-mute:#8B8E96;
+  --accent:#C2410C; --accent-deep:#7A2A0A; --accent-soft:#F4D9C8;
+  --signal:#166534; --warn:#A16207;
+  --code-bg:#1A1F2E; --code-fg:#F5F1E8;
+  --serif:'Frank Ruhl Libre','David',serif;
+  --sans:'Assistant','Arial Hebrew',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Menlo',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.page{max-width:980px;margin:0 auto;padding:3rem 2.5rem}
+
+/* COVER */
+.cover{padding:4rem 0 3rem;border-bottom:3px double var(--ink);margin-bottom:3rem;text-align:center}
+.cover .label{font-family:var(--mono);font-size:0.8rem;color:var(--accent);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1.5rem;font-weight:600}
+.cover h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.05;margin-bottom:1rem;letter-spacing:-0.02em}
+.cover h1 .accent{color:var(--accent);font-style:italic}
+.cover p{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.25rem);color:var(--ink-soft);max-width:680px;margin:0 auto;line-height:1.5}
+
+/* TOC */
+.toc{background:var(--paper-shade);border:1px solid var(--ink);padding:2rem 1.8rem;margin-bottom:4rem}
+.toc-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;font-weight:600}
+.toc ol{list-style:none;counter-reset:toc;display:grid;grid-template-columns:1fr 1fr;gap:0.3rem 1.5rem}
+.toc li{counter-increment:toc;padding:0.5rem 0;border-bottom:1px dashed var(--ink-mute);display:flex;align-items:baseline;gap:0.7rem;font-family:var(--serif);font-size:0.95rem}
+.toc li::before{content:'Q' counter(toc,decimal-leading-zero);font-family:var(--mono);font-size:0.7rem;color:var(--accent);font-weight:600;min-width:2.5rem}
+.toc a{color:var(--ink);text-decoration:none}
+.toc a:hover{color:var(--accent)}
+
+/* QUESTIONS */
+.qa{margin-bottom:4rem;scroll-margin-top:2rem;border:1px solid var(--ink);background:var(--paper);overflow:hidden}
+.qa-header{background:var(--ink);color:var(--paper);padding:1.5rem 2rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center}
+.qa-num{font-family:var(--serif);font-weight:900;font-size:2.5rem;color:var(--accent);font-style:italic;line-height:0.9}
+.qa-num small{display:block;font-family:var(--mono);font-size:0.6rem;color:var(--paper);letter-spacing:0.2em;font-style:normal;font-weight:500;margin-top:0.2rem}
+.qa-question h2{font-family:var(--serif);font-size:clamp(1.2rem,2.5vw,1.55rem);font-weight:700;line-height:1.25;margin:0;letter-spacing:-0.01em;color:var(--paper)}
+.qa-body{padding:2rem 2.2rem}
+
+h3{font-family:var(--serif);font-weight:700;font-size:1.25rem;margin:1.8rem 0 0.7rem;line-height:1.2;color:var(--ink)}
+h3:first-child{margin-top:0}
+h4{font-family:var(--sans);font-weight:600;font-size:1rem;margin:1.2rem 0 0.5rem;color:var(--accent-deep)}
+p{margin-bottom:1rem;font-size:1rem;line-height:1.7}
+p strong{color:var(--accent-deep);font-weight:700}
+
+/* CODE */
+pre{background:var(--code-bg);color:var(--code-fg);padding:1.3rem 1.5rem;overflow-x:auto;margin:1.2rem 0;font-family:var(--mono);font-size:0.82rem;line-height:1.7;direction:ltr;text-align:left;border-right:4px solid var(--accent)}
+code{font-family:var(--mono);font-size:0.88em;background:var(--paper-shade);padding:0.1rem 0.4rem;border-radius:3px;color:var(--accent-deep);direction:ltr;display:inline-block}
+pre code{background:none;padding:0;color:var(--code-fg);font-size:inherit}
+
+/* CALLOUT */
+.callout{background:var(--paper-shade);border-right:4px solid var(--accent);padding:1.1rem 1.4rem;margin:1.2rem 0;font-size:0.95rem}
+.callout .label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.5rem;display:block}
+.callout.warn{border-color:var(--warn)}
+.callout.warn .label{color:var(--warn)}
+.callout.signal{border-color:var(--signal)}
+.callout.signal .label{color:var(--signal)}
+
+/* QUESTION LIST */
+.q-list{margin:1rem 0;padding:0;list-style:none;counter-reset:qlist}
+.q-list li{counter-increment:qlist;padding:0.7rem 0 0.7rem 0;padding-right:2.8rem;border-bottom:1px dashed var(--ink-mute);position:relative;font-size:0.97rem;line-height:1.6}
+.q-list li:last-child{border-bottom:none}
+.q-list li::before{content:counter(qlist);position:absolute;right:0;top:0.7rem;font-family:var(--serif);font-style:italic;font-weight:900;font-size:1.5rem;color:var(--accent);line-height:1}
+.q-list li strong{color:var(--ink);font-weight:700}
+.q-list li em{font-style:italic;color:var(--ink-soft);display:block;margin-top:0.2rem;font-size:0.88rem}
+
+/* PIPELINE STEPS */
+.pipeline{margin:1.5rem 0}
+.p-step{display:grid;grid-template-columns:60px 1fr;gap:1.2rem;padding:1rem 0;border-bottom:1px solid var(--ink-mute);align-items:start}
+.p-step:last-child{border-bottom:none}
+.p-step .step-mark{font-family:var(--serif);font-style:italic;font-weight:900;font-size:1.8rem;color:var(--accent);line-height:1;text-align:center}
+.p-step h4{margin:0 0 0.3rem;color:var(--ink);font-family:var(--serif);font-size:1.05rem}
+.p-step p{margin:0;font-size:0.93rem;color:var(--ink-soft);line-height:1.6}
+
+/* COMPARE TABLE */
+.compare{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.92rem;border:2px solid var(--ink)}
+.compare th{background:var(--ink);color:var(--paper);padding:0.8rem;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;text-align:right;font-weight:600}
+.compare td{padding:0.8rem;border-bottom:1px solid var(--ink-mute);background:var(--paper);vertical-align:top}
+.compare tr:nth-child(even) td{background:var(--paper-shade)}
+.compare .name{font-family:var(--serif);font-weight:700;color:var(--ink)}
+.compare ul{margin:0;padding-right:1.2rem;font-size:0.88rem}
+.compare li{margin-bottom:0.3rem;line-height:1.5}
+
+/* VERSION DIAGRAM */
+.version-tree{margin:1.5rem 0;background:var(--paper-shade);border:1px solid var(--ink);padding:1.5rem 1.8rem}
+.version-row{display:grid;grid-template-columns:120px 1fr auto;gap:1.2rem;padding:0.7rem 0;border-bottom:1px dashed var(--ink-mute);align-items:center;font-size:0.9rem}
+.version-row:last-child{border-bottom:none}
+.version-row .v-num{font-family:var(--mono);font-weight:600;color:var(--accent);font-size:0.85rem;letter-spacing:0.1em}
+.version-row .v-desc{color:var(--ink)}
+.version-row .v-status{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding:0.2rem 0.6rem;white-space:nowrap}
+.v-status.live{background:var(--signal);color:var(--paper)}
+.v-status.dep{background:var(--ink-mute);color:var(--paper)}
+.v-status.dev{background:var(--warn);color:var(--paper)}
+
+/* TIMER VIZ */
+.timer-viz{margin:1.5rem 0;background:var(--ink);color:var(--paper);padding:1.8rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;position:relative;overflow:hidden}
+.timer-viz::after{content:'';position:absolute;top:0;left:0;width:6px;height:100%;background:var(--accent)}
+.timer-num{font-family:var(--serif);font-weight:900;font-style:italic;color:var(--accent);font-size:3.5rem;line-height:0.9}
+.timer-num small{display:block;font-family:var(--mono);font-size:0.65rem;color:var(--paper);font-style:normal;letter-spacing:0.2em;margin-top:0.3rem;font-weight:500}
+.timer-viz p{margin:0;color:var(--paper);font-family:var(--serif);font-size:1.05rem;line-height:1.5}
+.timer-viz p strong{color:var(--accent);font-weight:700}
+
+/* DUAL COMPARISON */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.5rem 0}
+.dual-card{background:var(--paper-shade);border:1px solid var(--ink);padding:1.5rem 1.4rem;display:flex;flex-direction:column;gap:0.5rem;position:relative;overflow:hidden}
+.dual-card::before{content:'';position:absolute;top:0;right:0;width:5px;height:100%;background:var(--accent)}
+.dual-card .header{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.3rem}
+.dual-card h4{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin:0 0 0.5rem;line-height:1.2}
+.dual-card .when{font-family:var(--serif);font-style:italic;color:var(--accent-deep);font-size:0.95rem;margin-bottom:0.6rem;font-weight:500}
+.dual-card .desc{font-size:0.92rem;line-height:1.6;color:var(--ink);margin:0}
+.dual-card .legal{font-family:var(--mono);font-size:0.7rem;color:var(--ink-mute);letter-spacing:0.05em;margin-top:0.7rem;padding-top:0.7rem;border-top:1px dashed var(--ink-mute)}
+.dual-card .power{margin-top:0.7rem;padding:0.5rem 0.7rem;background:var(--paper);font-size:0.85rem;border-right:3px solid var(--accent)}
+.dual-card .power strong{color:var(--accent-deep)}
+
+/* MATRIX */
+.matrix-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.88rem;border:2px solid var(--ink)}
+.matrix-table th{background:var(--ink);color:var(--paper);padding:0.8rem 0.6rem;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;text-align:right;font-weight:600}
+.matrix-table th.center{text-align:center}
+.matrix-table td{padding:0.7rem 0.6rem;border-bottom:1px solid var(--ink-mute);background:var(--paper);vertical-align:middle}
+.matrix-table tr:nth-child(even) td{background:var(--paper-shade)}
+.matrix-table .check{color:var(--signal);font-weight:700;font-size:1.1rem;text-align:center}
+.matrix-table .x{color:var(--ink-mute);text-align:center}
+.matrix-table .pred{font-family:var(--mono);font-size:0.78rem;color:var(--accent-deep);direction:ltr;text-align:right}
+
+/* SHAPE BLOCK */
+.shape-flow{margin:1.5rem 0;display:grid;grid-template-columns:1fr;gap:0.5rem}
+.shape{padding:1rem 1.3rem;border:1.5px solid var(--ink);background:var(--paper);position:relative;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center}
+.shape.alt{background:var(--paper-shade)}
+.shape.danger{background:var(--accent-soft);border-color:var(--accent);border-width:2px}
+.shape .arrow{font-family:var(--serif);font-size:1.5rem;color:var(--accent);font-weight:700}
+.shape .text{font-size:0.95rem}
+.shape .text strong{color:var(--ink);font-weight:700}
+.shape-arrow{text-align:center;font-family:var(--serif);font-size:1.5rem;color:var(--accent);line-height:0.5;padding:0.3rem 0;font-weight:700}
+
+/* FOOTER */
+footer{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--ink-mute);font-family:var(--mono);font-size:0.7rem;color:var(--ink-mute);letter-spacing:0.1em;text-align:center;line-height:1.8}
+footer strong{color:var(--ink);font-weight:600}
+
+/* RESPONSIVE */
+@media (max-width:720px){
+  .page{padding:2rem 1rem}
+  .toc ol{grid-template-columns:1fr}
+  .qa-header{grid-template-columns:50px 1fr;gap:1rem;padding:1.2rem 1.2rem}
+  .qa-num{font-size:1.8rem}
+  .qa-body{padding:1.5rem 1.2rem}
+  .dual{grid-template-columns:1fr}
+  .compare{font-size:0.78rem}
+  .compare th,.compare td{padding:0.5rem 0.4rem}
+  .matrix-table{font-size:0.75rem}
+  .matrix-table th,.matrix-table td{padding:0.4rem 0.3rem}
+  .timer-viz{grid-template-columns:1fr;text-align:center;gap:1rem}
+  .version-row{grid-template-columns:80px 1fr;gap:0.5rem}
+  .version-row .v-status{grid-column:1 / -1;justify-self:start}
+}
+
+@media print{
+  body{background:white}
+  .page{padding:1cm;max-width:100%}
+  .qa{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="label">⟢ &nbsp; טכני · עסקי · רגולטורי &nbsp; ⟣</div>
+    <h1>מלאך <span class="accent">הזכויות</span><br><span style="font-size:0.6em;font-style:italic;font-weight:400;color:var(--ink-soft)">Q&amp;A מעמיק לבעלי עניין</span></h1>
+    <p>מסמך זה עונה על שאלות הליבה של כל מי שבוחן את הפלטפורמה בעומק — לקוח עסקי, עו"ד מלווה, או מפתח שותף.</p>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-label">12 שאלות · תשובות מימוש</div>
+    <ol>
+      <li><a href="#q1">רשימת השאלות בשיחת Intake</a></li>
+      <li><a href="#q2">פענוח צילום מסמך (OCR)</a></li>
+      <li><a href="#q3">התאמה בין Twin למודול זכות</a></li>
+      <li><a href="#q4">עדכון על דחייה או חוסרים</a></li>
+      <li><a href="#q5">7 השכבות — מה יש בכל אחת</a></li>
+      <li><a href="#q6">מודול זכות — גרסה כמו Word?</a></li>
+      <li><a href="#q7">תוקף חתימת עו"ד</a></li>
+      <li><a href="#q8">בקשה ראשונה מול השגה</a></li>
+      <li><a href="#q9">שעון אישור־שתיקה — מימוש</a></li>
+      <li><a href="#q10">רישום מאגר ומינוי DPO</a></li>
+      <li><a href="#q11">איך מסומן הגבול לעו"ד אנושי</a></li>
+      <li><a href="#q12">ערעור אוטומטי לאחר דחייה</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ Q1 ============ -->
+  <section class="qa" id="q1">
+    <div class="qa-header">
+      <div class="qa-num">01<small>QUESTION</small></div>
+      <div class="qa-question"><h2>מהן רשימת השאלות שה-AI שואל את המשתמש?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>ה-AI Intake לא שואל רשימה קבועה. הוא מבצע <strong>חילוץ מותאם הקשר</strong>: שואל רק מה שחסר כדי להריץ את ה-Eligibility Engine. רשימת השדות הקבועה היא מה שכל זכות דורשת, אבל סדר השאלות והניסוח משתנה לפי הזרימה הטבעית של השיחה.</p>
+
+      <h3>השדות הנדרשים — לפי קבוצות</h3>
+
+      <h4>שדות זהות (חובה לכל זכות)</h4>
+      <ol class="q-list">
+        <li><strong>שם מלא</strong> <em>"מה שמך המלא?" — לרוב נחלץ אוטומטית מתעודת המילואים/אזרח ותיק שצורפה.</em></li>
+        <li><strong>תעודת זהות</strong> <em>"מה מספר תעודת הזהות שלך?" — נדרש לאימות מול הרשות.</em></li>
+        <li><strong>טלפון נייד</strong> <em>נחלץ אוטומטית ממספר ה-WhatsApp שממנו הגיעה ההודעה.</em></li>
+      </ol>
+
+      <h4>שדות מצב (תלויי זכות)</h4>
+      <ol class="q-list">
+        <li><strong>סטטוס מילואים</strong> <em>"אתה מחזיק כעת בתעודת משרת מילואים פעיל?" — נדרש להנחת מילואים.</em></li>
+        <li><strong>גיל</strong> <em>"באיזו שנה נולדת?" — נדרש להנחת אזרח ותיק. נחלץ מת.ז אם הוקלדה.</em></li>
+        <li><strong>מצב משפחתי</strong> <em>"רווק / נשוי / אלמן / גרוש?" — משפיע על שיעור ההנחה לאזרח ותיק.</em></li>
+        <li><strong>מצב הכנסה</strong> <em>"הכנסתך החודשית מעל / מתחת ל-X?" — אם רלוונטי לעיר ספציפית.</em></li>
+      </ol>
+
+      <h4>שדות נכס (חובה לארנונה)</h4>
+      <ol class="q-list">
+        <li><strong>רשות מקומית</strong> <em>"באיזו עיר אתה גר?" — חובה לבחירת ה-Authority Adapter.</em></li>
+        <li><strong>כתובת</strong> <em>"מה הכתובת המלאה (רחוב + מספר)?" — נדרש בטופס ההגשה.</em></li>
+        <li><strong>סטטוס נכס</strong> <em>"שוכר או בעלים?" — קובע אילו זכויות חלות.</em></li>
+        <li><strong>מספר נכס בארנונה</strong> <em>"יש לך מספר משלם?" — נחלץ אוטומטית מחשבון הארנונה אם הועלה.</em></li>
+      </ol>
+
+      <div class="callout">
+        <span class="label">חוקיות הזרימה</span>
+        ה-AI לא שואל הכל בבת אחת. הוא <strong>שואל רק שאלה אחת בכל פעם</strong>, ממתין לתשובה, ומחליט מה השאלה הבאה. אם המשתמש העלה מסמך — שדות שהמסמך כבר מספק לא נשאלים שוב.
+      </div>
+
+      <h3>איך זה עובד טכנית</h3>
+
+<pre><code>// shared/controller/IntakeController.ts
+
+@BackendMethod({ allowed: true })
+async nextQuestion(twin: DigitalTwin): Promise&lt;NextQ | null&gt; {
+  // אילו שדות חסרים?
+  const missing = TwinSchema.requiredFields
+    .filter(f =&gt; !twin[f.path]);
+
+  if (missing.length === 0) return null;
+
+  // המתן ל-AI שיבחר את השדה הבא לשאול
+  const next = await claude.complete({
+    system: INTAKE_PROMPT,
+    user: { twin, missing, conversation: twin.history }
+  });
+
+  return {
+    field: next.field,
+    questionHe: next.naturalQuestion,
+    suggestedAnswers: next.quickReplies
+  };
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ============ Q2 ============ -->
+  <section class="qa" id="q2">
+    <div class="qa-header">
+      <div class="qa-num">02<small>QUESTION</small></div>
+      <div class="qa-question"><h2>כיצד מפוענח הצילום שהמשתמש שולח?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>כשמשתמש שולח צילום של תעודת מילואים, חשבון ארנונה, או הסכם שכירות — הוא לא הולך ל-OCR קלאסי. הוא הולך ל-<strong>Vision LLM</strong> שמבצע גם זיהוי טקסט וגם הבנה סמנטית בשלב אחד.</p>
+
+      <h3>הזרימה המלאה</h3>
+
+      <div class="pipeline">
+        <div class="p-step">
+          <div class="step-mark">1</div>
+          <div>
+            <h4>קבלה ושמירה</h4>
+            <p>הצילום מתקבל מ-WhatsApp דרך GreenAPI webhook. נשמר ב-S3 בנתיב <code>uploads/{userId}/{docId}.jpg</code>, מוצפן at-rest.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">2</div>
+          <div>
+            <h4>סיווג סוג מסמך</h4>
+            <p>קריאה ראשונה ל-Claude Vision: <em>"איזה סוג מסמך זה? תעודת מילואים / חשבון ארנונה / תעודת ת.ז / אחר?"</em>. לפי התשובה — מופעל extraction schema מתאים.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">3</div>
+          <div>
+            <h4>חילוץ מובנה</h4>
+            <p>קריאה שנייה ל-Claude עם schema מוגדר. למשל לתעודת מילואים: <code>{ idNumber, fullName, validFromDate, validUntilDate, signatureValid }</code>. ה-LLM מחזיר JSON תואם, לא טקסט חופשי.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">4</div>
+          <div>
+            <h4>אימות ערכים</h4>
+            <p>ולידציה: ת.ז עם בדיקת ספרת ביקורת, תאריכים בפורמט ISO, שדות חובה אינם null. אם משהו לא תקין — בקשת צילום חדש.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">5</div>
+          <div>
+            <h4>הצלבה עם Twin</h4>
+            <p>אם הת.ז שחולצה לא תואמת לזו של המשתמש — דגל אזהרה. אם תוקף התעודה פג — בקשת חידוש מצה"ל.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">6</div>
+          <div>
+            <h4>אישור משתמש</h4>
+            <p>סיכום מוצג למשתמש: <em>"חולץ ת.ז 12345678, תוקף עד 31/12/2026 — לאשר?"</em>. רק אחרי אישור — ה-Twin מתעדכן.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <span class="label">חשוב</span>
+        ה-Vision LLM <strong>יכול לטעות</strong>. לכן אנחנו לא משתמשים בנתון ישירות אלא דורשים <strong>אישור מפורש</strong> מהמשתמש על כל שדה קריטי לפני שהוא נשמר ב-Twin. אם המשתמש מתקן — התיקון נשמר.
+      </div>
+
+      <h3>למה Vision LLM ולא OCR קלאסי?</h3>
+
+      <p>OCR מסורתי (Tesseract, AWS Textract) מחזיר טקסט. אנחנו צריכים <strong>הבנה</strong>. הצילום של תעודת מילואים מכיל לוגו, חתימה, מספר סידורי, שם, ת.ז, תוקף. OCR יחזיר את כל הטקסט מעורבב. Vision LLM יחזיר ישירות JSON מובנה <code>{ "idNumber": "12345678", "validUntil": "2026-12-31" }</code>, וגם יזהה אם החתימה הדיגיטלית של צה"ל נראית תקינה ויסמן זאת.</p>
+    </div>
+  </section>
+
+  <!-- ============ Q3 ============ -->
+  <section class="qa" id="q3">
+    <div class="qa-header">
+      <div class="qa-num">03<small>QUESTION</small></div>
+      <div class="qa-question"><h2>איך מתבצעת ההתאמה בין ה-Twin למודול הזכות?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>זה הליבה של ה-<strong>Eligibility Engine</strong>. כל מודול זכות מכיל רשימה של <code>Predicates</code> — תנאים אטומיים שצריכים להתקיים. ה-Engine מריץ אותם אחד-אחד מול ה-Twin ומחזיר תוצאה מובנית.</p>
+
+      <h3>מבנה Predicate</h3>
+
+<pre><code>interface Predicate {
+  id: string;                 // 'has_active_miluim_certificate'
+  twinPath: string;           // 'status.military.miluim.isValid'
+  operator: 'eq'|'gte'|'lte'|'in'|'exists';
+  expectedValue: any;
+  weight: number;             // 1.0 = חובה, 0.5 = משפיע
+  failureMessageHe: string;   // הודעה למשתמש אם לא מתקיים
+}</code></pre>
+
+      <h3>אלגוריתם ההתאמה</h3>
+
+<pre><code>// shared/controller/EligibilityController.ts
+
+evaluate(twin: DigitalTwin, module: RightModule): EvalResult {
+  const results = module.predicates.map(p =&gt; {
+    const value = getPath(twin, p.twinPath);
+
+    if (value === undefined) {
+      return { p, status: 'MISSING', value: null };
+    }
+
+    const passes = checkOperator(value, p.operator, p.expectedValue);
+    return { p, status: passes ? 'PASS' : 'FAIL', value };
+  });
+
+  // אם יש PASS על כל ה-Predicates במשקל 1.0 → ELIGIBLE
+  // אם יש MISSING → INFO_NEEDED, מחזיר את השאלות החסרות
+  // אם יש FAIL → NOT_ELIGIBLE, עם הסבר
+
+  return classify(results, module);
+}</code></pre>
+
+      <h3>דוגמה: הנחת מילואים בתל אביב</h3>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Predicate</th>
+            <th class="center">ערך ב-Twin</th>
+            <th class="center">תוצאה</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pred">has_active_miluim_certificate</td>
+            <td class="center">true</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td class="pred">municipality === 'tlv'</td>
+            <td class="center">tlv</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td class="pred">resident_status in [tenant, owner]</td>
+            <td class="center">tenant</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td class="pred">tlv_offers_discount === true</td>
+            <td class="center">true (Policy)</td>
+            <td class="check">✓</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>כל ה-Predicates עברו → <strong>תוצאה: זכאי ודאי</strong>. הסכום מחושב: <code>arnona.annualBill × 0.05 = ₪450</code>.</p>
+
+      <div class="callout signal">
+        <span class="label">חישוב מהיר ולא יקר</span>
+        ה-Eligibility רץ ב-<strong>פחות מ-50 מילישנייה</strong> לכל זכות. אין קריאות LLM, אין רשת — רק PostgreSQL query על Twin + הרצת Predicates ב-memory. זה מה שמאפשר לנו להציג למשתמש סיכום מהיר תוך שיחה רגילה.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q4 ============ -->
+  <section class="qa" id="q4">
+    <div class="qa-header">
+      <div class="qa-num">04<small>QUESTION</small></div>
+      <div class="qa-question"><h2>כיצד בפועל מתבצע העדכון על דחייה או חוסרים?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>שלוש דרכים שדחייה/חוסר יכולים להגיע למערכת. שלושתן נכנסות לאותה <strong>State Machine</strong> של ה-Claim Agent.</p>
+
+      <h3>דרך 1 — מייל מהרשות</h3>
+
+      <p>כל הגשה נשלחת מכתובת מייל ייעודית של המערכת, למשל <code>claim+12345@malach-hazchuyot.co.il</code>. כשהרשות עונה, התשובה מגיעה לאותה כתובת. webhook ב-MailGun (או Postmark) מקבל את המייל, מחלץ את ה-claim ID, ומפעיל את ה-Adapter המתאים.</p>
+
+<pre><code>// server/handlers/inboundMail.ts
+
+export async function onInboundMail(email: InboundEmail) {
+  const claimId = extractClaimId(email.toAddress);
+  const claim = await ClaimRepo.findById(claimId);
+
+  // Claude מנתח: זו אישור? דחייה? בקשה למסמך?
+  const intent = await classifyEmail(email.body);
+
+  switch (intent.type) {
+    case 'APPROVED':    return claim.markApproved(intent.amount);
+    case 'REJECTED':    return claim.markRejected(intent.reason);
+    case 'NEED_DOC':    return claim.requestDocument(intent.docType);
+    case 'CLARIFY':     return claim.requestClarification(intent.question);
+  }
+}</code></pre>
+
+      <h3>דרך 2 — סקר תקופתי בפורטל</h3>
+
+      <p>לרשויות עם פורטל מקוון (תל אביב), ה-Claim Agent מבצע <strong>polling אוטומטי כל 24 שעות</strong>. הוא מתחבר עם cookie session, ניגש לעמוד הסטטוס, ומשווה למצב הקודם.</p>
+
+<pre><code>// BullMQ job - רץ פעם ביום לכל claim פתוח
+async function pollClaimStatus(claimId: string) {
+  const claim = await ClaimRepo.findById(claimId);
+  const adapter = getAdapter(claim.authorityId);
+  const newStatus = await adapter.fetchStatus(claim.referenceId);
+
+  if (newStatus !== claim.status) {
+    await claim.recordStatusChange(newStatus);
+    await notifyUser(claim);
+  }
+}</code></pre>
+
+      <h3>דרך 3 — ולידציה ב-Eligibility</h3>
+
+      <p>זה הקישור לשאלה הקודמת. כש-<code>EligibilityController.evaluate()</code> מחזיר <strong>MISSING</strong> או <strong>FAIL</strong>, ה-AI Intake מציג זאת מיידית למשתמש בשיחה — עוד לפני שהבקשה הוגשה. למשל: <em>"מצוין, אבל חסר לי תאריך תוקף התעודה. כדי לוודא שאתה זכאי, נצטרך תעודה בתוקף."</em></p>
+
+      <h3>השוואה בין שלוש הדרכים</h3>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>מקור</th>
+            <th>זמן תגובה</th>
+            <th>תיאור</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">מייל מהרשות</td>
+            <td>מיידי (תוך דקות)</td>
+            <td>הרשות עונה → webhook → Claude מנתח → עדכון Twin → הודעה למשתמש</td>
+          </tr>
+          <tr>
+            <td class="name">Polling פורטל</td>
+            <td>תוך 24 שעות</td>
+            <td>BullMQ scheduled job בודק את הפורטל ומשווה למצב הקודם</td>
+          </tr>
+          <tr>
+            <td class="name">Eligibility בזמן שיחה</td>
+            <td>מיידי (50ms)</td>
+            <td>במהלך ה-Intake, ה-Engine מסמן מה חסר ומה לא מתקיים</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ Q5 ============ -->
+  <section class="qa" id="q5">
+    <div class="qa-header">
+      <div class="qa-num">05<small>QUESTION</small></div>
+      <div class="qa-question"><h2>מה יש בכל אחת מ-7 השכבות וכיצד מתוכנן המימוש?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>כל מודול הוא <strong>npm package פנימי</strong> עם API מוגדר. החיבור ביניהם דרך dependency injection. כך אפשר להחליף מודול אחד בלי לגעת באחרים.</p>
+
+      <h3>1. AI Intake</h3>
+      <p><strong>אחריות:</strong> שיחה עם המשתמש, חילוץ נתונים, החזרת תשובה טבעית.</p>
+      <p><strong>מימוש:</strong> Webhook listener על GreenAPI → Session manager (Redis) → Claude API call עם system prompt → תשובה חזרה ל-WhatsApp.</p>
+      <p><strong>API פנימי:</strong> <code>processMessage(userId, message): Response</code></p>
+      <p><strong>State:</strong> שיחה אחת = session ב-Redis עם TTL של 24 שעות. קריאות ל-Claude כוללות את ההיסטוריה.</p>
+
+      <h3>2. Digital Twin</h3>
+      <p><strong>אחריות:</strong> ייצוג מובנה של המשתמש. JSON schema קשיח.</p>
+      <p><strong>מימוש:</strong> Remult Entity ב-PostgreSQL. שדות מקוננים (status.military.miluim) מיוצגים כ-JSONB.</p>
+      <p><strong>API פנימי:</strong> <code>updateField(userId, path, value)</code> · <code>getTwin(userId)</code></p>
+      <p><strong>גרסאות:</strong> כל שינוי נשמר ב-event log (twin_events table) — אפשר לחזור אחורה לכל מצב היסטורי.</p>
+
+      <h3>3. Rights Catalog</h3>
+      <p><strong>אחריות:</strong> אחסון מודולי זכויות חתומים, עם versioning.</p>
+      <p><strong>מימוש:</strong> טבלת PostgreSQL <code>right_modules</code> + ה-PDF החתום ב-S3. שדה <code>signedAt</code> + <code>signedBy</code> + <code>s3Key</code>.</p>
+      <p><strong>API פנימי:</strong> <code>getModule(slug, version?)</code> · <code>publishModule(module)</code></p>
+
+      <h3>4. Eligibility Engine</h3>
+      <p><strong>אחריות:</strong> חישוב זכאות מ-Twin × Module.</p>
+      <p><strong>מימוש:</strong> פונקציה pure ב-TypeScript, ללא state. מקבלת Twin + Module, מחזירה EvalResult. רצה ב-process.</p>
+      <p><strong>API פנימי:</strong> <code>evaluate(twin, module): EvalResult</code></p>
+
+      <h3>5. Authority Adapters</h3>
+      <p><strong>אחריות:</strong> תקשורת עם רשות ספציפית.</p>
+      <p><strong>מימוש:</strong> כל Adapter מממש interface אחיד <code>AuthorityAdapter</code>. תל אביב = Playwright browser automation. ירושלים = SMTP + תבנית מייל. חיפה = PDF generator + מייל.</p>
+      <p><strong>API פנימי:</strong> <code>submit(claim) | pollStatus(refId) | respondTo(refId, msg)</code></p>
+
+      <h3>6. Claim Agent</h3>
+      <p><strong>אחריות:</strong> ניהול תיק לאורך זמן. State Machine + Scheduler.</p>
+      <p><strong>מימוש:</strong> BullMQ job per claim, עם cron schedule. לכל מצב (DRAFT, SUBMITTED, FOLLOWUP) יש handler נפרד. שעון אישור־שתיקה = job עם delay של 60 יום שמופעל בעת SUBMITTED.</p>
+      <p><strong>API פנימי:</strong> <code>createClaim(userId, moduleId)</code> · <code>onClaimEvent(claimId, event)</code></p>
+
+      <h3>7. Admin Panel</h3>
+      <p><strong>אחריות:</strong> ניהול מבצעי על ידי Operators.</p>
+      <p><strong>מימוש:</strong> Angular SPA נפרד מהאתר הציבורי. Tenant: <code>admin.malach-hazchuyot.co.il</code>. גישה אחרי 2FA.</p>
+      <p><strong>תפקודים:</strong> סטטיסטיקות, ניהול מודולים, חתימות עו"ד שצריך לחדש, תיקים שנעקרו ודורשים יד אנושית.</p>
+
+      <div class="callout">
+        <span class="label">תקשורת בין מודולים</span>
+        כל קריאה בין מודולים עוברת דרך <strong>API פנימי מוגדר</strong> — לא דרך ייבוא ישיר של פונקציות. זה מאפשר להחליף את AI Intake מ-Claude ל-GPT, או את Authority Adapter מ-Playwright ל-API ישיר, בלי לגעת בשאר המערכת.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q6 ============ -->
+  <section class="qa" id="q6">
+    <div class="qa-header">
+      <div class="qa-num">06<small>QUESTION</small></div>
+      <div class="qa-question"><h2>מודול זכות — זה כמו גרסת Word חדשה?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>בדיוק. <strong>כל שינוי בחוק = גרסה חדשה של המודול</strong>, בדיוק כמו שמסמך Word יכול להיות "v1, v2, v3 final, v3 final FINAL". רק שכאן זה מסודר עם <code>semantic versioning</code> ועם חתימה דיגיטלית של עו"ד.</p>
+
+      <h3>איך זה עובד</h3>
+
+      <p>כשמשרד הפנים מוציא חוזר חדש שמשנה את שיעור ההנחה למילואים מ-5% ל-7%:</p>
+
+      <div class="version-tree">
+        <div class="version-row">
+          <div class="v-num">v1.0.0</div>
+          <div class="v-desc">פרסום ראשון, 5% הנחה. תיקים פתוחים תחת גרסה זו ממשיכים בה.</div>
+          <div class="v-status dep">DEPRECATED</div>
+        </div>
+        <div class="version-row">
+          <div class="v-num">v2.0.0</div>
+          <div class="v-desc">החוזר החדש, 7% הנחה. תיקים חדשים נפתחים תחת גרסה זו.</div>
+          <div class="v-status live">LIVE</div>
+        </div>
+        <div class="version-row">
+          <div class="v-num">v2.1.0</div>
+          <div class="v-desc">תוספת שיפור — Predicate חדש שתוקן אחרי משוב משפטי. בעריכה.</div>
+          <div class="v-status dev">DRAFT</div>
+        </div>
+      </div>
+
+      <h3>חוקי הגרסה</h3>
+
+      <ol class="q-list">
+        <li><strong>Semantic versioning.</strong> שינוי MAJOR = שינוי משפטי משמעותי. MINOR = הוספת תנאי. PATCH = תיקון ניסוח. <em>למשל: שינוי שיעור הנחה = MAJOR. הוספת מסמך נדרש = MINOR.</em></li>
+
+        <li><strong>גרסה אחת חיה בכל רגע.</strong> רק גרסה אחת יכולה להיות במצב <code>LIVE</code> בכל זמן נתון. שאר הגרסאות הן <code>DRAFT</code> (בעריכה) או <code>DEPRECATED</code> (היסטורית).</li>
+
+        <li><strong>תיקים פתוחים נשארים בגרסה שלהם.</strong> אם הוגש תיק תחת v1.0 ועברנו ל-v2.0, התיק ימשיך תחת v1.0 עד שייסגר. <em>זה הגיוני משפטית: הזכות נצברה לפי החוק שהיה בתוקף בעת ההגשה.</em></li>
+
+        <li><strong>חתימה לכל גרסה בנפרד.</strong> v1.0 חתום, v2.0 דורש חתימה חדשה. גם אם השינוי הוא PATCH של תיקון ניסוח. <em>חתימה ישנה לא תקפה לגרסה חדשה.</em></li>
+
+        <li><strong>היסטוריה מלאה.</strong> כל הגרסאות נשמרות לעד ב-S3 + DB. אם בעוד 5 שנים יבדוק עו"ד תיק היסטורי, יראה בדיוק את המודול שלפיו עבדנו אז.</li>
+      </ol>
+
+      <h3>Schema במערכת</h3>
+
+<pre><code>// shared/entity/RightModule.ts
+
+@Entity('right_modules')
+class RightModule {
+  @Fields.cuid() id: string;
+  @Fields.string() slug: string;       // 'arnona-miluim'
+  @Fields.string() version: string;    // '2.0.0'
+  @Fields.string() status: ModuleStatus;
+                                       // DRAFT|LIVE|DEPRECATED
+  @Fields.json() predicates: Predicate[];
+  @Fields.json() calculation: Calculation;
+  @Fields.date() signedAt?: Date;
+  @Fields.string() signedBy?: string;  // user ID של עו"ד
+  @Fields.string() s3KeySigned?: string; // PDF חתום
+  @Fields.date() effectiveFrom: Date;
+  @Fields.date() effectiveUntil?: Date;
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ============ Q7 ============ -->
+  <section class="qa" id="q7">
+    <div class="qa-header">
+      <div class="qa-num">07<small>QUESTION</small></div>
+      <div class="qa-question"><h2>תוקף חתימת העו"ד — מתי פג ומה אז?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>חתימה דיגיטלית של עו"ד <strong>אינה פגה לפי זמן</strong>. היא תקפה כל עוד הגרסה שהיא חתומה עליה היא ה-LIVE, וכל עוד עורך הדין רשאי לעסוק במקצוע.</p>
+
+      <h3>מתי חתימה הופכת לא תקפה?</h3>
+
+      <ol class="q-list">
+        <li><strong>הגרסה שלה הוחלפה (DEPRECATED).</strong> כשגרסה v1.0 הוחלפה ב-v2.0, החתימה של v1.0 עוברת ל-archive. היא עדיין תקפה לתיקים היסטוריים, אך לא להגשות חדשות.</li>
+
+        <li><strong>החתימה הדיגיטלית נפגמה.</strong> זה נדיר אבל אפשרי — אם הקובץ ב-S3 השתנה (גם בטעות), חתימת ה-hash לא תאמת. המערכת בודקת זאת בכל קריאה ומסמנת אזהרה.</li>
+
+        <li><strong>עורך הדין הושעה / הוצא מהלשכה.</strong> במקרה כזה, נדרש עו"ד חליף שיחתום מחדש על כל המודולים שהיו תחת אחריותו. ה-Admin Panel מסמן זאת אוטומטית אם יש שינויי סטטוס.</li>
+
+        <li><strong>החוק עצמו השתנה.</strong> במקרה כזה גרסה חדשה נדרשת — וחתימה חדשה איתה.</li>
+      </ol>
+
+      <h3>איך החתימה נשמרת ומאומתת</h3>
+
+      <div class="pipeline">
+        <div class="p-step">
+          <div class="step-mark">1</div>
+          <div>
+            <h4>יצירה</h4>
+            <p>Operator מסיים עריכת מודול → המערכת יוצרת PDF עם כל פרטי המודול (predicates, calculation, legal sources). PDF זה משוגר לעו"ד דרך Zoho Sign.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">2</div>
+          <div>
+            <h4>חתימה</h4>
+            <p>עו"ד מקבל מייל, פותח את ה-PDF, חותם דיגיטלית עם תעודה אלקטרונית מאושרת לפי <strong>חוק חתימה אלקטרונית</strong>. ה-PDF החתום חוזר אוטומטית ל-S3.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">3</div>
+          <div>
+            <h4>אחסון WORM</h4>
+            <p>ה-PDF נשמר ב-S3 עם <code>Object Lock</code> — לא ניתן למחיקה או שינוי. רק רישום של מי גישה אליו ומתי.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">4</div>
+          <div>
+            <h4>אימות בזמן ריצה</h4>
+            <p>בכל פעם שמודול נטען (להגשה או לחישוב), המערכת בודקת את ה-hash של ה-PDF, מאמתת את החתימה הדיגיטלית, ומאמתת שהעו"ד עדיין במצב פעיל.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <span class="label">תזכורת חשובה</span>
+        כש-Operator יוצר גרסה חדשה (DRAFT), הוא <strong>חייב</strong> לעבור דרך זרימת חתימה לפני שהיא הופכת ל-LIVE. אין דרך לעקוף את זה. זה אכוף ב-DB ברמת constraint: גרסה במצב LIVE חייבת להיות עם <code>signedAt</code> not null.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q8 ============ -->
+  <section class="qa" id="q8">
+    <div class="qa-header">
+      <div class="qa-num">08<small>QUESTION</small></div>
+      <div class="qa-question"><h2>בקשה ראשונה מול השגה — הסבר מעמיק</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>זו הבחנה משפטית קריטית. שני הליכים שונים, עם מנופים משפטיים שונים, וכלים שונים לטיפול בכל אחד.</p>
+
+      <div class="dual">
+        <div class="dual-card">
+          <div class="header">מסלול 01</div>
+          <h4>בקשת הנחה ראשונה</h4>
+          <div class="when">לפני שקיבלת חשבון ארנונה לשנת המס</div>
+          <p class="desc">אזרח שעבר לעיר חדשה, או שסטטוסו השתנה (הפך למילואימניק או לאזרח ותיק) — מגיש בקשה <strong>פרואקטיבית</strong> לרשות לפני שיוצא חשבון ארנונה ראשון. הרשות שוקלת את הבקשה ומחליטה האם להעניק את ההנחה כבר בחשבון הראשון שייצא.</p>
+          <div class="legal">תקנות הסדרים במשק המדינה (הנחה מארנונה), תשנ"ג-1993 · סעיף 2-3</div>
+          <div class="power"><strong>כוח משפטי:</strong> בינוני. הרשות יכולה לשקול ולענות "לא" בלי שזה מפעיל מנגנון אישור־שתיקה.</div>
+        </div>
+
+        <div class="dual-card">
+          <div class="header">מסלול 02</div>
+          <h4>השגה על חשבון</h4>
+          <div class="when">אחרי שכבר קיבלת חשבון ארנונה <strong>בלי</strong> ההנחה שמגיעה</div>
+          <p class="desc">אזרח קיבל חשבון ארנונה ולא צוינה בו ההנחה שמגיעה לו. הוא מגיש <strong>השגה</strong> למנהל הארנונה, מבקש לתקן. כאן הרשות חייבת לענות תוך 60 יום (עד 90 עם הארכה). אם שתקה — <strong>ההשגה התקבלה אוטומטית</strong> לפי החוק.</p>
+          <div class="legal">תקנה 3ו לתקנות הסדרים במשק המדינה · חוק הרשויות המקומיות (ערר על קביעת ארנונה כללית), תשל"ו-1976</div>
+          <div class="power"><strong>כוח משפטי:</strong> חזק מאוד. שעון 60 יום + חזקת קבלה אוטומטית.</div>
+        </div>
+      </div>
+
+      <h3>איך המערכת מחליטה איזה מסלול להפעיל</h3>
+
+<pre><code>// shared/controller/ClaimController.ts
+
+selectStrategy(twin: DigitalTwin, module: RightModule): Strategy {
+  // האם יש חשבון ארנונה אחרון בידינו?
+  const lastBill = twin.documents.findLatest('arnona_bill');
+
+  if (!lastBill) {
+    // אין חשבון - מסלול בקשה ראשונה
+    return new InitialRequestStrategy(module);
+  }
+
+  // יש חשבון - מה ההנחה הקיימת בו?
+  const existingDiscount = analyzeBill(lastBill, module.slug);
+  // → { exists: true, percentage: 3, amount: 270, period: '2026' }
+  // או → { exists: false }
+
+  // מה ההנחה שמגיעה לפי המודול?
+  const entitledDiscount = computeEntitled(twin, module);
+  // → { percentage: 5, amount: 450, period: '2026' }
+
+  // השוואה — לא רק קיום, אלא תאימות מלאה
+  const gap = entitledDiscount.amount - (existingDiscount.amount || 0);
+
+  if (gap &lt;= 0 &amp;&amp; existingDiscount.exists) {
+    // ההנחה תואמת או טובה יותר - אין מה להגיש
+    return null;
+  }
+
+  if (existingDiscount.exists &amp;&amp; gap &gt; 0) {
+    // יש הנחה חלקית - השגה על ההפרש
+    return new PartialDiscountAppealStrategy(module, lastBill, gap);
+  }
+
+  // אין הנחה כלל - השגה רגילה
+  return new AppealStrategy(module, lastBill);
+}</code></pre>
+
+      <h3>שלושה תרחישים בפועל</h3>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>מצב בחשבון</th>
+            <th>מה מגיע לפי החוק</th>
+            <th>פעולת המערכת</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">אין הנחה כלל</td>
+            <td>5% (₪450)</td>
+            <td>השגה מלאה על ₪450</td>
+          </tr>
+          <tr>
+            <td class="name">הנחה חלקית — 3% (₪270)</td>
+            <td>5% (₪450)</td>
+            <td><strong style="color:var(--accent-deep)">השגה על ההפרש — ₪180</strong></td>
+          </tr>
+          <tr>
+            <td class="name">הנחה מלאה — 5% (₪450)</td>
+            <td>5% (₪450)</td>
+            <td>אין מה להגיש</td>
+          </tr>
+          <tr>
+            <td class="name">הנחה חורגת — 7% (₪630)</td>
+            <td>5% (₪450)</td>
+            <td>אין מה להגיש (העירייה הטיבה)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <span class="label">למה זה חשוב</span>
+        זה לא תרחיש נדיר. עיריות לעיתים מעניקות הנחה <strong>בשיעור ישן</strong> (לפני שהחוק עודכן), או <strong>על תקופה חלקית</strong> (רק חצי שנה במקום שנה מלאה), או <strong>על קומפוננטה אחת</strong> (רק על הדירה ולא על החניה). המערכת חייבת לבדוק את ההפרש המדויק ולא רק קיום בינארי.
+      </div>
+
+      <h3>שלושה תרחישי קצה מורכבים</h3>
+
+      <h4>תרחיש 1 — תקופה חלקית</h4>
+
+      <p>החשבון מציג הנחה אבל רק על Q1 (ינואר-מרץ). מגיע לכל השנה. המערכת מזהה זאת ומגישה השגה <strong>על שלושת הרבעונים החסרים</strong>.</p>
+
+<pre><code>// שדה period ב-ExistingDiscount הוא קריטי
+{ exists: true, percentage: 5, amount: 112.5,
+  period: '2026-Q1' }  // ← רק רבעון אחד!
+
+// המערכת מזהה שזה לא מכסה את כל השנה
+const expectedPeriod = '2026';
+if (existing.period !== expectedPeriod) {
+  // השגה על התקופה החסרה
+  return new PartialPeriodAppealStrategy(
+    module, lastBill,
+    missingPeriods: ['Q2', 'Q3', 'Q4']
+  );
+}</code></pre>
+
+      <h4>תרחיש 2 — הנחות מצטברות</h4>
+
+      <p>בחשבון יש הנחת מילואים <strong>וגם</strong> הנחת אזרח ותיק (למילואימניק שהוא גם בן 65+). המערכת חייבת לפצל את ההנחות, להבין מה כל אחת מכסה, ולוודא שכל אחת מהן בשיעור הנכון.</p>
+
+<pre><code>// analyzeBill מחזיר מערך, לא אובייקט יחיד
+const discounts = await analyzeBill(lastBill);
+// [
+//   { type: 'miluim',  pct: 5, amount: 450 },
+//   { type: 'elderly', pct: 25, amount: 2250 },
+// ]
+
+// בודקים כל אחת בנפרד מול המודול שלה
+for (const expected of entitledDiscounts) {
+  const matching = discounts.find(d =&gt;
+    d.type === expected.type
+  );
+
+  if (!matching) {
+    // הנחה חסרה לחלוטין
+    appealsToFile.push(new MissingDiscountAppeal(expected));
+  } else if (matching.amount &lt; expected.amount) {
+    // הנחה חלקית
+    appealsToFile.push(new PartialDiscountAppeal(
+      expected, matching
+    ));
+  }
+}</code></pre>
+
+      <div class="callout">
+        <span class="label">חשוב לדעת</span>
+        בחלק מהזכויות יש <strong>איסור צבירה</strong> — אי אפשר לצרף שתי הנחות יחד. המודול מסמן זאת בשדה <code>stackable: false</code>. במקרה כזה, המערכת מציעה למשתמש את ההנחה הגבוהה יותר ולא מנסה לצרף.
+      </div>
+
+      <h4>תרחיש 3 — הפסקה באמצע השנה</h4>
+
+      <p>החשבון של Q1 כלל הנחת מילואים. החשבון של Q2 — לא. הרשות לא הסבירה למה. ייתכן שהיא חשבה שתעודת המילואים פגה (אבל היא בתוקף). ייתכן שהיא טעתה. בכל מקרה — המערכת חייבת לזהות את הירידה הפתאומית ולפעול.</p>
+
+<pre><code>// השוואה בין רבעונים
+const billsByQuarter = await getQuarterlyBills(twin, 2026);
+//   Q1: { miluim: 112.5 }   ← היה
+//   Q2: { miluim: 0 }        ← אין!
+//   Q3: { miluim: 0 }
+//   Q4: { miluim: 0 }
+
+const dropDetected = detectDiscountDrop(billsByQuarter);
+if (dropDetected) {
+  // הליך ייחודי - בקשה רשמית להסבר + השגה
+  return new SuddenDropAppealStrategy({
+    module,
+    lastQuarterWithDiscount: 'Q1',
+    affectedQuarters: ['Q2', 'Q3', 'Q4'],
+    requestExplanation: true
+  });
+}</code></pre>
+
+      <p>במקרה הזה, ההגשה כוללת לא רק בקשה לחזרת ההנחה אלא גם <strong>בקשה רשמית להסבר</strong> מהעירייה (לפי חוק חופש המידע). זה יוצר לחץ על הרשות לבסס את החלטתה.</p>
+
+      <div class="callout signal">
+        <span class="label">תובנה אסטרטגית</span>
+        <strong>שלושת התרחישים האלה הם איפה ה-AI באמת מצדיק את עצמו.</strong> אזרח רגיל לא היה מזהה אותם — הוא היה רואה "יש הנחה" ומסיים שם. ה-Vision LLM שלנו, בשילוב עם השוואה בין רבעונים והבנה משפטית של הקטגוריות, חושף בדיוק את המקרים שעירייה "מסתירה". זה גם הכלי המסחרי החזק ביותר: <em>"בדקתי את 4 חשבונות הארנונה האחרונים שלך וגיליתי הפרש של ₪890 שמגיע לך."</em>
+      </div>
+
+      <h3>איך <code>analyzeBill</code> ו-<code>computeEntitled</code> עובדים</h3>
+
+<pre><code>// shared/services/BillAnalyzer.ts
+
+async function analyzeBill(
+  bill: Document, moduleSlug: string
+): Promise&lt;ExistingDiscount&gt; {
+  // Claude Vision מחלץ את כל סעיפי ההנחה מהחשבון
+  const lineItems = await claudeVision.extract(bill, {
+    schema: BillLineItemsSchema
+  });
+
+  // סינון לפי סוג ההנחה הרלוונטי למודול
+  const relevant = lineItems.filter(item =&gt;
+    matchesDiscountType(item, moduleSlug)
+  );
+
+  if (relevant.length === 0) return { exists: false };
+
+  return {
+    exists: true,
+    percentage: relevant[0].discountPct,
+    amount: relevant[0].discountAmount,
+    period: relevant[0].coveredPeriod,
+    rawText: relevant[0].rawDescription
+  };
+}
+
+function computeEntitled(
+  twin: DigitalTwin, module: RightModule
+): EntitledDiscount {
+  // המנוע של החישוב לפי הנוסחה שב-RightModule
+  const baseAmount = twin.arnona.annualBill;
+  const policy = module.policyOverrides[twin.municipality];
+  const rate = policy?.ratePercentage ?? module.calculation.rate;
+
+  return {
+    percentage: rate * 100,
+    amount: baseAmount * rate,
+    period: getCurrentTaxYear()
+  };
+}</code></pre>
+
+      <h3>אסטרטגיה מומלצת — לרוב המקרים</h3>
+
+      <p>ברוב הזמן <strong>מסלול ההשגה הוא העדיף</strong>, מסיבה אחת מרכזית: למשתמש שמגיע אלינו, יש כבר ככל הנראה חשבון ארנונה (כולם משלמים). אז הסבירות שיש לו חשבון בלי ההנחה היא גבוהה. <strong>אנחנו מציעים לו השגה רטרואקטיבית</strong> — שתחזיר לו לא רק את הנחת השנה הנוכחית אלא גם נסיגה אחורה (תלוי בעירייה, בדרך כלל עד שנה או שנתיים).</p>
+
+      <div class="callout signal">
+        <span class="label">מסר שיווקי</span>
+        זה גם המסר העוצמתי יותר ללקוח: <em>"אתה משלם כבר 3 שנים בלי הנחה? בוא נשגיב על החשבונות הקודמים. ייתכן שתקבל גם החזר רטרואקטיבי של ₪1,500 בנוסף להנחה השוטפת."</em>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q9 ============ -->
+  <section class="qa" id="q9">
+    <div class="qa-header">
+      <div class="qa-num">09<small>QUESTION</small></div>
+      <div class="qa-question"><h2>שעון אישור־שתיקה — איך מתוכנן המימוש?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>זה הלב של ה-Claim Agent. המימוש מבוסס על שילוב של <strong>BullMQ delayed jobs</strong> + <strong>State Machine מפורש</strong> + <strong>audit log חתום זמנית</strong>.</p>
+
+      <h3>הזרימה</h3>
+
+      <div class="shape-flow">
+        <div class="shape">
+          <div class="arrow">←</div>
+          <div class="text"><strong>T+0:</strong> ההשגה נשלחה לרשות. נשמר timestamp + מספר אסמכתא במערכת.</div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape alt">
+          <div class="arrow">←</div>
+          <div class="text"><strong>T+0 (אותו רגע):</strong> נוצר BullMQ job עם <code>delay: 60 * 24 * 3600 * 1000</code> מילישניות.</div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape alt">
+          <div class="arrow">←</div>
+          <div class="text"><strong>T+1 עד T+59:</strong> מצב <code>FOLLOWUP</code>. כל 14 יום בודקים סטטוס בפורטל / מייל.</div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape danger">
+          <div class="arrow">⚡</div>
+          <div class="text"><strong>T+60:</strong> ה-job מתעורר. בודק: האם הרשות ענתה? אם לא — מצב משתנה ל-<code>SILENT_APPROVAL_TRIGGERED</code>.</div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape">
+          <div class="arrow">←</div>
+          <div class="text"><strong>T+61:</strong> מערכת שולחת מכתב רשמי לרשות: <em>"בהתאם לתקנה 3ו(ה), השגתנו מתאריך X נחשבת כמתקבלת. אנא עדכנו את הרישומים."</em></div>
+        </div>
+      </div>
+
+      <h3>קוד מפושט</h3>
+
+<pre><code>// server/queues/silentApprovalQueue.ts
+
+const queue = new Queue('silent-approval', { connection: redis });
+
+// בעת SUBMITTED, יוצרים job
+async function onClaimSubmitted(claim: ClaimCase) {
+  await queue.add(
+    'check-silent-approval',
+    { claimId: claim.id },
+    { delay: 60 * 24 * 60 * 60 * 1000 } // 60 ימים
+  );
+}
+
+// כשה-job מתעורר
+queue.process('check-silent-approval', async (job) =&gt; {
+  const claim = await ClaimRepo.findById(job.data.claimId);
+
+  if (claim.status === 'APPROVED' || claim.status === 'REJECTED') {
+    return; // הרשות כבר ענתה - לא רלוונטי
+  }
+
+  // הרשות שתקה!
+  await claim.transitionTo('SILENT_APPROVAL_TRIGGERED', {
+    triggeredAt: new Date(),
+    legalBasis: 'תקנה 3ו(ה)',
+    daysWithoutResponse: 60
+  });
+
+  await sendSilentApprovalLetter(claim);
+  await notifyUser(claim, 'silent_approval');
+});</code></pre>
+
+      <h3>מה אם הרשות מבקשת הארכה?</h3>
+
+      <p>החוק מאפשר לרשות הארכה של 30 יום נוספים (סה"כ 90), בכפוף להודעה מנומקת. אם הגיעה הודעת הארכה, ה-job הקודם מתבטל ונוצר חדש עם delay של 90 יום מ-T+0.</p>
+
+<pre><code>async function onExtensionGranted(claim: ClaimCase) {
+  // בטל את ה-job של 60 יום
+  await queue.removeJobs(`silent-${claim.id}`);
+
+  // צור חדש עם 90 יום
+  await queue.add('check-silent-approval',
+    { claimId: claim.id },
+    {
+      delay: 90 * 24 * 60 * 60 * 1000,
+      jobId: `silent-${claim.id}-extended`
+    }
+  );
+
+  await claim.recordExtension();
+}</code></pre>
+
+      <div class="timer-viz">
+        <div class="timer-num">60-90<small>ימים</small></div>
+        <p>השעון פועל ב-Redis ולא במסד. <strong>הוא לא יישן בנפילה.</strong> אם השרת קורס — BullMQ יודע להמשיך מאיפה שעצר.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q10 ============ -->
+  <section class="qa" id="q10">
+    <div class="qa-header">
+      <div class="qa-num">10<small>QUESTION</small></div>
+      <div class="qa-question"><h2>רישום מאגר ומינוי DPO — איך בפועל?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>לפי <strong>חוק הגנת הפרטיות התשמ"א-1981</strong> ו<strong>תקנות הגנת הפרטיות (אבטחת מידע) תשע"ז-2017</strong>, מי שמנהל מאגר מידע אישי חייב ברישום ובסטנדרטים מוגדרים. הנה התהליך המלא.</p>
+
+      <h3>שלב 1 — רישום המאגר</h3>
+
+      <ol class="q-list">
+        <li><strong>זיהוי המאגר.</strong> "מאגר נתוני לקוחות מלאך הזכויות" — מכיל ת.ז, שם, כתובת, סטטוס מילואים/אזרח ותיק, חשבונות ארנונה, התכתבויות עם רשויות. <em>זה מאגר שמכיל מידע רגיש לפי החוק (פרט לבריאות).</em></li>
+
+        <li><strong>הגשת בקשה לרישום.</strong> טופס מקוון באתר רשם מאגרי המידע (ברשות הגנת הפרטיות, משרד המשפטים). מילוי: סוג מאגר, מטרת השימוש, מקורות המידע, אופן השמירה, אופן ההעברה.</li>
+
+        <li><strong>שלם אגרה ויקבלת מספר רישום.</strong> אגרה שנתית. אחרי הרישום, חובה לציין את מספר המאגר בכל פנייה ללקוח (במדיניות הפרטיות באתר).</li>
+
+        <li><strong>חידוש שנתי.</strong> אם יש שינויים מהותיים (מטרות חדשות, סוגי נתונים נוספים) — חובה לעדכן.</li>
+      </ol>
+
+      <h3>שלב 2 — מינוי DPO (Data Protection Officer)</h3>
+
+      <p>חובת מינוי DPO חלה על מאגרים גדולים (מעל 10,000 אנשים) או על מאגרים שמטפלים במידע רגיש במיוחד. במקרה שלנו — סביר שזה יהיה רלוונטי תוך שנה ראשונה.</p>
+
+      <ol class="q-list">
+        <li><strong>בחירת אדם.</strong> ה-DPO צריך להיות עצמאי — לא חבר הנהלה. יכול להיות חיצוני (יועץ פרטיות במשרת חלקית) או פנימי. בעלות נמוכה: יועץ פרטיות חיצוני ב-₪2,000-4,000 לחודש.</li>
+
+        <li><strong>מתן סמכויות.</strong> ל-DPO יש גישה לכל הנתונים, סמכות לדרוש תיקונים, ויכולת להגיש דוחות ישירות לרשות הפרטיות.</li>
+
+        <li><strong>פרסום פרטים.</strong> שם וכתובת מייל של ה-DPO מתפרסמים באתר תחת מדיניות הפרטיות, ומסופקים לכל לקוח שדורש.</li>
+
+        <li><strong>ביצוע ביקורות תקופתיות.</strong> כל 12 חודשים, ה-DPO מבצע audit פנימי וכותב דוח להנהלה.</li>
+      </ol>
+
+      <h3>שלב 3 — סטנדרטי האבטחה הנדרשים</h3>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>חובה</th>
+            <th>מימוש בפלטפורמה</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">הצפנה במנוחה</td>
+            <td>PostgreSQL + S3 = AES-256 ברירת מחדל. גם backups מוצפנים.</td>
+          </tr>
+          <tr>
+            <td class="name">הצפנה בתעבורה</td>
+            <td>HTTPS בלבד (TLS 1.3). HSTS preload. אין כניסה ב-HTTP.</td>
+          </tr>
+          <tr>
+            <td class="name">בקרת גישה</td>
+            <td>JWT + refresh tokens. 2FA חובה ל-Operators. RBAC ברמת שאילתה.</td>
+          </tr>
+          <tr>
+            <td class="name">audit log</td>
+            <td>טבלת <code>access_log</code> — כל גישה ל-Twin של משתמש מתועדת: מי, מתי, מה ראה, מאיזה IP.</td>
+          </tr>
+          <tr>
+            <td class="name">נוהל מחיקה</td>
+            <td>endpoint <code>POST /me/delete</code> — מוחק את כל הנתונים תוך 30 יום, עם רישום מבצע המחיקה.</td>
+          </tr>
+          <tr>
+            <td class="name">ניהול תקריות</td>
+            <td>נוהל כתוב לתקריות אבטחה. דיווח לרשות הפרטיות תוך 24 שעות במקרה של דליפה.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>שלב 4 — מדיניות פרטיות וכתב הסכמה</h3>
+
+      <p>בכל שיחה ראשונה עם משתמש חדש, ה-AI Intake מציג את מדיניות הפרטיות בצורה מקוצרת: <em>"כדי לסייע לך, אצטרך לאסוף ת.ז וכמה פרטים נוספים. הנתונים מאוחסנים מאובטחים ומשמשים רק להגשת זכויות בשמך. תוכל למחוק אותם בכל זמן. המסכים?"</em></p>
+
+      <p>ההסכמה נשמרת ב-DB עם timestamp + IP + גרסת מדיניות הפרטיות שהוצגה. כל שינוי במדיניות = הסכמה מחודשת.</p>
+
+      <div class="callout warn">
+        <span class="label">חשוב להבין</span>
+        ה<strong>לקוח</strong> (אלימלך שחר בן ארי) הוא <strong>בעל המאגר</strong> מבחינה משפטית. BizTechoff היא הספק הטכנולוגי. הרישום ברשם מאגרי המידע מתבצע ע"י הלקוח. BizTechoff מספקת את התשתית, אבל ההגשה הפורמלית והתשלום השנתי הם באחריות הלקוח. זה נרשם בתנאי ההצעה.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q11 ============ -->
+  <section class="qa" id="q11">
+    <div class="qa-header">
+      <div class="qa-num">11<small>QUESTION</small></div>
+      <div class="qa-question"><h2>איך מסומן הגבול לעו"ד אנושי?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>ההגשה האוטומטית של בקשות והשגות מנהליות לא נחשבת לייצוג משפטי. אבל יש שלבים בהם <strong>חובה</strong> שעו"ד אנושי יטפל. כל מודול זכות מסמן את הגבולות הללו במפורש, וה-Claim Agent עוצר אוטומטית כשמגיע אליהם.</p>
+
+      <h3>סימון בתוך מודול הזכות</h3>
+
+<pre><code>// בתוך RightModule
+{
+  appealMechanics: {
+    steps: [
+      {
+        order: 1,
+        nameHe: 'השגה למנהל הארנונה',
+        toEntity: 'municipality_treasurer',
+        autoHandled: true,             // ← אוטונומי
+        deadlineDaysFromTrigger: 90
+      },
+      {
+        order: 2,
+        nameHe: 'ערעור לוועדת הערר',
+        toEntity: 'municipal_appeal_committee',
+        autoHandled: true,             // ← אוטונומי, אבל זהיר
+        requiresLawyerNotification: true,  // ← מודיע לעו"ד
+        deadlineDaysFromTrigger: 30
+      },
+      {
+        order: 3,
+        nameHe: 'עתירה לבית המשפט לעניינים מינהליים',
+        toEntity: 'administrative_court',
+        autoHandled: false,            // ← חובה עו"ד
+        requiresHumanLawyer: true,
+        deadlineDaysFromTrigger: 45
+      }
+    ]
+  }
+}</code></pre>
+
+      <h3>הגבולות בפועל</h3>
+
+      <div class="pipeline">
+        <div class="p-step">
+          <div class="step-mark">1</div>
+          <div>
+            <h4>השגה ראשונה למנהל הארנונה — אוטונומי</h4>
+            <p>הליך מנהלי טהור. המערכת מטפלת מקצה לקצה. אין צורך בעו"ד אנושי. ה-flag <code>autoHandled: true</code>.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">2</div>
+          <div>
+            <h4>ערעור לוועדת הערר — אוטונומי + התראה</h4>
+            <p>גם זה הליך מנהלי, ה-Claim Agent יכול להגיש את הערעור. אבל ה-flag <code>requiresLawyerNotification: true</code> מפעיל מנגנון: עו"ד הליווי של המערכת מקבל התראה ויכול להעיף מבט. זה הליך כמעט אוטונומי, עם <strong>אופציית escape hatch</strong>.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">3</div>
+          <div>
+            <h4>עתירה לבית משפט — חובה עו"ד אנושי</h4>
+            <p>פה המערכת <strong>עוצרת לחלוטין</strong>. ה-flag <code>requiresHumanLawyer: true</code> חוסם את ה-Claim Agent מלהמשיך. במקום זאת, מתבצעות הפעולות הבאות:</p>
+
+            <ul style="margin:0.7rem 0 0;padding-right:1.2rem;font-size:0.93rem;line-height:1.7">
+              <li>נשלחת הודעה למשתמש: <em>"התיק שלך הגיע לשלב שבו יש לפנות לבית משפט. זה דורש ייצוג משפטי. אנו ממליצים על עו"ד הבאים:..."</em></li>
+              <li>נוצר תיעוד מלא של ההתכתבויות עד כה, מאוחסן ב-S3, וניתן להעביר לעו"ד.</li>
+              <li>נשלחת הודעה ל-Operator שמסמנת את התיק כ-<code>HUMAN_LAWYER_REQUIRED</code>.</li>
+              <li>שעון אישור־שתיקה נעצר עד שמתקבלת הודעה על המשך הליכים.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3>מטריצת הגבול — לפי סוג פעולה</h3>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>פעולה</th>
+            <th class="center">אוטונומי</th>
+            <th class="center">חובת התראה</th>
+            <th class="center">חובת עו"ד</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>בקשת הנחה ראשונה</td><td class="check">✓</td><td class="x">—</td><td class="x">—</td></tr>
+          <tr><td>השגה למנהל הארנונה</td><td class="check">✓</td><td class="x">—</td><td class="x">—</td></tr>
+          <tr><td>הצהרת אישור־שתיקה</td><td class="check">✓</td><td class="x">—</td><td class="x">—</td></tr>
+          <tr><td>תזכורת רשמית לרשות</td><td class="check">✓</td><td class="x">—</td><td class="x">—</td></tr>
+          <tr><td>ערעור לוועדת ערר</td><td class="check">✓</td><td class="check">✓</td><td class="x">—</td></tr>
+          <tr><td>פנייה לנציב תלונות</td><td class="check">✓</td><td class="check">✓</td><td class="x">—</td></tr>
+          <tr><td>עתירה מינהלית</td><td class="x">—</td><td class="x">—</td><td class="check">✓</td></tr>
+          <tr><td>הגשת תביעה אזרחית</td><td class="x">—</td><td class="x">—</td><td class="check">✓</td></tr>
+          <tr><td>ערעור לבית המשפט המחוזי</td><td class="x">—</td><td class="x">—</td><td class="check">✓</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout signal">
+        <span class="label">המסר המהותי</span>
+        המערכת <strong>לא חוצה את הגבול</strong>. היא בנויה כך שלא תוכל לחצות אותו גם אם מישהו ינסה. זה ההגנה המשפטית של המוצר — אנחנו לא מתחזים לעו"ד, ולא מבצעים ייצוג. אנחנו מנהלים מקצה לקצה את ההליכים המנהליים, ובמקום הנכון — מעבירים בכבוד לעו"ד אנושי.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Q12 ============ -->
+  <section class="qa" id="q12">
+    <div class="qa-header">
+      <div class="qa-num">12<small>QUESTION</small></div>
+      <div class="qa-question"><h2>ערעור אוטומטי לאחר דחייה — איך זה עובד?</h2></div>
+    </div>
+    <div class="qa-body">
+      <p>דחייה <strong>אינה סוף הדרך</strong>. החוק הישראלי מעניק שלוש שכבות של ערעור על החלטות בנושאי ארנונה, שתיים מהן <strong>אוטונומיות לחלוטין</strong> ולא דורשות עו"ד אנושי. ה-Claim Agent יודע לזהות דחייה, לנתח את הנימוק שלה, ולהפעיל את שכבת הערעור הנכונה אוטומטית.</p>
+
+      <h3>שכבות הערעור — היררכיה משפטית</h3>
+
+      <div class="shape-flow">
+        <div class="shape">
+          <div class="arrow">←</div>
+          <div class="text"><strong>השגה ראשונה</strong> — מנהל הארנונה (אוטונומי). <em>אם נדחתה →</em></div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape alt">
+          <div class="arrow">←</div>
+          <div class="text"><strong>שכבה 1 — ערר לוועדת ערר.</strong> ועדת ערר עירונית, הליך מנהלי. <em>30 יום מקבלת הדחייה. אוטונומי, עם התראה לעו"ד.</em></div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape alt">
+          <div class="arrow">←</div>
+          <div class="text"><strong>שכבה 2 — נציב תלונות הציבור.</strong> פנייה מקבילה. <em>ללא דדליין מחייב, אוטונומי.</em></div>
+        </div>
+        <div class="shape-arrow">▼</div>
+        <div class="shape danger">
+          <div class="arrow">⚡</div>
+          <div class="text"><strong>שכבה 3 — עתירה לבית משפט מינהלי.</strong> <em>45 יום מהחלטת ועדת הערר. חובה עו"ד אנושי.</em></div>
+        </div>
+      </div>
+
+      <h3>הזרימה האוטומטית — בעת דחייה</h3>
+
+      <div class="pipeline">
+        <div class="p-step">
+          <div class="step-mark">1</div>
+          <div>
+            <h4>זיהוי הדחייה</h4>
+            <p>תשובת הרשות מגיעה (במייל / בפורטל). Claude API מנתח את הטקסט ומסווג: <code>{ type: 'REJECTED', reason: '...', citedRegulation: '...' }</code>. סוג הסיבה משפיע על אסטרטגיית הערעור.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">2</div>
+          <div>
+            <h4>ניתוח עילת הדחייה</h4>
+            <p>ה-Claude מסווג את הסיבה לאחת מ-5 קטגוריות: <strong>חוסר מסמך</strong> (אפשר להשלים ולהגיש מחדש), <strong>פרשנות שגויה של החוק</strong> (ערעור משפטי), <strong>סיבה פרוצדורלית</strong> (ניתן לתקן), <strong>חריגת סמכות</strong> (פנייה לנציב), <strong>סיבה מהותית</strong> (יידרש בית משפט).</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">3</div>
+          <div>
+            <h4>הצעה למשתמש</h4>
+            <p>ה-AI שולח הודעה: <em>"קיבלתי את התשובה מהעירייה. הם דחו בנימוק X. לדעתי הדחייה לא מוצדקת כי Y. אני יכול להגיש ערר לוועדת הערר תוך 30 יום — להמשיך?"</em></p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">4</div>
+          <div>
+            <h4>הכנת מסמך הערר</h4>
+            <p>אם המשתמש מאשר, Claude מכין כתב ערר עם מבנה משפטי מקובל: עובדות, רקע משפטי, נימוקי הערר, ובקשה. כל ההתכתבויות הקודמות מצורפות כראיה.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">5</div>
+          <div>
+            <h4>חתימת עו"ד הליווי</h4>
+            <p>כתב הערר עובר לעו"ד הליווי דרך Zoho Sign. <strong>זה לא ייצוג</strong> — העו"ד מאשר את התוכן ואת הניסוח. שכר טרחה: ₪150-300 לערר, מסובסד מהמסלול הבסיסי או נגבה מהמשתמש.</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="step-mark">6</div>
+          <div>
+            <h4>הגשה ושעונים מקבילים</h4>
+            <p>הערר נשלח לוועדת הערר תוך <strong>30 יום</strong> מקבלת הדחייה (זה הדדליין החוקי לעורר). מרגע שהערר התקבל, <strong>הרשות חייבת להגיב תוך 30 יום נוספים</strong> (תקנות סדרי דין בוועדת ערר, תקנה 4). חשוב לציין: <strong>אין מנגנון אישור־שתיקה לוועדת ערר</strong> — זה ייחודי להליך ההשגה הראשונה (תקנה 3ו). לכן השעון של ועדת הערר הוא <strong>שעון מעקב מנהלי</strong>, לא משפטי. ה-Claim Agent עוקב, שולח תזכורות, אבל לא יכול להכריז על "זכייה" אם הוועדה שותקת.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>מטריצת החלטה — סיבת הדחייה ↔ פעולה</h3>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>סיבת הדחייה</th>
+            <th class="center">פעולה אוטומטית</th>
+            <th class="center">דרוש עו"ד</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>חוסר מסמך / מסמך לא תקין</td>
+            <td class="center">בקשת מסמך מהמשתמש → הגשה מחודשת</td>
+            <td class="x">—</td>
+          </tr>
+          <tr>
+            <td>פרשנות שגויה של תנאי הזכאות</td>
+            <td class="center">ערר לוועדת ערר עם נימוק משפטי</td>
+            <td class="check">✓ אישור ניסוח</td>
+          </tr>
+          <tr>
+            <td>סיבה פרוצדורלית (טופס לא מלא)</td>
+            <td class="center">תיקון ישיר → הגשה מחודשת</td>
+            <td class="x">—</td>
+          </tr>
+          <tr>
+            <td>חריגת סמכות / שיהוי</td>
+            <td class="center">פנייה במקביל לנציב תלונות + ערר</td>
+            <td class="check">✓ אישור ניסוח</td>
+          </tr>
+          <tr>
+            <td>סיבה מהותית מורכבת</td>
+            <td class="center">העברה לעו"ד אנושי</td>
+            <td class="check">✓ ייצוג מלא</td>
+          </tr>
+          <tr>
+            <td>החלטת ועדת ערר נדחתה</td>
+            <td class="center">העברה לעו"ד אנושי לעתירה מינהלית</td>
+            <td class="check">✓ ייצוג מלא</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>הקוד — State Machine מורחב</h3>
+
+<pre><code>// shared/entity/ClaimCase.ts
+
+enum ClaimStage {
+  DRAFT,
+  SUBMITTED,
+  ACKNOWLEDGED,
+  FOLLOWUP,
+  SILENT_APPROVAL_TRIGGERED,
+  APPROVED,
+  REJECTED,
+  // ↓ שכבות הערעור
+  REJECTION_ANALYZED,        // Claude ניתח את הסיבה
+  APPEAL_PROPOSED,           // הוצע למשתמש
+  APPEAL_PREPARED,           // כתב הערר מוכן
+  APPEAL_LAWYER_REVIEW,      // אצל עו"ד לאישור
+  APPEAL_SUBMITTED,          // הוגש לוועדת ערר
+  APPEAL_FOLLOWUP,           // ממתין לתגובה
+  APPEAL_APPROVED,           // הערר התקבל!
+  APPEAL_REJECTED,           // הערר נדחה
+  HUMAN_LAWYER_REQUIRED,     // ↑ פה המערכת עוצרת
+  CLOSED
+}
+
+// המעבר אוטומטי בין מצבים
+function onRejection(claim: ClaimCase) {
+  const reason = claim.rejectionReason;
+  const strategy = analyzeRejection(reason);
+
+  if (strategy.requiresHumanLawyer) {
+    return claim.transitionTo('HUMAN_LAWYER_REQUIRED');
+  }
+
+  if (strategy.canRetryDirectly) {
+    return claim.transitionTo('DRAFT', { resetWithFix: true });
+  }
+
+  // ערעור אוטומטי
+  return claim.transitionTo('REJECTION_ANALYZED', {
+    appealStrategy: strategy,
+    deadlineDays: 30
+  });
+}</code></pre>
+
+      <h3>שעון דדליין הגשה — לא אישור־שתיקה</h3>
+
+      <div class="timer-viz">
+        <div class="timer-num">30<small>ימים להגשת ערר</small></div>
+        <p>מרגע קבלת הדחייה — <strong>30 יום בלבד להגיש ערר לוועדת הערר</strong>. <strong style="color:var(--accent)">זה דדליין שלילי</strong> — אם פספסת, איבדת את הזכות לערר. השעון רץ ב-BullMQ ושולח התראות למשתמש ב-T+7, T+14, ו-T+25 אם לא אישר את הערעור. <strong>חשוב להבחין:</strong> זה לא שעון אישור־שתיקה (שקיים רק בהשגה הראשונה לפי תקנה 3ו) אלא שעון שמחייב את האזרח לפעול בזמן.</p>
+      </div>
+
+      <h3>מפת כל השעונים בתהליך</h3>
+
+      <p>כדי שלא יהיה בלבול — להלן ריכוז של כל השעונים שהמערכת מנהלת לאורך מסע הזכות, מהרגע שקיבלת חשבון ארנונה ועד למימוש או להעברה לעו"ד אנושי.</p>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>שעון</th>
+            <th class="center">משך</th>
+            <th>סוג</th>
+            <th>אם פג</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>הגשת השגה למנהל הארנונה</td>
+            <td class="center">90 יום מקבלת חשבון</td>
+            <td>דדליין שלילי</td>
+            <td>איבדת זכות להשגה לאותו חשבון</td>
+          </tr>
+          <tr style="background:var(--accent-soft)">
+            <td><strong>תגובת מנהל הארנונה</strong></td>
+            <td class="center">60 יום (90 עם הארכה)</td>
+            <td><strong style="color:var(--accent-deep)">אישור־שתיקה</strong></td>
+            <td><strong style="color:var(--accent-deep)">ההשגה התקבלה אוטומטית</strong></td>
+          </tr>
+          <tr>
+            <td>הגשת ערר לוועדת ערר</td>
+            <td class="center">30 יום מקבלת דחייה</td>
+            <td>דדליין שלילי</td>
+            <td>איבדת זכות לערר</td>
+          </tr>
+          <tr>
+            <td>תגובת הרשות לוועדת ערר</td>
+            <td class="center">30 יום מקבלת הערר</td>
+            <td>שעון מנהלי</td>
+            <td>אין סנקציה אוטומטית</td>
+          </tr>
+          <tr>
+            <td>החלטת ועדת הערר</td>
+            <td class="center">אין דדליין חוקי</td>
+            <td>שעון מעקב</td>
+            <td>תזכורות + פנייה לנציב</td>
+          </tr>
+          <tr>
+            <td>ערעור לבית משפט מינהלי</td>
+            <td class="center">30 יום מהחלטת הוועדה</td>
+            <td>דדליין שלילי</td>
+            <td>איבדת זכות לערעור · נדרש עו"ד</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <span class="label">למה זה חשוב</span>
+        מבין כל השעונים, <strong>רק אחד הוא "אישור־שתיקה"</strong> — תגובת מנהל הארנונה להשגה הראשונה (60 יום). זה ה-moat המשפטי הייחודי של המוצר. בכל שאר השלבים, שתיקה של הרשות היא <strong>לא</strong> כניעה אוטומטית — היא רק עיכוב מנהלי שמצריך מעקב ולחץ. ה-Claim Agent מבין את ההבחנה הזו ומפעיל את הכלים הנכונים בכל שלב.
+      </div>
+
+      <div class="callout signal">
+        <span class="label">המשך הסיפור הרוחב</span>
+        עם תוספת שכבת הערעור, התמונה השלמה היא: <strong>השגה → תגובה → במידת הצורך ערר → תגובה → במידת הצורך נציב/בית משפט</strong>. ב-90% מהמקרים זה ייגמר ברמת ההשגה (אישור או אישור־שתיקה). ב-8% נצטרך ערר. ב-2% בלבד — עו"ד אנושי. <strong>זה הופך את המוצר לאוטונומי בכ-98% מהמקרים.</strong>
+      </div>
+
+      <h3>השפעה על המודל העסקי</h3>
+
+      <p>שכבת הערעור היא חלק מהשירות הבסיסי — לא תוספת. הלקוח שילם פעם אחת, ואם הרשות דחתה, אנחנו <strong>נלחמים בעבורו</strong> עד הסוף האוטונומי. רק במעבר לעו"ד אנושי (2% מהמקרים) — שם נדרש תשלום נוסף או הסכם נפרד.</p>
+
+      <p>זה הבדל מהותי מ"הגשה אוטומטית" של מתחרים: אצלם, דחייה = סוף הדרך. אצלנו, דחייה = <strong>תחילת הקרב</strong>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <strong>מלאך הזכויות</strong> · מסמך טכני־עסקי · BizTechoff™<br>
+    Hod HaSharon, IL · biztechoff.co.il<br>
+    Confidential · For client and legal advisor use only · 2026
+  </footer>
+
+</div>
+</body>
+</html>
