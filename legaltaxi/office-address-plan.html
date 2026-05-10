@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תכנון - "המשרד שלנו" + מחירון מעודכן</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f172a;
+    --card: #ffffff;
+    --card-soft: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-soft: #64748b;
+    --primary: #1976d2;
+    --primary-dark: #0d47a1;
+    --accent: #d32f2f;
+    --warn: #f59e0b;
+    --ok: #16a34a;
+    --purple: #7c3aed;
+    --code-bg: #f1f5f9;
+    --code-text: #0d47a1;
+    --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Rubik', 'Heebo', system-ui, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  /* HERO */
+  header.hero {
+    background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 50%, #1976d2 100%);
+    color: #fff;
+    padding: 44px 38px;
+    border-radius: 22px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 50%),
+      radial-gradient(circle at bottom left, rgba(255,255,255,0.08), transparent 50%);
+  }
+  header.hero h1 { font-size: 2.1rem; font-weight: 800; margin-bottom: 10px; position: relative; }
+  header.hero .subtitle { font-size: 1.05rem; opacity: 0.95; position: relative; max-width: 900px; }
+  header.hero .meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; position: relative; }
+  header.hero .meta span {
+    background: rgba(255,255,255,0.2);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(6px);
+  }
+  header.hero .badge-plan { background: #fbbf24 !important; color: #78350f !important; font-weight: 700; }
+
+  /* SECTIONS */
+  section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  section h2 {
+    font-size: 1.55rem;
+    color: var(--primary-dark);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h3 { font-size: 1.1rem; color: var(--primary); margin: 18px 0 10px; }
+  section h4 { font-size: 1rem; color: var(--purple); margin: 14px 0 8px; }
+  section p { margin-bottom: 10px; }
+  section ul { margin: 8px 0; padding-right: 22px; }
+  section li { margin-bottom: 4px; }
+
+  code, .code {
+    background: var(--code-bg);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
+    font-size: 0.88em;
+    color: var(--code-text);
+    direction: ltr;
+    display: inline-block;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 18px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    direction: ltr;
+    text-align: left;
+    margin: 12px 0;
+  }
+  pre .k { color: #93c5fd; }
+  pre .s { color: #86efac; }
+  pre .c { color: #94a3b8; font-style: italic; }
+  pre .t { color: #fbbf24; }
+  pre .f { color: #f472b6; }
+  pre .n { color: #fca5a5; }
+
+  /* File pill */
+  .file-pill {
+    display: inline-block;
+    background: var(--card-soft);
+    border-right: 3px solid var(--primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.83rem;
+    direction: ltr;
+    margin: 4px 0;
+  }
+
+  /* BIG STEP CARDS */
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+  .step-header {
+    padding: 14px 22px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .step-header.purple { background: linear-gradient(135deg, #5b21b6, #7c3aed); }
+  .step-header.green  { background: linear-gradient(135deg, #14532d, #16a34a); }
+  .step-header.amber  { background: linear-gradient(135deg, #92400e, #d97706); }
+  .step-header .num {
+    background: rgba(255,255,255,0.25);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .step-header h3 { color: #fff !important; margin: 0 !important; font-size: 1.15rem; }
+  .step-header .file-tag {
+    background: rgba(0,0,0,0.22);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.74rem;
+    direction: ltr;
+  }
+  .step-body { padding: 20px 22px; }
+
+  /* DIFF */
+  .diff {
+    margin: 12px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .diff-header {
+    background: var(--card-soft);
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--border);
+  }
+  .diff-row {
+    padding: 6px 14px;
+    font-family: monospace;
+    font-size: 0.84rem;
+    direction: ltr;
+    text-align: left;
+    white-space: pre-wrap;
+  }
+  .diff-add { background: #dcfce7; color: #14532d; border-right: 4px solid var(--ok); }
+  .diff-del { background: #fee2e2; color: #7f1d1d; border-right: 4px solid var(--accent); text-decoration: line-through; }
+  .diff-ctx { background: #fff; color: var(--text-soft); }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  thead { background: var(--primary-dark); color: #fff; }
+  th, td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+  tbody tr:nth-child(even) { background: var(--card-soft); }
+  tbody tr:hover { background: #eff6ff; }
+  td.code-cell { font-family: monospace; direction: ltr; text-align: left; font-size: 0.84rem; }
+  td.price { font-weight: 700; color: var(--primary-dark); direction: ltr; text-align: right; }
+
+  /* ALERTS */
+  .alert {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-right: 4px solid;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .alert.warn { background: #fef3c7; border-color: var(--warn); color: #78350f; }
+  .alert.danger { background: #fee2e2; border-color: var(--accent); color: #7f1d1d; }
+  .alert.info { background: #dbeafe; border-color: var(--primary); color: #1e3a8a; }
+  .alert.ok { background: #dcfce7; border-color: var(--ok); color: #14532d; }
+  .alert.purple { background: #ede9fe; border-color: var(--purple); color: #5b21b6; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    margin: 0 4px;
+  }
+  .badge-new  { background: #dcfce7; color: #14532d; }
+  .badge-edit { background: #fef3c7; color: #78350f; }
+  .badge-fix  { background: #fee2e2; color: #7f1d1d; }
+  .badge-rule { background: #ede9fe; color: #5b21b6; }
+
+  /* TREE */
+  .tree {
+    font-family: monospace;
+    font-size: 0.9rem;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 18px 22px;
+    border-radius: 10px;
+    direction: ltr;
+    text-align: left;
+    line-height: 1.85;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  .tree .new { color: #86efac; font-weight: 700; }
+  .tree .edit { color: #fbbf24; font-weight: 700; }
+  .tree .same { color: #94a3b8; }
+  .tree .label { color: #f472b6; }
+
+  /* FLOW */
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch;
+    margin: 18px 0;
+  }
+  .flow-step {
+    flex: 1 1 200px;
+    background: var(--card-soft);
+    border: 1px solid var(--border);
+    border-right: 4px solid var(--primary);
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .flow-step .num {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    margin-left: 8px;
+  }
+  .flow-step.alt { border-right-color: var(--purple); }
+  .flow-step.alt .num { background: var(--purple); }
+  .flow-step.ok { border-right-color: var(--ok); }
+  .flow-step.ok .num { background: var(--ok); }
+  .flow-step.warn { border-right-color: var(--warn); }
+  .flow-step.warn .num { background: var(--warn); }
+
+  /* MOCKUPS */
+  .mockup-wrap {
+    background: #f1f5f9;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+  }
+  .mock-dialog {
+    background: #fff;
+    max-width: 520px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mock-dialog .title {
+    background: var(--primary-dark);
+    color: #fff;
+    padding: 12px 22px;
+    font-size: 1.05rem;
+    text-align: center;
+    font-weight: 700;
+  }
+  .mock-dialog .hint {
+    background: #fef3c7;
+    color: #78350f;
+    padding: 10px 22px;
+    font-size: 0.92rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .mock-body { padding: 18px 22px; }
+  .mock-field {
+    background: var(--card-soft);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+  }
+  .mock-field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .mock-field-row .label-mini { font-size: 0.78rem; color: var(--text-soft); width: 60px; }
+  .mock-field-row input.fake {
+    flex: 1;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.9rem;
+    direction: ltr;
+  }
+  .icon-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .icon-circle.verified { background: #dcfce7; color: var(--ok); }
+  .icon-circle.unverified { background: #fee2e2; color: var(--accent); animation: pulse 1.2s ease-in-out infinite; }
+  .icon-circle.disabled { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; }
+  .icon-circle.edit { background: #dbeafe; color: var(--primary); }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .field-msg {
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .mock-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--card-soft);
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .btn { padding: 8px 18px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; border: none; }
+  .btn-primary { background: var(--primary); color: #fff; font-weight: 700; }
+  .btn-primary:disabled { background: #cbd5e1; cursor: not-allowed; }
+  .btn-flat { background: transparent; color: var(--text-soft); }
+
+  /* CHECKBOX MOCKUP */
+  .mock-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    color: #3730a3;
+    font-weight: 600;
+    margin: 6px 0;
+  }
+  .mock-checkbox.checked { background: #1976d2; color: #fff; border-color: var(--primary-dark); }
+
+  footer {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 24px 0 8px;
+    font-size: 0.85rem;
+  }
+  footer .sig { color: var(--primary-dark); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>🏢 "המשרד שלנו" + תמחור מבוסס משרד</h1>
+    <p class="subtitle">תכנון מלא לפיצ'ר חדש בפרטי הזמנה: checkbox "מהמשרד שלנו / למשרד שלנו", זרימת אימות פרטי לקוח, השתלת כתובת אוטומטית, ועדכון קלקולטור התשלום עם כלל ה־"+30 ₪".</p>
+    <div class="meta">
+      <span class="badge-plan">📋 PLAN — אפס קוד עדיין</span>
+      <span>🛠️ Remult · Angular · Node</span>
+      <span>📁 LegalTaxi</span>
+      <span>📅 2026-05-10</span>
+      <span>👤 BizTechoff™</span>
+    </div>
+  </header>
+
+  <!-- BIG PICTURE -->
+  <section>
+    <h2>🎯 התמונה הגדולה</h2>
+
+    <p>הפיצ'ר נפרס על שלושה צירים שמשתלבים יחד:</p>
+
+    <div class="flow">
+      <div class="flow-step ok">
+        <span class="num">A</span>
+        <strong>UX</strong> — checkbox חדש בכל מקום שיש בחירת כתובת (FROM/TO) ב־<code>app-place-details</code>.
+      </div>
+      <div class="flow-step alt">
+        <span class="num">B</span>
+        <strong>Data</strong> — שדות חדשים על <code>User</code>: <code>officePlace</code> (FK ל־Place) + דגלי אימות.
+      </div>
+      <div class="flow-step warn">
+        <span class="num">C</span>
+        <strong>Pricing</strong> — חוק "+30 ₪" במנוע התשלום, חל על כל סוגי השליחות, רק כשהמשרד באחד משלושת האזורים הקרובים.
+      </div>
+    </div>
+
+    <h3>החלטות שאושרו (סיכום)</h3>
+    <table>
+      <thead><tr><th>נושא</th><th>החלטה</th></tr></thead>
+      <tbody>
+        <tr><td><code>app-place-details</code></td><td>נשאר כמו שהוא, לא מוסיפים <code>addressOnly</code>. רק מוסיפים <code>[useOurOffice]: boolean</code>.</td></tr>
+        <tr><td>תווית checkbox</td><td>"המשרד שלנו" — גנרי. ה־parent מחליט אם זה pickup/delivery.</td></tr>
+        <tr><td><code>User.officePlace</code></td><td><code>@Relations.toOne(() => Place)</code> + <code>officePlaceId: string</code></td></tr>
+        <tr><td>אימות אוטומטי מהזמנה</td><td>אם הגיע מ־order-details — נחשב מאומת. לא לעכב את הזרימה.</td></tr>
+        <tr><td>שדות בדיאלוג האימות</td><td>כתובת (חובה), אימייל (אופציונלי), נייד (אופציונלי, disabled עד SMS)</td></tr>
+        <tr><td>כפתור עריכה</td><td>✏️ ליד כל שדה — לפתיחה ידנית לעריכה</td></tr>
+        <tr><td>שדות legacy (<code>address</code>/<code>city</code>/<code>zipCode</code>)</td><td>לא מוחקים, נשארים כמות שהם</td></tr>
+        <tr><td>חוק "+30 ₪"</td><td>חל על <strong>כל</strong> סוגי השליחות, רק כשהמשרד ב־[גוש דן / שפלה קרוב / שרון קרוב]</td></tr>
+        <tr><td>multiplier על ה־30</td><td>כן, מוכפל ב־×1.5 / ×2 כמו היום בגוש דן</td></tr>
+        <tr><td>משרד באזור אחר</td><td>חישוב רגיל — כל אחד לפי האזור שלו</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section>
+    <h2>🏗️ ארכיטקטורה — עץ קבצים</h2>
+
+    <div class="tree">src/
+├─ app/
+│  ├─ common/
+│  │  ├─ email-verify-field/                  <span class="same">(קיים — ללא שינוי)</span>
+│  │  ├─ <span class="new">mobile-verify-field/                 ← חדש</span>
+│  │  ├─ <span class="edit">place-details/                       ← עריכה: +[useOurOffice]</span>
+│  │  └─ <span class="new">customer-details-validate/           ← חדש (דיאלוג)</span>
+│  │
+│  ├─ customer/
+│  │  └─ customer-details/                    <span class="same">(קיים — ללא שינוי כרגע)</span>
+│  │
+│  ├─ order/
+│  │  ├─ order-details/                       <span class="edit">← עריכה: שימוש ב־useOurOffice</span>
+│  │  └─ <span class="edit">orderPaymentCalculator.ts            ← עריכה: חוק +30 ₪</span>
+│  │
+│  ├─ service/
+│  │  ├─ customer.service.ts                  <span class="same">(קיים)</span>
+│  │  └─ <span class="new">customer-office.service.ts           ← חדש (helper)</span>
+│  │
+│  └─ users/
+│     └─ <span class="edit">user.ts                              ← עריכה: +officePlace, +דגלי אימות</span>
+│
+└─ shared/
+   └─ <span class="same">(ללא שינוי)</span>
+</div>
+
+    <div class="alert ok">
+      <span class="icon">✅</span>
+      <div>
+        <strong>3 קבצים חדשים, 4 עריכות.</strong> אפס מחיקות. הכל הרחבה — לא שבירה.
+      </div>
+    </div>
+  </section>
+
+  <!-- UX FLOW -->
+  <section>
+    <h2>🔄 זרימת UX מלאה</h2>
+
+    <h3>תרחיש 1 — לקוח מאומת (הזרימה השקופה)</h3>
+    <div class="flow">
+      <div class="flow-step ok"><span class="num">1</span>סימון <strong>☑️ המשרד שלנו</strong> ב־app-place-details</div>
+      <div class="flow-step ok"><span class="num">2</span><code>CustomerOfficeService</code> בודק: יש <code>officePlace</code>?</div>
+      <div class="flow-step ok"><span class="num">3</span>השתלת <code>officePlace</code> ב־Place הרלוונטי</div>
+      <div class="flow-step ok"><span class="num">4</span>סיום — המשתמש ממשיך</div>
+    </div>
+
+    <h3>תרחיש 2 — לקוח לא מאומת (הזרימה המלאה)</h3>
+    <div class="flow">
+      <div class="flow-step warn"><span class="num">1</span>סימון <strong>☑️ המשרד שלנו</strong></div>
+      <div class="flow-step warn"><span class="num">2</span>אין <code>officePlace</code> או לא מאומת → פתיחת דיאלוג</div>
+      <div class="flow-step alt"><span class="num">3</span>דיאלוג <code>customer-details-validate</code> נפתח עם hint</div>
+      <div class="flow-step alt"><span class="num">4</span>לקוח ממלא <strong>כתובת (חובה)</strong>, אופציונלית מאמת אימייל</div>
+      <div class="flow-step alt"><span class="num">5</span>שמירה: <code>User.officePlace</code> + <code>addressVerified</code></div>
+      <div class="flow-step ok"><span class="num">6</span>חזרה ל־order-details עם השתלה אוטומטית</div>
+    </div>
+  </section>
+
+  <!-- MOCKUPS -->
+  <section>
+    <h2>🎨 Mockups ויזואליים</h2>
+
+    <h3>1. Checkbox ב־<code>app-place-details</code></h3>
+    <div class="mockup-wrap">
+      <div style="background:#fff;padding:14px;border-radius:8px;border:1px solid var(--border);max-width:520px;margin:0 auto">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <strong style="color:var(--primary-dark)">📍 כתובת איסוף</strong>
+          <div class="mock-checkbox checked">☑ המשרד שלנו</div>
+        </div>
+        <input class="fake" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px" value="רחוב הרצל 88, תל אביב (מתוך כרטיס לקוח)" disabled>
+        <p style="font-size:0.78rem;color:var(--text-soft);margin-top:6px">ⓘ נשתל אוטומטית מהמשרד המאומת בכרטיס הלקוח</p>
+      </div>
+      <p style="text-align:center;margin-top:10px;color:var(--text-soft);font-size:0.88rem">כשה־checkbox מסומן: השדה מקבל את כתובת המשרד ונעול. ביטול → השדה משתחרר.</p>
+    </div>
+
+    <h3>2. דיאלוג <code>customer-details-validate</code></h3>
+    <div class="mockup-wrap">
+      <div class="mock-dialog">
+        <div class="title">אימות פרטי המשרד</div>
+        <div class="hint">⚠️ הזן את הכתובת של המשרד שלכם — נדרש להמשך ההזמנה</div>
+        <div class="mock-body">
+
+          <!-- Address -->
+          <div class="mock-field">
+            <div class="mock-field-row">
+              <span class="label-mini">📍 כתובת*</span>
+              <input class="fake" placeholder="הקלד כתובת..." value="">
+              <span class="icon-circle unverified" title="חובה">🔑</span>
+              <span class="icon-circle edit" title="עריכה">✏️</span>
+            </div>
+            <div class="field-msg">חובה — לחץ על המפתח להזין/לאמת</div>
+          </div>
+
+          <!-- Email -->
+          <div class="mock-field">
+            <div class="mock-field-row">
+              <span class="label-mini">📧 אימייל</span>
+              <input class="fake" value="moti@biztechoff.com" disabled>
+              <span class="icon-circle verified" title="מאומת">✓</span>
+              <span class="icon-circle edit" title="עריכה">✏️</span>
+            </div>
+          </div>
+
+          <!-- Mobile (disabled for now) -->
+          <div class="mock-field" style="opacity:0.6">
+            <div class="mock-field-row">
+              <span class="label-mini">📱 נייד</span>
+              <input class="fake" value="050-123-4567" disabled>
+              <span class="icon-circle disabled" title="טרם זמין">🔒</span>
+              <span class="icon-circle disabled" title="טרם זמין">✏️</span>
+            </div>
+            <div style="font-size:0.74rem;color:var(--text-soft);margin-top:4px">אימות נייד יופעל בקרוב (SMS)</div>
+          </div>
+
+        </div>
+        <div class="mock-buttons">
+          <button class="btn btn-flat">ביטול</button>
+          <button class="btn btn-primary" disabled>שמור והמשך להזמנה</button>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:10px;color:var(--text-soft);font-size:0.88rem">"שמור והמשך" — נשאר disabled עד שכתובת מאומתת קיימת.</p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section>
+    <h2>📋 שלבי ביצוע — קומפוננטה אחת בכל פעם</h2>
+
+    <!-- STEP 1 -->
+    <div class="step-card">
+      <div class="step-header purple">
+        <span class="num">1</span>
+        <h3>שינוי ישות User</h3>
+        <span class="file-tag">src/app/users/user.ts</span>
+        <span class="badge badge-edit" style="margin-right:auto">עריכה ✏️</span>
+      </div>
+      <div class="step-body">
+        <p>הוספת <code>officePlace</code> כ־FK + דגלי אימות. שמירה על כל השדות הקיימים.</p>
+        <pre><span class="c">// אחרי השדות הקיימים: address, city, zipCode</span>
+
+@<span class="t">Fields</span>.string({ <span class="f">caption</span>: <span class="s">'מזהה כתובת המשרד'</span> })
+officePlaceId = <span class="s">''</span>
+
+@<span class="t">Relations</span>.toOne(() =&gt; <span class="t">Place</span>, { <span class="f">caption</span>: <span class="s">'כתובת המשרד'</span> })
+officePlace!: <span class="t">Place</span>
+
+@<span class="t">Fields</span>.boolean({ <span class="f">caption</span>: <span class="s">'כתובת המשרד מאומתת?'</span> })
+addressVerified = <span class="t">false</span>
+
+@<span class="t">Fields</span>.boolean({ <span class="f">caption</span>: <span class="s">'נייד מאומת?'</span> })
+mobileVerified = <span class="t">false</span>
+
+<span class="c">// emailsVerified — קיים כבר ✅</span></pre>
+        <div class="alert info">
+          <span class="icon">ℹ️</span>
+          <div><strong>למה FK ולא string חדש?</strong> כי כתובת = Place מלא עם <code>x/y/area</code>, וזה מה שצריך לתמחור. רק שדה אחד לטיפול.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="num">2</span>
+        <h3>חדש: app-mobile-verify-field</h3>
+        <span class="file-tag">src/app/common/mobile-verify-field/</span>
+        <span class="badge badge-new" style="margin-right:auto">חדש ✨</span>
+      </div>
+      <div class="step-body">
+        <p>קומפוננטה אנלוגית ל־<code>app-email-verify-field</code> — כרגע <strong>במצב disabled</strong> (אייקון מנעול במקום מפתח, בלי דיאלוג).</p>
+        <p>הקומפוננטה תהיה מוכנה — ברגע שתאשר ממשק SMS, נחליף את הסטאב במנגנון אמיתי.</p>
+        <ul>
+          <li>3 קבצים: <code>.ts</code>, <code>.html</code>, <code>.scss</code></li>
+          <li>Inputs: <code>field</code>, <code>originalMobile</code>, <code>initialVerified</code>, <code>enabled = false</code></li>
+          <li>Output: <code>verifiedChange</code></li>
+          <li>UI: שדה + אייקון <code>lock</code> אפור (במקום <code>vpn_key</code>) + tooltip "אימות נייד יופעל בקרוב"</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="num">3</span>
+        <h3>חדש: customer-details-validate (דיאלוג)</h3>
+        <span class="file-tag">src/app/common/customer-details-validate/</span>
+        <span class="badge badge-new" style="margin-right:auto">חדש ✨</span>
+      </div>
+      <div class="step-body">
+        <p>דיאלוג קל-משקל שמרכז 3 שדות עם סטטוסי אימות, נפתח רק מ־order-details (לא מהתפריט הראשי).</p>
+        <h4>Inputs/Outputs:</h4>
+        <pre>args = {
+  customerId: <span class="t">string</span>,
+  hint: <span class="t">string</span>           <span class="c">// "הזן את הכתובת של המשרד שלכם"</span>
+}
+response = {
+  ok: <span class="t">boolean</span>,
+  officePlace?: <span class="t">Place</span>     <span class="c">// אם נשמר ✅</span>
+}</pre>
+        <h4>תוכן:</h4>
+        <ul>
+          <li><strong>שדה כתובת</strong> — <code>&lt;app-place-details [useContact]="false" [place]="customer.officePlace"&gt;</code></li>
+          <li><strong>שדה אימייל</strong> — <code>&lt;app-email-verify-field&gt;</code> הקיים</li>
+          <li><strong>שדה נייד</strong> — <code>&lt;app-mobile-verify-field [enabled]="false"&gt;</code></li>
+          <li>כפתור <strong>שמור והמשך להזמנה</strong> — disabled עד שכתובת מאומתת קיימת</li>
+          <li>כפתור <strong>ביטול</strong> — סוגר וחוזר ל־order-details בלי שינוי</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="num">4</span>
+        <h3>חדש: customer-office.service</h3>
+        <span class="file-tag">src/app/service/customer-office.service.ts</span>
+        <span class="badge badge-new" style="margin-right:auto">חדש ✨</span>
+      </div>
+      <div class="step-body">
+        <p>שירות קל שמרכז את הלוגיקה של "האם הלקוח מאומת? אם לא — פתח דיאלוג".</p>
+        <pre>@<span class="t">Injectable</span>({ <span class="f">providedIn</span>: <span class="s">'root'</span> })
+<span class="k">export class</span> <span class="t">CustomerOfficeService</span> {
+
+  <span class="c">/** מחזיר officePlace אם מאומת, אחרת פותח דיאלוג ומחכה */</span>
+  <span class="k">async</span> getOrVerifyOffice(customer: <span class="t">User</span>): <span class="t">Promise</span>&lt;<span class="t">Place</span> | <span class="t">null</span>&gt; {
+    <span class="k">if</span> (customer.officePlace &amp;&amp; customer.addressVerified) {
+      <span class="k">return</span> customer.officePlace
+    }
+    <span class="k">const</span> result = <span class="k">await</span> openDialog(<span class="t">CustomerDetailsValidateComponent</span>,
+      x =&gt; x.args = { customerId: customer.id, hint: <span class="s">'הזן את הכתובת של המשרד שלכם'</span> })
+    <span class="k">return</span> result?.officePlace ?? <span class="k">null</span>
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-card">
+      <div class="step-header amber">
+        <span class="num">5</span>
+        <h3>עריכה: app-place-details — הוספת useOurOffice</h3>
+        <span class="file-tag">src/app/common/place-details/place-details.component.{ts,html}</span>
+        <span class="badge badge-edit" style="margin-right:auto">עריכה ✏️</span>
+      </div>
+      <div class="step-body">
+        <p>תוספת מינימלית — Input אחד + checkbox + קריאה לשירות.</p>
+
+        <div class="diff">
+          <div class="diff-header">place-details.component.ts (הוספה לרשימת ה־@Input)</div>
+          <div class="diff-row diff-add">@Input() useOurOffice = false</div>
+          <div class="diff-row diff-add"></div>
+          <div class="diff-row diff-add">async toggleOurOffice(checked: boolean) {</div>
+          <div class="diff-row diff-add">  if (!checked) return</div>
+          <div class="diff-row diff-add">  const customer = this.place.order?.customer</div>
+          <div class="diff-row diff-add">  if (!customer) return</div>
+          <div class="diff-row diff-add">  const officePlace = await this.officeSrv.getOrVerifyOffice(customer)</div>
+          <div class="diff-row diff-add">  if (officePlace) this.applyOfficeToPlace(officePlace)</div>
+          <div class="diff-row diff-add">}</div>
+        </div>
+
+        <div class="diff">
+          <div class="diff-header">place-details.component.html (לפני שורת הכתובת)</div>
+          <div class="diff-row diff-add">&lt;mat-checkbox *ngIf="useOurOffice"</div>
+          <div class="diff-row diff-add">              [(ngModel)]="place.isOurOffice"</div>
+          <div class="diff-row diff-add">              (change)="toggleOurOffice($event.checked)"&gt;</div>
+          <div class="diff-row diff-add">  המשרד שלנו</div>
+          <div class="diff-row diff-add">&lt;/mat-checkbox&gt;</div>
+        </div>
+
+        <div class="alert info">
+          <span class="icon">💡</span>
+          <div><strong>הצעה:</strong> שדה <code>isOurOffice</code> חדש על <code>Place</code> (boolean) — מאפשר לזכור את הסימון בהזמנה. <em>אישור נדרש להוספה ל־Place.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step-card">
+      <div class="step-header amber">
+        <span class="num">6</span>
+        <h3>עריכה: order-details — שימוש ב־useOurOffice</h3>
+        <span class="file-tag">order-details.component.html</span>
+        <span class="badge badge-edit" style="margin-right:auto">עריכה ✏️</span>
+      </div>
+      <div class="step-body">
+        <p>הוספת <code>[useOurOffice]="true"</code> ל־<code>fromPlace</code> ול־<code>toPlaces</code>. <strong>לא</strong> ל־court/locate.</p>
+
+        <div class="diff">
+          <div class="diff-header">שורה ~657 (fromPlace)</div>
+          <div class="diff-row diff-del">&lt;app-place-details [useContact]="true" [place]="order.fromPlace" ...&gt;</div>
+          <div class="diff-row diff-add">&lt;app-place-details [useContact]="true" [useOurOffice]="true" [place]="order.fromPlace" ...&gt;</div>
+        </div>
+
+        <div class="diff">
+          <div class="diff-header">שורה ~721 (toPlaces)</div>
+          <div class="diff-row diff-del">&lt;app-place-details [useContact]="true" [place]="this.orderToPlaces[i]" ...&gt;</div>
+          <div class="diff-row diff-add">&lt;app-place-details [useContact]="true" [useOurOffice]="true" [place]="this.orderToPlaces[i]" ...&gt;</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="step-card">
+      <div class="step-header green">
+        <span class="num">7</span>
+        <h3>עריכה: orderPaymentCalculator — חוק "+30 ₪"</h3>
+        <span class="file-tag">src/app/order/orderPaymentCalculator.ts</span>
+        <span class="badge badge-rule" style="margin-right:auto">חוק חדש 📐</span>
+      </div>
+      <div class="step-body">
+        <p>הוספת בדיקה <strong>מעל</strong> כל ה־switch הקיים. אם תנאי המשרד מתקיים — לוקחים מסלול חישוב מקוצר. אחרת — הקוד הקיים רץ כרגיל (אפס סיכון לרגרסיה).</p>
+
+        <h4>הלוגיקה החדשה</h4>
+        <pre><span class="c">// מאזורי "המשרד הקרוב" — מקבלים את חוק ה־+30</span>
+<span class="k">const</span> nearAreas = [
+  <span class="t">AreaType</span>.גוש_דן_הרצליה_ראשון_לציון.id,
+  <span class="t">AreaType</span>.שפלה_קרוב.id,
+  <span class="t">AreaType</span>.שרון_קרוב.id
+]
+
+<span class="k">const</span> isOfficePickup  = o.fromPlace?.isOurOffice
+<span class="k">const</span> isOfficeDelivery = tos.some(p =&gt; p.isOurOffice)
+<span class="k">const</span> officeArea = isOfficePickup ? o.fromPlace.area
+                  : isOfficeDelivery ? tos.find(p =&gt; p.isOurOffice)!.area
+                  : <span class="k">null</span>
+
+<span class="k">if</span> (officeArea &amp;&amp; nearAreas.includes(officeArea.id)) {
+  <span class="c">// 🆕 חישוב מקוצר: צד אחר במלא + 30 (×multi)</span>
+  <span class="k">const</span> otherSide = isOfficePickup ? tos[0].area : o.fromPlace.area
+  result.items.push({
+    desc: otherSide.caption,
+    value: <span class="k">this</span>.getPrice(otherSide) * o.priority.multiplier
+  })
+  result.items.push({
+    desc: <span class="s">`המשרד שלנו (${officeArea.caption})`</span>,
+    value: <span class="t">30</span> * o.priority.multiplier
+  })
+  result.total = result.items.reduce((s, i) =&gt; s + i.value, <span class="t">0</span>)
+  <span class="k">return</span> result
+}
+
+<span class="c">// אחרת — נמשיך ל־switch הרגיל הקיים, ללא שינוי</span></pre>
+
+        <h4>דוגמאות מספריות</h4>
+        <table>
+          <thead><tr><th>תרחיש</th><th>סוג שירות</th><th>חישוב</th><th>סה"כ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>משרד בגוש דן → ירושלים</td>
+              <td>court</td>
+              <td>250 (ירושלים) + 30 (משרד)</td>
+              <td class="price">280 ₪</td>
+            </tr>
+            <tr>
+              <td>משרד בשרון קרוב → צפון רחוק (urgent ×2)</td>
+              <td>private</td>
+              <td>(300 + 30) × 2</td>
+              <td class="price">660 ₪</td>
+            </tr>
+            <tr>
+              <td>צפון אמצע → משרד בשפלה קרוב</td>
+              <td>gov</td>
+              <td>250 + 30</td>
+              <td class="price">280 ₪</td>
+            </tr>
+            <tr style="background:#fef3c7">
+              <td>משרד בירושלים → שרון רחוק</td>
+              <td>private</td>
+              <td><strong>חוק לא חל</strong> — חישוב רגיל</td>
+              <td class="price">350 ₪ (250+100)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert warn">
+          <span class="icon">⚠️</span>
+          <div><strong>שני הפילטרים הגלובליים בסוף <code>calc()</code></strong> (urgent מחוץ לטווח, copy פלילי) ימשיכו לחול גם על המסלול החדש — לוודא ש־<code>return</code> שלנו לא דולג עליהם. אולי כדאי להריץ אותם גם במסלול הקצר.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 8 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="num">8</span>
+        <h3>אימות באמצעות npm run build</h3>
+        <span class="file-tag">terminal</span>
+        <span class="badge badge-edit" style="margin-right:auto">בנייה 🛠️</span>
+      </div>
+      <div class="step-body">
+        <p>הרצת <code>npm run build</code> בלבד (אף פעם <code>dev</code>). אם יש שגיאות — תיקון מיידי. כל קומפוננטה מתקמפלת בנפרד לפני המעבר לבאה.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- RISKS -->
+  <section>
+    <h2>⚠️ נקודות סיכון / לאישור</h2>
+
+    <div class="alert warn">
+      <span class="icon">📍</span>
+      <div>
+        <strong>שדה <code>Place.isOurOffice</code></strong> — האם נוסיף שדה boolean חדש ל־Place שמסמן "זה המשרד"? זה מאפשר לקלקולטור לזהות מי המשרד בלי לקרוא חזרה ל־<code>customer.officePlace.id === place.id</code>. <strong>נדרש אישור.</strong>
+      </div>
+    </div>
+
+    <div class="alert warn">
+      <span class="icon">🔄</span>
+      <div>
+        <strong>השתלת officePlace ב־Place הזמנה</strong> — האם להעתיק את כל השדות (clone) או לקשר ב־FK? clone יוצר אי־תלות מהמשרד (אם הלקוח שינה את המשרד אחר כך, הזמנות ישנות לא ישתנו). <strong>המלצה: clone.</strong>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="icon">🛡️</span>
+      <div>
+        <strong>הזמנות קיימות</strong> — לקוחות בלי <code>officePlace</code> ימשיכו לעבוד כרגיל. ה־checkbox פשוט לא יעשה כלום עד שיש להם משרד. אין מיגרציה נדרשת.
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="icon">🔁</span>
+      <div>
+        <strong>"שמור והמשך"</strong> — בדיאלוג, אם הלקוח לחץ "ביטול" → לא נשמר כלום, ה־checkbox ב־order-details חוזר להיות לא מסומן.
+      </div>
+    </div>
+
+    <div class="alert purple">
+      <span class="icon">🎯</span>
+      <div>
+        <strong>שלב עתידי (לא בסקופ עכשיו):</strong> אימות נייד אמיתי דרך SMS — הקומפוננטה <code>app-mobile-verify-field</code> תהיה מוכנה כתשתית, רק נחבר ספק SMS כשתאשר.
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section>
+    <h2>📦 סיכום קבצים סופי</h2>
+    <table>
+      <thead><tr><th>קובץ</th><th>פעולה</th><th>שלב</th></tr></thead>
+      <tbody>
+        <tr><td><span class="file-pill">src/app/users/user.ts</span></td><td><span class="badge badge-edit">עריכה</span></td><td>1</td></tr>
+        <tr><td><span class="file-pill">src/app/common/mobile-verify-field/*.{ts,html,scss}</span></td><td><span class="badge badge-new">חדש</span></td><td>2</td></tr>
+        <tr><td><span class="file-pill">src/app/common/customer-details-validate/*.{ts,html,scss}</span></td><td><span class="badge badge-new">חדש</span></td><td>3</td></tr>
+        <tr><td><span class="file-pill">src/app/service/customer-office.service.ts</span></td><td><span class="badge badge-new">חדש</span></td><td>4</td></tr>
+        <tr><td><span class="file-pill">src/app/common/place-details/place-details.component.{ts,html}</span></td><td><span class="badge badge-edit">עריכה</span></td><td>5</td></tr>
+        <tr><td><span class="file-pill">src/app/order/order-details/order-details.component.html</span></td><td><span class="badge badge-edit">עריכה</span></td><td>6</td></tr>
+        <tr><td><span class="file-pill">src/app/order/orderPaymentCalculator.ts</span></td><td><span class="badge badge-rule">חוק חדש</span></td><td>7</td></tr>
+        <tr><td><span class="file-pill">src/app/entity/place.ts</span></td><td><span class="badge badge-edit">+isOurOffice (לאישור)</span></td><td>5</td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert ok" style="margin-top:14px">
+      <span class="icon">✅</span>
+      <div>
+        <strong>3 קומפוננטות/שירות חדשים · 4 עריכות ממוקדות · אפס מחיקות שדות · אפס commit עד אישורך.</strong>
+        <br>הכל מודולרי, הקלקולטור הקיים נשאר ללא שינוי בנתיב הרגיל (חוק חדש מתערב לפני ה־switch).
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="sig">BizTechoff™ · התאמת העסק לעידן הדיגיטלי</p>
+    <p>תכנון בלבד · 0 קוד עד אישורך · 0 commit עד הוראתך</p>
+  </footer>
+
+</div>
+</body>
+</html>
