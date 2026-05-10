@@ -710,13 +710,29 @@ response = {
         <span class="badge badge-new" style="margin-right:auto">חדש ✨</span>
       </div>
       <div class="step-body">
-        <p>שירות קל שמרכז את הלוגיקה של "האם הלקוח מאומת? אם לא — פתח דיאלוג".</p>
+        <p>שירות שמרכז את הלוגיקה של "האם הלקוח מאומת? אם לא — פתח דיאלוג". <strong>השירות הוא נקודת הכניסה</strong> — ה־UI לא צריך לדעת על דיאלוגים, רק לקרוא <code>getOrVerifyOffice()</code>.</p>
+
+        <div class="alert info">
+          <span class="icon">🎯</span>
+          <div>
+            <strong>למה השירות פותח את הדיאלוג ולא ה־UI?</strong>
+            הקודבייס שלך כבר משתמש בדפוס הזה — <code>UIToolsService.openPaymentAmount()</code>, <code>info()</code>, <code>error()</code> כולם פותחים דיאלוגים. עקבי + מודולרי + מקור אמת אחד לזרימה (אם מחר נפתח את הדיאלוג גם מ־customer-list — קריאה אחת לשירות).
+          </div>
+        </div>
+
         <pre>@<span class="t">Injectable</span>({ <span class="f">providedIn</span>: <span class="s">'root'</span> })
 <span class="k">export class</span> <span class="t">CustomerOfficeService</span> {
 
-  <span class="c">/** מחזיר officePlace אם מאומת, אחרת פותח דיאלוג ומחכה */</span>
+  <span class="k">constructor</span>(<span class="k">private</span> dialog: <span class="t">MatDialog</span>) {}
+
+  <span class="c">/** בדיקה טהורה — בלי side-effects */</span>
+  isOfficeVerified(customer: <span class="t">User</span>): <span class="t">boolean</span> {
+    <span class="k">return</span> !!(customer?.officePlace &amp;&amp; customer.addressVerified)
+  }
+
+  <span class="c">/** הזרימה המלאה — מחזיר officePlace, פותח דיאלוג אם צריך */</span>
   <span class="k">async</span> getOrVerifyOffice(customer: <span class="t">User</span>): <span class="t">Promise</span>&lt;<span class="t">Place</span> | <span class="t">null</span>&gt; {
-    <span class="k">if</span> (customer.officePlace &amp;&amp; customer.addressVerified) {
+    <span class="k">if</span> (<span class="k">this</span>.isOfficeVerified(customer)) {
       <span class="k">return</span> customer.officePlace
     }
     <span class="k">const</span> result = <span class="k">await</span> openDialog(<span class="t">CustomerDetailsValidateComponent</span>,
@@ -724,6 +740,10 @@ response = {
     <span class="k">return</span> result?.officePlace ?? <span class="k">null</span>
   }
 }</pre>
+
+        <p style="margin-top:8px;font-size:0.9rem;color:var(--text-soft)">
+          <strong>שתי מתודות:</strong> <code>isOfficeVerified()</code> טהורה לבדיקות UI מקדימות (למשל הצגת אייקון), ו־<code>getOrVerifyOffice()</code> שעושה את כל הזרימה.
+        </p>
       </div>
     </div>
 
@@ -760,9 +780,9 @@ response = {
           <div class="diff-row diff-add">&lt;/mat-checkbox&gt;</div>
         </div>
 
-        <div class="alert info">
-          <span class="icon">💡</span>
-          <div><strong>הצעה:</strong> שדה <code>isOurOffice</code> חדש על <code>Place</code> (boolean) — מאפשר לזכור את הסימון בהזמנה. <em>אישור נדרש להוספה ל־Place.</em></div>
+        <div class="alert ok">
+          <span class="icon">✅</span>
+          <div><strong>אושר:</strong> שדה <code>isOurOffice: boolean</code> נוסף ל־<code>Place</code> entity (ב־<code>src/app/entity/place.ts</code>). מאפשר לקלקולטור לזהות "זה המשרד" ישירות, בלי לקרוא חזרה ל־<code>customer.officePlace.id === place.id</code>. גם נשמר בהזמנה לעתיד.</div>
         </div>
       </div>
     </div>
@@ -776,18 +796,30 @@ response = {
         <span class="badge badge-edit" style="margin-right:auto">עריכה ✏️</span>
       </div>
       <div class="step-body">
-        <p>הוספת <code>[useOurOffice]="true"</code> ל־<code>fromPlace</code> ול־<code>toPlaces</code>. <strong>לא</strong> ל־court/locate.</p>
+        <p>הוספת <code>[useOurOffice]</code> ל־<code>fromPlace</code> (תמיד true) ול־<strong>נקודת המסירה הראשונה בלבד</strong> (<code>i === 0</code>). <strong>לא</strong> ל־court/locate, <strong>לא</strong> לנקודות מסירה נוספות.</p>
+
+        <div class="alert info">
+          <span class="icon">💡</span>
+          <div>
+            <strong>למה רק הראשון?</strong> ללקוח יש משרד אחד. אחרי שכבר סומן "למשרד שלנו" כיעד הראשון — אין סיבה להציע שוב כיעד 2, 3 וכו'. ההחלטה יושבת ב־parent (כאן) — ה־קומפוננטה <code>app-place-details</code> נשארת אגנוסטית.
+          </div>
+        </div>
 
         <div class="diff">
-          <div class="diff-header">שורה ~657 (fromPlace)</div>
+          <div class="diff-header">שורה ~657 (fromPlace) — תמיד</div>
           <div class="diff-row diff-del">&lt;app-place-details [useContact]="true" [place]="order.fromPlace" ...&gt;</div>
           <div class="diff-row diff-add">&lt;app-place-details [useContact]="true" [useOurOffice]="true" [place]="order.fromPlace" ...&gt;</div>
         </div>
 
         <div class="diff">
-          <div class="diff-header">שורה ~721 (toPlaces)</div>
+          <div class="diff-header">שורה ~721 (toPlaces) — רק האינדקס הראשון</div>
           <div class="diff-row diff-del">&lt;app-place-details [useContact]="true" [place]="this.orderToPlaces[i]" ...&gt;</div>
-          <div class="diff-row diff-add">&lt;app-place-details [useContact]="true" [useOurOffice]="true" [place]="this.orderToPlaces[i]" ...&gt;</div>
+          <div class="diff-row diff-add">&lt;app-place-details [useContact]="true" [useOurOffice]="i === 0" [place]="this.orderToPlaces[i]" ...&gt;</div>
+        </div>
+
+        <div class="alert ok">
+          <span class="icon">✅</span>
+          <div><strong>תוצאה:</strong> ה־checkbox מופיע בנקודת איסוף + נקודת מסירה ראשונה בלבד. שאר נקודות המסירה — UI נקי בלי checkbox.</div>
         </div>
       </div>
     </div>
@@ -891,10 +923,10 @@ response = {
   <section>
     <h2>⚠️ נקודות סיכון / לאישור</h2>
 
-    <div class="alert warn">
+    <div class="alert ok">
       <span class="icon">📍</span>
       <div>
-        <strong>שדה <code>Place.isOurOffice</code></strong> — האם נוסיף שדה boolean חדש ל־Place שמסמן "זה המשרד"? זה מאפשר לקלקולטור לזהות מי המשרד בלי לקרוא חזרה ל־<code>customer.officePlace.id === place.id</code>. <strong>נדרש אישור.</strong>
+        <strong>שדה <code>Place.isOurOffice</code> — אושר ✅</strong> — boolean חדש ב־Place. הקלקולטור משתמש בו ישירות (<code>p.isOurOffice</code>) במקום השוואה לקוסטומר. מתקיים גם אחרי שינוי מאוחר של המשרד בכרטיס הלקוח.
       </div>
     </div>
 
@@ -940,7 +972,7 @@ response = {
         <tr><td><span class="file-pill">src/app/common/place-details/place-details.component.{ts,html}</span></td><td><span class="badge badge-edit">עריכה</span></td><td>5</td></tr>
         <tr><td><span class="file-pill">src/app/order/order-details/order-details.component.html</span></td><td><span class="badge badge-edit">עריכה</span></td><td>6</td></tr>
         <tr><td><span class="file-pill">src/app/order/orderPaymentCalculator.ts</span></td><td><span class="badge badge-rule">חוק חדש</span></td><td>7</td></tr>
-        <tr><td><span class="file-pill">src/app/entity/place.ts</span></td><td><span class="badge badge-edit">+isOurOffice (לאישור)</span></td><td>5</td></tr>
+        <tr><td><span class="file-pill">src/app/entity/place.ts</span></td><td><span class="badge badge-edit">+isOurOffice ✅</span></td><td>5</td></tr>
       </tbody>
     </table>
 
