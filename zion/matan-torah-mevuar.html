@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מתן תורה — מה באמת קרה בסיני?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 80px -20px var(--shadow),
+      0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .bezras {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    color: var(--gold-deep);
+    margin-bottom: 40px;
+    opacity: 0.85;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 64px);
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 19px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 30px;
+  }
+
+  /* Chapter numbering */
+  .chapter-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 60px 0 24px;
+  }
+
+  .chapter-mark::before,
+  .chapter-mark::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 80px;
+  }
+
+  .chapter-number {
+    font-family: 'Bellefair', serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--crimson);
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  /* The opening question */
+  .opening-question {
+    background: rgba(140, 42, 30, 0.06);
+    border: 1px dashed rgba(140, 42, 30, 0.35);
+    padding: 32px 28px;
+    margin: 30px 0 50px;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+  }
+
+  .opening-question .qmark {
+    font-family: 'Bellefair', serif;
+    color: var(--crimson);
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+
+  .opening-question .q-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .opening-question .q-context {
+    display: block;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  /* Pasuk box */
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px;
+    margin: 20px 0;
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+
+  .pasuk-source {
+    display: block;
+    font-size: 13px;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+
+  /* Two channels asymmetric */
+  .channels-card {
+    margin: 30px 0;
+    padding: 36px 28px;
+    background: rgba(245, 236, 217, 0.5);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 6px;
+  }
+
+  .channels-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .channel {
+    padding: 22px 24px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .channel:last-child { margin-bottom: 0; }
+
+  .channel.open {
+    background: rgba(184, 138, 44, 0.1);
+    border: 2px solid var(--gold);
+  }
+
+  .channel.sealed {
+    background: rgba(43, 29, 16, 0.06);
+    border: 2px dashed rgba(43, 29, 16, 0.4);
+  }
+
+  .channel-flow {
+    position: absolute;
+    top: 18px;
+    left: 22px;
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold-deep);
+  }
+
+  .channel-badge {
+    display: inline-block;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+
+  .channel.open .channel-badge {
+    background: var(--gold);
+    color: var(--parchment);
+  }
+
+  .channel.sealed .channel-badge {
+    background: var(--ink);
+    color: var(--parchment);
+  }
+
+  .channel-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .channel-desc {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Decree barrier */
+  .decree-barrier {
+    margin: 30px 0;
+    padding: 28px;
+    background: rgba(43, 29, 16, 0.05);
+    border: 1px solid rgba(43, 29, 16, 0.2);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .decree-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .decree-rows {
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 2;
+  }
+
+  .decree-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .decree-row .arrow {
+    color: var(--crimson);
+    font-size: 20px;
+    text-decoration: line-through;
+    text-decoration-color: var(--crimson);
+    text-decoration-thickness: 2px;
+  }
+
+  /* Divine names quick-explainer */
+  .names-explainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .name-card {
+    padding: 20px 18px;
+    background: rgba(184, 138, 44, 0.06);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .name-card-word {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--crimson);
+    margin-bottom: 6px;
+  }
+
+  .name-card-meaning {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* The breakthrough card */
+  .breakthrough-card {
+    margin: 30px 0;
+    padding: 50px 30px;
+    background: linear-gradient(180deg, #1a1108 0%, #2b1d10 50%, #1a1108 100%);
+    color: var(--parchment);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+
+  .breakthrough-card::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .breakthrough-card::after {
+    content: "✺";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(184, 138, 44, 0.18);
+    font-size: 200px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breakthrough-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .breakthrough-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .divine-name {
+    text-align: center;
+    padding: 18px 36px;
+    background: rgba(184, 138, 44, 0.12);
+    border: 1px solid rgba(184, 138, 44, 0.5);
+    border-radius: 4px;
+    min-width: 260px;
+    backdrop-filter: blur(2px);
+  }
+
+  .divine-name-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(245, 236, 217, 0.7);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .divine-name-word {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .divine-name-meaning {
+    font-size: 13px;
+    color: rgba(245, 236, 217, 0.6);
+    font-style: italic;
+  }
+
+  .breakthrough-arrow {
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(184, 138, 44, 0.6);
+  }
+
+  /* The insight callout */
+  .insight-box {
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.1) 0%, rgba(140, 42, 30, 0.03) 100%);
+    border-right: 4px solid var(--crimson);
+    padding: 28px 32px;
+    margin: 30px 0;
+    border-radius: 3px;
+  }
+
+  .insight-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--crimson);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .insight-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 24px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Future card */
+  .future-card {
+    margin: 40px 0 20px;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, rgba(184, 138, 44, 0.15) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+  }
+
+  .future-tag {
+    position: absolute;
+    top: -12px;
+    right: 30px;
+    background: var(--gold);
+    color: var(--parchment);
+    padding: 4px 16px;
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+
+  .future-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--crimson);
+    margin-bottom: 12px;
+  }
+
+  .future-text {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .future-pasuk {
+    font-family: 'David Libre', serif;
+    font-size: 23px;
+    color: var(--ink);
+    font-weight: 700;
+    padding: 16px 0;
+    border-top: 1px solid rgba(184, 138, 44, 0.4);
+    border-bottom: 1px solid rgba(184, 138, 44, 0.4);
+    margin-top: 16px;
+  }
+
+  /* Attribution */
+  .attribution {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+  }
+
+  .attribution-line {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px;
+    color: var(--gold-deep);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .footer-ornament {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 24px; }
+    .container::before { inset: 8px; }
+    h2 { font-size: 24px; }
+    .channel-flow { position: static; display: block; margin-bottom: 6px; }
+    .divine-name { min-width: 220px; padding: 14px 22px; }
+    .divine-name-word { font-size: 30px; }
+    .breakthrough-arrow { font-size: 24px; }
+    .breakthrough-card::after { font-size: 130px; }
+    .names-explainer { grid-template-columns: 1fr; }
+    .decree-row { font-size: 15px; flex-wrap: wrap; }
+    p { font-size: 17px; }
+    .insight-text { font-size: 20px; }
+    .opening-question .q-text { font-size: 19px; }
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+  }
+
+  .container { animation: fadeUp 1s ease-out; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>מַתַּן תּוֹרָה</h1>
+    <p class="subtitle">מה באמת קרה בהר סיני?</p>
+
+    <!-- ============================== -->
+    <!-- 1. THE OPENING QUESTION         -->
+    <!-- ============================== -->
+    <div class="opening-question">
+      <div class="qmark">?</div>
+      <p class="q-text">
+        אם הקדוש ברוך הוא רוצה לדבר איתי —<br>
+        למה אני לא שומע?
+      </p>
+      <span class="q-context">
+        השאלה הפשוטה שפותחת את כל הלימוד
+      </span>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 2. THE TWO CHANNELS             -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק א׳</span>
+    </div>
+    <h2>שני קולות פועלים בתוכי</h2>
+
+    <p>
+      באדם פועלים בו־זמנית
+      <strong>שני ערוצי תקשורת שונים לגמרי</strong>.
+      לא שני קולות שאומרים אותו דבר —
+      אלא שני ערוצים <em>הפוכים זה לזה</em> בכיוון, באופי, ובנגישות.
+    </p>
+
+    <div class="channels-card">
+      <div class="channels-label">שני הערוצים</div>
+
+      <div class="channel open">
+        <div class="channel-flow">↑ מלמטה למעלה</div>
+        <span class="channel-badge">פְּרוּצָה</span>
+        <div class="channel-title">אני ↔ עצמי</div>
+        <p class="channel-desc">
+          אני מתקשר עם עצמי דרך הלב — המחשבות, הרגשות, הרצונות.
+          הקול הפנימי הרגיל, שרץ במוח כל היום.
+          ערוץ פתוח לרווחה, בלי שום מאמץ.
+        </p>
+      </div>
+
+      <div class="channel sealed">
+        <div class="channel-flow">↓ מלמעלה למטה</div>
+        <span class="channel-badge">כְּבוּשָׁה</span>
+        <div class="channel-title">הקב״ה ← אני</div>
+        <p class="channel-desc">
+          הקב״ה מתקשר איתי דרך מעשיי וליבי — דרך מה שקורה לי,
+          הצלחה וכישלון, התעוררויות בלב.
+          אבל הערוץ הזה <em>אטום</em>. אני לא קולט אותו באופן טבעי.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 3. WHY IS ONE SEALED?           -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ב׳</span>
+    </div>
+    <h2>למה ערוץ אחד פתוח והשני אטום?</h2>
+
+    <p>
+      זה לא במקרה. ולא רק עניין פסיכולוגי.
+      זוהי <strong>גזירה משמים</strong> — חוק יסוד של המציאות עצמה,
+      שהיה בתוקף עד מעמד הר סיני.
+    </p>
+
+    <div class="decree-barrier">
+      <div class="decree-label">הגזירה לפני מתן תורה</div>
+      <div class="decree-rows">
+        <div class="decree-row">
+          <span class="arrow">↓</span>
+          <span>עליונים <em>לא</em> יורדים לתחתונים</span>
+        </div>
+        <div class="decree-row">
+          <span class="arrow">↑</span>
+          <span>תחתונים <em>לא</em> עולים לעליונים</span>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      בלשון הקבלה זה אומר:
+      <span class="key-term">הדעת האלוקית</span>
+      לא יורדת אל
+      <span class="key-term">הדעת האנושית</span>.
+      שני שמות אלוקות —
+      <strong>הוי״ה</strong> מצד אחד,
+      <strong>אלוקים</strong> מצד שני —
+      נשארים מקבילים, לא נפגשים.
+    </p>
+
+    <div class="names-explainer">
+      <div class="name-card">
+        <div class="name-card-word">הוי״ה</div>
+        <p class="name-card-meaning">
+          האלוקות האינסופית.<br>
+          מעל הטבע, מעל השכל,<br>
+          מעל ההשגה האנושית.
+        </p>
+      </div>
+      <div class="name-card">
+        <div class="name-card-word">אלוקים</div>
+        <p class="name-card-meaning">
+          האלוקות שבטבע ובשכל.<br>
+          בתוך האדם — זה ה"אני"<br>
+          שחושב <em>שהוא</em> מנהל את חייו.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      התוצאה של הגזירה ברמת הנפש:
+      ה<strong>"אלוקים"</strong> שבתוך האדם —
+      השכל, האגו, ה"אני" שמרגיש <em>אוטונומי</em> —
+      חי באשליה שהוא הריבון. הוא לא רואה את ההוי״ה שמעליו.
+      <strong>הוא חושב שהוא מנהל את חייו</strong>.
+    </p>
+
+    <!-- ============================== -->
+    <!-- 4. THE BREAKTHROUGH             -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ג׳</span>
+    </div>
+    <h2>מתן תורה — ה' פורץ את הגזירה</h2>
+
+    <p>
+      בסיני קרה משהו שלא קרה אף פעם:
+      <strong>הקב״ה ירד מצידו</strong>.
+    </p>
+    <p>
+      שימו לב למה שלא קרה:
+      <em>האדם לא עלה</em>.
+      הוא ממשיך לתקשר עם עצמו כרגיל, מלמטה למעלה.
+      <strong>החידוש הוא שה' ירד</strong> —
+      פתח את הערוץ הכבוש מצידו,
+      והתחיל לשדר מלמעלה למטה.
+    </p>
+    <p>
+      בלשון הקבלה: <em>הוי״ה ירדה אל אלוקים</em>.
+      זהו הסוד של <strong>"עליונים יורדים לתחתונים"</strong>.
+    </p>
+
+    <div class="breakthrough-card">
+      <div class="breakthrough-label">המפגש בסיני</div>
+      <div class="breakthrough-stack">
+        <div class="divine-name">
+          <div class="divine-name-label">למעלה</div>
+          <div class="divine-name-word">הוי״ה</div>
+          <div class="divine-name-meaning">הדעת האלוקית · מעל הטבע</div>
+        </div>
+
+        <div class="breakthrough-arrow">↓</div>
+        <div class="breakthrough-arrow" style="font-size:18px;opacity:0.6;">∗</div>
+        <div class="breakthrough-arrow">↓</div>
+
+        <div class="divine-name">
+          <div class="divine-name-label">למטה</div>
+          <div class="divine-name-word">אֱלֹהִים</div>
+          <div class="divine-name-meaning">הדעת האנושית · הטבע · ה״אני״</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 5. THE INSIGHT INSIDE THE PERSON -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ד׳</span>
+    </div>
+    <h2>מה זה עושה לאדם בפנים?</h2>
+
+    <p>
+      ברגע שהוי״ה פוגשת את אלוקים בתוך האדם —
+      ה"אלוקים" שבי <em>מתעורר</em>.
+      הוא רואה לראשונה את מי שמעליו.
+      ואז מגיעה ההשגה ששוברת את כל האשליה:
+    </p>
+
+    <div class="insight-box">
+      <div class="insight-label">ההשגה</div>
+      <p class="insight-text">
+        "אני לא מנהל.<br>
+        <strong>אני מנוהל.</strong>"
+      </p>
+    </div>
+
+    <p>
+      כל מה שנראה לי כ"מנהל" של חיי —
+      השכל שלי, הכוח שלי, הטבע, המקריות —
+      הכל בעצם <strong>הוי״ה בעצמה</strong>, רק מחופשת.
+      אין שתי רשויות. אין מנהל אוטונומי.
+      <strong>אין עוד מלבדו</strong>.
+    </p>
+
+    <div class="pasuk">
+      אַתָּה הׇרְאֵתָ לָדַעַת
+      כִּי יְהֹוָה הוּא הָאֱלֹהִים,
+      אֵין עוֹד מִלְּבַדּוֹ
+      <span class="pasuk-source">— דברים ד, לה</span>
+    </div>
+
+    <p>
+      ולכן הפסוק לא אומר "אתה <em>למדת</em>" אלא <strong>"הראת"</strong> —
+      <em>הוראו לך מלמעלה</em>.
+      כי את האמת הזאת אי אפשר לגלות מלמטה.
+      היא חייבת להגיע <em>בירידה</em> — מהוי״ה אל אלוקים.
+    </p>
+
+    <!-- ============================== -->
+    <!-- 6. THE PUNCHLINE — NOT YET      -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ה׳ · אך עדיין</span>
+    </div>
+    <h2>האם זה באמת קרה לעם ישראל?</h2>
+
+    <p>
+      וכאן הפאנץ' שמטלטל:
+      מתן תורה <strong>באופן הרוחני הזה</strong> —
+      שכל יהודי באמת חי את ההכרה "אני מנוהל" —
+      <em>עדיין לא קרה במלואו</em>.
+    </p>
+    <p>
+      בסיני קיבלנו את התורה ברמת המעשה והדיבור.
+      אבל הפנימיות — שה"אלוקים" שבכל אחד יראה את ההוי״ה —
+      עוד מחכה.
+    </p>
+
+    <div class="future-card">
+      <div class="future-tag">לעתיד לבוא</div>
+      <div class="future-title">תורה חדשה במשיח</div>
+      <p class="future-text">
+        רק בביאת משיח יקבל עם ישראל
+        את התורה הזו במלואה —
+        תורה שבה כל יהודי חי
+        את האמת ש<strong>"אין עוד מלבדו"</strong>.
+      </p>
+      <div class="future-pasuk">
+        תּוֹרָה חֲדָשָׁה מֵאִתִּי תֵּצֵא
+      </div>
+    </div>
+
+    <!-- Attribution -->
+    <div class="attribution">
+      <div class="attribution-line">מדברי ציון אבירם הי״ו</div>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
