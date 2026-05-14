@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אויבי איש אנשי ביתו — סוד היסורים והשלום הפנימי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 80px -20px var(--shadow),
+      0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .bezras {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    color: var(--gold-deep);
+    margin-bottom: 40px;
+    opacity: 0.85;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 56px);
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 30px;
+  }
+
+  /* Opening question */
+  .opening-question {
+    background: rgba(140, 42, 30, 0.06);
+    border: 1px dashed rgba(140, 42, 30, 0.35);
+    padding: 32px 28px;
+    margin: 30px 0 50px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .opening-question .qmark {
+    font-family: 'Bellefair', serif;
+    color: var(--crimson);
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+
+  .opening-question .q-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .opening-question .q-context {
+    display: block;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  /* Chapter marks */
+  .chapter-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 55px 0 22px;
+  }
+
+  .chapter-mark::before,
+  .chapter-mark::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 80px;
+  }
+
+  .chapter-number {
+    font-family: 'Bellefair', serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--crimson);
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px;
+    margin: 20px 0;
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+
+  .pasuk-source {
+    display: block;
+    font-size: 13px;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+
+  /* The war card — personal truth vs world of falsehood */
+  .war-card {
+    margin: 30px 0;
+    padding: 36px 28px;
+    background: rgba(245, 236, 217, 0.5);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 6px;
+  }
+
+  .war-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .war-sides {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .war-side {
+    padding: 22px 18px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .war-side.truth {
+    background: rgba(184, 138, 44, 0.1);
+    border: 2px solid var(--gold);
+  }
+
+  .war-side.lies {
+    background: rgba(43, 29, 16, 0.06);
+    border: 2px dashed rgba(43, 29, 16, 0.4);
+  }
+
+  .war-side-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .war-side-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .war-vs {
+    font-family: 'Bellefair', serif;
+    color: var(--crimson);
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  /* Paradox visualization — scale */
+  .paradox-card {
+    margin: 30px 0;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+
+  .paradox-card::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .paradox-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .paradox-equation {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .paradox-term {
+    padding: 20px 14px;
+    background: rgba(184, 138, 44, 0.1);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+  }
+
+  .paradox-term-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 17px;
+    color: var(--parchment);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .paradox-term-arrow {
+    font-size: 22px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .paradox-equals {
+    font-family: 'Bellefair', serif;
+    font-size: 26px;
+    color: var(--gold);
+  }
+
+  .paradox-conclusion {
+    text-align: center;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(184, 138, 44, 0.2);
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(245, 236, 217, 0.85);
+  }
+
+  /* Trap mechanisms */
+  .trap-card {
+    margin: 30px 0;
+    padding: 32px 28px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.1) 0%, rgba(140, 42, 30, 0.03) 100%);
+    border: 1px solid rgba(140, 42, 30, 0.25);
+    border-right: 4px solid var(--crimson);
+    border-radius: 4px;
+  }
+
+  .trap-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--crimson);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .trap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .trap-item {
+    padding: 20px 16px;
+    background: rgba(245, 236, 217, 0.6);
+    border: 1px solid rgba(140, 42, 30, 0.15);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .trap-item-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .trap-item-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--crimson);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .trap-item-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* Path of peace */
+  .peace-card {
+    margin: 30px 0;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, rgba(184, 138, 44, 0.15) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+  }
+
+  .peace-tag {
+    position: absolute;
+    top: -12px;
+    right: 30px;
+    background: var(--gold);
+    color: var(--parchment);
+    padding: 4px 16px;
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+
+  .peace-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--crimson);
+    margin-bottom: 14px;
+  }
+
+  .peace-text {
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Evidence pesukim */
+  .evidence-card {
+    margin: 22px 0;
+    padding: 24px 26px;
+    background: rgba(184, 138, 44, 0.08);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .evidence-tag {
+    position: absolute;
+    top: -10px;
+    right: 22px;
+    background: var(--gold-deep);
+    color: var(--parchment);
+    padding: 3px 12px;
+    font-family: 'Bellefair', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+
+  .evidence-pasuk {
+    font-family: 'David Libre', serif;
+    font-size: 19px;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  .evidence-source {
+    font-size: 13px;
+    color: var(--gold-deep);
+    letter-spacing: 1px;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  .evidence-interp {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    border-top: 1px solid rgba(184, 138, 44, 0.25);
+    padding-top: 12px;
+    margin: 0;
+  }
+
+  /* Final conclusion */
+  .final-message {
+    margin-top: 50px;
+    padding: 36px 32px;
+    background: rgba(140, 42, 30, 0.06);
+    border-top: 2px solid var(--crimson);
+    border-bottom: 2px solid var(--crimson);
+    text-align: center;
+  }
+
+  .final-message-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .final-conclusion {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px;
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Attribution */
+  .attribution {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+  }
+
+  .attribution-line {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px;
+    color: var(--gold-deep);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .footer-ornament {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 24px; }
+    .container::before { inset: 8px; }
+    h2 { font-size: 23px; }
+    .war-sides { grid-template-columns: 1fr; gap: 12px; }
+    .war-vs { transform: rotate(90deg); }
+    .paradox-equation { grid-template-columns: 1fr; gap: 12px; }
+    .paradox-equals { transform: rotate(90deg); }
+    .trap-grid { grid-template-columns: 1fr; gap: 12px; }
+    p { font-size: 17px; }
+    .opening-question .q-text { font-size: 19px; }
+    .final-conclusion { font-size: 22px; }
+    .peace-title { font-size: 22px; }
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+  }
+
+  .container { animation: fadeUp 1s ease-out; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>אֹיְבֵי אִישׁ אַנְשֵׁי בֵיתוֹ</h1>
+    <p class="subtitle">סוד היסורים והדרך אל השלום הפנימי</p>
+
+    <!-- ============================== -->
+    <!-- 1. THE OPENING QUESTION         -->
+    <!-- ============================== -->
+    <div class="opening-question">
+      <div class="qmark">?</div>
+      <p class="q-text">
+        מאיפה באמת באים<br>
+        כל היסורים שלי?
+      </p>
+      <span class="q-context">
+        רובנו עונים אינסטינקטיבית: "מאחרים. מהחיים. מהמציאות."<br>
+        אבל זוהי רק התשובה הראשונה.
+      </span>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 2. SUFFERING = WAR FOR TRUTH    -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק א׳</span>
+    </div>
+    <h2>כל יסורי האדם — מלחמה אחת</h2>
+
+    <p>
+      התשובה האמיתית מפתיעה:
+      <strong>כל יסורי האדם הם מלחמה אחת בלבד —</strong>
+      מלחמתו של האדם על
+      <em>האמת האישית שלו</em>
+      בתוך <em>עולם של שקר</em>.
+    </p>
+    <p>
+      לא יסורי הגוף, לא יסורי הכסף, לא יסורי הכבוד —
+      כל אלה רק <strong>קליפות חיצוניות</strong>.
+      בלב כל סבל יושבת מלחמה אחת:
+      הפער בין מה ש<em>אני יודע שזה אמת</em>,
+      לבין מה ש<em>העולם מציג כאמת</em>.
+    </p>
+
+    <div class="war-card">
+      <div class="war-label">המלחמה האחת</div>
+      <div class="war-sides">
+        <div class="war-side truth">
+          <div class="war-side-label">בפנים</div>
+          <div class="war-side-title">האמת האישית<br>שלי</div>
+        </div>
+        <div class="war-vs">⚔</div>
+        <div class="war-side lies">
+          <div class="war-side-label">בחוץ</div>
+          <div class="war-side-title">עולם<br>של שקר</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 3. THE PARADOX                  -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ב׳ · פרדוקס</span>
+    </div>
+    <h2>למה דווקא הצדיק סובל יותר?</h2>
+
+    <p>
+      וכאן נחשף הפרדוקס המכאיב:
+      <strong>ככל שחוש הצדק של האדם גבוה יותר —
+      כך יסוריו גוברים</strong>.
+    </p>
+    <p>
+      זה לא צירוף מקרים. זה <em>חוק</em>.
+      ככל שאני יותר רגיש לאמת,
+      יותר רואה את הפער בין מה שצריך להיות
+      לבין מה שיש —
+      כך הפער שורף אותי יותר.
+    </p>
+
+    <div class="paradox-card">
+      <div class="paradox-label">משוואת היסורים</div>
+      <div class="paradox-equation">
+        <div class="paradox-term">
+          <div class="paradox-term-name">חוּשׁ הַצֶּדֶק</div>
+          <div class="paradox-term-arrow">↑</div>
+        </div>
+        <div class="paradox-equals">⇆</div>
+        <div class="paradox-term">
+          <div class="paradox-term-name">הַיִּסּוּרִים</div>
+          <div class="paradox-term-arrow">↑</div>
+        </div>
+      </div>
+      <div class="paradox-conclusion">
+        הרגישים יותר — סובלים יותר.<br>
+        הצדיקים — סובלים הכי הרבה.
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 4. THE INNER TRAP               -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ג׳ · המלכודת</span>
+    </div>
+    <h2>שני מנגנונים שמחמירים את הסבל</h2>
+
+    <p>
+      כשהאדם נמצא במלחמת האמת,
+      מתעוררים בו <strong>שני מנגנונים פנימיים</strong>
+      שלא רק שלא עוזרים — הם
+      <em>מגבירים</em> את הסבל ומעבירים אותו לגלגול הבא.
+    </p>
+
+    <div class="trap-card">
+      <div class="trap-label">שתי מלכודות פנימיות</div>
+      <div class="trap-grid">
+        <div class="trap-item">
+          <span class="trap-item-icon">♥</span>
+          <div class="trap-item-title">עיוורון רגשי<br>שבלב</div>
+          <div class="trap-item-desc">
+            הרגש הסוער על אי־הצדק
+            <em>מעוור</em> את הראייה.
+            אני כבר לא רואה
+            את התמונה כפי שהיא.
+          </div>
+        </div>
+        <div class="trap-item">
+          <span class="trap-item-icon">⌧</span>
+          <div class="trap-item-title">שיקול דעת פגום<br>שבהסתרה</div>
+          <div class="trap-item-desc">
+            כשאני מסתתר, מתגונן,
+            מתבצר בעמדה —
+            <em>שיקול הדעת</em> שלי
+            מתעוות מאליו.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      הלב עיוור מרגש,
+      והדעת פגומה מהסתרה.
+      <strong>בשתי הגזרות —</strong> אני לא רואה את האמת,
+      גם אם אני נלחם עליה.
+    </p>
+
+    <!-- ============================== -->
+    <!-- 5. THE KEY: PEACE-PURSUIT       -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ד׳ · המפתח</span>
+    </div>
+    <h2>מרדף השלום — מוציא מהשתיים</h2>
+
+    <p>
+      ה<strong>מרדף אחרי השלום</strong> —
+      לא השלום עצמו, אלא <em>הרדיפה אחריו</em> —
+      היא המפתח שמשחרר את האדם
+      משתי המלכודות הללו בבת אחת:
+    </p>
+
+    <div class="peace-card">
+      <div class="peace-tag">המפתח</div>
+      <div class="peace-title">מרדף אחרי השלום</div>
+      <p class="peace-text">
+        מוציא את האדם מ<strong>עיוורון הלב</strong> —
+        כי הוא מצנן את הרגש,<br>
+        ומוציא אותו מ<strong>שיקול הדעת הפגום</strong> —
+        כי הוא מבטל את ההסתרה.
+      </p>
+    </div>
+
+    <p>
+      ברגע שאני <em>רודף</em> אחרי שלום —
+      אני מפסיק להגן על העמדה שלי, מפסיק לבצר את עצמי.
+      ואז הלב מתקרר, והדעת מתבהרת.
+      <strong>פתאום אני רואה את האמת
+      שעד עכשיו לא יכולתי לראות.</strong>
+    </p>
+
+    <!-- ============================== -->
+    <!-- 6. THE REVELATION — TWO PESUKIM -->
+    <!-- ============================== -->
+    <div class="chapter-mark">
+      <span class="chapter-number">פרק ה׳ · הגילוי</span>
+    </div>
+    <h2>שני פסוקים שחושפים</h2>
+
+    <p>
+      וכשהדעת מתבהרת — מתגלה משהו שאי אפשר היה לראות קודם:
+      <strong>האויב כלל לא נמצא בחוץ</strong>.
+      שני פסוקים בנביא חושפים את האמת:
+    </p>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">עדות א׳</span>
+      <p class="evidence-pasuk">
+        מְהָרְסַיִךְ וּמַחֲרִיבַיִךְ —<br>
+        מִמֵּךְ יֵצֵאוּ
+      </p>
+      <div class="evidence-source">ישעיהו מט, יז</div>
+      <p class="evidence-interp">
+        אלה שהורסים ומחריבים את חייך —
+        <strong>יוצאים מתוכך</strong>.
+        לא מבחוץ. מתוכך פנימה.
+      </p>
+    </div>
+
+    <div class="evidence-card">
+      <span class="evidence-tag">עדות ב׳</span>
+      <p class="evidence-pasuk">
+        אֹיְבֵי אִישׁ — אַנְשֵׁי בֵיתוֹ
+      </p>
+      <div class="evidence-source">מיכה ז, ו</div>
+      <p class="evidence-interp">
+        אויבי האיש הם <strong>"אנשי ביתו"</strong> —
+        ובעומק: הכוחות שבתוך <em>ביתו הפנימי</em>,
+        כוחות הנפש שלו עצמו.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 7. THE CONCLUSION               -->
+    <!-- ============================== -->
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-conclusion">
+        אֵין אוֹיְבִים לָאָדָם —<br>
+        אֶלָּא הוּא בְּעַצְמוֹ
+      </p>
+    </div>
+
+    <!-- Attribution -->
+    <div class="attribution">
+      <div class="attribution-line">מדברי ציון אבירם הי״ו</div>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
