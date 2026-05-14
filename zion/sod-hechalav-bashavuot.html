@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סוד החלב בשבועות — הסכין שבכתר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 80px -20px var(--shadow),
+      0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .bezras {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    color: var(--gold-deep);
+    margin-bottom: 40px;
+    opacity: 0.85;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 56px);
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 50px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    gap: 20px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+
+  .divider-symbol {
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  .section { margin-bottom: 38px; }
+
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--crimson);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::before {
+    content: "❖";
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px;
+    margin: 18px 0;
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+
+  .pasuk-source {
+    display: block;
+    font-size: 13px;
+    color: var(--gold-deep);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+
+  .inline-callout {
+    background: rgba(140, 42, 30, 0.06);
+    border-right: 3px solid var(--crimson);
+    padding: 18px 24px;
+    margin: 20px 0;
+    border-radius: 2px;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* Secret reveal — gematria + roshei teivot */
+  .secret-card {
+    margin: 26px 0;
+    padding: 28px 26px;
+    background: linear-gradient(135deg, rgba(184, 138, 44, 0.1) 0%, rgba(184, 138, 44, 0.03) 100%);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .secret-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .secret-equation {
+    font-family: 'David Libre', serif;
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .secret-meaning {
+    font-size: 15px;
+    color: var(--ink-soft);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .final-message {
+    margin-top: 50px;
+    padding: 30px;
+    background: rgba(140, 42, 30, 0.05);
+    border-top: 2px solid var(--crimson);
+    border-bottom: 2px solid var(--crimson);
+    text-align: center;
+  }
+
+  .final-message-label {
+    font-family: 'Bellefair', serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .final-conclusion {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .attribution {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+  }
+
+  .attribution-line {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px;
+    color: var(--gold-deep);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .footer-ornament {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 24px; }
+    .container::before { inset: 8px; }
+    p { font-size: 17px; }
+    .inline-callout { font-size: 18px; }
+    .final-conclusion { font-size: 19px; }
+    .secret-equation { font-size: 19px; }
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+  }
+
+  .container { animation: fadeUp 1s ease-out; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>סוֹד הֶחָלָב בְּשָׁבוּעוֹת</h1>
+    <p class="subtitle">הסכין שבכתר — ומה באמת הבינו עם ישראל בסיני</p>
+
+    <div class="divider">
+      <span class="divider-symbol">✦</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הסכין הכשרה</h2>
+      <p>
+        בעבודת ה' יש מושג של <strong>"סכין כשרה"</strong> —
+        ולא הסכין הגשמית שעל השולחן,
+        אלא <em>סכין רוחנית</em> שבה האדם
+        "שוחט" את נפשו הבהמית — את תשוקות הגוף, את הרצונות הגסים —
+        כדי להעלות אותם לקדושה.
+      </p>
+      <p>
+        ואדם שלא זכה לסכין כזו —
+        <strong>הורג ואוכל את נפשו הבהמית בכל דרך</strong>.
+        כלומר: הוא נהנה מהעולם, מהאוכל, מהתענוגות —
+        אבל בלי הכלי הראוי. בלי השחיטה הכשרה.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הסכין היא מחשבת הכתר</h2>
+      <p>
+        מהי אותה סכין כשרה?
+        זוהי <strong>המחשבה של הכתר</strong> —
+        הספירה העליונה ביותר, שורש כל הספירות,
+        שמעל הדואליות של טוב ורע, מעל השכל,
+        מעל החלוקות הרגילות.
+      </p>
+      <p>
+        זוהי מחשבה <em>חדה כחוט השערה</em> —
+        דקה, מדויקת, נטולת חציצות.
+        רק עם מחשבה כזאת אדם יכול
+        <strong>להכשיר את נפשו הבהמית</strong>
+        ובאמת ליהנות מן העולם <em>לשם שמים</em>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">בלי הסכין — טריפות רוחניות</h2>
+      <p>
+        אבל אדם שלא זכה ל<strong>מתן תורה</strong> —
+        לגילוי <em>תורת הכתר</em> בנפשו —
+        מה דינו?
+      </p>
+      <p>
+        כל אכילתו, כל הנאתו, כל לימודו, כל מה שהוא חושב שהוא עושה "לשם שמים" —
+        הכל בעצם <strong>"טריפות ונבילות רוחניות"</strong>.
+        הוא חושב שהוא מעלה ניצוצות,
+        אבל בלי הסכין הכשרה — הניצוצות נופלים.
+      </p>
+      <div class="inline-callout">
+        בלי תורת הכתר —<br>
+        ההנאה <em>נראית</em> כשרה,<br>
+        אבל <strong>אינה</strong> כשרה.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">התובנה בסיני</h2>
+      <p>
+        כשהבינו עם ישראל במתן תורה
+        ש<strong>אסור להרוג את הנפש הבהמית בכל דרך שרוצים</strong> —
+        רק באופן של תורה, רק מהכתר —
+        מה עשו?
+      </p>
+      <p>
+        <strong>מיד הפסיקו לאכול בשר</strong>.
+        ועברו לאכול חלבי.
+      </p>
+      <p>
+        זוהי הסיבה הפנימית למנהג אכילת חלב בחג השבועות.
+        לא רק שלא הספיקו להכשיר כלים —
+        אלא <em>גילוי תודעתי שלם</em>:
+        הם הבינו שאי אפשר עוד "להרוג" כמו פעם.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">שני סודות במילה "חלב"</h2>
+      <p>
+        ובתוך עצם המילה "חלב" טמונים שני סודות
+        שמסבירים מה באמת התרחש בעם ישראל באותו רגע:
+      </p>
+
+      <div class="secret-card">
+        <div class="secret-label">סוד א׳ · גימטריה</div>
+        <div class="secret-equation">חָלָב = 40</div>
+        <p class="secret-meaning">
+          ועם ישראל זכו במתן תורה ל<strong style="color:var(--crimson)">בינה</strong>,<br>
+          שעניינה ב־40 ספירות.
+        </p>
+      </div>
+
+      <div class="secret-card">
+        <div class="secret-label">סוד ב׳ · ראשי תיבות</div>
+        <div class="secret-equation">
+          ח-ל-ב<br>
+          <span style="font-size:18px;font-weight:500;color:var(--ink-soft);">
+            <strong style="color:var(--crimson)">ל</strong>יבי
+            <strong style="color:var(--crimson)">ח</strong>לל
+            <strong style="color:var(--crimson)">ב</strong>קרבי
+          </span>
+        </div>
+        <p class="secret-meaning">
+          מתהילים (קט, כב): "וְלִבִּי חָלַל בְּקִרְבִּי".<br>
+          הגיעו ל<strong style="color:var(--crimson)">ביטול מוחלט</strong> —<br>
+          ליבם ריק וכן, מוכן לקבל את השכינה שירדה עליהם.
+        </p>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-conclusion">
+        אכילת חלב בשבועות —<br>
+        הצהרה ש<strong>הפסקנו לאכול בכלי הישן</strong>,<br>
+        ש<em>ליבנו חלל בקרבנו</em>,<br>
+        וזכינו לסכין הכשרה — לתורת הכתר.
+      </p>
+    </div>
+
+    <div class="attribution">
+      <div class="attribution-line">מדברי ציון אבירם הי״ו</div>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
