@@ -72,6 +72,58 @@
     font-weight: 400; font-style: italic; margin-bottom: 38px;
     line-height: 1.5;
   }
+
+  /* Hero image — owner triumphant before the heavens */
+  .hero-image {
+    position: relative;
+    margin: 0 auto 42px;
+    max-width: 420px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border: 1px solid rgba(184, 138, 44, 0.4);
+    border-radius: 8px;
+    box-shadow:
+      0 20px 50px -15px rgba(43, 29, 16, 0.3),
+      0 0 0 1px rgba(184, 138, 44, 0.15) inset;
+  }
+  .hero-image::before {
+    content: ""; position: absolute; inset: 6px;
+    border: 1px solid rgba(184, 138, 44, 0.35);
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-image .hero-caption {
+    margin-top: 14px;
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .hero-image .hero-tagline {
+    margin-top: 6px;
+    text-align: center;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 15px;
+    color: var(--crimson);
+    font-style: italic;
+    font-weight: 500;
+  }
+  @media (max-width: 640px) {
+    .hero-image { max-width: 100%; margin-bottom: 30px; }
+    .hero-image .hero-tagline { font-size: 13px; }
+  }
   p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
   .anger { color: #c8231a; font-weight: 700; }
   strong { color: var(--crimson); font-weight: 700; }
@@ -404,6 +456,15 @@
       איך החלטה אחת רוחנית — מורידה גשם<br>
       של ברכה גשמית על העסק שלך
     </p>
+
+    <!-- ============================== -->
+    <!-- HERO IMAGE                      -->
+    <!-- ============================== -->
+    <figure class="hero-image">
+      <img src="data:image/jpeg;base64,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" alt="בעל עסק מורם ידיים בניצחון מול שמש זוהבת" loading="eager">
+      <div class="hero-caption">✦ הָעֵסֶק הַמּוּשְׁלָם ✦</div>
+      <div class="hero-tagline">״משיב הרוח — מוריד הגשם״</div>
+    </figure>
 
     <!-- ============================== -->
     <!-- OPENING - exhausted owner       -->
