@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>העסק המושלם — וההחלטה שתשנה לך הכל</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #d9a943;
+    --crimson: #8c2a1e;
+    --sun: #e8b942;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(232, 185, 66, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(184, 138, 44, 0.06) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.9;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+  .container {
+    max-width: 740px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.65) 0%, rgba(245, 236, 217, 0.35) 100%);
+    padding: 60px 56px 70px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 28px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 22px; letter-spacing: 8px;
+    margin-bottom: 20px; opacity: 0.7;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(36px, 6vw, 52px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 14px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 400; font-style: italic; margin-bottom: 38px;
+    line-height: 1.5;
+  }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  .anger { color: #c8231a; font-weight: 700; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  /* OPENING — exhausted owner */
+  .scene {
+    margin: 0 0 38px;
+    padding: 30px 28px;
+    background: rgba(140, 42, 30, 0.05);
+    border-right: 4px solid var(--crimson);
+    border-radius: 4px;
+  }
+  .scene-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 4px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .scene p {
+    font-size: 17px; color: var(--ink);
+    line-height: 1.75; margin-bottom: 12px;
+    font-style: italic;
+  }
+  .scene p:last-child { margin-bottom: 0; }
+  .scene p strong { color: var(--crimson); font-style: normal; }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 36px 0; gap: 18px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 160px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 16px; letter-spacing: 4px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 23px; color: var(--crimson); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::before { content: "❖"; color: var(--gold); font-size: 14px; }
+
+  /* The diagnosis - what's REALLY wrong */
+  .diagnosis-card {
+    margin: 26px 0;
+    padding: 30px 26px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment); border-radius: 6px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+    text-align: center;
+  }
+  .diagnosis-card::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px; pointer-events: none;
+  }
+  .diagnosis-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 18px;
+    position: relative; z-index: 1;
+  }
+  .diagnosis-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 24px; color: var(--parchment);
+    font-weight: 600; line-height: 1.5;
+    margin: 0; position: relative; z-index: 1;
+  }
+  .diagnosis-text .highlight {
+    color: var(--gold); font-weight: 700;
+  }
+
+  /* Pasuk box */
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 16px 22px; margin: 18px 0;
+    font-family: 'David Libre', serif; font-size: 17px;
+    color: var(--ink-soft); border-radius: 2px;
+  }
+  .pasuk-source {
+    display: block; font-size: 13px; color: var(--gold-deep);
+    margin-top: 6px; letter-spacing: 1px;
+  }
+
+  /* Insight callout */
+  .insight {
+    margin: 24px 0;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.08) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border-right: 3px solid var(--crimson);
+    border-radius: 3px;
+  }
+  .insight-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .insight p {
+    font-size: 18px; color: var(--ink); margin: 0;
+    line-height: 1.65; font-weight: 500;
+  }
+
+  /* THE DREAM - imagining the ideal */
+  .dream-card {
+    margin: 36px 0;
+    padding: 38px 30px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.22) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+  }
+  .dream-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 14px;
+  }
+  .dream-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px; color: var(--ink);
+    font-weight: 700; line-height: 1.4;
+    text-align: center; margin-bottom: 22px;
+  }
+  .dream-scene {
+    font-size: 17px; color: var(--ink);
+    line-height: 1.8; margin-bottom: 14px;
+  }
+  .dream-scene:last-child { margin-bottom: 0; }
+  .dream-scene strong {
+    color: var(--gold-deep); font-weight: 700;
+  }
+
+  /* The formula card */
+  .formula-card {
+    margin: 36px 0;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment); border-radius: 6px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+    text-align: center;
+  }
+  .formula-card::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px; pointer-events: none;
+  }
+  .formula-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .formula-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--parchment);
+    font-weight: 600; line-height: 1.55;
+    margin: 0; position: relative; z-index: 1;
+  }
+  .formula-text .glow {
+    color: var(--gold); font-weight: 700;
+    background: linear-gradient(180deg, transparent 60%, rgba(232, 185, 66, 0.25) 60%);
+    padding: 0 6px;
+  }
+  .formula-source {
+    margin-top: 16px; position: relative; z-index: 1;
+    font-size: 13px; color: rgba(245, 236, 217, 0.7);
+    font-style: italic; letter-spacing: 1px;
+  }
+
+  /* The mystical reveal */
+  .reveal-quote {
+    margin: 28px 0;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .reveal-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 4px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .reveal-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--ink);
+    font-weight: 700; line-height: 1.5;
+    margin: 0;
+  }
+  .reveal-sub {
+    margin-top: 12px;
+    font-size: 15px; color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* The choice — two paths */
+  .choice-card {
+    margin: 30px 0;
+    padding: 28px 24px;
+    background: rgba(43, 29, 16, 0.04);
+    border: 1px solid rgba(43, 29, 16, 0.18);
+    border-radius: 6px;
+  }
+  .choice-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 4px; color: var(--ink-soft);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 18px;
+  }
+  .choice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .choice-side {
+    padding: 22px 16px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .choice-side.now {
+    background: rgba(43, 29, 16, 0.06);
+    border: 2px dashed rgba(140, 42, 30, 0.4);
+    opacity: 0.85;
+  }
+  .choice-side.dream {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border: 2px solid var(--gold);
+  }
+  .choice-tag {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; padding: 3px 12px;
+    border-radius: 10px; margin-bottom: 10px;
+    text-transform: uppercase; font-weight: 700;
+    display: inline-block;
+  }
+  .choice-side.now .choice-tag {
+    background: rgba(140, 42, 30, 0.6); color: var(--parchment);
+  }
+  .choice-side.dream .choice-tag {
+    background: var(--gold); color: var(--parchment);
+  }
+  .choice-side-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 17px; font-weight: 700;
+    line-height: 1.3; margin-bottom: 8px;
+  }
+  .choice-side.now .choice-side-title { color: var(--crimson); }
+  .choice-side.dream .choice-side-title { color: var(--gold-deep); }
+  .choice-side-detail {
+    font-size: 13px; color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* CTA — pull to learn more */
+  .cta-card {
+    margin-top: 50px;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    text-align: center;
+  }
+  .cta-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 23px; color: var(--ink);
+    font-weight: 700; line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .cta-promise {
+    font-size: 16px; color: var(--ink-soft);
+    font-style: italic; line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .cta-tag {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-top: 10px;
+    display: inline-block;
+  }
+
+  .attribution {
+    margin-top: 40px; text-align: center;
+    padding-top: 26px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 15px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 24px;
+    color: var(--gold); font-size: 16px;
+    letter-spacing: 10px; opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 36px 22px 50px; }
+    .container::before { inset: 8px; }
+    h1 { font-size: 30px; }
+    p { font-size: 17px; }
+    .scene p { font-size: 16px; }
+    .diagnosis-text { font-size: 19px; }
+    .insight p { font-size: 16px; }
+    .dream-title { font-size: 21px; }
+    .dream-scene { font-size: 16px; }
+    .formula-text { font-size: 18px; }
+    .reveal-text { font-size: 18px; }
+    .cta-text { font-size: 19px; }
+    .choice-grid { grid-template-columns: 1fr; gap: 12px; }
+    .choice-side-title { font-size: 16px; }
+  }
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · לבעלי עסקים</div>
+    <h1>הָעֵסֶק הַמּוּשְׁלָם<br>שֶׁמְּחַכֶּה לְךָ</h1>
+    <p class="subtitle">
+      איך החלטה אחת רוחנית — מורידה גשם<br>
+      של ברכה גשמית על העסק שלך
+    </p>
+
+    <!-- ============================== -->
+    <!-- OPENING - exhausted owner       -->
+    <!-- ============================== -->
+    <div class="scene">
+      <div class="scene-label">אתה לא לבד</div>
+      <p>
+        אתה מתעורר בבוקר <strong>מותש</strong>.
+        עוד יום של אש לכבות.
+        עוד עובד שלא עומד בקצב.
+        עוד ספק שמאכזב. עוד לקוח מעצבן.
+      </p>
+      <p>
+        העסק נראה בסדר על הנייר —
+        המחזורים גבוהים, התשתית עובדת —
+        אבל <strong>הכסף בורח</strong>,
+        ואתה <em>לא יודע מאיפה</em>.
+      </p>
+      <p>
+        אתה <span class="anger">כועס</span>. מתפרץ. סוחב את זה הביתה.
+        חוזר למחרת — וזה מתחיל שוב.
+      </p>
+      <p>
+        ואתה שואל את עצמך:
+        <strong>"זה חייב להיראות ככה?"</strong>
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE DIAGNOSIS                   -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">מי באמת המפסיד מספר אחד בעסק שלך?</h2>
+      <p>
+        לא הספקים. לא המוצר. לא השירות.
+        לא התחרות, לא העובדים, לא הלקוחות.
+      </p>
+    </div>
+
+    <div class="diagnosis-card">
+      <div class="diagnosis-label">המאבחן</div>
+      <p class="diagnosis-text">
+        הַמַּפְסִיד מִסְפָּר אֶחָד בָּעֵסֶק שֶׁלְּךָ —<br>
+        <span style="color:#e85a4f;font-weight:700;">הוּא הַכַּעַס</span>
+      </p>
+    </div>
+
+    <div class="section">
+      <p>
+        כי <span class="anger">הכעס</span> עושה דבר אחד הרסני:
+        <strong>הוא מגרש את השכינה מהעסק</strong>.
+        ובלי שכינה —
+      </p>
+      <div class="pasuk">
+        בִּרְכַּת ה' הִיא תַעֲשִׁיר
+        <span class="pasuk-source">— משלי י, כב</span>
+      </div>
+      <p>
+        ברגע שאתה <span class="anger">כועס</span> — אתה <em>סוגר בעצמך</em> את ברז הברכה.
+        אפשר לעבוד 18 שעות ביום, אפשר להעסיק 50 עובדים,
+        אפשר להיות עם המחזור הגדול בענף —
+        אבל אם הברכה נסתלקה,
+        <strong>אתה מנהל עסק שדולף</strong>.
+      </p>
+      <div class="insight">
+        <div class="insight-label">המסקנה הקרה</div>
+        <p>
+          המאבק שלך לא מול עובדים שאיכזבו.
+          לא מול ספקים שעקצו.
+          המאבק שלך — <strong>מול <span class="anger">הכעס</span> שבתוכך</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE DREAM SCENE                 -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">תאר לך לרגע אחד...</h2>
+
+      <div class="dream-card">
+        <div class="dream-label">העסק האידיאלי</div>
+        <div class="dream-title">העסק שאתה מגיע אליו<br>בשמחה — לא מותש</div>
+
+        <p class="dream-scene">
+          אתה נכנס בבוקר — וכל היום כל מה שאתה צריך לעשות
+          זה <strong>להפיץ חיוכים</strong>.
+        </p>
+        <p class="dream-scene">
+          לקוח נכנס — מקבל <strong>חיבוק</strong>.
+          עובד מגיע — מקבל <strong>העצמה</strong>.
+          ספק מתקשר — מקבל <strong>כבוד</strong>.
+          כל מי שנכנס בדלת — מרגיש שנכנס ל<em>בית</em>, לא לעסק.
+        </p>
+        <p class="dream-scene">
+          אין דחיפות. אין צעקות. אין מתח באוויר.
+          הכל זורם. עסקאות נסגרות מאליהן.
+          לקוחות חוזרים <strong>בשמחה</strong>.
+          עובדים <em>מתחננים</em> להישאר אצלך.
+        </p>
+        <p class="dream-scene">
+          אתה — בעל בית של <strong>הכנסת אורחים מהודרת</strong>.
+          ובסוף החודש, בלי שהבנת איך —
+          <strong>הרווחים הוכפלו</strong>.
+        </p>
+      </div>
+
+      <p>
+        ועכשיו השאלה הקריטית:
+        <strong>איך מגיעים לעסק הזה?</strong>
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE FORMULA                     -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">הנוסחה ששוברת את הקיר</h2>
+      <p>
+        מצפים ממך שתעבוד עוד יותר קשה.
+        שתעשה <em>קורסים</em> של ניהול. שתשכור יועצים.
+        תפזר תקציבי שיווק. תרענן את האסטרטגיה.
+      </p>
+      <p>
+        כל זה נחמד — אבל יש <strong>קיצור דרך אחד</strong>
+        שלא יוצא בבית ספר למינהל עסקים:
+      </p>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-label">הנוסחה</div>
+      <p class="formula-text">
+        תַּתְחִיל לְהִתְנַהֵג<br>
+        <span class="glow">כְּאִלּוּ הַעֵסֶק שֶׁלְּךָ<br>כְּבָר מוּשְׁלָם</span><br>
+        — וְהַקָּדוֹשׁ בָּרוּךְ הוּא יְצָרֵף<br>
+        אֶת הַמַּעֲשֶׂה לַמַּחֲשָׁבָה
+      </p>
+      <p class="formula-source">
+        על פי דברי חז"ל: "מחשבה טובה הקב״ה מצרפה למעשה" (קידושין מ ע״א)
+      </p>
+    </div>
+
+    <div class="section">
+      <p>
+        זה לא סוד "הסוד" המערבי.
+        זו <strong>הלכה יהודית של 2,000 שנה</strong>.
+        כשיהודי <em>מתנהג</em> כאילו המציאות כבר מתוקנת —
+        הקב"ה <em>מתקן אותה</em> בפועל.
+      </p>
+      <p>
+        אבל יש <strong>תנאי אחד</strong>:
+        החלום של "העסק המושלם" חייב להיות
+        <em>החלום של ה'</em> — לא רק שלי.
+        ועסק שמלא ב<span class="anger">כעס</span> — <strong>לא מעניין את ה'</strong>.
+        עסק שמלא בשלום, חיוכים, ואהבת הבריות — <strong>זה הבית של ה'</strong>.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- MASHIV HARUACH                  -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">משיב הרוח — מוריד הגשם</h2>
+      <p>
+        בכל יום אתה אומר בתפילה:
+        <strong>"משיב הרוח — מוריד הגשם"</strong>.
+        חשבת פעם מה זה אומר?
+      </p>
+    </div>
+
+    <div class="reveal-quote">
+      <div class="reveal-label">הסוד הקבלי</div>
+      <p class="reveal-text">
+        תַעֲשֶׂה אֶת הַתִּקּוּן <strong>הָרוּחָנִי</strong> —<br>
+        וה' יוֹרִיד לְךָ אֶת הַ<strong>גַּשְׁמִי</strong>
+      </p>
+      <p class="reveal-sub">
+        רוח ← גשם. תיקון רוחני ← השפעה גשמית.
+      </p>
+    </div>
+
+    <div class="section">
+      <p>
+        הבעיה שלך נראית גשמית: <em>כסף, לקוחות, עובדים</em>.
+        אבל השורש שלה — <strong>רוחני</strong>.
+        <span class="anger">כעס</span>. חוסר שלום. שכינה שהסתלקה.
+      </p>
+      <p>
+        תעשה את התיקון במקור — <strong>תפסיק לכעוס</strong> —
+        והקב"ה יזרים <em>גשם של ברכה</em> על העסק שלך.
+        ספקים יוותרו. לקוחות יחזרו. עובדים יזהרו.
+        הזליגות ייסתמו. <em>"הגשם" יבוא.</em>
+      </p>
+      <p>
+        כל ה<strong>"ברכה התקועה"</strong> שמחכה לעסק שלך כבר היום —
+        תרד עליך כשהאוויר יהיה נקי מ<span class="anger">כעס</span>.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE CHOICE                      -->
+    <!-- ============================== -->
+    <div class="choice-card">
+      <div class="choice-label">שני העסקים שלך</div>
+      <div class="choice-grid">
+        <div class="choice-side now">
+          <span class="choice-tag">היום</span>
+          <div class="choice-side-title">
+            עסק של <span class="anger">כעס</span>
+          </div>
+          <div class="choice-side-detail">
+            דליפות, התשה,<br>
+            מחזור גבוה<br>
+            עם רווח נמוך
+          </div>
+        </div>
+        <div class="choice-side dream">
+          <span class="choice-tag">אפשרי</span>
+          <div class="choice-side-title">
+            עסק של שלום
+          </div>
+          <div class="choice-side-detail">
+            ברכה זורמת,<br>
+            עובדים שמחים,<br>
+            רווח שמכפיל את עצמו
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:18px;margin-top:20px;font-weight:500;">
+      ההבדל בין השניים?<br>
+      <strong>החלטה אחת שאתה מקבל היום.</strong>
+    </p>
+
+    <!-- ============================== -->
+    <!-- CTA - magnetic pull             -->
+    <!-- ============================== -->
+    <div class="cta-card">
+      <p class="cta-text">
+        תנהל את העסק שלך<br>
+        <strong>כאילו כבר הוא מושלם</strong> —<br>
+        והקב"ה ידאג להפוך אותו<br>
+        למושלם באמת.
+      </p>
+      <p class="cta-promise">
+        זה לא תיאוריה. זה מנגנון שעובד 24/7 בעולם.<br>
+        <em>השאלה היחידה — האם אתה תעשה את הצעד הראשון.</em>
+      </p>
+      <div class="cta-tag">★ הצעד הראשון: להפסיק לכעוס ★</div>
+    </div>
+
+    <div class="attribution">
+      מדברי ציון אבירם הי״ו
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
