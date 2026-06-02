@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מָשָׁל לַמֶּלֶךְ — אוסף משלי המלכות והעבדות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf3df;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #d9a943;
+    --crimson: #8c2a1e;
+    --royal: #6a3a8a;
+    --sun: #e8b942;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(232, 185, 66, 0.14) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(184, 138, 44, 0.08) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 40px 16px;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.65) 0%, rgba(245, 236, 217, 0.35) 100%);
+    padding: 50px 50px 60px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 13px; letter-spacing: 7px; color: var(--gold-deep);
+    margin-bottom: 22px; opacity: 0.85;
+  }
+  .crown {
+    text-align: center;
+    font-size: 42px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 10px rgba(184, 138, 44, 0.3);
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(32px, 5vw, 46px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 12px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 17px; color: var(--ink-soft);
+    font-weight: 400; font-style: italic; margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .stats {
+    margin: 0 0 28px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.14) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .stat { flex: 1; min-width: 90px; }
+  .stat-number {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--gold-deep); line-height: 1.1;
+  }
+  .stat-label {
+    font-family: 'Bellefair', serif;
+    font-size: 9px; letter-spacing: 2px;
+    color: var(--ink-soft); text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* Nav */
+  .nav {
+    margin: 0 0 30px;
+    padding: 14px 16px;
+    background: rgba(255, 250, 235, 0.6);
+    border: 1px solid rgba(184, 138, 44, 0.2);
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .nav-link {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 13px;
+    color: var(--gold-deep);
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 12px;
+    background: rgba(184, 138, 44, 0.08);
+    border: 1px solid rgba(184, 138, 44, 0.2);
+    transition: all 0.15s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-link:hover {
+    background: var(--gold);
+    color: var(--paper);
+  }
+  .nav-link .symbol {
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .nav-link:hover .symbol { color: var(--paper); }
+  .nav-link .count {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  /* Category */
+  .category {
+    margin-bottom: 50px;
+    scroll-margin-top: 30px;
+  }
+  .category-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .category-symbol {
+    font-size: 30px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .category-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--crimson);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .category-description {
+    font-family: 'Bellefair', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .category-count {
+    font-family: 'Bellefair', serif;
+    font-size: 11px;
+    color: var(--ink-soft);
+    background: rgba(184, 138, 44, 0.1);
+    padding: 3px 12px;
+    border-radius: 12px;
+    display: inline-block;
+  }
+
+  /* Parable */
+  .parable {
+    background: rgba(255, 250, 235, 0.75);
+    border: 1px solid rgba(184, 138, 44, 0.22);
+    border-right: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 20px 24px 18px;
+    margin-bottom: 16px;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  .parable:hover {
+    background: rgba(255, 250, 235, 0.92);
+    border-right-color: var(--gold-deep);
+    box-shadow: 0 6px 18px -8px rgba(184, 138, 44, 0.3);
+  }
+  .parable-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(184, 138, 44, 0.3);
+  }
+  .parable-num {
+    font-family: 'Bellefair', serif;
+    font-size: 14px;
+    color: var(--gold-deep);
+    background: rgba(184, 138, 44, 0.12);
+    padding: 3px 11px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+  .parable-meta {
+    font-family: 'Bellefair', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .parable-text {
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+  .parable-text p {
+    margin-bottom: 10px;
+  }
+  .parable-text p:last-child { margin-bottom: 0; }
+  .parable-text strong {
+    color: var(--crimson);
+    font-weight: 700;
+  }
+  .parable-text em {
+    color: var(--gold-deep);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* All parables show full content - no truncation */
+  .parable .parable-text { max-height: none; }
+  .expand-btn { display: none !important; }
+
+  /* Closing */
+  .closing {
+    margin-top: 50px;
+    padding: 32px 28px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    text-align: center;
+  }
+  .closing-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .closing-text strong { color: var(--crimson); }
+  .attribution {
+    margin-top: 36px;
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 15px;
+    color: var(--gold-deep);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 20px 8px; }
+    .container { padding: 30px 18px 40px; }
+    .container::before { inset: 8px; }
+    h1 { font-size: 26px; }
+    .subtitle { font-size: 14px; }
+    .stats { padding: 10px 14px; gap: 8px; }
+    .stat-number { font-size: 21px; }
+    .stat-label { font-size: 8px; letter-spacing: 1.5px; }
+    .nav { padding: 10px; gap: 5px; }
+    .nav-link { font-size: 12px; padding: 4px 9px; }
+    .category-symbol { font-size: 24px; }
+    .category-title { font-size: 22px; }
+    .parable { padding: 16px 16px 14px; }
+    .parable-text { font-size: 15px; }
+    .closing-text { font-size: 17px; }
+  }
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+    .nav { display: none; }
+    .parable { break-inside: avoid; }
+    .parable.long .parable-text { max-height: none; }
+    .parable.long .parable-text::after { display: none; }
+    .expand-btn { display: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="bezras">בעז״ה</div>
+    <div class="crown">♔ ❖ ♔</div>
+    <div class="eyebrow">פניני חכמה · משלי המלכות</div>
+    <h1>מָשָׁל לַמֶּלֶךְ</h1>
+    <p class="subtitle">אוסף משלי המלכות, העבדות, בן המלך, והארמון<br>מדברי ציון אבירם הי״ו</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">121</div>
+        <div class="stat-label">משלים</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">10</div>
+        <div class="stat-label">שערים</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">♔</div>
+        <div class="stat-label">מלכות</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link" href="#cat-A"><span class="symbol">♔</span><span>הַמֶּלֶךְ הַנִּסְתָּר</span><span class="count">12</span></a>
+      <a class="nav-link" href="#cat-B"><span class="symbol">♚</span><span>בֶּן הַמֶּלֶךְ</span><span class="count">18</span></a>
+      <a class="nav-link" href="#cat-C"><span class="symbol">⚜</span><span>שֵׁרוּת וְעַבְדוּת</span><span class="count">11</span></a>
+      <a class="nav-link" href="#cat-D"><span class="symbol">♛</span><span>הָאַרְמוֹן, הַכֶּתֶר, וְהָאוֹצָר</span><span class="count">8</span></a>
+      <a class="nav-link" href="#cat-E"><span class="symbol">✦</span><span>מִבְחָנִים וּשְׁלִיחֻיּוֹת</span><span class="count">11</span></a>
+      <a class="nav-link" href="#cat-F"><span class="symbol">❖</span><span>הַמֶּלֶךְ וְעַמּוֹ</span><span class="count">22</span></a>
+      <a class="nav-link" href="#cat-G"><span class="symbol">⚔</span><span>מֶלֶךְ אֱמֶת וּמֶלֶךְ מְדֻמֶּה</span><span class="count">8</span></a>
+      <a class="nav-link" href="#cat-H"><span class="symbol">✧</span><span>מָשִׁיחַ וּגְאֻלָּה</span><span class="count">8</span></a>
+      <a class="nav-link" href="#cat-I"><span class="symbol">✡</span><span>תּוֹרָה, חָכְמָה, וְלִמּוּד</span><span class="count">18</span></a>
+      <a class="nav-link" href="#cat-J"><span class="symbol">☥</span><span>תִּקּוּן הַמִּדּוֹת וְהַנֶּפֶשׁ הַבַּהֲמִית</span><span class="count">5</span></a>
+    </nav>
+
+    <section class="category" id="cat-A">
+      <div class="category-header">
+        <div class="category-symbol">♔</div>
+        <h2 class="category-title">הַמֶּלֶךְ הַנִּסְתָּר</h2>
+        <div class="category-description">מלך שמחביא עצמו - והקבלה לגלות</div>
+        <span class="category-count">12 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 17</span>
+          <span class="parable-meta">23.10.2025</span>
+        </div>
+        <div class="parable-text"><p>מדוע ישנים בחושך וערים באור ?! הקדוש ברוך הוא הסתכל על התורה וברא עולם, החושך זה הגלות בגלות צריך לעצום עיניים בגלות צריך לסתום אוזנים ולכן ישנים בחושך כל החושים נחים כי אם אדם מתאמץ להפעיל את חושיו בלילה יתעייף שבעתיים וכאשר הוא ישן הוא חווה מציאות של חלום דווקא שכל חושיו ישנים הוא יכול לראות עולם רוחני עם חויות רגשיות וחז<em>״ל אומרים שהחלום הוא אחד חלקי שישים מהנבואה כי אחרי שישים ספירות זוכים ליסוד שם זה גילוי של יוסף שהיה נביא והיה מלך החלומות. והאור הנץ זה גילוי הנפש האלוקית שם פתאום שומעים קולות של צפורים שם רואים שמש משל לקדוש ברוך הוא שם אדם מתעורר לבריאה חדשה והכל כנגד גילוי הנר׳ן של האדם , אחרי מאה עשרים שנה אדם מבין שהוא בא לעולם הזה בשביל העולם הבא ופספס את העולם הזה בזה שהתעסק בעולם הזה בשביל העולם הזה . פעם שאל החוזה מלובלין את אחד מעשירי העיירה מה יש לך בעולם הזה אמר לו העשיר :״</em> יש לי כרכרה יקרה מזהב וששה סוסים<em>״<br>אמר לו החוזה מלובלין:״</em>זה העולם הבא שלך שאלתי אותך מה יש לך בעולם הזה״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 18</span>
+          <span class="parable-meta">2.3.2026</span>
+        </div>
+        <div class="parable-text"><p><em>״<strong>מגילת אסתר״</em></strong><br>גילוי השם מתוך ההסתרה ההתבוננות היומיומית האמיתית בהשלתלשלות חיינו היא מגילת אסתר . אדם שמחבר את ספור חייו רואה שכל חייו נס אחד מתמשך השגחה גדולה שלא נגמרת למרות שלא ראה ולא רואה כביכול את מציאות השם בכל דבר השם נמצא בכל מקום ומשגיח עליו מתוך ההסתרה .וזה למה שם השם לא נמצא במגילה בגילוי רק בהסתרה משל מהגאון מוילנא ימחיש לנו :״למלך שהיה לו בן יחיד, אהובו, מחמד נפשו עד למאוד. פעם חטא בן המלך לאביו. בכעסו הרב ביקש המלך להעניש את בנו עונש קשה, ושילחו ליער. אך, דאגתו של המלך גברה בו עד מאוד על בנו, ולכן, שלח שומרים שישמרו עליו לבל יינזק ביער הגדול, אך, הזהירם המלך, לבל יבחין בהם בן המלך. שוטט בן המלך תועה ביער, והיה סבור כי אביו כועס עליו עד למאוד. פתאום, התנפל עליו דוב גדול, אך בטרם הספיק הדוב להזיק לו, יצא מבעד לסבך העצים אחד משומרי ראשו של המלך וחרבו שלופה בידו, וברגע קט המית את הדוב והציל את בן המלך! בטרם הספיק הנסיך להודות למיטיבו, נעלם שומר הראש בסבך העבות... כעבור כמה ימים, הגיע בן המלך למקווה מים קטן בלב היער, ועצר לשתות מים. עודו רוכן אל המים, פרץ אריה בשעטה לעברו וביקש לטרפו. בטרם עבר האריה את מחצית הדרך, נורה מתוך הסבך חץ היישר אל ליבו של האריה, והוא מעד ונפל מתבוסס בדמו... החייל שירה את החץ, מיהר ונעלם במעבה היער...ושוב ארע בלילה אחד שהתנפלו שודדים על הנסיך שישן לתומו תחת אחד העצים, ובטרם הספיקו להזיקו, התנפלו על השודדים קבוצה מחיילי המלך והניסום... אז הבין בן המלך היטב, כי אין זה מקרה כלל, אלא, אביו המלך שלח את עבדיו לשומרו ולהגן עליו מפני המזיקים. כאשר גמלה אצלו ההבנה, כי כן הדבר, שבה אהבת אביו אל ליבו ומיהר לשוב אל הארמון, שם התחנן לפני אביו שיסלח לו. ואמנם, סלח לו אביו והשיבו אל ארמונו כבימים ימימה. וזהו הנמשל: הקב&quot;ה שלח אותנו אל הגלות, לאחר שסרחנו וחטאנו לו, אך, עם זאת הוא גם שולח לנו שומרי ראש שיעמדו לנו להצילנו מצרותינו, אך הנהגתו זו הינה בהסתר פנים ואין איש שם לב על כך. אולם, מרדכי ודורו ראו והבינו, כי כל הקורות אותם הכול מאיתו יתברך, ולכן, התחזקו גם בתפילה, תשובה וצום, וחזרו וקיבלו את התורה מאהבת הנס שנעשה להם! <br><strong>כִּי בְשִׂמְחָה תֵצֵאוּ וּבְשָׁלוֹם תּוּבָלוּן </strong><br>פורים שמח עם קדוש!</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 37</span>
+          <span class="parable-meta">4.12.2023</span>
+        </div>
+        <div class="parable-text"><p>המשיח לא ישנה את המציאות רק יחדד את הראייה הפנימית ואז נבין שאנחנו לא מבינים ונתבטל אל מול האין סוף בשמחה כי נדע שתמיד היה מלך רק בחר להסתתר מפני כוחות הנפש הגלויים ונגלה רק למי שזכה לכוחות הנפש הפנימיים</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 41</span>
+          <span class="parable-meta">6.2.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״משל למלך שיצא למלחמה ומתלבש עצמו והחכמים מכירים אותו בתנועותיו אבל אותם שאינם חכמים כל כך מכירים את המלך על ידי סימנים שבמקום שיש שם שמחה יתרה וגדולה שם הוא המלך״</em><br>(בוקר מהבעש״ט הקדוש)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 46</span>
+          <span class="parable-meta">21.12.2023</span>
+        </div>
+        <div class="parable-text"><p>תחשבו הגלות זה שהמלך לא בארמון למראה עיניים והגאולה שכולם רואים המלך משל לבוס שבעבודה ובוס שבחופש איפה נדרשת נאמנות גדולה יותר אבל באמת אין הבדל בין גלות וגאולה מבחינת המלך רק מבחינת העובדים</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 51</span>
+          <span class="parable-meta">5.1.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך חכם גדול וגבור חיל ומרוב גודל ענותנותו היה רואה ואינו נראה ולא היה לו גוף ולא צורה ולא דמות הגוף והיה עושה ניסים גדולים לעמו ומציל אותם מפורעניות וסכנות גדולות רק איש לא ייחס הניסים למלך והכל אמרו כי כך הוא הטבע לפעמים מציל לפעמים לא, וחיפש המלך גוף בשר ודם להתגלות בו אבל היו שנתנו גופם ולא ויתרו על שכלם וממונם והיו שויתרו על שכלם ולא נתנו את גופם ולבסוף היה אדם שויתר על שכלו וויתר על גופו וויתר על ממונו או אז המלך ירד לגופו עם חכמתו ועושרו וענותנותו וקבע שם מקום ארמונו ומקדשו והפך את האדם למלך בשר ודם ומאז כולם האמינו במלך כי ראו אותו בגוף בשר ודם והמלך קרא לו ״</em>המשיח<em>״ ואז אפילו הגויים חזרו בתשובה כי האמינו למראה עינהם ולא למשמע אוזניהם״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 74</span>
+          <span class="parable-meta">6.11.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך בממלכה רחוקה שהיה ענו וחכם וגבור ועשיר שנחבא לכלים וכל העם חיפשוהו על מנת לראותו ועשה המלך חוק בתחבולותיו שמי שירצה לראותו יהפכו המלך לעוור ומי שיהיה ״</em>עוור<em>״ יוכל לראותו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 83</span>
+          <span class="parable-meta">13.3.2024</span>
+        </div>
+        <div class="parable-text"><p>היה מלך שנתן <em>״לשר החושך״</em> למשול באור והוא הלך והסתיר עצמו בחושך ונמצא שכל מי שהלך לאור נענש על ידי <em>״שר החושך״</em> ולחושך איש לא רצה ללכת וככה המלך הסתתר מעיני כל איש עד שבא ילד חכם ועז פנים והחליט שהמלך מסתתר בחושך והלך לחושך וגילה את אור המלך ונעשה מלך בעצמו וחזר לאור וגירש את <em>״שר החושך״</em> וככה נעשה עולם מואר באור פני מלך וזה סוד <em>״ליבי חלל בקרבי״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 104</span>
+          <span class="parable-meta">9.2.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שבקש מסירות נפש מחייליו ואמר להם אני אפתח את אוצרותיי ואתן לכם כל מה שצריך על מנת לנצח את המלחמה אבל שנתן להם פחדו לבזבז שמא יחסר למרות שהכל בא מהמלך...״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 106</span>
+          <span class="parable-meta">15.3.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך חכם וענו כל כך שפיזר חוכמתו לרוב על מנת להסתתר במידותיו ובכך הפריד את הבר מהמוץ אלא שכנסו חכמה יותר מהמעשים זכו למוץ ואלו שרדפו מעשים יותר מהחכמה זכו לבר״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 108</span>
+          <span class="parable-meta">5.3.2026</span>
+        </div>
+        <div class="parable-text"><p>בממלכה רחוקה היה מלך שהיה כל יכול שהיה יכול לשלוט במחשבה דבור מעשה של צומח חי מדבר, אבל מעולם לא חשף את יכולתו לנתיניו ,ותמיד הסתתר מעיני כל בכדי לא לקבל כבוד ושלא ירגישו שהוא המנהל, וככה ממלכתו התנהלה במשך שנים עד שלא ראו אותו בצבור והתחילו שמועות בקרב אנשים (ח׳ו) שאולי המלך הזה לא באמת קיים וזה סתם <em>״אגדה״</em> עליו כי לא הרגישו בו ולא ראו אותו והוא מעולם לא חשף את עצמו בצבור, ובאמת איש לא נקב אצבע בממלכה בלי הסכמת המלך רק איש לא ידע כי ככה החליט המלך וזה היה סוג של שעשוע של המלך לראות מידת האמת של נתיניו שככל שהוא נעלם מידת האמת של האנשים התגלתה יותר וככה ידע מי נאמן ומי לא וככה ניהל ממלכתו שכולם <em>״כבובות על חוטים שקופים״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 112</span>
+          <span class="parable-meta">27.4.2024</span>
+        </div>
+        <div class="parable-text"><p>היה מלך ענו וחכם שויתר על להיות מלך בממלכתו בגלוי ומלך בנסתר על מנת שכל אחד ירגיש מלך בעצמו אבל אז קרה דבר מוזר הממלכה הפכה להיות עם מיליוני מלכים שכל אחד מנסה להיות מלך על כולם ואז לא נשארה ברירה למלך אלא להביא מלך שקרן ואכזרי שימנע את הדבר</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-B">
+      <div class="category-header">
+        <div class="category-symbol">♚</div>
+        <h2 class="category-title">בֶּן הַמֶּלֶךְ</h2>
+        <div class="category-description">משלי הבן, יורש העצר, וההתעוררות</div>
+        <span class="category-count">18 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 13</span>
+          <span class="parable-meta">7.12.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה בן של מלך שהיה חכם ענו וגבור, ולילה אחד הורדם על ידי אחד השרים ובשנתו נחטף מהארמון והושלך רחוק מאד מאד מהממלכה ,לאי של פושעים ,והנה בהתעורר בן המלך לא האמין למראה עיניו מה מעשיו בין אנשים פוחזים אלו ,מיד חיפש דרך מלוט בתחילה ניסה לברוח מהים אבל לא מצא רב חובל ולא ספינה בכל דרך שרצה לברוח נתקל בבעיות מאנשי המקום שהיו אכזריים ואנוכיים, אחרי שלוש שנים שניסה לברוח הגיע ממש על סף יאוש והתחיל להבין שהוא לא יצליח כנראה לחזור לארמון, התחיל מלמד את האנשים ״</em>חכמת המלך<em>״ ומספר להם על המלך ולאט לאט הצטרפו עוד אנשים ועוד אנשים עד שנעשה מפורסם בחכמתו ומידותיו עברו שלושים שנה וכל האי הפך לאנשים שצמאים לראות את המלך ומדברים רק על המלך בכל רגע ורגע, והנה יום אחד מגיעה ״</em>אונייה מלכותית<em>״ ומהאונייה יורד לא פחות מאשר המלך בכבודו ובעצמו ,והבן מתומגג מאושר לראות את אביו אחרי שלושים שנה <strong>ומחבק האב את הבן בדמעות ולוחש לו באוזן יישר כוח על הצלחת בשליחות עכשיו אתה ראוי להיות מלך על כל הממלכה</strong>״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 35</span>
+          <span class="parable-meta">26.4.2026</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך ולו בן יחיד שאהבו מאד מאד אמר המלך לבנו הקטן אם תשאל עלי שאלות או תיהיה עצוב או כועס אעזוב אותך מיד הילד מרוב אהבתו לאביו הרגיל את עצמו להיות תמים שמח ושפל תמיד עד ששינה טבעו וככה היה אביו עמו לעולם עד שהפך מלך בעצמו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 43</span>
+          <span class="parable-meta">4.4.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שהביא לבנו מטוס צעצוע ואונייה צעצוע וסוס צעצוע והבן הקטן כל כך אהב את הצעצועים ששיחק עם חבריו בחול והתגאה בצעצועים כאילו הם אמיתיים ולכל מקום שהלך לקח איתו את המטוס האונייה והסוס והאבא צחק לעצמו ואמר בליבו אם כך בני הקטן מתלהב ושמח בצעצועי האונייה המטוס והסוס מה יהיה שיגדל ויהיה לו מטוס אונייה וסוס אמיתיים בבודאי ישמח בהם שבעתים״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 59</span>
+          <span class="parable-meta">10.4.2024</span>
+        </div>
+        <div class="parable-text"><p>היה בן של מלך שנתן לעני מעות לפני פסח וככל שנתן לעני ככה העני גילה לו סודות נסתרים ונתן לו הבן עוד ועוד והעני גילה לו סודות שאוזן לא שמעה עד שהתקיים בבן המלך המשפט <em>״ היזהרו בבני עניים שמהם תצא תורה&quot; (נדרים,פא, א)<br>וככה שנעשה מלך היה חכם שפל ענו ואהוב בקרב עמו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 70</span>
+          <span class="parable-meta">3.6.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״משל למלך שהיה לו בן אחד שפינק אותו ונתן לו כל טוב סלע שהיה בארמון אביו ,והילד גדל ועזב את אביו ורצה לנסות דרכו ללא אביו, ולמד מקצועות רבים ועסק במסחר וכנס חכמות רבות ,והמלך התגעגע לבנו, מה עשה ,שלח את שר צבאו שהיה ערמומי גדול וטקטיקן שייסר את הבן בסתר בכל מיני דרכים רק על מנת שהילד יחזור לארמון ,והילד שהיה חכם ומוכשר ניסה להלחם בשר צבא המלך, אך ככל שנלחם ככה נחלש איבד ממונו איבד בריאות נפשו וגופו ,אבל מגאוותו לא נכנע ולא ביקש עזרת אביו, עד שכמאט איבד עצמו לדעת, ושכב על העפר ומירר בבכי מיד שר הצבא החליף בגדים ובא בדמות ״</em>אליהו הנביא<em>״ והוביל הבן לארמון וככה התאחדו האב והבן עד שמרוב אהבת המלך לבנו שם כתר לראשו ואמר לו בני אתה תמלוך בממלכה ואני אמלוך בארמון״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 71</span>
+          <span class="parable-meta">17.7.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה בן של מלך שהיה בא אליו עני קבוע והיה נותן לו הבן של המלך צדקה הגונה ,וכל פעם שהעני קיבל צדקה ,היה נותן לבן של המלך סטירה, והנה אחרי שש שנים שהבן של המלך נותן צדקה וחוטף סטירה, פתאום העני היה מקבל צדקה מחייך ונותן חיבוק לבן של המלך, שאל בן המלך את העני:״</em> מה השתנה יום מיומיים<em>״? אמר לו העני:״</em>אני אליהו הנביא ששלחו אותי מהשמים לנסותך כי לרוב שאדם עושה מעשה הוא עושה בשביל לקבל משהו והניסיון שלך היה שש שנים במקום לקבל פרס תקבל עונש, אחרי שש שנים אמרו שעכשיו עברת את הניסיון ומהיום תקבל חיוך וחיבוק״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 75</span>
+          <span class="parable-meta">3.1.2026</span>
+        </div>
+        <div class="parable-text"><p><em>״משל למלך שהיה לו בן ורצה ללמדו כמה מיני חכמות שצריכין לו ושכר כמה חכמים שילמדו עמו והוא לא יצלח שיקבל שום חכמה עד שנתייאשו מללמדו,ונשאר חכם אחד עמו. ופעם א׳ ראה הבן המלך איזה בטולה וחמד יפיה,והיה החכם קובל למלך על בנו בעניין זה והשיבו המלך אם כך מאחר שיש לו חמדה אפילו הוא גם בגשמי מזה יבוא לכל החכמות , וצוה להכניס הבטולה לחצר המלך וצוה עליה המלך שאם יתבענה לא תשמע לו עד שיקבל חכמה אחת, וכן עשתה ואח״</em>ז אמרה שילמוד עוד חכמה עד שעל ידי זה קיבל כל החכמות וכשנעשה חכם אז מאס בבתולה הנ<em>״ל כי ישא בת מלך כמותו״</em><br>(משל מהבעש״ט הקדוש) ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 76</span>
+          <span class="parable-meta">21.2.2026</span>
+        </div>
+        <div class="parable-text"><p>משל למלך שהיה לו בן ורצה ללמדו כמה מיני חכמות שצריכין לו , ושכר לו כמה חכמים שילמדו עמו, והוא לא יוצלח לקבל שום חכמה עד שנתאיישו מללמדו, ונשאר חכם אחד עמו , ופעם אחת ראה בן המלך איזה בתולה וחמד יפיה והיה החכם קובל למלך על בנו בעניין זה, והשיבו אם כן מאחר שיש לו חמדה גם שהוא בגשמי אפילו הכי מזה יבוא לכל החכמות וציווה להכניס הבתולה לחצר המלך וצווה עליה המלך שאם יתבענה לא תשמע אליו עד שיקבל חכמה אחת וכן עשתה, ואחר זה אמרה שילמוד עוד חכמה עד שעל ידי זה קיבל כל החכמות וכשנעשה חכם אז מאס בבתולה הנ<em>״ל כי ישא בת מלך כמוהו והנמשל מובן ודברי פי חכם יבין<br>(מהבעש״</em>ט הקדוש) ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 81</span>
+          <span class="parable-meta">24.1.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שאהב ניגון בנו למרות שלא היה הבן מנגן בשום כלי ובלא קול ושאלו שרי המלך מה הניגון שמנגן בנך שכל כך אהוב עליך וענה המלך לשריו:״</em> ניגון הלב שהוא רק לי ואין לו שום אהבה זרה בליבו<em>״ <br>(ע״</em>פ ליקוטי מוהר״ן סד)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 82</span>
+          <span class="parable-meta">21.2.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך גדול ענו וחכם שהיה מקבל ילדים לארמון וכל הילדים רצו לשים לראשם את כתר המלך על מנת להרגיש קרוב למלך מה עשה המלך בחכמתו יצר חיקוי מושלם של כתרו והחביא את כתרו האמיתי ושם כתר מדומה לראשו וכל ילד שבא לארמון נתן לו המלך הכתר במתנה לימים כל הילדים גדלו והיו לחכמים גדולים והתגאו והלכו בכתר המלך על ראשם עד שנוצר מצב שכל הממלכה היתה מלאה מלכים ואיש לא ידע שהכתר מזוייף והכל עשה המלך בחכמתו על מנת שכל עבד ירגיש מלך״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 84</span>
+          <span class="parable-meta">11.4.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שנולד לו בן יחיד והמלך נתן לנאמן בכל ביתו חכם שילמד הילד כל האמת וכל חכמות הממלכה ובהגיע הילד לגיל עשרים נתנו לילד ״</em>כדור שכחה<em>״ בהוראת המלך וספר ובו תמצית של כל החכמה שלמד ושלחו לארץ רחוקה ובה מלך שקרן וכולם שם שקרנים אמר המלך לבנו דע שאתה בא לעולם השקרנים אל תחפש את האמת כי תיפול לשקר רק תרחק מהשקר והאמת תמצא אותך וככה הילד עשה פשוט התעלם מכל הסובב אותו ודבק בשלום לבסוף נגלה אליו רבו ומורו והוביל אותו בלב נתיבי שלום חזרה לבית אביו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 86</span>
+          <span class="parable-meta">24.9.2024</span>
+        </div>
+        <div class="parable-text"><p>התורה לא ניתנה לגויים אלא נזהרת התורה בגנותה של בהמה אז קל וחמור בגנותו של יהודי וכל המשלים הם עלינו רק בהשאלה מספרת התורה על הגויים . משל למלך שבנו הלך עם חברה רעה וסרח ובאו השרים למלך ואמרו בנך סרח והדין הוא מלקות על חטאיו האם להלקות את בנך הצטער המלך מאד ואמר לשרים תלקו קשות את חבריו ותגידו לבן שהוא היה צריך להענש אבל בגלל שהוא בן המלך אז אביו מכה את חבריו ולא אותו למען יראו ויראו כך הגויים הם לא אשמים שחוטפים צונמים רעידות אדמה טייפון וישראל לעולם לא אלא השם רומז לנו אתם חוטאים הגויים חוטפים למען תראו ותראו ולא תנהגו כמותם . ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 88</span>
+          <span class="parable-meta">4.3.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״במהלך המלחמה הופרדו אבא ובן אחד מהשני האבא היה מעבר לגבול אחד והבן היה מהעבר השני, והאבא חיכה ״</em>שש שנים<em>״ שהבן יחצה את הגבול והם יפגשו, אבל השומרים לא נתנו לילד לחצות את הגבול ,וכל פעם שהילד התקרב לגבול השומרים כוונו עליו נשק וצעקו שיהרגוהו, והוא נסוג לאחור מה שהוא לא ידע זה שאבא שלו היה מלך גדול ונתן הוראה לשומרים שהיו חיילים שלו להקשות על בנו לחצות ואם הוא יתעקש וימסור נפשו לתת לו לעבור לבסוף הילד ישב על הגבול אל מול השומרים ובכה בכיות עצומות בלב נשבר ונדכא, הבכי לא עשה רושם על השומרים אבל אביו שהיה קרוב לגבול ושמע את הבכיות והגעגועים של בנו יחידו לא עמד בהם ונשבר, ואז אמר לשומרים תפתחו השערים ותתנו לו לעבור את הגבול וככה התאחדו האבא והבן ״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 89</span>
+          <span class="parable-meta">21.4.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שהיו לו עשרה ילדים שהיו מתנהגים בהתנשאות על כל העם ובכל מקום שהיו כולם התיחסו אליהם בכבוד למרות שהם לא התנהגו תמיד בנמוס ובאורך רוח כלפי העם והכל בגלל שכל העם ידעו שהם בני המלך כבדו אותם מלפנים שורת הדין והעלימו עין מהתנהגותם ואהבו אותם מלפני שורת הדין״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 92</span>
+          <span class="parable-meta">24.7.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״משל למלך ששם שומר בפתח הארמון אכזרי שלא ״</em>מכיר פנים<em>״ לאיש ,אפילו לא לשרי המלך, והנה בא בנו של המלך להכנס לאביו והשומר נתן לו ״</em>בוקס<em>״ לבטן כרע והתכופף הבן בכאב ושאל את השומר ראש:״</em> למה נתת לי מכה לבטן שהרי אני בנו והוא אבי<em>״ ?! אומר לו השומר: ״</em>תפקידי לדאוג שכל מי שבא למלך ישתחווה בכניסה אפילו צדיק גדול ואפילו בנו של המלך אני בסך הכל עושה תפקידי נאמנה״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 95</span>
+          <span class="parable-meta">12.1.2026</span>
+        </div>
+        <div class="parable-text"><p>משל למלך ולו עשרה בנים שגודלים ומתנהגים באופן טבעי ותנוק אחד שכבר בן עשר ולא הולך לא מדבר ולא שומע , כל הנחת שיש לו מתשע הגודלים לא משתווה לצער שיש לו מהתנוק בן עשר</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 96</span>
+          <span class="parable-meta">21.2.2026</span>
+        </div>
+        <div class="parable-text"><p>היה בן של מלך אחד שהביאו לו מתנה <em>״מטאטא פלא״</em> והבן של המלך היה בדלמה האם לשמור על מטאטא נקי ורחובות מלוכלכים או רחובות נקיים ומטאט מלוכלך ועד היום הוא בדלמה....</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 98</span>
+          <span class="parable-meta">26.4.2026</span>
+        </div>
+        <div class="parable-text"><p><em>״היה בן של מלך שהלך לנצח אויב אכזר ואמר לו אביו המלך תחכה לי עד שאגיע ואני אנצח את המלחמה וחיכה בן המלך וחיכה וחיכה ואביו לא הופיע עד שעזר אומץ ויצא להלחם באויב בגפו ללא עזרת אביו והפלא ופלא ניצח את האויב האכזר והנה איך שהוא מנצח מופיע אביו המלך ברוב צבא גדול ואומר לו הבן:״</em> אבא איפה היית שנלחמתי<em>״? עונה לו אביו: ״</em>בני אהובי לא אתה נלחמת אני נלחמתי אתה רק עזרת אומץ לצאת למלחמה״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-C">
+      <div class="category-header">
+        <div class="category-symbol">⚜</div>
+        <h2 class="category-title">שֵׁרוּת וְעַבְדוּת</h2>
+        <div class="category-description">משלי עבדים, שרים, וקבלת עול מלכות</div>
+        <span class="category-count">11 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 19</span>
+          <span class="parable-meta">25.1.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״עבד הכוונה לגוף האדם שנאמר:״</em>אָנָּה יְהוָה כִּי אֲנִי עַבְדֶּךָ אֲ‍נִי עַבְדְּךָ בֶּן אֲמָתֶךָ ..<em>״ (תהילים קטז)<br>״</em>עשר רובל<em>״(רובל גמטריה אהבה טהורה) קאי על עשר כוחות הנפש שאדם נותן במרתף אפל וחשוך קאי על עולם העשייה העולם הזה שמשול ״</em>לבירא עמיקתא<em>״(בור עמוק) וחשוך מאור אלוקי אז כאשר אדם נותן עשר כוחות הנפש באהבה טהורה (אהבה המסותרת) למלך אז המלך מעלה אותו לארמון שנמצא על הר גבוה ונותן לו מחכמת הכתר שנמשל לשער האלף וככה האדם שמסר גופו נפשו ממונו זוכה לבסוף להיות מלך בעצמו שמולך על ייצרו בעולם המדומין הזה ״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 24</span>
+          <span class="parable-meta">23.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״כָּל מִשְׁבָּרֶיךָ וְגַלֶּיךָ עָלַי עָבָרוּ״</em> (תהילים מב)<br>הניסיונות באים על האדם כמו גלים וככל שיעמוד זקוף ככה ישבר יותר מהר אבל אם יתכופף לא משנה מה גודל הגל הוא לא ירגיש אותו כלל וכלל ,בכלל נשאלת השאלה למה באים הניסיונות?! <em>״משל למלך שהיה לו שומר ראש בפתח הארמון וכל מי שבא למלך השומר נתן לו בוקס לבטן והנה בא שר האוצר האהוב חברו של המלך ואיך שהוא מגיע לפתח הארמון נותן לו השומר ראש בוקס לבטן מתקפל השר בכאב ושואל את השומר ראש:״</em> הרי אני חברו של המלך מדוע אתה נותן לי מכה לבטן<em>״? עונה השומר ראש:״</em> תפקידו לוודא שכל מי שבא לפני המלך משתחווה ולכן אני מכופף את כולם<em>״! והנמשל מובן אנחנו גאים רק לא יודעים זאת תפקידו של הייצר שהוא שומר הסף לכופף אותנו בתקווה שאנחנו נרכין ראש וניהיה שפלים ואז נוכל לבוא לפני המלך״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 25</span>
+          <span class="parable-meta">3.6.2025</span>
+        </div>
+        <div class="parable-text"><p>משל לעבד שמשרת בארמון המלך וכל הזמן שמשרת המלך רוצה להגדיל ביתו וטובו האם המלך יקדם עבד כזה אבל אם העבד היה מפקיר רצונו ומתעסק ברצון המלך יום ולילה בוודאי המלך היה מקדם אותו להיות לידו בחינת <em>״וַאֲנִי קִרֲבַת אֱלֹהִים לִי טוֹב״</em> (תהילים עג) ומן הסתם היה זוכה <em>״לעבד מלך מלך הוא״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 32</span>
+          <span class="parable-meta">29.9.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שבנו עבר על חוקי הממלכה השקם וערב והדין היה שמי שעובר על החוקים יכנס לבית הסוהר, מה עשה המלך, שם את בנו בבית סוהר ואמר לעוזרו האישי:״</em> לך בסתר אל בני ותספק לו כל צרכיו ובקשותיו<em>״! והלך עבד המלך אל הבן שהיה בבית הסוהר ושאל את הבן מה תרצה? אמר הבן לעבד המלך: ״</em>רצוני סמיכה מנוצות אווז חמה ונעימה ותביא לי יין מובחר ממרתף המלך וגם פסיון מומלא בפרות יבשים ואורז בר, וככה כל יום בא העבד לבן המלך והבן היה מבקש והעבד היה מביא, יום אחד ראה העבד של המלך את המלך עצוב מאד, שאל אותו עבד המלך:<em>״ מלכי האהוב למה תתעצב אל ליבך״</em>? אמר המלך לעבדו: <em>״כי שאמרתי לך לך לבני ותבקש ממנו מה רצונו הוא ביקש בלי סוף תנאים לעצמו אוכל טעים יין מובחר, אבל מעולם לא ביקש לחזור לארמון ולראות אותי וזה מצער אותי שאם היה מבקש להשתחרר מבית הסוהר מיד הייתי משחררו וחכם יבין״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 56</span>
+          <span class="parable-meta">22.1.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך ארירי ללא ילדים שאהב כל כך את נתניו שראה אותם כילדיו והיה מפזר מעות ומרגליות ברחובות בלי סוף על מנת שיהיו כולם מאושרים וכל הממלכה היו עשירים והנה המלך חיפש עבד לארמון ותנאי הקבלה היו שהאדם יתן את כל אוצרותיו שכנס לקופת המלך על מנצ להיות למלך לעבד ואיש לא היה מוכן כי לא רצה להיות עני אחרי שכנס כל כך הרבה אוצרות , עד שבא אדם אחד שפל וענו ואמר למלך אני אהיה לך לעבד אמר לו המלך: ״</em>עלייך לתת את כל רכושך למלך<em>״ אמר לו האדם:״</em> מה טוב לי בכל הרכוש אפ אני לא במחיצת המלך<em>״ אמר לו המלך:״</em> אתה לא תיהיה עבד אתה תיהיה למלך ושם כתר לראשו״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 57</span>
+          <span class="parable-meta">25.1.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה עבד שהיה נפגש עם מלך בחשאי במרתף שחור ואפל בבור עמוק ונותן למלך ״</em>עשר רובל<em>״ והמלך היה נפגש איתו פעם בשבוע בפנטהאוס יוקרתי ומחזיר לו ״</em>אלף רובל<em>״ עד שהעבד נעשה עשיר גדול ובנה לו ממלכה משלו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 69</span>
+          <span class="parable-meta">30.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה שר בממלכה רחוקה שבה היה מלך חכם גבור עשיר וענו והשר הזה היה נאמן חכם ומסור למלך רק היתה לו בעיה קטנה עמוק בתוך ליבו רצה הוא בעצמו להיות מלך ומה שהוא לא ידע שהמלך היה בוחן כליות ולב וידע רצונו הפנימי לכן המלך התנהג עמו בדרך של ״</em>גִּלָּה טֶפַח וְכִסָּה טִפְחַיִם״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 85</span>
+          <span class="parable-meta">15.8.2024</span>
+        </div>
+        <div class="parable-text"><p>כאשר אדם לומד בגלוי ופועל בגלוי ונותן עצות ומקבל עצות הוא לא יודע <em>״שאוזניים לכותל״</em> וחושב בתמימותו שזה רצון השם שידבר ויתנהג כך אלא משל לאדם שנמצא עבד אצל מלך רשע ורוצה לברוח אל מול פני המלך ככל שינסה יותר המלך ייסר אותו על רצונו לברוח נמצא שחייבים לפעול בסתר בשתיקה בענווה ובשפלות מתחת לרדאר של המלך הרשע, זאת כבר עבודה שצריך ללמוד אותה ועם המלך הרשע נמצא בתוכך והוא זה אתה איך תברח ממנו?! ברוך הבא <em>״למטריקס״</em>! ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 105</span>
+          <span class="parable-meta">22.3.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה עבד שעשה רוצנו בהדור גדול ורצון המלך כהלכה והנה העבד הזה לא קבל שום קדום במשך שנים עד שצפור לחשה לו שמן הראוי שיעשה רצונו כהלכה ורצון המלך בהדור כדול ומאז נעשה איש סודו של המלך״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 111</span>
+          <span class="parable-meta">3.2.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך אחד שכל עבד שרצה להתקבל לעבוד בארמון היה צריך לעבור מאה ימים של יסורין על מנת להוכיח נאמנותו וכל יום היסורים היו שונים ומשונים מיום קודם ויום אחד רואה חברו של העבד ושואלו אתה כבר שבעים ימים ביסורים אולי תפרוש תעזוב את הרצון לשרת את המלך האחד, אמר לו חברו העבד:״</em> אומר לך האמת שאין לי כל יסורים וכל כאב נהפוכו יש לי תענוג גדול בהם התפלא חברו של העבד ושאל אותו הכיצד אתה אומר שאתה נהנה מהם ענה לו העבד כל יום שעובר אני מתקרב למלך יותר ויותר וככל שאני מתקרב הכאב נעלם ומתחיל להרגיש תענוג אין סופי שזורם ברמ<em>״ח אברי ושס״</em>ה גידי מהפגישה המיוחלת עם האחד אחרי המאה ״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 119</span>
+          <span class="parable-meta">10.7.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שחיפש עבדים לשרתו בארמון והבטיח תנאי עבודה גשמים גדולים ושכר ענק ועצום רוחני אחרי שלוש שנות עבודה ובאו בלי סוף עבדים בשביל התנאים ולא בשביל השכר ואז הבין המלך שהפכו האמצעי למטרה ולא התקבלו לעבודה״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-D">
+      <div class="category-header">
+        <div class="category-symbol">♛</div>
+        <h2 class="category-title">הָאַרְמוֹן, הַכֶּתֶר, וְהָאוֹצָר</h2>
+        <div class="category-description">משלי הכניסה לארמון, הכתר, והאוצר</div>
+        <span class="category-count">8 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 1</span>
+          <span class="parable-meta">21.10.2023</span>
+        </div>
+        <div class="parable-text"><p>הרע הוא שומר ראש של המלך, או מבחן כניסה לחסד או מכונת האמת של המלך הוא כיסא לטוב<br>משל למה הדבר דומה:<br><em>״היה מלך אהוב גדול גבור עשיר ענו ולו ארמון גדול שהיה מקבל כל מי שרצה לראות אותו ליחידות אבל היה לו שומר בכניסה שכל מי שהיה רוצה להכנס למלך היה מקבל אגרוף לבטן ,יום אחד בא השר האהוב על המלך איש סודו ובא להכנס והנה השומר נותן לו אגרוף לבטן שהוא מקופל מכאב שואל השר את השומר:״</em> הרי אני אהובו של המלך מה הסיבה שאצה מכה אותי באכזריות ? עונה לו השומר:<em>״ תפקידי לוודא שכל מי שבא למלך יכנס בקומה כפופה בלי קשר מי האדם״</em>! זהו הרע הוא מבחן כניסה וכל מי שלא מתכופף ומאמין שהרע הוא רשות ולא המלך בעצמו יזכה למכה מתחת לחגורה <em>״דינא מלכותא דינא״</em> ולכן רבי יוחנן בן זכאי עשה עצמו כמת והצליח לצאת מהחומות של הייצר ולבקוש את אספסיאנוס שהוא הנחש שהופך למשיח ונותן מתנות מלכות בית דוד (משיח) יבנה וחכמיה (חכמת הויה) ורפואה לרבי צדוק כל צער הגלות שאנחנו מייחלים למשיח זאת מחלת אהבה שאמר שלמה המלך:<em>״..כִּי חוֹלַת אַהֲבָה אָנִי״</em> (שיר השירים)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 30</span>
+          <span class="parable-meta">10.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שכל שריו ועבדיו לבשו בגדי לבן ושמרו שלא יהיה רבב בבגדיהם מה עשה המלך לקח כתרו מעל ראשו וזרק לביוב לעיני כל שריו ועבדיו ואיש מהשרים והעבדים לא קפצו לביוב להביא למלך כתרו, כעס המלך והאדימו פניו אמר להם המלך בגדייכם חשוב מכתרי מיד הסתלק מעל פניהם ולא הראה פניו עוד״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 50</span>
+          <span class="parable-meta">10.12.2024</span>
+        </div>
+        <div class="parable-text"><p>משל לפושע גדול שהיה גונב מאוצר המלך בלי ידיעתו עד שהמלך הפך לעני וכל הממלכה סבלה מעניות מרודה עד שבא ילד אחד שהחזיר את הפושע גנב הזה בתשובה והוא החזיר את כל אוצרותיו של המלך ולאות הוקרה על שליחות הילד הוא הפקיד את האוצר בידי הילד והפך את הפושע לשר בממלכתו והילד הזה הוא המשיח וחכם יבין</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 63</span>
+          <span class="parable-meta">25.8.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שגר בארמון <br>מוקף כפרים של עניים שמיי ביוב הפרידו בין הארמון לכפרים והנה יום אחד אמר שאבד לו הכתר ואמר לשריו ועבדיו מי שימצא הכתר יהיה משנה למלך וחיפשו בכל עמק בכל הר במדבר ובים וביבשה והנה המלך זרק את כתרו לביוב שסביב לארמונו רק על מנת לראות מי ילכלכך בגדיו ויחפש במי הביוב ואיש משריו ועבדיו לא חיפש בביוב שהקיף את הארמון מחשש שיתלכלכו בגדיהם״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 93</span>
+          <span class="parable-meta">30.10.2025</span>
+        </div>
+        <div class="parable-text"><p><strong><em>״לך לך</strong>״</em><br><em>״משל למלך שגר בארמון ישן מלוכלך חשוך והנה ביום הולדתו המאה אמר לבנו היחיד יורש העצר דע לך בני:״</em>שאבותיי אמרו לי שיש אוצר מתחת לארמון ועל מנת לגלות אותו חייבים להרוס את הארמון ולגלות את היסודות של הבניין, אבל לנו לא היה אומץ להרוס את הארמון לא לסבי ולא לאבי ולא לי שמה אין כלום מתחת לארמון ונשאר בלי כלום, אבל אתה בני צעיר ואמיץ אתה לא כמונו אולי לך יהיה האומץ להרוס את הארמון ולגלות את האוצר שביסוד ואז לבנות ארמון חדש ומשוכלל שיש בו אושר ועושר״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 100</span>
+          <span class="parable-meta">23.10.2023</span>
+        </div>
+        <div class="parable-text"><p>משל לשני שרים שמתווכחים בארמון ופתאום נכנס המלך שניהם שותקים מיד<br>(משל מהאדמור הזקן)<br><em>״<strong>שני כתובים המכחישים זה את זה עד שיבוא השלישי ויכריע ביניהם״</em></strong><br>הנפש האלוקית והנפש הבהמית מכחישים זה את זה עד שזוכים שהמלך נכנס לחדר ושניהם מתבטלים ואיך יודעים שהכתוב השלישי הוא אלוהים שנאמר:<em>״בְּרֵאשִׁית, בָּרָא <strong>אֱלֹהִים</strong>״</em><br>הכתוב השלישי וקל להבין</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 110</span>
+          <span class="parable-meta">21.12.2023</span>
+        </div>
+        <div class="parable-text"><p>העולם לא כלי לקבל את האמת עדיין מחילה מביא האור החיים הקדוש בפרשת ויגש שיהודה נגש ליוסף היו שומרים שמקיפים את יוסף בצי גורן ולכן לא רצה יהודה לדבר אל מול השומרים כי הם שמעו דבר אחד והעבירו דבר אחר משל לאדם שבא למלך והשומרים בכניסה שואלים אותו למה לך לבוא למלך אומר להם האדם אני רוצה להתלונן בפני המלך על ההתנהגות הברוטלית שלכם שואל האור החיים איזה שומר ייתן לעבור לאדם כזה?!</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 118</span>
+          <span class="parable-meta">10.4.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״משל לאיש שכל חיו רצה לבוא לארמון להכנס ליחידות ולפגוש המלך והנה אחרי ארבעים שנה של חיפושים ובטושים משומרי החומות הגיע סוף סוף לארמון נכנס לחדר המלך ראה ״</em>כיסא ריק<em>״ וכתר על הכיסא אבל את המלך לא ראה ,שם הכתר על ראשו וישב על הכיסא״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-E">
+      <div class="category-header">
+        <div class="category-symbol">✦</div>
+        <h2 class="category-title">מִבְחָנִים וּשְׁלִיחֻיּוֹת</h2>
+        <div class="category-description">משלי שליחויות שהמלך מטיל ומבחני נאמנות</div>
+        <span class="category-count">11 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 10</span>
+          <span class="parable-meta">2.4.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״המדרש מביא משל למלך ששלח שלושה שרים עם יין ישן נושן לעבור מדבר ולבדוק אמינותם ואמר להם מי שישתה מהיין אערוף את ראשו. אחד היה צמא מאד וסקרן מאד לטעם היין הישן נושן שתה את כל הבקבוק, השני פתח שתה טעם את היין והצטער על שעבר על דבר המלך, מיד פקק את הבקבוק והמשיך ללכת במדבר. שלישי בכלל לא פתח היין. והנה מגיעים שלושת השרים למעבר למדבר מחכה להם המלך ואומר לראשון:״</em> איפה הבקבוק יין שנתתי לך<em>״?אמר לו השר :״</em>מצטער כבוד המלך שתיתי הכל בדרך<em>״ מיד נתן פקודה לערוף את ראשו, שואל המלך את השלישי:״</em> איפה הבקבוק שלך<em>״? אומר לו השר:״</em> הנה הבקבוק כבוד המלך אומר השר בבטחון ובגב זקוף וראש מורם לא פתחתי ולא טעמתי<em>״! אמר לו המלך:״</em> יישר כוח שכרך אלף רובל<em>״ ! שואל המלך את השר השני: ״</em>ואיפה הבקבוק שלך<em>״? אומר השר השני עם ראש כפוף ונפש שפלה אני מאד מצטער המלך לא יכולתי להתאפק לא לשתות טעמתי ומיד נכנס בי צער גדול על שעברתי על דבר המלך ופקקתי את הבקבוק״</em> אומר המלך כל הכבוד לך שכרך עשר אלף רובלים שואל השר שלא שתה:<em>״כבוד המלך מדוע שהוא יקבל עשר אלף רובל והוא עבר על הפקודה שלך ואני שלא עברתי ולא שתיתי כלל מקבל רק אלף רובל״</em>?! אומר לו המלך כי יכול להיות שאם היית טועם היית שותה את כל הבקבוק והוא טעם וסגר ולכן עמד בתאוותו ואתה בכלל לא התמודדת״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 22</span>
+          <span class="parable-meta">7.10.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך ולו סוס מרוץ שחור חכם במיוחד שהיה נותן רק למי שיותר חכם ממנו לרכב עליו ואמר המלך לשריו:״</em> מי שיוכל לרכב על הסוס שלי והסוס לא יעיף אותו מעליו סימן שהוא החכם מכל שריי והוא יהיה משנה למלך ורק הכיסא יפריד ביני לבינו<em>״ וכל השרים למדו יום ולילה בכל חכמות המלך ואיש לא יכל לרכב על הסוס איך שהתקרבו הסוס עמד על שתי רגליו האחוריות עד שבא ילד קטן ״</em><strong>בער מדעת<em>״</strong> ואמר למלך:״</em>אפשר לנסות<em>״ אמר המלך לילד:״</em> בבקשה<em>״ ואיך שהתקרב הילד לסוס מיד כרע הסוס ונתן לילד לרכב על גבו והיתה תעלומה בעיני השרים איך הילד זכה לחכמה הנכספת והם לא זכו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 33</span>
+          <span class="parable-meta">22.10.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך גדול ונורא ולו עשרה ילדים שעבדו בניהול ממלכתו וקיבלו שכר נאה אחד היה רופא שהיה מרפא חולים ואחד היה עו׳ד שהיה עוזר לחלשים ואחד היה אנסטלטור שהיה פותח סתימות ואחד היה נגר שהיה בונה בתים מעץ והנה נפגשו הילדים שלוש פעמים בשנה אצל האבא בארמון ושהילדים היו באים לארמון היו במחלוקות תמיד הרופא אמר להם אתם לא עוזרים בריפוי החולים והעו׳ד אמר לאחים אתם לא עוזרים לעניים בענינים אדמינסטרטיבים מול השלטון, והנגר אמר יש הרבה בתי עץ לבנות ואני קורס מתחת לעול ,וככה היו במחלוקות כל פעם שנפגשו בבית האבא, והאבא התעצב לליבו ואמר לעצמו אני משלם משכורתם עבדי עושים בלי סוף מאחורי הקלעים ואלו הבנים במקום לבוא לביתי בפרצוף מחייך בשירה רקוד ומחיאת כף הם באים בפרצוף זועף ומתווכחים מי טוב יותר ביטל האבא את ההרגל שהיו באים שלוש פעמים לארמון ואמר עד שלא תשמחו אחד עם השני לא אראה את פני ולא תוזמנו לארמון״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 36</span>
+          <span class="parable-meta">31.10.2023</span>
+        </div>
+        <div class="parable-text"><p>משל לאדם שהוביל אונייה מלאה ספרים למלך גדול ןרצה לחצות הים הגדול והנה בלב ים רואה הוא אונייה טובעת ואנשים זועקים לעזרה <em>״במים הסוערים״</em> מה עשה זרק הספרים לים והציל כמה אנשים שהיה יכול, שהגיע לחוף מבטחים בא המלך ושאל:<em>״ איפה כל הספרים שלי״</em> אמר לו האדם: <em>״זרקתי לים והצלתי אנשים״</em> שמח המלך שמחה גדולה שילש שכרו ועשהו משנה למלך״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 38</span>
+          <span class="parable-meta">12.5.2024</span>
+        </div>
+        <div class="parable-text"><p>היה מלך חולה ללא ילדים שחיפש יורש עצר ראוי ,חיפשו ילדים מגיל 13 ומעלה בעלי מידות טובות ,אלפים הגיעו למבחני הקבלה ולבסוף נשארו שלושה ,המצב של המלך הלך והחמיר הוא היה חולה בליבו עד שהרופאים אמרו נואש, לא היתה ברירה אלא לחפש תורם שיתרום את ליבו למלך שאלו את השלושה ילדים מי מכם מוכן לתרום את ליבו למען חיי המלך ?שתיים מיד נעלמו ורק אחד שמח לתרום את ליבו ומיד שהסכים. קרא לו המלך ליחידות ואמר לו <em>״בני אתה תיהיה יורש העצר אין לי כל מחלה אני בריא לחלוטין רציתי רק לבחון את מידת מסירות הנפש שלכם ואתה הוכחת לי שאתה מוכן למות בשבילי, לכן אתה ראוי להיות היורש וזה שנאמר:<br> ״</em><strong>רחמנא ליבא בעי״</strong></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 39</span>
+          <span class="parable-meta">23.5.2024</span>
+        </div>
+        <div class="parable-text"><p>משל לאדם שהוביל אונייה מלאה ספרים למלך שרצה לחצות הים הגדול והנה בלב ים רואה הוא אונייה טובעת ואנשים זועקים לעזרה במים הסוערים מה עשה זרק את כל הספרים לים והציל אנשים כמה שהיה יכול שהגיע לחוף מבטחים בא המלך ושאל איפה כל הספרים שלי אמר לו האדם זרקתי לים והצלתי אנשים שמח המלך שמחה גדולה שילש שכרו והפך אותו למשנה למלך״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 45</span>
+          <span class="parable-meta">12.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״בממלכה קטנה היה מלך טוב ענו וחכם וכולם אהבו את המלך אבל היתה בעיה בממלכה היה גנב שהיה גונב מכל הבתים בלילה ואיש משרי המלך וחייליו לא הצליחו לתפוס את הגנב, מה עשה המלך בחכמתו הודיע במפתיע שהוא עוזב הממלכה ואיתו כל שריו וחייליו והנה כעבור כמה ימים התחיל הגנב לגנוב בגלוי לאור יום עד שכולם ידעו מקום מחבואו או אז חזר המלך במפתיע ועצר הגנב ומאז העיירה שקטה ושמחה״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 68</span>
+          <span class="parable-meta">27.4.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך אחד ולו ארבע כרכים בממלכה וכל ענינו להטיב לממלכה מה עשה המלך ברוב חכמתו על מנת להגביר הטוב פיזר ״</em>עשרה סוחרים<em>״ רמאים ושקרנים בכל כרך של הממלכה והציע פרס ענק למי שיצליח לעשות איתם עסקי מסחר בטוב וישר ולהרוויח״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 72</span>
+          <span class="parable-meta">4.10.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״משל למלך שהפך כל עושרו ״</em>ליהלום אחד<em>״ וביקש להעביר היהלום למדינה רחוקה מעבר למדבר, בכדי להקים שם ממלכה חדשה, והנה חשב המלך איך אעביר את היהלום במדבר שהרי המדבר שורץ ״</em>שודדים וליסטים<em>״ ואז חשב בליבו אשלח ״</em>אלף פרשים<em>״ ואחביא היהלום אצל אחד מהם ,ואז אמר לעצמו בוודאי שהשודדים יתפסו אותם ויענו אותם עד שימצאו היהלום, ואז אמר אקח ארבעה מטובי הרוכבים על סוסים שחורים וכל אחד יצא לכיוון שונה וככה אעביר היהלום אבל אז אמר לעצמו השודדים בודאי יתפצלו ויתפסו אותם אחד אחד. לבסוף הבזיק רעיון במוחו אמר אשלח את היהלום עם עני יחף עם בגדים קרועים ובלויים כי עליו השודדים לא יסתכלו כלל וככה עשה ואעביר את היהלום בהצלחה״</em><br>והנמשל מובן... או שלא״?!</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 94</span>
+          <span class="parable-meta">22.12.2025</span>
+        </div>
+        <div class="parable-text"><p>משל :<em>״למלך שביקש מגדולי צייריו לצייר לו אדם עם סלסלה מלאה לחמים על ראשו ,והבטיח פרס כספי גדול לצייר הטוב ביותר, והנה הביאו הציירים את ציוריהם והשרים והשופטים מסתכלים ובוחנים איזה מהציורים הוא האמיתי ביותר,<strong>לפתע באה צפור והתחילה מנקרת את הלחם מאחד הציורים</strong> מיד אמר המלך נו שריי ועבדי מה אתם אומרים על גדולת הצייר שהגדיל לצייר ציור עד שהצפור טעתה לחשוב שהלחם אמיתי , מה דעתכם שריי ועבדיי? כולם אמרו פה אחד:״</em> זה הציור הטוב והאמיתי ביותר כבוד המלך<em>״! פתאום הגיע ילד קטן ואמר :״</em>אני מוצא פגם בציור כבוד המלך<em>״ <br>שאלו המלך:״</em>ומה הפגם ילד<em>״<br>אמר לו הילד:״</em>אם הציור אמיתי והצפור נחתה על ראש האדם ואכלה מהסלסלה איך לא פחדה מהאדם סימן שהאדם נראה לה כמת ולא כחי״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 115</span>
+          <span class="parable-meta">28.12.2023</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שנתן תרופה רעילה שכל מי שנוגע בה מת ואמר מי שיקח את התרופה הממיתה ויהפוך אותה לממתק באותם החומרים בלי להוסיף שום חומר הוא יהיה יורש העצר והרבה ניסו להפוך התרופה וטעמו אותה מיד מתו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-F">
+      <div class="category-header">
+        <div class="category-symbol">❖</div>
+        <h2 class="category-title">הַמֶּלֶךְ וְעַמּוֹ</h2>
+        <div class="category-description">משלי הנהגת הממלכה, יחסי המלך ונתיניו</div>
+        <span class="category-count">22 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 3</span>
+          <span class="parable-meta">1.2.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״יש מלך אחד אבל לפני שהוא בא צריך להמליך אותו ,כאשר אדם חי עם ספקות שנובעים מרצון לטוב אז הוא מאמין כביכול בשתי רשויות רשות של רע ורשות של טוב זה המלכת השקר המלכת המדמה ,שהרי ״</em><strong>אין אני והוא דרים בעולם אחד<em>״</strong> (סוטה ה) וגם נאמר:״</em><strong>אין רע יורד מלמעלה כלל</strong><em>״ (מדרש נשא) נמצא שכאשר יש ספק המלכנו את המדמה ואז אולי כן ואולי לא אבל כאשר אין ספק במחשבה ולא בדבור המלכנו את הקדוש ברוך הוא ואז בטוח שיהיה טוב כי אצלו יתברך אין מציאות של רע ויש אמונה גבוהה יותר שגם שלא קרה כמו שרצינו ועדיין אין לנו ספק שזה טוב אז הבורא עושה אתהפכא חשוכא לנהורא הופך את החושך לאור והמר למתוק ודם זוכים לבטחון שהרע והטוב הם אחד ואז אפשר גם לברך על הרע כשם שמברכים על הטוב בקצור אם אדם מאמין ב99.999% בקדוש ברוך הוא ויש לו ספק של 0.00001% שיכול להיות רע אז הוא מאה אחוז מאמין במדמה שהוא נמשל לחמץ, וחמץ לא בטל גם באלף ולכן רק שהורגין את הספק בטלנו את החמץ על מנת לעשות זאת עלינו תמיד להיות בשמחה ותמיד להיות זריזים למצוות ובכך ננצל מכל הספקות ואז זוכים לחב״</em>ד טהרת המחשבה (חיים בלי דאגות) <em>״ואין שמחה כהתרת הספקות״</em> (זבחים צ ע׳א)<br>ובא לציון גואל בהצלחה אהובים <br>משיח מיד !!!!</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 11</span>
+          <span class="parable-meta">9.9.2025</span>
+        </div>
+        <div class="parable-text"><p>בממלכה רחוקה היה מלך גדול חזק עשיר ענו ויפה תואר, שכולם אהבו אותו מאד אך המלך לא היה נראה בצבור כלל וכלל רק הוציא חכמתו בספרים כתובים לעם והנה בעם היו מעמדות היו עשירים חכמים מעמד בינוני ופשוטי עם ולאט לאט העשירים התרחקו מהחכמים והחכמים התרחקו מהמעמד הבינוני ופשוטי העם שהיו על סף עוני איש לא התיחס אליהם והתחילו ויכוחים ומחלוקות בתוך העשירים ובתוך החכמים ובתוך המעמד הבינוני רק פשוטי העם שלא היו מעורבים במחלוקות נשארו בתמימותם ,המלך התעצב מאד ולא ידע מה לעשות עד שעלה רעיון במוחו אזמין את העשירים החכמים המעמד הבינוני ופשוטי העם אלי לסעודה וכך יגמרו המחלוקות שבאו העשירים וראו את המלך בלבוש עוז והדר ועושרו היה מפוזר לרוב בכל מקום וכתר מלכות לראשו מיד התבטלו כאחד שנכנסו החכמים וראו את המלך שהסביר להם חכמה שלא ידעו מיד התבטלו כאחד ושראו המעמד הבינוני שהמלך זה לא סיפור מיד התבטלו כולם רק האנשים הפשוטים שקיבלו הכל בתמימות והאמינו שהמלך קיים שהרי הם היו עניים ופרנסתם היתה מצדקה ראו המלך ושמחו שמחה גדולה וככה כולם הרגישו בטול גדול מול המלך ובא לציון גואל הסתימו כל המחלוקות כי ראו שהמלך חי וקיים ואנחנו שעדיין לא ראינו לא מאמינים שהוא חי וקיים״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 12</span>
+          <span class="parable-meta">24.10.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״כל העניין זה להרוג את הספק שכל הזמן נותן לנו הרגשה שאולי זה הולך להיות לא טוב ,והספק הזה כובל אותנו בטבע וזה חוסר אמונה ביכולת האין סופית של השם יתברך ,ונמצא שאדם דואג מפחד כועס הוא כאילו לא מאמין שהשם כל יכול ,על מנת לנטרל את הספק הזה ,צריך לא לאחוז בתוצאה , כאשר אדם עושה לעצמו לעולם יהיה לו ״</em>ספקות<em>״ כאשר הוא מבין שהגוף שלו שליח בעולם הזה של מלך מלכי המלכים והרווח של המלך וההפסד שלו לא שלנו אז אנחנו לא מודאגים והשכל והרגש הם האוייבים שנאמר:״</em><strong>אֹיְבֵי אִישׁ אַנְשֵׁי בֵיתוֹ</strong><em>״(מיכה ז) אם אדם שבא לשרת את המלך מודאג אז משל לעובד שכל החודש עובד ומפחד אולי לא ישלמו לו שכר בעשירי לחודש , לעובדים אין דאגות רק לבעל הבתים שאמר שלמה המלך:״</em><strong>מְתוּקָה שְׁנַת הָעֹבֵד אִם מְעַט וְאִם הַרְבֵּה יֹאכֵל וְהַשָּׂבָע לֶעָשִׁיר אֵינֶנּוּ מַנִּיחַ לוֹ לִישׁוֹן</strong><em>״(קהלת ה) כל העניין זה לקבל החלטה אם באנו להיות עבדים או מלכים זה כל העניין בלנצח את הספק ונאמר:״</em><strong>אין שמחה כהתרת הספקות</strong>&quot; <br>(זבחים צ ע׳א) ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 16</span>
+          <span class="parable-meta">27.11.2024</span>
+        </div>
+        <div class="parable-text"><p>דע שלפי קריאת שמו של הבורא ככה רחמנותו על הנברא אם קורא בשם אלוהים הנהגת הטבע ואם קורה בשם אדני השגחות פרטיות בטבע ואם זוכה לקרוא למלך בשם יהוה הנהגת ניסים בטבע ואם זכה לקרוא למלך בשם אהיה יזכה לחסדים גדולים ואם זכה וזעק מעמקי ליבו קורא לבורא בשם אנוכי שדוד הטבע ובריאה יש מאין משל לבן שמתקשר לאביו שעסוק מאד בעבודתו והאבא מתפנה מכל עסקיו ועונה לבן ואיך קוראים לאבא בשמו בתפילה במצוות ובתורה כאשר כל יגיעה ומאמץ עם רגש מעוררת שם אחד ומושכת השגחה שונה והבן הוא אותו בן האבא תמיד אותו אבא מה רבו מעשייך ה<br>(מלוקט מתורת הבעש׳ט) ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 21</span>
+          <span class="parable-meta">12.8.2024</span>
+        </div>
+        <div class="parable-text"><p>אם היינו יורדים לעולם הזה מעולם האמת ליום אחד האם היינו קונים בית ולוקחים משכנתא לשלושים שנה האם היינו מתחייבים וקונים מכוניות במאות אלפי שקלים או לוקחים ליסינג על שתי מכוניות האם הינו מבלים במסעדה ארבע שעות האם היינו מתעסקים בחדשות בעתונים בפוליטקה ממש לא כי הזמן תכף אוזל ואנחנו חוזרים לעולם האמת <strong>ואם באנו לשבעים או שמונים שנה מה ההבדל</strong> שנאמר:<em>״יְמֵי שְׁנוֹתֵינוּ בָהֶם שִׁבְעִים שָׁנָה וְאִם בִּגְבוּרֹת שְׁמוֹנִים שָׁנָה וְרָהְבָּם עָמָל וָאָוֶן כִּי גָז חִישׁ וַנָּעֻפָה...אָדָם לַהֶבֶל דָּמָה יָמָיו כְּצֵל עוֹבֵר״</em>(תהילים)אז זהו העולם הזה נמשל ליבשה והעולם הבא לים העולם הזה נמשל לפרוזדור והעולם הבא לסלון<br>באמת כל מה שיש אחרי מאה עשרים שנה זה מצוות ותורה,שאמר החכם באדם העשיר באדם שהיה לו אלף נשים :<em>״סוֹף דָּבָר הַכֹּל נִשְׁמָע אֶת הָאֱלֹהִים יְרָא וְאֶת מִצְו‍ֹתָיו שְׁמוֹר כִּי זֶה כָּל הָאָדָם״</em>(קהלת יב)פה זה עולם העבודה שם זה עולם השכר וכל מי שעובד ומצפה לקבל שכר בעולם הזה הוא מבזבז את שכרו בעולם הבא. מאחר שאנחנו באמת לא מסוגלים לראות את האמת בפרופרציות נכונות כי <em>״האמת נעדרת״</em> כולנו נגועים בשקר רצון עצמי שלטון הנפש הבהמית שהיא חושבת ומרגישה ורצונה קודם לרצון המלך, עד שהמלך בחר להעלם וזה הרצון העצמי לטוב לכסף לכבוד למינוי לחכמה ללייקים ולכן אנחנו רבים בינינו על רצונינו שמוסתר תחת מעטה של שקר שהכל פיקדון בידינו לשרת המלך עד ביאת משיח שם הבצע יהפוך לשבע ויפסיק המרוץ אחר החומר ויתחיל המרוץ אחר הרוח שנאמר:<em>״<strong>הִנֵּה יָמִים בָּאִים נְאֻם אֲדֹנָי יְהוִה וְהִשְׁלַחְתִּי רָעָב בָּאָרֶץ לֹא רָעָב לַלֶּחֶם וְלֹא צָמָא לַמַּיִם כִּי אִם לִשְׁמֹעַ אֵת דִּבְרֵי יְהוָה״</em></strong> (עמוס)<br>משיח Now ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 26</span>
+          <span class="parable-meta">21.8.2025</span>
+        </div>
+        <div class="parable-text"><p>היה מלך ולו היו עשרה שרים ולכל שר היה כרך בממלכה ולכל כרך מטבע משלהם ואיש מהשרים לא ראו את המלך אבל כולם ידעו שהוא קיים ויום בהיר אחד הופיע המלך מחופש בבגדי עני, ובא לעני מרוד בכרך אחד מהממלכה, ונתן לו מטבעות לרוב, ושמח העני בכסף מאד,<br>וסיפר לאשתו ולבניו איך המלך מסר לו מטבעות, ואמר להם שמעכשיו הם לא יהיו עוד עניים כי יש לך הם <em>״מטבע המלך״</em> והלך העני לאחד המרכולים בעיירה עם המטבעות לקנות ,והמוכר לא הסכים לקבל את המטבעות, וככה עבר בין כל העשרה כרכים בכל הממלכה ואיש לא הסכים לקבל את המטבעות, וחזר להיות עני ולחזר על הפתחים בשביל <em>״המטבע המקומי״</em> שבו כולם שכרו, התפלל העני שיום יבוא והמלך יתגלה לכל השרים ולכל הממלכה וינהיג את <em>״המטבע״</em> שלו ואז הוא יוציא את מעותיו שקיבל מהמלך ויהיה מעשירי הממלכה״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 42</span>
+          <span class="parable-meta">21.3.2025</span>
+        </div>
+        <div class="parable-text"><p>להסביר עניין <em>״לית מחשבה תפיסה בך כלל״</em><br>למי שמחובר לאין סוף ברוך הוא<em>״: משל לעני שכל יום שישי היה מקבל אוכל מוכן תבשילים מארמון המלך וכל פעם שלח לו המלך מטעמים שונים בטעמים וצבעים שונים הרבה מעבר למה שהעני ומשפחתו צריכים כמה בושה ושפלות ושמחה היה לעני שקיבל כל יום שישי עד שהעני היה מזמין כל חבריו העניים לביתו לקדוש וקבלת שבת והיו כולם מתענגים על המאכלים ואיש לא ידע שהמאכלים באים מארמון המלך כולם חשבו שזה תבשילים של העני ואשתו וככל שהתרבו המחמאות והאורחים השמחה היתה גדולה אבל מהולה בפחד שמא המלך יפסיק לשלוח אוכל ולכן היה העני שפל וענו כל חייו ככה שאדם מחובר אין לו שום מושג איזה חידושי תורה הוא יקבל כל פעם שיפתח את הספר ובגלל בטולו ענותנותו ושמחתו הוא לא מפסיק לקבל חידושים וכולם חושבים שהוא חכם וגאון רק הוא יודע שכלום לו ממנו ולכן שומר על שפלותו ענתנותו ושמחתו במתנה שזכה ולכן התורה נקראת מתנה אשרי ילוד אשה שזוכה לקבל דברי אלוהים חיים זאת ״</em>סעודת עתיקא קדישה״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 48</span>
+          <span class="parable-meta">12.8.2024</span>
+        </div>
+        <div class="parable-text"><p>מי אמר שמשה צריך היה להכנס לארץ מי אמר שהבית הראשון או השני הוא הבית?<br>משל לאדם קנה דונם אדמה ושם עליה קרואן וגר שם הוא ואשתו אחר כך נולדו לו שלושה ילדים הרס את הקרואן ובנה בית קומה אחת אחר כך נולדו לו עוד שלושה ילדים עכשיו יש לו ששה הרס הבית ובנה בית עם שלושה חדרים לימים נולדו לו עוד ארבעה הרס את הבית ובנה בית חמש קומות עם מרתף ענק וקומת גג מדהימה ככה זה בית ראשון זה שאדם מגלה את נשמתו בית שני מתגלה לו מלאך ומלמדו איך לצאת מאחיזת הנחש בית שלישי שנכנס להיכל משיח ופוגש את המלך ומקבל תורה מפיו והדרך להגיע למלך עוברת שמבטל שכלו ורגשו פעם ראשונה ופעם שנייה ואז זוכה לאין סוף מלמעלה זה הכתר זה עתיק זה משיח נמצא שאם לא היה מחריב שכלו פעמים לא היה זוכה לקשר עם המלך תחילה חכמה ללא דעת אחר כך חכמה עם דעת של אצילות ולבסוף חכמה עם דעת של מלך מלכי המלכים ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 55</span>
+          <span class="parable-meta">8.12.2023</span>
+        </div>
+        <div class="parable-text"><p><em>״משל מרבי נחמן:<br>״</em> פעם היה מלך טוב לב ועשיר גדול שהלווה לכל העם כסף לחיות במטרה שיחזירו לו באחרית הימים והנה עברו הרבה שנים ובא אדם למלך ואמר:<em>״ כבוד המלך אני בוש ונכלם אין לי להחזיר לך עבור כל מה שנתת לי במשך כל השנים״</em> אמר לו המלך:<em>״ טיפש שכמוך כולם חייבים לי בא ועזור לי לגבות החוב קצת מכל אחד ואמחול לך על חובך״</em>!<br> והנמשל מובן ..</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 60</span>
+          <span class="parable-meta">12.4.2024</span>
+        </div>
+        <div class="parable-text"><p>משל למלך שהלווה לכל נתיניו כסף והנה בא אחד מאנשי הממלכה בקומה שפלה לפני המלך ואמר למלך:<em>״מחילה מהמלך אין ביכולתי להחזיר הכסף שהלוותה לי״</em> ענה לו המלך:<em>״ טיפש שכמותך כולם חייבים לי עזור לי לגבות קצת מעל איש ואוותר לך על חובך״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 64</span>
+          <span class="parable-meta">27.12.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שהיה חכם ענו ועשיר גדול והיו לו מחסנים מלאים בתבואה שמנים פירות כסף וזהב לרוב וחיפש להעביר לעניי הממלכה רק השליחים שהיה המלך שולח איתם היו לוקחים לעצמם את רוב המשלוח ומעבירים פרורים בלבד שלא הספיק לעניים, מה עשה המלך בנה ״</em>צנורות<em>״ תת קרקעים עד לבתי העניים והעביר לעניים בצנורות אלו ואיש משריו ועבדיו לא ידע כיצד המלך מכלכל את עניי הממלכה״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 65</span>
+          <span class="parable-meta">2.2.2025</span>
+        </div>
+        <div class="parable-text"><p>המלך רוצה את הגוף לא את הנשמה כי הנשמה שלו והגוף לא אבל הגוף רוצה חומריות והנשמה רוצה רוחניות נמצא שאדם מתעסק ברוחניות הוא לא נותן להשם כלום ולכן גם לא יקבל מהשם כלום רק חכמה אבל אם ייתן להשם יתברך חומריות גשמיות השם יגלה לו את החלק הרוחני שנעלם ממנו ויתקשר איתו בדעת על מנת לכבוש את גופו לעבודת השם כי למלך יש הכל מלבד גוף בשר ודם שהרי אין לו צורה ואין לו גוף וגם לא דמות הגוף אז הוא יתברך בחר ביהודים וטמן בהם חלק ממנו במטרה שנגלה את החלק וביחד נשתלט על הגוף ואז הוא יהיה מלך בשר ודם וככה יוכל למלוך בעולם דרך עם ישראל שהם יהיו עטרת ראשו הכתר והם ימלכו ישתבח שמו לעד תחשבו עשרים מיליון מלכים בעולם של עשר מילארד עבדים שכולם רוצים לעשות רצונם זה עולם הבא שהשם תכנן ומתכנן לעם ישראל״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 66</span>
+          <span class="parable-meta">19.2.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״בממלכה רחוקה מעבר להרי החושך היה מלך ענו חכם עשיר וחזק שמרוב אהבתו לנתניו חלק להם ״</em>כדורי פלא<em>״ וכולם חשבו שזה ויטמנים להתחזקות ובאמת זאת היתה תרופת פלא למחלת חשוכת מרפא שכולם נשאו בגופם״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 79</span>
+          <span class="parable-meta">8.3.2025</span>
+        </div>
+        <div class="parable-text"><p>אי-שם בקצה הממלכה, נסעה לה שיירה מכובדת ובה המלך בכבודו ובעצמו. השיירה התקדמה עד שהגיעה אל גדר שהקיפה שדה רחבת ידיים. משרתי המלך, שידעו שזמנו יקר לו, קפצו מן המרכבה והחחלו לנתץ את הגדר.האיכר בעל השדה היה אדם פשוט ובור. הוא נולד בכפר הסמוך ושם גדל כל חייו; על המלך הוא לא שמע מעולם – עד כדי כך גדלה בורותו.כשראה אנשים מנתצים את גדר שדהו, הוא החל לצעוק עליהם. הם התעלמו מדבריו, והוא בצעד נואש החל להשליך אבנים בזו אחר זו. אבן אחת פגעה בסוסים, השניה בעגלון, והשלישית במלך בכבודו ובעצמו. פגיעה במלך! חטא לא יכופר! קראו המשרתים. הם רצו לעבר האיכר ואסרו את ידיו באזיקים. אחד מהם הוציא את חרבו כשהוא מוכן להוציא להורג את האיכר המסכן כאן ועכשיו, כיאה לדין מורד במלך.אך המלך שצפה במתרחש ביקש מהם לעצור. &quot;הוא בוודאי מעולם לא שמע עליי ואפילו לא יודע מלך מהו&quot; הוא אמר לעצמו. במקום להוציא אותו להורג, הוא ביקש מן המשרתים להביא אותו עמם לעיר הבירה וללמד אותו מהו המלך.וכך אכן עשו המשרתים. לאחר שהם שבו אל הארמון, הם הטילו עליו משימות פשוטות. תחילה הוא הופקד על טיאטוא רחובות העיר. לאחר-מכן הוא קודם בדרגה והפך להיות מנקה החצר, וכך אט-אט הוא התקרב אל המלך.ככל שחלפו הימים, החל האיכר להבין ולהכיר בגדולתו של המלך. הוא ראה את הערצת האזרחים, את משמר הכבוד ואת אימת המשרתים עד שיום אחד גברו עליו רגשותיו. הוא ניגש לאחד מן השרים והחל לבכות ולהתחנן לפניו שיביא אותו לפני המלך, כי הוא רוצה לבקש ממנו סליחה ומחילה על כך שזרק עליו אבנים.<br>משל זה מיוחס לרבי ישראל הבעל שם טוב, שסיים ואמר:כאשר אדם חוטא לפני בורא העולם, מקרב אותו האלוקים לפניו ונותן לו שכל שיבין את גודל החטא. וככל שהחוטא מתקרב יותר לאדון העולמים, כך יגברו בו רגשי החרטה והצער על כך שהוא עבר על רצונו.</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 97</span>
+          <span class="parable-meta">25.2.2026</span>
+        </div>
+        <div class="parable-text"><p>היה מלך ענו חכם גבור ונדיב שתושביו לא שלמו מיסים כמו שצריך והתחילו מקילים בחוקי הממלכה ומתנהגים לא יפה אחד לשני ,מה עשה מינה עליהם <em>״שר רשע״</em> ביותר שגזר עליהם גזירות רעות ואכזריות והתחילו כולם מתלוננים על הסבל בינם לבין עצמם עד שבא <em>״איש זקן״</em> ואמר להם אתן לכם עיצה עשו עצמכם כמתים אל תדברו אחד על השני יותר ותיהיו שקטים כדגים וכך היה , והנה כעבור חצי שנה שכל הממלכה <em>״בלמה״</em> פיה יום אחד הגיע המלך ופיטר את השר וחזר למלוך על נתניו ואמר להם רק בגלל שאתם התנהגתם ברמאות ואלימות אחד כלפי השני אז מידה כנגד מידה שלחתי לכם השר הרשע אבל מיד שנעשיתם שקטים ורגועים אין עוד צורך בשר פטרתי אותו לאלתר מעכשיו אני אמלוך עלייכם״ והנמשל מובן</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 103</span>
+          <span class="parable-meta">29.1.2026</span>
+        </div>
+        <div class="parable-text"><p>היה מלך שנתן לכולם להתנהג כרצונם וסלח ומחל לכל נתיניו, אבל הם לא סלחו אחד לשני והזיקו אחד לשני, מה עשה המלך מינה שר טוב ושר רע ואמר מי שיתנהג טוב יקבל טוב ומי שיתנהג היפך הטוב השר הרע ישלוט בו ,וכך היה וכולם סבלו מהשר הרע ואמרו איזה שר רע ואכזר ,אבל המעט שעשו רצון המלך אמרו איזה שר טוב וידעו כולם שהממלכה מונהגת על <em>״שכר ועונש״</em> רק לא שלטו בייצריהם ותאוותם לחומר״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 109</span>
+          <span class="parable-meta">15.3.2026</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שמינה מאה שרים בממשלתו וכל שר הביא הצעות ליעול לשולחן המלך והשרים היו חלוקים בדעותיהם על אופן הניהול והנה המלך כל פעם לקח עצה של שר אחר רק על מנת להראות לשרים שלא הם קובעים אלה הוא ולפעמים לקח קצת מדעה של זה וקצת מדעה של זה כי מי יאמר לו מה לעשות שהרי הוא המלך ולא מחוייב לשום שר או ספר או חוק שכתב וחוקק״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 113</span>
+          <span class="parable-meta">15.4.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך חכם שחוקק חוקים שמבוססים על אמת ומינה שופטים ושוטרים שלוקחים שוחד ומשקרים כל הזמן והעם היה מבולבל החכמים שבינהם תמיד נשפטו ונענשו על לא עוול בכפם (לדעתם) והתמימים שבינהם מעולם לא הגיעו לבית משפט ,והיו הרבה מאד חכמים ומעט מאד תמימים״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 114</span>
+          <span class="parable-meta">21.12.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״בחוץ לארץ יש סייעתא להשגת רוח הקודש הגם שאין השכינה שורה, עם כל זה יש סיוע להשגת רוח הקודש <strong>ואפילו אינו הגון כל כך לא מדקדקין עמו כמו בארץ הקדושה</strong> משל למלך שהוא בדרך ומוכרח ללון במלון או פונדק שאינו לפי כבוד המלך ביופי ובנקיות אין זה ביזיון למלך כיוון שהכל יודעין שהמלך הוא בדרך״</em><br>(הבעש״ט הקדוש)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 117</span>
+          <span class="parable-meta">28.5.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״בממלכה רחוקה היה מלך חכם וענו שחלק מחכמתו לשריו רק על מנת לראות מי מתגאה ומי נשאר בקבלת עול אליו וככה ידע להבדיל בין הבר למוץ בין הנאמנים לאלו שהיה בדעתם למלוך״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 120</span>
+          <span class="parable-meta">23.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך ששכחו אותו מה עשה המלך עשה מסיבה וחלק הזמין וחלק לא הזמין אלא שהזמין לעולם לא ישכחו את המסיבה ואלה שלא הזמין ישמעו את המוסיקה כל ימי חייהם וינסו להבין את השיר״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 121</span>
+          <span class="parable-meta">28.10.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה פעם מלך שדלתו היתה פתוחה לכל דכפין רק התור היה ארוך מאד ומיגע וכל משהגיע למלך ולא התקבל התייאש והלך לדרכו, וכמה חבל כי המלך עיקב את התור על ידי מלאכיו רק על מנת לברר את הבר מהמוץ״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-G">
+      <div class="category-header">
+        <div class="category-symbol">⚔</div>
+        <h2 class="category-title">מֶלֶךְ אֱמֶת וּמֶלֶךְ מְדֻמֶּה</h2>
+        <div class="category-description">משלי שני מלכים - האמת מול השקר</div>
+        <span class="category-count">8 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 7</span>
+          <span class="parable-meta">18.12.2024</span>
+        </div>
+        <div class="parable-text"><p><strong>משל הקוף</strong><br><em>״משל לקוף שמצא ספר של מלך שכתב את כל חכמתו בספר מונח בפינה ברצפת היער והתחיל הקוף להתנהג כמו ״</em>מלך<em>״ אבל במידותיו ותאוותיו בסתר נשאר קוף והתחיל מתנשא על משפחתו וחבריו עד שנעשה מלך עליהם בכוח חכמתו למרות שבסתר המשיך להיות ״</em>קוף<em>״ והיה בטוח שהוא ״</em>אדם<em>״ וכולם קופים עד שהגיע אדם אחד לג׳ונגל עם מראה והראה לקוף שהוא קוף ולא אדם כמו שחשב והקוף הצטער מאד כי חשב שהוא אדם ונעשה שפל וענו ופתאום כל הקופים אהבו אותו והמליכו אותו מאהבה עליהם כי היה חכם רק התנשא עליהם שחשב שהוא אדם והם קופים״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 8</span>
+          <span class="parable-meta">28.1.2025</span>
+        </div>
+        <div class="parable-text"><p>הנצרות התחילה מיהודי שרצה לעבוד את הבורא בדרך חדשה על מנת שהוא יהיה מלך וזה חילול שבת בפרהסיה ברוחניות והעונש על זה סקילה ותלייה . וזה יוצר דת חדשה שכל ענינה שכל וטובות הנאה ללא סולם ערכים עד שלא מאמינים באל אחד אין עניין האחדות ולכן נצרות זאת עבודה זרה</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 29</span>
+          <span class="parable-meta">9.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״בממלכה רחוקה היה מלך ״</em>רמאי ושקרן<em>״ שכולם סבלו מההנהגות שלו ולא אהבו אותו אבל היו ״</em>אנוסים<em>״ והתנהגו במידותיו היו כועסים מרמים ומשקרים עד שנעשו כולם חולים ,לימים מת המלך הרמאי ובא במקומו מלך חדש ענו וחכם מה עשה המלך החדש אמר לכל התושבים מהיום אנחנו הופכים הגדרת הצבעים במדינה מה שהיה שחור נעשה לבן ומה שהיה שלבן נעשה שחור. והנה כולם הסכימו בתחילה היה לתושבים קשה מאד כי היו רגילים להנהגה הקודמת לימים התרגלו והנה אחרי ״</em>שלוש שנים<em>״ אמר להם המלך החדש עכשיו נחזור להנהגה הקודמת מה ששחור שחור ומה שלבן לבן והפלא ופלא הצבע השחור נעלם וכולם ראו רק לבן ,ונעשה נס גדול כולם הפסיקו לכעוס הפסיקו לשקר והפלא הגדול נעשו בריאים מכל המחלות ומאז חיו בשמחה ובאהבת חינם אחד עם השני״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 58</span>
+          <span class="parable-meta">27.1.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך סופר שכתב ספר איך להגיע לאמת ומכר אותו למדינה שכולם שקרנים והספר הפך להיות ״</em>רב מכר<em>״ ביום אחד למרות שלמדו בו יום ולילה האמת עדיין היתה נעדרת ששאלו המלך מה ההגיון שעומד מאחורי העניין אמר להם המלך אם היו מגיעים לאמת הספר לא היה רב מכר והבן״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 62</span>
+          <span class="parable-meta">25.7.2024</span>
+        </div>
+        <div class="parable-text"><p>פעם בממלכה רחוקה היה צבא ומלך חזק ויהיר והנה הגיע איש פשוט <em>״לבוש כעני״</em> ואמר לחיילים שהמלך שלהם זה מלך מדומה ולא מלך אמיתי וניסה לשכנע אותם לעשות מרד במלך ואיש לא רצה להקשיב לילד למרות שהביא להם הוכחות מהכתובים ועל זה כתב שלמה המלך משל :״<strong>עִיר קְטַנָּה וַאֲנָשִׁים בָּהּ מְעָט וּבָא אֵלֶיהָ מֶלֶךְ גָּדוֹל וְסָבַב אֹתָהּ וּבָנָה עָלֶיהָ מְצוֹדִים גְּדֹלִים.וּמָצָא בָהּ אִישׁ מִסְכֵּן חָכָם וּמִלַּט הוּא אֶת הָעִיר בְּחָכְמָתוֹ וְאָדָם לֹא זָכַר אֶת הָאִישׁ הַמִּסְכֵּן הַהוּא</strong>.<br>(קהלת ט טו)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 67</span>
+          <span class="parable-meta">20.2.2025</span>
+        </div>
+        <div class="parable-text"><p>במדינה רחוקה היו שתי ממלכות ממלכה אחת של מלך שכולם כבדו אותו כי היה החכם ביותר בממלכה ומנהג הממלכה היה שמי שחכם ביותר הוא המלך והיה מרוץ לחכמה עד שאיש לא יצא מביתו מרוב שהיה עסוקים בחכמה יום ולילה על מנת למלוך, בממלכה ממול היה מלך אחד שהיה שפל ענו ונסתר מכולם שם מי שהיה בעל מעשים בעל מידות שפל וענו נעשה מלך ובין שתי הממלכות היה שטח הפקר מדבר חם ולוהט והיו שולחים את כל הפושעים של הממלכה הראשונה לגלות לשם ונמצא שממלכה לא נגעה בממלכה וזה והחכמים לא הכירו את השפלים למרות שהשפלים הכירו את החכמים כי יכלו לעבור המדבר בלא פגע כי הליסטים והשודדים לא נגעו בהם כי היו עניים ובגדיהם קרועים ובלויים ולא היה מממון בכיסם מעולם וזה שנאמר:<em>״אין אדם נוגע במוכן לחבירו ואין מלכות נוגעת בחברתה אפילו כמלא נימא״</em>(יומא לח א)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 73</span>
+          <span class="parable-meta">6.10.2025</span>
+        </div>
+        <div class="parable-text"><p>משל למלך אחד שהגיע רמאי אחר שהגיע לממלכה וזייף את הכסף המקומי ופיזר אותו בערך פחות מהמטבע המקומי ופירסם בכל העתונים והמדיה שהמטבע שלו מקורי והמטבע של המלך מזוייף, וכך הפך את השקר לאמת ואת האמת לשקר ונעשה מלך בעצמו מרוב עושרו לא עוד שהצליח ברוב עורמתו להעליל על המלך והמלך נכנס לבית הסוהר..</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 90</span>
+          <span class="parable-meta">8.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך שקרן מצא ספר של מלך אמיתי ולמד בו ארבעים שנה וקיים קלה כבחמורה אבל הכל הלך לו הפוך ממה שרצה ולא הבין למה עד שפגש נער צעיר בשנים ואמר לו כל מטרת הספר זה להמליך את המלך האמיתי ואתה רצית להמליך את עצמך״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-H">
+      <div class="category-header">
+        <div class="category-symbol">✧</div>
+        <h2 class="category-title">מָשִׁיחַ וּגְאֻלָּה</h2>
+        <div class="category-description">משלים על המשיח, הגאולה, וביאתם</div>
+        <span class="category-count">8 משלים</span>
+      </div>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 4</span>
+          <span class="parable-meta">12.2.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״<strong>משיח</strong>״</em><br><em>״היה מלך שהיה הכי ענו בעולם הכי חכם בעולם הכי חזק בעולם הכי עשיר בעולם הכי רגיש בעולם אבל היה לו בעיה אחת לא היה לו גוף ולכן איש לא האמין בו מה עשה המלך על מנת שיאמינו בו ברא עשרים מיליון גופים בשביל שיהודי אחד יספק לו גוף בלי כל מה שהיה לו על מנת שהוא המלך יבוא עם כל עושרו ענתנותו כוח וחכמתו לגוף הזה וככה יאמינו בו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 15</span>
+          <span class="parable-meta">18.11.2024</span>
+        </div>
+        <div class="parable-text"><p>בס<em>״ד עם ישראל לא יצא ללחום באויב במשך שנים עד והוא התעצם והתעצם מתחת ״</em>לרדאר<em>״ שלנו ופתאום מה שקרה תראו את ״</em>חיילי בית דוד<em>״ (צה׳ל) מחוסר ברירה שתקפו אותנו ואנחנו צריכים להגן על עצמינו כמה מוטיבציה יש להם בגשמיות מסירות נפש כפשוטו וברוחניות התחזקות בציצית בתפילין ובקריאת שמע נמצא שהחוסר ברירה דחפה אותנו לגאולה למגר את האויב אחת לתמיד ולא להסתפק בהגנה בלבד ולכן הייצר שמתגבר עוד ועוד על האדם הוא שמוביל את עם ישראל להלחם יותר על ידי תורה ומצוות ולהתפלל יותר ויותר ולצעוק להשם יתברך וככה נגאלים שכתוב ;״</em><strong>צָעֲקוּ וַיהוָה שָׁמֵעַ וּמִכָּל צָרוֹתָם הִצִּילָם<em>״</strong> (תהילים לד יח) וזה שדוד המלך קרא לאחיטופל רבו שנמשל לייצר הרע (אחד מארבעה שאין להם חלק לעולם הבא) שנאמר: ״</em><strong>שֶׁכֵּן מָצִינוּ בְּדָוִד מֶלֶךְ יִשְׂרָאֵל, שֶׁלֹּא לָמַד מֵאֲחִיתוֹפֶל ..., קְרָאוֹ רַבּוֹ אַלּוּפוֹ וּמְיֻדָּעוֹ,</strong><em>״ (אבות ו ג) ודוד שלא ידע איך להיות ״</em>מלך ישראל<em>״ אחרי שהנביא שמואל כבר המליך אותו למלך שנרדף שבע שנים יום ולילה על ידי השטן בגשמיות וברוחניות עד שהתבלבל שאמר:״</em><strong>תָּעִיתִי כְּשֶׂה אֹבֵד</strong><em>״ (תהילים קיט) נמצא שמחוסר ברירה קבל מוטיבציה אין סופית לפנות להשם בתפילות ובתחנונים ולכן נגאל נמצא שהרב שלו היה השטן שהוביל אותו בלא ידיעתו של דוד ולא ידיעתו של אחיטופל עד למלך מלכי המלכים הקדוש ברוך הוא ״</em><strong>מָה רַבּוּ מַעֲשֶׂיךָ יְהוָה כֻּלָּם בְּחָכְמָה עָשִׂיתָ..״</strong> (תהילים קד)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 20</span>
+          <span class="parable-meta">5.4.2024</span>
+        </div>
+        <div class="parable-text"><p>ואני תפילה&quot; (תהלים קט) אומר דוד המלך. ר&#x27; שמחה בונם מפשיסחא פירש פסוק זה על פי משל: עסקן מכובד ההולך לעשיר לבקש תרומה עבור מטרה מסוימת, עליו לתאר את הצרכים שעבורם הוא מבקש תרומה. אך עני הלבוש סחבות העומד בפתח הדלת ביד פשוטה אינו צריך לומר דבר, כל מהותו מבטאת בקשה זו זהו המשיח דוד מלכא משיחא</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 40</span>
+          <span class="parable-meta">9.6.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״המשיח יקבל תורה גנוזה מששת ימי בראשית שהבורא הסתיר ולא נתן לאף צדיק להנות ממנה או לגלותה לעולם וטמן תורה זאת עמוק בעמקי הקליפות בלב ״</em>הסטרא אחרא<em>״ ומאחר והצדיקים לא ירדו לעמקי הקליפות מפחד לא להדבק בחטאים, התורה הזאת נעלמה ונסתרה מהם, המשיח לא רק הלך לקליפות אלא החזיר ״</em>הנחש<em>״ בתשובה זכה לתורה הזאת מהניצוצות שהיו שבויות ביד הנחש כי החזירו בתשובה מאהבה וזדונות הפכו לו לזכויות עד ״</em>שבלע המוות לנצח<em>״ משל לגנב גדול שגנב אוצרות מארמון המלך במשך עשרות שנים ואיש לא הרגיש מלבד המלך עד שבא ״</em>ילד אחד<em>״ ושיכנע הגנב לחזור בתשובה מאהבה וחזר הגנב והתוודה על חטאיו והתחרט וקיבל על עצמו לסור מדרכו הרעה לא לגנוב עוד ,לא עוד שהחזיר גנבתו למלך כמה שמחה היתה למלך שממונו חזר אליו, הזמין המלך הילד לארמון וחלק לו כבוד גדול ולחש המלך לאותו ילד דע לך שזה הגנב זה בני שירד לתרבות רעה ואבד ושמחתי שהחזרת בני גדולה אלפי מונים משמחתי מהממון שחזר אליי על כן קח לך הממון ותחייה בעושר ואושר וזה שנאמר:״</em> שטיפש אחד זורק אבן עשרה חכמים לא מוצאים אותה״</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 47</span>
+          <span class="parable-meta">31.12.2023</span>
+        </div>
+        <div class="parable-text"><p>בס<em>״ד לעניות דעתי הקטנה ליבי אומר לי שהרמב״</em>ם הוא בחינת הרופא של הייצר הרע שהוא נמשל לצאלח הדין מלך מצרים הוא הנחש שלא יודע בדעתו למרות כל הרופאים שלו ועצותיהם להתרפא נמצא שנקודת משיח שהיא הרמב״ם היא שמרפא את מלך מצרים הנחש שאז זכויות הופכות לזכויות ומתגלה המשיח בעולם . ונקודת הרפואה כמה שיותר לעזור לאנשים שבמצרים שנשלטים תחת ייצריהם זאת נקודת משיח שעל ידי לימוד תורה יום ולילה ועזרה לעם ישראל תחת השיעבוד מתגלה נקודת משיח וזה המזור לצאת מהדעת הראשונה של המלך הזקן וכסיל</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 49</span>
+          <span class="parable-meta">1.11.2024</span>
+        </div>
+        <div class="parable-text"><p><em>״שיבוא משיח הוא יהיה מלך ורב בעם ישראל והוא ילמד אותנו תורה מהשמים ואז נבין את הגמרא במועד קטן דף יז׳ ע׳א ״</em>אם דומה הרב למלאך ה&#x27; יבקשו תורה מפיו ואם לאו אל יבקשו<em>״ ונבין שלא ניתן היה להבין תורה בלי רב משמים ואחד ההלכות שלימד אחיטופל את דוד מלכא משיחא לעולם לא ללמוד לבד בלי הרב המדובר שהוא משה רבינו״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 53</span>
+          <span class="parable-meta">11.7.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״בלק״</em><br>באנגלית שחור רמז לסטרא אחרא שנמשל לחושך הפלא ופלא דוד המלך יצא מבלק והוא המשיח אור האורות ואיך אור כזה גדול יצא מחושך כזה גדול שהבטול והענווה גוברת על החוצפה והגאווה אז לוקחים את העזות מהסטרא אחרא לקדושה וזה משיח וזה <em>״יתרון האור הבא מן החושך״</em> לא פלא שזאת הפרשה מדברת הכי הרבה על משיח מכל הפרשות ונקראת על שם גוי שבלק הביא את עגלון ועגלון הביא את רות ורות הביאה את עובד ועובד את ישי וישי את דוד מה רבו מעשיך השם כולם מחפשים אותך באור ואתה מתחבא בחושך״ ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 54</span>
+          <span class="parable-meta">9.12.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״<strong>וְזָרַקְתִּי עֲלֵיכֶם מַיִם טְהוֹרִים וּטְהַרְתֶּם מִכֹּל טֻמְאוֹתֵיכֶם וּמִכָּל גִּלּוּלֵיכֶם אֲטַהֵר אֶתְכֶם״</em></strong><br>(יחזקאל לו)<br>אין מים אלא תורה ונמצא שתורת משיח שעליה נאמר:<em>״תורה חדשה מאיתי תצא״</em> היא התורה שתטהר את כל הטומאות והעוונות ואיך ? היום יש הרבה דעות בעם ישראל והרבה זרמים כי ברובד החיצוני שהוא רובד החכמה יש דעות ומחלוקות שנאמר:<em>״כשם שפרצופיהם שונים דעותיהם שונות״</em> ברובד הפנימי יש אחדות כי שם נמצא הבטול לאחד ובבטול כולנו שוים , וברגע שכולנו נזכה לתורה החדשה ונראה שכולנו לא הבנו פנימיות טעמי התורה בכלל למה התכוון המשורר שנאמר אמרו חכמים: &quot;<strong>תורה שאדם לומד בעולם הזה הֶבֶל היא לפני תורתו של משיח</strong>&quot; נמצא שהאחדות תבוא מחוסר הידיעה שנבין כמה לא ידענו ונתבטל משל:<em>״ לשני שרים שמתווכחים בארמון על מה התכוון המלך ופתאום המלך נכנס לארמון שואל האדמור הזקן האם ימשיכו להתווכח בוודאי שלא״</em>!</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-I">
+      <div class="category-header">
+        <div class="category-symbol">✡</div>
+        <h2 class="category-title">תּוֹרָה, חָכְמָה, וְלִמּוּד</h2>
+        <div class="category-description">משלי תורה - לימוד אמיתי לעומת חכמת חוץ</div>
+        <span class="category-count">18 משלים</span>
+      </div>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 2</span>
+          <span class="parable-meta">18.11.2023</span>
+        </div>
+        <div class="parable-text"><p><em>״כל עוד אדם חושב שיודע לא יגלו לו כלום משמים רק אדם שמחליט שהוא לא יודע מתחילים לגלות לו כמה הוא לא יודע וזה ״</em>מודה ועוזב ירוחם<em>״ מודה שלא ידע כי מה היחס בין מה שאדם יודע למה שהוא לא יודע אחד חלקי אין סוף וזה יהודה שהיה מלך והיה בטוח שהוא יודע ותמר היא הלילית אשת השטן שבועלת את המלכות בערמה על ידי תאוות הגוף שנקראים ״</em>אשה יפה<em>״ ואז אחרי ההודעה של יהודה יוצאים זרח ופרץ כאשר הראשון צדיק והשני בעל תשובה ודווקא מהשני יוצא המשיח דוד המלך״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 6</span>
+          <span class="parable-meta">26.9.2024</span>
+        </div>
+        <div class="parable-text"><p>הערב כ&quot;ד באלול הילולת חבקוק הנביא בן השונמית הדליקו נר לכבודו בקשו בקשות זכות הצדיק תגן בעד כל עם ישראל אמן ואמן ♥️♥️♥️</p><p>מי היה חבקוק? בספר חבקוק כמעט ולא מצוינים פרטים על חייו האישיים של חבקוק, בניגוד למצוי אצל כמה נביאים אחרים. על כך כותב ה&#x27;אבן עזרא&#x27;: &quot;הנביא הזה לא ידענו דורו ולא משפחתו&quot;. לעומת זאת, בזוהר מבואר (מ&quot;ד, ב) כי חבקוק הוא בנה של האישה השונמית מתקופת אלישע.</p><p> על פי פירוש זה, שמו של חבקוק הוא על שם החיבוק שחיבק אלישע את הילד והחיה אותו, כפי שמבואר בספר מלכים ב&#x27;. גם לפי פירושים אחרים, שמו של חבקוק נגזר מהשורש ח&#x27;ב&#x27;ק.</p><p> בספר עצמו לא נמסר לנו שמו של המלך שבחייו התנבא חבקוק. על פי סדר עולם רבה, חבקוק נתנבא בימי מנשה המלך, והסיבה לכך ששם המלך לא הוזכר, היא &quot;מפני שלא היה מלך כשר לא נקראו על שמו&quot;. על פי הגישה הקודמת שצוינה בחז&quot;ל, ועל פיה חבקוק הוא בנה של השונמית מתקופת אלישע בן שפט, חבקוק ניבא בתקופה זו, כנראה בזמן המלך יהוא.</p><p> ספר חבקוק הוא השמיני שבספרי תרי עשר, והוא מכיל שלושה פרקים. הספר כולל את נבואותיו של חבקוק.</p><p>בתלמוד בבלי (מכות כ&quot;ד) מובא כך: &quot;דרש רבי שמלאי: &#x27;שש מאות ושלש עשרה מצות נאמרו לו למשה&#x27;... בא דוד והעמידן על אחת עשרה... בא ישעיה והעמידן על שש... בא מיכה והעמידן על שלוש... בא חבקוק והעמידן על אחת שנאמר: &#x27;וצדיק באמונתו יחיה&#x27;&quot;. (חבקוק ב&#x27;, ד&#x27;) </p><p>המהר&quot;ל מסביר שלא בא הנביא לצמצם חלילה את מצוות התורה, אלא שבמצווה זו, וכן באחת עשרה המצוות שמנה דוד, בשש שמנה ישעיהו ובשלוש שמנה מיכה, יש את כל השלמות כשם שיש בשאר המצוות, אמנם לא בצורה מפורטת ולא באותה מעלה. המאירי מסביר את דברי חבקוק כי כל כוונת ותכלית המצוות היא לעבוד ולדבוק בה&#x27; על ידי האמונה האיתנה.</p><p>בספרו, מתואר כי חבקוק חג עוגה ועמד בה ולא זז משם עד שעזרו השם בתשועה לעם ישראל, וכפי שהסביר המלבי&quot;ם, שתפילה זו היא על זמני הגלות והגאולה: &quot;תפלה לחבקוק - תפילה זו נחלקת לשלשה חלקים:</p><p>חלק א&#x27; - עד &quot;מהר פארן סלה&quot;: התפלל על זמן הגלות שלא יסתיר ה&#x27; פניו מעמו וסיים במילת &quot;סלה&quot;.</p><p>חלק ב&#x27; - מן &quot;כסה שמים הודו&quot; עד &quot;ערות יסוד עד צואר סלה&quot; התפלל על הנהגת ה&#x27; בזמן הגלות ועל התגלות ה&#x27; בעת הגאולה עת יצא לישע את עמו וסיים במלת &quot;סלה&quot;.</p><p>חלק ג&#x27; - מן פסוק י&quot;ד עד סוף הסימן התפלל על העת שיהיו ישראל למשיסה ועל חבלי משיח, והודיע שהחבויים והצרות יהיו סימן הגאולה&quot;.</p><p> רבי נחמן מברסלב כותב בספר המידות (ערך &#x27;דעת&#x27; כי תפילתו של חבקוק הינה סגולה ליישוב הדעת. מדובר בתפילה מרתקת ומדהימה, שבמקומות רבים נוהגים לקוראה בליל יום הכיפורים. על פי סגנון התפילה, נראה כי זהו פרק בספר תהילים, אך מדובר על תפילתו של חבקוק הנביא.</p><p> לשון התפילה:<br>&quot;תְּפִלָּה לַחֲבַקּוּק הַנָּבִיא עַל שִׁגְיֹנוֹת. אֵדנָי, שָׁמַעְתִּי שִׁמְעֲךָ יָרֵאתִי; אֵדנָי פָּעָלְךָ בְּקֶרֶב שָׁנִים חַיֵּיהוּ, בְּקֶרֶב שָׁנִים תּוֹדִיעַ; בְּרֹגֶז, רַחֵם תִּזְכּוֹר. אֱלוֹהַּ מִתֵּימָן יָבוֹא, וְקָדוֹשׁ מֵהַר-פָּארָן סֶלָה; כִּסָּה שָׁמַיִם הוֹדוֹ, וּתְהִלָּתוֹ מָלְאָה הָאָרֶץ. וְנֹגַהּ כָּאוֹר תִּהְיֶה, קַרְנַיִם מִיָּדוֹ לוֹ; וְשָׁם, חֶבְיוֹן עֻזֹּה. לְפָנָיו, יֵלֶךְ דָּבֶר; וְיֵצֵא רֶשֶׁף, לְרַגְלָיו. עָמַד וַיְמֹדֶד אֶרֶץ, רָאָה וַיַּתֵּר גּוֹיִם, וַיִּתְפֹּצְצוּ הַרְרֵי עַד, שַׁחוּ גִּבְעוֹת עוֹלָם; הֲלִיכוֹת עוֹלָם, לוֹ. תַּחַת אָוֶן, רָאִיתִי אָהֳלֵי כוּשָׁן; יִרְגְּזוּן, יְרִיעוֹת אֶרֶץ מִדְיָן. הֲבִנְהָרִים, חָרָה אֵדנָי, אִם בַּנְּהָרִים אַפֶּךָ, אִם-בַּיָּם עֶבְרָתֶךָ: כִּי תִרְכַּב עַל סוּסֶיךָ, מַרְכְּבֹתֶיךָ יְשׁוּעָה. עֶרְיָה תֵעוֹר קַשְׁתֶּךָ, שְׁבֻעוֹת מַטּוֹת אֹמֶר סֶלָה; נְהָרוֹת, תְּבַקַּע אָרֶץ. רָאוּךָ יָחִילוּ הָרִים, זֶרֶם מַיִם עָבָר; נָתַן תְּהוֹם קוֹלוֹ, רוֹם יָדֵיהוּ נָשָׂא. שֶׁמֶשׁ יָרֵחַ, עָמַד זְבֻלָה; לְאוֹר חִצֶּיךָ יְהַלֵּכוּ, לְנֹגַהּ בְּרַק חֲנִיתֶךָ. בְּזַעַם, תִּצְעַד אָרֶץ; בְּאַף, תָּדוּשׁ גּוֹיִם. יָצָאתָ לְיֵשַׁע עַמֶּךָ, לְיֵשַׁע אֶת מְשִׁיחֶךָ; מָחַצְתָּ רֹּאשׁ מִבֵּית רָשָׁע, עָרוֹת יְסוֹד עַד צַוָּאר סֶלָה. נָקַבְתָּ בְמַטָּיו רֹאשׁ פְּרָזָו, יִסְעֲרוּ לַהֲפִיצֵנִי; עֲלִיצֻתָם, כְּמוֹ לֶאֱכֹל עָנִי בַּמִּסְתָּר. דָּרַכְתָּ בַיָּם, סוּסֶיךָ; חֹמֶר, מַיִם רַבִּים. שָׁמַעְתִּי וַתִּרְגַּז בִּטְנִי, לְקוֹל צָלְלוּ שְׂפָתַי יָבוֹא רָקָב בַּעֲצָמַי, וְתַחְתַּי אֶרְגָּז: אֲשֶׁר אָנוּחַ לְיוֹם צָרָה, לַעֲלוֹת לְעַם יְגוּדֶנּוּ. כִּי תְאֵנָה לֹא תִפְרָח, וְאֵין יְבוּל בַּגְּפָנִים כִּחֵשׁ מַעֲשֵׂה זַיִת, וּשְׁדֵמוֹת לֹא עָשָׂה אֹכֶל; גָּזַר מִמִּכְלָה צֹאן, וְאֵין בָּקָר בָּרְפָתִים. וַאֲנִי, בַּיהוָה אֶעְלוֹזָה: אָגִילָה, בֵּאלֹהֵי יִשְׁעִי. יְהוִה אֲדֹנָי, חֵילִי, וַיָּשֶׂם רַגְלַי כָּאַיָּלוֹת, וְעַל בָּמוֹתַי יַדְרִכֵנִי; לַמְנַצֵּחַ, בִּנְגִינוֹתָי&quot;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 9</span>
+          <span class="parable-meta">21.2.2025</span>
+        </div>
+        <div class="parable-text"><p>אז רק בשביל לדעת את האמת חכמה וידיעה לא קשורה ליראת שמים כי ראינו שקרח היה חכם ובעל רוח הקודש וכפר וראינו אלישע בן אבויה היה תנא גדול הדור רבו של רבי מאיר וכפר בעיקר וראינו ירבעם בן נבט היה מלך בישראל יותר חכם מכל החכמים וכפר וכן אחיטופל וכן דואג האדומי וראינו שאליעזר בן הורקנוס בגיל 28 לא קרא קריאת שמע מימיו ולא ברכת המזון וזכה לגילוי אליהו הנביא בשבעה ימים שפרש מתאוותיו וראינו שפחה על ים סוף וראינו ילדים שראו פני שכינה שאמרו זה אלי ואנווהו אז רבותי באו נבין שחכמה זה עדיין לא יראת שמים ולכן נאמר:<em>״ חכמה בגויים תאמין״</em> ולא עושה את האדם אמיתי גם אם הוא מדקלם את כל התורה במבחן סיכה וגם אם יש לו רוח הקודש כשמואל הנביא שאמר <em>״אנוכי הרואה״</em> ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 23</span>
+          <span class="parable-meta">14.4.2025</span>
+        </div>
+        <div class="parable-text"><p>משל למלך חכם שרצה לתת מתנה לעמו מה עשה הכניס חכמתו בספר חוקים וכתבם על <em>״ספר אחד״</em>ושלח חכמיו ושריו ללמד העם החוקים ועומק חכמתו ואמר המלך מי שלא יקיים חוקיו יטביעם <em>״בים סוער״</em> והנה העם הפשוט לא קיים חוקיו של המלך <em>״מקוצר רוח ועבודה קשה״</em> וטבעו בים והשרים היו שרים ומרננים למלך על גודל ספר חוקיו שחיבר שבו חכמת המלך והקהיל המלך את שריו אמר לשרים ולחכמים <em>״<strong>מעשי ידי טובעים בים ואתם אומרים שירה״</em></strong> . והנמשל:<em>״ הם כל היהודים שעדיין לא שומרים תורה ומצוות טובעים ״</em>ביסוד המים<em>״ תאוות ממון אכילה ונשים (שערי קדושה<br>למהרח&quot;ו )ואני מתעסק בתורה יום ולילה שנמשלה לשירה שאמר דוד המלך :״</em><strong>זְמִרוֹת</strong> הָיוּ לִי חֻקֶּיךָ בְּבֵית מְגוּרָי״<br>(תהילים קיט נד) ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 27</span>
+          <span class="parable-meta">28.9.2025</span>
+        </div>
+        <div class="parable-text"><p>התורה נקראת משל קדמוני השם יתברך ברא מציאות גשמית שהיא רק משל למציאות רוחנית וכל התורה וכל ספורי המקרא התורה שבכתב והתורה שבעל פה קוראים בתוך גוף האדם ונמצא שהעקידה היא רוחנית ורצח קין את הבל רוחני ובלעם ופנחס רוחני וקרח ועדתו רוחני ודוד וגוליית רוחני כל הדמויות הרעות מיצגות את הנפש הבהמית שהיא משורש קין וכל הדמויות החיוביות מיצגו את הנפש האלוקית משורש הבל ונמצא שאדם שזוכה למלחמה רוחנית זאת וממליך את הנפש האלוקית על הנפש הבהמית זוכה להבין שהכל אחד בסוד מעשה מרכבה ולכן אומר דוד המלך שזכה להבין זאת ולנצח במלחמה הפנימית <em>״אָז אָמַרְתִּי הִנֵּה בָאתִי בִּמְגִלַּת סֵפֶר כָּתוּב עָלָי״</em> (תהילים מ ח)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 28</span>
+          <span class="parable-meta">30.8.2024</span>
+        </div>
+        <div class="parable-text"><p>ככה נפלו גדולי עולם אלישע בן אבויה היה תנא גדול הדור ונפל לשכלו יורבעם בן נבט היה מלך הכי חכם בדורו שכל החכמים מבוטלים אליו מגודל חכמתו ועבד עבודה זרה וכפר בהשם וכן הרשימה ארוכה רק אחרי מאה עשרים שנה יודעים האמת נמצא שאדם כל חייו חי ולא יודע אל האמת אפילו אם הוא גדול הדור ראו רבי יוחנן בן זכאי<br>וכשחלה רבי יוחנן בן זכאי נכנסו תלמידיו לבקרו כיון שראה אותם התחיל לבכות אמרו לו תלמידיו נר ישראל עמוד הימיני פטיש החזק מפני מה אתה בוכה אמר להם אילו לפני מלך בשר ודם היו מוליכין אותי שהיום כאן ומחר בקבר שאם כועס עלי אין כעסו כעס עולם ואם אוסרני אין איסורו איסור עולם ואם ממיתני אין מיתתו מיתת עולם ואני יכול לפייסו בדברים ולשחדו בממון אעפ&#x27;&#x27;כ הייתי בוכה ועכשיו שמוליכים אותי לפני ממ&#x27;&#x27;ה הקב&#x27;&#x27;ה שהוא חי וקיים לעולם ולעולמי עולמים שאם כועס עלי כעסו כעס עולם ואם אוסרני איסורו איסור עולם ואם ממיתני מיתתו מיתת עולם ואיני יכול לפייסו בדברים ולא לשחדו בממון ולא עוד אלא שיש לפני שני דרכים אחת של גן עדן ואחת של גיהנם ואיני יודע באיזו מוליכים אותי ולא אבכה&quot; (ברכות כח ע׳ב)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 31</span>
+          <span class="parable-meta">10.8.2025</span>
+        </div>
+        <div class="parable-text"><p>האין סוף נמצא בחושך הגבול נמצא באור . השם נתן את הגבול <em>״לשטן״</em> כל דבר שיש בו גבול יש בו רצון, ולכן החכמה היא גבול ולכן גם החכם הכי גדול נשלט אפילו יש לו <em>״רוח הקודש״</em> קקרח ואפילו הגיע <em>״לפרדס״</em> כאלישע בן אבויה ,או היה כהן גדול שמונים שנה בקודש הקודשים כרבי יוחנן או היה מלך כירבעם שהיו כל חכמי ישראל כקליפת השום בפניו, למלך לא באים עם חכמה למלך באים עם בטול ענווה לא יודע ,מעשים במסירות נפש ,שפלות, נפשי כעפר לכל תיהיה ,למלך באים עם הרבה ביזיונות ניסיונות יסורים כדוד המלך, שם איש לא מוכן להיות זה החושך , לא גרשנו את הייצר הרע מהעולם כי אנחנו באים אליו עם חכמה והוא כונס אותה אליו זה לא עבד וזה לא יעבוד <em>״קבלת עול״</em> בלי שכל ובלי רגש בשמחה גדולה זורעת מלח בעיניו והוא נעשה <em>״עוור״</em> ואז הוא כועס ומכעיס ושהוא כועס ואנחנו שותקים ושמחים אנחנו מוציאים ממנו את הניצוץ המחייה שבו שנאמר:<em>״<strong>חַיִל בָּלַע וַיְקִאֶנּוּ מִבִּטְנוֹ יוֹרִשֶׁנּוּ אֵל״</em></strong> (איוב כ) ושם החושך ומתוך החושך הזה בוקע אורו של משיח , השם צריך גוף מזוכך בלי שכל בלי רגש והוא יבוא לגוף הזה ויביא איתו גם שכל וגם רגש נמצא שהשם רק מחפש גוף להתגלות ולא שכל ,כי אין לו גוף ואין לו צורה ולא דמות הגוף שנאמר:<em>״וְנָתַתִּי לָכֶם לֵב חָדָשׁ וְרוּחַ חֲדָשָׁה אֶתֵּן בְּקִרְבְּכֶם וַהֲסִרֹתִי אֶת לֵב הָאֶבֶן מִבְּשַׂרְכֶם וְנָתַתִּי לָכֶם לֵב בָּשָׂר״</em> (יחזקאל לו) ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 44</span>
+          <span class="parable-meta">30.4.2025</span>
+        </div>
+        <div class="parable-text"><p>בשנת ה&#x27;תשט&quot;ו - אחד החסידים כתב לרבי שקיימת התלבטות בין המחנכים לגבי יום זה; יש המציעים לעבור את זה בשתיקה ללא הסברים. ויש המציעים להזכיר במילים ספורות על המלחמה, ועל הניסים הגדולים שקרו, שהשם ברחמיו הציל אותנו. מה אם כן נכון לעשות?<br>ענה על כך הרבי (נצטט חלק מהמכתב): &quot;..כל דבר שהאדם רואה או שומע יכול ובמילא גם צריך ללמוד הוראה בעבודתו את השם יתברך, ועל אחת כמה וכמה במאורע שנוגע לכמה וכמה מבני ישראל, ובפרט אם רואים שמסר השם יתברך רבים ביד מעטים באופן נסי, הרי זה צריך לעורר תוספת כח לעבדו יתברך..&quot;כלומר, אין להתעלם מהניסים הגדולים שארעו, בכך שחלק גדול מעם ישראל הקים בארצו רבונות יהודית - מקום הצלה ופליטה לכלל ישראל. ניסים אלה (כולל הניסים שארעו במלחמת העצמאות ושאר המלחמות) צריכים לעורר בנו התפעלות של קדושה הגורמת הוספה בעבודת השם. יחד עם זאת, אין להזדהות עם חגיגות יום העצמאות, משום שמייסדי המדינה, הקימו אותה על יסודות הנוגדים לתורה. כולל ההדגשה של &#x27;כוחי ועוצם ידי&#x27; והתעלמות מוחלטת מהניסים הגדולים שהשם עשה. למעשה, חגיגה זו מצערת ביותר.הרבי המשיל לכך משל:&quot;משל למה הדבר דומה, למלך גדול ורב, שמראה אהבתו העצומה לאיש הדיוט נבזה שפל אנשים כו&#x27;, ויורד אליו ממקום כבודו עם כל שריו כו&#x27;, ומכניסו להיכלו היכל המלך כו&#x27;..האפשר לומר ששפל אנשים זה יאמר למלך, אשר היכל זה אינו של המלך אלא של ההדיוט, ולכן יתנהג בו כפי רצונו, ותחילת הנהגתו היא לגרש את המלך מהיכלו..&quot; והנמשל: המלך הוא השם. היכל המלך - ארץ ישראל. האיש הפשוט הוא עם ישראל. המלך הציל אותנו בניסים עצומים והביא אותנו להיכלו. האם יעלה על הדעת שנחגוג את העובדה שיהודים התנהגו כמגרש את המלך מארצו?!<br>לאחר מלחמת ששת ימים - לאור הניסים הגדולים עלתה סברה לחגוג עם כולם. אך הרבי ענה על כך: &quot;..אין מקום בשנה זו דוקא, וגם לאחר הנצחון של מלחמת ששת הימים, לשנות את ההנהגה ביום העצמאות, ואין גם לבסס את השקפת השמחה - שהרי לאחר ניסים כה גלויים, ביטוי השמחה היה צריך להיות בתוספת בעניני מחולל הנסים - תורה וקדושה, ורואים כי אדרבה, גדלה ההרגשה של &quot;כחי ועוצם ידי&quot;..&quot;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 52</span>
+          <span class="parable-meta">5.2.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״יום הגשמים״</em><br>הגשם משל לתורה מהכתר ששם זוכים לתורה מפי הגבורה מפיו של מלך מלכי המלכים שנקראת דא׳ח (דברי אלוהים חיים)<em>״מים דוכרים״</em> שנאמר:<em>״יִשָּׁקֵנִי מִנְּשִׁיקוֹת פִּיהוּ כִּי טוֹבִים דֹּדֶיךָ מִיָּיִן״</em>(שיר השירים)אדם שזכה למים אלו יכול <em>״לפקוד עקרות״</em> ע׳פ רבי נחמן (ספר המידות) ועכשיו נבין את הפסוק שמי שזוכה <em>״למים דוכריים״</em> שנקראים <em>״יום הגשמים״</em> זוכה להחיות מתים הדבור הזה פועל באנשים שהיו רחוקים מתורה ומצוות ונוגע בהם בנקודת משיח שבליבם והם מתעוררים מאפס למאה ואחד ברגע,<br>וזאת הכוונה שגדול יום הגשמים כיום תחיית המתים בעזרת השם על כולנו מיד בביאת המשיח ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 61</span>
+          <span class="parable-meta">2.5.2024</span>
+        </div>
+        <div class="parable-text"><p><strong>דַּע -</strong> עניין ה דעת <br><strong>מֵאַיִן בָּאתָ</strong> - הפכת לאין ואז הגעת.<br><strong>וּלְאָן אַתָּה הוֹלֵךְ</strong> - דע שאתה בדרך אל הארמון לפגוש המלך בחייך.<br><strong>וְלִפְנֵי מִי אַתָּה עָתִיד לִתֵּן דִּין וְחֶשְׁבּוֹן</strong> - שתגיע לשם אתה תיהיה עבד המלך <em>״ועבד מלך מלך הוא״</em> ואתה תמלוך על הטבע ותצטרך לתת דין וחשבון למלך מלכי המלכים כל יום על מעשייך כי קנית את עולמך בחייך</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 77</span>
+          <span class="parable-meta">20.4.2026</span>
+        </div>
+        <div class="parable-text"><p>להסביר עניין ארבע אמות של הלכה , כל המקיים הלכה בשולחן ערוך מקבל על עצמו עול מלכות שמים מנתק שכלו מלהבין ומנתק רגשותיו מלהרגיש ומקיים ההלכה ללא מחלוקת בין השכל לרגש זאת קבלת עול אמיתית על מנת לעבור את המדמה ששולט בארבע עולמות מעשה דבור מחשבה כוונה על האדם לנתק שכלו ולהתעלם מרגשותיו בעולם שרובם ככולם רצון עצמי ומחשבה עצמית או אז ירד ארמון משוכלל עם דעת אין סופית מהעולם החמישי על האדם ואז מעבד חסר שכל ורגש יהיה מלך בעל שכל ורגש אין סופי ואז יבין שאמרו חז<em>״ל ״</em>עבד מלך מלך הוא״! ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 78</span>
+          <span class="parable-meta">26.4.2026</span>
+        </div>
+        <div class="parable-text"><p>זאת חקת התורה&quot;<br>על פרשת פרה אדומה אמר שלמה המלך בחכמתו: &quot;אמרתי אחכמה והיא רחוקה ממני&quot;!אמר המגיד מדובנא משל למה הדבר דומה? :לעשיר כפרי אחד שרצה לנסוע עד סוף העולם. אמר ועשה! הכין מרכבה רתומה לסוסים אבירים וחזקים ולקח אוכל צידה לדרך.לאחר מכן עלו הוא ומשרתו למרכבה ויצאו למסע אל סוף העולם... ביום הראשון לנסיעתו נסע העשיר שלוש מאות פרסאות ולעת ערב עצר כדי לנוח במלון.במלון ישב העשיר אל השולחן והשתתף בשיחת האורחים ובסיפורי מסעותיהם. כל אחד מהם תיאר באוזני חבריו את מטרת מסעו, כמה כבר נסע וכמה עוד עליו לנסוע. &quot;אני&quot; - קפץ העשיר ואמר- &quot;נוסע לסוף העולם וכבר עברתי היום שלוש מאות פרסאות!&quot;&quot;שוטה שכמוך&quot; -צחקו כולם- &quot;האינך יודע כי העולם הוא עגול?!&quot; אין אתה מתקרב לסוף מסעך כלל כי ככל שתרחיק ותיסע כן ירחק ממך סוף העולם...כן הוא גם הנמשל סיים המגיד:<br>שלמה המלך חפץ להבין את סודות התורה אולם ככל שלמד הבין כי התורה עמוקה מני ים.משום כך אמר: &quot;אמרתי אחכמה והיא רחוקה ממני&quot;!</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 80</span>
+          <span class="parable-meta">12.11.2023</span>
+        </div>
+        <div class="parable-text"><p><em>״<strong>משל חכמי החומות״</em></strong><br><em>״בממלכה אחת היה מלך רשע שכלא את כל חכמי הממלכה ״</em>בבית סוהר<em>״ עם חומות בגובה שלושים מטר ועל החומות שמרו ענקים בגובה שלושים מטר וכל האסירים שהיו תלמידי חכמים ניסו לטפס בכל דרך אבל כל פעם שהגיעו לקצה החומה השומרים פצעו אותם קשות עד שרק דברו על בריחה ולא ניסו עוד לברוח וככה במשך שישים שנה איש לא הצליח לברוח מהבית סוהר עד שבא ילד ושאל את גדול החכמים רבינו למה אתם מנסים לברוח מלמעלה ולא מלמטה תחפור מנהרה מתחת לחומה וכך תנצלו כולם וככה היה באפילת ״</em>לילה חשוך<em>״ ברחו כולם ״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 87</span>
+          <span class="parable-meta">7.1.2025</span>
+        </div>
+        <div class="parable-text"><p>היה פעם מלך ששלח שר חכם ללמד חכמת המלך איך להיות ענוים והשר חכך בדעתו להיות מלך בעצמו מה עשה לקח מתחתיו מורים ולימד אותם כל אחד פרוש שונה בחכמת המלך ואמר להם אתם תלמדו את העם ותמיד תכניסו בשכלם שזאת האמת ואין פשרות ולימים נעשו עדרים עדרים וכל אחד בדעותיו ומאחר שהיו חכמים רק כל אחד בחכמתו הוא נעשו גאים עד שאח לא דיבר עם אח ואבא לא דיבר עם בן והיה צער גדול למלך על שנעשה פרוד בממלכתו</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 91</span>
+          <span class="parable-meta">19.5.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״היה מלך ערמומי וחכם שחיפש חייטים שיתפרו לו בגד שתפור ״</em>מחול וממים<em>״ והבטיח כל הון שבעולם למי שיצליח וכל החכמים והחייטים והקוסמים ניסו ולא הצליחו לחבר חול עם מים בתפר, והנה הגיע ילד אחד והראה למלך הבגד שתפור מחול וממים ואמר המלך לילד אתן לך כל הון שבעולם אם תגלה לי איך עשית זאת והילד אמר למלך:״</em>אִם יִתֵּן אִישׁ אֶת כָּל הוֹן בֵּיתוֹ בָּאַהֲבָה בּוֹז יָבוּזוּ לוֹ<em>״(שיר השירים) ובז למלך והלך כשם שבא״</em></p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 99</span>
+          <span class="parable-meta">12.5.2026</span>
+        </div>
+        <div class="parable-text"><p>פעם שאל מלך את רבי יונתן איבשיץ מה ההלכה הזאת שהתולעת בתוך הפרי מותרת יצאה אסורה הרי שבשתי המקרים אוכל תולעת מדוע שהיא בפנים מותרת ויוצאת אסורה? ענה לו הצדיק:<em>״ כבוד המלך יאכל משהו בפיו עכשיו ירוק את האוכל הלעוס לכף ידו ויחזור ויכניס לפיו ויאכל , הרי האוכל אותו אוכל שהיה בפה אלא מרגע שיצא מפיו נמאס עליו כך היא התולעת.<br>והנמשל:״</em> הייצר הרע שאנחנו חיים איתו הוא לא מאוס אבל מרגע שגילינו פרצופו ולא מאסנו בו הרי הוא כאכילת תולעת ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 107</span>
+          <span class="parable-meta">30.8.2025</span>
+        </div>
+        <div class="parable-text"><p><em>״כל עבודה בגבול מורידה ״</em>תענוג גבולי<em>״ כל עבודה בלי גבול מורידה תענוג אין סופי משל לשליח שמגיע מהמלך עם מסר של אהבה והאדם מתענג ומשתעשע עם השליח, והחכם אומר מה לי להשתעשע עם השליח אלך לשורש האהבה של המלך, השורש הוא בכתר לשם מגיעים בלי גבול, עשייה בלי שכל בלי רגש מושכת אור אין סוף מהכתר, עד שהתענוג נעשה תמידי שאפשר להתענג במחשבה עם השם שמעוררת רגש פנימי בכל האברים כי הוא בא מהלב ולא מהשכל״</em><br>(מלוקט מהבעש״ט הקדוש)</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 116</span>
+          <span class="parable-meta">5.2.2024</span>
+        </div>
+        <div class="parable-text"><p>היה מלך שלמד בספר שכתב מלך חכם גבור וענו איך להפיל מלך מכסאו ולמד ולמד וחשב לעצמו מתי יבוא מלך שאוכל לממש לימודי עליו ומעולם לא חשב שהספר מדבר עליו כי חכך בדעתו איזה מלך ילמד על עצמו איך לרדת מכיסאו וחכם יבין</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <section class="category" id="cat-J">
+      <div class="category-header">
+        <div class="category-symbol">☥</div>
+        <h2 class="category-title">תִּקּוּן הַמִּדּוֹת וְהַנֶּפֶשׁ הַבַּהֲמִית</h2>
+        <div class="category-description">משלים על הנפש הבהמית, היצר, והתיקון</div>
+        <span class="category-count">5 משלים</span>
+      </div>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 5</span>
+          <span class="parable-meta">24.4.2024</span>
+        </div>
+        <div class="parable-text"><p>בס<em>״ד נפרש ״</em>חד גדיא<em>״<br>לעניות דעתינו בסוד :<br><strong>הגדי</strong> - זה ״</em>השעיר להשם<em>״ או אם תרצו ״</em>נקודת משיח<em>״ שנמכרה בכל יהודי בחינת יוסף (שטבלו האחים את כותנתו בדם גדי עיזים) <br><strong>חתול</strong> - הקנאה להשם שמאבדת נקודה זאת כי לא באים ברחמים אחד עם השני ואלו אנחנו שאחים כולנו וקנאים אחד לשני ולכן זה כמכירת יוסף למצרים.<br><strong>כלב</strong> - משל לפרעה שנמשל לכלב<br>״</em><strong>מקל</strong><em>״ - למטה של משה רבינו האמונה מעל טעם ודעת ״</em>אהבת חינם<em>״ שבאה ומוציאה את האדם ממצרים.<br><strong>אש</strong> -כאשר אדם זוכה לאש הפנימית אין צורך במקל ולכן האש בעבודת השם שורפת המקל בחינת יעקב שנאמר:״</em>וְהָיָה בֵית יַעֲקֹב אֵשׁ<em>״ (עובדיה)<br><strong>מים</strong> - התורה נמשלה למים כאשר אדם זוכה לתורת חסד מהשמים (שם מים) אז זה מקרר את האש הפנימית שעלולה לשרוף את האדם ללא הדא״</em>ח (דברי אלוהים חיים)<br><strong>שור</strong> - אחרי התורה זוכים לנבואה בחינת משיח בן יוסף שנאמר:<em>״בְּכוֹר שׁוֹרוֹ הָדָר לוֹ וְקַרְנֵי רְאֵם קַרְנָיו בָּהֶם עַמִּים יְנַגַּח״</em> (דברים) שמי שזוכה לשכל הזה מנגח את העמים שהם המחשבות הרבות.<br><strong>שוחט</strong> - משיח בן דוד שהוא שוחט מלשון מעלה מושך את הס<em>״ם ״</em>שחט רבה לרבי זירא<em>״ (פסחים צו ע׳ב) עד הכתר שם מתבטל השטן לפני השם שנאמר:״</em>אומר להן דוד: אני אברך, ולי נאה לברך, שנאמר (תהלים קטז) כוס ישועות אשא ובשם ה&#x27; אקרא&quot;.(פסחים קיט ע׳ב)<br><strong>מלאך המוות</strong> - מלחמת גוג ומגוג שזאת שירת הברבור של השטן שתוקף את דוד ודוד שמח ומודה על היסורין וככה הופך זדונות לזכויות <em>״ומברר יקר מזולל״</em> ומפיל את הקליפה .<br><strong>הקדוש ברוך הוא</strong> - פנימיות הכתר עתיקא קדישא שם השטן מתבטל לפני המלך ונכלל באור אין סוף וככה הקב״ה שוחט מעלה לקדושה את ההנחש והופך אותו למליץ יושר שלו וזה משיח</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 14</span>
+          <span class="parable-meta">4.7.2024</span>
+        </div>
+        <div class="parable-text"><p>מסביר האדמור הזקן שאשה הכוונה לדעת העליונה שנאמר:<em>״וְאִשָּׁה אַחַת מִנְּשֵׁי בְנֵי הַנְּבִיאִים צָעֲקָה אֶל אֱלִישָׁע ..״</em>(מלכים) ואשה גם הכוונה לגוף שנאמר:<em>״ אשתו כגופו״</em> (יבמות סב ע׳ב) בפניומיות כאשר הגוף שנמשל לאשה זוכה לתיקון המידות שקשור לנפש הבהמית נצח הוד יסוד (חיבור ז׳א ונוקבה <em>״זעיר אנפין ומלכות״</em>) אזי זוכים לדעת העליונה שהיא הנבואה בחינת יסוד (יוד סוד בחינת תורה מפי הבורא) המשיח הראשון בן יוסף זה נקרא חתונה חיבור זו׳ן (זכר ונקבה)<br>המחשבה העליונה נקראת זכר והמלכות נקראת נקבה והחיבור בין הניצוץ המחיה למחשבה העליונה נקרא חתונה. זוכים לזה או על ידי טבעת שהיא עגולה עניין האפסיות הבטול שרק ככה לא מתעמתים עם המדמה שווה פרוטה שם של משיח שמכסה על מציאות השם שאדם שם עצמו כשיריים הוא עובר את המלאך שנקרא <em>״פריטה״</em>. כתובה כנגד תורה משמים קבלת התורה גילוי משה רבינו זאת הכתובה וביאה הכוונה שהגוף משרת את המלך במסירות נפש אז כביכול המלך הקב״ה בא על המלכה כנסת ישראל שהם אברי הגוף וכשם שהיתה בעילה של השטן שבעל את חוה עכשיו זוכין ליחוד קדושה בריך הוא ושכינתא חיבור הניוץ עם הכתר וזה ביאה וקל להבין</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable long">
+        <div class="parable-header">
+          <span class="parable-num">משל 34</span>
+          <span class="parable-meta">2.3.2026</span>
+        </div>
+        <div class="parable-text"><p><em>״המן״</em> מסמל את <em>״השטן״</em><br>(שהוא אחד מארבע דברים שהשם מצטער שברא) שהשם ברא אותו בשביל שאנחנו נעשה עבדים לקדוש ברוך הוא על ידי שהוא ישדל אותנו לעבירות ועל ידי כך אנחנו נדבק בקדוש ברוך הוא ונעשה תשובה וניהיה עבדים להשם יתברך כמשל <em>״הזונה מהזהר״</em> , אך <em>״המן״</em> שהוא בסך הכל שר שנשלח למלא תפקידו במקום שניהיה עבדים הוא החתים את אחשרוש על האגרת ואז החליף את העין באלף באגרת ורוצה <em>״לאבד אותנו״</em> <em>״במקום לעבד אותנו״</em> ולכן אומר אחשרוש <em>״מִי הוּא זֶה וְאֵי זֶה הוּא אֲשֶׁר מְלָאוֹ לִבּוֹ לַעֲשׂוֹת כֵּן.״</em> אני לא חתמתי על אגרת כזאת (מסתבר שהוא לא היה כל כך סנילי) כמו שאומר ביחזקאל פרעה <em>״אָמַר לִי יְאֹרִי וַאֲנִי עֲשִׂיתִנִי״</em> (שהוא ברא את עצמו) נמצא שפה יש מרידה במלך ולכן אסתר אמרה אם נמכרנו לעבדים הייתי מסכימה אבל המטרה היא לאבד אותנו לסטרא אחרא ופה הכל התהפך והשם התעורר ועשה מה שעשה ומה שהיה הוא שיהיה מיד בביאת משיח ‏&lt;ההודעה נערכה&gt;</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 101</span>
+          <span class="parable-meta">8.2.2024</span>
+        </div>
+        <div class="parable-text"><p>בפנימיות בס״ד המשקוף העליון כנגד יראת שמים משקוף ימני כנגד תורה משה רבינו משקוף שמאלי כנגד הנפש הבהמית תקון המידות אומר השם במצרים פסחתי דלגתי ויתרתי על יראת שמים לימוד תורת אמת שזוכים למשה ותיקון המידות אהרון וגאלתי אתכם בתנאי שאתם תיהיו לי לעבדים ולא תיהיו עבדי פרעה שאדם עובד לתאוותיו יצריו אלילי הגויים אוכל ממון ותאוות בשרים . *<strong>אדם לעולם יהיה עבד בחייו הוא רק צריך להחליט למי הוא עבד למלך או למדמה </strong>*</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+      <article class="parable">
+        <div class="parable-header">
+          <span class="parable-num">משל 102</span>
+          <span class="parable-meta">28.9.2024</span>
+        </div>
+        <div class="parable-text"><p>הכלב משל לפרעה שמיצג את הייצר הרע בגוף האדם כאשר אדם נהנה בתאוות ותענוגי העולם מהשפע שקיבל מהמלך לעבוד את המלך אזי המלך משסע הכלב באדם זה וכאשר מגדיל את השם בשפע זה בחינת עושה עטרת כתר למלך המלך מתגמל אותו בהתאם כל מה שקיבלנו זה פקדון בידינו לשרת את המלך ואחרי מאה עשרים שנה מבקש המלך דוח מפורט מה עשינו בפקדון שנאמר;<em>״ מרבה נכסים מרבה דאגות״</em> אומר רבי נחמן מרבה נכסים בעולם הזה מרבה דאגות בעולם הבא וקל להבין</p></div>
+        <button class="expand-btn"><span class="expand-label-collapsed">▼ הצג את המשל המלא</span><span class="expand-label-expanded">▲ כווץ</span></button>
+      </article>
+    </section>
+
+    <div class="closing">
+      <p class="closing-text">
+        כל החיים — <strong>הם משל למלך</strong>.<br>
+        השאלה אחת:<br>
+        <em>מתי תזכור שאתה בן?</em>
+      </p>
+    </div>
+
+    <div class="attribution">מדברי ציון אבירם הי״ו</div>
+    <div class="footer-ornament">✦ ♔ ✦</div>
+  </div>
+
+  <script>
+    document.body.addEventListener('click', (e) => {
+      if (e.target.closest('.expand-btn')) {
+        const btn = e.target.closest('.expand-btn');
+        btn.parentElement.classList.toggle('expanded');
+      }
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לב התניא — פרק ל״ב בפשטות גמורה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.9;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 40px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 24px; letter-spacing: 8px;
+    margin-bottom: 30px; opacity: 0.7;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(40px, 7vw, 60px); text-align: center;
+    color: var(--ink); line-height: 1.1;
+    margin-bottom: 16px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 300; font-style: italic; margin-bottom: 50px;
+  }
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 50px 0; gap: 20px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 18px; letter-spacing: 4px; }
+  .section { margin-bottom: 38px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 24px; color: var(--crimson); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::before { content: "❖"; color: var(--gold); font-size: 14px; }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  /* Tanya quote in original */
+  .tanya-original {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 16px 22px; margin: 16px 0;
+    font-family: 'David Libre', serif; font-size: 16px;
+    color: var(--ink-soft); border-radius: 2px;
+    font-style: italic;
+  }
+  .tanya-original-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--gold-deep);
+    margin-bottom: 6px; text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* Everyday example box - "כמו ש..." */
+  .example-box {
+    background: rgba(245, 236, 217, 0.7);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-right: 3px solid var(--gold-deep);
+    padding: 16px 22px; margin: 16px 0;
+    border-radius: 3px;
+  }
+  .example-label {
+    display: inline-block; font-family: 'Bellefair', serif;
+    font-size: 10px; letter-spacing: 3px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 8px;
+    background: rgba(184, 138, 44, 0.12);
+    padding: 2px 10px; border-radius: 10px;
+  }
+  .example-box p { font-size: 16px; margin: 0; color: var(--ink-soft); line-height: 1.7; }
+  .example-box p + p { margin-top: 8px; }
+
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px; font-weight: 500;
+  }
+
+  /* Lev = 32 card */
+  .lev-card {
+    margin: 26px 0; padding: 30px 26px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment); border-radius: 6px;
+    text-align: center; position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+  .lev-card::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px; pointer-events: none;
+  }
+  .lev-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold);
+    margin-bottom: 14px; text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+  .lev-equation {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 30px;
+    color: var(--gold); font-weight: 700; line-height: 1.3;
+    margin-bottom: 10px; position: relative; z-index: 1;
+  }
+  .lev-meaning {
+    font-size: 14px; color: rgba(245, 236, 217, 0.75);
+    font-style: italic; position: relative; z-index: 1;
+  }
+
+  /* Action box */
+  .action-inline {
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.08) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border-right: 3px solid var(--crimson);
+    padding: 16px 22px; margin: 18px 0;
+    border-radius: 3px;
+  }
+  .action-inline-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .action-inline p {
+    font-size: 16px; color: var(--ink); margin: 0;
+    line-height: 1.7;
+  }
+
+  /* HALACHA section */
+  .halacha-section {
+    margin-top: 60px;
+    padding: 50px 36px 40px;
+    background: linear-gradient(135deg, rgba(184, 138, 44, 0.15) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    position: relative;
+  }
+  .halacha-tag {
+    position: absolute; top: -14px; right: 36px;
+    background: var(--gold); color: var(--parchment);
+    padding: 6px 22px;
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 4px; border-radius: 14px;
+    text-transform: uppercase;
+  }
+  .halacha-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--crimson); text-align: center;
+    margin-bottom: 8px;
+  }
+  .halacha-subtitle {
+    text-align: center; font-style: italic;
+    color: var(--ink-soft); margin-bottom: 30px;
+    font-size: 16px;
+  }
+  .action-item {
+    background: rgba(245, 236, 217, 0.7);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 4px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .action-number {
+    font-family: 'Bellefair', serif;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 700;
+    text-align: center;
+  }
+  .action-body { padding-top: 2px; }
+  .action-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--crimson); margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .action-text {
+    font-size: 16px; color: var(--ink);
+    line-height: 1.7; margin: 0;
+  }
+
+  .final-message {
+    margin-top: 50px; padding: 30px;
+    background: rgba(140, 42, 30, 0.05);
+    border-top: 2px solid var(--crimson);
+    border-bottom: 2px solid var(--crimson);
+    text-align: center;
+  }
+  .final-message-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .final-conclusion {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 22px;
+    color: var(--ink); font-weight: 600;
+    line-height: 1.6; margin: 0;
+  }
+  .attribution {
+    margin-top: 50px; text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+  }
+  .attribution-line {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .attribution-source {
+    font-size: 13px; color: var(--ink-soft);
+    margin-top: 6px; font-style: italic;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 30px;
+    color: var(--gold); font-size: 18px;
+    letter-spacing: 12px; opacity: 0.5;
+  }
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 22px; }
+    .container::before { inset: 8px; }
+    p { font-size: 17px; }
+    .lev-equation { font-size: 24px; }
+    .final-conclusion { font-size: 19px; }
+    .halacha-section { padding: 40px 20px 30px; }
+    .halacha-title { font-size: 24px; }
+    .action-item { grid-template-columns: 36px 1fr; gap: 12px; padding: 16px 16px; }
+    .action-number { font-size: 22px; }
+    .action-title { font-size: 17px; }
+    .action-text { font-size: 15px; }
+    .tanya-original { font-size: 15px; }
+    .example-box p { font-size: 15px; }
+  }
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">תניא · פרק ל״ב</div>
+    <h1>לֵב הַתַּנְיָא</h1>
+    <p class="subtitle">סוד אהבת ישראל בפשטות גמורה</p>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <!-- ============================== -->
+    <!-- INTRO                           -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">למה הפרק הזה כל כך מיוחד?</h2>
+      <p>
+        בתניא יש 53 פרקים.
+        את הפרק ה־32 קוראים החסידים <strong>"לב התניא"</strong>.
+        למה? כי <strong>המספר 32 בעברית הוא ל״ב</strong>,
+        וזה בדיוק כמו המילה <strong>"לֵב"</strong>.
+      </p>
+      <div class="lev-card">
+        <div class="lev-label">המפתח</div>
+        <div class="lev-equation">ל״ב · 32 · לֵב</div>
+        <div class="lev-meaning">הפרק שהוא הלב הפועם של התניא</div>
+      </div>
+      <p>
+        ועל מה הפרק הזה? על דבר אחד פשוט שלכאורה כולנו יודעים:
+        <strong>"ואהבת לרעך כמוך"</strong> —
+        לאהוב כל יהודי.
+      </p>
+      <p>
+        אבל האדמו"ר הזקן בעל התניא מגלה לנו פה משהו מדהים:
+        זו לא סתם מצווה אחת מתוך 613.
+        <strong>זה השורש של כל התורה כולה.</strong>
+        בלי זה — שום דבר לא עובד.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 1. WHO YOU ARE                  -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">מי אתה באמת — הגוף או הנשמה?</h2>
+      <p>
+        כל אחד מאיתנו בנוי משני דברים שונים לגמרי:
+      </p>
+      <p>
+        ה<strong>גוף</strong> — זה החלק שרואים.
+        הוא רעב, צמא, רוצה כסף, רוצה כבוד, רוצה לישון.
+        הוא ה<em>"אני"</em> החיצוני.
+      </p>
+      <p>
+        וה<strong>נשמה</strong> — זה החלק שלא רואים.
+        היא ה"דלק" האלוקי שמחיה את הגוף.
+        היא באה ישירות מה' ושייכת לעולם הקדושה.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תחשוב על מכונית: יש את הפח החיצוני,
+          ויש את הנהג שמניע אותה.
+          הגוף הוא המכונית — הנשמה היא הנהג.
+        </p>
+        <p>
+          מי שמתבלבל ו<em>חושב שהוא המכונית</em> —
+          חי כל החיים בלבול אחד גדול.
+        </p>
+      </div>
+      <p>
+        האדמו"ר הזקן אומר משהו פשוט אך עוצמתי:
+        <strong>תשים את הנשמה במקום הראשון,
+        ואת הגוף במקום השני</strong>.
+        הגוף הוא לא <em>אתה</em> — הוא רק <em>הבגד שלך</em>.
+      </p>
+      <p>
+        וכשהאדם מצליח לעשות את ההיפוך הזה —
+        השמחה שלו תהיה <strong>שמחת הנשמה</strong>,
+        לא שמחת הגוף.
+        ואז, בקלות, הוא יכול לאהוב כל יהודי כמו עצמו.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 2. ONE FATHER                   -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">למה כל היהודים הם "אחים ממש"?</h2>
+      <p>
+        עכשיו השאלה הגדולה:
+        <strong>למה בכלל לאהוב יהודי שאני בקושי מכיר?</strong>
+        מה משותף ביני לבין סנדלר ברחוב, או מתנחל בהר, או חילוני בתל אביב?
+      </p>
+      <p>
+        תשובת התניא פשוטה ועצומה:
+        כל הנשמות של היהודים <strong>באות ממקור אחד</strong> —
+        מהקב"ה עצמו.
+        אם הנשמה שלך באה מאבא, והנשמה שלי באה מאבא —
+        <strong>יש לנו אבא אחד</strong>.
+      </p>
+      <div class="tanya-original">
+        <div class="tanya-original-label">לשון התניא</div>
+        ולכן נקראו כל ישראל אחים <strong>ממש</strong> —
+        מצד שורש נפשם בה' אחד,
+        רק שהגופים מחולקים.
+      </div>
+      <p>
+        תשים לב למילה <strong>"ממש"</strong>.
+        לא במשל. לא בהשאלה.
+        <em>אחים ממש</em>.
+        אנחנו לא <em>"כמו"</em> אחים — אנחנו <strong>באמת</strong> אחים.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תאר לעצמך שני אחים תאומים שגדלו בבתים שונים
+          ולא הכירו אחד את השני.
+          הם נראים שונה, מדברים שונה, מתלבשים שונה —
+          אבל הם <strong>תאומים</strong>.
+          זה לא תלוי בהיכרות. זה פשוט עובדה.
+        </p>
+        <p>
+          כך כל היהודים: יש לנו אותה <em>נשמת אם</em>.
+          רק הגופים נראים אחרת — אבל בפנים, אנחנו אותו דבר.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 3. WHY BODY-PEOPLE CAN'T LOVE   -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">למה מי שחי לגוף — לא יכול לאהוב באמת?</h2>
+      <p>
+        ומכאן יוצאת מסקנה חזקה:
+        מי ש<strong>חושב שהוא הגוף</strong> ולא הנשמה —
+        <em>בלתי אפשרי</em> שתהיה לו אהבה אמיתית לאף אחד.
+      </p>
+      <p>
+        למה? כי הגופים <strong>שונים זה מזה</strong>.
+        לכל גוף יש אינטרסים שונים, רצונות שונים, צרכים שונים.
+        אם אני רואה את עצמי כגוף ואותך כגוף —
+        <em>אנחנו בעצם מתחרים</em>.
+        מה לי ולך?
+      </p>
+      <p>
+        ולכן האהבה ה"אפשרית" היחידה ביניהם היא מה שנקרא
+        <strong>"אהבה התלויה בדבר"</strong> —
+        אני אוהב אותך כי אתה נותן לי משהו.
+        ברגע שהדבר נגמר —
+        <em>גם האהבה נגמרת</em>.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          חברה במקום עבודה: כל עוד אנחנו עובדים יחד ועוזרים אחד לשני —
+          חברים מצויינים.
+          ברגע שאחד עוזב — הקשר נגמר.
+          זו אהבה <em>תלויה בדבר</em>: בעבודה.
+        </p>
+        <p>
+          אבל אחים אמיתיים אוהבים אחד את השני
+          גם בלי שום סיבה חיצונית.
+          <strong>כי הם פשוט אחים.</strong>
+        </p>
+      </div>
+      <div class="action-inline">
+        <div class="action-inline-label">המסקנה</div>
+        <p>
+          רוצה לאהוב באמת? תפסיק לראות את עצמך כגוף.
+          תזכור שאתה <strong>נשמה</strong>,
+          וכל יהודי הוא <strong>נשמה אחרת מאותו מקור</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 4. HILLEL                       -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">"זה כל התורה כולה" — הסיפור של הלל</h2>
+      <p>
+        ועל זה אמר הלל הזקן את המשפט המפורסם:
+        <strong>"זהו כל התורה כולה — והשאר זה רק פירוש"</strong>.
+      </p>
+      <div class="example-box">
+        <span class="example-label">הסיפור · גמרא שבת לא</span>
+        <p>
+          פעם בא גוי להלל וביקש להתגייר בתנאי שילמדו אותו
+          את כל התורה <em>על רגל אחת</em> —
+          כלומר תוך זמן שאדם יכול לעמוד על רגל אחת.
+        </p>
+        <p>
+          ענה לו הלל:
+          <strong>"מה ששנוא עליך — אל תעשה לחברך.
+          זוהי כל התורה כולה. השאר זה פירוש. צא ולמד."</strong>
+        </p>
+      </div>
+      <p>
+        איך זה יכול להיות שמצווה אחת
+        היא <em>כל התורה</em>?
+        כי כל מטרת התורה היא לעשות שני דברים:
+      </p>
+      <p>
+        <strong>ראשית</strong> — לרומם את הנשמה למעלה,
+        עד שורשה בה' עצמו.
+      </p>
+      <p>
+        <strong>שנית</strong> — להוריד את <em>"אור אין סוף"</em>
+        (האור האלוקי האין־סופי) אל תוך עם ישראל.
+      </p>
+      <p>
+        ושני הדברים יקרו רק כש<strong>עם ישראל מאוחד</strong> —
+        כל הנשמות יחד.
+        כי יש כלל מהזוהר:
+      </p>
+      <div class="tanya-original">
+        <div class="tanya-original-label">מהזוהר הקדוש (ארמית)</div>
+        קוּדְשָׁא בְּרִיךְ הוּא לָא שָׁרְיָא בַּאֲתַר פָּגִים
+      </div>
+      <p>
+        בעברית: <strong>"הקב"ה לא שורה במקום פגום"</strong>.
+        כלומר — אם יש פירוד וקרע בעם ישראל —
+        <em>השכינה לא יכולה לרדת לשם</em>.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תאר לעצמך כוס יקרה שנשברה לכמה רסיסים.
+          אי אפשר למלא אותה במים — המים יזלגו.
+          רק כשמדביקים אותה <strong>שלמה</strong> —
+          היא יכולה להחזיק משקה.
+        </p>
+        <p>
+          כך עם ישראל: כשאנחנו מפורדים, אי אפשר "לקבל" את האור האלוקי.
+          רק כשאנחנו מאוחדים — הוא יורד אלינו.
+        </p>
+      </div>
+      <p>
+        ולכן מבקשים בתפילה:
+        <strong>"ברכנו אבינו כולנו כאחד באור פניך"</strong> —
+        <em>כולנו כאחד</em>, ואז יבוא האור.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 5. THE HARD QUESTION            -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">שאלה קשה — אבל הגמרא אומרת לשנוא חוטא!</h2>
+      <p>
+        ופה עולה שאלה גדולה.
+        הגמרא אומרת ש<strong>מי שרואה את חברו עובר עבירה — מצווה לשנוא אותו</strong>,
+        ואפילו לומר לרבו שגם הוא ישנא אותו!
+      </p>
+      <p>
+        אז איך זה מתיישב עם
+        <em>"אחים ממש"</em>
+        ו<em>"ואהבת לרעך כמוך"</em>?
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 6. THE ANSWER                   -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">התשובה — רק במקרה מאוד מצומצם!</h2>
+      <p>
+        האדמו"ר הזקן עושה כאן צמצום ענק.
+        הוא אומר: <strong>שלושה תנאים</strong> חייבים להתקיים יחד,
+        ורק אז מותר לשנוא:
+      </p>
+      <p>
+        <strong>תנאי ראשון</strong> —
+        מדובר ב<em>חבר קרוב שלך בתורה ובמצוות</em>.
+        לא סתם יהודי ברחוב. לא מישהו שאתה בקושי מכיר.
+        אלא חבר אישי, שותף לדרך.
+      </p>
+      <p>
+        <strong>תנאי שני</strong> —
+        כבר קיימת בו את המצווה
+        <strong>"הוֹכֵחַ תּוֹכִיחַ אֶת עֲמִיתֶךָ"</strong> (ויקרא יט).
+        כלומר — הוכחת אותו <em>ברוך, באהבה, בארבע עיניים</em>.
+        לא בעלבון, לא בפומבי, לא בכעס.
+      </p>
+      <p>
+        <strong>תנאי שלישי</strong> —
+        ולמרות התוכחה המכובדת — הוא <em>לא שב</em> מחטאו וממשיך.
+      </p>
+      <p>
+        רק כש<strong>שלושת התנאים יחד</strong> מתקיימים —
+        אז יש מקום למצוות שנאה.
+      </p>
+      <div class="example-box">
+        <span class="example-label">תחשוב לעצמך</span>
+        <p>
+          כמה אנשים בחייך באמת עברו את הסינון הזה?
+          חבר קרוב? הוכחת ברוך? והוא לא שב?
+        </p>
+        <p>
+          <strong>כמעט אף אחד.</strong>
+          רוב פעמים שאנחנו "שונאים בצדק" —
+          זה רק האגו שלנו מצדיק את עצמו.
+        </p>
+      </div>
+      <div class="action-inline">
+        <div class="action-inline-label">המסקנה</div>
+        <p>
+          בכל פעם שאתה מרגיש מצווה לשנוא יהודי —
+          <strong>ספור את שלושת התנאים</strong>.
+          לא מתקיימים? אין היתר.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 7. FAR FROM TORAH               -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">ומה עם יהודי רחוק מהתורה?</h2>
+      <p>
+        מה לגבי יהודי <strong>שלא נחשב "חבר" שלך בתורה ומצוות</strong>?
+        כלומר אדם רחוק מהתורה — חילוני, מסורתי, או יהודי שעובר עבירות
+        אבל הוא לא חבר קרוב שלך?
+      </p>
+      <p>
+        על זה אמר הלל הזקן את מאמרו המפורסם השני:
+      </p>
+      <div class="tanya-original">
+        <div class="tanya-original-label">פרקי אבות א, יב</div>
+        הֱוֵי מִתַּלְמִידָיו שֶׁל אַהֲרֹן,
+        אוֹהֵב שָׁלוֹם וְרוֹדֵף שָׁלוֹם,
+        אוֹהֵב אֶת הַבְּרִיּוֹת
+        וּמְקָרְבָן לַתּוֹרָה.
+      </div>
+      <p>
+        תשים לב שהלל קרא לאנשים האלה <strong>"בְּרִיּוֹת"</strong> —
+        ולא "ישראל" ולא "חברים".
+      </p>
+      <div class="example-box">
+        <span class="example-label">משמעות המילה "בריות"</span>
+        <p>
+          <em>בריות</em> = פשוט נבראים של הקב"ה.
+          הלל בחר את הכינוי הכי בסיסי: גם אם הם רחוקים מהתורה,
+          <strong>הם נבראים של ה'</strong>. וזה מספיק
+          כדי שיש חובה לאהוב אותם.
+        </p>
+      </div>
+      <p>
+        ואיך מתייחסים אליהם?
+        <strong>"למשכן בחבלי עבותות אהבה"</strong> —
+        <em>למשוך אותם אליך בחבלי אהבה</em>.
+        לא לדחות. לא להתנשא. לא לתייג. אלא <strong>לקרב</strong> —
+        עם חיוך, כבוד, חיבור אישי.
+      </p>
+      <p>
+        ואפילו אם בסוף לא הצלחת לקרב אותו לתורה —
+        <strong>"לא הפסיד שכר מצוות אהבת רעים"</strong>.
+        עצם זה שאהבת אותו ועזרת לו — זו המצווה.
+        התוצאה בידי שמים.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 8. EVEN HATE NEEDS LOVE         -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">החידוש הכי גדול — גם שנאה צריכה אהבה</h2>
+      <p>
+        ועכשיו החידוש הגדול והעוצמתי של הפרק:
+        <strong>גם במקרה הספציפי שמותר לשנוא</strong> —
+        (חבר קרוב, שהוכחת ולא שב) —
+        חייבים <em>גם לאהוב אותו</em>.
+      </p>
+      <p>
+        איך זה אפשרי? איך אפשר לשנוא ולאהוב באותו זמן?
+        האדמו"ר הזקן מגלה לנו ש<strong>שתי האמיתות הן אמת</strong> —
+        רק שכל אחת מתייחסת לחלק אחר באדם:
+      </p>
+      <p>
+        <strong>שנאה</strong> — נכוונת רק כלפי <em>הרע שבו</em>.
+        כלפי המעשים הרעים. כלפי הצד הקלוקל.
+      </p>
+      <p>
+        <strong>אהבה</strong> — נכוונת כלפי <em>הטוב הגנוז שבו</em>.
+        מה זה הטוב הגנוז? <strong>הניצוץ האלוקי</strong> שיש בכל יהודי,
+        אפילו ברשע, אפילו בחוטא.
+        הניצוץ הזה <em>תמיד</em> שם — הוא מה שמחיה את הנשמה.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תאר לך תפוח עץ יקר שנפל לתוך בוץ.
+          תרצה לנקות אותו, להסיר את הבוץ —
+          אבל את התפוח עצמו אתה רוצה לשמור.
+        </p>
+        <p>
+          השנאה היא לבוץ. <strong>האהבה היא לתפוח</strong>.
+          שניהם אמת. שניהם חובה. שניהם יחד.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 9. RACHAMIM                     -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">סוד הרחמים — איך מכבים שנאה</h2>
+      <p>
+        ויש כאן כלי עוד יותר עוצמתי.
+        האדמו"ר הזקן מורה לנו <strong>לעורר רחמים</strong>
+        על הניצוץ האלוקי שבחוטא.
+      </p>
+      <p>
+        למה לרחם עליו? כי הניצוץ האלוקי שלו <strong>נמצא בגלות</strong>
+        בתוך הרע שבו. הוא <em>שבוי</em> אצל הצד השני.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תאר לעצמך <strong>בן מלך שנפל בשבי אצל אויב</strong>.
+          האם תכעס עליו?
+          <em>תרחם עליו!</em>
+          הוא לא בחר להיות שם — הוא קרבן.
+        </p>
+        <p>
+          וכך הניצוץ האלוקי שבכל יהודי חוטא:
+          הוא בן מלך שתקוע במקום לא לו.
+          הוא לא האויב — הוא <strong>הקרבן</strong> של הקליפה.
+        </p>
+      </div>
+      <p>
+        ואז קורה דבר מופלא:
+        <strong>"הרחמנות מבטלת השנאה ומעוררת האהבה"</strong>.
+        הרחמים הם <em>מתג</em>:
+        ברגע שמרחמים — השנאה <strong>נכבית</strong>
+        והאהבה <strong>נדלקת</strong> מאליה.
+      </p>
+      <div class="example-box">
+        <span class="example-label">סוד מהקבלה · ישעיהו כט</span>
+        <p>
+          הפסוק אומר:
+          <strong>"לְיַעֲקֹב אֲשֶׁר פָּדָה אֶת אַבְרָהָם"</strong> —
+          יעקב פדה את אברהם.
+        </p>
+        <p>
+          לפי הקבלה: <em>יעקב</em> = רחמים,
+          ו<em>אברהם</em> = אהבה.
+          הפסוק מגלה שכשהאהבה תקועה ולא יוצאת —
+          <strong>הרחמים הם אלה ש"פודים" אותה</strong>.
+          תרחם — והאהבה תשתחרר.
+        </p>
+      </div>
+      <div class="action-inline">
+        <div class="action-inline-label">המסקנה</div>
+        <p>
+          ברגע שעולה כעס בלב — <strong>החלף לרחמים</strong>.
+          תחשוב: "הנשמה שלו בשבי. הוא לא רע — הוא קרבן."
+          השנאה תיכבה אוטומטית.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 10. EXCEPTION                   -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">החריג היחיד — מינים ואפיקורסים</h2>
+      <p>
+        אם הכל אהבה — מה עם דוד המלך שכתב בתהילים
+        <strong>"תכלית שנאה שנאתים"</strong>?
+        על מי הוא דיבר?
+      </p>
+      <p>
+        האדמו"ר הזקן מסיים את הפרק בהבהרה חשובה:
+        הפסוק הזה מדבר <strong>אך ורק על מינים ואפיקורסים</strong> —
+        כלומר <em>אנשים שכופרים בה' אלוקי ישראל במזיד וברצונם</em>.
+      </p>
+      <p>
+        על פי הגמרא בשבת קטז —
+        אנשים כאלה <em>"אין להם חלק באלוקי ישראל"</em>,
+        ולכן עליהם בלבד מותרת השנאה המוחלטת.
+      </p>
+      <p>
+        אבל לגבי <strong>כל יהודי אחר בעולם</strong> —
+        חוטא קל, חוטא חמור, חילוני גמור, רחוק מאוד מהתורה —
+        כל עוד יש בו ניצוץ של אמונה,
+        <strong>הוא בכלל "אחים ממש" — וחלה עליו אהבת ישראל</strong>.
+      </p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HALACHA LEMA'ASEH                            -->
+    <!-- ============================================ -->
+    <div class="halacha-section">
+      <div class="halacha-tag">להלכה למעשה</div>
+      <div class="halacha-title">מה עושים עם זה מחר בבוקר?</div>
+      <p class="halacha-subtitle">תלמוד המביא לידי מעשה — שמונה צעדים קונקרטיים מפרק ל״ב</p>
+
+      <div class="action-item">
+        <div class="action-number">1</div>
+        <div class="action-body">
+          <div class="action-title">תרגיל "אחים ממש"</div>
+          <p class="action-text">
+            לפני שאתה שופט/כועס/מבקר יהודי כלשהו —
+            <strong>עצור שתי שניות</strong> ותגיד בלב:
+            "זה אח שלי ממש. אותו אבא. אותו שורש."
+            ברוב המקרים — הכעס נמס.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">2</div>
+        <div class="action-body">
+          <div class="action-title">בדיקת "גוף או נשמה?"</div>
+          <p class="action-text">
+            שלוש פעמים ביום עצור ושאל:
+            "השמחה/הכאב שלי כרגע — מאיפה?
+            מהגוף (כסף, כבוד, אוכל) או מהנשמה (תורה, חסד, ה')?"
+            <strong>עצם הזיהוי</strong> משנה את הסולם.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">3</div>
+        <div class="action-body">
+          <div class="action-title">מבחן שלושת התנאים לשנאה</div>
+          <p class="action-text">
+            לפני שאתה מרשה לעצמך לשנוא — ספור:
+            <strong>(א)</strong> חבר קרוב?
+            <strong>(ב)</strong> הוכחת ברוך?
+            <strong>(ג)</strong> והוא לא שב?
+            אם לא — אין היתר. זו ההצדקה של האגו.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">4</div>
+        <div class="action-body">
+          <div class="action-title">גישת אהרון לרחוקים</div>
+          <p class="action-text">
+            פגשת יהודי רחוק מהתורה? <strong>תחייך לפני שתחנך</strong>.
+            "חבלי אהבה" — לא חבלים שמושכים בכוח, אלא חוטים עדינים.
+            הזמן, שאל, התעניין. אם לא קירבת — לא הפסדת
+            את שכר המצווה.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">5</div>
+        <div class="action-body">
+          <div class="action-title">טכניקת "התפוח והבוץ"</div>
+          <p class="action-text">
+            מישהו פגע בך? תאחז בשתי האמיתות יחד:
+            <strong>(א)</strong> דחיית הבוץ (המעשה הרע);
+            <strong>(ב)</strong> אהבת התפוח (הניצוץ שבו).
+            לא או־או. שניהם.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">6</div>
+        <div class="action-body">
+          <div class="action-title">מתג הרחמים</div>
+          <p class="action-text">
+            עלה כעס בלב? <strong>החלף ל"מצב רחמים"</strong>.
+            תחשוב: הנשמה שלו בשבי. הוא קרבן של הקליפה — לא אויב.
+            הרחמים יבטלו את השנאה ויעוררו אהבה אוטומטית.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">7</div>
+        <div class="action-body">
+          <div class="action-title">בדיקת אחדות לפני תפילה</div>
+          <p class="action-text">
+            לפני כל תפילה — שאל את עצמך:
+            "יש בלבי משהו נגד יהודי כלשהו?"
+            <em>הקב"ה לא שורה במקום פגום.</em>
+            רוצה שתפילתך תתקבל? <strong>פנה את המקום קודם</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">8</div>
+        <div class="action-body">
+          <div class="action-title">חשבון נפש יומי — איחוד או פירוד?</div>
+          <p class="action-text">
+            בסוף כל יום — שאלה אחת:
+            <strong>"היום גרמתי לאיחוד או לפירוד?"</strong>
+            במשפחה, בעבודה, בקבוצת ווטסאפ.
+            כל פעולה היא או "כולנו כאחד" — או ההיפך.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-conclusion">
+        זֶהוּ כָּל הַתּוֹרָה כֻּלָּהּ —<br>
+        וְהַשְּׁאָר פֵּרוּשׁ.<br>
+        <span style="font-size:17px;color:var(--ink-soft);font-style:italic;font-weight:400;">
+          צֵא וּלְמַד — וְצֵא וַעֲשֵׂה.
+        </span>
+      </p>
+    </div>
+
+    <div class="attribution">
+      <div class="attribution-line">מבואר על פי דברי ציון אבירם הי״ו</div>
+      <div class="attribution-source">תניא, פרק ל״ב — לב התניא</div>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הגרעין — כל התורה בנקודה אחת</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf3df;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #d9a943;
+    --crimson: #8c2a1e;
+    --sage: #6b8a4a;
+    --sage-deep: #4d6638;
+    --sun: #e8b942;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.12) 0%, transparent 65%),
+      radial-gradient(ellipse at bottom, rgba(107, 138, 74, 0.06) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.9;
+    min-height: 100vh;
+    padding: 50px 18px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.65) 0%, rgba(245, 236, 217, 0.35) 100%);
+    padding: 70px 60px 60px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+
+  /* Header */
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 26px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 24px; letter-spacing: 10px;
+    margin-bottom: 20px; opacity: 0.75;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(34px, 5.5vw, 50px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 14px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 400; font-style: italic; margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .sub-subtitle {
+    text-align: center; font-size: 14px; color: var(--gold-deep);
+    margin-bottom: 36px;
+    font-family: 'Bellefair', serif; letter-spacing: 3px;
+  }
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 50px 0 36px; gap: 20px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 18px; letter-spacing: 4px; }
+
+  /* The Big Statement - the CORE */
+  .core-statement {
+    margin: 0 0 50px;
+    padding: 44px 36px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--paper);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 25px 60px -20px rgba(43, 29, 16, 0.5);
+  }
+  .core-statement::before {
+    content: ""; position: absolute; inset: 10px;
+    border: 1px solid rgba(184, 138, 44, 0.4);
+    border-radius: 5px; pointer-events: none;
+  }
+  .core-label {
+    font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 6px;
+    color: var(--sun);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    position: relative; z-index: 1;
+  }
+  .core-quote {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(22px, 3.8vw, 28px);
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--paper);
+    position: relative; z-index: 1;
+  }
+  .core-quote strong { color: var(--sun); }
+  .core-quote em {
+    color: #e5b95c;
+    font-style: italic;
+  }
+  .core-source {
+    margin-top: 22px;
+    font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 5px;
+    color: var(--gold-light);
+    opacity: 0.85;
+    position: relative; z-index: 1;
+  }
+
+  /* Body sections */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 26px; color: var(--crimson); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 14px;
+    line-height: 1.3;
+  }
+  .section-title::before {
+    content: "❖"; color: var(--gold); font-size: 14px;
+    flex-shrink: 0;
+  }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  /* Pasuk box */
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px;
+    margin: 18px 0;
+    font-family: 'David Libre', serif;
+    font-size: 17px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+  .pasuk-source {
+    display: block;
+    font-size: 13px; color: var(--gold-deep);
+    margin-top: 8px; letter-spacing: 1px;
+  }
+
+  /* Insight callout */
+  .insight {
+    margin: 24px 0;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.10) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border-right: 3px solid var(--crimson);
+    border-radius: 4px;
+  }
+  .insight-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .insight p {
+    font-size: 17px; color: var(--ink); margin: 0;
+    line-height: 1.7; font-weight: 500;
+  }
+
+  /* The Descent - hierarchy */
+  .descent-card {
+    margin: 30px 0;
+    padding: 36px 30px;
+    background: linear-gradient(180deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+  }
+  .descent-label {
+    text-align: center;
+    font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 5px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .level {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    background: rgba(255, 250, 235, 0.7);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 4px;
+  }
+  .level-num {
+    font-family: 'Bellefair', serif;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 700;
+    margin-left: 16px;
+    min-width: 36px;
+    text-align: center;
+  }
+  .level-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--gold-deep);
+    flex: 1;
+  }
+  .level-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-right: 18px;
+  }
+  .level-arrow {
+    text-align: center;
+    color: var(--gold);
+    margin: 4px 0;
+    font-size: 14px;
+    opacity: 0.6;
+  }
+  .level.highlight {
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.15) 0%, rgba(140, 42, 30, 0.05) 100%);
+    border-color: var(--crimson);
+  }
+  .level.highlight .level-num { color: var(--crimson); }
+  .level.highlight .level-name { color: var(--crimson); }
+
+  /* The Three Pillars */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 30px 0;
+  }
+  .pillar {
+    padding: 24px 18px;
+    background: linear-gradient(135deg, rgba(255, 250, 235, 0.85) 0%, rgba(245, 236, 217, 0.5) 100%);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-top: 3px solid var(--gold);
+    border-radius: 4px;
+    text-align: center;
+  }
+  .pillar-symbol {
+    font-size: 32px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+  .pillar-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--crimson);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .pillar-text {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Two sides comparison */
+  .sides-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 30px 0;
+  }
+  .side {
+    padding: 24px 22px;
+    border-radius: 6px;
+  }
+  .side.real {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border: 2px solid var(--gold);
+  }
+  .side.fake {
+    background: rgba(43, 29, 16, 0.05);
+    border: 2px dashed rgba(140, 42, 30, 0.4);
+  }
+  .side-tag {
+    display: inline-block;
+    font-family: 'Bellefair', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 4px 14px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .side.real .side-tag { background: var(--gold); color: var(--paper); }
+  .side.fake .side-tag { background: var(--crimson); color: var(--paper); }
+  .side-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .side.real .side-title { color: var(--gold-deep); }
+  .side.fake .side-title { color: var(--crimson); }
+  .side ul { list-style: none; padding: 0; }
+  .side li {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    padding: 5px 0;
+    padding-right: 20px;
+    position: relative;
+  }
+  .side.real li::before {
+    content: "✦";
+    position: absolute; right: 0; top: 7px;
+    color: var(--gold); font-size: 11px;
+  }
+  .side.fake li::before {
+    content: "▪";
+    position: absolute; right: 0; top: 7px;
+    color: var(--crimson); font-size: 12px;
+    opacity: 0.7;
+  }
+
+  /* The Bridge - Moshe Rabenu */
+  .bridge-card {
+    margin: 36px 0;
+    padding: 40px 32px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.22) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .bridge-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .bridge-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px; color: var(--ink);
+    font-weight: 700; line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .bridge-card p {
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.7; margin: 0;
+  }
+  .bridge-card strong { color: var(--crimson); }
+  .bridge-card em { color: var(--gold-deep); }
+
+  /* Final */
+  .final-message {
+    margin-top: 50px;
+    padding: 40px 32px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.20) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    text-align: center;
+  }
+  .final-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .final-conclusion {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--ink);
+    font-weight: 700; line-height: 1.6;
+    margin: 0;
+  }
+  .final-conclusion strong { color: var(--crimson); }
+  .final-conclusion em { color: var(--gold-deep); font-style: italic; }
+  .final-hope {
+    margin-top: 18px;
+    font-size: 15px; color: var(--gold-deep);
+    font-style: italic;
+  }
+
+  .attribution {
+    margin-top: 50px; text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 30px;
+    color: var(--gold); font-size: 18px;
+    letter-spacing: 12px; opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 24px 10px; }
+    .container { padding: 40px 22px 50px; }
+    .container::before { inset: 8px; }
+    p { font-size: 17px; }
+    .core-statement { padding: 30px 22px; }
+    .core-quote { font-size: 20px; }
+    .pillars-grid { grid-template-columns: 1fr; gap: 12px; }
+    .sides-grid { grid-template-columns: 1fr; gap: 14px; }
+    .side-title { font-size: 19px; }
+    .side li { font-size: 14px; }
+    .level { padding: 12px 14px; }
+    .level-num { font-size: 18px; min-width: 28px; margin-left: 10px; }
+    .level-name { font-size: 15px; }
+    .level-desc { font-size: 12px; margin-right: 8px; }
+    .bridge-title { font-size: 21px; }
+    .bridge-card p { font-size: 15px; }
+    .final-conclusion { font-size: 18px; }
+    .section-title { font-size: 21px; }
+    .insight p { font-size: 16px; }
+  }
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">סינתזה · גרעין כל הלימודים</div>
+    <h1>הַגַּרְעִין</h1>
+    <p class="subtitle">
+      כל מה שלמדנו מציון אבירם —<br>
+      בנקודה אחת
+    </p>
+    <p class="sub-subtitle">— שלוש עשרה ביחד · גרעין אחד —</p>
+
+    <!-- ====================================== -->
+    <!-- THE CORE STATEMENT                     -->
+    <!-- ====================================== -->
+    <div class="core-statement">
+      <div class="core-label">הסוד שמאחורי הכל</div>
+      <div class="core-quote">
+        הַתּוֹרָה הִיא <strong>סוֹד פְּרָטִי</strong><br>
+        בֵּין הָאָדָם לְבוֹרְאוֹ —<br>
+        <em>אֵיךְ לְהִנָּצֵל מֵעַצְמוֹ</em><br><br>
+        שֶׁהָאָדָם הוּא <strong>הָאוֹיֵב הַגָּדוֹל</strong><br>
+        בְּיוֹתֵר שֶׁל עַצְמוֹ
+      </div>
+      <div class="core-source">— מדברי ציון אבירם הי״ו —</div>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <!-- ====================================== -->
+    <!-- 1. INTRO - The Map                     -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">המפה — מה ציון לימד אותנו</h2>
+      <p>
+        במשך חודשים שלמים זכינו ללמוד מציון אבירם
+        שלושה־עשר עיונים שונים — כל אחד נראה נושא נפרד:
+        עקידת יצחק, סור מרע, מתן תורה, צדיק מדומה,
+        ניסיון הממון, התורה כסם המוות, כעס, הנפש הבהמית,
+        שלום לרחוק ולקרוב, חיבור זו"ן, האישה כפריצת התקרה,
+        מקור התורה בכתר.
+      </p>
+      <p>
+        אבל כאשר מתבוננים בעומק —
+        כל השלושה־עשר הם <strong>לימוד אחד</strong>.
+        כולם מתארים <em>אותה תנועה</em>:
+      </p>
+      <div class="insight">
+        <div class="insight-label">הגרעין</div>
+        <p>
+          איך האדם — <em>שהוא האויב של עצמו</em> —
+          <strong>ניצל מעצמו</strong> דרך כפייה אחת קטנה,
+          ובאותה נשימה זוכה ל<em>גילוי אלוקי</em>?
+        </p>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 2. THE DESCENT                         -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">השתלשלות — מאיפה התורה יורדת</h2>
+      <p>
+        ציון פתח לנו את המבט מהראשית.
+        בקצה העליון נמצא <strong>הכתר</strong> —
+        ושם <em>״אין עוד מלבדו״</em>.
+        אין מציאות, אין הבנה, אין כלום
+        מלבד המלך. שם הוא הרב והוא המלך.
+      </p>
+      <p>
+        משם התורה יורדת — מתגשמת — שכבה אחרי שכבה:
+      </p>
+    </div>
+
+    <div class="descent-card">
+      <div class="descent-label">סדר ההשתלשלות</div>
+
+      <div class="level highlight">
+        <span class="level-num">∞</span>
+        <span class="level-name">כֶּתֶר</span>
+        <span class="level-desc">״אין עוד מלבדו״ — שם המלך</span>
+      </div>
+      <div class="level-arrow">▼</div>
+
+      <div class="level">
+        <span class="level-num">א</span>
+        <span class="level-name">אֲצִילוּת</span>
+        <span class="level-desc">רזי דרזין — האורות מתחילים להתגשם</span>
+      </div>
+      <div class="level-arrow">▼</div>
+
+      <div class="level">
+        <span class="level-num">ב</span>
+        <span class="level-name">בְּרִיאָה · יְצִירָה · עֲשִׂיָּה</span>
+        <span class="level-desc">סוד → דרוש → רמז → פשט</span>
+      </div>
+      <div class="level-arrow">▼</div>
+
+      <div class="level">
+        <span class="level-num">ג</span>
+        <span class="level-name">הָעוֹלָם הַזֶּה</span>
+        <span class="level-desc">המשל והנמשל מתערבבים — טעות מרה</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="insight">
+        <div class="insight-label">המסקנה</div>
+        <p>
+          כל המחלוקות בין הזרמים — הן רק על ה<em>פשט</em>.
+          כי <strong>שם</strong> התורה הכי גשמית.
+          אבל מי שמסתכל רק על הפשט —
+          מבלבל את המשל עם הנמשל ומפסיד את הכל.
+        </p>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 3. THE TWO SOULS                       -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">שני אויבים בתוכך — שתי נפשות</h2>
+      <p>
+        בתוך כל אדם יש <strong>שתי נפשות</strong>.
+        ציון לימד אותנו: הנפש הבהמית
+        <em>מכחישה ושונאת</em> את הנפש האלוקית.
+        <strong>״עשו שונא ליעקב״</strong> — אבל בתוכך.
+      </p>
+    </div>
+
+    <div class="sides-grid">
+      <div class="side real">
+        <span class="side-tag">הנפש האלוקית</span>
+        <div class="side-title">למען ה' וְעַם יִשְׂרָאֵל</div>
+        <ul>
+          <li>בלי גבול</li>
+          <li>אהבת ישראל</li>
+          <li>יוצאת מהאני</li>
+          <li>מעשים כלליים</li>
+          <li>שואפת לאין סוף</li>
+        </ul>
+      </div>
+      <div class="side fake">
+        <span class="side-tag">הנפש הבהמית</span>
+        <div class="side-title">למען עצמי</div>
+        <ul>
+          <li>בגבול</li>
+          <li>ממון, תאוות, תענוגי הגוף</li>
+          <li>תמיד חושבת על עצמה</li>
+          <li>מדודה ושקולה</li>
+          <li>״ושוחד יעוור עיני חכמים״</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        ולכן — וזה ה<strong>נקודה הכי חשובה</strong> —
+        <em>לא ניתן לשכנע את הנפש הבהמית להתבטל</em>.
+        היא לא תקשיב לשכל שלך.
+        היא לא תתפעל מהתורה שלמדת.
+      </p>
+      <div class="pasuk">
+        כַּד אִתְכַּפְיָא סִטְרָא אַחֲרָא —<br>
+        אִסְתַּלַּק יְקָרָא דְקוּדְשָׁא־בְּרִיךְ־הוּא לְעֵילָא
+        <span class="pasuk-source">— תניא פרק כז</span>
+      </div>
+      <p>
+        חייבים <strong>לכפות</strong> עליה.
+        לא <em>לקפוץ</em> מעליה — אלא <strong>לכפות</strong> אותה.
+        לעשות נגד רצונה — למען רצון השם.
+      </p>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 4. THE THREE PILLARS                   -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">שלושת העמודים שעליהם הכל</h2>
+      <p>
+        כל הלימודים של ציון נשענים על שלוש אבני יסוד —
+        שלוש אמיתות שאינן ניתנות לוויתור:
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-symbol">⚔</div>
+        <div class="pillar-title">כפייה<br>לא שכנוע</div>
+        <p class="pillar-text">
+          אי אפשר ללמד את הנפש הבהמית.
+          חייבים לכפות עליה רצון השם.
+          זה לבדו פותח השמים.
+        </p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-symbol">∞</div>
+        <div class="pillar-title">בלי גבול<br>למען הכלל</div>
+        <p class="pillar-text">
+          מעשים בגבול = הצד השמאלי.
+          מעשים בלי גבול למען עם ישראל —
+          שם הצד הימני נולד.
+        </p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-symbol">♔</div>
+        <div class="pillar-title">המלכת המלך<br>גם כשאתה צודק</div>
+        <p class="pillar-text">
+          הניסיון הקשה: להמליך את המלך
+          דווקא כשאתה צודק.
+          שם אנשים גוזרים את דינם.
+        </p>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 5. SUR ME-RA → ASE TOV                 -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">סור מרע ועשה טוב — בסדר הזה</h2>
+      <p>
+        ציון הסביר את התניא פרק מא:
+        <em>למה צריך לסור מרע <strong>לפני</strong> שעושים טוב?</em>
+      </p>
+      <p>
+        כי הרע <strong>דבוק באדם נגד רצונו</strong> מאז חטא עץ הדעת.
+        ואי אפשר לעשות טוב כשאתה משוחד.
+        השוחד הוא הרצון העצמי שלך —
+        והוא מעוור את עיניך גם כשאתה לומד תורה.
+      </p>
+      <div class="pasuk">
+        שָׁלוֹם שָׁלוֹם <strong>לָרָחוֹק</strong> וְ<strong>לַקָּרוֹב</strong>
+        — אָמַר ה' וּרְפָאתִיו
+        <span class="pasuk-source">— ישעיהו נז</span>
+      </div>
+      <p>
+        קודם לרחוק — הנפש הבהמית, המידות, ״דרך ארץ״.
+        רק אז לקרוב — הנפש האלוקית, תורה משמים.
+      </p>
+      <div class="insight">
+        <div class="insight-label">אזהרה</div>
+        <p>
+          אחרת זה <strong>״נֶזֶם זָהָב בְּאַף חֲזִיר״</strong>
+          (משלי יא) —
+          תורה גדולה אצל אדם בלי תיקון מידות
+          הופכת את התורה עצמה <em>לסם המוות</em>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 6. THE TRAP                            -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">המלכודת — איך תורה הופכת לסם המוות</h2>
+      <p>
+        זה <strong>הלימוד הקשה ביותר</strong> שציון לימד אותנו:
+      </p>
+      <p>
+        אדם שמרבה ללמוד תורה — אבל לא מבטל רצונו
+        על ידי <em>מעשים בלי גבול למען עם ישראל</em> —
+        <strong>התורה הופכת לו לסם המוות</strong>.
+      </p>
+      <p>
+        ככל שילמד יותר — ירבו אצלו <em>שאלות וקושיות ומחלוקות</em>.
+        הוא יגדיל את ה״מדמה״ שלו. ייתפס בחכמתו כבמבוך.
+        ולעולם יראה רע.
+      </p>
+      <div class="insight">
+        <div class="insight-label">הגימטריה הנוראה</div>
+        <p>
+          תורה ש״לסַם־אֵ-ל״ — הופכת ל<strong>״סמא-ל״</strong>
+          (השטן). במקום סם החיים — סם המוות.
+        </p>
+      </div>
+      <p>
+        <em>זה האויב שבתוך עצמך</em>.
+        מי שלומד תורה ולא יוצא מעצמו —
+        תורתו <strong>נגדו</strong>, לא בעדו.
+      </p>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 7. THE PROOFS - CONCRETE TESTS         -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">המבחנים האמיתיים — איפה זה נשבר ביום־יום</h2>
+
+      <p>
+        איך יודעים אם הצלחת לכפות את עצמך —
+        או שאתה רק חושב שהצלחת?
+        ציון נתן לנו <strong>שלושה מבחני אמת</strong>:
+      </p>
+
+      <div class="insight">
+        <div class="insight-label">מבחן 1 · ניסיון הממון</div>
+        <p>
+          <strong>״מגלגלין חובה על ידי חייב״</strong>.
+          אתה רימית פעם מישהו — גם בלי דעת.
+          מגלגלים אותך לפגוש מישהו שמרמה אותך במצח נחושה.
+          <em>אתה צודק.</em> והוא עושה לך עוול אמיתי.
+          אבל ברגע שאתה כועס — אתה <strong>פוסק את דינך שלך</strong>.
+        </p>
+      </div>
+
+      <div class="insight">
+        <div class="insight-label">מבחן 2 · כעס</div>
+        <p>
+          רבי נחמן: <strong>״כעס מפסיד ממון״</strong>.
+          ניסיון כעס = רוצים לתת לך ממון.
+          כעסת? לקחו ממך. לא כעסת? נתנו לך.
+          זה <em>הכלי הרווחי ביותר</em> בעולם —
+          וגם <em>הכלי לפשיטת רגל</em>.
+        </p>
+      </div>
+
+      <div class="insight">
+        <div class="insight-label">מבחן 3 · צדיק או צדיק מדומה</div>
+        <p>
+          אדם בעל ״חוש צדק״ שסובל מהעולם בגלל ש<em>אינו מקבל הכרה</em>,
+          בגלל ש<em>לא מעריכים אותו</em>,
+          בגלל <em>״האמת האישית״</em> שלו —
+          <strong>אינו צדיק. הוא צדיק מדומה</strong>.
+        </p>
+        <p>
+          הצדיק האמיתי סובל מפרעה
+          לא בגלל שאינו יודע — אלא <strong>בגלל שהוא כן יודע</strong>.
+          הוא יודע <em>את האמת של ה'</em>, לא את האמת של עצמו.
+        </p>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 8. THE BRIDGE                          -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">הגשר — מתן תורה האמיתי</h2>
+      <p>
+        ועכשיו — ה<em>הבטחה</em>.
+        מה קורה כשאדם <strong>באמת</strong> כופה את עצמו פעם אחת?
+      </p>
+      <p>
+        עד מתן תורה היו <em>שני ערוצים</em>:
+        אחד פתוח — האדם מתקשר עם עצמו דרך לבו;
+        ואחד <strong>כבוש</strong> — הבורא לא יורד אל האדם.
+        ״עליונים לא יורדים לתחתונים״.
+      </p>
+      <p>
+        מתן תורה = <em>פריצת התקרה</em>.
+        עליונים יורדים, תחתונים עולים.
+        הדעת האלוקית (״הויה״) יורדת לדעת האנושית (״אלוקים״) —
+        ואלוקים מבין:
+      </p>
+      <div class="pasuk">
+        אַתָּה הָרְאֵתָ לָדַעַת כִּי <strong>ה' הוּא הָאֱלֹהִים</strong> —<br>
+        <strong>אֵין עוֹד מִלְּבַדּוֹ</strong>
+        <span class="pasuk-source">— דברים ד, לה</span>
+      </div>
+      <p>
+        ״אני <em>לא מנהל</em>. אני מנוהל.״
+      </p>
+    </div>
+
+    <div class="bridge-card">
+      <div class="bridge-label">הממוצע המחבר</div>
+      <div class="bridge-title">
+        כל זה קורה ב<strong>נקודה אחת</strong>:<br>
+        הַחִבּוּר שֶׁל זוּ״ן —<br>
+        זָכָר וְנוּקְבָא
+      </div>
+      <p>
+        <em>הזכר</em> — זעיר אנפין — אצילות — בחינת משה רבנו.<br>
+        <em>הנוקבא</em> — מלכות — עולם העשייה — הגוף שלך.<br><br>
+        כשהזכר יורד לגוף — נוצרת ה<strong>״חתונה״</strong>.
+        עכשיו האדם מקבל תורה <em>מהזכר</em> —
+        וזו הדעת שגואלת את האדם <strong>מעצמו</strong>.<br><br>
+        זה מתן תורה האמיתי.
+        זאת <em>״נשמה לנשמה״</em> — חכמת שער הנון.
+        זה בחינת משה רבנו.
+      </p>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 9. THE METAPHORS                       -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">המשלים הגדולים — איך הכל קושר זה לזה</h2>
+      <p>
+        עכשיו אפשר להבין את כל המשלים שציון פתח:
+      </p>
+
+      <div class="insight">
+        <div class="insight-label">עקידת יצחק</div>
+        <p>
+          ״הריגת הבן״ ברוחניות = <strong>הריגת הדעת הבהמית</strong>.
+          בן (52) = בהמה (52) = אליהו (52).
+          מי שהורג את ה״בן״ — זוכה לגילוי <em>אליהו</em>.
+        </p>
+      </div>
+
+      <div class="insight">
+        <div class="insight-label">פרעה ובני ישראל במצרים</div>
+        <p>
+          פרעה = <em>פרעה שבלב</em> — הרצון העצמי השולט באברי הגוף.
+          ״עם ישראל״ הם <em>אברי הגוף</em> המשועבדים.
+          הרופא = התלמיד חכם שמוציא אותם משעבוד —
+          אבל <strong>רק אם בעצמו יצא מהגבול</strong>.
+        </p>
+      </div>
+
+      <div class="insight">
+        <div class="insight-label">האישה והגוף — ופרצת</div>
+        <p>
+          ״אשתו״ (גימטריה 707), ״ופרצת״ (770).
+          האישה היא הגוף — ״אשתו כגופו״.
+          הגוף הוא <strong>הכלי לפרוץ את התקרה</strong>.
+          זכה — עזר. לא זכה — כנגדו (הופך לייצר הרע).
+        </p>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- 10. THE PROMISE                        -->
+    <!-- ====================================== -->
+    <div class="section">
+      <h2 class="section-title">ההבטחה — תורה חדשה מאיתי תצא</h2>
+      <p>
+        ציון חתם בהבטחה גדולה:
+        מתן תורה ה<em>אמיתי</em> — באופן הרוחני העליון —
+        עוד <strong>לא היה לעם ישראל</strong>.
+      </p>
+      <p>
+        הוא יהיה רק בביאת המשיח:
+      </p>
+      <div class="pasuk">
+        <strong>תּוֹרָה חֲדָשָׁה מֵאִתִּי תֵּצֵא</strong>
+        <span class="pasuk-source">— ישעיהו (נדרש בויקרא רבה)</span>
+      </div>
+      <p>
+        עד אז — כל אדם, בכל יום, יכול לזכות לגילוי קטן ממנו.
+        ב<em>כפייה אחת קטנה</em>.
+        ברגע אחד שבו הוא יצא מעצמו למען הכלל.
+        <strong>שם הוא קיבל תורה משמים</strong>.
+      </p>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- FINAL                                  -->
+    <!-- ====================================== -->
+    <div class="final-message">
+      <div class="final-label">סיכום בשורה אחת</div>
+      <p class="final-conclusion">
+        <strong>כל החיים</strong> —<br>
+        הם <em>תנועה אחת קטנה</em>:<br><br>
+        לְהִנָּצֵל מֵעַצְמְךָ —<br>
+        כְּדֵי לְהִוָּלֵד שׁוּב.
+      </p>
+      <p class="final-hope">
+        ✦ אַל תַּאֲמִין בְּעַצְמְךָ עַד יוֹם מוֹתְךָ ✦
+      </p>
+    </div>
+
+    <div class="attribution">
+      מדברי ציון אבירם הי״ו
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>

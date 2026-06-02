@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מגלגלין חובה על יד חייב — סוד ניסיון הממון</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --parchment-deep: #ebdfc4;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 42, 30, 0.05) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.9;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.6) 0%, rgba(245, 236, 217, 0.3) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 40px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 24px; letter-spacing: 8px;
+    margin-bottom: 30px; opacity: 0.7;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(38px, 6vw, 56px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 16px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 300; font-style: italic; margin-bottom: 30px;
+  }
+
+  /* Dramatic opening scene */
+  .scene-card {
+    margin: 30px 0 50px;
+    padding: 32px 28px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.1) 0%, rgba(140, 42, 30, 0.03) 100%);
+    border: 1px solid rgba(140, 42, 30, 0.3);
+    border-radius: 4px;
+    position: relative;
+  }
+  .scene-label {
+    display: inline-block; font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 4px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 14px;
+    background: rgba(140, 42, 30, 0.12);
+    padding: 3px 12px; border-radius: 12px;
+  }
+  .scene-card p {
+    font-size: 18px; color: var(--ink);
+    line-height: 1.7; margin-bottom: 12px;
+    font-style: italic;
+  }
+  .scene-card p:last-child { margin-bottom: 0; }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 50px 0; gap: 20px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 18px; letter-spacing: 4px; }
+  .section { margin-bottom: 38px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 24px; color: var(--crimson); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::before { content: "❖"; color: var(--gold); font-size: 14px; }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px; margin: 18px 0;
+    font-family: 'David Libre', serif; font-size: 17px;
+    color: var(--ink-soft); border-radius: 2px;
+  }
+  .pasuk-source {
+    display: block; font-size: 13px; color: var(--gold-deep);
+    margin-top: 8px; letter-spacing: 1px;
+  }
+
+  /* Example box */
+  .example-box {
+    background: rgba(245, 236, 217, 0.7);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-right: 3px solid var(--gold-deep);
+    padding: 16px 22px; margin: 16px 0;
+    border-radius: 3px;
+  }
+  .example-label {
+    display: inline-block; font-family: 'Bellefair', serif;
+    font-size: 10px; letter-spacing: 3px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 8px;
+    background: rgba(184, 138, 44, 0.12);
+    padding: 2px 10px; border-radius: 10px;
+  }
+  .example-box p { font-size: 16px; margin: 0; color: var(--ink-soft); line-height: 1.7; }
+  .example-box p + p { margin-top: 10px; }
+
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px; font-weight: 500;
+  }
+
+  /* The mechanism card - dark */
+  .mechanism-card {
+    margin: 30px 0; padding: 36px 28px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--parchment); border-radius: 6px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+  .mechanism-card::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px; pointer-events: none;
+  }
+  .mechanism-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 24px;
+  }
+  .mechanism-flow {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: center;
+  }
+  .mechanism-step {
+    background: rgba(184, 138, 44, 0.1);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px;
+    padding: 16px 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 440px;
+  }
+  .mechanism-step-num {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 3px; color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .mechanism-step-text {
+    font-size: 16px; color: var(--parchment);
+    line-height: 1.5;
+  }
+  .mechanism-arrow {
+    color: var(--gold); font-size: 18px;
+    line-height: 1;
+  }
+
+  /* Warning callout - critical clarification */
+  .warning-callout {
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.12) 0%, rgba(140, 42, 30, 0.04) 100%);
+    border: 2px solid var(--crimson);
+    border-radius: 6px;
+    padding: 28px 26px;
+    margin: 30px 0;
+    position: relative;
+  }
+  .warning-tag {
+    position: absolute; top: -12px; right: 24px;
+    background: var(--crimson); color: var(--parchment);
+    padding: 4px 16px;
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 3px; border-radius: 12px;
+    text-transform: uppercase;
+  }
+  .warning-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--crimson); margin-bottom: 12px;
+  }
+  .warning-callout p {
+    font-size: 17px; color: var(--ink);
+    line-height: 1.7; margin-bottom: 12px;
+  }
+  .warning-callout p:last-child { margin-bottom: 0; }
+
+  /* HALACHA section */
+  .halacha-section {
+    margin-top: 50px;
+    padding: 50px 36px 40px;
+    background: linear-gradient(135deg, rgba(184, 138, 44, 0.15) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    position: relative;
+  }
+  .halacha-tag {
+    position: absolute; top: -14px; right: 36px;
+    background: var(--gold); color: var(--parchment);
+    padding: 6px 22px;
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 4px; border-radius: 14px;
+    text-transform: uppercase;
+  }
+  .halacha-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--crimson); text-align: center;
+    margin-bottom: 8px;
+  }
+  .halacha-subtitle {
+    text-align: center; font-style: italic;
+    color: var(--ink-soft); margin-bottom: 30px;
+    font-size: 16px;
+  }
+  .action-item {
+    background: rgba(245, 236, 217, 0.7);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 4px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .action-number {
+    font-family: 'Bellefair', serif;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 700;
+    text-align: center;
+  }
+  .action-body { padding-top: 2px; }
+  .action-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--crimson); margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .action-text {
+    font-size: 16px; color: var(--ink);
+    line-height: 1.7; margin: 0;
+  }
+
+  .final-message {
+    margin-top: 50px; padding: 30px;
+    background: rgba(140, 42, 30, 0.05);
+    border-top: 2px solid var(--crimson);
+    border-bottom: 2px solid var(--crimson);
+    text-align: center;
+  }
+  .final-message-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .final-conclusion {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 21px;
+    color: var(--ink); font-weight: 600;
+    line-height: 1.6; margin: 0;
+  }
+
+  .attribution {
+    margin-top: 50px; text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+  }
+  .attribution-line {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 30px;
+    color: var(--gold); font-size: 18px;
+    letter-spacing: 12px; opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 22px; }
+    .container::before { inset: 8px; }
+    p { font-size: 17px; }
+    .final-conclusion { font-size: 18px; }
+    .halacha-section { padding: 40px 20px 30px; }
+    .halacha-title { font-size: 23px; }
+    .action-item { grid-template-columns: 36px 1fr; gap: 12px; padding: 16px 16px; }
+    .action-number { font-size: 22px; }
+    .action-title { font-size: 17px; }
+    .action-text { font-size: 15px; }
+    .scene-card p { font-size: 17px; }
+    .example-box p { font-size: 15px; }
+    .mechanism-step-text { font-size: 15px; }
+    .warning-title { font-size: 19px; }
+    .warning-callout p { font-size: 16px; }
+  }
+
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>מְגַלְגְּלִין חוֹבָה עַל יְדֵי חַיָּב</h1>
+    <p class="subtitle">סוד ניסיון הממון — והדין שאתה פוסק על עצמך</p>
+
+    <!-- ============================== -->
+    <!-- OPENING SCENE                   -->
+    <!-- ============================== -->
+    <div class="scene-card">
+      <span class="scene-label">סצנה מוכרת</span>
+      <p>
+        מישהו רימה אותך. בכסף, בעסק, בעבודה.
+        חתם אתך על משהו ולא קיים, או לקח ולא החזיר,
+        או הוציא ממך כסף במרמה.
+      </p>
+      <p>
+        אתה צודק. אתה <strong>בטוח</strong> שאתה צודק.
+        אתה כועס — ובצדק.
+        כל אדם הגון היה כועס במקומך.
+      </p>
+      <p>
+        ואז התורה מטילה עליך פצצה:
+        <strong>מה שקרה לך עכשיו —
+        זה הדין שאתה פסקת על עצמך.</strong>
+      </p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <!-- ============================== -->
+    <!-- 1. THE HIDDEN MECHANISM         -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">המנגנון הנסתר</h2>
+      <p>
+        אדם מרמה אנשים — לפעמים <strong>במזיד</strong> (במכוון),
+        ולפעמים <strong>בשגגה</strong> (בלי לשים לב).
+        לפעמים הוא יודע שעשה משהו לא בסדר,
+        ולפעמים הוא <em>בכלל לא חושב</em> שזו מרמה.
+      </p>
+      <p>
+        למשל: לקחת משהו ולא החזרת. הבטחת ולא קיימת.
+        מכרת משהו ופרטים חשובים השמטת. הוצאת תועלת בלי לשלם עליה.
+        <strong>כולנו עשינו כאלה דברים</strong>, גם בלי לשים לב.
+      </p>
+      <p>
+        ואז מגיע יום שמישהו <strong>מרמה אותך</strong> —
+        בא במצח נחושה ומוציא ממך משהו לא בצדק.
+        ואתה משוכנע שזה <em>אדם רע, ושאתה הקרבן</em>.
+      </p>
+      <p>
+        אבל בעולם של פנימיות התורה — קיים כלל:
+      </p>
+      <div class="pasuk">
+        מְגַלְגְּלִין חוֹבָה עַל יְדֵי חַיָּב
+        <span class="pasuk-source">— תלמוד בבלי, שבת לב ע״א · תענית כט ע״א</span>
+      </div>
+      <p>
+        בעברית פשוטה: <strong>הקב"ה לא מביא עונשים בלי סיבה</strong>.
+        כשמגיע עונש לאדם — הוא נשלח דרך מי שגם כן חייב.
+        כלומר, האדם שרימה אותך —
+        הוא לא רק "רע" שעושה משהו רע.
+        <strong>הוא שליח. הוא הכלי שדרכו מגלגל הקב"ה את החשבון שלך עם עצמך.</strong>
+      </p>
+
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תאר לעצמך שופט שמחליט לתת לך קנס.
+          הוא לא בא לבית שלך לגבות אותו — שולח שוטר.
+          השוטר הוא הכלי, לא הגורם.
+          הקנס הוא <strong>על מעשה שלך</strong> — לא על השוטר.
+        </p>
+        <p>
+          כך במרמה: האדם שרימה אותך הוא <em>השוטר</em>.
+          ה"קנס" — על משהו שאתה עשית בעבר.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 2. WHY MONEY IS HARDEST         -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">למה ניסיון הממון הכי קשה?</h2>
+      <p>
+        חז"ל אומרים שניסיון הממון
+        הוא <strong>הקשה ביותר להמליך את הקב"ה</strong> בתוכו.
+        למה דווקא ממון?
+      </p>
+      <p>
+        כי <strong>אתה צודק</strong>.
+        זה לא ניסיון של תאווה רגילה, שאתה יודע שהיא רעה.
+        זה ניסיון שבו <em>השכל וההיגיון</em>
+        אומרים לך: "מגיע לי. הוא רימה אותי. הכסף שלי."
+      </p>
+      <p>
+        קשה להמליך את הקב"ה כשאתה צודק.
+        כשאתה טועה — קל לבקש סליחה.
+        אבל כש<strong>בודאות</strong> נעשתה לך עוולה —
+        <em>איך אפשר לקבל את זה באהבה?</em>
+      </p>
+      <p>
+        ובדיוק שם נמצא כל הניסיון:
+        <strong>במקום הפסד הכיס, כשאתה צודק — שם מתחיל הסיפור האמיתי שלך עם ה'.</strong>
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 3. THE TRAP                     -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">הפח — איך אדם פוסק את דינו של עצמו</h2>
+      <p>
+        עכשיו תקשיב לנקודה הקשה ביותר:
+        <strong>כשאתה עומד על צדקתך וזועק על העוול —
+        אתה בעצם פוסק את דינך על המקרה הקודם.</strong>
+      </p>
+      <p>
+        איך זה עובד?
+      </p>
+    </div>
+
+    <div class="mechanism-card">
+      <div class="mechanism-label">מנגנון "מגלגלין חובה"</div>
+      <div class="mechanism-flow">
+        <div class="mechanism-step">
+          <div class="mechanism-step-num">שלב 1</div>
+          <div class="mechanism-step-text">
+            פעם רימית מישהו — במזיד או בשגגה.<br>
+            אולי לא שמת לב, אולי שכחת. ה' זוכר.
+          </div>
+        </div>
+        <div class="mechanism-arrow">↓</div>
+        <div class="mechanism-step">
+          <div class="mechanism-step-num">שלב 2</div>
+          <div class="mechanism-step-text">
+            מגיע אדם חייב (שגם הוא רימה).<br>
+            הקב"ה משתמש בו ככלי — והוא מרמה אותך.
+          </div>
+        </div>
+        <div class="mechanism-arrow">↓</div>
+        <div class="mechanism-step">
+          <div class="mechanism-step-num">שלב 3</div>
+          <div class="mechanism-step-text">
+            אתה מתמלא כעס וזעם.<br>
+            "זה לא בסדר! אסור לעשות כך לאדם!"
+          </div>
+        </div>
+        <div class="mechanism-arrow">↓</div>
+        <div class="mechanism-step">
+          <div class="mechanism-step-num">שלב 4 · הפח</div>
+          <div class="mechanism-step-text">
+            כל מילת כעס שלך — היא <strong style="color:var(--gold);">פסק דין</strong><br>
+            על המקרה שאתה עצמך רימית פעם.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      תקרא את זה שוב לאט:
+      ה<em>חומרה</em> שאתה תובע כלפי המרמה שלו —
+      היא בדיוק החומרה שהשמיים יתבעו ממך
+      על המרמה שלך.
+    </p>
+
+    <div class="example-box">
+      <span class="example-label">דוגמה</span>
+      <p>
+        תאר לעצמך אדם שגונב משהו קטן בחנות —
+        ושוכח מזה. עוברים חודשים. שנים.
+      </p>
+      <p>
+        ואז מישהו גונב <em>ממנו</em> משהו, והוא זועק:
+        "גנב! עליו לשבת בכלא! אסור לסלוח לגנבים!"
+      </p>
+      <p>
+        בכך הוא <strong>חתם את גזר דינו שלו</strong>:
+        כפי שהוא תובע חומרה — כך הוא יישפט.
+      </p>
+    </div>
+
+    <div class="section">
+      <p>
+        מקור הדבר בפסוק מפורסם בפרקי אבות,
+        שמסביר את כל הסוד:
+      </p>
+      <div class="pasuk">
+        וְנִפְרָעִין מִן הָאָדָם
+        מִדַּעְתּוֹ וְשֶׁלֹּא מִדַּעְתּוֹ,
+        וְיֵשׁ לָהֶם עַל מַה שֶּׁיִּסְמֹכוּ,
+        וְהַדִּין דִּין אֱמֶת
+        <span class="pasuk-source">— משנה, פרקי אבות ג, טז</span>
+      </div>
+      <p>
+        בעברית פשוטה:
+      </p>
+      <p>
+        <strong>"נפרעין מן האדם"</strong> —
+        גובים מהאדם את החובות שלו.
+      </p>
+      <p>
+        <strong>"מדעתו ושלא מדעתו"</strong> —
+        בין אם הוא מודע לחטא שלו, בין אם לא.
+        אדם יכול לחטוא בלי לשים לב — וגם זה נגבה ממנו.
+      </p>
+      <p>
+        <strong>"יש להם על מה שיסמוכו"</strong> —
+        לכל דבר שקורה לך — יש סיבה אמיתית בשמיים.
+        אין מקריות.
+      </p>
+      <p>
+        <strong>"והדין דין אמת"</strong> —
+        זה הקטע הכואב והמדויק.
+        <em>גם כשהשכל שלנו לא מבין איך זה צדק</em> —
+        זה צדק. הדין אמת. רק לא במידת השכל שלנו.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 4. CRITICAL CLARIFICATION       -->
+    <!-- ============================== -->
+    <div class="warning-callout">
+      <div class="warning-tag">חשוב להבין</div>
+      <div class="warning-title">מה הלימוד הזה לא אומר</div>
+      <p>
+        הלימוד הזה <strong>לא אומר</strong> שאסור להתגונן ממרמה,
+        או שצריך להרשות לאנשים לרמות אותך.
+        מותר ואף חובה לפעול בחכמה — לתבוע, להוכיח, להגיב נכון.
+      </p>
+      <p>
+        הלימוד מדבר על <em>מה קורה בלב שלך</em> —
+        על הזעם הפנימי, על הוודאות בצדק שלי כל כך מוחלטת
+        עד שהיא הופכת ל<strong>קטרוג עליי בשמיים</strong>.
+      </p>
+      <p>
+        הוא לא בא לבטל את הצדק החיצוני —
+        אלא לבטל את <strong>הקטרוג הפנימי</strong>
+        שמופעל ברגע שאני "פוסק את דינו" של אחר ברוגז.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 5. HOW TO ESCAPE                -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">איך יוצאים מהפח?</h2>
+      <p>
+        עכשיו לעיקר — מה עושים?
+        איך לא נופלים לאותו פח שכמעט אף אחד לא עומד בו?
+      </p>
+      <p>
+        השם של זה הוא: <strong>"להמליך את המלך"</strong> —
+        להכניס את הקב"ה לסיפור.
+        ברגע שמלך אמיתי נמצא בחדר —
+        אני מפסיק להיות התובע והשופט.
+        אני רק <em>בעל דין</em>, והוא הפוסק.
+      </p>
+      <p>
+        ההמלכה הזו, דווקא כשאני צודק,
+        היא <strong>"המלכה ראשונה במעלה"</strong>.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          תאר לעצמך אדם בבית משפט,
+          שמסכים לקבל את שיפוט השופט גם אם זה לא לטובתו.
+          זה לא חולשה — <em>זו אמונה במערכת</em>.
+        </p>
+        <p>
+          לעומתו, אדם שצועק על השופט "אני צודק! לא אעמוד בזה!" —
+          הוא הראשון שהשופט יחמיר עליו.
+          <strong>גם בדין שמיים זה בדיוק אותו דבר.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HALACHA LEMA'ASEH                            -->
+    <!-- ============================================ -->
+    <div class="halacha-section">
+      <div class="halacha-tag">להלכה למעשה</div>
+      <div class="halacha-title">מה עושים כשמרמים אותי?</div>
+      <p class="halacha-subtitle">תלמוד המביא לידי מעשה — שבעה צעדים מעשיים</p>
+
+      <div class="action-item">
+        <div class="action-number">1</div>
+        <div class="action-body">
+          <div class="action-title">עוצרים את הזעם הראשון</div>
+          <p class="action-text">
+            ברגע שמזהים שרימו אותי —
+            <strong>שלוש נשימות לפני שמגיבים</strong>.
+            הזעם הראשון הוא הפח. רגע של עצירה
+            פוסל את "פסק הדין" שאני חותם על עצמי.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">2</div>
+        <div class="action-body">
+          <div class="action-title">לזכור: "הוא רק השליח"</div>
+          <p class="action-text">
+            לא להזדהות עם הזעם על האדם.
+            <strong>הוא לא היוצר את העוול — הוא הכלי</strong>.
+            הקב"ה החליט שעכשיו אני מתעמת עם המקרה הזה.
+            השאלה היא איך אני אגיב, לא איך הוא פעל.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">3</div>
+        <div class="action-body">
+          <div class="action-title">חשבון נפש: היכן הייתי "הוא"?</div>
+          <p class="action-text">
+            במקום לשפוט אותו — לשאול את עצמי:
+            <strong>"מתי אני עשיתי דבר דומה?"</strong>
+            לא בהכרח אותה מרמה — אולי לקחתי משהו ולא החזרתי,
+            לא קיימתי הבטחה, השמטתי פרט.
+            הזיכרון הזה <em>מוחק את הקטרוג</em>.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">4</div>
+        <div class="action-body">
+          <div class="action-title">למתן את התביעה — לא לוותר עליה</div>
+          <p class="action-text">
+            <strong>זה לא ויתור על הצדק</strong> —
+            פועלים בחכמה, מתייעצים, אולי גם תובעים בדין.
+            אבל בלב — תוך כדי המעשים — נשארים שקטים.
+            "אעשה את החובה שלי, וההכרעה למלך".
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">5</div>
+        <div class="action-body">
+          <div class="action-title">המלכת המלך בקול</div>
+          <p class="action-text">
+            לומר בפה (אפילו בלחישה):
+            <strong>"ה' צדיק בכל דרכיו. הדין דין אמת.
+            לא אבין הכל בשכל שלי — ואני מקבל."</strong>
+            המילים פותחות בלב את מה שהמחשבה לא יכולה.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">6</div>
+        <div class="action-body">
+          <div class="action-title">לבקש רחמים — לא דין</div>
+          <p class="action-text">
+            במקום לבקש בתפילה "תן לי את שלי" —
+            לבקש <strong>"רחם עליי, סלח לי על מה שעשיתי"</strong>.
+            ברגע שמבקשים רחמים — מתבטל הקטרוג,
+            ולפעמים גם המקרה החיצוני מתפזר מאליו.
+          </p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">7</div>
+        <div class="action-body">
+          <div class="action-title">להחזיר במעשה — אם אפשר</div>
+          <p class="action-text">
+            אם נזכרת במקרה שאתה רימית פעם —
+            <strong>תחזיר. תפצה. תבקש סליחה</strong>.
+            זו התשובה הכי חזקה לדין הקודם —
+            ובדרך כלל גם המקרה הנוכחי מתבטל כשהיא נעשית.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-conclusion">
+        כשמרמים אותך —<br>
+        זה לא הסיפור שלך מולו.<br>
+        <strong>זה הסיפור שלך מול עצמך.</strong><br>
+        <span style="font-size:16px;color:var(--ink-soft);font-style:italic;font-weight:400;">
+          המלך את המלך — דווקא כשאתה צודק.
+        </span>
+      </p>
+    </div>
+
+    <div class="attribution">
+      <div class="attribution-line">מדברי ציון אבירם הי״ו</div>
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>

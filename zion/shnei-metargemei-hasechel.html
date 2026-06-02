@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שני מתרגמי השכל — סוד צד ימין וצד שמאל</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf3df;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #d9a943;
+    --crimson: #8c2a1e;
+    --sage: #6b8a4a;
+    --sage-deep: #4d6638;
+    --sun: #e8b942;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184, 138, 44, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(107, 138, 74, 0.06) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.9;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.65) 0%, rgba(245, 236, 217, 0.35) 100%);
+    padding: 70px 60px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 32px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 22px; letter-spacing: 8px;
+    margin-bottom: 24px; opacity: 0.7;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(34px, 5.5vw, 50px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 16px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 300; font-style: italic; margin-bottom: 40px;
+    line-height: 1.5;
+  }
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 50px 0; gap: 20px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 18px; letter-spacing: 4px; }
+
+  .section { margin-bottom: 38px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 24px; color: var(--crimson); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::before { content: "❖"; color: var(--gold); font-size: 14px; }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px; margin: 18px 0;
+    font-family: 'David Libre', serif; font-size: 17px;
+    color: var(--ink-soft); border-radius: 2px;
+  }
+  .pasuk-source {
+    display: block; font-size: 13px; color: var(--gold-deep);
+    margin-top: 8px; letter-spacing: 1px;
+  }
+  .key-term {
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 138, 44, 0.3) 60%);
+    padding: 0 4px; font-weight: 500;
+  }
+
+  /* Example box */
+  .example-box {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.10) 0%, rgba(184, 138, 44, 0.03) 100%);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-right: 3px solid var(--gold-light);
+    padding: 18px 24px; margin: 18px 0;
+    border-radius: 3px;
+  }
+  .example-label {
+    display: inline-block; font-family: 'Bellefair', serif;
+    font-size: 10px; letter-spacing: 3px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 8px;
+    background: rgba(184, 138, 44, 0.14);
+    padding: 2px 10px; border-radius: 10px;
+  }
+  .example-box p { font-size: 16px; margin: 0; color: var(--ink-soft); line-height: 1.7; }
+  .example-box p + p { margin-top: 10px; }
+
+  /* TWO SIDES COMPARISON - main visual */
+  .sides-card {
+    margin: 30px 0;
+    padding: 36px 28px;
+    background: rgba(245, 236, 217, 0.55);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 8px;
+  }
+  .sides-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 24px;
+  }
+  .sides-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .side {
+    padding: 26px 22px;
+    border-radius: 6px;
+  }
+  .side.right {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.06) 100%);
+    border: 2px solid var(--gold);
+  }
+  .side.left {
+    background: rgba(43, 29, 16, 0.05);
+    border: 2px dashed rgba(140, 42, 30, 0.4);
+  }
+  .side-tag {
+    display: inline-block;
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; padding: 4px 14px;
+    border-radius: 12px; margin-bottom: 14px;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .side.right .side-tag {
+    background: var(--gold); color: var(--paper);
+  }
+  .side.left .side-tag {
+    background: var(--crimson); color: var(--paper);
+  }
+  .side-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; font-weight: 700;
+    margin-bottom: 14px; line-height: 1.3;
+  }
+  .side.right .side-title { color: var(--gold-deep); }
+  .side.left .side-title { color: var(--crimson); }
+  .side-features {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .side-features li {
+    font-size: 15px; color: var(--ink-soft);
+    line-height: 1.55; padding: 5px 0;
+    padding-right: 22px; position: relative;
+  }
+  .side.right .side-features li::before {
+    content: "✦"; position: absolute; right: 0;
+    color: var(--gold); font-size: 11px; top: 8px;
+  }
+  .side.left .side-features li::before {
+    content: "▪"; position: absolute; right: 0;
+    color: var(--crimson); font-size: 12px; top: 7px;
+    opacity: 0.7;
+  }
+  .side-conclusion {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(184, 138, 44, 0.3);
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .side.right .side-conclusion { color: var(--gold-deep); font-weight: 500; }
+  .side.left .side-conclusion { color: var(--crimson); opacity: 0.85; }
+
+  /* Key insight callouts */
+  .insight {
+    margin: 22px 0;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.08) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border-right: 3px solid var(--crimson);
+    border-radius: 3px;
+  }
+  .insight-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .insight p {
+    font-size: 17px; color: var(--ink); margin: 0;
+    line-height: 1.7; font-weight: 500;
+  }
+
+  /* Cain vs Abel card */
+  .kavh-card {
+    margin: 30px 0;
+    padding: 32px 26px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--paper); border-radius: 6px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(43, 29, 16, 0.5);
+  }
+  .kavh-card::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 4px; pointer-events: none;
+  }
+  .kavh-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 22px;
+    position: relative; z-index: 1;
+  }
+  .kavh-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    position: relative; z-index: 1;
+  }
+  .kavh-side {
+    text-align: center;
+    padding: 18px 16px;
+    border-radius: 4px;
+  }
+  .kavh-side.hevel {
+    background: rgba(232, 185, 66, 0.15);
+    border: 1px solid rgba(232, 185, 66, 0.4);
+  }
+  .kavh-side.kayin {
+    background: rgba(140, 42, 30, 0.15);
+    border: 1px solid rgba(140, 42, 30, 0.3);
+  }
+  .kavh-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 24px; font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .kavh-side.hevel .kavh-name { color: var(--gold-light); }
+  .kavh-side.kayin .kavh-name { color: #e85a4f; }
+  .kavh-action {
+    font-size: 14px; color: rgba(245, 236, 217, 0.9);
+    line-height: 1.5; margin-bottom: 10px;
+  }
+  .kavh-result {
+    font-size: 12px;
+    color: rgba(245, 236, 217, 0.7);
+    font-style: italic;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(184, 138, 44, 0.3);
+  }
+
+  /* The bridge — Moshe Rabenu */
+  .bridge-card {
+    margin: 30px 0;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.20) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .bridge-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .bridge-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 24px; color: var(--ink);
+    font-weight: 700; line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .bridge-card p {
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.7; margin: 0;
+  }
+
+  /* HALACHA section */
+  .halacha-section {
+    margin-top: 50px;
+    padding: 50px 36px 40px;
+    background: linear-gradient(135deg, rgba(107, 138, 74, 0.10) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--sage);
+    border-radius: 8px;
+    position: relative;
+  }
+  .halacha-tag {
+    position: absolute; top: -14px; right: 36px;
+    background: var(--sage); color: var(--paper);
+    padding: 6px 22px;
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 4px; border-radius: 14px;
+    text-transform: uppercase;
+  }
+  .halacha-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--sage-deep); text-align: center;
+    margin-bottom: 8px;
+  }
+  .halacha-subtitle {
+    text-align: center; font-style: italic;
+    color: var(--ink-soft); margin-bottom: 30px;
+    font-size: 16px;
+  }
+  .action-item {
+    background: rgba(255, 250, 235, 0.75);
+    border: 1px solid rgba(107, 138, 74, 0.25);
+    border-radius: 4px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+  }
+  .action-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--sage-deep); margin-bottom: 8px;
+    line-height: 1.3;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .action-title::before {
+    content: "✦"; color: var(--gold); font-size: 14px;
+  }
+  .action-text {
+    font-size: 16px; color: var(--ink);
+    line-height: 1.7; margin: 0;
+  }
+  .action-text strong { color: var(--crimson); }
+
+  /* Final */
+  .final-message {
+    margin-top: 50px;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    text-align: center;
+  }
+  .final-message-label {
+    font-family: 'Bellefair', serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .final-conclusion {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--ink);
+    font-weight: 700; line-height: 1.55;
+    margin: 0;
+  }
+  .final-hope {
+    margin-top: 14px;
+    font-size: 15px; color: var(--gold-deep);
+    font-style: italic;
+  }
+
+  .attribution {
+    margin-top: 50px; text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 30px;
+    color: var(--gold); font-size: 18px;
+    letter-spacing: 12px; opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 20px 10px; }
+    .container { padding: 40px 22px; }
+    .container::before { inset: 8px; }
+    p { font-size: 17px; }
+    .sides-grid { grid-template-columns: 1fr; gap: 14px; }
+    .side-title { font-size: 19px; }
+    .side-features li { font-size: 14px; }
+    .kavh-grid { grid-template-columns: 1fr; gap: 14px; }
+    .kavh-name { font-size: 21px; }
+    .bridge-title { font-size: 20px; }
+    .bridge-card p { font-size: 15px; }
+    .final-conclusion { font-size: 19px; }
+    .halacha-section { padding: 40px 22px 30px; }
+    .halacha-title { font-size: 22px; }
+    .action-title { font-size: 17px; }
+    .action-text { font-size: 15px; }
+    .insight p { font-size: 16px; }
+    .example-box p { font-size: 15px; }
+  }
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה</div>
+    <h1>שְׁנֵי מְתַרְגְּמֵי הַשֵּׂכֶל</h1>
+    <p class="subtitle">
+      סוד צד ימין וצד שמאל —<br>
+      ואיך באמת מגלים את הנשמה
+    </p>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <!-- ============================== -->
+    <!-- 1. THE TWO TRANSLATORS          -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">שני המתרגמים שבלב</h2>
+      <p>
+        בליבו של כל אדם פועלים <strong>שני מתרגמים</strong>.
+        תפקידם אחד: לקחת את ה<em>שכל</em> שבמוח
+        ולהפוך אותו ל<em>רגש</em> שבלב.
+      </p>
+      <p>
+        כי שכל לבדו אינו מניע אדם.
+        הוא צריך להתורגם ל<strong>רגש</strong> —
+        ורק אז הוא הופך ל<em>מעשה</em>.
+      </p>
+      <p>
+        אבל יש <strong>שני סוגי תרגום</strong> —
+        ושני סוגי רגש. וההבדל ביניהם —
+        הוא ההבדל בין <em>בהמה לנשמה</em>.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 2. THE TWO SIDES VISUAL         -->
+    <!-- ============================== -->
+    <div class="sides-card">
+      <div class="sides-label">שני המתרגמים</div>
+      <div class="sides-grid">
+
+        <div class="side right">
+          <span class="side-tag">צד ימין</span>
+          <div class="side-title">מתרגם לרגש כללי</div>
+          <ul class="side-features">
+            <li>מעשה <strong>בלי גבול</strong></li>
+            <li>למען <em>עם ישראל</em></li>
+            <li>יציאה מהאני העצמי</li>
+            <li>נסיעות כלליות, לא פרטיות</li>
+            <li>נתינה מעבר למה שנדרש</li>
+            <li>גילוי הנפש האלוקית</li>
+          </ul>
+          <p class="side-conclusion">
+            כאן נולד הצד הימני — וכאן מתגלה הנשמה.
+          </p>
+        </div>
+
+        <div class="side left">
+          <span class="side-tag">צד שמאל</span>
+          <div class="side-title">מתרגם לרגש עצמי</div>
+          <ul class="side-features">
+            <li>מעשה <strong>בגבול</strong></li>
+            <li>למען <em>עצמי</em></li>
+            <li>תמיד רואה את עצמו בסיטואציה</li>
+            <li>מדוד, שקול, מנוי</li>
+            <li>נתינה רק כפי החיוב</li>
+            <li>הנפש הבהמית שולטת</li>
+          </ul>
+          <p class="side-conclusion">
+            כאן שורה עין הרע — וכאן נשארים בגוף.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 3. THE LIMITED SIDE             -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">המעשה בגבול — איפה שעין הרע שורה</h2>
+      <p>
+        אדם שעושה מעשה <em>בגבול</em> —
+        כלומר עושה מה שהוא <strong>חייב</strong>, לא יותר —
+        סימן שהמעשה נעשה ב<strong>רצון עצמי</strong>.
+      </p>
+      <p>
+        למה הוא מצמצם? <strong>כי הוא מפחד להפסיד</strong>.
+        הוא רוצה לעשות, חייב לעשות —
+        אבל מהמעשה הזה <em>יכול לצאת לו הפסד</em>.
+        אז הוא נותן את <strong>המינימום</strong>.
+      </p>
+      <p>
+        חז"ל מלמדים אותנו דבר מרתק:
+      </p>
+      <div class="pasuk">
+        אֵין הַבְּרָכָה שׁוֹרָה לֹא בְּדָבָר הַשָּׁקוּל,<br>
+        וְלֹא בְּדָבָר הַמָּדוּד, וְלֹא בְּדָבָר הַמָּנוּי —<br>
+        אֶלָּא בְּדָבָר הַסָּמוּי מִן הָעַיִן
+        <span class="pasuk-source">— תלמוד בבלי, תענית ח ע״ב</span>
+      </div>
+      <p>
+        ולהפך — <strong>עין הרע</strong> דווקא שורה
+        ב<em>מדוד</em>, ב<em>שקול</em>, וב<em>מנוי</em>.
+        כל מי שעושה את מעשיו <em>בגבול</em> —
+        מזמין לעצמו את עין הרע.
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה</span>
+        <p>
+          אדם נותן צדקה — אבל סופר בדיוק כמה הוא חייב.
+          לומד תורה — אבל רק שיעור אחד ביום, לפי תכנון.
+          עוזר לחברו — אבל רק עד כמה ש"לא יוצא לו ביוקר".
+        </p>
+        <p>
+          כל המעשים שלו <em>נמדדים</em>,
+          וכולם <strong>מתרגמים את החכמה שלו לרגש עצמי</strong>.
+          הוא תמיד יראה את עצמו בתוך הסיטואציה — ויחשוב <em>על עצמו</em>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 4. THE UNLIMITED SIDE           -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">היציאה מהגבול — שם נולדת הנשמה</h2>
+      <p>
+        ברגע שאדם <strong>יוצא מהגבול</strong> —
+        יוצא מעצמו —
+        מתחיל להתעסק עם הגוף שלו <em>למען עם ישראל</em>,
+        עושה עם הרכב שלו <em>נסיעות כלליות</em> ולא פרטיות,
+        נותן מזמנו <em>מעבר למה שנדרש</em> —
+      </p>
+      <p>
+        אז משהו פלאי קורה:
+        השכל שלו מתחיל <strong>לתרגם את המעשים לרגש כללי</strong>.
+        ואז — נולד <strong>הצד הימני</strong>.
+      </p>
+      <div class="insight">
+        <div class="insight-label">המפתח</div>
+        <p>
+          <strong>ככה מגלים את הנשמה.</strong><br>
+          לא ע"י לימוד נוסף. לא ע"י תרגול.
+          אלא ע"י <em>יציאה מהגבול</em> —
+          מעשים בלי גבול למען הכלל.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 5. CAIN AND ABEL                -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">קין והבל — הדוגמה המכוננת</h2>
+      <p>
+        ההבדל בין שני המתרגמים הוא בדיוק
+        <strong>ההבדל בין מנחת קין למנחת הבל</strong>.
+      </p>
+      <div class="pasuk">
+        וַיָּבֵא קַיִן מִפְּרִי הָאֲדָמָה מִנְחָה לַה'.<br>
+        וְהֶבֶל הֵבִיא גַם הוּא <strong>מִבְּכֹרוֹת צֹאנוֹ וּמֵחֶלְבֵהֶן</strong>.<br>
+        וַיִּשַׁע ה' אֶל הֶבֶל וְאֶל מִנְחָתוֹ,<br>
+        וְאֶל קַיִן וְאֶל מִנְחָתוֹ לֹא שָׁעָה.
+        <span class="pasuk-source">— בראשית ד, ג-ה</span>
+      </div>
+    </div>
+
+    <div class="kavh-card">
+      <div class="kavh-label">שתי מנחות · שתי גישות</div>
+      <div class="kavh-grid">
+
+        <div class="kavh-side hevel">
+          <div class="kavh-name">הבל</div>
+          <div class="kavh-action">
+            הביא <strong>מבכורות</strong> צאנו —<br>
+            <em>הטוב שבטוב</em>.<br>
+            את <strong>המקסימום</strong>.<br>
+            הרבה מעבר למה שנדרש.
+          </div>
+          <div class="kavh-result">
+            "וַיִּשַׁע ה' אֶל הֶבֶל"<br>
+            המנחה התקבלה
+          </div>
+        </div>
+
+        <div class="kavh-side kayin">
+          <div class="kavh-name">קין</div>
+          <div class="kavh-action">
+            הביא "<strong>מפרי האדמה</strong>" —<br>
+            <em>סתם מה שהיה</em>.<br>
+            את <strong>המינימום</strong>.<br>
+            רק מה שחייב לתת.
+          </div>
+          <div class="kavh-result">
+            "וְאֶל קַיִן לֹא שָׁעָה"<br>
+            המנחה לא התקבלה
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        קין הביא — אבל <strong>בגבול</strong>.
+        בדיוק מה שחייב, לא יותר.
+        זו מנחה של ה<em>צד השמאלי</em> —
+        תרגום של חובה לרגש עצמי.
+      </p>
+      <p>
+        הבל הביא — אבל <strong>בלי גבול</strong>.
+        את הבכורות, את החלב הטוב ביותר,
+        הרבה מעבר למה שהיה דרוש.
+        זו מנחה של ה<em>צד הימני</em> —
+        תרגום של דעת לרגש כללי, נתינה אמיתית.
+      </p>
+      <div class="insight">
+        <div class="insight-label">העיקרון</div>
+        <p>
+          ה' לא מסתכל על <em>מה</em> נתת —
+          אלא על <em>איך</em> נתת.
+          <strong>בגבול או בלי גבול. מהאני או מעבר לאני.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 6. THE TRAP OF TORAH STUDY      -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">הסכנה — לימוד תורה בלי לב</h2>
+      <p>
+        ועכשיו לנקודה הקריטית, שכל לומד תורה חייב לדעת:
+      </p>
+      <p>
+        אדם שלומד תורה <em>בלימוד שכלי בלבד</em> —
+        שלא פועל בלב שלו, שלא מתורגם למעשים בלי גבול —
+        כל התרגום של התורה שלו הוא <strong>תרגום לא נכון</strong>.
+      </p>
+      <p>
+        למה? כי <strong>הוא לומד בנפש הבהמית</strong>.
+        השכל שלו מתורגם דרך הצד השמאלי —
+        ונשאר ברגש עצמי.
+      </p>
+      <div class="insight">
+        <div class="insight-label">המסקנה הקשה</div>
+        <p>
+          ככל שילמד יותר — <strong>יהיה לו יותר שכל</strong>.<br>
+          אבל הוא <em>לא יתקן את המידות</em>.<br>
+          כי אין לו <strong>גילוי אלוקי</strong>. אין לו עזרה משמיים.
+        </p>
+      </div>
+      <p>
+        חז"ל אמרו:
+      </p>
+      <div class="pasuk">
+        <strong>אִלְמָלֵא הַקָּדוֹשׁ בָּרוּךְ הוּא עוֹזְרוֹ —<br>
+        אֵין יָכוֹל לוֹ</strong>
+        <span class="pasuk-source">— תלמוד בבלי, סוכה נב ע״ב · קידושין ל ע״ב</span>
+      </div>
+      <p>
+        בלי עזרת ה' — אדם <em>לא יכול</em> לנצח את היצר הרע.
+        ועזרת ה' מגיעה רק לזה שיצא מהגבול —
+        רק לזה שתרגם את שכלו לרגש כללי.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 7. THE LEAP                     -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">הכפייה — איך מגלים את הנשמה</h2>
+      <p>
+        כדי לגלות את <strong>הנפש האלוקית</strong> —
+        חייבים <strong>לכפות את הנפש הבהמית</strong>.
+        לעשות דברים שהיא לא רוצה לעשות.
+      </p>
+      <p>
+        להפסיק לחשוב <em>"מה ייצא לי?"</em>,
+        ולהתחיל לחשוב <em>"מה אני יכול לתת?"</em>
+      </p>
+      <div class="example-box">
+        <span class="example-label">דוגמה מעשית</span>
+        <p>
+          תכננת לנסוע לקניות — בדרך פגשת יהודי שצריך טרמפ.
+          הנפש הבהמית אומרת: "אני ממהר. יש לי תכנון."
+          הנפש האלוקית אומרת: "<strong>נסיעה כללית, לא פרטית</strong>".
+        </p>
+        <p>
+          ברגע שאתה עוצר ולוקח אותו — <strong>כפית את הנפש הבהמית</strong>.
+          המתרגם הימני נדלק. הצד הימני נולד.
+          וגילית את הנשמה.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 8. THE BRIDGE - MOSHE           -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">משה רבנו — הממוצע המחבר</h2>
+      <p>
+        ומה שמתגלה אחרי הכפייה הזו —
+        זה <strong>הממוצע המחבר</strong> בין האדם לקב"ה.
+        זה ה<em>מקום</em> שבו מקבלים תורה.
+      </p>
+    </div>
+
+    <div class="bridge-card">
+      <div class="bridge-label">הממוצע המחבר</div>
+      <div class="bridge-title">
+        שם נמצא משה רבנו —<br>
+        שם הרב הכשר —<br>
+        שם תיקון המידות
+      </div>
+      <p>
+        זה <strong>נצח · הוד · יסוד · מלכות</strong>,
+        ומשם והלאה —
+        עד לתורה העליונה שהיא משה רבנו.<br><br>
+        אבל אי אפשר להגיע לשם —
+        עד שעוזבים את עצמנו.
+        <em>איך עוזבים את עצמנו?</em><br><br>
+        <strong>לוקחים את הגוף ופועלים<br>
+        למען עם ישראל בלי גבול.</strong>
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 9. THE WARNING                  -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">בלי זה — עולם של שקר</h2>
+      <p>
+        עד שלא זוכים לתורה משמיים —
+        כל מה שאנחנו מבינים, חושבים, ולומדים —
+        הוא <strong>"עָלְמָא דְשִׁיקְרָא"</strong>.
+        עולם של שקר.
+      </p>
+      <div class="insight">
+        <div class="insight-label">פרקי אבות ב, ד</div>
+        <p>
+          <strong>אַל תַּאֲמִין בְּעַצְמְךָ עַד יוֹם מוֹתְךָ</strong><br>
+          האמת מתגלה רק למי שזכה <em>לכפות את עצמו</em>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- FINAL                           -->
+    <!-- ============================== -->
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-conclusion">
+        כל מי שמעשיו <strong>בגבול</strong> —<br>
+        נשאר במתרגם השמאלי.<br>
+        מי שיוצא מעצמו <strong>בלי גבול</strong> —<br>
+        מגלה את <em>הנשמה</em>.
+      </p>
+      <p class="final-hope">
+        ✦ ככה מקבלים תורה משמיים ✦
+      </p>
+    </div>
+
+    <div class="attribution">
+      מדברי ציון אבירם הי״ו
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
