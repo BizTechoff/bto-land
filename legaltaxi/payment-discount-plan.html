@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תכנון - הנחה בסכום + עדכון Payment.rows</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f172a;
+    --card: #ffffff;
+    --card-soft: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-soft: #64748b;
+    --primary: #1976d2;
+    --primary-dark: #0d47a1;
+    --accent: #d32f2f;
+    --warn: #f59e0b;
+    --ok: #16a34a;
+    --code-bg: #f1f5f9;
+    --code-text: #0d47a1;
+    --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Rubik', 'Heebo', system-ui, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  header.hero {
+    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+    color: #fff;
+    padding: 40px 36px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 50%);
+  }
+  header.hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  header.hero .subtitle {
+    font-size: 1rem;
+    opacity: 0.92;
+    position: relative;
+  }
+  header.hero .meta {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+  }
+  header.hero .meta span {
+    background: rgba(255,255,255,0.18);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+  header.hero .badge-plan {
+    background: #fbbf24 !important;
+    color: #78350f !important;
+    font-weight: 700;
+  }
+
+  section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  section h2 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 18px 0 10px;
+  }
+  section p { margin-bottom: 10px; }
+  section ul { margin: 8px 0; padding-right: 22px; }
+  section li { margin-bottom: 4px; }
+
+  code, .code {
+    background: var(--code-bg);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
+    font-size: 0.88em;
+    color: var(--code-text);
+    direction: ltr;
+    display: inline-block;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 18px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    direction: ltr;
+    text-align: left;
+    margin: 12px 0;
+  }
+  pre .k { color: #93c5fd; }
+  pre .s { color: #86efac; }
+  pre .c { color: #94a3b8; font-style: italic; }
+  pre .t { color: #fbbf24; }
+  pre .f { color: #f472b6; }
+  pre .n { color: #fca5a5; }
+
+  .file-pill {
+    display: inline-block;
+    background: var(--card-soft);
+    border-right: 3px solid var(--primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.86rem;
+    direction: ltr;
+    margin: 4px 0;
+  }
+
+  /* === Step Cards === */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 14px 0;
+  }
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .step-header {
+    padding: 14px 22px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .step-header .num {
+    background: rgba(255,255,255,0.25);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .step-header h3 {
+    color: #fff !important;
+    margin: 0 !important;
+    font-size: 1.1rem;
+  }
+  .step-header .file-tag {
+    margin-right: auto;
+    background: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    direction: ltr;
+  }
+  .step-body { padding: 18px 22px; }
+
+  /* === Diff Boxes === */
+  .diff {
+    margin: 12px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .diff .diff-header {
+    background: var(--card-soft);
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--border);
+  }
+  .diff-row {
+    padding: 6px 14px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    direction: ltr;
+    text-align: left;
+    white-space: pre-wrap;
+  }
+  .diff-add { background: #dcfce7; color: #14532d; border-right: 4px solid var(--ok); }
+  .diff-del { background: #fee2e2; color: #7f1d1d; border-right: 4px solid var(--accent); text-decoration: line-through; }
+  .diff-ctx { background: #fff; color: var(--text-soft); }
+
+  /* === Mockup of dialog === */
+  .mockup-wrap {
+    background: #f1f5f9;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+  }
+  .mock-dialog {
+    background: #fff;
+    max-width: 460px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mock-dialog h2.title {
+    background: var(--primary-dark);
+    color: #fff;
+    padding: 14px 22px;
+    font-size: 1.1rem;
+    text-align: center;
+    border: none;
+    margin: 0;
+  }
+  .mock-body { padding: 20px 22px; }
+  .mock-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .mock-row label { font-size: 0.92rem; color: var(--text); min-width: 90px; }
+  .mock-row .val { font-weight: 700; color: var(--primary-dark); direction: ltr; }
+  .mock-toggle {
+    display: flex;
+    background: var(--card-soft);
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid var(--border);
+    margin: 8px 0 14px;
+  }
+  .mock-toggle button {
+    flex: 1;
+    padding: 8px 14px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    transition: all 0.15s;
+  }
+  .mock-toggle button.active {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(25,118,210,0.3);
+  }
+  .mock-input {
+    width: 110px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    direction: ltr;
+    text-align: center;
+    background: #fff;
+  }
+  .mock-input:focus { border-color: var(--primary); outline: none; }
+  .mock-input.disabled {
+    background: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+  .mock-final {
+    padding: 14px;
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    border-radius: 8px;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+  .mock-final .v {
+    color: var(--primary-dark);
+    font-weight: 800;
+    font-size: 1.3rem;
+    direction: ltr;
+    display: inline-block;
+    margin: 0 6px;
+  }
+  .mock-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--card-soft);
+    justify-content: flex-end;
+    border-top: 1px solid var(--border);
+  }
+  .btn { padding: 8px 18px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; border: none; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-flat { background: transparent; color: var(--text-soft); }
+
+  /* === Tables === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  thead { background: var(--primary-dark); color: #fff; }
+  th, td {
+    padding: 11px 14px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr:nth-child(even) { background: var(--card-soft); }
+  tbody tr:hover { background: #eff6ff; }
+  td.code-cell {
+    font-family: monospace;
+    direction: ltr;
+    text-align: left;
+    font-size: 0.86rem;
+  }
+
+  /* === Alerts === */
+  .alert {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-right: 4px solid;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .alert.warn { background: #fef3c7; border-color: var(--warn); color: #78350f; }
+  .alert.danger { background: #fee2e2; border-color: var(--accent); color: #7f1d1d; }
+  .alert.info { background: #dbeafe; border-color: var(--primary); color: #1e3a8a; }
+  .alert.ok { background: #dcfce7; border-color: var(--ok); color: #14532d; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 0 4px;
+  }
+  .badge-new { background: #dcfce7; color: #14532d; }
+  .badge-edit { background: #fef3c7; color: #78350f; }
+  .badge-fix { background: #fee2e2; color: #7f1d1d; }
+
+  footer {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 24px 0 8px;
+    font-size: 0.85rem;
+  }
+  footer .sig { color: var(--primary-dark); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>💸 הנחה בסכום + הנחה באחוז + עדכון Payment.rows</h1>
+    <p class="subtitle">תכנון מלא לפני יישום — דיאלוג <code style="background:rgba(255,255,255,0.2);color:#fff">payment-amount</code> ועדכון <code style="background:rgba(255,255,255,0.2);color:#fff">payment-details</code></p>
+    <div class="meta">
+      <span class="badge-plan">📋 PLAN — אפס קוד עדיין</span>
+      <span>📁 LegalTaxi</span>
+      <span>📅 2026-05-10</span>
+      <span>👤 BizTechoff™</span>
+    </div>
+  </header>
+
+  <!-- Current state & bug -->
+  <section>
+    <h2>🔍 המצב הנוכחי + הבאג שמתקנים</h2>
+
+    <h3>זרימה היום</h3>
+    <ol style="padding-right:20px">
+      <li>אדמין/משרד עושה <strong>Ctrl+Shift+Click</strong> על שדה הסכום ב־<code>payment-details</code>.</li>
+      <li>נפתח דיאלוג <code>payment-amount</code> עם שדה אחד — <strong>אחוז הנחה</strong> (0–100).</li>
+      <li>השינוי מתעדכן ב־<code>payment.amount</code> וב־<code>payment.discount</code> ונשמר.</li>
+    </ol>
+
+    <div class="alert danger">
+      <span class="icon">🐛</span>
+      <div>
+        <strong>הבאג:</strong> כש־discount מיושמת → <code>payment.amount</code> יורד אבל <code>payment.rows</code> נשאר זהה. סכום השורות &gt; <code>amount</code>.
+        <br><strong>תוצאה:</strong> ב־<code>greenInvoice.ts</code> (שורה 524) הסכימה לפי rows מקבלת תוצאה לא נכונה — חוסר התאמה בחשבונית.
+      </div>
+    </div>
+
+    <div class="alert warn">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>חוסר עקביות בישות:</strong> <code>Payment.discount</code> מוגדר עם <code>displayValue: c + ' ₪'</code> אבל בקוד מטופל כאחוז. גם זה ייפתר.
+      </div>
+    </div>
+  </section>
+
+  <!-- Order of execution -->
+  <section>
+    <h2>📋 סדר ביצוע (קומפוננטה אחת בכל פעם)</h2>
+
+    <div class="steps-grid">
+
+      <!-- STEP 1 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="num">1</span>
+          <h3>חדש: enum DiscountType</h3>
+          <span class="file-tag">src/shared/enums/discountType.ts</span>
+          <span class="badge badge-new" style="margin-right:auto">חדש ✨</span>
+        </div>
+        <div class="step-body">
+          <p>קובץ חדש לפי ארכיטקטורה B (<code>shared/enums/</code>) — הצבעה הוויברנטית שלך לעתיד.</p>
+          <pre><span class="k">import</span> { ValueListFieldType } <span class="k">from</span> <span class="s">"remult"</span>
+
+@<span class="t">ValueListFieldType</span>&lt;<span class="t">DiscountType</span>&gt;({ <span class="f">caption</span>: <span class="s">'סוג הנחה'</span> })
+<span class="k">export class</span> <span class="t">DiscountType</span> {
+    <span class="k">static</span> none = <span class="k">new</span> <span class="t">DiscountType</span>(<span class="s">'none'</span>, <span class="s">'אין'</span>, <span class="s">''</span>)
+    <span class="k">static</span> fixed = <span class="k">new</span> <span class="t">DiscountType</span>(<span class="s">'fixed'</span>, <span class="s">'בש"ח'</span>, <span class="s">' ₪'</span>)
+    <span class="k">static</span> percent = <span class="k">new</span> <span class="t">DiscountType</span>(<span class="s">'percent'</span>, <span class="s">'באחוז'</span>, <span class="s">'%'</span>)
+    <span class="k">constructor</span>(<span class="k">public</span> id = <span class="s">''</span>, <span class="k">public</span> caption = <span class="s">''</span>, <span class="k">public</span> suffix = <span class="s">''</span>) { }
+    <span class="k">static</span> getFields() { <span class="k">return</span> [<span class="k">this</span>.none, <span class="k">this</span>.fixed, <span class="k">this</span>.percent] }
+}</pre>
+          <p style="font-size:0.88rem;color:var(--text-soft);margin-top:4px"><strong>שדה <code>suffix</code>:</strong> משמש את ה־<code>displayValue</code> של <code>discount</code> בשלב 2.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="num">2</span>
+          <h3>עדכון Payment entity</h3>
+          <span class="file-tag">src/app/entity/payment.ts</span>
+          <span class="badge badge-edit" style="margin-right:auto">עריכה ✏️</span>
+        </div>
+        <div class="step-body">
+          <p>הוספת שדה <code>discountType</code> + תיקון ה־<code>displayValue</code> של <code>discount</code> שיציג לפי הסוג.</p>
+
+          <div class="diff">
+            <div class="diff-header">payment.ts (סביבות שורה 44–45)</div>
+            <div class="diff-row diff-del">    @Fields.number({ caption: 'הנחה', displayValue: (r, c) =&gt; c + ' ₪' })</div>
+            <div class="diff-row diff-del">    discount = 0;</div>
+            <div class="diff-row diff-add">    @Fields.number({</div>
+            <div class="diff-row diff-add">        caption: 'הנחה',</div>
+            <div class="diff-row diff-add">        displayValue: (r, c) =&gt; c + (r.discountType?.suffix ?? '')</div>
+            <div class="diff-row diff-add">    })</div>
+            <div class="diff-row diff-add">    discount = 0;</div>
+            <div class="diff-row diff-add"></div>
+            <div class="diff-row diff-add">    @Field(() =&gt; DiscountType, { caption: 'סוג הנחה' })</div>
+            <div class="diff-row diff-add">    discountType: DiscountType = DiscountType.none;</div>
+          </div>
+
+          <div class="alert info">
+            <span class="icon">ℹ️</span>
+            <div><strong>אין מחיקה</strong> של שדות קיימים. רק עריכת ה־decorator של <code>discount</code> והוספת <code>discountType</code>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="num">3</span>
+          <h3>שדרוג דיאלוג payment-amount</h3>
+          <span class="file-tag">payment-amount.component.{ts,html,scss}</span>
+          <span class="badge badge-edit" style="margin-right:auto">עריכה ✏️</span>
+        </div>
+        <div class="step-body">
+          <p>הוספת מתג סוג הנחה + שני שדות (פעיל לפי הבחירה). default = <strong>fixed (₪)</strong>.</p>
+
+          <h3 style="margin-top:14px">📐 Mockup של הדיאלוג</h3>
+          <div class="mockup-wrap">
+            <div class="mock-dialog">
+              <h2 class="title">עריכת סכום תשלום</h2>
+              <div class="mock-body">
+                <div class="mock-row">
+                  <label>סכום מקורי:</label>
+                  <span class="val">350 ₪</span>
+                </div>
+
+                <label style="font-size:0.88rem;color:var(--text-soft)">סוג הנחה:</label>
+                <div class="mock-toggle">
+                  <button class="active">בש"ח (₪)</button>
+                  <button>באחוז (%)</button>
+                </div>
+
+                <div class="mock-row">
+                  <label>הנחה:</label>
+                  <input class="mock-input" value="50" type="number" />
+                  <span class="val">₪</span>
+                </div>
+                <div class="mock-row" style="opacity:0.6">
+                  <label>אחוז:</label>
+                  <input class="mock-input disabled" disabled value="0" type="number" />
+                  <span class="val">%</span>
+                </div>
+
+                <div class="mock-final">
+                  סכום לתשלום: <span class="v">300 ₪</span>
+                </div>
+              </div>
+              <div class="mock-buttons">
+                <button class="btn btn-flat">סגור</button>
+                <button class="btn btn-primary">שמור</button>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin-top:18px">🧮 הלוגיקה</h3>
+          <table>
+            <thead><tr><th>סוג</th><th>חישוב <code>amount</code></th><th>גבולות</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><code>fixed</code> (default)</td>
+                <td class="code-cell">amount = original − discount</td>
+                <td>0 ≤ discount ≤ original</td>
+              </tr>
+              <tr>
+                <td><code>percent</code></td>
+                <td class="code-cell">amount = original − (original × discount / 100)</td>
+                <td>0 ≤ discount ≤ 100</td>
+              </tr>
+              <tr>
+                <td><code>none</code></td>
+                <td class="code-cell">amount = original</td>
+                <td>discount = 0</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="alert info">
+            <span class="icon">🔁</span>
+            <div><strong>מעבר בין סוגים:</strong> כשהמשתמש מחליף סוג — מאפסים את <code>discount</code> ל־0 (כדי לא לבלבל ערכים בין % ל־₪).</div>
+          </div>
+
+          <h3 style="margin-top:18px">📤 Response החדש</h3>
+          <pre>response = {
+  changed: <span class="t">boolean</span>,
+  amount: <span class="t">number</span>,        <span class="c">// הסכום הסופי לתשלום</span>
+  discount: <span class="t">number</span>,      <span class="c">// הערך שהמשתמש הקליד (% או ₪)</span>
+  discountType: <span class="t">DiscountType</span> <span class="c">// 🆕 חדש</span>
+}</pre>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="num">4</span>
+          <h3>עדכון payment-details — הוספת שורת הנחה ל־rows</h3>
+          <span class="file-tag">payment-details.component.ts</span>
+          <span class="badge badge-fix" style="margin-right:auto">תיקון 🐛</span>
+        </div>
+        <div class="step-body">
+          <p>אחרי <code>response.changed</code> ב־<code>showLines()</code> (שורה 274) — להפעיל helper שמעדכן את <code>payment.rows</code> לפני השמירה.</p>
+
+          <div class="diff">
+            <div class="diff-header">payment-details.component.ts (סביבות שורה 274–278)</div>
+            <div class="diff-row diff-ctx">  if (response.changed) {</div>
+            <div class="diff-row diff-add">    this.payment.discountType = response.discountType</div>
+            <div class="diff-row diff-add">    this.payment.discount = response.discount</div>
+            <div class="diff-row diff-add">    this.applyDiscountRow()    <span style="color:#86efac">// 🆕 helper חדש</span></div>
+            <div class="diff-row diff-ctx">    this.payment.amount = response.amount</div>
+            <div class="diff-row diff-del">    this.payment.discount = response.discount</div>
+            <div class="diff-row diff-ctx">    await remult.repo(Payment).save(this.payment)</div>
+            <div class="diff-row diff-ctx">    this.cdr.detectChanges()</div>
+            <div class="diff-row diff-ctx">  }</div>
+          </div>
+
+          <h3 style="margin-top:14px">🧩 ה־helper המוצע</h3>
+          <pre><span class="k">private</span> applyDiscountRow() {
+  <span class="c">// 1) הסר שורת הנחה קודמת אם קיימת</span>
+  <span class="k">const</span> lines = (<span class="k">this</span>.payment.rows || <span class="s">''</span>).split(<span class="s">'\n'</span>)
+                  .filter(l =&gt; !l.trim().startsWith(<span class="s">'הנחה'</span>))
+
+  <span class="c">// 2) הוסף שורה חדשה לפי discountType</span>
+  <span class="k">if</span> (<span class="k">this</span>.payment.discountType === <span class="t">DiscountType</span>.percent &amp;&amp; <span class="k">this</span>.payment.discount &gt; 0) {
+    <span class="k">const</span> sumOriginal = lines.reduce((s, l) =&gt; s + parseFloat(l.split(<span class="s">':'</span>)[1] || <span class="s">'0'</span>), 0)
+    <span class="k">const</span> discountValue = <span class="k">this</span>.payment.discount
+    <span class="k">const</span> discountAmount = +(sumOriginal * discountValue / 100).toFixed(2)
+    lines.push(<span class="s">`הנחה (${discountValue}%): -${discountAmount}`</span>)
+  }
+  <span class="k">else if</span> (<span class="k">this</span>.payment.discountType === <span class="t">DiscountType</span>.fixed &amp;&amp; <span class="k">this</span>.payment.discount &gt; 0) {
+    lines.push(<span class="s">`הנחה: -${<span class="k">this</span>.payment.discount}`</span>)
+  }
+
+  <span class="k">this</span>.payment.rows = lines.join(<span class="s">'\n'</span>)
+}</pre>
+
+          <h3 style="margin-top:14px">📝 פורמט שורות לדוגמה</h3>
+          <table>
+            <thead><tr><th>תרחיש</th><th>rows אחרי</th><th>amount</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>בלי הנחה</td>
+                <td class="code-cell">שרון רחוק: 200<br>גוש דן: 30</td>
+                <td><code>230</code></td>
+              </tr>
+              <tr>
+                <td>הנחה 50 ₪</td>
+                <td class="code-cell">שרון רחוק: 200<br>גוש דן: 30<br>הנחה: -50</td>
+                <td><code>180</code></td>
+              </tr>
+              <tr>
+                <td>הנחה 15%</td>
+                <td class="code-cell">שרון רחוק: 200<br>גוש דן: 30<br>הנחה (15%): -34.5</td>
+                <td><code>195.5</code></td>
+              </tr>
+              <tr>
+                <td>שינוי הנחה (15% → 20%)</td>
+                <td class="code-cell">שרון רחוק: 200<br>גוש דן: 30<br>הנחה (20%): -46</td>
+                <td><code>184</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="alert ok">
+            <span class="icon">✅</span>
+            <div><strong>תוצאה:</strong> תמיד <code>sum(rows.values) === payment.amount</code> → <code>greenInvoice</code> מקבל חשבונית עקבית.</div>
+          </div>
+
+          <h3 style="margin-top:14px">🔧 תיקון נלווה — ה־alert בשורה 285</h3>
+          <p>היום מציג <code>%</code> קשיח. נחליף לתצוגה לפי <code>discountType</code>:</p>
+          <div class="diff">
+            <div class="diff-row diff-del">alert(this.payment.rows + (this.payment.discount &gt; 0 ? `\n*(הנחה: ${this.payment.discount}%)` : ''));</div>
+            <div class="diff-row diff-add">alert(this.payment.rows);  <span style="color:#86efac">// השורה כבר בתוך rows, אין צורך לכפול</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="num">5</span>
+          <h3>אימות באמצעות npm run build</h3>
+          <span class="file-tag">terminal</span>
+          <span class="badge badge-edit" style="margin-right:auto">בנייה 🛠️</span>
+        </div>
+        <div class="step-body">
+          <p>הרצה של <code>npm run build</code> בלבד (ללא <code>dev</code>) לוודא שהכל קומפיל. אם יש שגיאות — תיקון מיידי.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Risks -->
+  <section>
+    <h2>⚠️ נקודות סיכון / שלא נשכח</h2>
+
+    <div class="alert warn">
+      <span class="icon">📊</span>
+      <div>
+        <strong>הנחה באחוז — על מה היא מחושבת?</strong> הצעתי לחשב על סכום ה־rows המקוריות (לפני הנחה). זה יוצא יותר נכון משימוש ב־<code>originalAmount</code> שיכול להכיל הנחות ישנות אם נערך כבר. אם תעדיף חישוב על <code>originalAmount</code> — תאמר.
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="icon">🔄</span>
+      <div>
+        <strong>תיקון מקרה קיים:</strong> הזמנות שכבר נשמרו עם <code>discount &gt; 0</code> אבל בלי <code>discountType</code> ובלי שורת הנחה ב־rows — אין מיגרציה אוטומטית. נשארות לא מסונכרנות עד עריכה ידנית. <strong>לאשר שזה בסדר.</strong>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="icon">🔍</span>
+      <div>
+        <strong>זיהוי שורת הנחה</strong> נעשה בעזרת <code>startsWith('הנחה')</code>. לוודא שאין שורות אחרות בקלקולטור שמתחילות במילה "הנחה" (לא ראיתי כאלה ב־<code>orderPaymentCalculator</code>).
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="icon">🏷️</span>
+      <div>
+        <strong>שדה <code>suffix</code> ב־DiscountType:</strong> משמש את <code>displayValue</code> של <code>Payment.discount</code> כדי להציג <code>'10%'</code> או <code>'50 ₪'</code> או <code>'0'</code> לפי הסוג. בלי לקרוא לפונקציה נוספת.
+      </div>
+    </div>
+  </section>
+
+  <!-- Files summary -->
+  <section>
+    <h2>📦 סיכום קבצים</h2>
+    <table>
+      <thead><tr><th>קובץ</th><th>פעולה</th><th>שלב</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="file-pill">src/shared/enums/discountType.ts</span></td>
+          <td><span class="badge badge-new">חדש</span></td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td><span class="file-pill">src/app/entity/payment.ts</span></td>
+          <td><span class="badge badge-edit">עריכה</span></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td><span class="file-pill">src/app/route/payment/payment-amount/payment-amount.component.ts</span></td>
+          <td><span class="badge badge-edit">עריכה</span></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><span class="file-pill">src/app/route/payment/payment-amount/payment-amount.component.html</span></td>
+          <td><span class="badge badge-edit">עריכה</span></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><span class="file-pill">src/app/route/payment/payment-amount/payment-amount.component.scss</span></td>
+          <td><span class="badge badge-edit">עריכה (קל)</span></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><span class="file-pill">src/app/route/payment/payment-details/payment-details.component.ts</span></td>
+          <td><span class="badge badge-fix">תיקון + הוספת helper</span></td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert ok" style="margin-top:14px">
+      <span class="icon">✅</span>
+      <div>
+        <strong>0 מחיקות שדות</strong> · <strong>0 קומפוננטות חדשות</strong> · <strong>1 קובץ enum חדש בלבד</strong>.
+        כל השאר עריכות ממוקדות. מודולרי, מינימלי, ללא commit.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="sig">BizTechoff™ · התאמת העסק לעידן הדיגיטלי</p>
+    <p>תכנון בלבד · 0 קוד עד אישורך · 0 commit עד הוראתך</p>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שלוח · ארכיטקטורת הפלטפורמה — מסמך אב</title>
+<style>
+  :root{
+    --blue:#0b2a6b; --blue-2:#13399a; --blue-soft:#1e50c8;
+    --gold:#c79a3a; --gold-soft:#e6c66e;
+    --ink:#16213e; --muted:#5b6478; --line:#e3e7f0;
+    --bg:#f6f8fc; --card:#ffffff; --ok:#1f9d6b; --warn:#c2682a;
+    --shadow:0 10px 30px rgba(11,42,107,.08);
+    --radius:16px; --mono:'SFMono-Regular',Consolas,'Courier New',monospace;
+    --sans:'Segoe UI','Assistant','Heebo',system-ui,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* Cover */
+  .cover{background:
+      radial-gradient(1200px 500px at 80% -10%,rgba(199,154,58,.22),transparent 60%),
+      linear-gradient(135deg,var(--blue) 0%,var(--blue-2) 55%,var(--blue-soft) 100%);
+    color:#fff;padding:64px 0 56px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 14px,transparent 14px 28px);}
+  .cover .wrap{position:relative;z-index:1}
+  .eyebrow{display:inline-block;letter-spacing:.18em;font-size:13px;color:var(--gold-soft);
+    border:1px solid rgba(230,198,110,.5);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  .cover h1{font-size:46px;line-height:1.15;margin:0 0 12px;font-weight:800}
+  .cover h1 .gold{color:var(--gold-soft)}
+  .cover p.lead{font-size:19px;max-width:680px;color:#dfe6f7;margin:0 0 8px}
+  .cover .meta{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;font-size:14px;color:#cdd7f2}
+  .cover .meta b{color:#fff}
+
+  /* Sections */
+  section{padding:46px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:28px;margin:0 0 6px;color:var(--blue)}
+  h2 .num{display:inline-block;min-width:38px;height:38px;line-height:38px;text-align:center;
+    background:var(--blue);color:#fff;border-radius:10px;font-size:16px;margin-left:12px;vertical-align:2px}
+  h3{font-size:20px;color:var(--blue-2);margin:26px 0 8px}
+  h4{font-size:16px;color:var(--ink);margin:18px 0 6px}
+  .sub{color:var(--muted);font-size:16px;margin:0 0 18px}
+  p{margin:0 0 14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;box-shadow:var(--shadow);margin:16px 0}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:880px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+  .pill{display:inline-block;font-size:12.5px;padding:3px 11px;border-radius:999px;
+    background:#eef2fb;color:var(--blue-2);border:1px solid #dde5f6;margin:0 0 0 6px}
+  .pill.gold{background:#fbf3df;color:#8a6a1e;border-color:#eeddb4}
+  .pill.ok{background:#e7f6ef;color:#157a52;border-color:#c7ead9}
+
+  /* Layer diagram */
+  .layers{display:flex;flex-direction:column;gap:12px;margin:8px 0}
+  .layer{border-radius:14px;padding:16px 18px;color:#fff;position:relative;box-shadow:var(--shadow)}
+  .layer .lt{font-weight:700;font-size:17px;margin-bottom:4px}
+  .layer .ld{font-size:13.5px;opacity:.92}
+  .layer.fe{background:linear-gradient(120deg,#13399a,#1e50c8)}
+  .layer.mid{background:linear-gradient(120deg,#0b2a6b,#13399a)}
+  .layer.be{background:linear-gradient(120deg,#10245a,#1c3f8f)}
+  .layer.sh{background:linear-gradient(120deg,#5b4a17,#a07d23)}
+  .layer.int{background:linear-gradient(120deg,#2a2f45,#445072)}
+  .arrowcol{display:flex;justify-content:center;color:var(--muted);font-size:22px;margin:-4px 0}
+
+  /* Flow */
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:6px 0}
+  .flow .node{flex:1;min-width:120px;background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:12px;text-align:center;box-shadow:var(--shadow)}
+  .flow .node b{display:block;color:var(--blue);font-size:14.5px}
+  .flow .node span{font-size:12px;color:var(--muted)}
+  .flow .sep{display:flex;align-items:center;color:var(--gold);font-weight:700;font-size:22px;padding:0 8px}
+  @media(max-width:880px){.flow .sep{transform:rotate(90deg)}}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:14px;background:#fff;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f0f4fc;color:var(--blue);font-weight:700;font-size:13px}
+  tr:last-child td{border-bottom:none}
+  td code,.ic{font-family:var(--mono);font-size:12.5px;background:#f3f5fb;padding:1px 6px;border-radius:6px;color:var(--blue-2)}
+  .fk{color:var(--gold);font-weight:700}
+
+  /* Tree / code block */
+  pre{background:#0e1b3d;color:#dbe4fb;border-radius:14px;padding:18px 20px;overflow:auto;
+    font-family:var(--mono);font-size:13px;line-height:1.6;direction:ltr;text-align:left;box-shadow:var(--shadow)}
+  pre .c{color:#8aa0d8}
+  pre .k{color:var(--gold-soft)}
+
+  /* Domain header strip */
+  .dom{display:flex;align-items:center;gap:12px;margin:34px 0 4px}
+  .dom .ix{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:22px;
+    background:var(--blue);color:#fff;box-shadow:var(--shadow)}
+  .dom h3{margin:0;font-size:22px;color:var(--blue)}
+  .dom small{color:var(--muted);font-family:var(--mono);font-size:12px}
+
+  ul.clean{margin:6px 0 14px;padding-inline-start:20px}
+  ul.clean li{margin:4px 0}
+  .note{background:#fbf7ea;border:1px solid #eeddb4;border-radius:12px;padding:12px 16px;color:#6f5613;font-size:14px}
+  .note b{color:#8a6a1e}
+
+  /* Roadmap */
+  .road{position:relative;margin:10px 0;padding-inline-start:6px}
+  .phase{display:flex;gap:14px;margin:0 0 14px}
+  .phase .dot{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--gold);
+    color:#fff;display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow)}
+  .phase .body{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;flex:1;box-shadow:var(--shadow)}
+  .phase .body b{color:var(--blue)}
+
+  footer{padding:34px 0;color:var(--muted);font-size:13px;text-align:center}
+  footer b{color:var(--blue)}
+  .toc{columns:2;column-gap:30px}
+  @media(max-width:880px){.toc{columns:1}}
+  .toc a{display:block;color:var(--blue-2);text-decoration:none;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .toc a:hover{color:var(--gold)}
+  .toc a b{color:var(--muted);font-family:var(--mono);font-size:12px;margin-left:8px}
+
+  /* בס"ד — always top-right corner */
+  .bsd-mark{position:fixed;top:7px;right:14px;z-index:9999;
+    font-family:'Times New Roman','David',serif;font-size:13px;font-weight:700;
+    color:var(--blue);background:rgba(255,255,255,.94);border:1px solid var(--gold-soft);
+    border-radius:999px;padding:2px 11px;box-shadow:0 3px 10px rgba(11,42,107,.18);
+    letter-spacing:.02em;pointer-events:none;user-select:none}
+</style>
+</head>
+<body>
+
+<div class="bsd-mark" aria-hidden="true">בס״ד</div>
+
+<div class="cover">
+  <div class="wrap">
+    <span class="eyebrow">בס״ד · מסמך אב · ARCHITECTURE BLUEPRINT</span>
+    <h1>שלוח<span class="gold"> · </span>הפלטפורמה של<br>השליח, <span class="gold">365 ימים בשנה</span></h1>
+    <p class="lead">מסמך תכנון מלמעלה־למטה: מהחזון, דרך שכבות המערכת ומבנה הקוד, ועד רמת השדה והלוגיקה העסקית של כל דומיין.</p>
+    <div class="meta">
+      <span><b>סטאק:</b> Angular 21.2 · Remult 3.3 · Node.js</span>
+      <span><b>ארכיטקטורה:</b> Domain‑Pattern · מודולריות מלאה</span>
+      <span><b>היקף:</b> 8 דומיינים · 4 ממשקים</span>
+      <span><b>גרסה:</b> טיוטה 0.1 · ב׳ סיון</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <h2><span class="num">0</span>תוכן ומפת הקריאה</h2>
+  <p class="sub">המסמך בנוי בקידוח הדרגתי — כל פרק ממקד את הקודם.</p>
+  <div class="card toc">
+    <a href="#vision"><b>1</b> החזון — מה אנחנו בונים ולמי</a>
+    <a href="#layers"><b>2</b> ארכיטקטורת שכבות</a>
+    <a href="#folders"><b>3</b> מבנה התיקיות בקוד</a>
+    <a href="#flow"><b>4</b> זרימת הנתונים</a>
+    <a href="#map"><b>5</b> מפת הדומיינים (תפריט הצד)</a>
+    <a href="#drill"><b>6</b> קידוח לעומק — דומיין אחר דומיין</a>
+    <a href="#cross"><b>7</b> שכבות רוחב — זהות, רב‑דיירות, i18n</a>
+    <a href="#integrations"><b>8</b> ממשקים חיצוניים</a>
+    <a href="#ai"><b>9</b> שכבת AI — בינה לאורך הפלטפורמה</a>
+    <a href="#road"><b>10</b> מפת דרכים לשלבים</a>
+  </div>
+</section>
+
+<section id="vision">
+  <h2><span class="num">1</span>החזון</h2>
+  <p class="sub">מערכת הפעלה אחת לכל חיי בית חב״ד — כל הקהילה במקום אחד.</p>
+  <div class="card">
+    <p>שליח חב״ד מנהל קהילה שלמה בעצמו: אנשים, אירועים, תרומות, לוח עברי, מבצעים, דיוור ומסמכים — לרוב בעשרה כלים שונים שלא מדברים זה עם זה. <b>שלוח</b> מאחד את הכול לפלטפורמה אחת מודולרית, בעברית כברירת מחדל ובאנגלית, שמכירה את הלוח העברי ואת זמני היום לפי מיקום בית חב״ד.</p>
+    <div class="grid g3" style="margin-top:6px">
+      <div><span class="pill gold">עיקרון 1</span><h4>מקום אחד לכל נושא</h4><p style="font-size:14px;color:var(--muted)">מודולריות מוחלטת — כל דומיין עומד בפני עצמו, נקי ומופרד.</p></div>
+      <div><span class="pill gold">עיקרון 2</span><h4>יהודי מלידה</h4><p style="font-size:14px;color:var(--muted)">תאריך עברי, זמנים, יארצייטים ומבצעים הם אזרחים סוג א׳ במערכת.</p></div>
+      <div><span class="pill gold">עיקרון 3</span><h4>365 ימים</h4><p style="font-size:14px;color:var(--muted)">לא אירוע חד‑פעמי — מחזור חיים שלם של קהילה לאורך כל השנה.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="layers">
+  <h2><span class="num">2</span>ארכיטקטורת שכבות</h2>
+  <p class="sub">חמש שכבות, אחריות אחת לכל שכבה. הנתון זורם מלמעלה למטה וחזרה — והכול דרך Remult.</p>
+  <div class="layers">
+    <div class="layer fe"><div class="lt">① Frontend · Angular</div><div class="ld">קומפוננטות לפי Domain‑Pattern: list · details · selection · selection‑field. ללא standalone. תרגום i18n.</div></div>
+    <div class="arrowcol">↕</div>
+    <div class="layer mid"><div class="lt">② Middle · Remult</div><div class="ld">שכבת הישויות והבקרים המשותפת. בלקוח שמירה דרך <code style="color:#fff">remult.repo().save()</code>, בשרת <code style="color:#fff">record.save()</code>.</div></div>
+    <div class="arrowcol">↕</div>
+    <div class="layer be"><div class="lt">③ Backend · Node.js</div><div class="ld"><code style="color:#fff">server/</code>: index · server · jwt · remult‑api · json‑body. אכיפת הרשאות וחיבור ל‑DB.</div></div>
+    <div class="arrowcol">↕</div>
+    <div class="layer sh"><div class="lt">④ Shared · חוזה הנתונים</div><div class="ld">מקובץ לפי דומיין (כמו app/): entity (IdEntity) · enum (@ValueListFieldType) · request/response types · controller (@BackendMethod).</div></div>
+    <div class="arrowcol">↕</div>
+    <div class="layer int"><div class="lt">⑤ Integrations · ממשקים</div><div class="ld">s3 · geo · heb‑cal · email · <b>ai</b> — מחוברים דרך תבנית Delegate, מנותקים מהלוגיקה העסקית.</div></div>
+  </div>
+</section>
+
+<section id="folders">
+  <h2><span class="num">3</span>מבנה התיקיות בקוד</h2>
+  <p class="sub">תבנית דומיין עקבית — אותה צורה חוזרת בכל מודול, כך שכל חדש מתמצא מיד.</p>
+<pre><span class="c">src/</span>
+├─ <span class="k">app/</span>
+│  ├─ common/                         <span class="c"># רכיבים גנריים משותפים</span>
+│  ├─ route/                          <span class="c"># app-routing</span>
+│  ├─ service/                        <span class="c"># שירותי רוחב</span>
+│  └─ <span class="k">[side-bar-item]/</span>             <span class="c"># דומיין = פריט בתפריט הצד</span>
+│     ├─ [item]-list.component
+│     ├─ [item]-details.component
+│     ├─ [item]-selection.component
+│     ├─ [item]-selection-field.component
+│     └─ [item].service.ts            <span class="c"># component → service → controller</span>
+├─ <span class="k">assets/</span>
+│  └─ i18n/  he.json · en.json        <span class="c"># עברית ברירת מחדל + אנגלית</span>
+├─ <span class="k">server/</span>
+│  ├─ index.ts · server.ts
+│  ├─ jwt.ts · remult-api.ts · json-body.ts
+│  └─ s3.ts · geo.ts · email.ts · heb-cal.ts · ai.ts   <span class="c"># ממשקים</span>
+└─ <span class="k">shared/</span>
+   └─ <span class="k">[side-bar-item]/</span>                <span class="c"># דומיין — אותה חלוקה כמו app/</span>
+      ├─ [item].entity.ts             <span class="c"># extends IdEntity</span>
+      ├─ [item].enum.ts               <span class="c"># @ValueListFieldType</span>
+      ├─ [item].request.type.ts       <span class="c"># interface · בקשה</span>
+      ├─ [item].response.type.ts      <span class="c"># interface · תשובה</span>
+      └─ [item].controller.ts         <span class="c"># ControllerBase · @BackendMethod</span></pre>
+  <div class="note"><b>קונבנציית FK:</b> שדה מחרוזת <code class="ic">eventTypeId</code> לצד יחס <code class="ic">@Relations.toOne(() =&gt; EventType)</code> בשם <code class="ic">eventType</code> — מזהה לשמירה, יחס לתצוגה.</div>
+</section>
+
+<section id="flow">
+  <h2><span class="num">4</span>זרימת הנתונים</h2>
+  <p class="sub">מהלקוח עד השרת וחזרה — נתיב יחיד וצפוי. כשבקר נדרש לממשק חיצוני, הוא קורא לו דרך Delegate.</p>
+  <div class="flow">
+    <div class="node"><b>Component</b><span>Angular · UI</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>Service</b><span>rxjs</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>Controller</b><span>@BackendMethod</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>Integration</b><span>via Delegate</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>Server</b><span>Remult · DB</span></div>
+  </div>
+  <h4>תבנית ה‑Delegate</h4>
+<pre><span class="c">// בבקר — מגדיר חוזה, לא יודע מי מממש:</span>
+static [item][Method]Delegate: (req: [item][Method]Request) =&gt; Promise&lt;[item][Method]Response&gt;
+
+<span class="c">// בקובץ הממשק בשרת — רושם את המימוש:</span>
+[item]Controller.[item][Method]Delegate = async (req) =&gt; await [item][Method](req)
+console.info('[item][Method]Delegate successfully registered.')</pre>
+</section>
+
+<section id="map">
+  <h2><span class="num">5</span>מפת הדומיינים</h2>
+  <p class="sub">שמונה פריטים בתפריט הצד — שמונה דומיינים מודולריים. זהו ה"מה שמתוכנן להיפתח".</p>
+  <div class="grid g4">
+    <div class="card" style="margin:0"><div style="font-size:26px">📊</div><h4 style="margin:6px 0 2px">לוח בקרה</h4><small style="color:var(--muted)">Dashboard</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">👥</div><h4 style="margin:6px 0 2px">קהילה / אנ״ש</h4><small style="color:var(--muted)">Community · CRM</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">📅</div><h4 style="margin:6px 0 2px">אירועים ורישום</h4><small style="color:var(--muted)">Events</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">💝</div><h4 style="margin:6px 0 2px">תרומות ומגביות</h4><small style="color:var(--muted)">Donations</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">🕯️</div><h4 style="margin:6px 0 2px">לוח עברי וזמנים</h4><small style="color:var(--muted)">Calendar · Zmanim</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">🧎</div><h4 style="margin:6px 0 2px">מבצעים</h4><small style="color:var(--muted)">Mivtzoim</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">✉️</div><h4 style="margin:6px 0 2px">דיוור</h4><small style="color:var(--muted)">Communications</small></div>
+    <div class="card" style="margin:0"><div style="font-size:26px">📁</div><h4 style="margin:6px 0 2px">מסמכים ומדיה</h4><small style="color:var(--muted)">Documents</small></div>
+  </div>
+</section>
+
+<section id="drill">
+  <h2><span class="num">6</span>קידוח לעומק — דומיין אחר דומיין</h2>
+  <p class="sub">לכל דומיין: הישויות, השדות המרכזיים (כולל מפתחות זרים), והלוגיקה העסקית.</p>
+
+  <!-- DASHBOARD -->
+  <div class="dom"><div class="ix">📊</div><div><h3>לוח בקרה</h3><small>app/dashboard · קריאה בלבד · מצרף נתונים מכל הדומיינים</small></div></div>
+  <div class="card">
+    <p>תצוגת על שמושכת מדדים חיים מכל המודולים: כמות אנשי קהילה, אירועים קרובים, תרומות החודש, התקדמות קמפיינים, זמני היום של היום, יארצייטים בשבוע הקרוב ומבצעים פתוחים. ללא ישות משלו — קומפוננטה מצרפת בלבד.</p>
+    <span class="pill ok">לוגיקה:</span> ווידג׳טים מבוססי <code class="ic">@BackendMethod</code> מצרפים, מסוננים לפי המוסד והרשאות המשתמש.
+  </div>
+
+  <!-- COMMUNITY -->
+  <div class="dom"><div class="ix">👥</div><div><h3>קהילה / אנ״ש · CRM</h3><small>app/community · entities: Contact · Family · Tag</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>Contact</b><br>איש קשר</td>
+        <td><code>firstName</code> · <code>lastName</code> · <code>hebrewName</code> (שם קודש) · <code>gender</code><span class="pill">enum</span> · <code>phone</code> · <code>email</code> · <code>address</code> · <code>city</code> · <code>country</code> · <code>geo</code>{lat,lng} · <code>status</code><span class="pill">enum</span> · <code>language</code><span class="pill">enum</span> · <code>birthday</code> · <code>hebrewBirthday</code> · <code>anniversary</code> · <code>tags</code> · <code>notes</code></td>
+        <td class="fk">familyId →&nbsp;Family</td></tr>
+      <tr><td><b>Family</b><br>משפחה / משק בית</td><td><code>name</code> · <code>address</code> · <code>geo</code> · <code>headContactId</code></td><td class="fk">headContactId →&nbsp;Contact</td></tr>
+      <tr><td><b>Tag</b><br>תיוג</td><td><code>name</code> · <code>color</code></td><td>—</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>מניעת כפילויות לפי טלפון/אימייל בשמירה.</li>
+      <li>גאו‑קידוד כתובת אוטומטי דרך <code class="ic">geo.ts</code> בעת שמירה.</li>
+      <li>סגמנטציה לפי סטטוס/תיוג — ההזנה לדיוור ולמגביות.</li>
+      <li>גלגול נתונים ברמת המשפחה (household roll‑up).</li>
+    </ul>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="dom"><div class="ix">📅</div><div><h3>אירועים ורישום</h3><small>app/events · entities: Event · EventType · Registration</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>EventType</b><br>סוג אירוע</td><td><code>name</code> · <code>kind</code><span class="pill">enum: סעודת שבת · שיעור · חג · התוועדות · אירוע חיים</span> · <code>color</code> · <code>defaultCapacity</code></td><td>—</td></tr>
+      <tr><td><b>Event</b><br>אירוע</td><td><code>title</code> · <code>startDate</code> · <code>startHebrewDate</code> · <code>location</code> · <code>capacity</code> · <code>isRecurring</code> · <code>recurrenceRule</code> · <code>registrationOpen</code></td><td class="fk">eventTypeId →&nbsp;EventType</td></tr>
+      <tr><td><b>Registration</b><br>רישום / נוכחות</td><td><code>adults</code> · <code>children</code> · <code>status</code><span class="pill">enum: נרשם · הגיע · בוטל · המתנה</span> · <code>checkInAt</code></td><td class="fk">eventId →&nbsp;Event<br>contactId →&nbsp;Contact</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>קיבולת ורשימת המתנה אוטומטית בעת מילוי.</li>
+      <li>תאריך עברי נגזר אוטומטית מ‑<code class="ic">heb-cal.ts</code>.</li>
+      <li>פריסת אירועים חוזרים לפי <code class="ic">recurrenceRule</code>.</li>
+      <li>צ׳ק‑אין נוכחות ותזכורות דרך <code class="ic">email.ts</code>.</li>
+    </ul>
+  </div>
+
+  <!-- DONATIONS -->
+  <div class="dom"><div class="ix">💝</div><div><h3>תרומות ומגביות</h3><small>app/donations · entities: Donation · Campaign · Pledge</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>Campaign</b><br>קמפיין</td><td><code>name</code> · <code>goalAmount</code> · <code>currency</code><span class="pill">enum</span> · <code>startDate</code> · <code>endDate</code> · <code>status</code><span class="pill">enum</span></td><td>—</td></tr>
+      <tr><td><b>Pledge</b><br>התחייבות</td><td><code>amount</code> · <code>currency</code> · <code>dueDate</code> · <code>status</code><span class="pill">enum: פתוח · מולא · באיחור</span></td><td class="fk">contactId →&nbsp;Contact<br>campaignId →&nbsp;Campaign</td></tr>
+      <tr><td><b>Donation</b><br>תרומה</td><td><code>amount</code> · <code>currency</code> · <code>method</code><span class="pill">enum: מזומן · אשראי · העברה · שיק</span> · <code>date</code> · <code>receiptNumber</code> · <code>receiptSent</code></td><td class="fk">contactId →&nbsp;Contact<br>campaignId →&nbsp;Campaign<br>pledgeId →&nbsp;Pledge</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>מספור קבלות אוטומטי + שליחת קבלה ב‑<code class="ic">email.ts</code>.</li>
+      <li>גלגול התקדמות קמפיין מול היעד.</li>
+      <li>מעקב מילוי התחייבויות (pledge → donation).</li>
+      <li>תרומות חוזרות ותמיכה רב‑מטבעית.</li>
+    </ul>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="dom"><div class="ix">🕯️</div><div><h3>לוח עברי וזמנים</h3><small>app/calendar · entities: Yahrzeit · (HebrewDay — נגזר/מטמון)</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>Yahrzeit</b><br>יארצייט</td><td><code>deceasedName</code> · <code>hebrewDate</code> · <code>gregorianAnchor</code> · <code>relation</code> · <code>notifyDaysBefore</code></td><td class="fk">contactId →&nbsp;Contact</td></tr>
+      <tr><td><b>HebrewDay</b><br>(שירות, מטמון)</td><td><code>parsha</code> · <code>holiday</code> · <code>candleLighting</code> · <code>havdalah</code> · <code>zmanim</code>{...}</td><td>נגזר מ‑geo</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li><code class="ic">heb-cal.ts</code> מחשב זמני יום לפי <code class="ic">geo</code> של המוסד — הדלקת נרות, פרשה, חגים.</li>
+      <li>חזרת יארצייט שנתית בלוח העברי + תזכורות.</li>
+      <li>שירות המרה עברי↔לועזי המשמש את כל הפלטפורמה.</li>
+    </ul>
+  </div>
+
+  <!-- MIVTZOIM -->
+  <div class="dom"><div class="ix">🧎</div><div><h3>מבצעים</h3><small>app/mivtzoim · entities: Mivtza · MivtzaRecord</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>Mivtza</b><br>מבצע</td><td><code>type</code><span class="pill">enum: תפילין · מזוזה · נרות שבת · צדקה · אותיות בס״ת · כשרות · טהרה</span> · <code>name</code> · <code>goal</code></td><td>—</td></tr>
+      <tr><td><b>MivtzaRecord</b><br>רישום ביצוע</td><td><code>date</code> · <code>location</code>{geo} · <code>completed</code> · <code>notes</code></td><td class="fk">mivtzaId →&nbsp;Mivtza<br>contactId →&nbsp;Contact</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>מעקב מעורבות מצוות לכל איש קשר לאורך זמן.</li>
+      <li>מיפוי גאוגרפי של פעילות שטח.</li>
+      <li>יעדים, רצפים (streaks) ומשימות מעקב.</li>
+    </ul>
+  </div>
+
+  <!-- COMMS -->
+  <div class="dom"><div class="ix">✉️</div><div><h3>דיוור</h3><small>app/communications · entities: Mailing · MailingRecipient · Template</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>Template</b><br>תבנית</td><td><code>name</code> · <code>subject</code> · <code>body</code> · <code>language</code><span class="pill">enum</span></td><td>—</td></tr>
+      <tr><td><b>Mailing</b><br>דיוור</td><td><code>subject</code> · <code>body</code> · <code>segmentFilter</code> · <code>scheduledAt</code> · <code>status</code><span class="pill">enum: טיוטה · מתוזמן · נשלח</span> · <code>sentCount</code></td><td class="fk">templateId →&nbsp;Template</td></tr>
+      <tr><td><b>MailingRecipient</b><br>נמען</td><td><code>status</code> · <code>sentAt</code></td><td class="fk">mailingId →&nbsp;Mailing<br>contactId →&nbsp;Contact</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>בניית סגמנט מתוך ה‑CRM (סטטוס/תיוג/מיקום).</li>
+      <li>שליחה דרך <code class="ic">email.ts</code> + מעקב נשלחים.</li>
+      <li>קבלות תרומה זורמות גם דרך ערוץ זה.</li>
+    </ul>
+  </div>
+
+  <!-- DOCS -->
+  <div class="dom"><div class="ix">📁</div><div><h3>מסמכים ומדיה</h3><small>app/documents · entities: Document · MediaAsset</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>Document</b><br>מסמך</td><td><code>name</code> · <code>s3Key</code> · <code>mimeType</code> · <code>size</code> · <code>category</code><span class="pill">enum</span></td><td class="fk">contactId? · eventId?</td></tr>
+      <tr><td><b>MediaAsset</b><br>מדיה</td><td><code>s3Key</code> · <code>width</code> · <code>height</code> · <code>alt</code></td><td class="fk">ownerType · ownerId</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>העלאה/הורדה דרך <code class="ic">s3.ts</code> עם קישורים חתומים.</li>
+      <li>צירוף מסמכים לאנשי קשר/אירועים.</li>
+      <li>גלריית מדיה למוסד.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="cross">
+  <h2><span class="num">7</span>שכבות רוחב</h2>
+  <p class="sub">תשתיות החוצות את כל הדומיינים.</p>
+  <div class="grid g3">
+    <div class="card" style="margin:0">
+      <h4>🔐 זהות והרשאות · JWT</h4>
+      <p style="font-size:14px;color:var(--muted)">חשבונות שליח, תפקידים (שליח · עוזר · מנהל). <code class="ic">jwt.ts</code> אוכף גישה בכל בקר.</p>
+    </div>
+    <div class="card" style="margin:0">
+      <h4>🏢 מוסד · רב‑דיירות</h4>
+      <p style="font-size:14px;color:var(--muted)">ישות <b>Institution</b> — שם, כתובת, <code class="ic">geo</code> (מזין זמנים), לוגו (s3), מטבע ושפות. בידוד נתונים בין מוסדות.</p>
+    </div>
+    <div class="card" style="margin:0">
+      <h4>🌐 i18n · עברית/אנגלית</h4>
+      <p style="font-size:14px;color:var(--muted)"><code class="ic">assets/i18n</code> — עברית ברירת מחדל (RTL) + אנגלית (LTR). כל מחרוזת מתורגמת, החלפת כיוון מלאה.</p>
+    </div>
+  </div>
+</section>
+
+<section id="integrations">
+  <h2><span class="num">8</span>ממשקים חיצוניים</h2>
+  <p class="sub">ארבעה ממשקים בשרת, כולם דרך תבנית Delegate — מנותקים מהלוגיקה ומוחלפים בקלות.</p>
+  <table>
+    <tr><th>ממשק</th><th>קובץ</th><th>תפקיד</th><th>משרת את</th></tr>
+    <tr><td><b>Hebrew Calendar</b></td><td><code>heb-cal.ts</code></td><td>זמנים, פרשה, חגים, המרת תאריכים</td><td>לוח עברי · אירועים · יארצייטים</td></tr>
+    <tr><td><b>Geo</b></td><td><code>geo.ts</code></td><td>גאו‑קידוד כתובות, מיקום ומיפוי</td><td>קהילה · מבצעים · זמנים</td></tr>
+    <tr><td><b>Email</b></td><td><code>email.ts</code></td><td>שליחת מיילים, קבלות, תזכורות</td><td>דיוור · תרומות · אירועים</td></tr>
+    <tr><td><b>Storage</b></td><td><code>s3.ts</code></td><td>אחסון קבצים ומדיה, קישורים חתומים</td><td>מסמכים · מוסד (לוגו)</td></tr>
+    <tr><td><b>AI</b></td><td><code>ai.ts</code></td><td>שער אגנוסטי לספק — ניסוח, סיכום, תובנות</td><td>כל הדומיינים · קו‑פיילוט</td></tr>
+  </table>
+</section>
+
+<section id="ai">
+  <h2><span class="num">9</span>שכבת AI — בינה לאורך הפלטפורמה</h2>
+  <p class="sub">לא מודול בתפריט — יכולת אופקית שכל דומיין צורך, דרך שער ספק אגנוסטי. עם עיקרון‑על מקודש: אדם בלולאה.</p>
+
+  <div class="card" style="border-inline-start:5px solid var(--gold);background:#fbf7ea">
+    <h3 style="margin-top:0;color:#8a6a1e">🛡️ HUMAN IN THE FLOW — עיקרון‑על</h3>
+    <p style="margin-bottom:8px"><b>כל פעולה שה‑AI מציע דורשת אישור ידני מהשליח — תמיד.</b> ה‑AI מנסח, מציע ומסכם — אך לעולם לא שולח, מוחק או מבצע ללא לחיצת אישור. החריג היחיד: אם השליח <b>סימן והגדיר מראש</b> אוטונומיה לנושא ספציפי — ורק בו — ה‑AI ימשיך לבד, עם תיעוד מלא.</p>
+    <span class="pill gold">ברירת מחדל: אישור</span><span class="pill">אוטונומיה: opt‑in לכל נושא בנפרד</span><span class="pill">ניתן לביטול בכל רגע</span>
+  </div>
+
+  <h3>מחזור האישור</h3>
+  <div class="flow">
+    <div class="node"><b>AI</b><span>מציע / מנסח</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>השליח</b><span>בודק ועורך</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>אישור</b><span>ידני · ברירת מחדל</span></div>
+    <div class="sep">←</div>
+    <div class="node"><b>ביצוע</b><span>שליחה / שמירה</span></div>
+  </div>
+  <div class="note"><b>מסלול אוטונומי (opt‑in):</b> רק לנושא שהשליח סימן מראש — ה‑AI מדלג על שלב האישור לאותו נושא בלבד, תוך תיעוד כל פעולה ביומן.</div>
+
+  <h3>שלוש רמות</h3>
+  <div class="grid g3">
+    <div class="card" style="margin:0"><h4>① שער · server/ai.ts</h4><p style="font-size:14px;color:var(--muted)">ממשק אחד אגנוסטי לספק (דרך Delegate). מחליפים ספק/מודל בלי לגעת בלוגיקה.</p></div>
+    <div class="card" style="margin:0"><h4>② הגדרה · shared/ai/</h4><p style="font-size:14px;color:var(--muted)">ישות AiProfile — ספק, מודל, טמפרטורה ופרסונה כ<b>נתון</b>. פרופיל לכל סוג משימה.</p></div>
+    <div class="card" style="margin:0"><h4>③ שזירה · בכל דומיין</h4><p style="font-size:14px;color:var(--muted)">כל דומיין חושף מתודת controller שבונה prompt; קו‑פיילוט גלובלי מעל כל הנתונים.</p></div>
+  </div>
+
+  <div class="dom"><div class="ix">🤖</div><div><h3>שכבת AI · ישויות</h3><small>shared/ai · entities: AiProfile · AiConversation</small></div></div>
+  <div class="card">
+    <table>
+      <tr><th>ישות</th><th>שדות מרכזיים</th><th>מפתח זר</th></tr>
+      <tr><td><b>AiProfile</b><br>פרופיל</td><td><code>name</code> · <code>provider</code><span class="pill">enum</span> · <code>model</code> · <code>temperature</code> · <code>topP</code> · <code>maxTokens</code> · <code>systemPersona</code> · <code>apiKeyRef</code> (סוד · הפניה בלבד) · <code>autonomyTopics</code>[] · <code>isDefault</code></td><td class="fk">tenantId →&nbsp;Tenant<br>shaliachId? →&nbsp;Shaliach</td></tr>
+      <tr><td><b>AiConversation</b><br>שיחה (אופ׳)</td><td><code>title</code> · <code>messages</code>[] · <code>contextRef</code> · <code>createdAt</code></td><td class="fk">tenantId · shaliachId</td></tr>
+    </table>
+    <span class="pill ok">לוגיקה עסקית:</span>
+    <ul class="clean">
+      <li>פרופיל לכל משימה — "ניסוח" (טמפ׳ גבוהה) מול "סיכום" (טמפ׳ נמוכה).</li>
+      <li>מפתח API כסוד מוצפן — הפניה בלבד, לעולם לא ערך גלוי.</li>
+      <li>כל קריאה נושאת <code class="ic">tenantId</code> — בידוד מלא, שום הקשר לא דולף בין מוסדות.</li>
+      <li><code class="ic">autonomyTopics</code> — הנושאים שהשליח אישר להמשך עצמאי; כל היתר דורש אישור ידני.</li>
+    </ul>
+  </div>
+
+  <h3>חמש הקפיצות מעל המתחרים</h3>
+  <div class="grid g2">
+    <div class="card" style="margin:0"><h4>🎙️ לכידת שטח קולית</h4><p style="font-size:14px;color:var(--muted)">השליח מכתיב מפגש מבצע → נוצרים Contact + Engagement + משימת מעקב. מחסל הזנת נתונים.</p></div>
+    <div class="card" style="margin:0"><h4>🧭 Next‑best‑action</h4><p style="font-size:14px;color:var(--muted)">הפלטפורמה יוזמת: למי להתקשר, את מי להזמין, את מי לבקש — היום (לאישור).</p></div>
+    <div class="card" style="margin:0"><h4>✨ הסבה קסומה בהרשמה</h4><p style="font-size:14px;color:var(--muted)">אקסלים מבולגנים → אנשי קשר נקיים, ללא כפילויות, עם משפחות ושמות קודש.</p></div>
+    <div class="card" style="margin:0"><h4>✍️ תוכן בקולו, רב‑לשוני</h4><p style="font-size:14px;color:var(--muted)">ניוזלטר, דבר תורה, הזמנות, תודות — בלחיצה, בשפת הקהילה (לאישור).</p></div>
+    <div class="card" style="margin:0"><h4>💎 מודיעין תורמים</h4><p style="font-size:14px;color:var(--muted)">מי בשל, איזה סכום, מתי — וטיוטת הפנייה מוכנה לאישור.</p></div>
+    <div class="card" style="margin:0"><h4>🗣️ קו‑פיילוט מעל הנתונים</h4><p style="font-size:14px;color:var(--muted)">שאלה בשפה טבעית → רשימה, גרף או פעולה — תמיד לאישור השליח.</p></div>
+  </div>
+</section>
+
+<section id="road">
+  <h2><span class="num">10</span>מפת דרכים לשלבים</h2>
+  <p class="sub">בנייה מודולרית — דומיין אחד שלם בכל פעם, לפי האקסיומה "קומפוננטה אחת עד לסיום".</p>
+  <div class="road">
+    <div class="phase"><div class="dot">0</div><div class="body"><b>שלב 0 · תשתית</b> — זהות/JWT, ישות מוסד והגדרות, i18n, שלד הממשקים (heb‑cal · geo · email · s3).</div></div>
+    <div class="phase"><div class="dot">1</div><div class="body"><b>שלב 1 · ליבה</b> — קהילה/CRM, לוח בקרה, לוח עברי וזמנים.</div></div>
+    <div class="phase"><div class="dot">2</div><div class="body"><b>שלב 2 · מעורבות</b> — אירועים ורישום, תרומות ומגביות.</div></div>
+    <div class="phase"><div class="dot">3</div><div class="body"><b>שלב 3 · הפצה</b> — מבצעים, דיוור, מסמכים ומדיה.</div></div>
+    <div class="phase"><div class="dot">4</div><div class="body"><b>שלב 4 · תובנה</b> — דוחות מתקדמים ואנליטיקה על פני כל הדומיינים.</div></div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p><b>שלוח</b> · מסמך אב לארכיטקטורה · בס״ד</p>
+  <p>BizTechoff™ — התאמת העסק לעידן הדיגיטלי</p>
+</footer>
+
+</body>
+</html>

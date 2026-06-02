@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שתי הדרכים — לשחרר את הרוח</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf3df;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #d9a943;
+    --crimson: #8c2a1e;
+    --sage: #6b8a4a;
+    --sage-deep: #4d6638;
+    --sun: #e8b942;
+    --fire: #c84a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(232, 185, 66, 0.13) 0%, transparent 62%),
+      radial-gradient(ellipse at bottom, rgba(200, 74, 30, 0.05) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.9;
+    min-height: 100vh;
+    padding: 50px 18px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.65) 0%, rgba(245, 236, 217, 0.35) 100%);
+    padding: 66px 56px 56px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 24px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 24px; letter-spacing: 10px;
+    margin-bottom: 20px; opacity: 0.72;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(34px, 5.5vw, 48px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 14px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 400; font-style: italic; margin-bottom: 38px;
+    line-height: 1.5;
+  }
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 46px 0 34px; gap: 20px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 18px; letter-spacing: 4px; }
+
+  .section { margin-bottom: 36px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 25px; color: var(--crimson); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+    line-height: 1.3;
+  }
+  .section-title::before {
+    content: "❖"; color: var(--gold); font-size: 14px; flex-shrink: 0;
+  }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px; margin: 18px 0;
+    font-family: 'David Libre', serif; font-size: 17px;
+    color: var(--ink-soft); border-radius: 2px;
+  }
+  .pasuk-source {
+    display: block; font-size: 13px; color: var(--gold-deep);
+    margin-top: 8px; letter-spacing: 1px;
+  }
+
+  /* Opening - the heart */
+  .heart-card {
+    margin: 0 0 40px;
+    padding: 38px 32px;
+    background: linear-gradient(135deg, #2b1d10 0%, #1a1108 100%);
+    color: var(--paper);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 22px 55px -18px rgba(43, 29, 16, 0.5);
+  }
+  .heart-card::before {
+    content: ""; position: absolute; inset: 9px;
+    border: 1px solid rgba(184, 138, 44, 0.4);
+    border-radius: 5px; pointer-events: none;
+  }
+  .heart-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--sun);
+    text-transform: uppercase; margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .heart-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(20px, 3vw, 25px);
+    font-weight: 700; line-height: 1.5;
+    color: var(--paper); position: relative; z-index: 1;
+  }
+  .heart-text strong { color: var(--sun); }
+  .heart-text em { color: #e5b95c; font-style: italic; }
+
+  /* Two paths comparison */
+  .paths-card {
+    margin: 30px 0;
+    padding: 34px 26px;
+    background: rgba(245, 236, 217, 0.5);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 8px;
+  }
+  .paths-label {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .paths-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .path {
+    padding: 26px 22px; border-radius: 6px;
+  }
+  .path.body {
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.1) 0%, rgba(140, 42, 30, 0.03) 100%);
+    border: 2px solid var(--crimson);
+  }
+  .path.spirit {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border: 2px solid var(--gold);
+  }
+  .path-tag {
+    display: inline-block; font-family: 'Bellefair', serif;
+    font-size: 10px; letter-spacing: 3px; padding: 4px 14px;
+    border-radius: 12px; margin-bottom: 14px;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .path.body .path-tag { background: var(--crimson); color: var(--paper); }
+  .path.spirit .path-tag { background: var(--gold); color: var(--paper); }
+  .path-title {
+    font-family: 'Frank Ruhl Libre', serif; font-size: 21px;
+    font-weight: 700; margin-bottom: 14px; line-height: 1.3;
+  }
+  .path.body .path-title { color: var(--crimson); }
+  .path.spirit .path-title { color: var(--gold-deep); }
+  .path ul { list-style: none; padding: 0; }
+  .path li {
+    font-size: 15px; color: var(--ink-soft); line-height: 1.55;
+    padding: 5px 0; padding-right: 20px; position: relative;
+  }
+  .path.body li::before {
+    content: "▪"; position: absolute; right: 0; top: 7px;
+    color: var(--crimson); font-size: 12px;
+  }
+  .path.spirit li::before {
+    content: "✦"; position: absolute; right: 0; top: 8px;
+    color: var(--gold); font-size: 11px;
+  }
+  .path-note {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px dashed rgba(184, 138, 44, 0.3);
+    font-size: 14px; font-style: italic; line-height: 1.5;
+  }
+  .path.body .path-note { color: var(--crimson); opacity: 0.85; }
+  .path.spirit .path-note { color: var(--gold-deep); }
+
+  /* Insight */
+  .insight {
+    margin: 22px 0; padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.10) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border-right: 3px solid var(--crimson); border-radius: 4px;
+  }
+  .insight-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .insight p {
+    font-size: 17px; color: var(--ink); margin: 0;
+    line-height: 1.7; font-weight: 500;
+  }
+
+  /* The Chassid's way - fire card */
+  .fire-card {
+    margin: 34px 0;
+    padding: 40px 32px;
+    background: linear-gradient(135deg, rgba(200, 74, 30, 0.14) 0%, rgba(232, 185, 66, 0.08) 100%);
+    border: 2px solid var(--fire);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+  }
+  .fire-symbol {
+    font-size: 38px; line-height: 1; margin-bottom: 12px;
+  }
+  .fire-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--fire);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .fire-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px; color: var(--ink);
+    font-weight: 700; line-height: 1.4; margin-bottom: 14px;
+  }
+  .fire-title strong { color: var(--fire); }
+  .fire-card p {
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.7; margin: 0;
+  }
+  .fire-card strong { color: var(--fire); }
+  .fire-card em { color: var(--gold-deep); }
+
+  /* Two-together highlight */
+  .both-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin: 24px 0;
+  }
+  .both-cell {
+    padding: 20px 18px; text-align: center;
+    background: rgba(255, 250, 235, 0.8);
+    border: 1px solid rgba(200, 74, 30, 0.3);
+    border-radius: 6px;
+  }
+  .both-symbol { font-size: 26px; margin-bottom: 8px; line-height: 1; }
+  .both-name {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 17px; color: var(--fire); margin-bottom: 6px;
+  }
+  .both-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* Final */
+  .final-message {
+    margin-top: 48px; padding: 38px 30px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.06) 100%);
+    border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+    text-align: center;
+  }
+  .final-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .final-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--ink);
+    font-weight: 700; line-height: 1.55; margin: 0;
+  }
+  .final-text strong { color: var(--crimson); }
+  .final-text em { color: var(--gold-deep); font-style: italic; }
+  .final-hope {
+    margin-top: 16px; font-size: 15px; color: var(--gold-deep); font-style: italic;
+  }
+
+  .attribution {
+    margin-top: 48px; text-align: center; padding-top: 28px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 26px;
+    color: var(--gold); font-size: 18px;
+    letter-spacing: 12px; opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 24px 10px; }
+    .container { padding: 40px 22px 44px; }
+    .container::before { inset: 8px; }
+    h1 { font-size: 28px; }
+    .subtitle { font-size: 15px; }
+    p { font-size: 17px; }
+    .section-title { font-size: 21px; }
+    .heart-text { font-size: 19px; }
+    .paths-grid { grid-template-columns: 1fr; gap: 14px; }
+    .path-title { font-size: 19px; }
+    .path li { font-size: 14px; }
+    .fire-title { font-size: 21px; }
+    .both-grid { grid-template-columns: 1fr; gap: 12px; }
+    .final-text { font-size: 19px; }
+    .insight p { font-size: 16px; }
+  }
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עבודת החסיד · אתכפיא</div>
+    <h1>שְׁתֵּי הַדְּרָכִים<br>לְשַׁחְרֵר אֶת הָרוּחַ</h1>
+    <p class="subtitle">
+      איך פותחים את המנעול שבין הגוף לרוח —<br>
+      ולמה דרך החסיד היא הקצרה ביותר
+    </p>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <!-- ============================== -->
+    <!-- THE HEART - OPENING            -->
+    <!-- ============================== -->
+    <div class="heart-card">
+      <div class="heart-label">הנקודה הראשונה</div>
+      <div class="heart-text">
+        הָרוּחַ <strong>יוֹשֶׁבֶת בַּלֵּב</strong>.<br><br>
+        כְּשֶׁאָדָם <em>שָׂמֵחַ</em> —<br>
+        מְדַבֵּר רַק מֵהַטּוֹב,<br>
+        חוֹשֵׁב רַק טוֹב —<br>
+        הוּא <strong>מַצִּיל אֶת הָרוּחַ</strong>.<br><br>
+        וּכְשֶׁהוּא מַצִּיל אֶת הָרוּחַ —<br>
+        הוּא מַצִּיל אֶת <strong>הַגּוּף</strong>.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="pasuk">
+        כִּי <strong>בְשִׂמְחָה תֵצֵאוּ</strong> וּבְשָׁלוֹם תּוּבָלוּן
+        <span class="pasuk-source">— ישעיהו נה, יב</span>
+      </div>
+      <p>
+        למה <em>בשמחה</em> תצאו?
+        כי השמחה היא <strong>אחת משתי הדרכים</strong>
+        לצאת מהכלא.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE LOCK                       -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">המנעול — הגוף והרוח כולאים זה את זה</h2>
+      <p>
+        הגוף והרוח קשורים זה בזה.
+        כשאחד כלוא — גם השני כלוא.
+        וכדי לשחרר — צריך <em>״אתכפיא״</em>,
+        כפייה. אבל יש <strong>שתי דרכים</strong> לכפות:
+      </p>
+    </div>
+
+    <div class="paths-card">
+      <div class="paths-label">שתי הדרכים לאתכפיא</div>
+      <div class="paths-grid">
+
+        <div class="path body">
+          <span class="path-tag">דרך א'</span>
+          <div class="path-title">הגוף משחרר<br>את הרוח</div>
+          <ul>
+            <li>אתכפיא <strong>במעשה</strong></li>
+            <li>עבודת ה<em>״בטוש״</em></li>
+            <li>מעשה כללי</li>
+            <li>כפייה על הגוף</li>
+          </ul>
+          <p class="path-note">
+            עבודה לא פשוטה בכלל —
+            ולא אהובה על הגוף הנשלט על ידי הלב.
+          </p>
+        </div>
+
+        <div class="path spirit">
+          <span class="path-tag">דרך ב'</span>
+          <div class="path-title">הרוח משחררת<br>את הגוף</div>
+          <ul>
+            <li>אתכפיא <strong>בשמחה</strong></li>
+            <li>עבודת ה<em>״רוח שטות״</em></li>
+            <li>לדבר ולחשוב רק טוב</li>
+            <li>כפייה על הרוח</li>
+          </ul>
+          <p class="path-note">
+            עבודה קלה יותר —
+            אבל מצריכה ״רוח שטות״,
+            מה שתלמיד חכם לא אוהב ולא יודע לעשות.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE TRAP                       -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">המלכוד — למה תלמיד חכם נכשל</h2>
+      <p>
+        התלמיד חכם בז לעבודת השמחה.
+        הוא חושב שזו <em>לא העבודה האמיתית</em>.
+        אבל הנה האמת:
+      </p>
+      <div class="insight">
+        <div class="insight-label">בלי מעשים</div>
+        <p>
+          ללא המעשים — <strong>אין ״אהבה״, יש רק ״יראה״</strong>.
+          ולכן עבודת השמחה ב<em>רוח שטות</em>
+          נראית לו ״לא לעניין״ —
+          כי <strong>היצר מלא גאווה ואגו</strong>,
+          ואומר לאדם: ״זאת לא העבודה״.
+        </p>
+      </div>
+      <div class="pasuk">
+        <strong>אוֹי לִי מִיִּצְרִי — וְאוֹי לִי מִיּוֹצְרִי</strong>
+        <span class="pasuk-source">— תלמוד בבלי, ברכות סא ע״א</span>
+      </div>
+      <p>
+        אם תלך אחרי היצר (הגאווה) — אוי לך מיוצרך.
+        אם תכפה רק את הגוף בלי שמחה — חסר לך.
+        אם תשמח בלי מעשים — חסר לך.
+        <em>שתי הדרכים לבד — אינן שלמות</em>.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE CHASSID'S WAY              -->
+    <!-- ============================== -->
+    <div class="fire-card">
+      <div class="fire-symbol">🔥</div>
+      <div class="fire-label">דרך החסיד</div>
+      <div class="fire-title">
+        הַדֶּרֶךְ <strong>הַקְּצָרָה בְּיוֹתֵר</strong>:<br>
+        שְׁתֵּי הַדְּרָכִים יַחַד
+      </div>
+      <p>
+        גם <strong>אתכפיא במעשה</strong> — על הגוף.<br>
+        וגם <strong>אתכפיא בשמחה</strong> — על הרוח.<br><br>
+        וככה מעוררים — <em>בעת ובעונה אחת</em> —
+        את הרוח ואת הגוף.
+      </p>
+    </div>
+
+    <div class="both-grid">
+      <div class="both-cell">
+        <div class="both-symbol">⚒</div>
+        <div class="both-name">מעשים במסירות נפש</div>
+        <div class="both-desc">כפיית הגוף — ה״בטוש״</div>
+      </div>
+      <div class="both-cell">
+        <div class="both-symbol">☀</div>
+        <div class="both-name">רוח שטות בשמחה</div>
+        <div class="both-desc">כפיית הרוח — השמחה</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        זאת <strong>עבודת החסיד</strong> —
+        שהוא <em>שורף את היצר</em>
+        בעבודת רוח שטות ומעשים במסירות נפש כאחד.
+      </p>
+      <div class="pasuk">
+        חָסִיד — <strong>שׂוֹרְפָן</strong>
+        <span class="pasuk-source">— על פי תלמוד בבלי, פסחים עה ע״א</span>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- THE FIRE                       -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">איך מדליקים את האש — שאלת השאלות</h2>
+      <p>
+        אבל כדי לשרוף את היצר — <strong>חייבים אש</strong>.
+        ואיך מדליקים את האש הזאת?
+        זאת <em>שאלת השאלות</em>.
+      </p>
+      <div class="insight">
+        <div class="insight-label">התשובה</div>
+        <p>
+          <strong>״קופצים לאש״</strong> —<br>
+          וככה היא נדלקת.
+        </p>
+      </div>
+      <p>
+        אי אפשר לחכות שהאש תידלק לבד.
+        אי אפשר להדליק אותה <em>מבחוץ</em>.
+        רק מי ש<strong>קופץ פנימה</strong> —
+        מצית אותה.
+      </p>
+      <p>
+        ראה <em>עצת ה' למשה</em> במעשה המנורה:
+        משה התקשה איך לעשות את המנורה,
+        ואמר לו ה': <strong>״השלך אותה לאש — והיא תיעשה מאליה״</strong>.
+        כך גם כאן — קפיצה לאש מצמיחה את האור.
+      </p>
+      <div class="pasuk">
+        ״עֲשֵׂה אַתָּה אֶת תַּבְנִיתָהּ וְהִיא נַעֲשֵׂית מֵאֵלֶיהָ״ —<br>
+        הִשְׁלִיכָהּ לָאֵשׁ וְנַעֲשְׂתָה הַמְּנוֹרָה
+        <span class="pasuk-source">— על פי רש"י, במדבר ח, ד ומדרש תנחומא</span>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- FINAL                          -->
+    <!-- ============================== -->
+    <div class="final-message">
+      <div class="final-label">סוף דבר</div>
+      <p class="final-text">
+        אַל תְּחַכֶּה שֶׁהָאֵשׁ תִּדָּלֵק —<br>
+        <strong>קְפֹץ פְּנִימָה</strong>.<br><br>
+        כְּפֵה אֶת הַגּוּף בְּמַעֲשֶׂה,<br>
+        כְּפֵה אֶת הָרוּחַ בְּ<em>שִׂמְחָה</em> —<br>
+        וְהַיֵּצֶר <strong>יִשָּׂרֵף מֵאֵלָיו</strong>.
+      </p>
+      <p class="final-hope">
+        ✦ כִּי בְשִׂמְחָה תֵצֵאוּ ✦
+      </p>
+    </div>
+
+    <div class="attribution">
+      מדברי ציון אבירם הי״ו
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>

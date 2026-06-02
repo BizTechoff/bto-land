@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rights Engine + Digital Twin · אפיון Phase 0 · v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#F5F1E8; --paper-shade:#ECE6D5; --paper-deep:#E0D9C2;
+    --ink:#1A1F2E; --ink-soft:#4A5060; --ink-mute:#8B8E96;
+    --accent:#C2410C; --accent-deep:#7A2A0A; --accent-soft:#F4D9C8;
+    --signal:#166534;
+    --code-bg:#1A1F2E; --code-fg:#F5F1E8;
+    --serif:'Frank Ruhl Libre','David',serif;
+    --sans:'Assistant','Arial Hebrew',system-ui,sans-serif;
+    --mono:'JetBrains Mono','Menlo',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse at top right,rgba(194,65,12,0.04),transparent 50%),radial-gradient(ellipse at bottom left,rgba(26,31,46,0.03),transparent 50%);
+    background-attachment:fixed}
+  .page{max-width:980px;margin:0 auto;padding:4rem 3rem}
+
+  /* COVER */
+  .cover{border-bottom:2px solid var(--ink);padding-bottom:4rem;margin-bottom:4rem}
+  .cover-meta{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5rem;padding-bottom:1rem;border-bottom:1px solid var(--ink-mute)}
+  .cover-meta .doc-type{color:var(--accent);font-weight:500}
+  .cover-meta .ver-tag{background:var(--ink);color:var(--paper);padding:0.25rem 0.6rem;margin-right:0.5rem}
+  .cover-eyebrow{font-family:var(--mono);font-size:0.85rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+  .cover-eyebrow::before{content:'';width:60px;height:2px;background:var(--accent)}
+  .cover h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.5rem,6vw,4.8rem);line-height:1;letter-spacing:-0.02em;margin-bottom:1.5rem}
+  .cover h1 .accent{color:var(--accent);font-style:italic;font-weight:700}
+  .cover-subtitle{font-family:var(--serif);font-weight:400;font-size:clamp(1.2rem,2.5vw,1.6rem);color:var(--ink-soft);max-width:720px;margin-bottom:2rem;line-height:1.4}
+  .badge-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:3rem}
+  .badge{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 0.9rem;border:1px solid var(--ink);background:var(--paper);font-weight:500}
+  .badge.primary{background:var(--ink);color:var(--paper)}
+  .badge.accent{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+  .cover-abstract{font-size:1.1rem;line-height:1.7;max-width:680px;padding-right:2rem;border-right:3px solid var(--accent)}
+  .cover-byline{margin-top:3rem;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.1em;color:var(--ink-mute)}
+  .cover-byline strong{color:var(--ink);font-weight:500}
+
+  /* TOC */
+  .toc{background:var(--paper-shade);border:1px solid var(--ink);padding:2.5rem 2rem;margin-bottom:5rem}
+  .toc-label{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+  .toc ol{list-style:none;counter-reset:toc}
+  .toc li{counter-increment:toc;padding:0.6rem 0;border-bottom:1px dashed var(--ink-mute);display:flex;align-items:baseline;gap:1rem;font-family:var(--serif);font-size:1.1rem}
+  .toc li:last-child{border-bottom:none}
+  .toc li::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);font-size:0.8rem;color:var(--accent);font-weight:500;min-width:2.5rem}
+  .toc a{color:var(--ink);text-decoration:none}
+  .toc a:hover{color:var(--accent)}
+
+  /* SECTIONS */
+  section.major{margin-bottom:5rem;scroll-margin-top:2rem}
+  .section-header{display:grid;grid-template-columns:120px 1fr;gap:2rem;align-items:baseline;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--ink)}
+  .section-number{font-family:var(--serif);font-weight:900;font-size:5rem;line-height:0.85;color:var(--accent);font-style:italic}
+  .section-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.1;letter-spacing:-0.01em}
+  .section-title small{display:block;font-family:var(--sans);font-weight:400;font-size:1rem;color:var(--ink-mute);margin-top:0.5rem}
+  h3{font-family:var(--serif);font-weight:700;font-size:1.5rem;margin:2.5rem 0 1rem;line-height:1.2}
+  h4{font-family:var(--sans);font-weight:600;font-size:1.05rem;margin:1.5rem 0 0.5rem;color:var(--accent-deep);letter-spacing:0.02em}
+  p{margin-bottom:1.2rem;font-size:1.05rem;line-height:1.75}
+  p strong{font-weight:700;color:var(--accent-deep)}
+  .lede::first-letter{font-family:var(--serif);font-weight:900;font-size:4.5rem;float:right;line-height:0.9;margin-left:0.5rem;margin-top:0.4rem;color:var(--accent)}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:3rem 0;padding:2.5rem 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);text-align:center;position:relative}
+  .pull-quote::before{content:'״';position:absolute;top:-0.3rem;right:50%;transform:translateX(50%);background:var(--paper);padding:0 1rem;font-family:var(--serif);font-size:3rem;color:var(--accent);line-height:1}
+  .pull-quote p{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.3rem,2.8vw,1.8rem);line-height:1.4;max-width:760px;margin:0 auto}
+
+  /* ENGINE CARDS */
+  .engine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin:2rem 0}
+  .engine-card{background:var(--paper-shade);border:1px solid var(--ink);padding:1.8rem 1.5rem;position:relative;overflow:hidden}
+  .engine-card::before{content:'';position:absolute;top:0;right:0;width:100%;height:4px;background:var(--accent)}
+  .engine-card.highlight{background:var(--accent-soft);border-width:2px}
+  .engine-card.highlight::before{background:linear-gradient(90deg,var(--accent),var(--accent-deep));height:6px}
+  .engine-card .num{font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:0.7rem}
+  .engine-card h4{font-family:var(--serif);font-weight:700;font-size:1.3rem;color:var(--ink);margin:0 0 0.5rem}
+  .engine-card .en{font-family:var(--mono);font-size:0.75rem;color:var(--ink-mute);letter-spacing:0.05em;margin-bottom:1rem;direction:ltr;text-align:right}
+  .engine-card p{font-size:0.95rem;line-height:1.6;margin:0;color:var(--ink-soft)}
+
+  /* 24/7 BANNER */
+  .banner-247{background:var(--ink);color:var(--paper);padding:2rem 2.5rem;margin:3rem 0;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;position:relative;overflow:hidden}
+  .banner-247::after{content:'';position:absolute;top:0;left:0;width:8px;height:100%;background:var(--accent)}
+  .clock-display{font-family:var(--serif);font-size:4rem;font-weight:900;line-height:0.9;color:var(--accent);font-style:italic}
+  .clock-display small{display:block;font-family:var(--mono);font-size:0.8rem;color:var(--paper);font-style:normal;letter-spacing:0.2em;margin-top:0.3rem;font-weight:400}
+  .banner-247 .text{font-family:var(--serif);font-size:1.2rem;line-height:1.5}
+  .banner-247 .text strong{color:var(--accent);font-weight:700}
+
+  /* CHAT MOCKUP */
+  .chat-frame{margin:2.5rem 0;border:1px solid var(--ink);background:var(--paper-shade);overflow:hidden;max-width:540px;margin-left:auto;margin-right:auto}
+  .chat-header{background:var(--ink);color:var(--paper);padding:0.9rem 1.2rem;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.1em}
+  .chat-header .channel{display:flex;align-items:center;gap:0.6rem}
+  .chat-header .dot{width:8px;height:8px;background:#4ADE80;border-radius:50%;box-shadow:0 0 0 3px rgba(74,222,128,0.2);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,0.2)}50%{box-shadow:0 0 0 6px rgba(74,222,128,0.05)}}
+  .chat-header .time{color:var(--ink-mute);font-size:0.7rem}
+  .chat-body{padding:1.5rem 1.2rem;background:var(--paper);min-height:200px}
+  .msg{max-width:85%;margin-bottom:1rem;padding:0.75rem 1rem;font-size:0.95rem;line-height:1.55;border:1px solid var(--ink)}
+  .msg.user{background:var(--paper-shade);margin-left:auto;border-radius:0 12px 12px 12px}
+  .msg.ai{background:var(--ink);color:var(--paper);margin-right:0;margin-left:auto;border-radius:12px 0 12px 12px;position:relative;direction:rtl;text-align:right}
+  .msg.ai::before{content:'AI';position:absolute;top:-10px;right:-1px;background:var(--accent);color:var(--paper);font-family:var(--mono);font-size:0.6rem;padding:0.15rem 0.45rem;letter-spacing:0.15em;font-weight:600}
+  .msg .ts{display:block;font-family:var(--mono);font-size:0.65rem;color:var(--ink-mute);margin-top:0.4rem;letter-spacing:0.05em}
+  .msg.ai .ts{color:rgba(245,241,232,0.5)}
+  .msg.results{background:var(--accent-soft);color:var(--ink);border:2px solid var(--accent);margin-right:0;margin-left:auto;border-radius:12px 0 12px 12px;max-width:95%;position:relative}
+  .msg.results::before{content:'AI · MATCH';position:absolute;top:-10px;right:-1px;background:var(--accent);color:var(--paper);font-family:var(--mono);font-size:0.6rem;padding:0.15rem 0.45rem;letter-spacing:0.15em;font-weight:600}
+  .right-found{padding:0.7rem;margin:0.5rem 0;background:var(--paper);border:1px dashed var(--accent-deep);display:grid;grid-template-columns:1fr auto;gap:0.5rem;align-items:center}
+  .right-found .name{font-family:var(--serif);font-weight:700;font-size:0.95rem}
+  .right-found .source{font-family:var(--mono);font-size:0.65rem;color:var(--ink-mute);margin-top:0.2rem;letter-spacing:0.05em}
+  .right-found .amount{font-family:var(--serif);font-weight:900;font-size:1.2rem;color:var(--accent);text-align:left;direction:ltr}
+  .right-found .amount small{display:block;font-family:var(--mono);font-size:0.6rem;color:var(--ink-mute);font-weight:400;letter-spacing:0.1em}
+  .total-line{font-family:var(--serif);font-size:1.05rem;margin-top:0.7rem;padding-top:0.6rem;border-top:2px solid var(--accent);display:flex;justify-content:space-between;align-items:baseline}
+  .total-amount{font-weight:900;font-size:1.5rem;color:var(--accent-deep);direction:ltr}
+  .cta-row{margin-top:0.8rem;display:flex;gap:0.5rem;flex-wrap:wrap}
+  .cta-row .cta{background:var(--ink);color:var(--paper);padding:0.5rem 0.9rem;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;border:none}
+  .cta-row .cta.primary{background:var(--accent)}
+
+  /* CODE */
+  pre{background:var(--code-bg);color:var(--code-fg);padding:1.5rem;border-radius:4px;overflow-x:auto;margin:1.5rem 0;font-family:var(--mono);font-size:0.85rem;line-height:1.7;direction:ltr;text-align:left;border-right:4px solid var(--accent)}
+  code{font-family:var(--mono);font-size:0.9em;background:var(--paper-shade);padding:0.1rem 0.4rem;border-radius:3px;color:var(--accent-deep);direction:ltr;display:inline-block}
+  pre code{background:none;padding:0;color:var(--code-fg);font-size:inherit}
+
+  /* DIAGRAM */
+  .diagram-wrap{background:var(--paper-shade);border:1px solid var(--ink);padding:2rem;margin:2.5rem 0;overflow-x:auto}
+  .diagram-caption{font-family:var(--mono);font-size:0.75rem;color:var(--ink-mute);letter-spacing:0.1em;text-transform:uppercase;margin-top:1rem;text-align:center}
+
+  /* PIPELINE */
+  .pipeline{margin:2rem 0;counter-reset:pipeline}
+  .pipeline-step{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:1.2rem 0;border-bottom:1px solid var(--ink-mute);align-items:start;counter-increment:pipeline}
+  .pipeline-step:last-child{border-bottom:none}
+  .pipeline-step .step-num{font-family:var(--serif);font-weight:900;font-style:italic;color:var(--accent);font-size:2.5rem;line-height:1}
+  .pipeline-step .step-num::before{content:counter(pipeline,decimal-leading-zero)}
+  .pipeline-step h4{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin:0 0 0.3rem}
+  .pipeline-step .tech{font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem}
+  .pipeline-step p{margin:0;color:var(--ink-soft);font-size:0.97rem}
+
+  /* KINGDOMS */
+  .kingdoms-intro{text-align:center;margin:3rem 0 2rem;padding:2rem;background:var(--paper-shade);border:1px solid var(--ink)}
+  .kingdoms-intro .label{font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.8rem}
+  .kingdoms-intro h3{font-family:var(--serif);font-size:2.2rem;font-weight:900;margin:0 0 0.5rem;font-style:italic;letter-spacing:-0.01em}
+  .kingdoms-intro h3 span{display:inline-block;color:var(--accent);padding:0 0.3rem}
+  .kingdoms-intro p{font-family:var(--serif);color:var(--ink-soft);font-size:1.05rem;margin:0;font-style:italic}
+
+  .kingdom-stack{margin:2rem 0}
+  .kingdom{display:grid;grid-template-columns:160px 1fr;gap:2rem;padding:2rem 0;border-bottom:1px solid var(--ink-mute);align-items:start}
+  .kingdom:last-child{border-bottom:none}
+  .kingdom-letter{font-family:var(--serif);font-weight:900;font-size:5.5rem;line-height:0.9;color:var(--accent);font-style:italic;text-align:center}
+  .kingdom-letter small{display:block;font-family:var(--mono);font-size:0.7rem;color:var(--ink-mute);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;font-style:normal;font-weight:500}
+  .kingdom-content h4{font-family:var(--serif);font-size:1.5rem;color:var(--ink);font-weight:700;margin:0 0 0.4rem;letter-spacing:-0.01em}
+  .kingdom-content .tagline{font-family:var(--mono);font-size:0.75rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem}
+  .kingdom-content p{font-size:0.97rem;color:var(--ink);margin-bottom:0.8rem}
+  .kingdom-rights{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.8rem}
+  .kingdom-rights span{background:var(--paper-shade);padding:0.35rem 0.8rem;font-size:0.85rem;border:1px solid var(--ink);font-family:var(--sans)}
+  .kingdom-rights span.primary{background:var(--accent);color:var(--paper);border-color:var(--accent);font-weight:500}
+
+  /* ROADMAP */
+  .roadmap{margin:2rem 0}
+  .phase{display:grid;grid-template-columns:140px 1fr;gap:2rem;padding:1.5rem 0;border-bottom:1px solid var(--ink-mute);align-items:start}
+  .phase:last-child{border-bottom:none}
+  .phase-label{font-family:var(--mono);font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .phase-label .duration{display:block;color:var(--ink-mute);font-size:0.7rem;margin-top:0.3rem}
+  .phase-content h4{font-family:var(--serif);font-size:1.25rem;color:var(--ink);margin:0 0 0.5rem;font-weight:700}
+  .phase-content p{font-size:0.95rem;margin:0;color:var(--ink-soft)}
+
+  /* CALLOUT */
+  .callout{background:var(--paper-shade);border-right:4px solid var(--accent);padding:1.2rem 1.5rem;margin:1.5rem 0;font-size:0.97rem}
+  .callout .label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.5rem;display:block}
+  .callout.signal{border-color:var(--signal)}
+  .callout.signal .label{color:var(--signal)}
+
+  /* RISK */
+  .risk-item{margin:1.5rem 0;padding-right:1.2rem;border-right:2px solid var(--ink-mute)}
+  .risk-item h4{color:var(--ink);font-family:var(--serif);font-size:1.1rem;margin-bottom:0.4rem}
+  .risk-item .reco{margin-top:0.6rem;font-size:0.95rem;background:var(--paper-shade);padding:0.7rem 1rem;border-right:3px solid var(--accent)}
+  .risk-item .reco strong{color:var(--accent-deep)}
+
+  /* VERTICAL */
+  .vertical{background:var(--paper-shade);padding:2rem;margin:1.5rem 0;border:1px solid var(--ink);position:relative}
+  .vertical::before{content:'▎';position:absolute;top:1.5rem;right:-0.5rem;color:var(--accent);font-size:2rem;line-height:0.5}
+  .vertical h3{margin-top:0;color:var(--accent-deep)}
+
+  /* FOOTER */
+  footer{margin-top:6rem;padding-top:2rem;border-top:2px solid var(--ink);font-family:var(--mono);font-size:0.75rem;color:var(--ink-mute);letter-spacing:0.1em;text-align:center}
+  footer .sig{margin-top:0.5rem;font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink)}
+
+  /* RESPONSIVE */
+  @media (max-width:720px){
+    .page{padding:2rem 1.2rem}
+    .section-header{grid-template-columns:60px 1fr;gap:1rem}
+    .section-number{font-size:3rem}
+    .phase{grid-template-columns:100px 1fr;gap:1rem}
+    .kingdom{grid-template-columns:80px 1fr;gap:1rem}
+    .kingdom-letter{font-size:3rem}
+    .banner-247{grid-template-columns:1fr;text-align:center;padding:1.5rem}
+    .clock-display{font-size:3rem}
+    .cover-meta{flex-direction:column;gap:0.5rem;align-items:flex-start}
+  }
+
+  @media print{body{background:white}.page{padding:1cm}section.major,pre{page-break-inside:avoid}}
+
+  /* INTRO */
+  .cover h1,.cover-subtitle,.cover-abstract,.badge-row{opacity:0;animation:fadeUp 0.8s ease-out forwards}
+  .cover h1{animation-delay:0.1s}.cover-subtitle{animation-delay:0.3s}
+  .badge-row{animation-delay:0.4s}.cover-abstract{animation-delay:0.5s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-meta">
+      <span class="doc-type">אפיון פרויקט · PHASE 0</span>
+      <span><span class="ver-tag">V3</span> מאי 2026</span>
+    </div>
+
+    <div class="cover-eyebrow">BizTechoff™ · Civic-Tech Initiative</div>
+
+    <h1>מנוע הזכויות<br><span class="accent">+ תאום דיגיטלי</span></h1>
+
+    <p class="cover-subtitle">
+      פלטפורמה אזרחית 24/7 המאתרת ומגישה אוטומטית זכויות חוקיות באמצעות שיחה טבעית — מבוססת מטא־מנוע שבונה את עצמו, פרופיל דיגיטלי דינמי, וסוכן הגשה אוטונומי. מכסה את המרחב המלא — דומם, צומח, חי, ומדבר.
+    </p>
+
+    <div class="badge-row">
+      <span class="badge primary">24/7 SERVICE</span>
+      <span class="badge accent">CONVERSATIONAL AI</span>
+      <span class="badge">WhatsApp / Voice / Web</span>
+      <span class="badge">Hebrew · Arabic · Russian</span>
+    </div>
+
+    <p class="cover-abstract">
+      הפלטפורמה משלבת ארבעה רכיבים: <strong>שכבת AI שיחתית</strong> שקולטת תמלול קולי או טקסטואלי וממירה אותו לפרופיל זכויות; <strong>Engine Factory</strong> שמייצר אוטומטית מנועי זכויות מטקסט משפטי; <strong>Digital Twin</strong> דינמי של הישות — אדם, חיה, צמח, או נכס; ו<strong>Claim Agent</strong> אוטונומי שמגיש, עוקב, ומפעיל מנגנוני אישור־שתיקה משפטיים עד למימוש מלא של הזכות.
+    </p>
+
+    <div class="cover-byline">
+      Prepared by <strong>BizTechoff™</strong> · Hod HaSharon, IL · biztechoff.co.il
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-label">תוכן עניינים</div>
+    <ol>
+      <li><a href="#sec1">תקציר מנהלים</a></li>
+      <li><a href="#sec2">הבעיה והמבדל התחרותי</a></li>
+      <li><a href="#sec3">קונספט הליבה</a></li>
+      <li><a href="#sec4">ארכיטקטורת המערכת</a></li>
+      <li><a href="#sec5">שכבת ה-AI השיחתית</a></li>
+      <li><a href="#sec6">קהל יעד — ארבע ממלכות</a></li>
+      <li><a href="#sec7">ארכיטקטורה טכנית</a></li>
+      <li><a href="#sec8">מודל עסקי</a></li>
+      <li><a href="#sec9">תכנית ביצוע</a></li>
+      <li><a href="#sec10">סיכונים וסיכום</a></li>
+    </ol>
+  </nav>
+
+  <!-- SECTION 1 -->
+  <section class="major" id="sec1">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <h2 class="section-title">תקציר מנהלים<small>Executive Summary</small></h2>
+    </div>
+
+    <p class="lede">הפלטפורמה היא <strong>שירות אזרחי 24/7</strong> המאפשר לכל בעל זכות בישראל — אדם, מחזיק חיה, בעל קרקע חקלאית, מחזיק נכס, או התאגדות — לאתר ולממש זכויות חוקיות באמצעות שיחה טבעית בוואטסאפ, בקול, או בצ׳אט.</p>
+
+    <p>המערכת בנויה מארבעה מנועי ליבה:</p>
+
+    <div class="engine-grid">
+      <div class="engine-card highlight">
+        <div class="num">CORE / 01 · NEW</div>
+        <h4>AI Conversational Intake</h4>
+        <div class="en">24/7 Voice & Chat Layer</div>
+        <p>קולט תמלול אודיו או טקסט מהמשתמש, מחלץ נתונים ל-Twin, מריץ Eligibility, ומחזיר תשובה טבעית עם רשימת זכויות וסכומים.</p>
+      </div>
+      <div class="engine-card">
+        <div class="num">CORE / 02</div>
+        <h4>Engine Factory</h4>
+        <div class="en">Rights Engine Factory</div>
+        <p>מטא־מנוע הבונה אוטומטית מנועי זכויות מטקסט משפטי (חוק, תקנה, חוזר), בליווי בדיקה אנושית וחתימת עו"ד.</p>
+      </div>
+      <div class="engine-card">
+        <div class="num">CORE / 03</div>
+        <h4>Digital Twin</h4>
+        <div class="en">Entity Profile</div>
+        <p>פרופיל דיגיטלי דינמי של הישות — בין אם זה אדם, חיה, חלקה חקלאית, או נכס דומם.</p>
+      </div>
+      <div class="engine-card">
+        <div class="num">CORE / 04</div>
+        <h4>Claim Agent</h4>
+        <div class="en">Autonomous Submitter</div>
+        <p>סוכן אוטונומי שמגיש בקשות, עוקב, ומפעיל מנגנוני אישור־שתיקה (60-90 יום) עד למימוש מלא.</p>
+      </div>
+    </div>
+
+    <div class="banner-247">
+      <div class="clock-display">24/7<small>NON-STOP</small></div>
+      <div class="text">בעוד <strong>"כל זכות"</strong> נסגר ב-17:00 ו<strong>zhuti</strong> דורש אינטראקציה ידנית — שירות זה זמין בכל שעה, בכל יום, בכל שפה. אזרח שמתעורר ב-3 לפנות בוקר עם שאלה — מקבל תשובה.</div>
+    </div>
+
+    <p>המודל העסקי משלב <strong>תשלום סמלי</strong> לערכת בקשה דיגיטלית, מסלול הצלחה (No Win No Fee) על זכויות גדולות, ומסלולי B2B לוועדי עובדים והתאגדויות.</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="major" id="sec2">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <h2 class="section-title">הבעיה והמבדל התחרותי<small>The Gap We Address</small></h2>
+    </div>
+
+    <p>המערכת המנהלית בישראל יוצרת פער מבני: זכויות רבות שהאזרח זכאי להן אינן ממומשות. המידע פזור, התהליך ביורוקרטי, מסמכים שונים נדרשים מאותו אזרח לאותה זכות, והמעקב חוזר.</p>
+
+    <p>קיימים שירותים בשוק שמספקים <strong>מידע</strong>, אבל אף אחד מהם לא <strong>פותר</strong> את הבעיה מקצה לקצה:</p>
+
+    <h3>מפת התחרות</h3>
+
+    <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.92rem">
+      <thead>
+        <tr style="background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:0.75rem;letter-spacing:0.1em">
+          <th style="padding:0.8rem;text-align:right;border:1px solid var(--ink)">שירות</th>
+          <th style="padding:0.8rem;border:1px solid var(--ink)">זמינות</th>
+          <th style="padding:0.8rem;border:1px solid var(--ink)">שפה טבעית</th>
+          <th style="padding:0.8rem;border:1px solid var(--ink)">הגשה אוטומטית</th>
+          <th style="padding:0.8rem;border:1px solid var(--ink)">מעקב + השגה</th>
+        </tr>
+      </thead>
+      <tbody style="background:var(--paper-shade)">
+        <tr>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);font-weight:600">"כל זכות"</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">סטטי</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+        </tr>
+        <tr>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);font-weight:600">zhuti.co.il</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">שעות עבודה</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">חלקית</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">ידני</td>
+        </tr>
+        <tr>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);font-weight:600">רשויות מקומיות</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">שעות עבודה</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+          <td style="padding:0.8rem;border:1px solid var(--ink-mute);text-align:center">—</td>
+        </tr>
+        <tr style="background:var(--accent-soft)">
+          <td style="padding:0.8rem;border:1px solid var(--accent);font-weight:700;color:var(--accent-deep)">הפלטפורמה שלנו</td>
+          <td style="padding:0.8rem;border:1px solid var(--accent);text-align:center;color:var(--accent-deep);font-weight:700">24/7</td>
+          <td style="padding:0.8rem;border:1px solid var(--accent);text-align:center;color:var(--accent-deep);font-weight:700">✓</td>
+          <td style="padding:0.8rem;border:1px solid var(--accent);text-align:center;color:var(--accent-deep);font-weight:700">✓</td>
+          <td style="padding:0.8rem;border:1px solid var(--accent);text-align:center;color:var(--accent-deep);font-weight:700">✓ אוטונומי</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <span class="label">המבדל</span>
+      ה-moat האמיתי אינו בקטלוג הזכויות (מידע פתוח), אלא בשילוב של <strong>זמינות 24/7</strong> + <strong>שיחה טבעית במקום טפסים</strong> + <strong>אוטומציה מקצה לקצה</strong> + <strong>ספריית Authority Adapters</strong> שמתחזקים ידע מבצעי על איך כל רשות עובדת בפועל.
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="major" id="sec3">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <h2 class="section-title">קונספט הליבה<small>The Core Idea</small></h2>
+    </div>
+
+    <div class="pull-quote">
+      <p>שיחה ב-WhatsApp בשעה 02:30 בלילה. AI שמבין מה צריך, מנוע שמאתר את הזכויות, וסוכן שמפעיל את השעון המשפטי עד למימוש.</p>
+    </div>
+
+    <p>הקונספט עומד על שלוש הנחות עבודה:</p>
+
+    <p><strong>הנחה 1 — האזרח רוצה לדבר, לא למלא טופס.</strong> אינטרפייסים מבוססי טפסים מובילים נטישה גבוהה. שיחה טבעית בעברית (או ערבית/רוסית), בערוץ שאזרחים כבר מכירים (וואטסאפ), בכל שעה — מסירה את החיכוך.</p>
+
+    <p><strong>הנחה 2 — הזכויות אינן רק לאדם.</strong> פלטפורמה שמטפלת רק באדם מפספסת חצי מהשוק. יש זכויות לבעלי חיות, חקלאים, בעלי נכסים, והתאגדויות. ה-Twin תוכנן להיות גנרי ויכול לייצג כל ישות שיש לה זכויות.</p>
+
+    <p><strong>הנחה 3 — הסוכן לא מנדנד, הוא מפעיל מנגנון משפטי.</strong> בארנונה, השגה שלא קיבלה תגובה תוך 60 יום נחשבת כאילו התקבלה. בביטוח לאומי יש דדליינים מקבילים. הסוכן יודע את החוק, מודד את הזמן, ופועל כשנפתח חלון.</p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="major" id="sec4">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <h2 class="section-title">ארכיטקטורת המערכת<small>System Architecture</small></h2>
+    </div>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#1A1F2E"/></marker>
+          <marker id="arrowAccent" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#C2410C"/></marker>
+        </defs>
+
+        <!-- Channels (top) -->
+        <g>
+          <rect x="40" y="20" width="820" height="50" fill="#F4D9C8" stroke="#C2410C" stroke-width="2" stroke-dasharray="6,3"/>
+          <text x="450" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7A2A0A" letter-spacing="2">CHANNELS · 24/7</text>
+          <text x="450" y="60" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="14" fill="#1A1F2E">WhatsApp · Voice Call · Web Chat · Hebrew/Arabic/Russian</text>
+        </g>
+
+        <!-- AI Intake (highlight) -->
+        <g>
+          <rect x="290" y="100" width="320" height="90" fill="#C2410C" stroke="#1A1F2E" stroke-width="2"/>
+          <rect x="290" y="100" width="320" height="6" fill="#1A1F2E"/>
+          <text x="450" y="135" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="20" fill="#F5F1E8">AI Intake Layer</text>
+          <text x="450" y="158" text-anchor="middle" font-family="Assistant" font-size="13" fill="#F5F1E8">תמלול → חילוץ → זכויות → תשובה</text>
+          <text x="450" y="178" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#F5F1E8">Whisper + Claude API + Eligibility</text>
+        </g>
+
+        <!-- Engine Factory -->
+        <g>
+          <rect x="40" y="230" width="200" height="80" fill="#ECE6D5" stroke="#1A1F2E" stroke-width="2"/>
+          <rect x="40" y="230" width="200" height="6" fill="#C2410C"/>
+          <text x="140" y="262" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="16" fill="#1A1F2E">Engine Factory</text>
+          <text x="140" y="282" text-anchor="middle" font-family="Assistant" font-size="12" fill="#4A5060">חוק → מודול זכות</text>
+          <text x="140" y="300" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8B8E96">LLM + Lawyer Sign-off</text>
+        </g>
+
+        <!-- Rights Catalog -->
+        <g>
+          <rect x="660" y="230" width="200" height="80" fill="#1A1F2E" stroke="#1A1F2E" stroke-width="2"/>
+          <rect x="660" y="230" width="200" height="6" fill="#C2410C"/>
+          <text x="760" y="262" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="16" fill="#F5F1E8">Rights Catalog</text>
+          <text x="760" y="282" text-anchor="middle" font-family="Assistant" font-size="12" fill="#ECE6D5">קטלוג זכויות חתום</text>
+          <text x="760" y="300" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8B8E96">Versioned · WORM</text>
+        </g>
+
+        <!-- Digital Twin -->
+        <g>
+          <rect x="40" y="350" width="200" height="80" fill="#7A2A0A" stroke="#1A1F2E" stroke-width="2"/>
+          <rect x="40" y="350" width="200" height="6" fill="#F5F1E8"/>
+          <text x="140" y="382" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="16" fill="#F5F1E8">Digital Twin</text>
+          <text x="140" y="402" text-anchor="middle" font-family="Assistant" font-size="12" fill="#ECE6D5">תאום דיגיטלי</text>
+          <text x="140" y="420" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#ECE6D5">Person · Animal · Plant · Object</text>
+        </g>
+
+        <!-- Eligibility Engine -->
+        <g>
+          <rect x="350" y="350" width="200" height="80" fill="#C2410C" stroke="#1A1F2E" stroke-width="2"/>
+          <rect x="350" y="350" width="200" height="6" fill="#1A1F2E"/>
+          <text x="450" y="382" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="16" fill="#F5F1E8">Eligibility Engine</text>
+          <text x="450" y="402" text-anchor="middle" font-family="Assistant" font-size="12" fill="#F5F1E8">התאמת זכויות</text>
+          <text x="450" y="420" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#F5F1E8">Twin × Catalog</text>
+        </g>
+
+        <!-- Claim Agent -->
+        <g>
+          <rect x="660" y="350" width="200" height="80" fill="#ECE6D5" stroke="#1A1F2E" stroke-width="2"/>
+          <rect x="660" y="350" width="200" height="6" fill="#C2410C"/>
+          <text x="760" y="382" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="16" fill="#1A1F2E">Claim Agent</text>
+          <text x="760" y="402" text-anchor="middle" font-family="Assistant" font-size="12" fill="#4A5060">סוכן הגשה</text>
+          <text x="760" y="420" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8B8E96">BullMQ · Silent-Approval Clock</text>
+        </g>
+
+        <!-- Authority Adapters -->
+        <g>
+          <rect x="290" y="480" width="320" height="70" fill="#ECE6D5" stroke="#1A1F2E" stroke-width="2"/>
+          <text x="450" y="510" text-anchor="middle" font-family="Frank Ruhl Libre" font-weight="700" font-size="16" fill="#1A1F2E">Authority Adapters</text>
+          <text x="450" y="528" text-anchor="middle" font-family="Assistant" font-size="12" fill="#4A5060">עירייה · ביטוח לאומי · משרדים · קופ"ח</text>
+          <text x="450" y="544" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8B8E96">Plugin per Authority · API/PDF/Browser</text>
+        </g>
+
+        <!-- Arrows -->
+        <line x1="450" y1="70" x2="450" y2="98" stroke="#C2410C" stroke-width="3" marker-end="url(#arrowAccent)"/>
+        <line x1="450" y1="190" x2="450" y2="348" stroke="#C2410C" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
+        <line x1="240" y1="390" x2="348" y2="390" stroke="#1A1F2E" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="660" y1="270" x2="555" y2="370" stroke="#1A1F2E" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="240" y1="270" x2="345" y2="350" stroke="#1A1F2E" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <line x1="550" y1="390" x2="658" y2="390" stroke="#C2410C" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
+        <line x1="760" y1="430" x2="500" y2="478" stroke="#C2410C" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
+      </svg>
+      <div class="diagram-caption">תרשים זרימה כללי · כל הערוצים נכנסים דרך AI Intake · החל מהשנייה הראשונה זה אוטונומי</div>
+    </div>
+
+    <p>המערכת בנויה משכבות שכל אחת מהן מודולרית ועצמאית. ה-AI Intake הוא הדלת הקדמית, השאר רץ ברקע.</p>
+  </section>
+
+  <!-- SECTION 5 - AI INTAKE -->
+  <section class="major" id="sec5">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <h2 class="section-title">שכבת ה-AI השיחתית<small>Conversational AI Intake — The 24/7 Front Door</small></h2>
+    </div>
+
+    <p class="lede">זה הרכיב שהופך את הפלטפורמה ממערכת ביורוקרטית למוצר אנושי. במקום טופס עם 30 שדות שאזרח ינטוש בשנייה ה-15, הוא מנהל שיחה טבעית בעברית — בערוץ שהוא כבר מכיר.</p>
+
+    <h3>הזרימה - מתמלול לזכויות</h3>
+
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="step-num"></div>
+        <div>
+          <div class="tech">WhatsApp · Voice · Web</div>
+          <h4>קליטת אודיו או טקסט</h4>
+          <p>המשתמש מדבר או כותב בערוץ הנוח לו. וואטסאפ דרך GreenAPI (תשתית קיימת ב-BizTechoff), מוקד טלפוני קולי, או ווידג׳ט web. השפה: עברית, ערבית, או רוסית.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num"></div>
+        <div>
+          <div class="tech">Whisper / AWS Transcribe</div>
+          <h4>תמלול אודיו לטקסט</h4>
+          <p>אם הקלט קולי — תמלול מיידי לטקסט עברית. Whisper מצטיין בעברית, ויכול לרוץ on-prem ב-AWS il-central-1 ללא יציאת נתונים מישראל.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num"></div>
+        <div>
+          <div class="tech">Claude API · Hebrew Native</div>
+          <h4>חילוץ נתונים ל-Twin</h4>
+          <p>Claude מנתח את הטקסט ומחלץ שדות רלוונטיים: סטטוס מילואים, רשות מקומית, גיל, מצב משפחתי, סוג נכס. במקרה של מידע חסר — מנסח שאלת המשך טבעית.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num"></div>
+        <div>
+          <div class="tech">Eligibility Engine</div>
+          <h4>הרצת התאמת זכויות</h4>
+          <p>ה-Twin המעודכן רץ מול הקטלוג. כל מודולי הזכויות שתואמים את ה-Predicates מוחזרים יחד עם סכומים משוערים ודירוג ROI.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num"></div>
+        <div>
+          <div class="tech">Claude API · Response Synthesis</div>
+          <h4>סינתזה של תשובה טבעית</h4>
+          <p>במקום פלט JSON של 12 זכויות, Claude מנסח תשובה אנושית: <em>"בדקתי, ויכולות להגיע לך 3 זכויות בסך משוער של ₪6,450 בשנה. רוצה שאתחיל להגיש?"</em></p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num"></div>
+        <div>
+          <div class="tech">Claim Agent Hand-off</div>
+          <h4>מעבר לסוכן ההגשה</h4>
+          <p>ברגע שהמשתמש מאשר, ה-Claim Agent מתחיל לעבוד. מסמכים נוספים נאספים בהמשך השיחה (תעודת מילואים, חשבון ארנונה), ואז ההגשה יוצאת לדרך.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>איך זה נראה בפועל</h3>
+
+    <div class="chat-frame">
+      <div class="chat-header">
+        <div class="channel"><span class="dot"></span><span>WhatsApp · בוט הזכויות</span></div>
+        <span class="time">02:34</span>
+      </div>
+      <div class="chat-body">
+        <div class="msg user">
+          היי, אני מילואימניק, גר ברמת גן ושמעתי שיש איזושהי הנחה
+          <span class="ts">02:34</span>
+        </div>
+        <div class="msg ai">
+          היי! בשמחה אבדוק. כדי לאתר במדויק — אתה שוכר את הדירה או בעלים?
+          <span class="ts">02:34</span>
+        </div>
+        <div class="msg user">
+          שוכר
+          <span class="ts">02:35</span>
+        </div>
+        <div class="msg ai">
+          תודה. יש לך תעודת משרת מילואים פעיל בתוקף? אם כן אפשר לצרף כאן. ואם לא — אוכל לעזור להוציא אחת מהמערכת של צה"ל ב-2 דקות
+          <span class="ts">02:35</span>
+        </div>
+        <div class="msg user">
+          [קובץ: תעודה_מילואים.pdf]
+          <span class="ts">02:36</span>
+        </div>
+        <div class="msg ai">
+          התעודה התקבלה ובתוקף. רגע, בודק עבורך זכויות נוספות שמגיעות למילואימניק שגר ברמת גן...
+          <span class="ts">02:36</span>
+        </div>
+
+        <div class="msg results">
+          <div style="font-family:var(--serif);font-weight:700;font-size:1.1rem;margin-bottom:0.6rem">זיהיתי 3 זכויות פוטנציאליות</div>
+
+          <div class="right-found">
+            <div>
+              <div class="name">הנחת ארנונה למילואים — רמת גן</div>
+              <div class="source">תקנה 3ו · הנחת רשות 5%</div>
+            </div>
+            <div class="amount">₪450<small>לשנה</small></div>
+          </div>
+
+          <div class="right-found">
+            <div>
+              <div class="name">תוספת משכנתא לחייל מילואים</div>
+              <div class="source">משרד השיכון · אם יש משכנתא</div>
+            </div>
+            <div class="amount">₪3,800<small>לשנה</small></div>
+          </div>
+
+          <div class="right-found">
+            <div>
+              <div class="name">מענק חד־פעמי לימי שירות</div>
+              <div class="source">משרד הביטחון</div>
+            </div>
+            <div class="amount">₪2,200<small>חד״פ</small></div>
+          </div>
+
+          <div class="total-line">
+            <span>סה"כ פוטנציאל בשנה הראשונה</span>
+            <span class="total-amount">₪6,450</span>
+          </div>
+
+          <div class="cta-row">
+            <span class="cta primary">הגש בשמי</span>
+            <span class="cta">פרטים נוספים</span>
+            <span class="cta">לא עכשיו</span>
+          </div>
+          <span class="ts">02:36</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout signal">
+      <span class="label">הערך השיווקי</span>
+      ב-30 שניות של שיחה, אזרח שלא ידע על שום זכות — מקבל פוטנציאל של ₪6,450 בשנה. ב-2 דקות נוספות, הסוכן כבר הגיש את הבקשות והשעון של 60 יום לאישור־שתיקה התחיל לרוץ. <strong>זה גודל הצעת הערך.</strong>
+    </div>
+
+    <h3>תשתית שתומכת בזה — כבר קיימת ב-BizTechoff</h3>
+
+    <p>הרכיבים הקריטיים לשכבת ה-AI כבר נבנו או שמתוכננים להיבנות בתוך BizTechoff:</p>
+
+<pre><code>WhatsApp Channel        → WA Agent (GreenAPI) — קיים
+Hebrew NLU              → Claude API — קיים
+Queue Orchestration     → BullMQ + Redis — קיים
+Audio Storage           → AWS S3 il-central-1 — קיים
+Multi-tenant Auth       → JWT Module — קיים
+Document OCR            → Plate Recognizer + Vision — קיים מ-LegalTaxi/ShomaTech
+Speech-to-Text          → Whisper API — להוסיף
+Voice Channel (IVR)     → Twilio / Vonage — להוסיף Phase 2</code></pre>
+
+    <p>כלומר — להבדיל ממוצרים אחרים, אנחנו לא בונים תשתית AI מאפס. אנחנו <strong>מרכיבים</strong> פלטפורמה מודולים שכבר עבדו בפרויקטים קודמים.</p>
+  </section>
+
+  <!-- SECTION 6 - 4 KINGDOMS -->
+  <section class="major" id="sec6">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <h2 class="section-title">קהל יעד — ארבע ממלכות<small>Target Audiences — The Four Kingdoms</small></h2>
+    </div>
+
+    <div class="kingdoms-intro">
+      <div class="label">קונספט מארגן</div>
+      <h3>דצח״מ <span>·</span> דומם <span>·</span> צומח <span>·</span> חי <span>·</span> מדבר</h3>
+      <p>הפלטפורמה מטפלת בכל ספקטרום הזכויות בישראל — מאדם, דרך חיה, צמח, ועד נכס דומם. וגם התאגדויות מעליהם.</p>
+    </div>
+
+    <p>הסיווג ל-4 ממלכות הוא לא רק פילוסופי — הוא מבני. ה-<code>DigitalTwin</code> תוכנן להיות פולימורפי: אותו entity יכול לייצג אדם, גן ירק, גולדן רטריבר, או מבנה מסחרי. ה-Eligibility Engine מריץ את אותם Predicates על כולם.</p>
+
+    <div class="kingdom-stack">
+
+      <div class="kingdom">
+        <div class="kingdom-letter">מ<small>מדבר · אדם</small></div>
+        <div class="kingdom-content">
+          <h4>אזרחים</h4>
+          <div class="tagline">PRIMARY MARKET · HIGHEST VOLUME</div>
+          <p>קבוצת המוצא ל-Phase 1. אוכלוסייה רחבה, מודעות נמוכה לזכויות, וערוצי הפצה אורגניים (קבוצות פייסבוק, ווצאפ של מילואימניקים, ארגוני אזרחים ותיקים).</p>
+          <div class="kingdom-rights">
+            <span class="primary">חיילי מילואים — MVP</span>
+            <span>אזרחים ותיקים</span>
+            <span>אנשים עם מוגבלויות</span>
+            <span>הורים יחידנים</span>
+            <span>משפחות שכולות</span>
+            <span>נפגעי טרור</span>
+            <span>עולים חדשים</span>
+            <span>בני נוער בסיכון</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kingdom">
+        <div class="kingdom-letter">ח<small>חי · בעלי חיים</small></div>
+        <div class="kingdom-content">
+          <h4>בעלי חיים</h4>
+          <div class="tagline">UNDERSERVED · NICHE WITH ENGAGED OWNERS</div>
+          <p>שוק כמעט ריק מתחרים. בעלי כלבים בישראל זוכים להנחות באגרות וטיפולים — אך רוב לא מודעים. חקלאים מקבלים סבסוד עבור עדרים — תהליך ביורוקרטי. שירות אוטונומי כאן זוכה לאהבה מהירה.</p>
+          <div class="kingdom-rights">
+            <span>הנחה באגרת כלב — אזרח ותיק/נכה</span>
+            <span>סבסוד חיסונים</span>
+            <span>פיצוי על נזקי טבע לעדרים</span>
+            <span>סיוע למחזיקי חיות שירות</span>
+            <span>פטור ממכס על מזון רפואי</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kingdom">
+        <div class="kingdom-letter">צ<small>צומח · חקלאי</small></div>
+        <div class="kingdom-content">
+          <h4>צמחיה ויערות</h4>
+          <div class="tagline">RURAL ISRAEL · HIGH-VALUE LOW-VOLUME</div>
+          <p>חקלאים, חוואים, ובעלי קרקע חקלאית. סכומי הזכויות פר-בקשה גבוהים (עשרות אלפי שקלים), אבל קהל היעד קטן. מודל No Win No Fee עובד מצוין כאן.</p>
+          <div class="kingdom-rights">
+            <span>פיצוי בצורת ושיטפונות</span>
+            <span>סבסוד מים חקלאיים</span>
+            <span>מענק לטכנולוגיה ירוקה</span>
+            <span>פטור מהיטלי השבחה לקרקע חקלאית</span>
+            <span>פיצוי שריפות יערות</span>
+            <span>תמיכה בעצי זית עתיקים</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kingdom">
+        <div class="kingdom-letter">ד<small>דומם · נכסים</small></div>
+        <div class="kingdom-content">
+          <h4>נכסים דוממים — לא להישרף</h4>
+          <div class="tagline">PROPERTY · HIGH RETROACTIVE VALUE</div>
+          <p>בעלי דירות, רכבים, מבנים מסחריים. כאן המכרה הגדול: הנחות ארנונה רטרואקטיביות, פיצוי על נזקי שריפה, סבסוד שיפוץ אנרגטי, החזרי מס שבח, פטור על דירת מגורים יחידה. הסכומים גדולים והטיפול עכשיו בעיקר ידני דרך עורכי דין יקרים.</p>
+          <div class="kingdom-rights">
+            <span class="primary">פיצוי שריפות "לא להישרף"</span>
+            <span>הנחת ארנונה רטרואקטיבית</span>
+            <span>פטור ממס שבח</span>
+            <span>סבסוד שיפוץ אנרגטי</span>
+            <span>פיצוי רעידת אדמה תמ"א 38</span>
+            <span>החזר אגרת רישוי רכב</span>
+            <span>פיצוי על נזקי טבע ופיגועים</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kingdom" style="background:var(--paper-shade);padding-right:1.5rem;padding-left:1.5rem;border-right:4px solid var(--accent);margin-top:1.5rem">
+        <div class="kingdom-letter">+<small>התאגדויות</small></div>
+        <div class="kingdom-content">
+          <h4>התאגדויות ועמותות</h4>
+          <div class="tagline">B2B PLAY · HIGH RETENTION · STRATEGIC</div>
+          <p>שכבה חוצה — לא ממלכה אלא ישות מסוג שונה. עמותות, חברות לתועלת הציבור, ארגוני מתנדבים, וועדי בית. רישום סעיף 46, פטור מע"מ, הנחת ארנונה למבני ציבור, מענקים. המודל: כל עמותה מנהלת מספר זכויות מסוגים שונים בו זמנית.</p>
+          <div class="kingdom-rights">
+            <span>אישור סעיף 46 (חל"צ)</span>
+            <span>פטור מע"מ</span>
+            <span>הנחת ארנונה למבנה ציבור</span>
+            <span>מענקי משרדים ציבוריים</span>
+            <span>פטור מאגרת רשם</span>
+            <span>הקלות בדיווח שנתי</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      <span class="label">למה זה חשוב סטרטגית</span>
+      ה-Twin הפולימורפי הזה הוא <strong>moat ארכיטקטוני</strong>. כל פלטפורמה אחרת שתרצה להיכנס לתחום תצטרך לבחור: או "אנחנו לאזרחים", או "אנחנו לחקלאים". אנחנו עם תשתית אחת לכל ה-4 ממלכות, ועו"ד אחד שחותם על מודולים יכול לחתום באותה תשתית גם על מודול לאדם וגם על מודול לחווה.
+    </div>
+  </section>
+
+  <!-- SECTION 7 - TECH STACK -->
+  <section class="major" id="sec7">
+    <div class="section-header">
+      <div class="section-number">07</div>
+      <h2 class="section-title">ארכיטקטורה טכנית<small>Tech Stack</small></h2>
+    </div>
+
+    <p>תואם להעדפות הסטאק והארכיטקטורה של BizTechoff (Modular, Core + Vertical):</p>
+
+    <p><strong>Backend:</strong> Node.js + Remult + Express · <strong>Frontend:</strong> Angular (RTL, Hebrew-first; Capacitor בעתיד) · <strong>Database:</strong> PostgreSQL · <strong>Queue:</strong> BullMQ + Redis · <strong>Storage:</strong> AWS S3 באזור <code>il-central-1</code> · <strong>Auth:</strong> JWT httpOnly + Refresh + 2FA · <strong>AI:</strong> Claude API + Whisper · <strong>WhatsApp:</strong> GreenAPI (Phase 1) → 360dialog (Phase 3) · <strong>Signing:</strong> Zoho Sign.</p>
+
+    <h3>מבנה תיקיות</h3>
+
+<pre><code>src/
+├── app/
+│   ├── common/
+│   ├── route/
+│   └── service/
+├── assets/
+├── server/
+│   ├── index.ts
+│   ├── server.ts
+│   ├── jwt.ts
+│   ├── remult-api.ts
+│   └── json-body.ts
+└── shared/
+    ├── entity/
+    │   ├── DigitalTwin.ts          // פולימורפי - 4 ממלכות
+    │   ├── TwinKindHuman.ts
+    │   ├── TwinKindAnimal.ts
+    │   ├── TwinKindPlant.ts
+    │   ├── TwinKindProperty.ts
+    │   ├── TwinKindAssociation.ts
+    │   ├── RightModule.ts
+    │   ├── ClaimCase.ts
+    │   ├── ConversationSession.ts  // שיחת AI Intake
+    │   └── Authority.ts
+    ├── enum/
+    ├── controller/
+    │   ├── EligibilityController.ts
+    │   ├── ClaimController.ts
+    │   ├── TwinController.ts
+    │   ├── IntakeController.ts     // AI Intake API
+    │   └── EngineFactoryController.ts
+    └── type/
+        ├── interface-req/
+        └── interface-res/</code></pre>
+
+    <h3>חלוקה למודולים — MOST!</h3>
+
+<pre><code>@biztechoff/twin-core              // Twin פולימורפי לכל הממלכות
+@biztechoff/eligibility-engine
+@biztechoff/engine-factory
+@biztechoff/claim-agent
+@biztechoff/ai-intake              // ★ NEW - AI שיחתי
+@biztechoff/authority-base
+@biztechoff/right-modules          // הקטלוג עצמו
+@biztechoff/legal-signing
+@biztechoff/wa-agent               // קיים מ-BizTechoff
+
+// Authority Adapters per kingdom:
+@biztechoff/authority-iriya-*      // ערים - דומם + מדבר
+@biztechoff/authority-bituach-leumi
+@biztechoff/authority-mas-hachnasa
+@biztechoff/authority-vetinari     // וטרינר עירוני - חי
+@biztechoff/authority-keren-kayemet // קק"ל - צומח
+@biztechoff/authority-rasham-amutot // רשם עמותות</code></pre>
+  </section>
+
+  <!-- SECTION 8 - BUSINESS -->
+  <section class="major" id="sec8">
+    <div class="section-header">
+      <div class="section-number">08</div>
+      <h2 class="section-title">מודל עסקי<small>Revenue Model</small></h2>
+    </div>
+
+    <h3>מסלולי הכנסה לפי ממלכה</h3>
+
+    <p><strong>אזרחים (מדבר):</strong> ערכה דיגיטלית סמלית ₪29-59 לזכות. מסלול הצלחה 10-15% על זכויות גדולות. מנוי משפחתי ₪39 לחודש לעד 4 פרופילים.</p>
+
+    <p><strong>בעלי חיים (חי):</strong> ₪19 לבדיקת זכויות + הגשה. רובם low-value אבל volume גבוה — מודל freemium עובד.</p>
+
+    <p><strong>חקלאים (צומח):</strong> No Win No Fee 8-12% — הסכומים גבוהים, אבל הקהל קטן ומחושב. מנוי שנתי לחווה ₪890.</p>
+
+    <p><strong>נכסים דוממים (דומם):</strong> כאן המכרה. פיצוי שריפה / רעידת אדמה / ארנונה רטרואקטיבית — ₪3,000-50,000 לתביעה. עמלה 12-18%.</p>
+
+    <p><strong>התאגדויות:</strong> מנוי שנתי ₪1,200-3,600 (לפי גודל). כולל מעקב אחר כל זכויות הארגון.</p>
+
+    <h3>B2B — ערוץ הפצה אסטרטגי</h3>
+
+    <p>ועדי עובדים גדולים, קופ"ח, חברות ביטוח, רשויות מקומיות, ארגוני עזרה (Yad Sarah, AMI, חברה למתנ"סים), ומועצות אזוריות חקלאיות. מסלול B2B מוריד את ה-CAC לאפס ויוצר distribution channel רחב.</p>
+
+    <div class="callout signal">
+      <span class="label">תובנה חשובה</span>
+      ערכה ראשונה היא רק ה-onboarding. הערך האמיתי מתממש בשנה השנייה — Twin שמולא לזכות אחת מאתר אוטומטית 5-7 זכויות נוספות בלי שאלות נוספות. <strong>LTV / CAC צפוי מעל 8x.</strong>
+    </div>
+  </section>
+
+  <!-- SECTION 9 - ROADMAP -->
+  <section class="major" id="sec9">
+    <div class="section-header">
+      <div class="section-number">09</div>
+      <h2 class="section-title">תכנית ביצוע<small>Roadmap</small></h2>
+    </div>
+
+    <div class="roadmap">
+      <div class="phase">
+        <div class="phase-label">Phase 0<span class="duration">הנוכחי</span></div>
+        <div class="phase-content">
+          <h4>אפיון ראשוני</h4>
+          <p>מסמך זה · schema של RightModule + Twin פולימורפי · רשימת רשויות ל-MVP.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-label">Phase 1<span class="duration">3-4 חודשים</span></div>
+        <div class="phase-content">
+          <h4>MVP — ארנונה למילואים בוואטסאפ</h4>
+          <p>5 ערים גדולות (ת"א, ירושלים, חיפה, ראשל"צ, פ"ת). AI Intake בעברית בלבד דרך GreenAPI. Twin של אדם בלבד. מודול זכות אחד, 5 Authority Adapters חצי-ידניים, Claim Agent עם השעון של 60 יום, חתימת עו"ד אחד. <strong>KPI:</strong> 100 הגשות בפיילוט, 60%+ הצלחה.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-label">Phase 2<span class="duration">חודשים 4-9</span></div>
+        <div class="phase-content">
+          <h4>הרחבה ל-3 ממלכות</h4>
+          <p>הוספת Twin של נכסים דוממים (פיצוי שריפה, ארנונה רטרואקטיבית) + בעלי חיים (אגרת כלב). ערוץ קולי דרך Twilio. Engine Factory POC. ערבית כשפה שנייה.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-label">Phase 3<span class="duration">חודשים 9-18</span></div>
+        <div class="phase-content">
+          <h4>פלטפורמה מלאה</h4>
+          <p>קטלוג ציבורי 50+ זכויות. הוספת ממלכות חקלאות + התאגדויות. B2B Self-service ל-ועדי עובדים. אפליקציית מובייל (Capacitor). מעבר מ-GreenAPI ל-360dialog (BSP רשמי).</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-label">Phase 4<span class="duration">שנה 2+</span></div>
+        <div class="phase-content">
+          <h4>הרחבה רוחבית</h4>
+          <p>אינטגרציה ל-data.gov.il לעדכון Twin אוטומטי. שירות B2B לרשויות מקומיות. הרחבה למאות מודולי זכויות. בחינת התרחבות לתחומים נוספים (אזרחים בחו"ל, פינוי-בינוי).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10 - RISKS & CLOSING -->
+  <section class="major" id="sec10">
+    <div class="section-header">
+      <div class="section-number">10</div>
+      <h2 class="section-title">סיכונים, פתוחות, וסיכום<small>Risks &amp; Closing</small></h2>
+    </div>
+
+    <h3>10.1 · סיכונים עיקריים</h3>
+
+    <div class="risk-item">
+      <h4>חוק לשכת עורכי הדין</h4>
+      <p>הגשה אוטומטית לרשות מנהלית בדרך כלל איננה ייצוג, אבל ערר משפטי לבית משפט הוא ייצוג. צריך לסמן בכל מודול את הגבול.</p>
+      <p class="reco"><strong>המלצה:</strong> מיפוי בכל RightModule באיזה שלב נדרש עו"ד אנושי, ומעבר למצב "המערכת מכינה — האזרח חותם" כשנדרש.</p>
+    </div>
+
+    <div class="risk-item">
+      <h4>תקנות אבטחת מידע + AI</h4>
+      <p>שיחת WhatsApp מכילה ת.ז, מצב משפחתי, נתונים רפואיים. תמלול ב-AI שעובר ל-Claude API דורש תיעוד מפורש בתנאי השימוש.</p>
+      <p class="reco"><strong>המלצה:</strong> עיבוד התמלול בתוך AWS il-central-1, רישום מאגר, מינוי DPO, ו-PII redaction אוטומטי לפני שליחה ל-Claude.</p>
+    </div>
+
+    <div class="risk-item">
+      <h4>הזיות AI בחילוץ נתונים</h4>
+      <p>אם ה-AI חולץ "שוכר" כשהמשתמש אמר "בעלים" — הזכות עלולה להידחות.</p>
+      <p class="reco"><strong>המלצה:</strong> אישור מפורש מהמשתמש על כל שדה קריטי לפני הגשה (<em>"לוודא — אתה שוכר את הדירה?"</em>). חתימת עו"ד מכסה את המודול, לא את החילוץ.</p>
+    </div>
+
+    <h3>10.2 · החלטות פתוחות</h3>
+
+    <div class="risk-item">
+      <h4>Predicates: TypeScript או JSON DSL?</h4>
+      <p class="reco"><strong>המלצה:</strong> TS ב-Phase 1, מעבר ל-DSL ב-Phase 2 כשה-Engine Factory מבשיל ופרסום מודולים נדרש בלי deploy.</p>
+    </div>
+
+    <div class="risk-item">
+      <h4>אסטרטגיית Phase 1 — בקשה ראשונה או השגה?</h4>
+      <p>השגה (השגה על חשבון ארנונה) מפעילה את שעון ה-60 יום עם חזקת קבלה. בקשה ראשונה היא flow פשוט יותר אבל בלי המנוף המשפטי.</p>
+      <p class="reco"><strong>המלצה:</strong> להציע את שני המסלולים. למשתמשים שלא קיבלו עדיין הנחה — בקשה. לכאלה שמשלמים שנים בלי הנחה — השגה רטרואקטיבית.</p>
+    </div>
+
+    <h3>10.3 · סיכום</h3>
+
+    <p>הפלטפורמה מציעה פתרון מבני לבעיה שאין לה כיום פתרון אוטונומי בשוק הישראלי. המבדל הוא רב־שכבתי: <strong>זמינות 24/7</strong> + <strong>שיחה טבעית במקום טפסים</strong> + <strong>אוטומציה מקצה לקצה</strong> + <strong>כיסוי 4 ממלכות</strong> + <strong>מנוף השעון המשפטי</strong>.</p>
+
+    <p>ה-MVP המומלץ נשאר <strong>הנחת ארנונה לחיילי מילואים בוואטסאפ</strong> — אוכלוסייה רחבה, מודעות נמוכה, מנוף שיווקי קהילתי. אחרי הוכחת הקונספט, ההרחבה לשאר ה-3 ממלכות לא דורשת בנייה מחדש — אותה תשתית.</p>
+
+    <div class="callout">
+      <span class="label">הצעד הבא</span>
+      הכרעה בהחלטות הפתוחות (10.2), בחירת ה-vertical הראשון בתוך MVP (בקשה / השגה), וכתיבת Phase 1 spec עם ERD מלא של ה-Twin הפולימורפי.
+    </div>
+  </section>
+
+  <footer>
+    Phase 0 v3 · Rights Engine + Digital Twin · BizTechoff™
+    <div class="sig">— מאי 2026 —</div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta.title">שלוח · הפלטפורמה של השליח, 365 ימים בשנה</title>
+<style>
+  :root{
+    --blue:#0b2a6b; --blue-2:#13399a; --blue-3:#1e50c8;
+    --gold:#c79a3a; --gold-2:#e6c66e; --gold-deep:#9a7420;
+    --ink:#101a33; --muted:#5b6478; --line:#e3e7f0;
+    --bg:#f7f9fd; --card:#fff; --ok:#1f9d6b;
+    --shadow:0 14px 40px rgba(11,42,107,.10);
+    --shadow-sm:0 6px 18px rgba(11,42,107,.08);
+    --sans:'Segoe UI','Assistant','Heebo',system-ui,Arial,sans-serif;
+    --r:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.7}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{margin:0}
+  .gold{color:var(--gold)}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(247,249,253,.86);
+    backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:21px;color:var(--blue)}
+  .brand .logo{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--blue),var(--blue-3));color:var(--gold-2);
+    font-size:22px;box-shadow:var(--shadow-sm)}
+  .nav-links{display:flex;align-items:center;gap:26px}
+  .nav-links a{color:var(--muted);font-size:15px;font-weight:600}
+  .nav-links a:hover{color:var(--blue)}
+  .nav-right{display:flex;align-items:center;gap:14px}
+  .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+  .lang button{border:0;background:none;padding:7px 14px;font-weight:700;font-size:13px;color:var(--muted);cursor:pointer}
+  .lang button.active{background:var(--blue);color:#fff}
+  .btn{display:inline-block;border:0;cursor:pointer;font-family:inherit;font-weight:700;
+    padding:12px 22px;border-radius:999px;font-size:15px;transition:.18s;white-space:nowrap}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#3a2c07;box-shadow:0 8px 22px rgba(199,154,58,.35)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(199,154,58,.45)}
+  .btn-ghost{background:#fff;color:var(--blue);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--blue-3);color:var(--blue-3)}
+  .btn-light{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .btn-light:hover{background:rgba(255,255,255,.2)}
+  @media(max-width:820px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;color:#fff;
+    background:
+      radial-gradient(1100px 460px at 85% -8%,rgba(199,154,58,.28),transparent 60%),
+      radial-gradient(900px 500px at 0% 110%,rgba(30,80,200,.5),transparent 55%),
+      linear-gradient(135deg,#0a2461 0%,#13399a 60%,#1e50c8 100%)}
+  .hero::after{content:"";position:absolute;inset:0;opacity:.5;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 16px,transparent 16px 32px)}
+  .hero-in{position:relative;z-index:1;padding:74px 0 84px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  @media(max-width:920px){.hero-in{grid-template-columns:1fr;padding:54px 0 64px}}
+  .eyebrow{display:inline-block;letter-spacing:.14em;font-size:12.5px;color:var(--gold-2);
+    border:1px solid rgba(230,198,110,.5);padding:6px 15px;border-radius:999px;margin-bottom:20px}
+  .hero h1{font-size:50px;line-height:1.12;font-weight:800;margin-bottom:18px}
+  @media(max-width:920px){.hero h1{font-size:36px}}
+  .hero p.lead{font-size:20px;color:#dde6fb;max-width:560px;margin-bottom:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-trust{margin-top:26px;font-size:14px;color:#c2cef0;display:flex;gap:22px;flex-wrap:wrap}
+  .hero-trust span{display:flex;align-items:center;gap:7px}
+  .hero-trust b{color:var(--gold-2)}
+
+  /* mock panel */
+  .mock{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:22px;
+    padding:16px;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+  .mock-bar{display:flex;gap:6px;margin-bottom:12px}
+  .mock-bar i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.4)}
+  .mock-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mw{background:rgba(255,255,255,.95);border-radius:13px;padding:13px 14px;color:var(--ink)}
+  .mw .t{font-size:11.5px;color:var(--muted);font-weight:600}
+  .mw .v{font-size:23px;font-weight:800;color:var(--blue);margin-top:2px}
+  .mw .v small{font-size:12px;color:var(--ok);font-weight:700}
+  .mw.full{grid-column:1/3}
+  .bar{height:8px;border-radius:6px;background:#e7ecf8;margin-top:9px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));width:68%}
+  .zman{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;color:var(--ink)}
+  .zman b{color:var(--blue)}
+
+  /* SECTION shells */
+  section.s{padding:72px 0}
+  .center{text-align:center;max-width:720px;margin:0 auto 46px}
+  .kicker{color:var(--gold-deep);font-weight:800;letter-spacing:.05em;font-size:14px;margin-bottom:10px}
+  h2.title{font-size:34px;color:var(--blue);line-height:1.2;margin-bottom:12px}
+  .center p{color:var(--muted);font-size:17px}
+
+  /* PAIN */
+  .pain{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.pain-grid{grid-template-columns:1fr}}
+  .pain-card{padding:22px;border:1px solid var(--line);border-radius:var(--r);background:#fbfcfe}
+  .pain-card .x{font-size:24px}
+  .pain-card h3{font-size:18px;color:var(--ink);margin:10px 0 6px}
+  .pain-card p{color:var(--muted);font-size:14.5px;margin:0}
+
+  /* FEATURES */
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media(max-width:1000px){.feat-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.feat-grid{grid-template-columns:1fr}}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    padding:24px 22px;box-shadow:var(--shadow-sm);transition:.2s;position:relative;overflow:hidden}
+  .feat:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#cdd9f3}
+  .feat::before{content:"";position:absolute;top:0;inset-inline-start:0;width:100%;height:4px;
+    background:linear-gradient(90deg,var(--blue),var(--gold))}
+  .feat .ic{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;font-size:25px;
+    background:#eef2fc;margin-bottom:14px}
+  .feat h3{font-size:18px;color:var(--blue);margin-bottom:6px}
+  .feat p{color:var(--muted);font-size:14px;margin:0}
+
+  /* HOW */
+  .how{background:linear-gradient(135deg,#0a2461,#13399a);color:#fff}
+  .how .center h2.title,.how .center .kicker{color:#fff}
+  .how .center .kicker{color:var(--gold-2)}
+  .how .center p{color:#cdd7f2}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+  .step{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);padding:26px 22px}
+  .step .n{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    color:#3a2c07;display:grid;place-items:center;font-weight:800;font-size:20px;margin-bottom:14px}
+  .step h3{font-size:19px;margin-bottom:7px}
+  .step p{color:#cfd9f3;font-size:14.5px;margin:0}
+
+  /* INTEGRATIONS */
+  .int-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:820px){.int-grid{grid-template-columns:1fr 1fr}}
+  .int{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;text-align:center;box-shadow:var(--shadow-sm)}
+  .int .ic{font-size:30px}
+  .int h3{font-size:16px;color:var(--blue);margin:10px 0 5px}
+  .int p{font-size:13px;color:var(--muted);margin:0}
+
+  /* PRICING */
+  .price-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;align-items:stretch}
+  @media(max-width:860px){.price-wrap{grid-template-columns:1fr}}
+  .price{border-radius:24px;padding:36px 34px;position:relative;overflow:hidden}
+  .price.main{background:linear-gradient(135deg,#0a2461,#13399a);color:#fff;box-shadow:var(--shadow)}
+  .price.main::after{content:"";position:absolute;inset:0;opacity:.5;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 16px,transparent 16px 32px)}
+  .price.add{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+  .price .z{position:relative;z-index:1}
+  .ribbon{display:inline-block;background:var(--gold);color:#3a2c07;font-weight:800;font-size:12.5px;
+    padding:5px 14px;border-radius:999px;margin-bottom:16px}
+  .price h3{font-size:20px;margin-bottom:8px}
+  .price.main h3{color:#fff}
+  .price.add h3{color:var(--blue)}
+  .amount{display:flex;align-items:baseline;gap:8px;margin:6px 0 4px}
+  .amount .num{font-size:52px;font-weight:800;line-height:1}
+  .price.main .amount .num{color:var(--gold-2)}
+  .price.add .amount .num{color:var(--blue)}
+  .amount .per{font-size:16px;color:inherit;opacity:.8}
+  .price .desc{font-size:14.5px;opacity:.9;margin-bottom:18px}
+  .price.add .desc{color:var(--muted)}
+  .plist{list-style:none;padding:0;margin:0 0 24px}
+  .plist li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:14.5px}
+  .plist li .ck{flex:0 0 auto;color:var(--gold-2);font-weight:800}
+  .price.add .plist li .ck{color:var(--ok)}
+  .opt-tag{font-size:12.5px;color:var(--gold-deep);font-weight:700;background:#fbf3df;border:1px solid #eeddb4;
+    padding:3px 10px;border-radius:999px;display:inline-block;margin-bottom:10px}
+
+  /* CTA */
+  .cta{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#3a2c07;border-radius:26px;
+    padding:54px 40px;text-align:center;box-shadow:var(--shadow)}
+  .cta h2{font-size:34px;margin-bottom:12px;color:#2c2105}
+  .cta p{font-size:18px;margin-bottom:26px;color:#4a3a10}
+  .btn-dark{background:var(--blue);color:#fff}
+  .btn-dark:hover{background:var(--blue-2);transform:translateY(-2px)}
+
+  /* FOOTER */
+  footer{background:#0a1838;color:#aab6da;padding:40px 0 30px;font-size:14px}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  .foot-in .brand{color:#fff}
+  footer .sig{color:var(--gold-2);font-weight:700}
+  footer small{display:block;text-align:center;margin-top:22px;color:#6f7eaa}
+
+  [hidden]{display:none!important}
+
+  /* בס"ד — always top-right corner */
+  .bsd-mark{position:fixed;top:7px;right:14px;z-index:9999;
+    font-family:'Times New Roman','David',serif;font-size:13px;font-weight:700;
+    color:var(--blue);background:rgba(255,255,255,.92);border:1px solid var(--gold-2);
+    border-radius:999px;padding:2px 11px;box-shadow:0 3px 10px rgba(11,42,107,.18);
+    letter-spacing:.02em;pointer-events:none;user-select:none}
+</style>
+</head>
+<body>
+
+<div class="bsd-mark" aria-hidden="true">בס״ד</div>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="logo">ש</span><span>שלוח</span></a>
+    <div class="nav-links">
+      <a href="#features" data-i18n="nav.features">המערכת</a>
+      <a href="#how" data-i18n="nav.how">איך זה עובד</a>
+      <a href="#integrations" data-i18n="nav.integrations">ממשקים</a>
+      <a href="#pricing" data-i18n="nav.pricing">מחיר</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="language">
+        <button id="he" class="active" onclick="setLang('he')">עברית</button>
+        <button id="en" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="#pricing" class="btn btn-gold" data-i18n="nav.cta">דברו איתי</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow" data-i18n="hero.eyebrow">בס״ד · לכל שליח חב״ד בעולם</span>
+      <h1 data-i18n="hero.h1">כל בית חב״ד שלכם<br><span class="gold">במערכת אחת.</span><br>365 ימים בשנה.</h1>
+      <p class="lead" data-i18n="hero.lead">אנשים, אירועים, תרומות, לוח עברי וזמנים, מבצעים ודיוור — מאוחדים בפלטפורמה אחת שמדברת עברית ומכירה את הלוח היהודי.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-gold" data-i18n="hero.cta1">להתחיל עכשיו</a>
+        <a href="#features" class="btn btn-light" data-i18n="hero.cta2">לסיור במערכת</a>
+      </div>
+      <div class="hero-trust">
+        <span><b>✓</b> <span data-i18n="hero.t1">עברית כברירת מחדל</span></span>
+        <span><b>✓</b> <span data-i18n="hero.t2">לוח עברי וזמנים מובנים</span></span>
+        <span><b>✓</b> <span data-i18n="hero.t3">הקמה ב‑770 ₪ לחודש</span></span>
+      </div>
+    </div>
+    <div class="mock" aria-hidden="true">
+      <div class="mock-bar"><i></i><i></i><i></i></div>
+      <div class="mock-grid">
+        <div class="mw"><div class="t" data-i18n="mock.people">אנשי קהילה</div><div class="v">1,248 <small>▲</small></div></div>
+        <div class="mw"><div class="t" data-i18n="mock.events">אירועים החודש</div><div class="v">17</div></div>
+        <div class="mw full"><div class="t" data-i18n="mock.campaign">קמפיין "בניין בית חב״ד"</div><div class="v">₪ 184,000</div><div class="bar"><i></i></div></div>
+        <div class="mw full">
+          <div class="t" data-i18n="mock.zmanim">זמני היום · ב׳ סיון</div>
+          <div class="zman"><span data-i18n="mock.candles">הדלקת נרות</span><b>19:34</b></div>
+          <div class="zman"><span data-i18n="mock.parsha">פרשת השבוע</span><b data-i18n="mock.parsha.v">נשא</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PAIN -->
+<section class="s pain">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker" data-i18n="pain.kicker">המציאות היום</div>
+      <h2 class="title" data-i18n="pain.title">עשרה כלים שלא מדברים זה עם זה</h2>
+      <p data-i18n="pain.sub">גיליון אקסל לתורמים, יומן נפרד לאירועים, פתקים לזמנים, וקבוצת וואטסאפ לכל השאר. הקהילה גדלה — והניהול נשבר.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="x">🗂️</div><h3 data-i18n="pain.1.h">מידע מפוזר</h3><p data-i18n="pain.1.p">איש קשר אחד מופיע בחמישה מקומות — ובכל מקום אחרת.</p></div>
+      <div class="pain-card"><div class="x">🕯️</div><h3 data-i18n="pain.2.h">הלוח היהודי נשכח</h3><p data-i18n="pain.2.p">זמנים, יארצייטים וחגים מחושבים ידנית, ולפעמים נופלים בין הכיסאות.</p></div>
+      <div class="pain-card"><div class="x">⏳</div><h3 data-i18n="pain.3.h">שעות על אדמיניסטרציה</h3><p data-i18n="pain.3.p">זמן שהיה צריך ללכת לקהילה הולך לתחזוקת טבלאות.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="s" id="features">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker" data-i18n="feat.kicker">הפלטפורמה המלאה</div>
+      <h2 class="title" data-i18n="feat.title">שמונה מודולים. מערכת אחת.</h2>
+      <p data-i18n="feat.sub">כל מה שבית חב״ד צריך לאורך השנה — בנוי מודולרית, כל נושא במקום אחד.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic">📊</div><h3 data-i18n="feat.1.h">לוח בקרה</h3><p data-i18n="feat.1.p">מבט‑על חי: אנשים, אירועים קרובים, תרומות, זמני היום ויארצייטים השבוע.</p></div>
+      <div class="feat"><div class="ic">👥</div><h3 data-i18n="feat.2.h">קהילה · CRM</h3><p data-i18n="feat.2.p">אנשי קשר, משפחות, סטטוסים ותיוג — עם שם קודש, מיקום וסגמנטציה.</p></div>
+      <div class="feat"><div class="ic">📅</div><h3 data-i18n="feat.3.h">אירועים ורישום</h3><p data-i18n="feat.3.p">סעודות שבת, שיעורים, חגים והתוועדויות — רישום, קיבולת ונוכחות.</p></div>
+      <div class="feat"><div class="ic">💝</div><h3 data-i18n="feat.4.h">תרומות ומגביות</h3><p data-i18n="feat.4.p">תורמים, קמפיינים, התחייבויות וקבלות — מרובה מטבעות ואוטומטי.</p></div>
+      <div class="feat"><div class="ic">🕯️</div><h3 data-i18n="feat.5.h">לוח עברי וזמנים</h3><p data-i18n="feat.5.p">זמני היום לפי מיקום, פרשה וחגים, יארצייטים עם תזכורות.</p></div>
+      <div class="feat"><div class="ic">🧎</div><h3 data-i18n="feat.6.h">מבצעים</h3><p data-i18n="feat.6.p">תפילין, מזוזה, נרות שבת ועוד — מעקב, יעדים ומיפוי שטח.</p></div>
+      <div class="feat"><div class="ic">✉️</div><h3 data-i18n="feat.7.h">דיוור</h3><p data-i18n="feat.7.p">ניוזלטר וקבלות מתוך סגמנטים של ה‑CRM — תזמון ומעקב שליחה.</p></div>
+      <div class="feat"><div class="ic">📁</div><h3 data-i18n="feat.8.h">מסמכים ומדיה</h3><p data-i18n="feat.8.p">אחסון קבצים ותמונות, מחוברים לאנשי קשר ולאירועים.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="s how" id="how">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker" data-i18n="how.kicker">פשוט להתחיל</div>
+      <h2 class="title" data-i18n="how.title">מהיום הראשון לעבודה מסודרת</h2>
+      <p data-i18n="how.sub">בלי פרויקט אינסופי. מתחברים, מסבים את הנתונים, ויוצאים לדרך.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3 data-i18n="how.1.h">מחברים את המוסד</h3><p data-i18n="how.1.p">כתובת ומיקום בית חב״ד מזינים אוטומטית את הזמנים והלוח העברי.</p></div>
+      <div class="step"><div class="n">2</div><h3 data-i18n="how.2.h">מסבים את הנתונים</h3><p data-i18n="how.2.p">אנשי הקשר, התורמים והאירועים הקיימים נכנסים פנימה — בלי להתחיל מאפס.</p></div>
+      <div class="step"><div class="n">3</div><h3 data-i18n="how.3.h">מנהלים את השנה</h3><p data-i18n="how.3.p">כל דומיין במקומו, הכול מסונכרן, ואתם חוזרים לעיקר — הקהילה.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section class="s" id="integrations">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker" data-i18n="int.kicker">מחובר לכל מה שצריך</div>
+      <h2 class="title" data-i18n="int.title">ממשקים מובנים</h2>
+      <p data-i18n="int.sub">המערכת לא חיה בבועה — היא מדברת עם השירותים שמפעילים בית חב״ד.</p>
+    </div>
+    <div class="int-grid">
+      <div class="int"><div class="ic">🕯️</div><h3 data-i18n="int.1.h">לוח עברי</h3><p data-i18n="int.1.p">זמנים, פרשה, חגים והמרת תאריכים.</p></div>
+      <div class="int"><div class="ic">📍</div><h3 data-i18n="int.2.h">מיקום וגאו</h3><p data-i18n="int.2.p">כתובות, מיפוי שטח וזמנים לפי מיקום.</p></div>
+      <div class="int"><div class="ic">✉️</div><h3 data-i18n="int.3.h">אימייל</h3><p data-i18n="int.3.p">דיוור, קבלות ותזכורות אוטומטיות.</p></div>
+      <div class="int"><div class="ic">☁️</div><h3 data-i18n="int.4.h">אחסון קבצים</h3><p data-i18n="int.4.p">מסמכים ומדיה עם קישורים מאובטחים.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="s" id="pricing" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker" data-i18n="price.kicker">תמחור פשוט והוגן</div>
+      <h2 class="title" data-i18n="price.title">מחיר אחד, הכול כלול</h2>
+      <p data-i18n="price.sub">ריטיינר חודשי קבוע לכל הפלטפורמה. הקמה חד‑פעמית — רק למי שרוצה.</p>
+    </div>
+    <div class="price-wrap">
+      <div class="price main">
+        <div class="z">
+          <span class="ribbon" data-i18n="price.ribbon">הפופולרי</span>
+          <h3 data-i18n="price.main.h">מנוי לפלטפורמה</h3>
+          <div class="amount"><span class="num">₪770</span><span class="per" data-i18n="price.main.per">/ לחודש</span></div>
+          <p class="desc" data-i18n="price.main.desc">ריטיינר חודשי — כל שמונת המודולים, עדכונים ותמיכה שוטפת.</p>
+          <ul class="plist">
+            <li><span class="ck">✓</span><span data-i18n="price.main.1">כל שמונת המודולים פתוחים</span></li>
+            <li><span class="ck">✓</span><span data-i18n="price.main.2">לוח עברי וזמנים מובנים</span></li>
+            <li><span class="ck">✓</span><span data-i18n="price.main.3">עברית ואנגלית</span></li>
+            <li><span class="ck">✓</span><span data-i18n="price.main.4">עדכונים ותמיכה שוטפת</span></li>
+          </ul>
+          <a href="#contact" class="btn btn-gold" style="width:100%;text-align:center" data-i18n="price.main.cta">מתחילים</a>
+        </div>
+      </div>
+      <div class="price add">
+        <span class="opt-tag" data-i18n="price.add.opt">אופציונלי · חד‑פעמי</span>
+        <h3 data-i18n="price.add.h">הקמה והסבה</h3>
+        <div class="amount"><span class="num">₪1,200</span><span class="per" data-i18n="price.add.per">· חד‑פעמי</span></div>
+        <p class="desc" data-i18n="price.add.desc">למי שרוצה כניסה חלקה — חיבור הממשקים שנבחרו והסבת הנתונים הקיימים.</p>
+        <ul class="plist">
+          <li><span class="ck">✓</span><span data-i18n="price.add.1">חיבור הממשקים שנבחרו</span></li>
+          <li><span class="ck">✓</span><span data-i18n="price.add.2">הסבת נתונים קיימים</span></li>
+          <li><span class="ck">✓</span><span data-i18n="price.add.3">ליווי בהקמה</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center" data-i18n="price.add.cta">להוסיף הקמה</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="s" id="contact">
+  <div class="wrap">
+    <div class="cta">
+      <h2 data-i18n="cta.h">מוכנים להחזיר את הזמן לקהילה?</h2>
+      <p data-i18n="cta.p">נצרף אתכם, נסביר ונראה אם זה מתאים — בלי התחייבות.</p>
+      <a href="mailto:biztechoff@gmail.com" class="btn btn-dark" data-i18n="cta.btn">לתיאום שיחה</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-in">
+    <a class="brand" href="#top"><span class="logo">ש</span><span>שלוח</span></a>
+    <div class="sig">BizTechoff™ — <span data-i18n="footer.sig">התאמת העסק לעידן הדיגיטלי</span></div>
+  </div>
+  <div class="wrap"><small data-i18n="footer.bsd">בס״ד · שלוח · הפלטפורמה של השליח, 365 ימים בשנה</small></div>
+</footer>
+
+<script>
+  const I18N = {
+    he:{
+      "meta.title":"שלוח · הפלטפורמה של השליח, 365 ימים בשנה",
+      "nav.features":"המערכת","nav.how":"איך זה עובד","nav.integrations":"ממשקים","nav.pricing":"מחיר","nav.cta":"דברו איתי",
+      "hero.eyebrow":"בס״ד · לכל שליח חב״ד בעולם",
+      "hero.h1":"כל בית חב״ד שלכם<br><span class='gold'>במערכת אחת.</span><br>365 ימים בשנה.",
+      "hero.lead":"אנשים, אירועים, תרומות, לוח עברי וזמנים, מבצעים ודיוור — מאוחדים בפלטפורמה אחת שמדברת עברית ומכירה את הלוח היהודי.",
+      "hero.cta1":"להתחיל עכשיו","hero.cta2":"לסיור במערכת",
+      "hero.t1":"עברית כברירת מחדל","hero.t2":"לוח עברי וזמנים מובנים","hero.t3":"החל מ‑770 ₪ לחודש",
+      "mock.people":"אנשי קהילה","mock.events":"אירועים החודש","mock.campaign":"קמפיין \"בניין בית חב״ד\"",
+      "mock.zmanim":"זמני היום · ב׳ סיון","mock.candles":"הדלקת נרות","mock.parsha":"פרשת השבוע","mock.parsha.v":"נשא",
+      "pain.kicker":"המציאות היום","pain.title":"עשרה כלים שלא מדברים זה עם זה",
+      "pain.sub":"גיליון אקסל לתורמים, יומן נפרד לאירועים, פתקים לזמנים, וקבוצת וואטסאפ לכל השאר. הקהילה גדלה — והניהול נשבר.",
+      "pain.1.h":"מידע מפוזר","pain.1.p":"איש קשר אחד מופיע בחמישה מקומות — ובכל מקום אחרת.",
+      "pain.2.h":"הלוח היהודי נשכח","pain.2.p":"זמנים, יארצייטים וחגים מחושבים ידנית, ולפעמים נופלים בין הכיסאות.",
+      "pain.3.h":"שעות על אדמיניסטרציה","pain.3.p":"זמן שהיה צריך ללכת לקהילה הולך לתחזוקת טבלאות.",
+      "feat.kicker":"הפלטפורמה המלאה","feat.title":"שמונה מודולים. מערכת אחת.",
+      "feat.sub":"כל מה שבית חב״ד צריך לאורך השנה — בנוי מודולרית, כל נושא במקום אחד.",
+      "feat.1.h":"לוח בקרה","feat.1.p":"מבט‑על חי: אנשים, אירועים קרובים, תרומות, זמני היום ויארצייטים השבוע.",
+      "feat.2.h":"קהילה · CRM","feat.2.p":"אנשי קשר, משפחות, סטטוסים ותיוג — עם שם קודש, מיקום וסגמנטציה.",
+      "feat.3.h":"אירועים ורישום","feat.3.p":"סעודות שבת, שיעורים, חגים והתוועדויות — רישום, קיבולת ונוכחות.",
+      "feat.4.h":"תרומות ומגביות","feat.4.p":"תורמים, קמפיינים, התחייבויות וקבלות — מרובה מטבעות ואוטומטי.",
+      "feat.5.h":"לוח עברי וזמנים","feat.5.p":"זמני היום לפי מיקום, פרשה וחגים, יארצייטים עם תזכורות.",
+      "feat.6.h":"מבצעים","feat.6.p":"תפילין, מזוזה, נרות שבת ועוד — מעקב, יעדים ומיפוי שטח.",
+      "feat.7.h":"דיוור","feat.7.p":"ניוזלטר וקבלות מתוך סגמנטים של ה‑CRM — תזמון ומעקב שליחה.",
+      "feat.8.h":"מסמכים ומדיה","feat.8.p":"אחסון קבצים ותמונות, מחוברים לאנשי קשר ולאירועים.",
+      "how.kicker":"פשוט להתחיל","how.title":"מהיום הראשון לעבודה מסודרת",
+      "how.sub":"בלי פרויקט אינסופי. מתחברים, מסבים את הנתונים, ויוצאים לדרך.",
+      "how.1.h":"מחברים את המוסד","how.1.p":"כתובת ומיקום בית חב״ד מזינים אוטומטית את הזמנים והלוח העברי.",
+      "how.2.h":"מסבים את הנתונים","how.2.p":"אנשי הקשר, התורמים והאירועים הקיימים נכנסים פנימה — בלי להתחיל מאפס.",
+      "how.3.h":"מנהלים את השנה","how.3.p":"כל דומיין במקומו, הכול מסונכרן, ואתם חוזרים לעיקר — הקהילה.",
+      "int.kicker":"מחובר לכל מה שצריך","int.title":"ממשקים מובנים",
+      "int.sub":"המערכת לא חיה בבועה — היא מדברת עם השירותים שמפעילים בית חב״ד.",
+      "int.1.h":"לוח עברי","int.1.p":"זמנים, פרשה, חגים והמרת תאריכים.",
+      "int.2.h":"מיקום וגאו","int.2.p":"כתובות, מיפוי שטח וזמנים לפי מיקום.",
+      "int.3.h":"אימייל","int.3.p":"דיוור, קבלות ותזכורות אוטומטיות.",
+      "int.4.h":"אחסון קבצים","int.4.p":"מסמכים ומדיה עם קישורים מאובטחים.",
+      "price.kicker":"תמחור פשוט והוגן","price.title":"מחיר אחד, הכול כלול",
+      "price.sub":"ריטיינר חודשי קבוע לכל הפלטפורמה. הקמה חד‑פעמית — רק למי שרוצה.",
+      "price.ribbon":"הפופולרי","price.main.h":"מנוי לפלטפורמה","price.main.per":"/ לחודש",
+      "price.main.desc":"ריטיינר חודשי — כל שמונת המודולים, עדכונים ותמיכה שוטפת.",
+      "price.main.1":"כל שמונת המודולים פתוחים","price.main.2":"לוח עברי וזמנים מובנים",
+      "price.main.3":"עברית ואנגלית","price.main.4":"עדכונים ותמיכה שוטפת","price.main.cta":"מתחילים",
+      "price.add.opt":"אופציונלי · חד‑פעמי","price.add.h":"הקמה והסבה","price.add.per":"· חד‑פעמי",
+      "price.add.desc":"למי שרוצה כניסה חלקה — חיבור הממשקים שנבחרו והסבת הנתונים הקיימים.",
+      "price.add.1":"חיבור הממשקים שנבחרו","price.add.2":"הסבת נתונים קיימים","price.add.3":"ליווי בהקמה","price.add.cta":"להוסיף הקמה",
+      "cta.h":"מוכנים להחזיר את הזמן לקהילה?","cta.p":"נצרף אתכם, נסביר ונראה אם זה מתאים — בלי התחייבות.","cta.btn":"לתיאום שיחה",
+      "footer.sig":"התאמת העסק לעידן הדיגיטלי","footer.bsd":"בס״ד · שלוח · הפלטפורמה של השליח, 365 ימים בשנה"
+    },
+    en:{
+      "meta.title":"Shaluach · The Shliach's platform, 365 days a year",
+      "nav.features":"Platform","nav.how":"How it works","nav.integrations":"Integrations","nav.pricing":"Pricing","nav.cta":"Talk to us",
+      "hero.eyebrow":"B\"H · For every Chabad Shliach worldwide",
+      "hero.h1":"Your whole Chabad House,<br><span class='gold'>in one system.</span><br>365 days a year.",
+      "hero.lead":"People, events, donations, the Hebrew calendar & zmanim, mivtzoim and mailings — unified in one platform that speaks Hebrew and knows the Jewish calendar.",
+      "hero.cta1":"Get started","hero.cta2":"Take a tour",
+      "hero.t1":"Hebrew by default","hero.t2":"Hebrew calendar & zmanim built in","hero.t3":"From ₪770 / month",
+      "mock.people":"Community members","mock.events":"Events this month","mock.campaign":"\"Build the Chabad House\" campaign",
+      "mock.zmanim":"Today's zmanim · 2 Sivan","mock.candles":"Candle lighting","mock.parsha":"Weekly parsha","mock.parsha.v":"Naso",
+      "pain.kicker":"Today's reality","pain.title":"Ten tools that don't talk to each other",
+      "pain.sub":"A spreadsheet for donors, a separate calendar for events, sticky notes for zmanim, and a WhatsApp group for everything else. The community grows — and management breaks.",
+      "pain.1.h":"Scattered data","pain.1.p":"One contact lives in five places — and each one says something different.",
+      "pain.2.h":"The Jewish calendar slips","pain.2.p":"Zmanim, yahrzeits and holidays computed by hand — and sometimes missed.",
+      "pain.3.h":"Hours on admin","pain.3.p":"Time that should go to the community goes to maintaining tables.",
+      "feat.kicker":"The full platform","feat.title":"Eight modules. One system.",
+      "feat.sub":"Everything a Chabad House needs across the year — built modular, every subject in one place.",
+      "feat.1.h":"Dashboard","feat.1.p":"A live overview: people, upcoming events, donations, today's zmanim and this week's yahrzeits.",
+      "feat.2.h":"Community · CRM","feat.2.p":"Contacts, families, statuses and tags — with sacred name, location and segmentation.",
+      "feat.3.h":"Events & registration","feat.3.p":"Shabbat meals, classes, holidays and farbrengens — registration, capacity and attendance.",
+      "feat.4.h":"Donations & fundraising","feat.4.p":"Donors, campaigns, pledges and receipts — multi-currency and automated.",
+      "feat.5.h":"Hebrew calendar & zmanim","feat.5.p":"Daily zmanim by location, parsha and holidays, yahrzeits with reminders.",
+      "feat.6.h":"Mivtzoim","feat.6.p":"Tefillin, mezuzah, Shabbat candles and more — tracking, goals and field mapping.",
+      "feat.7.h":"Communications","feat.7.p":"Newsletters and receipts from CRM segments — scheduling and send tracking.",
+      "feat.8.h":"Documents & media","feat.8.p":"Store files and photos, linked to contacts and events.",
+      "how.kicker":"Easy to begin","how.title":"From day one to an organized year",
+      "how.sub":"No endless project. Connect, migrate your data, and go.",
+      "how.1.h":"Connect your institution","how.1.p":"Your Chabad House address and location auto-feed the zmanim and Hebrew calendar.",
+      "how.2.h":"Migrate your data","how.2.p":"Your existing contacts, donors and events come in — no starting from scratch.",
+      "how.3.h":"Run the year","how.3.p":"Every domain in its place, all in sync, and you return to what matters — the community.",
+      "int.kicker":"Connected to what matters","int.title":"Built-in integrations",
+      "int.sub":"The system doesn't live in a bubble — it talks to the services that run a Chabad House.",
+      "int.1.h":"Hebrew calendar","int.1.p":"Zmanim, parsha, holidays and date conversion.",
+      "int.2.h":"Location & geo","int.2.p":"Addresses, field mapping and location-based zmanim.",
+      "int.3.h":"Email","int.3.p":"Mailings, receipts and automated reminders.",
+      "int.4.h":"File storage","int.4.p":"Documents and media with secure links.",
+      "price.kicker":"Simple, fair pricing","price.title":"One price, everything included",
+      "price.sub":"A fixed monthly retainer for the whole platform. One-time setup — only if you want it.",
+      "price.ribbon":"Popular","price.main.h":"Platform subscription","price.main.per":"/ month",
+      "price.main.desc":"Monthly retainer — all eight modules, updates and ongoing support.",
+      "price.main.1":"All eight modules unlocked","price.main.2":"Hebrew calendar & zmanim built in",
+      "price.main.3":"Hebrew and English","price.main.4":"Updates and ongoing support","price.main.cta":"Get started",
+      "price.add.opt":"Optional · one-time","price.add.h":"Setup & migration","price.add.per":"· one-time",
+      "price.add.desc":"For a smooth start — connecting the chosen integrations and migrating your existing data.",
+      "price.add.1":"Connect the chosen integrations","price.add.2":"Migrate existing data","price.add.3":"Hands-on onboarding","price.add.cta":"Add setup",
+      "cta.h":"Ready to give the time back to your community?","cta.p":"We'll onboard you, walk you through it, and see if it fits — no commitment.","cta.btn":"Schedule a call",
+      "footer.sig":"Bringing your work into the digital age","footer.bsd":"B\"H · Shaluach · The Shliach's platform, 365 days a year"
+    }
+  };
+
+  function setLang(lang){
+    const dict = I18N[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined){
+        if(key === 'meta.title'){ document.title = dict[key]; }
+        else { el.innerHTML = dict[key]; }
+      }
+    });
+    document.getElementById('he').classList.toggle('active', lang==='he');
+    document.getElementById('en').classList.toggle('active', lang==='en');
+  }
+  setLang('he');
+</script>
+</body>
+</html>

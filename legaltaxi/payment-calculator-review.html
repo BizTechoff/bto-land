@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סקירת חישוב התשלום | LegalTaxi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-soft: #1e293b;
+    --card: #ffffff;
+    --card-soft: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-soft: #64748b;
+    --primary: #1976d2;
+    --primary-dark: #0d47a1;
+    --accent: #d32f2f;
+    --warn: #f59e0b;
+    --ok: #16a34a;
+    --code-bg: #f1f5f9;
+    --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Rubik', 'Heebo', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* === HEADER === */
+  header.hero {
+    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+    color: #fff;
+    padding: 40px 36px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 50%);
+  }
+  header.hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  header.hero .subtitle {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    position: relative;
+  }
+  header.hero .meta {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+  }
+  header.hero .meta span {
+    background: rgba(255,255,255,0.18);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(6px);
+  }
+
+  /* === SECTIONS === */
+  section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  section h2 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h2 .emoji { font-size: 1.4rem; }
+  section h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 18px 0 10px;
+  }
+  section p { margin-bottom: 10px; }
+
+  /* === FLOW STEPS === */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 18px 0;
+  }
+  .flow-step {
+    background: var(--card-soft);
+    border: 1px solid var(--border);
+    border-right: 4px solid var(--primary);
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .flow-step .num {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+
+  /* === CODE / FILES === */
+  code, .code {
+    background: var(--code-bg);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
+    font-size: 0.88em;
+    color: var(--primary-dark);
+    direction: ltr;
+    display: inline-block;
+  }
+  .file-list {
+    list-style: none;
+    margin: 12px 0;
+  }
+  .file-list li {
+    padding: 8px 14px;
+    background: var(--card-soft);
+    border-right: 3px solid var(--primary);
+    margin-bottom: 6px;
+    border-radius: 6px;
+    font-size: 0.93rem;
+  }
+
+  /* === KEY-VALUE BOX === */
+  .kv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .kv-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #bfdbfe;
+  }
+  .kv-box .k { font-size: 0.85rem; color: var(--text-soft); margin-bottom: 4px; }
+  .kv-box .v { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); }
+
+  /* === DELIVERY TYPE CARDS === */
+  .types-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .type-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .type-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .type-header {
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .type-header .icon { font-size: 1.6rem; }
+  .type-header .id-tag {
+    margin-right: auto;
+    background: rgba(255,255,255,0.22);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-family: monospace;
+    direction: ltr;
+  }
+  .type-header h3 {
+    color: #fff !important;
+    margin: 0 !important;
+    font-size: 1.2rem;
+  }
+  .type-body { padding: 18px 22px; }
+  .type-body ul {
+    list-style: none;
+    padding-right: 0;
+  }
+  .type-body li {
+    padding: 8px 0 8px 0;
+    border-bottom: 1px dashed var(--border);
+    position: relative;
+    padding-right: 22px;
+  }
+  .type-body li:last-child { border-bottom: none; }
+  .type-body li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--primary);
+    font-size: 0.7rem;
+    top: 12px;
+  }
+
+  /* Color per type */
+  .t-private  .type-header { background: linear-gradient(135deg, #ea580c, #f97316); }
+  .t-court    .type-header { background: linear-gradient(135deg, #16a34a, #22c55e); }
+  .t-gov      .type-header { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .t-copy     .type-header { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+  .t-print    .type-header { background: linear-gradient(135deg, #475569, #64748b); }
+  .t-apostille.type-header,
+  .t-apostille .type-header { background: linear-gradient(135deg, #be185d, #ec4899); }
+  .t-shredder .type-header { background: linear-gradient(135deg, #7f1d1d, #b91c1c); }
+  .t-toner    .type-header { background: linear-gradient(135deg, #1e40af, #3b82f6); }
+  .t-locate   .type-header { background: linear-gradient(135deg, #d97706, #f59e0b); }
+  .t-course   .type-header { background: linear-gradient(135deg, #4b5563, #6b7280); }
+
+  /* === TABLE === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  thead { background: var(--primary-dark); color: #fff; }
+  th, td {
+    padding: 11px 14px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr:nth-child(even) { background: var(--card-soft); }
+  tbody tr:hover { background: #eff6ff; }
+  td.price {
+    font-weight: 700;
+    color: var(--primary-dark);
+    direction: ltr;
+    text-align: right;
+  }
+
+  /* === ALERTS === */
+  .alert {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-right: 4px solid;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .alert.warn { background: #fef3c7; border-color: var(--warn); color: #78350f; }
+  .alert.danger { background: #fee2e2; border-color: var(--accent); color: #7f1d1d; }
+  .alert.info { background: #dbeafe; border-color: var(--primary); color: #1e3a8a; }
+  .alert.ok { background: #dcfce7; border-color: var(--ok); color: #14532d; }
+  .alert strong { font-weight: 700; }
+
+  /* === BADGE === */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 0 4px;
+  }
+  .badge-mult { background: #e0e7ff; color: #3730a3; }
+  .badge-no-mult { background: #fee2e2; color: #991b1b; }
+  .badge-fixed { background: #dcfce7; color: #14532d; }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 24px 0 8px;
+    font-size: 0.85rem;
+  }
+  footer .sig {
+    color: var(--primary-dark);
+    font-weight: 700;
+  }
+
+  /* === PRINT === */
+  @media print {
+    body { background: #fff; padding: 10px; }
+    section, .type-card { box-shadow: none; break-inside: avoid; }
+    header.hero { background: var(--primary-dark) !important; }
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 16px 8px; }
+    section { padding: 18px 16px; }
+    header.hero { padding: 28px 22px; }
+    header.hero h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="hero">
+    <h1>📊 סקירת חישוב התשלום</h1>
+    <p class="subtitle">מנגנון <code style="background:rgba(255,255,255,0.2);color:#fff">orderPaymentCalculator</code> ושימושו ב־<code style="background:rgba(255,255,255,0.2);color:#fff">order-details.calcPayment()</code></p>
+    <div class="meta">
+      <span>📁 LegalTaxi</span>
+      <span>🛠️ Remult · Angular · Node</span>
+      <span>📅 2026-05-10</span>
+      <span>👤 BizTechoff™</span>
+    </div>
+  </header>
+
+  <!-- MACRO -->
+  <section>
+    <h2><span class="emoji">🌐</span> מאקרו — הארכיטקטורה הכללית</h2>
+
+    <h3>הקבצים המעורבים</h3>
+    <ul class="file-list">
+      <li><code>src/app/order/orderPaymentCalculator.ts</code> — המנוע המרכזי (<code>@Injectable</code>)</li>
+      <li><code>src/app/order/order-details/order-details.component.ts</code> → <code>calcPayment()</code> — מעטפת קליינט (הזמנה רגילה)</li>
+      <li><code>src/shared/payment.type.ts</code> — Request / Response / Item</li>
+    </ul>
+
+    <h3>זרימת חישוב</h3>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span>בניית <code>PaymentCalculatorRequest</code></div>
+      <div class="flow-step"><span class="num">2</span>בניית <code>areasByPlace</code> + <code>placeContacts</code></div>
+      <div class="flow-step"><span class="num">3</span>קריאה ל־<code>calculator.calc()</code></div>
+      <div class="flow-step"><span class="num">4</span><code>switch</code> לפי סוג שירות</div>
+      <div class="flow-step"><span class="num">5</span>צבירת <code>items[]</code> ו־<code>total</code></div>
+      <div class="flow-step"><span class="num">6</span>פילטרים גלובליים</div>
+      <div class="flow-step"><span class="num">7</span>Post-processing (locate)</div>
+      <div class="flow-step"><span class="num">8</span>שמירת <code>Payment</code></div>
+    </div>
+
+    <h3>מקור המחיר (priceMap → default)</h3>
+    <div class="alert info">
+      <span class="icon">💡</span>
+      <div>
+        <strong>שכבה כפולה:</strong> פונקציות <code>getPrice(area)</code> ו־<code>getCopyPrice(area)</code> מחזירות תחילה את <code>priceMap</code> של ה־<code>Pricing</code> שנבחר ללקוח (<code>PricingLine</code>), ואם אין — נופלות ל־<code>area.price</code> ו־<code>area.copyPrice</code> שמובנים ב־<code>AreaType</code> עצמו.
+      </div>
+    </div>
+
+    <h3>מכפיל דחיפות (<code>OrderPriority.multiplier</code>)</h3>
+    <div class="kv-grid">
+      <div class="kv-box"><div class="k">normal — רגילה (עד 7 ימי עסקים)</div><div class="v">×1</div></div>
+      <div class="kv-box"><div class="k">high — דחופה (עד 3 ימים)</div><div class="v">×1.5</div></div>
+      <div class="kv-box"><div class="k">urgent — בהולה (מהיום להיום)</div><div class="v">×2</div></div>
+    </div>
+
+    <h3>שני פילטרים גלובליים בסוף <code>calc()</code></h3>
+    <div class="alert danger">
+      <span class="icon">🚫</span>
+      <div>
+        <strong>1. בהולה מחוץ לטווח:</strong> אם <code>priority = urgent</code> ויש ולו נקודה אחת מחוץ ל־[גוש דן/הרצליה/ראשל"צ, שרון קרוב/רחוק, שפלה קרוב/רחוק] → <strong>total = 0</strong>.
+      </div>
+    </div>
+    <div class="alert danger">
+      <span class="icon">⚖️</span>
+      <div>
+        <strong>2. תיק פלילי:</strong> אם <code>type = copy</code> וגם <code>copyType = criminal</code> → <strong>total = 0</strong>.
+      </div>
+    </div>
+    <div class="alert warn">
+      <span class="icon">🧪</span>
+      <div>
+        <strong>מצב לא־production:</strong> ב־<code>order-details.component.ts</code> נחתך <code>amount</code> ל־<code>Math.min(Math.max(0, total), 2)</code> — עד 2 ש"ח לבדיקות.
+      </div>
+    </div>
+  </section>
+
+  <!-- MICRO PER TYPE -->
+  <section>
+    <h2><span class="emoji">🔬</span> מיקרו — לפי סוג שירות (<code>DeliveryType</code>)</h2>
+
+    <div class="types-grid">
+
+      <!-- PRIVATE -->
+      <div class="type-card t-private">
+        <div class="type-header">
+          <span class="icon">📦</span>
+          <h3>מסירה אישית</h3>
+          <span class="id-tag">private</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcPrivate()</code> — הלוגיקה המורכבת ביותר.</p>
+
+          <div class="alert info" style="margin-top:8px">
+            <span class="icon">💡</span>
+            <div>
+              <strong>העיקרון בלבד:</strong> שליח אוסף מנקודה אחת ומוסר בנקודה אחרת.
+              צד אחד הוא ה"שליחות האמיתית" → משלם <strong>מלא</strong>.
+              הצד השני הוא רק "תוספת" → משלם <strong>מופחת</strong>.
+              <br><br>
+              <strong>איך נקבע מי הצד היקר?</strong>
+              <ul style="margin-right:18px;margin-top:4px">
+                <li>אם אחד הצדדים הוא <strong>גוש דן</strong> (120 ש"ח — הזול ביותר) → גוש דן הוא תמיד ה"מופחת", והוא משלם <strong>30 ש"ח קבוע</strong> (מבצע — פחות מחצי המחיר שלו)</li>
+                <li>אחרת → <strong>האזור היקר משלם מלא, האזור הזול משלם חצי</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <h4 style="margin-top:14px;color:var(--primary)">🌳 מקרה A — <code>courier</code> + נקודה אחת בלבד</h4>
+          <p>4 ענפים, לפי סדר ה־<code>if/else if</code>:</p>
+
+          <table>
+            <thead>
+              <tr><th>תנאי</th><th>FROM משלם</th><th>TO משלם</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1.</strong> FROM = גוש דן</td>
+                <td class="price">30 × multi</td>
+                <td class="price">price(TO) × multi</td>
+              </tr>
+              <tr>
+                <td><strong>2.</strong> TO = גוש דן</td>
+                <td class="price">price(FROM) × multi</td>
+                <td class="price">30 × multi</td>
+              </tr>
+              <tr>
+                <td><strong>3.</strong> FROM &gt; TO (במחיר)</td>
+                <td class="price">price(FROM) × multi</td>
+                <td class="price">½ × price(TO) × multi</td>
+              </tr>
+              <tr>
+                <td><strong>4.</strong> TO ≥ FROM</td>
+                <td class="price">½ × price(FROM) × multi</td>
+                <td class="price">price(TO) × multi</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p style="margin-top:8px">בכל ארבעת הענפים: <strong>+20 ש"ח לכל נמען נוסף</strong> באותה כתובת ב־TO.</p>
+
+          <h4 style="margin-top:18px;color:var(--primary)">🧮 דוגמאות מספריות (priority = normal, multi = ×1)</h4>
+
+          <table>
+            <thead>
+              <tr><th>FROM</th><th>TO</th><th>פירוט</th><th>סה"כ</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>גוש דן (120)</td>
+                <td>שרון רחוק (200)</td>
+                <td>TO=200 + FROM=30</td>
+                <td class="price">230 ₪</td>
+              </tr>
+              <tr>
+                <td>ירושלים (250)</td>
+                <td>גוש דן (120)</td>
+                <td>FROM=250 + TO=30</td>
+                <td class="price">280 ₪</td>
+              </tr>
+              <tr>
+                <td>ירושלים (250)</td>
+                <td>שרון רחוק (200)</td>
+                <td>FROM=250 + TO=½×200=100</td>
+                <td class="price">350 ₪</td>
+              </tr>
+              <tr>
+                <td>שרון רחוק (200)</td>
+                <td>ירושלים (250)</td>
+                <td>TO=250 + FROM=½×200=100</td>
+                <td class="price">350 ₪</td>
+              </tr>
+              <tr>
+                <td>ירושלים (250)</td>
+                <td>שרון רחוק (200) + 2 נמענים</td>
+                <td>250 + 100 + 2×20</td>
+                <td class="price">390 ₪</td>
+              </tr>
+              <tr style="background:#fef3c7">
+                <td>ירושלים (250)</td>
+                <td>שרון רחוק (200)</td>
+                <td>×2 (urgent): 500 + 200</td>
+                <td class="price">700 ₪</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 style="margin-top:18px;color:var(--primary)">📚 מקרה B — <code>upload</code> או יותר מנקודה אחת</h4>
+          <ul>
+            <li>קיבוץ נקודות לפי אזור (כולל FROM אם <code>courier</code>) → לכל קבוצה: <code>price × count × multi</code></li>
+            <li>+20 ש"ח לכל נמען נוסף</li>
+            <li><strong>אין מבצעי "חצי מחיר" כאן</strong> — כל אזור משלם מלא × כמות הנקודות בו</li>
+          </ul>
+
+          <div class="alert warn" style="margin-top:8px">
+            <span class="icon">⚠️</span>
+            <div>זאת קפיצה משמעותית במחיר ברגע שעוברים מנקודה אחת לשתיים. הנקודה השנייה לא מקבלת חצי — היא משלמת מלא.</div>
+          </div>
+
+          <p style="margin-top:10px"><span class="badge badge-mult">×multiplier</span> אם <code>pickupType = upload</code> → <strong>+ calcUpload()</strong></p>
+        </div>
+      </div>
+
+      <!-- COURT -->
+      <div class="type-card t-court">
+        <div class="type-header">
+          <span class="icon">⚖️</span>
+          <h3>הגשת כתבי דין</h3>
+          <span class="id-tag">court</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcCourt()</code></p>
+          <ul>
+            <li>אזור בית המשפט × multiplier</li>
+            <li>אם <code>pickupType = courier</code> → +אזור FROM × multiplier</li>
+            <li>אם <code>pickupType = upload</code> → +<code>calcUpload()</code></li>
+            <li class="alert info" style="margin-top:8px;display:block;padding:8px 12px;border-right-width:3px"><strong>ℹ️</strong> אין נקודות מסירה אצל לקוח — להגשה זה אזור בית המשפט בלבד.</li>
+          </ul>
+          <p><span class="badge badge-mult">×multiplier</span></p>
+        </div>
+      </div>
+
+      <!-- GOV -->
+      <div class="type-card t-gov">
+        <div class="type-header">
+          <span class="icon">🏛️</span>
+          <h3>פעולה מול נציג ממשלתי</h3>
+          <span class="id-tag">gov</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcGov()</code></p>
+          <ul>
+            <li>אזור <code>order.court.area</code> (השדה משמש כיעד הממשלתי) × multiplier</li>
+            <li>אם <code>pickupType = courier</code> → +אזור FROM × multiplier</li>
+            <li>קיבוץ נקודות מסירה לפי אזור → <code>price × count × multiplier</code></li>
+            <li>אם <code>pickupType = upload</code> → +<code>calcUpload()</code></li>
+          </ul>
+          <p><span class="badge badge-mult">×multiplier</span></p>
+        </div>
+      </div>
+
+      <!-- COPY -->
+      <div class="type-card t-copy">
+        <div class="type-header">
+          <span class="icon">📋</span>
+          <h3>צילום תיקים</h3>
+          <span class="id-tag">copy</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcCopy()</code></p>
+          <ul>
+            <li>אזור בית המשפט (<code>getPrice</code>) — <strong>ללא multiplier</strong></li>
+            <li>אם <strong>לא</strong> <code>sendDocsToEmail</code> → +אזור נקודת מסירה ראשונה (גם ללא multiplier)</li>
+          </ul>
+          <div class="alert danger" style="margin-top:8px">
+            <span class="icon">🚫</span>
+            <div><strong>עקיפה גלובלית:</strong> אם <code>copyType = criminal</code> → <strong>total = 0</strong></div>
+          </div>
+          <p><span class="badge badge-no-mult">ללא multiplier</span></p>
+        </div>
+      </div>
+
+      <!-- PRINT -->
+      <div class="type-card t-print">
+        <div class="type-header">
+          <span class="icon">🖨️</span>
+          <h3>הדפסה כריכה ודגלון</h3>
+          <span class="id-tag">print</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcPrint()</code></p>
+          <ul>
+            <li>קיבוץ נקודות מסירה לפי אזור → <code>price × count</code> — <strong>ללא multiplier</strong></li>
+            <li>אם <code>pickupType = upload</code> → +<code>calcUpload()</code></li>
+          </ul>
+          <p><span class="badge badge-no-mult">ללא multiplier</span></p>
+        </div>
+      </div>
+
+      <!-- APOSTILLE -->
+      <div class="type-card t-apostille">
+        <div class="type-header">
+          <span class="icon">🌐</span>
+          <h3>אפוסטיל</h3>
+          <span class="id-tag">apostille</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcApostille()</code> (איסוף אחד → מסירה אחת)</p>
+
+          <h4 style="margin-top:10px;color:var(--primary)">בסיס</h4>
+          <ul>
+            <li><code>returnToFromPlace = true</code> → <strong>FROM × 2</strong> (הלוך-חזור לאותו מקום)</li>
+            <li>אחרת → האזור היקר מבין FROM ו־TO[0] × 2</li>
+          </ul>
+
+          <h4 style="margin-top:10px;color:var(--primary)">תוספות (ב־<code>calc()</code> עצמו)</h4>
+          <table>
+            <thead><tr><th>פריט</th><th>תעריף</th></tr></thead>
+            <tbody>
+              <tr><td>מסמכי בית משפט (4 ראשונים חינם)</td><td class="price">30 ש"ח / מסמך</td></tr>
+              <tr><td>מסמכי משרד החוץ</td><td class="price">200 ש"ח / מסמך</td></tr>
+              <tr><td>חתימת אותנטיות (<code>requirePreSign && !preSigned</code>)</td><td class="price">150 ש"ח / מסמך</td></tr>
+              <tr><td>אגרות (אם <code>appostilleHagInclude</code>)</td><td class="price">40 ש"ח / מסמך</td></tr>
+            </tbody>
+          </table>
+          <p><span class="badge badge-no-mult">ללא multiplier בבסיס</span></p>
+        </div>
+      </div>
+
+      <!-- SHREDDER -->
+      <div class="type-card t-shredder">
+        <div class="type-header">
+          <span class="icon">🗑️</span>
+          <h3>פינוי וגריסת מסמכים</h3>
+          <span class="id-tag">shredder</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcShredder()</code> + תוספת ק"ג ב־<code>calc()</code></p>
+          <ul>
+            <li>אזור FROM (<code>getPrice</code>) — <strong>חינם</strong> ב־[גוש דן, שרון קרוב, שפלה קרוב]</li>
+            <li>אחרת — חיוב מלא, <strong>ללא multiplier</strong></li>
+            <li><strong>תשלום ק"ג:</strong> <code>kg × 7.5 ש"ח</code></li>
+          </ul>
+          <div class="alert warn" style="margin-top:8px">
+            <span class="icon">⚠️</span>
+            <div>קומנט בקוד אומר "12" — אך המכפיל בפועל הוא <strong>7.5</strong>. שווה לוודא איזה מהם מתוכנן.</div>
+          </div>
+          <p><span class="badge badge-no-mult">ללא multiplier</span></p>
+        </div>
+      </div>
+
+      <!-- TONER -->
+      <div class="type-card t-toner">
+        <div class="type-header">
+          <span class="icon">🖋️</span>
+          <h3>דיו / טונר</h3>
+          <span class="id-tag">toner</span>
+        </div>
+        <div class="type-body">
+          <p><strong>פונקציה:</strong> <code>calcToner()</code> + תוספת טונרים</p>
+          <ul>
+            <li>קיבוץ נקודות מסירה לפי אזור — <strong>חינם</strong> ב־[גוש דן, שרון קרוב, שפלה קרוב]</li>
+            <li>אחרת — <code>price × count × multiplier</code></li>
+          </ul>
+
+          <h4 style="margin-top:10px;color:var(--primary)">תשלום טונרים</h4>
+          <table>
+            <thead><tr><th>כמות</th><th>תעריף ליחידה</th></tr></thead>
+            <tbody>
+              <tr><td><code>inksCount &lt; 5</code></td><td class="price">150 ש"ח</td></tr>
+              <tr><td><code>inksCount ≥ 5</code></td><td class="price">100 ש"ח</td></tr>
+            </tbody>
+          </table>
+
+          <div class="alert warn" style="margin-top:8px">
+            <span class="icon">🐛</span>
+            <div><strong>באג קטן:</strong> הלולאה <code>for (const a of all)</code> מקוננת בתוך הלולאה החיצונית — מייצרת שורות כפולות. שווה תיקון.</div>
+          </div>
+          <p><span class="badge badge-mult">×multiplier על האזורים</span></p>
+        </div>
+      </div>
+
+      <!-- LOCATE -->
+      <div class="type-card t-locate">
+        <div class="type-header">
+          <span class="icon">🔍</span>
+          <h3>איתור</h3>
+          <span class="id-tag">locate</span>
+        </div>
+        <div class="type-body">
+          <p><strong>חישוב ראשוני (ב־<code>calc()</code>):</strong></p>
+          <table>
+            <thead><tr><th>סוג איתור</th><th>תעריף קבוע</th></tr></thead>
+            <tbody>
+              <tr><td><code>interiorMinistry</code> — משרד הפנים</td><td class="price">70 ש"ח</td></tr>
+              <tr><td><code>privateInvestigator</code> — חוקר פרטי</td><td class="price">300 ש"ח</td></tr>
+            </tbody>
+          </table>
+
+          <h4 style="margin-top:14px;color:var(--primary)">Post-processing ב־<code>order-details.component.ts</code></h4>
+          <p>אם בוצע איתור (<code>order.located</code> ≠ <code>order.locate</code>):</p>
+          <ul>
+            <li><strong>auto-verification = true</strong>:
+              <ul style="margin-right:18px;margin-top:6px">
+                <li>שגוי ≥ נכון → <strong>0 ש"ח</strong> (כבר שולם)</li>
+                <li>נכון &gt; שגוי → חיוב <strong>ההפרש בלבד</strong></li>
+              </ul>
+            </li>
+            <li><strong>auto-verification = false</strong>: חיוב מלא של הנקודה הנכונה החדשה</li>
+          </ul>
+          <p><span class="badge badge-fixed">תעריף קבוע</span></p>
+        </div>
+      </div>
+
+      <!-- COURSE -->
+      <div class="type-card t-course">
+        <div class="type-header">
+          <span class="icon">🎓</span>
+          <h3>קורס שליח משפטי</h3>
+          <span class="id-tag">course</span>
+        </div>
+        <div class="type-body">
+          <p>ה־case ריק (<code>break;</code>). <strong>אין חישוב</strong> — מטופל מחוץ לקלקולטור.</p>
+          <p><span class="badge badge-fixed">לא בקלקולטור</span></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- UPLOAD -->
+  <section>
+    <h2><span class="emoji">📦</span> calcUpload() — תוסף משותף</h2>
+    <p>נקרא רק כש־<code>pickupType = upload</code>, מתוך: <strong>court / gov / print / private</strong>.</p>
+
+    <h3>שני מצבים</h3>
+    <div class="kv-grid">
+      <div class="kv-box">
+        <div class="k">Mode A — <code>addCoverAndPrintOnce = true</code></div>
+        <div class="v" style="font-size:0.95rem">הגדרות אחידות לכל המסמכים — מבוסס <code>covers/appendices/pages × copies</code></div>
+      </div>
+      <div class="kv-box">
+        <div class="k">Mode B — <code>addCoverAndPrintOnce = false</code></div>
+        <div class="v" style="font-size:0.95rem">לופ על <code>req.docs[]</code> — כל מסמך עם הגדרותיו</div>
+      </div>
+    </div>
+
+    <h3>תעריפים אחידים</h3>
+    <table>
+      <thead><tr><th>פריט</th><th>תעריף ליחידה</th><th>הערות</th></tr></thead>
+      <tbody>
+        <tr><td>הדפסה ש/ל</td><td class="price">0.30 ש"ח / עמוד</td><td>ב־<code>private</code>: מינוס 100 עמודים בחינם</td></tr>
+        <tr><td>הדפסה צבעונית</td><td class="price">2 ש"ח / עמוד</td><td>—</td></tr>
+        <tr><td>נספחים / דגלונים</td><td class="price">3 ש"ח / יחידה</td><td>—</td></tr>
+        <tr><td>כריכות</td><td class="price">30 ש"ח / יחידה</td><td>—</td></tr>
+        <tr><td>נספחים — העתק לסריקה</td><td class="price">3 ש"ח / יחידה</td><td>אם <code>extraCopyForScan</code></td></tr>
+        <tr><td>כריכות — העתק לסריקה</td><td class="price">30 ש"ח / יחידה</td><td>אם <code>extraCopyForScan</code></td></tr>
+        <tr><td>דיסק</td><td class="price">15 ש"ח / יחידה</td><td>—</td></tr>
+        <tr><td>דיסק און קי</td><td class="price">50 ש"ח / יחידה</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert info">
+      <span class="icon">ℹ️</span>
+      <div><code>calcUpload</code> <strong>אינו מוכפל</strong> ב־multiplier. יש קומנטים <code>// * req.priority.multiplier</code> שמעידים על הסרה מכוונת. גם הקטע של "עריכת מסמכים להגשה" (subscription/2 ש"ח) מוקפא בקומנטים — לא בשימוש.</div>
+    </div>
+  </section>
+
+  <!-- WARNINGS -->
+  <section>
+    <h2><span class="emoji">⚠️</span> נקודות חשובות לשים לב</h2>
+
+    <div class="alert warn">
+      <span class="icon">🗑️</span>
+      <div><strong>calc1()</strong> — מתודה ישנה במנוע, מבוססת על <code>calcBaseDelivery()</code> הגנרית. <strong>לא נקראת היום</strong> — מועמדת למחיקה (באישורך בלבד).</div>
+    </div>
+
+    <div class="alert warn">
+      <span class="icon">🗑️</span>
+      <div><strong>calcBaseDelivery()</strong> — נקראת רק מ־<code>calc1</code>. ב־<code>calc()</code> החדש לא בשימוש בכלל. לוגיקה משותפת ישנה.</div>
+    </div>
+
+    <div class="alert warn">
+      <span class="icon">⚠️</span>
+      <div><strong><code>AreaType.none</code></strong> כברירת מחדל ב־apostille / calcBaseDelivery (<code>high = AreaType.none</code>) — סיכון לכשל אם רשימה ריקה.</div>
+    </div>
+
+    <div class="alert warn">
+      <span class="icon">🐛</span>
+      <div><strong>באג ב־<code>calcToner</code>:</strong> דחיסת <code>for (const a of all)</code> בתוך הלולאה הראשית מייצרת שורות כפולות בתוצאה.</div>
+    </div>
+
+    <div class="alert warn">
+      <span class="icon">🤔</span>
+      <div><strong>שִׁפצוּף ק"ג ב־shredder:</strong> הקומנט אומר "12", אבל המכפיל בפועל הוא 7.5. צריך החלטה.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="sig">BizTechoff™ · התאמת העסק לעידן הדיגיטלי</p>
+    <p>סקירה אנליטית — ש.ל.ק (שאלה ללא קוד)</p>
+  </footer>
+
+</div>
+</body>
+</html>

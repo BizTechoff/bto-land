@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>מתמטיק — הצעת מחיר</title>
+<style>
+  :root{
+    --cream:#F4F0E8; --paper:#FBF9F4; --navy:#16273E; --navy-card:#172A42;
+    --orange:#D9683E; --orange-soft:#F3E4DB; --blue:#1D4ED8; --blue2:#3B82F6;
+    --blue-soft:#E9F0FB; --green:#2E9E5B; --green-soft:#E4F1E8;
+    --ink:#16273E; --ink2:#566579; --line:#E4DFD4; --fill:#FFF3BF; --fill-bd:#E9CF57;
+    --r:14px; --shadow:0 14px 34px -16px rgba(22,39,62,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:Arial,'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:34px 24px 80px}
+  .toolbar{max-width:920px;margin:0 auto 14px;display:flex;justify-content:flex-start;gap:12px;align-items:center}
+  .hint{font-size:12.5px;color:var(--ink2)}
+  .hint b{background:var(--fill);padding:1px 7px;border-radius:5px;border:1px solid var(--fill-bd)}
+  .btn{background:var(--navy);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+
+  .hero{background:var(--navy);color:#fff;border-radius:20px;padding:34px 36px;position:relative;overflow:hidden;box-shadow:var(--shadow);text-align:center}
+  .hero::after{content:"∑";position:absolute;left:-8px;bottom:-46px;font-size:200px;color:rgba(255,255,255,.05);font-weight:800}
+  .hero .kick{color:var(--orange);font-weight:800;letter-spacing:1px;font-size:12.5px}
+  .hero h1{font-size:34px;font-weight:800;letter-spacing:-1px;margin:6px 0 4px}
+  .hero p{color:#c9d4e2;font-size:15px;max-width:560px;margin:0 auto}
+  .meta{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:20px;font-size:13px}
+  .meta div span{display:block;color:#90a2b8;font-size:11px;font-weight:700;margin-bottom:2px}
+
+  .sec{margin-top:28px}
+  .sec-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-h .num{background:var(--orange);color:#fff;font-weight:800;font-size:14px;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto}
+  .sec-h h2{font-size:23px;font-weight:800;letter-spacing:-.4px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+
+  .lead{font-size:15px;color:var(--ink2)}
+  ul.feat{list-style:none;margin-top:6px}
+  ul.feat li{font-size:14px;padding-right:24px;position:relative;margin-bottom:8px;break-inside:avoid}
+  ul.feat li::before{content:"✓";position:absolute;right:0;top:1px;color:var(--green);font-weight:800}
+
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:var(--navy);color:#fff;text-align:right;padding:11px 15px;font-size:13px}
+  td{padding:11px 15px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border:none}
+  .tot td{background:var(--blue-soft);font-weight:800;font-size:15px}
+  .price{font-weight:800;white-space:nowrap}
+  .big-price{font-size:40px;font-weight:800;color:var(--navy);letter-spacing:-1px}
+  .big-price small{font-size:15px;color:var(--ink2);font-weight:700}
+
+  .fill{background:var(--fill);border:1px dashed var(--fill-bd);border-radius:6px;padding:1px 10px;font-weight:700;min-width:90px;display:inline-block;color:#7a5b00}
+  .fill:focus{outline:2px solid var(--blue);background:#fff}
+
+  .note{font-size:13px;color:var(--ink2);background:var(--blue-soft);border:1px solid #cfe0f6;border-radius:10px;padding:13px 15px;margin-top:14px}
+  .warn{background:var(--orange-soft);border-color:#ecccbd}
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .pillrow b{font-size:12.5px;font-weight:700;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+
+  .sign{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:18px}
+  @media(max-width:680px){.sign{grid-template-columns:1fr}}
+  .sign div{border-top:1.5px solid var(--ink);padding-top:7px;font-size:13px;color:var(--ink2);text-align:center}
+  .foot{margin-top:44px;text-align:center;color:var(--ink2);font-size:12px;border-top:1px solid var(--line);padding-top:20px}
+  .small{font-size:12.5px;color:var(--ink2)}
+  @media print{.toolbar{display:none}body{background:#fff}.hero{box-shadow:none}}
+  @page{
+    size:A4; margin:16mm 14mm 20mm 14mm;
+    @bottom-left{ content:"עמוד " counter(page) " מתוך " counter(pages); font-family:Arial,sans-serif; font-size:10px; color:#566579; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">🖨️ הדפסה / שמירה כ-PDF</button>
+  </div>
+
+<div class="wrap">
+
+  <div style="text-align:right;font-size:13px;color:var(--ink2);font-weight:700;margin-bottom:8px">בס״ד</div>
+
+  <div class="hero">
+    <div class="kick">הצעת מחיר</div>
+    <h1>מתמטיק</h1>
+    <p>פיתוח פלטפורמת מורה AI לשיעורי בית במתמטיקה, כיתות ד׳–י״ב — Web + iOS + Android.</p>
+    <div class="meta">
+      <div><span>לכבוד</span><b>זאב סלבין</b></div>
+      <div><span>מאת</span><b dir="ltr">BizTechoff™</b></div>
+      <div><span>תאריך</span><b>01/06/2026</b></div>
+      <div><span>תוקף ההצעה ומחיריה</span><b>14 יום</b></div>
+    </div>
+  </div>
+
+  <!-- 01 scope -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">01</div><h2>מה כולל הפיתוח</h2></div>
+    <div class="card">
+      <p class="lead">פלטפורמה מלאה, מודולרית ומאובטחת, הבנויה על Angular · Remult · Node.js, ועטופה ל-iOS ו-Android מקוד אחד (Capacitor):</p>
+      <ul class="feat" style="columns:2;column-gap:30px;max-width:760px;margin:0 auto">
+        <li>Onboarding תלמיד + הורה, קוד אישי</li>
+        <li>מסך שיחה עם אווטאר מונפש</li>
+        <li>מנוע קול בעברית (STT → LLM → TTS)</li>
+        <li>ניתוח שיעורי בית מצילום (Vision)</li>
+        <li>הכרת ספרי הלימוד (RAG · pgvector)</li>
+        <li>סנכרון שיעורי בית מ-Webtop + הזנה ידנית</li>
+        <li>דשבורד הורה (מעקב + ניתוח AI)</li>
+        <li>פאנל ניהול (Admin)</li>
+        <li>Push Notifications</li>
+        <li>אבטחה: כל מפתחות הספקים מאחורי Backend proxy</li>
+      </ul>
+      <div class="pillrow">
+        <b>Angular</b><b>Remult</b><b>Node.js</b><b>PostgreSQL + pgvector</b><b>Capacitor → iOS/Android</b><b>Provider-agnostic AI</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="text-align:center;break-inside:avoid;page-break-inside:avoid">
+    <a href="http://biztechoff.co.il/matematic/matematic-mockup" target="_blank" rel="noopener" style="display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:16px;text-decoration:none;padding:14px 30px;border-radius:12px;box-shadow:var(--shadow)">לצפייה בהדמייה ◀</a>
+    <div id="shots" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+      <figure style="margin:0;flex:0 0 200px;max-width:210px"><img src="matematic.ps.welcome.png" alt="מסך פתיחה" style="width:100%;aspect-ratio:377/804;object-fit:cover;object-position:top;border-radius:16px;border:1px solid var(--line);box-shadow:0 8px 22px rgba(22,39,62,.12);display:block"><figcaption style="text-align:center;font-size:12.5px;font-weight:700;color:var(--ink2);margin-top:8px">מסך פתיחה — תלמיד / הורה</figcaption></figure>
+      <figure style="margin:0;flex:0 0 200px;max-width:210px"><img src="matematic.ps.lesson.png" alt="שיחה" style="width:100%;aspect-ratio:377/804;object-fit:cover;object-position:top;border-radius:16px;border:1px solid var(--line);box-shadow:0 8px 22px rgba(22,39,62,.12);display:block"><figcaption style="text-align:center;font-size:12.5px;font-weight:700;color:var(--ink2);margin-top:8px">שיחה — הלב</figcaption></figure>
+      <figure style="margin:0;flex:0 0 200px;max-width:210px"><img src="matematic.ps.parent.png" alt="לוח מחוונים הורה" style="width:100%;aspect-ratio:377/804;object-fit:cover;object-position:top;border-radius:16px;border:1px solid var(--line);box-shadow:0 8px 22px rgba(22,39,62,.12);display:block"><figcaption style="text-align:center;font-size:12.5px;font-weight:700;color:var(--ink2);margin-top:8px">לוח מחוונים הורה</figcaption></figure>
+</div>
+  </div>
+
+  <!-- 02 dev price -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">02</div><h2>תמורה (חד-פעמי)</h2></div>
+    <div class="card">
+      <div style="text-align:center">
+        <div class="big-price">60,000 ₪</div>
+        <div class="small" style="margin-top:6px"><b style="color:var(--orange)">עד</b> <b>40 ימי עבודה</b> מתחילת הפרויקט.</div>
+      </div>
+      <div class="note warn" style="margin-top:14px"><b>מודל שותפות (אופציונלי):</b> כחלופה לתשלום מלא, הספק יכול להשתתף בפרויקט כשותף בשיעור <b>7%–10%</b> — חלק זה מקוזז מהמחיר כהשתתפות יחסית של הספק בפיתוח, והמחיר שלעיל משקף קיזוז זה. שיעור השותפות, אופן ההחזקה ותנאיה ייקבעו ויעוגנו בהסכם בין הצדדים.</div>
+      <div class="note" style="text-align:center;font-size:15px">
+        התשלום יבוצע בהעברה בנקאית לזכות הספק בחשבון:<br>
+        <b style="font-size:16px">בנק: לאומי (10) · סניף: 975 · חשבון: 1857090</b>
+      </div>    </div>
+  </div>
+
+  <!-- 03 payment schedule -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">03</div><h2>לוח תשלומים</h2></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table>
+        <tr><th>שלב</th><th>מועד</th><th>תנאי</th><th style="text-align:left">סכום</th></tr>
+        <tr><td>מקדמה</td><td>בחתימת ההצעה</td><td>פתיחת פרויקט</td><td class="price" style="text-align:left">15,000 ₪</td></tr>
+        <tr><td>אבן דרך 1</td><td><b style="color:var(--orange)">עד</b> יום 15</td><td>לאחר מצגת התקדמות</td><td class="price" style="text-align:left">15,000 ₪</td></tr>
+        <tr><td>אבן דרך 2</td><td><b style="color:var(--orange)">עד</b> יום 30</td><td>לאחר מצגת התקדמות</td><td class="price" style="text-align:left">15,000 ₪</td></tr>
+        <tr><td>סיום פיתוח · תחילת פיילוט</td><td><b style="color:var(--orange)">עד</b> יום 40</td><td>מסירה ועלייה לאוויר</td><td class="price" style="text-align:left">15,000 ₪</td></tr>
+        <tr class="tot"><td colspan="3">סה״כ פיתוח</td><td style="text-align:left">60,000 ₪</td></tr>
+      </table>
+    </div>
+    <div class="note">מבנה התשלום: מקדמה 15,000 ₪ בחתימה · 2 תשלומים של 15,000 ₪ כל כ-15 יום לאחר מצגת התקדמות · 15,000 ₪ בסיום הפיתוח ותחילת הפיילוט. סה״כ 60,000 ₪.</div>
+  </div>
+
+  <!-- 04 ops/providers -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">04</div><h2>עלויות הפעלה שוטפות — ספקים חיצוניים</h2></div>
+    <div class="card">
+      <p class="lead">עלויות אלה משולמות <b>ישירות לפי שימוש בפועל</b> ומועברות בעלות מלאה (ללא תוספת). הן באחריות הלקוח, ומשתנות לפי היקף השימוש ובחירת הספק:</p>
+      <table style="margin-top:12px">
+        <tr><th>רכיב</th><th>ספק (ניתן להחלפה)</th><th style="text-align:left">הערכת עלות / תלמיד / חודש</th></tr>
+        <tr><td>LLM — מנוע ההדרכה</td><td>Claude / GPT-4o</td><td style="text-align:left">לפי צריכה</td></tr>
+        <tr><td>STT — זיהוי דיבור</td><td>ivrit.ai / ElevenLabs Scribe</td><td style="text-align:left">לפי צריכה</td></tr>
+        <tr><td>TTS — קול עברי</td><td>Google / Azure / ElevenLabs</td><td style="text-align:left">לפי צריכה</td></tr>
+        <tr><td>אחסון קבצים</td><td>AWS S3</td><td style="text-align:left">לפי צריכה (תמונות ש״ב, קובצי ספרי לימוד PDF ושערים)</td></tr>
+        <tr><td>אירוח + DB</td><td>תשתית ענן</td><td style="text-align:left">החל מ-20$ / חודש · גדל לפי עומס</td></tr>
+      </table>
+      <div class="note warn"><b>חשוב:</b> עלויות הספקים משולמות לפי שימוש בפועל, מועברות ב<b>עלות מלאה (ללא רווח)</b>, והן באחריות הלקוח. התשלום לחשבונות הספקים יבוצע ישירות מאמצעי התשלום של הלקוח.</div>
+    </div>
+  </div>
+
+  <!-- 05 support -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">05</div><h2>שירות, תמיכה ותחזוקה (לאחר עלייה לאוויר)</h2></div>
+    <div class="card">
+      <p class="lead"><b>אפשרות לשירות (אופציונלי)</b> — חבילת תחזוקה חודשית הכוללת:</p>
+      <ul class="feat" style="columns:2;column-gap:30px;max-width:760px;margin:0 auto">
+        <li>ניטור זמינות ותקלות</li>
+        <li>עדכוני אבטחה ושדרוגי גרסה</li>
+        <li>תחזוקת אינטגרציית Webtop (התאמה לשינויים)</li>
+        <li>תיקוני באגים</li>
+        <li>תמיכה טכנית</li>
+        <li>גיבויים</li>
+      </ul>
+      <table style="margin-top:14px">
+        <tr><th>שירות</th><th style="text-align:left">מחיר</th></tr>
+        <tr><td>חבילת תחזוקה חודשית — 4 שעות</td><td class="price" style="text-align:left">450 ₪ / חודש</td></tr>
+        <tr><td>שעת פיתוח מחוץ לתיחום</td><td class="price" style="text-align:left">310 ₪ / שעה</td></tr>
+      </table>
+      <div class="note"><b>תיחום זמני תגובה (SLA):</b> עד 24 שעות לבאג קריטי; עד 5 ימי עבודה לתקלות שאינן קריטיות.</div>
+      <div class="note">שעות שלא נוצלו בחודש אינן נצברות. שינויים ותוספות פיצ׳רים מעבר לתחזוקה — לפי שעת פיתוח מחוץ לתיחום או הצעה נפרדת.</div>
+    </div>
+  </div>
+
+  <!-- 06 assumptions -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">06</div><h2>הנחות, גבולות גזרה והחרגות</h2></div>
+    <div class="card">
+      <ul class="feat">
+        <li>ההצעה אינה כוללת רכש, רישוי או זכויות יוצרים על תכני ספרי הלימוד.</li>
+        <li>האווטאר מוגדר כאנימציה גרפית/CSS, ולא כדמות תלת-ממד (3D) מרונדרת.</li>
+        <li>עלויות ספקי ה-AI והאירוח (סעיף 04) באחריות הלקוח ומשולמות בעלות.</li>
+        <li>אינטגרציית Webtop מבוססת חיבור לא-רשמי וכפופה לשינויים בצד SmartSchool.</li>
+        <li>נדרשת הסכמת הורה ומדיניות פרטיות לנתוני קטינים — יסופקו לפני עלייה לאוויר.</li>
+        <li>גישה לחשבונות ספקים (LLM/STT/TTS/אירוח) תיפתח על שם הלקוח; התשלום לחשבונות הספקים יבוצע ישירות מאמצעי התשלום של הלקוח.</li>
+        <li>לוח הזמנים (<b style="color:var(--orange)">עד</b> 40 ימי עבודה) מותנה בזמינות הלקוח לאישורים ולמשובים באבני הדרך.</li>
+        <li>תקופת פיילוט: 30 יום מהעלייה לאוויר, הכוללת fine-tuning במסגרת התיחום שסוכם. אפשרות חבילת התחזוקה (סעיף 05) מתחילה בתום תקופת הפיילוט.</li>
+        <li>במסגרת הצעה זו, בשלב הפיתוח תינתן לספק, במקרים שאינם בשליטה / בלתי מתוכננים, אפשרות חריגה של עד 30 יום קדימה ממועד סיום הפיתוח המתוכנן, כמקובל במקרים אלו.</li>
+        <li>זמינות התוכנה כפופה לזמינות של הענן, מסד הנתונים והממשקים לצד שלישי.</li>
+        <li>אמינות המידע הינה באחריות הלקוח בלבד.</li>
+        <li>תחילת הפיילוט מאשרת את קבלת הלקוח כי המערכת לשביעות רצונו.</li>
+      </ul>
+
+      <div class="note warn" style="margin-top:16px"><b>ביטול ההתקשרות:</b> בכל מקרה של ביטול על-ידי הלקוח, התשלומים ששולמו עד למועד הביטול לא יושבו, ובנוסף יחויב הלקוח בפיצוי מוסכם בשיעור 15% מהתמורה הכוללת של הפרויקט.</div>
+    </div>
+  </div>
+
+  <!-- sign -->
+  <div class="sec">
+    <div class="card">
+      <div style="font-size:13.5px;color:var(--ink);margin-top:0;line-height:1.7">קראתי, הבנתי, ואישרתי את התנאים והתמחור המפורטים לעיל. חתימתי מאשרת את תחילת הפרויקט בהתאם להצעה זו, ופותחת את מסלול התשלום בהתאם לסעיף 03.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:30px 40px;justify-content:center;margin-top:22px">
+        <div style="flex:1 1 240px;min-width:210px;max-width:340px">
+          <div style="height:100px"></div>
+          <div style="border-top:1.5px solid var(--ink);padding-top:7px;font-size:13px;color:var(--ink2);text-align:center;max-width:250px;margin:0 auto">חתימת הלקוח · ____ / ____ / ____</div>
+        </div>
+        <div style="flex:1 1 240px;min-width:210px;max-width:340px">
+          <div style="height:100px;display:flex;align-items:flex-end;justify-content:center;overflow:visible">
+            <img src="bto.sign.white.png" alt="חתימת הספק" style="height:106px;max-width:100%;object-fit:contain;mix-blend-mode:multiply;margin-bottom:-4px">
+          </div>
+          <div style="border-top:1.5px solid var(--ink);padding-top:7px;font-size:13px;color:var(--ink2);text-align:center;max-width:250px;margin:0 auto">חתימת הספק · 01/06/2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    הצעת מחיר זו תקפה לתקופה הנקובה לעיל · מתמטיק · נבנה על Angular · Remult · Node.js
+    <div dir="ltr" style="margin-top:10px;font-weight:800;color:var(--navy);font-size:14px">BizTechoff™</div>
+    <div style="margin-top:2px">ט.ל.ח</div>
+  </div>
+</div>
+</body>
+</html>

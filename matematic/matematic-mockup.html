@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>מתמטיק — אפיון אינטראקטיבי</title>
+<style>
+  :root{
+    --primary:#3B82F6; --dark:#1D4ED8; --light-bg:#EFF6FF;
+    --page:#F4F7FA; --text:#0F172A; --text2:#475569;
+    --border:#E2E8F0; --success:#4CAF50; --danger:#EF4444;
+    --r-card:14px; --r-code:20px; --r-btn:28px;
+    --grad:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%);
+    --shadow:0 10px 30px -8px rgba(29,78,216,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,'Segoe UI',system-ui,sans-serif}
+  body{
+    background:
+      radial-gradient(900px 500px at 15% -10%,#dbeafe 0%,transparent 55%),
+      radial-gradient(800px 500px at 110% 110%,#e0ecff 0%,transparent 50%),
+      #eef3fb;
+    min-height:100vh; color:var(--text);
+    display:flex; flex-direction:column; align-items:center;
+    padding:28px 14px 80px;
+  }
+  .topbar{width:100%;max-width:1180px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:14px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .logo{width:46px;height:46px;border-radius:13px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:800;font-size:22px;box-shadow:var(--shadow)}
+  .brand h1{font-size:22px;letter-spacing:-.5px}
+  .brand small{color:var(--text2);font-size:12.5px;font-weight:600}
+  .stackbadge{display:flex;gap:8px;flex-wrap:wrap}
+  .stackbadge span{background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;color:var(--dark);box-shadow:0 2px 6px rgba(15,23,42,.04)}
+
+  .stage{display:flex;gap:30px;align-items:flex-start;max-width:1180px;width:100%;justify-content:center;flex-wrap:wrap}
+
+  /* phone */
+  .phone{
+    width:380px;height:800px;background:#000;border-radius:46px;padding:13px;
+    box-shadow:0 40px 80px -20px rgba(29,78,216,.45),0 0 0 2px #1e293b;
+    position:relative;flex:0 0 auto;
+  }
+  .notch{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:150px;height:26px;background:#000;border-radius:0 0 18px 18px;z-index:50}
+  .screen{
+    width:100%;height:100%;background:var(--page);border-radius:34px;overflow:hidden;position:relative;
+  }
+  .view{position:absolute;inset:0;display:none;flex-direction:column;animation:fade .4s ease}
+  .view.active{display:flex}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .scroll::-webkit-scrollbar{width:0}
+
+  .statusbar{height:34px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px 4px;font-size:12px;font-weight:700;color:var(--text)}
+  .statusbar .dots{display:flex;gap:5px;align-items:center}
+
+  .pad{padding:22px 22px 26px}
+  .h-title{font-size:25px;font-weight:800;letter-spacing:-.6px;line-height:1.25}
+  .h-sub{color:var(--text2);font-size:14px;margin-top:8px;line-height:1.5}
+  .step-pill{display:inline-block;background:var(--light-bg);color:var(--dark);font-size:12px;font-weight:800;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:16px;border-radius:var(--r-btn);padding:16px;width:100%;transition:.2s;font-family:inherit}
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:active{transform:scale(.97)}
+  .btn-ghost{background:#fff;color:var(--dark);border:1.5px solid var(--border)}
+  .btn-row{position:absolute;bottom:0;left:0;right:0;padding:18px 22px 26px;background:linear-gradient(to top,var(--page) 70%,transparent)}
+
+  .field{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-card);padding:16px;font-size:16px;width:100%;font-family:inherit;outline:none;transition:.2s;text-align:right}
+  .field:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+  label.lbl{display:block;font-size:13.5px;font-weight:700;color:var(--text2);margin:0 0 9px 2px}
+
+  /* role select */
+  .role-card{background:#fff;border:1.5px solid var(--border);border-radius:22px;padding:26px;display:flex;align-items:center;gap:18px;cursor:pointer;transition:.22s;margin-bottom:16px}
+  .role-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .role-card .ic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:30px;flex:0 0 auto}
+  .role-card h3{font-size:19px;font-weight:800}
+  .role-card p{color:var(--text2);font-size:13px;margin-top:4px}
+
+  /* grade grid */
+  .grid-grades{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+  .grade{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-card);padding:18px 8px;text-align:center;font-weight:800;font-size:20px;cursor:pointer;transition:.18s}
+  .grade small{display:block;font-size:11px;color:var(--text2);font-weight:700;margin-top:3px}
+  .grade.sel{background:var(--grad);color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+  .grade.sel small{color:#dbeafe}
+
+  /* books */
+  .grid-books{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+  .book{position:relative;border-radius:var(--r-card);overflow:hidden;cursor:pointer;aspect-ratio:3/4;border:2.5px solid transparent;transition:.2s;box-shadow:0 6px 16px rgba(15,23,42,.1)}
+  .book .cover{width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;color:#fff;font-weight:800;font-size:14px;line-height:1.3}
+  .book .check{position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-size:15px;transform:scale(0);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+  .book.sel{border-color:var(--primary)}
+  .book.sel .check{transform:scale(1)}
+  .book.sel .cover{filter:brightness(.85)}
+
+  /* success */
+  .success-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+  .check-big{width:96px;height:96px;border-radius:50%;background:var(--success);display:grid;place-items:center;color:#fff;font-size:52px;margin-bottom:24px;animation:pop .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 12px 30px rgba(76,175,80,.4)}
+  @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+  .code-box{background:#fff;border:2px dashed var(--primary);border-radius:var(--r-code);padding:22px 30px;margin:24px 0;letter-spacing:12px;font-size:38px;font-weight:800;color:var(--dark)}
+
+  /* CHAT */
+  .chat-top{background:#fff;border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+  .chat-top .left{display:flex;align-items:center;gap:10px}
+  .conn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--text2)}
+  .conn .dot{width:9px;height:9px;border-radius:50%;background:var(--success);box-shadow:0 0 0 0 rgba(76,175,80,.5);animation:ping 2s infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(76,175,80,.5)}70%{box-shadow:0 0 0 7px rgba(76,175,80,0)}100%{box-shadow:0 0 0 0 rgba(76,175,80,0)}}
+  .iconbtn{width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:#fff;display:grid;place-items:center;cursor:pointer;font-size:17px;transition:.18s}
+  .iconbtn:active{transform:scale(.92)}
+  .iconbtn.on{background:var(--light-bg);border-color:var(--primary)}
+
+  .avatar-stage{padding:18px 0 8px;display:flex;flex-direction:column;align-items:center;background:linear-gradient(to bottom,#fff,var(--page))}
+  .avatar-orbit{position:relative;width:130px;height:130px;display:grid;place-items:center}
+  .ring{position:absolute;border-radius:50%;border:2.5px solid var(--primary);opacity:0}
+  .speaking .ring{animation:ringpulse 1.8s ease-out infinite}
+  .speaking .ring.r2{animation-delay:.9s}
+  @keyframes ringpulse{0%{width:88px;height:88px;opacity:.55}100%{width:150px;height:150px;opacity:0}}
+  .avatar{width:88px;height:88px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-size:44px;position:relative;z-index:2;box-shadow:var(--shadow);transition:.3s}
+  .thinking .avatar{animation:breathe 2.4s ease-in-out infinite;box-shadow:0 0 28px 6px rgba(96,165,250,.55)}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .speaking .avatar{animation:bob .6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .status-tag{margin-top:12px;font-size:13px;font-weight:800;color:var(--dark);min-height:18px}
+  .vbars{display:flex;gap:4px;align-items:flex-end;height:22px;margin-top:8px;opacity:0;transition:.3s}
+  .speaking .vbars{opacity:1}
+  .vbars span{width:4px;background:var(--primary);border-radius:3px;height:6px}
+  .speaking .vbars span{animation:wave .8s ease-in-out infinite}
+  .vbars span:nth-child(2){animation-delay:.15s}
+  .vbars span:nth-child(3){animation-delay:.3s}
+  .vbars span:nth-child(4){animation-delay:.45s}
+  .vbars span:nth-child(5){animation-delay:.6s}
+  @keyframes wave{0%,100%{height:6px}50%{height:22px}}
+
+  .messages{flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:12px}
+  .messages::-webkit-scrollbar{width:0}
+  .bubble{max-width:80%;padding:12px 15px;font-size:14.5px;line-height:1.5;border-radius:18px;animation:fade .3s ease;white-space:pre-wrap}
+  .bubble.ai{background:#fff;border:1px solid var(--border);align-self:flex-start;border-bottom-right-radius:6px;color:var(--text)}
+  .bubble.me{background:var(--grad);color:#fff;align-self:flex-end;border-bottom-left-radius:6px}
+  .bubble.img{padding:7px;align-self:flex-end}
+  .bubble.img .ph{width:150px;height:100px;border-radius:12px;background:linear-gradient(135deg,#cbd5e1,#94a3b8);display:grid;place-items:center;color:#fff;font-size:30px}
+  .thinkbub{background:#fff;border:1px solid var(--border);align-self:flex-start;border-radius:18px;border-bottom-right-radius:6px;padding:12px 15px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);font-weight:700}
+  .typedot{display:flex;gap:3px}
+  .typedot i{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:td 1s infinite}
+  .typedot i:nth-child(2){animation-delay:.2s}
+  .typedot i:nth-child(3){animation-delay:.4s}
+  @keyframes td{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+  .inputbar{background:#fff;border-top:1px solid var(--border);padding:10px 12px;display:flex;align-items:center;gap:8px}
+  .inputbar .txt{flex:1;border:1.5px solid var(--border);border-radius:22px;padding:11px 16px;font-size:14.5px;outline:none;text-align:right;font-family:inherit}
+  .inputbar .txt:focus{border-color:var(--primary)}
+  .mic{width:44px;height:44px;border-radius:50%;background:var(--grad);color:#fff;border:none;display:grid;place-items:center;font-size:18px;cursor:pointer;flex:0 0 auto;transition:.2s}
+  .mic.rec{background:var(--danger);animation:recpulse 1s infinite}
+  @keyframes recpulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+
+  /* dashboard */
+  .dash-head{background:var(--grad);color:#fff;padding:24px 20px 26px;border-radius:0 0 26px 26px}
+  .dash-head h2{font-size:21px;font-weight:800}
+  .dash-head p{opacity:.9;font-size:13px;margin-top:4px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:var(--r-card);padding:16px;margin-bottom:14px;box-shadow:0 4px 14px rgba(15,23,42,.04)}
+  .card h4{font-size:14.5px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .hw{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border)}
+  .hw:last-child{border:none}
+  .hw .cb{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex:0 0 auto;cursor:pointer;display:grid;place-items:center;color:#fff;font-size:13px;transition:.18s}
+  .hw.done .cb{background:var(--success);border-color:var(--success)}
+  .hw.done .htxt{text-decoration:line-through;color:var(--text2)}
+  .hw .htxt{flex:1;font-size:13.5px;font-weight:700}
+  .hw .htxt small{display:block;color:var(--text2);font-weight:600;font-size:11.5px;margin-top:2px}
+  .stat-row{display:flex;gap:10px}
+  .stat{flex:1;background:var(--light-bg);border-radius:12px;padding:13px;text-align:center}
+  .stat b{font-size:24px;color:var(--dark);font-weight:800}
+  .stat small{display:block;color:var(--text2);font-size:11px;font-weight:700;margin-top:2px}
+  .prog{margin:11px 0}
+  .prog .top{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;margin-bottom:6px}
+  .prog .bar{height:9px;border-radius:6px;background:var(--border);overflow:hidden}
+  .prog .fill{height:100%;background:var(--grad);border-radius:6px;transition:width 1s}
+  .ai-summary{background:var(--light-bg);border:1px solid #bfdbfe;border-radius:12px;padding:14px;font-size:13px;line-height:1.6;color:var(--text)}
+  .ai-summary b{color:var(--dark)}
+  .ss-row{display:flex;align-items:center;justify-content:space-between}
+  .ss-row .lbl2{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+
+  /* settings */
+  .set-row{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--border)}
+  .set-row:last-child{border:none}
+  .set-row .name{font-size:14px;font-weight:700}
+  .set-row .name small{display:block;color:var(--text2);font-weight:600;font-size:11.5px;margin-top:2px}
+  .toggle{width:48px;height:28px;border-radius:99px;background:var(--border);position:relative;cursor:pointer;transition:.25s;flex:0 0 auto}
+  .toggle.on{background:var(--primary)}
+  .toggle::after{content:"";position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .toggle.on::after{right:23px}
+  .sel-mini{background:var(--light-bg);border:1px solid #bfdbfe;border-radius:10px;padding:7px 12px;font-size:12.5px;font-weight:700;color:var(--dark)}
+
+  .sectitle{font-size:12px;font-weight:800;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin:6px 2px 10px}
+
+  /* navigator */
+  .nav{flex:0 0 auto;width:240px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:16px;box-shadow:0 10px 30px rgba(15,23,42,.06);position:sticky;top:28px}
+  .nav h5{font-size:12px;font-weight:800;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+  .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:right;background:transparent;border:none;padding:10px 11px;border-radius:11px;font-size:13.5px;font-weight:700;color:var(--text);cursor:pointer;transition:.16s;font-family:inherit;margin-bottom:2px}
+  .nav button:hover{background:var(--page)}
+  .nav button.active{background:var(--light-bg);color:var(--dark)}
+  .nav button .e{width:24px;text-align:center}
+  .nav .grp{margin-top:14px}
+  .note{font-size:11.5px;color:var(--text2);line-height:1.5;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+
+  @media(max-width:900px){.nav{display:none}}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">∑</div>
+      <div>
+        <h1>מתמטיק <small style="font-weight:600">· אפיון אינטראקטיבי</small></h1>
+        <small>מורה מתמטיקה חכם · כיתות ד׳–י״ב · עברית מלאה (RTL)</small>
+      </div>
+    </div>
+    <div class="stackbadge">
+      <span>Angular</span><span>Remult</span><span>Node.js</span><span>→ Native-ready</span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <!-- NAVIGATOR -->
+    <aside class="nav">
+      <h5>מסכים</h5>
+      <div class="grp">
+        <button class="active" data-go="role"><span class="e">🚪</span> בחירת תפקיד</button>
+        <button data-go="name"><span class="e">✍️</span> שם התלמיד (1/3)</button>
+        <button data-go="grade"><span class="e">🎓</span> בחירת כיתה (2/3)</button>
+        <button data-go="books"><span class="e">📚</span> בחירת ספרים (3/3)</button>
+        <button data-go="success"><span class="e">✅</span> נרשמת בהצלחה</button>
+      </div>
+      <div class="grp">
+        <button data-go="chat"><span class="e">💬</span> שיחה (הלב)</button>
+        <button data-go="settings"><span class="e">⚙️</span> הגדרות</button>
+      </div>
+      <div class="grp">
+        <button data-go="plogin"><span class="e">👪</span> כניסת הורה</button>
+        <button data-go="dash"><span class="e">📊</span> לוח מחוונים הורה</button>
+      </div>
+      <div class="note">
+        זהו מוקאפ אינטראקטיבי לדפדפן בסטאק שלך (Angular-vibe). כל המסכים לחיצים. ניתן להמיר ל-native (Capacitor / NativeScript) בלי שינוי שכבת ה-UX.
+      </div>
+    </aside>
+
+    <!-- PHONE -->
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen" id="screen">
+
+        <!-- ROLE -->
+        <section class="view active" data-view="role">
+          <div class="statusbar"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+          <div class="pad" style="padding-top:40px">
+            <div style="text-align:center;margin-bottom:30px">
+              <div style="width:80px;height:80px;border-radius:24px;background:var(--grad);display:grid;place-items:center;font-size:42px;color:#fff;margin:0 auto 18px;box-shadow:var(--shadow)">∑</div>
+              <div class="h-title">ברוכים הבאים למתמטיק</div>
+              <div class="h-sub">מי משתמש באפליקציה?</div>
+            </div>
+            <div class="role-card" onclick="go('name')">
+              <div class="ic" style="background:var(--light-bg)">🧒</div>
+              <div><h3>אני תלמיד/ה</h3><p>למידת מתמטיקה עם מורה חכם</p></div>
+            </div>
+            <div class="role-card" onclick="go('plogin')">
+              <div class="ic" style="background:#FEF3C7">👪</div>
+              <div><h3>אני הורה</h3><p>מעקב אחרי ההתקדמות של הילד/ה</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- NAME -->
+        <section class="view" data-view="name">
+          <div class="statusbar"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+          <div class="pad">
+            <span class="step-pill">שלב 1 מתוך 3</span>
+            <div class="h-title">איך קוראים לך?</div>
+            <div class="h-sub">כך המורה יפנה אליך באופן אישי</div>
+            <div style="margin-top:26px">
+              <label class="lbl">שם התלמיד/ה</label>
+              <input class="field" id="studentName" placeholder="לדוגמה: נועה" value="נועה" />
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="go('grade')">המשך ←</button>
+          </div>
+        </section>
+
+        <!-- GRADE -->
+        <section class="view" data-view="grade">
+          <div class="statusbar"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+          <div class="scroll"><div class="pad" style="padding-bottom:110px">
+            <span class="step-pill">שלב 2 מתוך 3</span>
+            <div class="h-title">באיזו כיתה את/ה?</div>
+            <div class="h-sub">המורה יתאים את רמת ההסבר לגיל שלך</div>
+            <div class="grid-grades" id="grades"></div>
+          </div></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="go('books')">המשך ←</button>
+          </div>
+        </section>
+
+        <!-- BOOKS -->
+        <section class="view" data-view="books">
+          <div class="statusbar"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+          <div class="scroll"><div class="pad" style="padding-bottom:110px">
+            <span class="step-pill">שלב 3 מתוך 3</span>
+            <div class="h-title">בחר/י את ספרי הלימוד</div>
+            <div class="h-sub">המורה ילמד את התוכן ויתאים את עצמו לספרים שלך</div>
+            <div class="grid-books" id="books"></div>
+          </div></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="go('success')">סיום הרשמה ←</button>
+          </div>
+        </section>
+
+        <!-- SUCCESS -->
+        <section class="view" data-view="success">
+          <div class="statusbar"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+          <div class="success-wrap">
+            <div class="check-big">✓</div>
+            <div class="h-title">נרשמת בהצלחה!</div>
+            <div class="h-sub" style="max-width:260px">שמור/י את הקוד האישי — דרכו הורה יכול להתחבר ולעקוב</div>
+            <div class="code-box" id="code">428 015</div>
+            <div style="font-size:12px;color:var(--text2);margin-bottom:8px">קוד אישי בן 6 ספרות</div>
+            <button class="btn btn-primary" style="margin-top:18px" onclick="go('chat')">בוא נתחיל ללמוד →</button>
+          </div>
+        </section>
+
+        <!-- CHAT -->
+        <section class="view" data-view="chat">
+          <div class="chat-top">
+            <div class="left">
+              <div class="conn"><span class="dot"></span> מחובר</div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <div class="iconbtn on" id="ttsBtn" title="קול המורה" onclick="toggleTTS()">🔊</div>
+              <div class="iconbtn" onclick="go('settings')">⚙️</div>
+            </div>
+          </div>
+          <div class="avatar-stage" id="avStage">
+            <div class="avatar-orbit">
+              <div class="ring r1"></div><div class="ring r2"></div>
+              <div class="avatar">👩‍🏫</div>
+            </div>
+            <div class="status-tag" id="statusTag">היי נועה! מוכנה להתחיל? 👋</div>
+            <div class="vbars"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="messages" id="messages"></div>
+          <div class="inputbar">
+            <div class="iconbtn" title="צילום שיעורי בית" onclick="sendHomework()">📷</div>
+            <input class="txt" id="chatInput" placeholder="כתוב/י שאלה במתמטיקה..." onkeydown="if(event.key==='Enter')sendMsg()" />
+            <button class="mic" id="micBtn" onclick="toggleMic()">🎤</button>
+          </div>
+        </section>
+
+        <!-- PARENT LOGIN -->
+        <section class="view" data-view="plogin">
+          <div class="statusbar"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+          <div class="pad" style="padding-top:34px">
+            <div style="width:70px;height:70px;border-radius:20px;background:#FEF3C7;display:grid;place-items:center;font-size:36px;margin-bottom:18px">👪</div>
+            <div class="h-title">כניסת הורה</div>
+            <div class="h-sub">הזן/י את שם הילד/ה והקוד האישי שקיבל בהרשמה</div>
+            <div style="margin-top:24px">
+              <label class="lbl">שם התלמיד/ה</label>
+              <input class="field" placeholder="נועה" value="נועה" style="margin-bottom:16px" />
+              <label class="lbl">קוד אישי (6 ספרות)</label>
+              <input class="field" placeholder="______" value="428015" style="letter-spacing:6px;text-align:center;font-weight:800" />
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="go('dash')">כניסה ←</button>
+          </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section class="view" data-view="dash">
+          <div class="scroll" style="background:var(--page)">
+            <div class="dash-head">
+              <div class="statusbar" style="color:#fff;padding-left:0;padding-right:0"><span>9:41</span><div class="dots"><span>📶</span><span>🔋</span></div></div>
+              <h2>שלום! 👋</h2>
+              <p>מעקב אחרי הלמידה של נועה · כיתה ז׳</p>
+            </div>
+            <div style="padding:16px 16px 28px">
+              <div class="card">
+                <h4>📊 שימוש</h4>
+                <div class="stat-row">
+                  <div class="stat"><b>3</b><small>השבוע</small></div>
+                  <div class="stat"><b>14</b><small>החודש</small></div>
+                  <div class="stat"><b>47</b><small>סה״כ</small></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h4>🎯 התקדמות</h4>
+                <div class="prog">
+                  <div class="top"><span>יעד שבועי</span><span>3 / 5</span></div>
+                  <div class="bar"><div class="fill" style="width:60%"></div></div>
+                </div>
+                <div class="prog">
+                  <div class="top"><span>יעד חודשי</span><span>14 / 20</span></div>
+                  <div class="bar"><div class="fill" style="width:70%"></div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h4>📝 שיעורי בית ממתינים</h4>
+                <div class="hw" onclick="this.classList.toggle('done')">
+                  <div class="cb">✓</div>
+                  <div class="htxt">משוואות ממעלה ראשונה — תרגילים 1–8<small>מתמטיקה · להגשה: 03/06</small></div>
+                </div>
+                <div class="hw" onclick="this.classList.toggle('done')">
+                  <div class="cb">✓</div>
+                  <div class="htxt">שברים — דף עבודה<small>מתמטיקה · להגשה: 05/06</small></div>
+                </div>
+                <div class="hw done" onclick="this.classList.toggle('done')">
+                  <div class="cb">✓</div>
+                  <div class="htxt">חזקות ושורשים<small>מתמטיקה · הוגש</small></div>
+                </div>
+                <div style="display:flex;gap:7px;margin-top:12px">
+                  <div style="flex:1;text-align:center;font-size:11.5px;font-weight:700;background:var(--light-bg);border:1px solid var(--border);border-radius:9px;padding:8px 4px;cursor:pointer">🔄 מ-Webtop</div>
+                  <div style="flex:1;text-align:center;font-size:11.5px;font-weight:700;background:var(--light-bg);border:1px solid var(--border);border-radius:9px;padding:8px 4px;cursor:pointer">📷 צילום</div>
+                  <div style="flex:1;text-align:center;font-size:11.5px;font-weight:700;background:var(--light-bg);border:1px solid var(--border);border-radius:9px;padding:8px 4px;cursor:pointer">✍️ ידני</div>
+                </div>
+                <div style="font-size:11px;color:var(--text2);text-align:center;margin-top:7px">תמיד אפשר להוסיף שיעורי בית מאחת משלוש הדרכים</div>
+              </div>
+
+              <div class="card">
+                <h4>🤖 ניתוח AI — סיכום אחרון</h4>
+                <div class="ai-summary">
+                  נועה תרגלה השבוע בעיקר <b>משוואות ופתרון לפי שלבים</b>. היא שולטת היטב בבידוד נעלם, אך כדאי לחזק <b>שברים במכנה משתנה</b>. מומלץ לתרגל 2–3 שאלות נוספות בנושא זה. מגמה כללית: <b>שיפור מתמיד</b> 📈
+                </div>
+              </div>
+
+              <div class="card">
+                <h4>📚 ספרי לימוד</h4>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <span class="sel-mini">מתמטיקה ז׳ · כרך א׳</span>
+                  <span class="sel-mini">גיאומטריה ז׳</span>
+                </div>
+              </div>
+
+              <div class="card" style="margin-bottom:0">
+                <h4>🔗 סנכרון Webtop</h4>
+                <div class="ss-row">
+                  <div class="lbl2"><span class="dot" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--success)"></span> מחובר · שיעורי בית מסונכרנים בצד שרת</div>
+                  <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="view" data-view="settings">
+          <div class="chat-top">
+            <div class="left" style="font-weight:800;font-size:16px">⚙️ הגדרות</div>
+            <div class="iconbtn" onclick="go('chat')">✕</div>
+          </div>
+          <div class="scroll"><div style="padding:16px">
+            <div class="sectitle">קול ושמע</div>
+            <div class="card">
+              <div class="set-row">
+                <div class="name">קול המורה<small>הקראת התשובות (TTS)</small></div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="set-row">
+                <div class="name">ספק TTS<small>Google Cloud Neural2</small></div>
+                <div class="sel-mini">he-IL-Neural2-A ▾</div>
+              </div>
+              <div class="set-row">
+                <div class="name">קצב דיבור</div>
+                <div class="sel-mini">×1.12</div>
+              </div>
+            </div>
+
+            <div class="sectitle">מנוע ה-AI</div>
+            <div class="card">
+              <div class="set-row">
+                <div class="name">ספק LLM<small>מומלץ לפרודקשן: ענן</small></div>
+                <div class="sel-mini">Claude API ▾</div>
+              </div>
+              <div class="set-row">
+                <div class="name">מודל</div>
+                <div class="sel-mini">multimodal ▾</div>
+              </div>
+              <div class="set-row">
+                <div class="name">חיבור דרך Backend Proxy<small>מפתחות לא נחשפים באפליקציה</small></div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+            </div>
+
+            <div class="sectitle">חיבור Webtop</div>
+            <div class="card">
+              <div class="set-row">
+                <div class="name">חשבון Webtop<small>סנכרון שיעורי בית · שם משתמש + סיסמה</small></div>
+                <div class="sel-mini" style="background:#E8F5EA;border-color:#bfe2cc;color:#2E7D32">מחובר ✓</div>
+              </div>
+              <div class="set-row">
+                <div class="name">סנכרון אוטומטי ברקע<small>כל כמה שעות בצד השרת</small></div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+            </div>
+
+            <div class="sectitle">הרשאות</div>
+            <div class="card">
+              <div class="set-row">
+                <div class="name">מצלמה — צילום/סריקת שיעורי בית</div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="set-row">
+                <div class="name">מיקרופון — דיבור עם המורה</div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+            </div>
+
+            <button class="btn btn-ghost" style="margin-top:8px;color:var(--danger);border-color:#fecaca">איפוס מלא</button>
+          </div></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ---------- navigation ----------
+  function go(v){
+    document.querySelectorAll('.view').forEach(s=>s.classList.toggle('active', s.dataset.view===v));
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.go===v));
+    if(v==='chat' && !chatInit){ initChat(); chatInit=true; }
+  }
+  document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+
+  // ---------- grades ----------
+  const grades=[['ד׳','יסודי'],['ה׳','יסודי'],['ו׳','יסודי'],['ז׳','חטיבה'],['ח׳','חטיבה'],['ט׳','חטיבה'],['י׳','תיכון'],['י״א','תיכון'],['י״ב','תיכון']];
+  const gEl=document.getElementById('grades');
+  grades.forEach((g,i)=>{
+    const d=document.createElement('div'); d.className='grade'+(i===3?' sel':'');
+    d.innerHTML=g[0]+'<small>'+g[1]+'</small>';
+    d.onclick=()=>{document.querySelectorAll('.grade').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');};
+    gEl.appendChild(d);
+  });
+
+  // ---------- books ----------
+  const books=[
+    ['מתמטיקה ז׳ · כרך א׳','#3B82F6','#1D4ED8',true],
+    ['גיאומטריה ז׳','#10B981','#047857',true],
+    ['אלגברה — יסודות','#8B5CF6','#6D28D9',false],
+    ['חשבון ובעיות מילוליות','#F59E0B','#B45309',false],
+    ['מתמטיקה ז׳ · כרך ב׳','#EC4899','#BE185D',false],
+    ['חידות ואתגרים','#06B6D4','#0E7490',false],
+  ];
+  const bEl=document.getElementById('books');
+  books.forEach(b=>{
+    const d=document.createElement('div'); d.className='book'+(b[3]?' sel':'');
+    d.innerHTML='<div class="check">✓</div><div class="cover" style="background:linear-gradient(150deg,'+b[1]+','+b[2]+')">'+b[0]+'</div>';
+    d.onclick=()=>d.classList.toggle('sel');
+    bEl.appendChild(d);
+  });
+
+  // ---------- success code ----------
+  const code=String(Math.floor(100000+Math.random()*900000));
+  document.getElementById('code').textContent=code.slice(0,3)+' '+code.slice(3);
+
+  // ---------- TTS toggle ----------
+  let tts=true;
+  function toggleTTS(){tts=!tts;const b=document.getElementById('ttsBtn');b.classList.toggle('on',tts);b.textContent=tts?'🔊':'🔇';}
+
+  // ---------- mic ----------
+  let rec=false, recTimer;
+  function toggleMic(){
+    const m=document.getElementById('micBtn'), inp=document.getElementById('chatInput');
+    rec=!rec; m.classList.toggle('rec',rec);
+    if(rec){
+      setStatus('מקשיב... 🎙️');
+      const partial='כמה זה שתים עשרה כפול שמונה?';
+      let i=0; inp.value='';
+      recTimer=setInterval(()=>{ inp.value=partial.slice(0,i+=2); if(i>=partial.length){clearInterval(recTimer);} },45);
+    }else{
+      clearInterval(recTimer); setStatus('היי נועה! מוכנה להתחיל? 👋');
+      if(inp.value.trim())sendMsg();
+    }
+  }
+
+  // ---------- chat ----------
+  let chatInit=false;
+  const msgEl=()=>document.getElementById('messages');
+  const stage=()=>document.getElementById('avStage');
+  function setStatus(t){document.getElementById('statusTag').textContent=t;}
+  function addBubble(cls,html){const d=document.createElement('div');d.className='bubble '+cls;d.innerHTML=html;msgEl().appendChild(d);scrollDown();return d;}
+  function scrollDown(){const m=msgEl();m.scrollTop=m.scrollHeight;}
+
+  const replies=[
+    'שאלה יפה! 💡 בוא נפתור ביחד צעד אחד בכל פעם.\nמה לדעתך הצעד הראשון? נסה ואני אכוון.',
+    'כמעט! בוא נבדוק את הצעד הזה שוב.\nאם נכפול את שני האגפים — מה נקבל?',
+    'מצוין! 🎉 בדיוק ככה.\nעכשיו נסה את החלק הבא לבד — אני כאן אם תיתקעי.',
+    'אני רואה שצירפת תמונה של דף השיעורים. מצאתי 3 תרגילים.\nבוא נתחיל מתרגיל 1 — מה השאלה מבקשת ממך?'
+  ];
+  let rIdx=0;
+
+  function aiRespond(isImg){
+    setSpeaking(false); setThinking(true); setStatus('חושב...');
+    const think=document.createElement('div'); think.className='thinkbub';
+    think.innerHTML='<span>חושב</span><span class="typedot"><i></i><i></i><i></i></span><span id="sec">0 שנ׳</span>';
+    msgEl().appendChild(think); scrollDown();
+    let s=0; const t=setInterval(()=>{s++;const el=think.querySelector('#sec');if(el)el.textContent=s+' שנ׳';},1000);
+    setTimeout(()=>{
+      clearInterval(t); think.remove(); setThinking(false);
+      const txt=isImg?replies[3]:replies[rIdx++%3];
+      addBubble('ai',txt);
+      if(tts){ setSpeaking(true); setStatus('מדבר...');
+        setTimeout(()=>{setSpeaking(false);setStatus('היי נועה! עוד שאלה? 😊');}, 2600);
+      } else setStatus('היי נועה! עוד שאלה? 😊');
+    }, 1900);
+  }
+  function setSpeaking(on){stage().classList.toggle('speaking',on);}
+  function setThinking(on){stage().classList.toggle('thinking',on);}
+
+  function sendMsg(){
+    const inp=document.getElementById('chatInput'); const v=inp.value.trim(); if(!v)return;
+    addBubble('me',v); inp.value=''; aiRespond(false);
+  }
+  function sendHomework(){
+    const d=document.createElement('div'); d.className='bubble img';
+    d.innerHTML='<div class="ph">📄</div>';
+    msgEl().appendChild(d); scrollDown();
+    addBubble('me','צילמתי את דף שיעורי הבית 📷');
+    aiRespond(true);
+  }
+  function initChat(){
+    addBubble('ai','שלום נועה! 😊 אני המורה החכם שלך למתמטיקה.\nאפשר לשאול אותי כל שאלה — בכתב או בדיבור, ואפשר גם לצלם דף שיעורי בית.\nבמה נתחיל?');
+  }
+</script>
+</body>
+</html>

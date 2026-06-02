@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>מתמטיק — הצעת ארכיטקטורה</title>
+<style>
+  :root{
+    --cream:#F4F0E8; --paper:#FBF9F4; --navy:#16273E; --navy2:#1F3350;
+    --navy-card:#172A42; --orange:#D9683E; --orange-soft:#F3E4DB;
+    --blue:#1D4ED8; --blue2:#3B82F6; --blue-soft:#E9F0FB;
+    --green:#2E9E5B; --green-soft:#E4F1E8;
+    --ink:#16273E; --ink2:#566579; --line:#E4DFD4;
+    --r:16px; --shadow:0 14px 34px -16px rgba(22,39,62,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px}
+
+  /* hero */
+  .hero{background:var(--navy);color:#fff;border-radius:24px;padding:42px 40px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .hero::after{content:"∑";position:absolute;left:-10px;bottom:-50px;font-size:240px;color:rgba(255,255,255,.05);font-weight:800;line-height:1}
+  .hero .kick{color:var(--orange);font-weight:800;letter-spacing:1px;font-size:13px}
+  .hero h1{font-size:40px;font-weight:800;letter-spacing:-1px;margin:8px 0 6px}
+  .hero p{font-size:17px;color:#c9d4e2;max-width:620px}
+  .pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+  .pills span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:700}
+  .pills span.hot{background:var(--orange);border-color:transparent}
+
+  /* section heads */
+  .sec{margin-top:48px}
+  .sec-h{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+  .sec-h .num{background:var(--orange);color:#fff;font-weight:800;font-size:15px;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto}
+  .sec-h h2{font-size:27px;font-weight:800;letter-spacing:-.5px}
+  .sec-h p{color:var(--ink2);font-size:14px;margin-top:2px}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:0 4px 16px rgba(22,39,62,.04)}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.g3,.g2{grid-template-columns:1fr}}
+
+  .principle h3{font-size:16px;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .principle .ico{width:30px;height:30px;border-radius:9px;background:var(--blue-soft);display:grid;place-items:center;font-size:16px;flex:0 0 auto}
+  .principle p{font-size:13.5px;color:var(--ink2)}
+
+  /* layer diagram */
+  .layers{display:flex;flex-direction:column;gap:0}
+  .layer{border-radius:14px;padding:18px 20px;border:1.5px solid;position:relative}
+  .layer .lh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .layer h4{font-size:17px;font-weight:800}
+  .layer .tag{font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:999px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chips b{font-size:12.5px;font-weight:700;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .arrow{align-self:center;color:var(--ink2);font-size:22px;margin:7px 0}
+  .l-client{background:var(--blue-soft);border-color:#bcd3f5}
+  .l-client .tag{background:var(--blue);color:#fff}
+  .l-yours{background:var(--green-soft);border-color:#bfe2cc}
+  .l-yours .tag{background:var(--green);color:#fff}
+  .l-data{background:#F1EFE8;border-color:#dcd7cb}
+  .l-data .tag{background:#5F5E5A;color:#fff}
+  .l-ext{background:var(--orange-soft);border-color:#ecccbd}
+  .l-ext .tag{background:var(--orange);color:#fff}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-top:14px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-left:6px;vertical-align:middle}
+
+  /* voice flow */
+  .vflow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .vstep{flex:1;min-width:120px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .vstep .n{font-size:11px;font-weight:800;color:var(--orange)}
+  .vstep h5{font-size:15px;font-weight:800;margin:3px 0}
+  .vstep small{font-size:12px;color:var(--ink2)}
+  .varr{display:grid;place-items:center;padding:0 8px;color:var(--blue2);font-size:20px;font-weight:800}
+  @media(max-width:760px){.varr{transform:rotate(90deg);padding:6px 0}}
+  .badge-rec{display:inline-block;background:var(--green);color:#fff;font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px;margin-bottom:6px}
+
+  /* module map */
+  .modwrap{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:start}
+  @media(max-width:760px){.modwrap{grid-template-columns:1fr}}
+  .tree{background:var(--navy-card);color:#cdd9e8;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:12.5px;line-height:1.85;direction:ltr;text-align:left}
+  .tree .f{color:#9ec1ff}.tree .c{color:#7fd3a8}
+  .modlist{display:grid;gap:10px}
+  .mod{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .mod .mi{width:34px;height:34px;border-radius:9px;background:var(--green-soft);display:grid;place-items:center;font-size:16px;flex:0 0 auto}
+  .mod b{font-size:14px}.mod span{font-size:12.5px;color:var(--ink2);display:block}
+
+  /* steps row (webtop) */
+  .steps{counter-reset:s;display:grid;gap:10px}
+  .step{display:flex;gap:13px;align-items:flex-start}
+  .step::before{counter-increment:s;content:counter(s);background:var(--blue);color:#fff;font-weight:800;font-size:13px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto}
+  .step p{font-size:14px;padding-top:3px}
+  .step b{color:var(--navy)}
+
+  /* tech table */
+  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border-radius:12px;overflow:hidden}
+  th{background:var(--navy);color:#fff;text-align:right;padding:12px 16px;font-size:13px}
+  td{padding:11px 16px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border:none}
+  td:first-child{font-weight:800;width:32%}
+
+  /* derisk */
+  .risk{display:flex;gap:13px;background:var(--paper);border:1px solid var(--line);border-right:4px solid var(--orange);border-radius:11px;padding:14px 16px}
+  .risk h5{font-size:14.5px;font-weight:800;margin-bottom:3px}
+  .risk p{font-size:13px;color:var(--ink2)}
+  .risk .rl{font-size:11px;font-weight:800;color:var(--orange);white-space:nowrap}
+
+  .note{font-size:13px;color:var(--ink2);background:var(--blue-soft);border:1px solid #cfe0f6;border-radius:11px;padding:14px 16px;margin-top:14px}
+  .foot{margin-top:50px;text-align:center;color:var(--ink2);font-size:12.5px;border-top:1px solid var(--line);padding-top:22px}
+  h2 .sub{font-weight:600;color:var(--ink2);font-size:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="kick">הצעת ארכיטקטורה · יוני 2026</div>
+    <h1>מתמטיק</h1>
+    <p>פלטפורמת מורה AI לשיעורי בית במתמטיקה, כיתות ד׳–י״ב. ארכיטקטורה מודולרית, חוצת-פלטפורמות ומאובטחת — בנויה על סטאק מוכח.</p>
+    <div class="pills">
+      <span class="hot">Angular</span><span class="hot">Remult</span><span class="hot">Node.js</span>
+      <span>PostgreSQL</span><span>Capacitor → iOS + Android</span><span>AI ללא תלות בספק</span>
+    </div>
+  </div>
+
+  <!-- 01 principles -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">01</div><div><h2>עקרונות מנחים</h2><p>חמשת העקרונות שכל החלטה ארכיטקטונית נגזרת מהם</p></div></div>
+    <div class="grid g3">
+      <div class="card principle"><h3><span class="ico">🧩</span> מודולריות</h3><p>כל יכולת היא מודול עצמאי עם entity + controller משלו. אפשר להחליף, לכבות או לשדרג כל אחד בלי לגעת בשאר.</p></div>
+      <div class="card principle"><h3><span class="ico">🔄</span> אי-תלות בספק</h3><p>STT, LLM ו-TTS עוברים דרך שכבת gateway. החלפת ElevenLabs↔OpenAI היא שינוי config, לא ארכיטקטורה.</p></div>
+      <div class="card principle"><h3><span class="ico">🔐</span> מאובטח כברירת מחדל</h3><p>אף מפתח API לא חי באפליקציה. כל קריאה לספק חיצוני עוברת דרך ה-backend שלך כ-proxy.</p></div>
+      <div class="card principle"><h3><span class="ico">📱</span> בנייה אחת, כל הפלטפורמות</h3><p>קוד Angular אחד נעטף ל-iOS ו-Android עם Capacitor. אין פיתוח כפול, יש כיסוי מלא.</p></div>
+      <div class="card principle"><h3><span class="ico">🏫</span> תוכן מבית הספר</h3><p>שיעורי הבית מגיעים מ-Webtop וצילום דף — לא מאגר פנימי. הצ׳אט עובד עליהם תרגיל-תרגיל.</p></div>
+      <div class="card principle"><h3><span class="ico">⚡</span> מוכח, לא ניסיוני</h3><p>כל רכיב בארכיטקטורה הוא טכנולוגיה בוגרת ומוכרת. אפס הימורים על רכיבים שלא הוכחו.</p></div>
+    </div>
+  </div>
+
+  <!-- 02 layers -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">02</div><div><h2>שכבות המערכת</h2><p>זרימה מהלקוח עד השירותים החיצוניים — דרך הקוד שלך בלבד</p></div></div>
+    <div class="card">
+      <div class="layers">
+        <div class="layer l-client">
+          <div class="lh"><h4>לקוחות</h4><span class="tag">Angular</span></div>
+          <div class="chips"><b>Web</b><b>iOS · Capacitor</b><b>Android · Capacitor</b><b>+ plugins נייטיב: מצלמה · מיקרופון · התראות</b></div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="layer l-yours">
+          <div class="lh"><h4>שכבת Remult משותפת (shared)</h4><span class="tag">חוזה type-safe</span></div>
+          <div class="chips"><b>entity</b><b>controller</b><b>enum</b><b>type (req/res)</b></div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="layer l-yours">
+          <div class="lh"><h4>Backend — Node + Remult (server)</h4><span class="tag">הליבה שלך</span></div>
+          <div class="chips"><b>Auth · JWT</b><b>Chat / Tutor</b><b>Voice Orchestrator</b><b>LLM Gateway</b><b>TTS / STT Proxy</b><b>Webtop Sync</b><b>RAG · ספרים</b></div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="grid g2" style="margin-top:4px">
+          <div class="layer l-data">
+            <div class="lh"><h4>נתונים</h4><span class="tag">התשתית שלך</span></div>
+            <div class="chips"><b>PostgreSQL</b><b>pgvector (RAG)</b><b>אחסון קבצים</b></div>
+          </div>
+          <div class="layer l-ext">
+            <div class="lh"><h4>שירותים חיצוניים</h4><span class="tag">מתחלפים</span></div>
+            <div class="chips"><b>LLM ענן</b><b>STT</b><b>TTS</b><b>Webtop (scraping)</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:#3B82F6"></i>לקוחות</span>
+        <span><i style="background:#2E9E5B"></i>הקוד שלך</span>
+        <span><i style="background:#5F5E5A"></i>נתונים</span>
+        <span><i style="background:#D9683E"></i>חיצוני / מתחלף</span>
+      </div>
+      <div class="note"><b>הנקודה המרכזית:</b> אין חץ ישיר מהלקוח לשירות חיצוני. הכל עובר דרך ה-backend שלך — וזה מה שנותן אבטחה, caching, rate-limiting והחלפת ספק בלי לגעת באפליקציה.</div>
+    </div>
+  </div>
+
+  <!-- 03 voice -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">03</div><div><h2>מנוע הקול</h2><p>Pipeline מודולרי — ההחלטה הכי מוכחת ובטוחה</p></div></div>
+    <div class="card">
+      <span class="badge-rec">✓ מומלץ להצעה</span>
+      <div class="vflow">
+        <div class="vstep"><div class="n">קלט</div><h5>STT</h5><small>דיבור התלמיד → טקסט<br>ivrit.ai / ElevenLabs Scribe</small></div>
+        <div class="varr">←</div>
+        <div class="vstep"><div class="n">חשיבה</div><h5>LLM</h5><small>Claude + הקשר הספר (RAG)<br>הדרכה בשאלות</small></div>
+        <div class="varr">←</div>
+        <div class="vstep"><div class="n">פלט</div><h5>TTS</h5><small>תשובה → קול עברי<br>Google / Azure</small></div>
+      </div>
+      <div class="grid g2" style="margin-top:18px">
+        <div>
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:8px">למה Pipeline?</h3>
+          <p style="font-size:13.5px;color:var(--ink2)">כל שלב הוא מודול נפרד ומתחלף — אפס נעילה לספק יחיד, הכי קל להוכיח שעובד, ומאפשר לתמחר ולשפר כל רכיב לחוד. תואם מושלם לעיקרון המודולריות.</p>
+        </div>
+        <div>
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:8px">נתיב שדרוג</h3>
+          <p style="font-size:13.5px;color:var(--ink2)">אם בעתיד נרצה השהיה נמוכה יותר וקטיעות טבעיות (barge-in), מחליפים את ה-Voice Orchestrator ל-OpenAI Realtime — שינוי מבודד במודול אחד, לא שכתוב של המערכת.</p>
+        </div>
+      </div>
+      <div class="note">השהיה נשמרת נמוכה ע״י <b>streaming</b>: טקסט חלקי מה-STT בזמן אמת, ו-TTS שמתחיל לדבר לפני שכל המשפט מוכן.</div>
+    </div>
+  </div>
+
+  <!-- 04 modules -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">04</div><div><h2>מודולים בצד שרת</h2><p>ממופים ישירות למבנה התיקיות שלך — לפי דומיין</p></div></div>
+    <div class="card">
+      <div class="modwrap">
+        <div class="tree">
+src/  <span class="c">// לפי דומיין</span><br>
+├─ <span class="f">app/</span> (Angular)<br>
+│&nbsp;&nbsp;└─ common · route · service<br>
+├─ <span class="f">assets/</span><br>
+├─ <span class="f">server/</span><br>
+│&nbsp;&nbsp;└─ index · server · jwt · remult-api<br>
+└─ <span class="f">shared/</span> <span class="c">← דומיינים</span><br>
+&nbsp;&nbsp;&nbsp;├─ <span class="f">student/</span> entity·controller·type<br>
+&nbsp;&nbsp;&nbsp;├─ <span class="f">parent/</span> entity·controller·type<br>
+&nbsp;&nbsp;&nbsp;├─ <span class="f">chat/</span> entity·controller·type<br>
+&nbsp;&nbsp;&nbsp;├─ <span class="f">voice/</span> controller·type<br>
+&nbsp;&nbsp;&nbsp;├─ <span class="f">books/</span> entity·controller (RAG)<br>
+&nbsp;&nbsp;&nbsp;└─ <span class="f">assignments/</span> entity·controller (Webtop)
+        </div>
+        <div class="modlist">
+          <div class="mod"><div class="mi">🔐</div><div><b>Auth · JWT</b><span>הרשמה/כניסה, תלמיד+הורה, קוד 6 ספרות, JWT</span></div></div>
+          <div class="mod"><div class="mi">💬</div><div><b>Chat / Tutor</b><span>ניהול שיחה, system-prompt, 3 רמות גיל, היסטוריה</span></div></div>
+          <div class="mod"><div class="mi">🎙️</div><div><b>Voice Orchestrator</b><span>מתזמר STT→LLM→TTS, streaming, נקודת השדרוג ל-Realtime</span></div></div>
+          <div class="mod"><div class="mi">🧠</div><div><b>LLM Gateway</b><span>proxy ל-Claude (מתחלף), מפתחות מוסתרים, caching, rate-limit</span></div></div>
+          <div class="mod"><div class="mi">📚</div><div><b>RAG · ספרים</b><span>חילוץ PDF, אינדוקס pgvector, שליפת הקשר רלוונטי</span></div></div>
+          <div class="mod"><div class="mi">🏫</div><div><b>Webtop Sync</b><span>משיכת שיעורי בית בצד שרת, מיפוי ל-assignments</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 webtop -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">05</div><div><h2>סנכרון שיעורי בית מ-Webtop</h2><p>בצד שרת, pull-based, חוצה-פלטפורמות</p></div></div>
+    <div class="card">
+      <div class="steps">
+        <div class="step"><p>המשתמש מזין את פרטי ה-Webtop שלו <b>פעם אחת</b> במסך ההגדרות (Angular).</p></div>
+        <div class="step"><p>הפרטים נשמרים <b>מוצפנים</b> ב-DB דרך <b>webtop-credential.entity</b>.</p></div>
+        <div class="step"><p><b>Job מתוזמן בשרת</b> מתחבר ל-Webtop בשם המשתמש, מושך את ה-HTML ומפרסר אותו (cheerio).</p></div>
+        <div class="step"><p>הנתונים נשמרים כ-<b>assignment.entity</b>, וה-AI בצ׳אט מציג: ״יש לך 2 שיעורי בית מהיום, נתחיל?״</p></div>
+      </div>
+      <div class="note"><b>למה בצד שרת?</b> רץ לכל הפלטפורמות (כולל iOS), עובד ברקע גם כשהאפליקציה סגורה, ו-<b>pull-based</b> — לא תלוי בכך שההורה יראה את ההתראה (שזה מה שקורה אצל 80% מההורים). <b>Fallback:</b> הזנה ידנית + צילום דף, תמיד זמינים.</div>
+    </div>
+  </div>
+
+  <!-- 06 stack -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">06</div><div><h2>סטאק טכנולוגי</h2><p>הסטאק הרגיל שלך — מוכח ומספיק</p></div></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table>
+        <tr><th>שכבה</th><th>טכנולוגיה</th><th>תפקיד</th></tr>
+        <tr><td>Frontend</td><td>Angular + Capacitor</td><td>web + עטיפה ל-iOS/Android מקוד אחד</td></tr>
+        <tr><td>שכבת API</td><td>Remult</td><td>חוזה type-safe, entities + controllers משותפים</td></tr>
+        <tr><td>Backend</td><td>Node.js</td><td>השרת, מודולים, proxy לכל ספק חיצוני</td></tr>
+        <tr><td>Database</td><td>PostgreSQL + pgvector</td><td>נתונים + אינדוקס סמנטי לספרים (RAG)</td></tr>
+        <tr><td>STT</td><td>ivrit.ai / ElevenLabs Scribe</td><td>דיבור עברית → טקסט (מתחלף)</td></tr>
+        <tr><td>LLM</td><td>Claude (מתחלף: GPT-4o / Gemini)</td><td>מנוע ההדרכה + Vision לשיעורי בית</td></tr>
+        <tr><td>TTS</td><td>Google / Azure / ElevenLabs</td><td>קול עברי יליד (מתחלף)</td></tr>
+        <tr><td>אינטגרציה</td><td>Webtop client (Node)</td><td>משיכת שיעורי בית בצד שרת</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 07 derisk -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">07</div><div><h2>למה זה עובד — ניהול סיכונים</h2><p>כל נקודת סיכון, ואיך הארכיטקטורה מנטרלת אותה</p></div></div>
+    <div class="grid" style="gap:11px">
+      <div class="risk"><div class="rl">אבטחה</div><div><h5>מפתחות API נחשפים</h5><p>נפתר: כל הספקים מאחורי ה-backend proxy. שום מפתח לא יוצא ללקוח.</p></div></div>
+      <div class="risk"><div class="rl">תלות ספק</div><div><h5>נעילה ל-ElevenLabs/LLM יקר</h5><p>נפתר: שכבת gateway. כל ספק מתחלף ב-config — כולל מעבר לחלופה זולה.</p></div></div>
+      <div class="risk"><div class="rl">Webtop</div><div><h5>scraping שביר / חוסם iOS</h5><p>נפתר: רץ בצד שרת (חוצה-פלטפורמות) + fallback של הזנה ידנית וצילום.</p></div></div>
+      <div class="risk"><div class="rl">קול</div><div><h5>מורכבות real-time</h5><p>נפתר: pipeline מודולרי מוכח, עם נתיב שדרוג מבודד ל-Realtime אם צריך.</p></div></div>
+      <div class="risk"><div class="rl">פרטיות</div><div><h5>נתוני קטינים + סיסמאות בי״ס</h5><p>טופל: הצפנה במנוחה, הסכמת הורה מפורשת, מדיניות שמירה — מתוכנן מהיום הראשון.</p></div></div>
+      <div class="risk"><div class="rl">פלטפורמות</div><div><h5>אין iOS בפרוטוטיפ</h5><p>נפתר: Capacitor מקוד Angular אחד — iOS ו-Android יחד, בלי פיתוח כפול.</p></div></div>
+    </div>
+  </div>
+
+  <!-- 08 open -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">08</div><div><h2>החלטות פתוחות לסגירה</h2><p>לפני תמחור סופי</p></div></div>
+    <div class="card">
+      <div class="grid g2">
+        <div class="principle"><h3><span class="ico">🏫</span> אינטגרציה רשמית ל-SmartSchool</h3><p>לאמת מול Smart School Ltd אם קיים API רשמי — עדיף על scraping אם זמין.</p></div>
+        <div class="principle"><h3><span class="ico">📖</span> זכויות תוכן ספרי הלימוד</h3><p>לברר בעלות זכויות לפני התחייבות ל״כיסוי מלא של כל הכיתות״.</p></div>
+        <div class="principle"><h3><span class="ico">🎯</span> מהות המוצר</h3><p>״מורה פרטי AI״ או ״פלטפורמת למידה מלאה״ — קובע אם נדרש מודול תרגול מובנה.</p></div>
+        <div class="principle"><h3><span class="ico">🔊</span> איכות קול עברי</h3><p>להשוות דגימות OpenAI מול ElevenLabs ולהחליט ברירת מחדל מול שדרוג פרימיום.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">מתמטיק · הצעת ארכיטקטורה · נבנה על Angular · Remult · Node.js · יוני 2026</div>
+</div>
+</body>
+</html>

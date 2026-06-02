@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מלאך הזכויות · מילואים ארנונה · אב טיפוס</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1a1a;
+    --ink-2:#3a3631;
+    --paper:#fbfaf6;
+    --muted:#6a6660;
+    --line:#e6e0d4;
+    --soft:#f3eee2;
+
+    /* Color coding matching Elimelech's SVG */
+    --gray-fill:#f1efe8;     --gray-border:#5f5e5a;     --gray-text:#444441;
+    --green-fill:#e1f5ee;    --green-border:#0f6e56;    --green-text:#085041;
+    --amber-fill:#faeeda;    --amber-border:#854f0b;    --amber-text:#633806;
+    --purple-fill:#eeedfe;   --purple-border:#534ab7;   --purple-text:#3c3489;
+    --success-fill:#eaf3de;  --success-border:#3b6d11;  --success-text:#27500a;
+    --danger-fill:#fcecec;   --danger-border:#a52a2a;   --danger-text:#7c1f1f;
+  }
+  html,body{background:var(--paper);min-height:100vh}
+  body{
+    font-family:'Heebo',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    line-height:1.55;
+    font-size:14px;
+  }
+
+  /* ============ HEADER ============ */
+  .topbar{
+    background:var(--ink);color:#fff;padding:16px 32px;
+    display:flex;align-items:center;gap:24px;
+    position:sticky;top:0;z-index:50;
+    box-shadow:0 2px 16px rgba(0,0,0,0.15);
+  }
+  .logo{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:22px;font-weight:700;
+  }
+  .logo .accent{color:#c8501e}
+  .logo small{
+    display:block;font-family:Heebo,sans-serif;
+    font-size:10px;letter-spacing:2px;
+    color:rgba(255,255,255,0.55);
+    margin-top:-4px;font-weight:600;
+  }
+  .badge-version{
+    background:rgba(200,80,30,0.18);border:1px solid #c8501e;
+    color:#fff;font-size:11px;letter-spacing:1.5px;
+    padding:5px 14px;border-radius:3px;font-weight:700;
+  }
+  .top-meta{
+    margin-right:auto;
+    font-size:11px;color:rgba(255,255,255,0.65);
+    text-align:left;letter-spacing:0.5px;
+  }
+  .top-meta b{display:block;color:#fff;font-size:12px;font-weight:600;margin-bottom:2px}
+
+  /* ============ INTRO ============ */
+  .intro{
+    max-width:1100px;margin:40px auto 20px;padding:0 32px;
+  }
+  .intro h1{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:38px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;
+  }
+  .intro h1 em{color:#c8501e;font-style:italic}
+  .intro .sub{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .intro .legend{
+    display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;
+    background:#fff;border:1px solid var(--line);padding:14px 18px;border-radius:6px;
+  }
+  .intro .legend span{display:inline-flex;align-items:center;gap:8px}
+  .intro .legend span::before{
+    content:'';width:14px;height:14px;border-radius:3px;border:1.5px solid;
+  }
+  .intro .legend .lg-engine::before{background:var(--gray-fill);border-color:var(--gray-border)}
+  .intro .legend .lg-data::before{background:var(--green-fill);border-color:var(--green-border)}
+  .intro .legend .lg-decision::before{background:var(--amber-fill);border-color:var(--amber-border);transform:rotate(45deg)}
+  .intro .legend .lg-output::before{background:var(--purple-fill);border-color:var(--purple-border)}
+  .intro .legend .lg-success::before{background:var(--success-fill);border-color:var(--success-border)}
+
+  /* ============ FLOW CONTAINER ============ */
+  .flow{
+    max-width:1100px;margin:24px auto 60px;padding:0 32px;
+  }
+  .flow > .arrow{
+    width:2px;height:50px;background:linear-gradient(to bottom,#aaa,#888);
+    margin:0 auto;position:relative;
+  }
+  .flow > .arrow::after{
+    content:'';position:absolute;bottom:-2px;left:50%;
+    transform:translateX(-50%);width:0;height:0;
+    border-left:8px solid transparent;border-right:8px solid transparent;
+    border-top:12px solid #888;
+  }
+
+  /* ============ STEP CARD ============ */
+  .step{
+    background:#fff;border:2px solid;border-radius:10px;
+    padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:24px;
+    align-items:start;position:relative;
+  }
+  .step.gray{border-color:var(--gray-border);background:var(--gray-fill)}
+  .step.green{border-color:var(--green-border);background:var(--green-fill)}
+  .step.purple{border-color:var(--purple-border);background:var(--purple-fill)}
+  .step.success{border-color:var(--success-border);background:var(--success-fill)}
+  .step.danger{border-color:var(--danger-border);background:var(--danger-fill)}
+  .step-num{
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:20px;font-weight:800;color:#fff;
+    flex-shrink:0;
+  }
+  .step.gray .step-num{background:var(--gray-border)}
+  .step.green .step-num{background:var(--green-border)}
+  .step.purple .step-num{background:var(--purple-border)}
+  .step.success .step-num{background:var(--success-border)}
+  .step.danger .step-num{background:var(--danger-border)}
+  .step h3{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:22px;font-weight:800;margin-bottom:4px;
+  }
+  .step.gray h3{color:var(--gray-text)}
+  .step.green h3{color:var(--green-text)}
+  .step.purple h3{color:var(--purple-text)}
+  .step.success h3{color:var(--success-text)}
+  .step.danger h3{color:var(--danger-text)}
+  .step .lead{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+  .step .body{margin-top:8px}
+
+  /* ============ DECISION DIAMOND ============ */
+  .decision{
+    width:260px;height:260px;background:var(--amber-fill);
+    border:3px solid var(--amber-border);
+    transform:rotate(45deg);
+    margin:36px auto;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  .decision-inner{
+    transform:rotate(-45deg);text-align:center;
+    width:80%;
+  }
+  .decision-num{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--amber-border);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:16px;font-weight:800;
+    margin:0 auto 8px;
+  }
+  .decision-inner h4{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:18px;font-weight:800;color:var(--amber-text);
+    margin-bottom:4px;
+  }
+  .decision-inner p{font-size:12px;color:var(--amber-text)}
+
+  /* Branch labels on diamond */
+  .decision .branch-label{
+    position:absolute;background:#fff;border:1.5px solid var(--amber-border);
+    color:var(--amber-text);font-size:12px;font-weight:700;
+    padding:4px 10px;border-radius:14px;transform:rotate(-45deg);
+    white-space:nowrap;
+  }
+  .decision .branch-label.no{
+    left:-40px;top:50%;transform:rotate(-45deg) translateY(-50%);
+  }
+  .decision .branch-label.yes{
+    right:-40px;top:50%;transform:rotate(-45deg) translateY(-50%);
+  }
+  .decision .branch-label.loop{
+    bottom:-40px;left:50%;transform:rotate(-45deg) translateX(-50%);
+  }
+
+  /* ============ BRANCHED LAYOUT ============ */
+  .branches{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:30px 0;align-items:start;
+  }
+  .branches .step{margin:0}
+  .branch-arrow{
+    width:2px;height:30px;background:#aaa;margin:0 auto 8px;position:relative;
+  }
+  .branch-arrow::after{
+    content:'';position:absolute;bottom:-2px;left:50%;
+    transform:translateX(-50%);width:0;height:0;
+    border-left:6px solid transparent;border-right:6px solid transparent;
+    border-top:10px solid #888;
+  }
+
+  /* ============ INTERNAL UI MOCKUPS ============ */
+  .ui-card{
+    background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:6px;
+    padding:18px 20px;font-size:13px;
+  }
+  .ui-card h5{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:14px;font-weight:700;margin-bottom:10px;
+    color:var(--ink);
+  }
+  .ui-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:7px 0;border-bottom:1px dotted #d8d4cc;font-size:12.5px;
+  }
+  .ui-row:last-child{border-bottom:0}
+  .ui-row span{color:var(--muted)}
+  .ui-row b{font-weight:600}
+  .ui-input{
+    width:100%;padding:8px 12px;border:1px solid #d8d4cc;border-radius:4px;
+    font-size:13px;font-family:inherit;background:#fff;
+    margin-bottom:8px;
+  }
+  .ui-input::placeholder{color:#b0aca5}
+  .ui-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:9px 18px;border-radius:5px;font-weight:600;font-size:13px;
+    border:none;cursor:pointer;font-family:inherit;
+    text-decoration:none;
+  }
+  .ui-btn-primary{background:#c8501e;color:#fff}
+  .ui-btn-success{background:#0f6e56;color:#fff}
+  .ui-btn-ghost{background:transparent;border:1px solid currentColor;color:var(--muted)}
+  .ui-btn-payme{background:#0066ff;color:#fff}
+  .ui-btn-whatsapp{background:#25d366;color:#fff}
+  .ui-btn-email{background:#5f5e5a;color:#fff}
+  .ui-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+  .ui-tag{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.5px;
+    padding:3px 9px;border-radius:3px;text-transform:uppercase;
+  }
+  .ui-tag.free{background:#e8f5e9;color:#1b5e20}
+  .ui-tag.paid{background:#fff3e0;color:#c8501e}
+  .ui-tag.auto{background:#e1edfa;color:#1e6cc8}
+  .ui-tag.req{background:#fcebeb;color:#a52a2a}
+
+  /* Big result card */
+  .big-result{
+    background:#1a1a1a;color:#fff;padding:22px 26px;border-radius:8px;
+    display:flex;align-items:center;gap:20px;margin-bottom:14px;
+  }
+  .big-result .check{
+    width:50px;height:50px;background:#0f6e56;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;color:#fff;flex-shrink:0;
+  }
+  .big-result h6{
+    font-family:'Frank Ruhl Libre',Georgia,serif;font-size:18px;font-weight:700;
+  }
+  .big-result p{color:rgba(255,255,255,0.7);font-size:12px}
+  .big-result .amount{
+    margin-right:auto;text-align:left;
+  }
+  .big-result .amount b{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:32px;font-weight:800;color:#c8501e;display:block;
+  }
+  .big-result .amount small{font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.6)}
+
+  /* Upsell box */
+  .upsell{
+    background:linear-gradient(135deg,#fff,#fff8f0);
+    border:2px solid #c8501e;border-radius:8px;
+    padding:18px 22px;margin-top:12px;
+    display:flex;align-items:center;gap:18px;
+  }
+  .upsell .coffee{
+    width:46px;height:46px;background:#fbeee5;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;flex-shrink:0;
+  }
+  .upsell h6{font-family:'Frank Ruhl Libre',Georgia,serif;font-size:15px;font-weight:700;margin-bottom:2px}
+  .upsell p{font-size:11.5px;color:var(--muted)}
+  .upsell .price{
+    margin-right:auto;font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:24px;font-weight:800;color:#c8501e;
+  }
+
+  /* Payme form */
+  .payme-box{
+    background:#0066ff;color:#fff;padding:18px 22px;border-radius:8px;
+    margin-bottom:14px;
+  }
+  .payme-box .pm-head{
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    font-weight:700;font-size:15px;
+  }
+  .payme-box .pm-head svg{width:24px;height:24px}
+  .pm-form{background:rgba(255,255,255,0.1);padding:14px;border-radius:6px}
+  .pm-form .ui-input{
+    background:rgba(255,255,255,0.95);color:var(--ink);
+    border:none;font-size:13px;
+  }
+  .pm-form .secure{font-size:10.5px;color:rgba(255,255,255,0.8);margin-top:6px}
+
+  /* Receipt */
+  .receipt{
+    background:#fff;border:1px dashed #999;padding:14px 18px;border-radius:6px;
+    font-size:11.5px;line-height:1.5;
+  }
+  .receipt h6{font-size:13px;text-align:center;margin-bottom:8px;border-bottom:1px solid #ddd;padding-bottom:6px}
+  .receipt .row{display:flex;justify-content:space-between;margin-bottom:4px}
+
+  /* Letter preview */
+  .letter{
+    background:#fff;border:1px solid #d8d4cc;padding:18px 20px;border-radius:6px;
+    font-family:'Frank Ruhl Libre',Georgia,serif;font-size:13px;line-height:1.7;
+    color:var(--ink-2);
+  }
+  .letter .lh{font-size:11.5px;color:var(--muted);margin-bottom:10px;text-align:left}
+  .letter h6{font-size:14px;font-weight:700;text-align:center;margin:10px 0 14px}
+  .letter .var{background:#fff3e0;color:#c8501e;padding:0 4px;border-radius:2px;font-weight:600}
+
+  /* Signature pad */
+  .sig-pad{
+    background:#fafafa;border:2px dashed #888;border-radius:6px;
+    height:90px;display:flex;align-items:center;justify-content:center;
+    color:#888;font-size:13px;margin:10px 0;position:relative;
+  }
+  .sig-pad svg{position:absolute;width:140px;height:60px}
+
+  /* Send channels grid */
+  .send-channels{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;
+  }
+  .send-channel{
+    background:#fff;border:1.5px solid #d8d4cc;border-radius:6px;
+    padding:12px 14px;cursor:pointer;text-align:center;
+    transition:all 0.15s;
+  }
+  .send-channel:hover{border-color:#c8501e;background:#fff8f0}
+  .send-channel .icon{font-size:22px;margin-bottom:6px}
+  .send-channel b{display:block;font-size:13px;font-weight:600}
+  .send-channel small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+
+  /* Nudnik configuration */
+  .nudnik-config{background:#fff;border:1px solid #d8d4cc;border-radius:6px;padding:16px 18px}
+  .freq-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .freq-pill{
+    padding:6px 14px;border-radius:18px;font-size:12px;font-weight:600;
+    border:1.5px solid #d8d4cc;background:#fff;cursor:pointer;
+  }
+  .freq-pill.active{background:#534ab7;border-color:#534ab7;color:#fff}
+
+  /* Loop visualization */
+  .loop-vis{
+    background:#fff8e8;border:2px dashed #c8a020;border-radius:8px;
+    padding:18px 22px;margin:30px 0;text-align:center;
+    font-size:13px;color:#7a5d10;
+  }
+  .loop-vis .arr-circle{
+    width:60px;height:60px;border:3px solid #c8a020;border-radius:50%;
+    border-right-color:transparent;display:inline-block;
+    transform:rotate(45deg);margin:0 10px;
+    position:relative;
+  }
+  .loop-vis .arr-circle::after{
+    content:'';position:absolute;top:-5px;right:0;
+    width:0;height:0;border-left:7px solid transparent;
+    border-right:7px solid transparent;border-bottom:10px solid #c8a020;
+    transform:rotate(-45deg);
+  }
+
+  /* Final celebration */
+  .celebration{
+    background:linear-gradient(135deg,#eaf3de 0%,#d4e9b0 100%);
+    border:3px solid #3b6d11;border-radius:12px;padding:32px;
+    text-align:center;
+  }
+  .celebration h2{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:42px;font-weight:900;color:#27500a;margin-bottom:6px;
+  }
+  .celebration p{font-size:15px;color:#3b6d11;margin-bottom:18px}
+  .celebration .summary{
+    background:#fff;border:1px solid #3b6d11;border-radius:8px;
+    padding:18px;display:inline-block;text-align:right;
+  }
+  .celebration .summary .row{
+    display:flex;justify-content:space-between;gap:30px;font-size:13px;
+    padding:5px 0;border-bottom:1px dotted #d4e9b0;
+  }
+  .celebration .summary .row:last-child{border-bottom:0;font-weight:700;font-size:14px;padding-top:8px;margin-top:4px;border-top:2px solid #3b6d11}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:#1a1a1a;color:#fff;padding:24px 32px;
+    text-align:center;font-size:11px;letter-spacing:1px;
+    margin-top:60px;
+  }
+  footer .brand{
+    font-family:'Frank Ruhl Libre',serif;font-size:14px;
+    margin-bottom:4px;letter-spacing:0;
+  }
+  footer .meta{color:rgba(255,255,255,0.5)}
+
+  /* Step badge with source reference */
+  .src-ref{
+    display:inline-block;background:rgba(0,0,0,0.06);
+    font-size:10.5px;color:var(--muted);padding:2px 8px;
+    border-radius:3px;margin-bottom:6px;letter-spacing:0.3px;
+  }
+
+  /* Responsive */
+  @media (max-width:760px){
+    .topbar{padding:12px 16px;gap:10px;flex-wrap:wrap}
+    .top-meta{display:none}
+    .intro{padding:0 16px}
+    .intro h1{font-size:28px}
+    .flow{padding:0 16px}
+    .step{grid-template-columns:1fr;padding:18px 20px;gap:14px}
+    .step-num{width:36px;height:36px;font-size:16px}
+    .branches{grid-template-columns:1fr}
+    .decision{width:220px;height:220px}
+    .send-channels{grid-template-columns:1fr}
+    .celebration h2{font-size:30px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="logo">
+    מלאך<span class="accent"> הזכויות</span>
+    <small>RIGHTS ANGEL · אב-טיפוס · מילואים ארנונה</small>
+  </div>
+  <span class="badge-version">FLOW v3</span>
+  <div class="top-meta">
+    <b>תואם לתרשים הזרימה</b>
+    8 שלבים · 2 מעוינים · לולאת נודניק
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<div class="intro">
+  <h1>אב-טיפוס · מילואים <em>ארנונה</em></h1>
+  <p class="sub">מסך אחר מסך - לפי תרשים הזרימה המלא. כל 8 השלבים, 2 המעוינים, ולולאת הנודניק - כפי שרשמת בתרשים שלך.</p>
+  <div class="legend">
+    <span class="lg-engine">תשתית · מנוע</span>
+    <span class="lg-data">קלט / חישוב</span>
+    <span class="lg-decision">החלטה</span>
+    <span class="lg-output">פלט / פעולה</span>
+    <span class="lg-success">סיום מוצלח</span>
+  </div>
+</div>
+
+<!-- ============ FLOW ============ -->
+<div class="flow">
+
+  <!-- STEP 1: ENGINE -->
+  <div class="step gray">
+    <div class="step-num">1</div>
+    <div>
+      <div class="src-ref">תרשים · קופסה 1 · "מנוע החוקים (הגנרי)"</div>
+      <h3>מנוע החוקים הגנרי</h3>
+      <p class="lead">תשתית רב-זכאותית גמישה - כותבים פעם אחת, מריצים על כל זכות. בסיום פיתוח מילואים-ארנונה, ניתן להגדיר "אזרחים ותיקים" בלי שורת קוד נוספת.</p>
+      <div class="body">
+        <div class="ui-card">
+          <h5>הזכויות הזמינות במנוע</h5>
+          <div class="ui-row"><span>✅ הנחת ארנונה למילואים פעיל (חייל + מפקד)</span><span class="ui-tag auto">פעיל</span></div>
+          <div class="ui-row"><span>⏳ הנחת ארנונה לאזרחים ותיקים</span><span class="ui-tag" style="background:#fff8e0;color:#7a5d10">בהכנה</span></div>
+          <div class="ui-row"><span>+ אפשרות להוספת זכות חדשה דרך Forge</span><span class="ui-tag free">ניתן להוספה</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- STEP 2: DATA ENTRY -->
+  <div class="step green">
+    <div class="step-num">2</div>
+    <div>
+      <div class="src-ref">תרשים · קופסה 2 · "הזנת נתונים · המשתמש מזין פרטים · ידני או אוטומטי"</div>
+      <h3>הזנת נתונים</h3>
+      <p class="lead">המשתמש מזין פרטים - ידנית או באמצעות העלאת מסמך לחילוץ אוטומטי. תאום דיגיטלי נבנה לכל משתמש.</p>
+      <div class="body">
+        <div class="ui-card">
+          <h5>פרטים אישיים <span class="ui-tag req">חובה</span></h5>
+          <input class="ui-input" placeholder="שם מלא" value="משה כהן">
+          <input class="ui-input" placeholder="תעודת זהות" value="123456789">
+          <input class="ui-input" placeholder="כתובת מגורים" value="רחוב הזית 14, הוד השרון">
+          <h5 style="margin-top:14px">מילואים <span class="ui-tag auto">חילוץ מתעודה</span></h5>
+          <div class="ui-row"><span>ימי מילואים ב-12 חודשים</span><b>26 ימים</b></div>
+          <div class="ui-row"><span>תעודה</span><b>תעודת מפקד פעיל</b></div>
+          <div class="ui-row"><span>תוקף עד</span><b>31/12/2026</b></div>
+          <div class="ui-btns">
+            <button class="ui-btn ui-btn-ghost">📎 העלה תעודת מילואים (חילוץ אוטומטי)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- STEP 3: CALCULATION + UPSELL -->
+  <div class="step green">
+    <div class="step-num">3</div>
+    <div>
+      <div class="src-ref">תרשים · קופסה 3 · "חישוב והצגת ההנחה · גובה ההנחה המדויק · חינמי · + הצעת ערכת סיוע (Upsell)"</div>
+      <h3>חישוב והצגת ההנחה <span class="ui-tag free">חינמי</span></h3>
+      <p class="lead">המערכת מחשבת את גובה ההנחה המדויק על בסיס הנתונים שהוזנו - ומציגה למשתמש. ניתן להמשיך מכאן או לעצור.</p>
+      <div class="body">
+        <div class="big-result">
+          <div class="check">✓</div>
+          <div>
+            <h6>זכאי להנחה - 25% כמפקד מילואים</h6>
+            <p>מבוסס על תעודת מפקד פעיל + 26 ימים ב-12 חודשים</p>
+          </div>
+          <div class="amount">
+            <b>₪ 1,237</b>
+            <small>חיסכון שנתי משוער</small>
+          </div>
+        </div>
+        <div class="upsell">
+          <div class="coffee">☕</div>
+          <div>
+            <h6>קנה לנו קפה - ואנחנו נשלח את הבקשה עבורך</h6>
+            <p>מכתב רשמי · חתימה דיגיטלית · שליחה לגזבר · נודניק עד מימוש · ערעור אוטומטי אם נדחה</p>
+          </div>
+          <div class="price">₪ 18</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- DECISION 1: PURCHASE? -->
+  <div class="decision">
+    <div class="decision-inner">
+      <div class="decision-num">4</div>
+      <h4>בוצעה רכישה?</h4>
+      <p>18 ₪ · Payme</p>
+    </div>
+    <span class="branch-label no">לא ↓</span>
+    <span class="branch-label yes">↓ כן</span>
+  </div>
+
+  <!-- BRANCHES -->
+  <div class="branches">
+
+    <!-- BRANCH: YES - PAYMENT (right side in RTL) -->
+    <div>
+      <div class="branch-arrow"></div>
+      <div class="step purple">
+        <div class="step-num">4b</div>
+        <div>
+          <div class="src-ref">תרשים · "18 ₪ · Payme"</div>
+          <h3>תשלום מאובטח · Payme</h3>
+          <p class="lead">סליקה מיידית באמצעות Payme - הקוד הקיים מאתרים קודמים יוטמע בלי כתיבה מחדש.</p>
+          <div class="body">
+            <div class="payme-box">
+              <div class="pm-head">
+                <span>💳 Payme</span>
+                <span style="margin-right:auto;font-weight:700">₪ 18.00</span>
+              </div>
+              <div class="pm-form">
+                <input class="ui-input" placeholder="מספר כרטיס">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <input class="ui-input" placeholder="MM/YY">
+                  <input class="ui-input" placeholder="CVV">
+                </div>
+                <button class="ui-btn ui-btn-payme" style="width:100%;justify-content:center;margin-top:6px">🔒 שלם 18 ₪</button>
+                <div class="secure">🔐 תשלום מאובטח SSL · אינטגרציה מוכנה מאתרים קיימים</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRANCH: NO - GOODBYE (left side in RTL) -->
+    <div>
+      <div class="branch-arrow"></div>
+      <div class="step gray danger">
+        <div class="step-num">4a</div>
+        <div>
+          <div class="src-ref">תרשים · "סיום · נפרדים לשלום"</div>
+          <h3>נפרדים לשלום</h3>
+          <p class="lead">המשתמש בחר לא לרכוש. נשלח קישור חזרה לפרטיו - שיוכל לחזור בכל רגע.</p>
+          <div class="body">
+            <div class="ui-card">
+              <p style="font-size:12.5px">תודה שהשתמשת במערכת. שמרנו את הנתונים שלך - אם תרצה לחזור ולממש את הזכות, פשוט לחץ על הקישור שיישלח לדוא"ל שלך.</p>
+              <div class="ui-btns" style="margin-top:10px">
+                <button class="ui-btn ui-btn-ghost">סגור</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- STEP 5: RECEIPT + LETTER -->
+  <div class="step purple">
+    <div class="step-num">5</div>
+    <div>
+      <div class="src-ref">תרשים · קופסה 5 · "הפקת קבלה ומכתב דרישה · קבלה אוטומטית · מכתב לגזברות"</div>
+      <h3>הפקת קבלה אוטומטית + מכתב דרישה</h3>
+      <p class="lead">קבלה דיגיטלית מופקת מיד עם התשלום. במקביל - מכתב הדרישה הרשמי לגזברות מורכב אוטומטית מתבנית + נתוני המשתמש.</p>
+      <div class="body" style="display:grid;grid-template-columns:1fr 1.4fr;gap:14px;margin-top:6px">
+
+        <!-- Receipt -->
+        <div class="receipt">
+          <h6>קבלה · פייצ'קר בע"מ</h6>
+          <div class="row"><span>תאריך</span><b>31/05/2026</b></div>
+          <div class="row"><span>מס' קבלה</span><b>2026-04891</b></div>
+          <div class="row"><span>שולם ע"י</span><b>משה כהן</b></div>
+          <div class="row"><span>פרטים</span><b>ערכת סיוע</b></div>
+          <div class="row" style="font-weight:700;border-top:1px solid #aaa;margin-top:4px;padding-top:6px">
+            <span>סה"כ</span><b>₪ 18.00</b>
+          </div>
+          <div style="text-align:center;margin-top:8px;font-size:10px;color:#999">חתום דיגיטלית · נשלח לדוא"ל</div>
+        </div>
+
+        <!-- Letter preview -->
+        <div class="letter">
+          <div class="lh">לכבוד · גזבר/ית עיריית הוד השרון · treasurer@hod-hasharon.muni.il</div>
+          <h6>בקשה להנחה בארנונה - מפקד מילואים פעיל</h6>
+          אני, <span class="var">משה כהן</span> (ת"ז <span class="var">123456789</span>), המתגורר ב<span class="var">רחוב הזית 14</span>, פונה אליכם בבקשה להנחה בארנונה בהתאם לתקנה 3ז.
+          <br><br>
+          הנחה מבוקשת: <span class="var">25%</span> על 100 מ"ר ראשונים.
+          <br><br>
+          בכבוד רב,<br>
+          <span class="var">משה כהן</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- STEP 6: SIGNATURE + SEND -->
+  <div class="step purple">
+    <div class="step-num">6</div>
+    <div>
+      <div class="src-ref">תרשים · קופסה 6 · "חתימה ושליחה · דוא״ל / WhatsApp"</div>
+      <h3>חתימה דיגיטלית (אופציונלי) + שליחה</h3>
+      <p class="lead">חתימה דיגיטלית רשות - לא חובה. המשתמש בוחר ערוץ שליחה: דוא"ל ישיר לגזברות, או WhatsApp לפנייה אישית.</p>
+      <div class="body">
+
+        <!-- Signature pad -->
+        <div class="ui-card">
+          <h5>חתימה דיגיטלית <span class="ui-tag" style="background:#e1edfa;color:#1e6cc8">אופציונלי</span></h5>
+          <div class="sig-pad">
+            <svg viewBox="0 0 140 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 40 Q25 10 45 30 Q60 50 80 25 Q100 5 130 35" stroke="#c8501e" fill="none" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span style="position:relative;top:30px;font-size:11px">חתימת משה כהן · 31/05/2026</span>
+          </div>
+          <div class="ui-btns">
+            <button class="ui-btn ui-btn-ghost">↻ נקה</button>
+            <button class="ui-btn ui-btn-ghost">דלג ללא חתימה</button>
+          </div>
+        </div>
+
+        <!-- Send channels -->
+        <div style="margin-top:14px">
+          <h5 style="font-family:'Frank Ruhl Libre',serif;font-size:14px;font-weight:700;margin-bottom:6px">בחר ערוץ שליחה</h5>
+          <div class="send-channels">
+            <div class="send-channel">
+              <div class="icon">📧</div>
+              <b>דוא"ל לגזברות</b>
+              <small>treasurer@hod-hasharon.muni.il</small>
+            </div>
+            <div class="send-channel">
+              <div class="icon" style="color:#25d366">💬</div>
+              <b>WhatsApp</b>
+              <small>שליחה ישירה לגזבר</small>
+            </div>
+          </div>
+          <div class="ui-btns" style="margin-top:10px">
+            <button class="ui-btn ui-btn-success" style="width:100%;justify-content:center">📤 שלח עכשיו</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- STEP 7: NUDNIK -->
+  <div class="step purple">
+    <div class="step-num">7</div>
+    <div>
+      <div class="src-ref">תרשים · קופסה 7 · "הפעלת הנודניק · בדיקת מימוש ההנחה בארנונה" · מייל אלימלך: "המשתמש יכול לכייל את תדירות התזכורות"</div>
+      <h3>הפעלת "הנודניק" - מעקב אוטומטי</h3>
+      <p class="lead">המערכת תוודא שהזכות מומשה - על ידי פניות חוזרות לגזברות עד שיש תשובה. <b>המשתמש בוחר את התדירות.</b></p>
+      <div class="body">
+        <div class="nudnik-config">
+          <h5>תדירות התזכורות (ניתן לשינוי בכל רגע)</h5>
+          <div class="freq-options">
+            <span class="freq-pill">כל 3 ימים</span>
+            <span class="freq-pill">שבועי</span>
+            <span class="freq-pill active">כל 14 יום</span>
+            <span class="freq-pill">חודשי</span>
+            <span class="freq-pill">כיבוי</span>
+          </div>
+          <div style="margin-top:14px">
+            <h5 style="margin-bottom:6px">ערוצי התראה</h5>
+            <div class="ui-row"><span>📱 התראה במערכת (פעמון)</span><b style="color:#0f6e56">✓ פעיל</b></div>
+            <div class="ui-row"><span>📧 דוא"ל</span><b style="color:#0f6e56">✓ פעיל</b></div>
+            <div class="ui-row"><span>💬 WhatsApp</span><b style="color:#999">⚪ לא פעיל</b></div>
+          </div>
+          <div style="background:#f3eee2;padding:10px 12px;border-radius:5px;font-size:11.5px;color:#5f5e5a;margin-top:12px">
+            <b>נודניק הבא:</b> 14/06/2026 · אם אין תשובה - פנייה חוזרת לגזברות + התראה למשתמש
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- DECISION 2: FULFILLED? -->
+  <div class="decision">
+    <div class="decision-inner">
+      <div class="decision-num">8</div>
+      <h4>האם הזכות מומשה?</h4>
+    </div>
+    <span class="branch-label no">לא · חוזר חלילה</span>
+    <span class="branch-label yes">↓ כן</span>
+  </div>
+
+  <!-- Loop visualization -->
+  <div class="loop-vis">
+    <div class="arr-circle"></div>
+    <div style="margin-top:10px"><b>לולאת הנודניק:</b> אם לא מומשה - חוזרים לשלב 7 (לפי התדירות שנבחרה) עד שמתקבלת תשובה מהגזברות או שהמשתמש מחליט לסגור.</div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- SUCCESS -->
+  <div class="celebration">
+    <h2>הללויה! 🎉</h2>
+    <p>הזכות מומשה · ההנחה אושרה ונרשמה בחשבון הארנונה</p>
+    <div class="summary">
+      <div class="row"><span>הוגש בתאריך</span><b>31/05/2026</b></div>
+      <div class="row"><span>אושר בתאריך</span><b>22/07/2026</b></div>
+      <div class="row"><span>זמן עד מימוש</span><b>52 ימים</b></div>
+      <div class="row"><span>חיסכון שנתי</span><b>₪ 1,237</b></div>
+      <div class="row"><span>עלות לשירות</span><b>₪ 18</b></div>
+      <div class="row"><span>תשואה (ROI)</span><b style="color:#27500a">×68.7</b></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="brand">מלאך הזכויות · אב-טיפוס Flow v3</div>
+  <div class="meta">BIZTECHOFF™ · 8 שלבים + 2 מעוינים + לולאת נודניק · 31/05/2026</div>
+</footer>
+
+</body>
+</html>
