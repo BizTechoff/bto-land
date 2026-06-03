@@ -236,6 +236,7 @@ footer.ft{background:var(--water-deep);color:#cfe2ef;padding:54px 0 30px;}
       <a href="#how" onclick="closeNav()">איך זה עובד</a>
       <a href="#events" onclick="closeNav()">אירועים</a>
       <a href="#nisim" onclick="closeNav()">סיפורי ניסים</a>
+      <a href="#souls" onclick="closeNav()">הנצחה</a>
       <a href="#join" onclick="closeNav()">התנדבות</a>
       <a href="#contact" onclick="closeNav()">צור קשר</a>
     </nav>
@@ -451,6 +452,107 @@ footer.ft{background:var(--water-deep);color:#cfe2ef;padding:54px 0 30px;}
     </div>
   </div>
 </section>
+
+<!-- ===================== SOULS / MEMORIAL BRANCHES ===================== -->
+<style>
+.souls{background:linear-gradient(180deg,#fff,#fff8ec);border-block:1px solid var(--line);}
+.souls-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:28px;}
+.soul{flex:1 1 250px;max-width:290px;background:#fff;border:1px solid var(--line);border-top:5px solid var(--water);
+  border-radius:16px;padding:22px;box-shadow:var(--shadow);cursor:pointer;transition:transform .16s,box-shadow .16s;text-align:center;}
+.soul:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+.soul .ic{font-size:2rem;}
+.soul h3{font-size:1.12rem;color:var(--water-deep);font-weight:800;margin:6px 0 2px;}
+.soul .branch{font-size:.92rem;color:var(--fire-deep);font-weight:700;}
+.soul .badge{display:inline-block;margin-top:10px;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 11px;}
+.soul .badge.real{background:#fff4d6;color:#7a5a10;border:1px solid var(--gold);}
+.soul .badge.ex{background:#eef3f7;color:var(--muted);border:1px dashed #b9c6d2;}
+.soul .more{margin-top:10px;font-size:.85rem;font-weight:700;color:var(--water);}
+.smodal{position:fixed;inset:0;background:rgba(6,18,31,.72);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;}
+.smodal.open{display:flex;}
+.smodal-box{background:#fff;border-radius:22px;max-width:560px;width:100%;padding:36px 34px;box-shadow:var(--shadow-lg);position:relative;border-top:6px solid var(--gold);text-align:center;}
+.smodal-box .x{position:absolute;top:12px;left:16px;font-size:1.6rem;cursor:pointer;color:var(--muted);background:none;border:none;line-height:1;}
+.smodal-box .m-ic{font-size:2.8rem;}
+.smodal-box h3{font-size:1.55rem;color:var(--water-deep);font-weight:900;margin:6px 0 2px;}
+.smodal-box .m-branch{color:var(--fire-deep);font-weight:800;margin-bottom:10px;}
+.smodal-box .m-badge{display:inline-block;margin:6px 0 14px;font-size:.78rem;font-weight:800;border-radius:999px;padding:4px 13px;}
+.smodal-box .m-badge.real{background:#fff4d6;color:#7a5a10;border:1px solid var(--gold);}
+.smodal-box .m-badge.ex{background:#eef3f7;color:var(--muted);border:1px dashed #b9c6d2;}
+.smodal-box p.m-story{font-size:1.06rem;color:var(--ink);line-height:1.8;text-align:right;}
+.smodal-box .m-cta{display:inline-block;margin-top:18px;background:linear-gradient(135deg,var(--fire),var(--fire-deep));color:#fff;font-weight:800;border-radius:999px;padding:11px 26px;text-decoration:none;}
+</style>
+<section class="sec souls" id="souls">
+  <div class="container">
+    <div class="center">
+      <span class="sec-tag">🕯️ הנצחה · נשמות וענפים</span>
+      <h2>כל נשמה — וענף משלה</h2>
+      <p class="lead">כל נרצח מ-7.10 מוצא את מקומו בענף שאהב. לחצו על נשמה כדי לקרוא את סיפורה — והתרומה לעילוי נשמתה ממשיכה בדיוק את מה שהיא אהבה.</p>
+    </div>
+    <div class="souls-grid">
+      <div class="soul" style="border-top-color:#2f9e6b;" onclick="openStory('maya')">
+        <div class="ic">🌿</div><h3>מאיה בן דוד ז״ל</h3><div class="branch">מחלקת ריפוי ורטריט</div>
+        <span class="badge real">סיפור אמיתי</span><div class="more">לקריאת הסיפור ←</div>
+      </div>
+      <div class="soul" onclick="openStory('itai')">
+        <div class="ic">🏄</div><h3>איתי</h3><div class="branch">מחלקת גלישה</div>
+        <span class="badge ex">דוגמה להמחשה</span><div class="more">לקריאת הסיפור ←</div>
+      </div>
+      <div class="soul" style="border-top-color:#3aa6e0;" onclick="openStory('dana')">
+        <div class="ic">🧘</div><h3>דנה</h3><div class="branch">מחלקת יוגה</div>
+        <span class="badge ex">דוגמה להמחשה</span><div class="more">לקריאת הסיפור ←</div>
+      </div>
+      <div class="soul" style="border-top-color:#8a4fa3;" onclick="openStory('yoni')">
+        <div class="ic">❄️</div><h3>יוני</h3><div class="branch">אמבטיות קרח</div>
+        <span class="badge ex">דוגמה להמחשה</span><div class="more">לקריאת הסיפור ←</div>
+      </div>
+      <div class="soul" style="border-top-color:var(--gold);" onclick="openStory('nimrod')">
+        <div class="ic">📖</div><h3>נמרוד</h3><div class="branch">שיעורי תורה</div>
+        <span class="badge ex">דוגמה להמחשה</span><div class="more">לקריאת הסיפור ←</div>
+      </div>
+    </div>
+    <p class="lead" style="text-align:center;margin-top:26px;font-size:.95rem;">מאיה — סיפור אמיתי ומתועד. איתי, דנה, יוני ונמרוד — דוגמאות להמחשת המודל. כל הקדשה אמיתית תיעשה לפי סיפור שפורסם ובתיאום ובאישור המשפחה.</p>
+  </div>
+</section>
+
+<!-- story modal -->
+<div class="smodal" id="storyModal" onclick="if(event.target===this)closeStory()">
+  <div class="smodal-box">
+    <button class="x" onclick="closeStory()">✕</button>
+    <div class="m-ic" id="mIc">🕯️</div>
+    <h3 id="mName"></h3>
+    <div class="m-branch" id="mBranch"></div>
+    <span class="m-badge" id="mBadge"></span>
+    <p class="m-story" id="mStory"></p>
+    <a class="m-cta" href="#donate" onclick="closeStory()">תרמו לעילוי נשמתו ❤️</a>
+  </div>
+</div>
+
+<script>
+const SOULS={
+  maya:{ic:"🌿",name:"מאיה בן דוד ז״ל",branch:"מחלקת ריפוי ורטריט",real:true,
+    story:"״מאיה מורינגה״ — אשת חינוך ואמא, בת 48 מכפר חיים, שהקדישה את חייה לרפא את העולם. נרצחה בשמחת תורה בכפר עזה. שבוע לפני כן התעוררה בבוקר וסיפרה לאמהּ על חלום, שבו אמרו לה שהיא עומדת לעזוב את העולם. לעילוי נשמתה — מחלקת הריפוי, הרטריט והמורינגה, שממשיכה בדיוק את החלום שלה."},
+  itai:{ic:"🏄",name:"איתי",branch:"מחלקת גלישה",real:false,
+    story:"דוגמה להמחשת המודל: איתי אהב את הים, וגלש בכל הזדמנות. לזכרו תוקם מחלקת הגלישה — שתלמד ילדים מיוחדים ומעוטי יכולת לרכוב על הגל, בחינם. כל גל הוא המשך של מה שהוא אהב."},
+  dana:{ic:"🧘",name:"דנה",branch:"מחלקת יוגה",real:false,
+    story:"דוגמה להמחשת המודל: דנה אהבה יוגה ואת השלווה שהיא נתנה לה. לזכרה תוקם מחלקת היוגה — מרחב של נשימה, איזון וריפוי לכל מי שזקוק לו."},
+  yoni:{ic:"❄️",name:"יוני",branch:"אמבטיות קרח",real:false,
+    story:"דוגמה להמחשת המודל: יוני אהב שלג, וטייל לאלסקה ולמסלולי סקי. לזכרו יוקמו אמבטיות הקרח — חוויה של עוצמה, חוסן והתחדשות הגוף והנפש."},
+  nimrod:{ic:"📖",name:"נמרוד",branch:"שיעורי תורה",real:false,
+    story:"דוגמה להמחשת המודל: נמרוד אהב תורה ולימוד. לזכרו יוקמו שיעורי התורה — שמחזיקים את האש הרוחנית של המקום וממשיכים את אהבת הלימוד שלו."}
+};
+function openStory(k){
+  const s=SOULS[k]; if(!s)return;
+  document.getElementById('mIc').textContent=s.ic;
+  document.getElementById('mName').textContent=s.name;
+  document.getElementById('mBranch').textContent=s.branch;
+  const b=document.getElementById('mBadge');
+  b.textContent=s.real?"סיפור אמיתי ומתועד":"דוגמה להמחשת המודל";
+  b.className="m-badge "+(s.real?"real":"ex");
+  document.getElementById('mStory').textContent=s.story;
+  document.getElementById('storyModal').classList.add('open');
+}
+function closeStory(){document.getElementById('storyModal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStory();});
+</script>
 
 <!-- ===================== JOIN / VOLUNTEER ===================== -->
 <section class="sec" id="join">
