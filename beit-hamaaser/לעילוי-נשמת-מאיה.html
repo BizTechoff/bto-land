@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בֵּית הַמַּעֲשֵׂר — לעילוי נשמת מאיה בן דוד ז״ל</title>
+<style>
+:root{
+  --night:#0a1a2b;--night-2:#102942;--ink:#1d2430;--muted:#5d6776;
+  --water:#3aa6e0;--water-deep:#0e6ba8;--fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#e7b94e;--gold-soft:#f3d27a;--gold-light:#f6e3a8;
+  --paper:#fbf8f1;--white:#fff;--line:#e8dfcc;
+  --shadow:0 18px 50px rgba(8,26,43,.22);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.85;}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px;}
+section{scroll-margin-top:40px;}
+
+/* ===== MEMORIAL HERO ===== */
+.memorial{position:relative;text-align:center;color:#fff;padding:90px 22px 80px;overflow:hidden;
+  background:radial-gradient(circle at 50% 18%,rgba(231,185,78,.30),transparent 46%),
+            linear-gradient(180deg,#06121f 0%,var(--night) 45%,var(--night-2) 100%);}
+.memorial::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,transparent 2px 11px);}
+.memorial>*{position:relative;z-index:2;}
+.bsd{font-size:.9rem;font-weight:700;color:var(--gold-light);letter-spacing:.1em;margin-bottom:24px;opacity:.9;}
+/* candle */
+.candle{width:54px;margin:0 auto 6px;}
+.flame{transform-origin:center bottom;animation:flick 2.6s ease-in-out infinite;}
+@keyframes flick{0%,100%{transform:scale(1) rotate(-1deg);}50%{transform:scale(1.06,1.1) rotate(1.5deg);}}
+.led-by{font-size:1rem;letter-spacing:.32em;text-transform:uppercase;opacity:.78;margin:16px 0 8px;}
+.memorial h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;line-height:1.15;text-shadow:0 4px 24px rgba(0,0,0,.5);}
+.memorial .zl{color:var(--gold-light);}
+.memorial .years{margin-top:10px;font-size:1.1rem;opacity:.85;font-weight:600;}
+.memorial .epitaph{margin:26px auto 0;max-width:640px;font-size:1.2rem;opacity:.95;font-style:italic;}
+.scroll-hint{margin-top:40px;opacity:.7;font-size:.9rem;animation:bob 2.6s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ===== STORY ===== */
+.story{padding:70px 0 30px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:800;letter-spacing:.06em;color:var(--fire-deep);
+  background:#fdeee6;border-radius:999px;padding:6px 16px;margin-bottom:16px;}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;color:var(--water-deep);line-height:1.2;margin-bottom:14px;}
+.story p{font-size:1.12rem;margin-bottom:16px;}
+.story p .hl{color:var(--fire-deep);font-weight:800;}
+.pull{margin:30px 0;padding:24px 30px;border-right:5px solid var(--gold);background:#fff;border-radius:14px;box-shadow:var(--shadow);
+  font-size:1.28rem;font-weight:800;color:var(--water-deep);}
+
+/* ===== CONNECTION ===== */
+.connect{background:linear-gradient(135deg,#fff,#fff8ec);border-block:1px solid var(--line);padding:64px 0;}
+.bridge{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin-top:24px;}
+.bcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 22px;text-align:center;box-shadow:var(--shadow);}
+.bcard .ic{font-size:2.4rem;}
+.bcard h3{font-size:1.25rem;font-weight:900;margin:8px 0 4px;}
+.bcard.maya h3{color:var(--water-deep);}
+.bcard.house h3{color:var(--fire-deep);}
+.bcard p{font-size:.98rem;color:var(--muted);}
+.bridge .eq{font-size:2rem;color:var(--gold);font-weight:900;}
+@media(max-width:680px){.bridge{grid-template-columns:1fr;}.bridge .eq{transform:rotate(90deg);}}
+
+/* ===== ALL VICTIMS ===== */
+.victims{padding:64px 0;text-align:center;}
+.victims .frame{background:linear-gradient(180deg,var(--night),var(--night-2));color:#fff;border-radius:24px;padding:54px 30px;box-shadow:var(--shadow);}
+.victims .frame h2{color:#fff;}
+.victims .frame p{font-size:1.12rem;opacity:.92;max-width:640px;margin:0 auto 8px;}
+.victims .frame .gold{color:var(--gold-light);font-weight:800;}
+
+/* ===== DONOR CALL ===== */
+.donor{padding:66px 0;}
+.donor-box{background:linear-gradient(135deg,var(--water-deep),var(--fire-deep));color:#fff;border-radius:26px;padding:54px clamp(26px,5vw,60px);text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.donor-box::before{content:"";position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(231,185,78,.5),transparent 70%);}
+.donor-box>*{position:relative;z-index:2;}
+.donor-box h2{color:#fff;}
+.donor-box p{font-size:1.16rem;opacity:.96;max-width:680px;margin:0 auto 14px;}
+.donor-box .big{font-size:1.4rem;font-weight:900;color:var(--gold-light);margin:18px 0;}
+.cta{display:inline-flex;gap:10px;align-items:center;margin-top:14px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;
+  font-weight:900;font-size:1.08rem;border:none;border-radius:999px;padding:15px 34px;cursor:pointer;box-shadow:0 12px 30px rgba(231,185,78,.4);text-decoration:none;transition:transform .15s;}
+.cta:hover{transform:translateY(-3px);}
+
+/* ===== FOOTER ===== */
+footer{background:var(--night);color:#9bbdd4;text-align:center;padding:40px 22px;font-size:.92rem;}
+footer a{color:var(--gold-light);}
+.kaddish{font-size:1.05rem;color:var(--gold-light);margin-bottom:10px;font-weight:700;}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:10px;right:14px;z-index:9999;font-weight:700;font-size:.82rem;color:#f6e3a8;background:rgba(10,26,43,.62);padding:3px 11px;border-radius:9px;">בס"ד</div>
+
+<!-- ===================== MEMORIAL HERO ===================== -->
+<section class="memorial">
+  <div class="candle">
+    <svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="86" rx="22" ry="4" fill="rgba(231,185,78,.25)"/>
+      <rect x="20" y="40" width="20" height="44" rx="4" fill="#f4ecd8"/>
+      <rect x="20" y="40" width="20" height="44" rx="4" fill="url(#wax)" opacity=".25"/>
+      <rect x="28.5" y="32" width="3" height="10" fill="#5a4a2a"/>
+      <g class="flame">
+        <path d="M30 6 C38 18 40 26 30 34 C20 26 22 18 30 6 Z" fill="#e7b94e"/>
+        <path d="M30 14 C34 21 35 26 30 31 C25 26 26 21 30 14 Z" fill="#fff3cf"/>
+      </g>
+      <defs><linearGradient id="wax" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#caa84e"/><stop offset="1" stop-color="#8a7330"/></linearGradient></defs>
+    </svg>
+  </div>
+  <div class="led-by">לעילוי נשמת</div>
+  <h1>מאיה בן דוד <span class="zl">ז״ל</span></h1>
+  <div class="years">הי״ד · נרצחה בכפר עזה · שמחת תורה, ז׳ באוקטובר 2023</div>
+  <p class="epitaph">״באנו לעולם לתת, לא לקחת.״ — מי שכל חייה היו נתינה, ממשיכה לתת גם עכשיו.</p>
+  <div class="scroll-hint">⌄ סיפורה של מאיה ⌄</div>
+</section>
+
+<!-- ===================== HER STORY ===================== -->
+<section class="story">
+  <div class="wrap">
+    <span class="eyebrow">🕯️ מי הייתה מאיה</span>
+    <h2>נתינה אין-סופית — מפעל חיים של ריפוי</h2>
+    <p>מאיה בן דוד ז״ל, בת 48 מכפר חיים, הייתה <span class="hl">אשת חינוך אהובה ומוערכת</span>. את חייה הקדישה לשליחות אחת: ליצור עולם מרפא, בריא וטוב יותר. היא התוודעה לסגולותיו של צמח המורינגה והפכה לשגרירה הנאמנה ביותר שלו — עד שרבים הכירו אותה פשוט בשם <span class="hl">״מאיה מורינגה״</span>.</p>
+    <p>היא חיפשה תמיד עשייה משמעותית שתמלא אותה בנתינה. למדה, חקרה, פיתחה מוצרים, והפיצה בריאות וריפוי לכל מי שפגשה — בלי לבקש דבר בחזרה. הנתינה שלה לא הכירה גבולות.</p>
+    <p>בשבת שמחת תורה נסעה עם משפחתה לבקר את הורי בעלה צפריר, מוותיקי ומייסדי קיבוץ כפר עזה. באותו בוקר ארור נקטעו חייה — אך לא נקטעה הנתינה. <span class="hl">חבריה הרבים נשבעו להמשיך את מפעל חייה</span>, וכך גם אנחנו.</p>
+
+    <div class="pull">המקום הזה הוא ההמשך החי של מאיה — נתינה שממשיכה לזרום, בדיוק כמו שהיא חלמה.</div>
+  </div>
+</section>
+
+<!-- ===================== THE CONNECTION ===================== -->
+<section class="connect">
+  <div class="wrap">
+    <span class="eyebrow">💧🔥 החיבור</span>
+    <h2>מהריפוי של מאיה — אל בֵּית הַמַּעֲשֵׂר</h2>
+    <p class="story" style="padding:0;font-size:1.12rem;">מאיה ריפאה את הגוף ואת הנפש, מתוך אהבת אדם טהורה — בלי קשר לדת, בלי תנאים. זה בדיוק לב הקונספט: <b>מים</b> שמרפאים את הגוף והנפש, <b>אש</b> שמדליקה את הרוח, ושניהם נפגשים ב<b>שלום</b>. כל אדם מוזמן — שומר תורה ומצוות, ומי שעדיין לא — להתחבר לנתינה הזו בכל לבו.</p>
+
+    <div class="bridge">
+      <div class="bcard maya"><div class="ic">💧</div><h3>הדרך של מאיה</h3><p>ריפוי, בריאות ונתינה אין-סופית לכל אדם — בלי תנאים.</p></div>
+      <div class="eq">→</div>
+      <div class="bcard house"><div class="ic">🔥</div><h3>בֵּית הַמַּעֲשֵׂר</h3><p>מים ואש שנפגשים בשלום — מאה אחוז נתינה, הכל חינם, הכל מתרומות.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ALL VICTIMS ===================== -->
+<section class="victims">
+  <div class="wrap">
+    <div class="frame">
+      <span class="eyebrow" style="background:rgba(231,185,78,.16);color:var(--gold-light);">🤍 מקום של נחמה</span>
+      <h2>לזכר מאיה — ולזכר כל קדושי השבעה באוקטובר</h2>
+      <p>בֵּית הַמַּעֲשֵׂר הוא מקום הנצחה חי לכל מי שנפלו באותו יום. לא אנדרטה של אבן — אלא <span class="gold">נתינה שנמשכת</span>, שמחה שחוזרת, וחיבור בין לבבות.</p>
+      <p>כאן הופכים את הכאב הגדול ביותר לאור הגדול ביותר. כל ערב, כל סדנה, כל חיוך — הם נר זיכרון שממשיך לבעור.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DONOR CALL ===================== -->
+<section class="donor">
+  <div class="wrap">
+    <div class="donor-box">
+      <h2>הזמנה להיות שותפים</h2>
+      <p>מאיה נתנה בלי גבול. אנחנו מזמינים אתכם להמשיך את הנתינה הזו — להפוך זיכרון לחיים, ואובדן לאור. כל מי שיראה את הרעיון מבין: זה מאה אחוז נתינה, בלי חארטות.</p>
+      <p class="big">״מי שמטיב לבריות נעשה שותף של הבורא.״</p>
+      <p>השקעה בבֵית הַמַּעֲשֵׂר היא השקעה בנצח — בשמה של מאיה, ובשם כל מי שנלקחו מאיתנו. הלב נכנס — ואז השמים הם הגבול.</p>
+      <a class="cta" href="#" onclick="return false;">להצטרף כשותפים בהנצחה 🤍</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="kaddish">תְּהֵא נִשְׁמָתָהּ צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
+  <div>בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש 💧🔥</div>
+  <div style="margin-top:10px;opacity:.7;font-size:.85rem;">לזכרה מונצח בהר הרצל · מפעל חייה ״מאיה מורינגה״ ממשיך ·
+    <a href="https://laad.btl.gov.il/Web/He/TerrorVictims/Page/Default.aspx?ID=43482" target="_blank">דף ההנצחה הרשמי</a>
+  </div>
+</footer>
+
+</body>
+</html>

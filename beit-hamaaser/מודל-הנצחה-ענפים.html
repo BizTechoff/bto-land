@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ההנצחה החיה · בֵּית הַמַּעֲשֵׂר — כל נשמה וענף משלה</title>
+<style>
+:root{
+  --night:#0a1a2b;--night-2:#102942;--ink:#1d2430;--muted:#5d6776;
+  --water:#3aa6e0;--water-deep:#0e6ba8;--fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#e7b94e;--gold-soft:#f3d27a;--gold-light:#f6e3a8;
+  --paper:#fbf8f1;--white:#fff;--line:#e8dfcc;
+  --shadow:0 16px 44px rgba(8,26,43,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.85;}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px;}
+section{scroll-margin-top:30px;}
+
+/* hero */
+.hero{position:relative;text-align:center;color:#fff;padding:80px 22px 70px;overflow:hidden;
+  background:radial-gradient(circle at 50% 18%,rgba(231,185,78,.30),transparent 48%),
+            linear-gradient(180deg,#06121f,var(--night) 50%,var(--night-2));}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,transparent 2px 11px);}
+.hero>*{position:relative;z-index:2;}
+.bsd{font-size:.9rem;font-weight:700;color:var(--gold-light);letter-spacing:.1em;margin-bottom:18px;opacity:.9;}
+.hero h1{font-size:clamp(2.2rem,6vw,3.5rem);font-weight:900;line-height:1.12;text-shadow:0 4px 24px rgba(0,0,0,.5);}
+.hero .sub{margin-top:16px;font-size:1.15rem;opacity:.93;max-width:640px;margin-inline:auto;}
+.hero .gold{color:var(--gold-light);}
+
+/* sections */
+.sec{padding:60px 0 20px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:800;letter-spacing:.06em;color:var(--fire-deep);
+  background:#fdeee6;border-radius:999px;padding:6px 16px;margin-bottom:14px;}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;color:var(--water-deep);line-height:1.2;margin-bottom:14px;}
+.sec p{font-size:1.12rem;margin-bottom:14px;}
+.sec p .hl{color:var(--fire-deep);font-weight:800;}
+.center{text-align:center;}.center .eyebrow{margin-inline:auto;}.center p{max-width:760px;margin-inline:auto;}
+
+/* mechanism steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px;}
+.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 18px;text-align:center;box-shadow:var(--shadow);position:relative;}
+.step .n{position:absolute;top:12px;right:14px;width:26px;height:26px;border-radius:50%;background:var(--water-deep);color:#fff;font-weight:800;font-size:.85rem;display:grid;place-items:center;}
+.step .ic{font-size:2rem;}
+.step h4{font-size:1.06rem;color:var(--water-deep);font-weight:800;margin:8px 0 4px;}
+.step p{font-size:.94rem;color:var(--muted);margin:0;}
+@media(max-width:820px){.steps{grid-template-columns:repeat(2,1fr);}}
+
+/* branch wall */
+.wall{background:linear-gradient(180deg,#fff,#fff8ec);border-block:1px solid var(--line);}
+.branches{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:24px;}
+.branch{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);border-top:5px solid var(--water);display:flex;flex-direction:column;}
+.branch .top{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.branch .ic{font-size:2rem;}
+.branch h3{font-size:1.2rem;font-weight:900;color:var(--water-deep);}
+.branch .ded{font-size:.95rem;font-weight:800;border-radius:10px;padding:8px 12px;margin:8px 0 12px;}
+.branch .ded.filled{background:#fff4d6;color:#7a5a10;border:1px solid var(--gold);}
+.branch .ded.open{background:#eef3f7;color:var(--muted);border:1px dashed #b9c6d2;}
+.branch .funds-t{font-size:.84rem;font-weight:800;color:var(--fire-deep);margin-bottom:4px;}
+.branch ul{list-style:none;margin:0;}
+.branch li{font-size:.92rem;color:var(--muted);padding:3px 0;}
+.branch li::before{content:"•";color:var(--fire);margin-left:8px;font-weight:900;}
+.branch.maya{border-top-color:var(--gold);background:linear-gradient(180deg,#fffdf6,#fff8ea);}
+
+/* sourcing */
+.source-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:var(--shadow);}
+.source-box .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px;}
+.source-box .item{background:var(--paper);border-radius:14px;padding:18px;}
+.source-box .item b{color:var(--water-deep);}
+.source-box a{color:var(--water-deep);font-weight:700;}
+.consent{margin-top:18px;background:#fdeee6;border:1px solid #f3c4ad;border-radius:14px;padding:16px 20px;font-weight:700;color:var(--fire-deep);}
+@media(max-width:680px){.source-box .grid{grid-template-columns:1fr;}}
+
+/* unity */
+.unity{background:linear-gradient(180deg,var(--night),var(--night-2));color:#fff;border-radius:26px;padding:54px clamp(24px,5vw,56px);text-align:center;box-shadow:var(--shadow);margin:34px 0;}
+.unity h2{color:#fff;}
+.unity p{font-size:1.16rem;opacity:.94;max-width:680px;margin:0 auto 12px;}
+.unity .gold{color:var(--gold-light);font-weight:800;}
+.unity .big{font-size:1.4rem;font-weight:900;color:var(--gold-light);margin:18px 0;}
+
+/* cta */
+.cta-box{text-align:center;padding:20px 0 60px;}
+.cta{display:inline-flex;gap:10px;align-items:center;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;
+  font-weight:900;font-size:1.1rem;border:none;border-radius:999px;padding:16px 38px;cursor:pointer;box-shadow:0 12px 30px rgba(231,185,78,.4);text-decoration:none;transition:transform .15s;}
+.cta:hover{transform:translateY(-3px);}
+
+footer{background:var(--night);color:#9bbdd4;text-align:center;padding:36px 22px;font-size:.9rem;}
+footer a{color:var(--gold-light);}
+.kaddish{font-size:1.05rem;color:var(--gold-light);margin-bottom:10px;font-weight:700;}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:10px;right:14px;z-index:9999;font-weight:700;font-size:.82rem;color:#f6e3a8;background:rgba(10,26,43,.62);padding:3px 11px;border-radius:9px;">בס"ד</div>
+
+<!-- hero -->
+<section class="hero">
+  <h1>כל נשמה — וענף משלה</h1>
+  <p class="sub">ההנצחה החיה של בֵּית הַמַּעֲשֵׂר: כל נרצח מ<span class="gold">השבעה באוקטובר</span> מוצא את מקומו בענף שאהב — והנתינה לעילוי נשמתו ממשיכה את מה שהוא אהב בחייו.</p>
+</section>
+
+<!-- the idea -->
+<section class="sec">
+  <div class="wrap center">
+    <span class="eyebrow">🕯️ הרעיון</span>
+    <h2>השמחה שנקטעה — הופכת לשמחה אין-סופית</h2>
+    <p>הם נרצחו בשמחת תורה — ביום של שמחה. אנחנו לוקחים את השמחה שנקטעה ומחזירים אותה לחיים: <span class="hl">כל אדם שנפל מוצא את מקומו בענף שאהב</span>. מי שאהב את הים — בענף הגלישה. מי שעשתה יוגה — בענף היוגה. מי שלמד תורה — בשיעורי התורה.</p>
+    <p>וכך התרומה לעילוי נשמתו לא נשארת מילה — היא <span class="hl">ממשיכה בדיוק את מה שהוא אהב</span>, ומחברת בין שומרי תורה ומצוות למי שעדיין לא. זו הנצחה שחיה, נושמת, ושמחה.</p>
+  </div>
+</section>
+
+<!-- mechanism -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">⚙️ איך זה עובד</span>
+      <h2>מנגנון ההקדשה</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="ic">🕯️</div><h4>בוחרים נשמה</h4><p>נרצח/ת שאהב/ה תחום מסוים בחייו.</p></div>
+      <div class="step"><span class="n">2</span><div class="ic">🌿</div><h4>משייכים לענף</h4><p>הענף שאהב/ה — גלישה, יוגה, תורה, מוסיקה.</p></div>
+      <div class="step"><span class="n">3</span><div class="ic">❤️</div><h4>תורמים לעילוי נשמתו</h4><p>התרומה זורמת אוטומטית לאותו ענף בלבד.</p></div>
+      <div class="step"><span class="n">4</span><div class="ic">🌱</div><h4>הענף חי בשמו</h4><p>מממן מדריכים, ציוד וחולצות — בשמו לנצח.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- branch wall -->
+<section class="sec wall">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">🌿 קיר ההקדשות</span>
+      <h2>הענפים — וכל אחד לעילוי נשמה</h2>
+      <p>כל ענף נושא שם של נשמה, וכל תרומה אליו ממנת בדיוק את מה שצריך כדי שהוא ימשיך לפעול. <b>השמות מתווספים בתיאום ובאישור המשפחות.</b></p>
+    </div>
+
+    <div class="branches">
+
+      <!-- Maya anchor -->
+      <div class="branch maya">
+        <div class="top"><span class="ic">🌿</span><h3>ריפוי, בריאות ורטריט</h3></div>
+        <div class="ded filled">לעילוי נשמת מאיה בן דוד ז״ל · ״מאיה מורינגה״</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>מנחי רטריט וסדנאות ריפוי</li><li>צמחי מרפא ומורינגה</li><li>אמבטיות קרח וציוד</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:var(--water);">
+        <div class="top"><span class="ic">🏄</span><h3>גלישה לילדים מיוחדים</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>מדריכי גלישה מוסמכים</li><li>גלשנים וחליפות</li><li>חולצות הקבוצה וביטוח</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:var(--water-light);">
+        <div class="top"><span class="ic">🧘</span><h3>יוגה ואמבטיות קרח</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>מדריכות יוגה</li><li>מזרנים וציוד</li><li>אמבטיות קרח</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:var(--gold);">
+        <div class="top"><span class="ic">📖</span><h3>שיעורי תורה וכולל</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>רבנים ומלמדים</li><li>ספרי לימוד</li><li>כיבוד לערבי הלימוד</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:#b1559a;">
+        <div class="top"><span class="ic">🎵</span><h3>מוסיקה והופעות</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>מוסיקאים אורחים</li><li>ציוד הגברה ובמה</li><li>ערבי השראה וניגון</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:var(--fire);">
+        <div class="top"><span class="ic">🔥</span><h3>ערבי על האש לחיילים</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>אוכל ולוגיסטיקה</li><li>ערבי גיבוש וחיזוק</li><li>כבוד ללוחמים</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:#2f9e6b;">
+        <div class="top"><span class="ic">🥖</span><h3>חלוקת מזון לנצרכים</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>מצרכים וסלי מזון</li><li>אריזה והפצה</li><li>מתנדבים ולוגיסטיקה</li></ul>
+      </div>
+
+      <div class="branch" style="border-top-color:var(--fire-deep);">
+        <div class="top"><span class="ic">😄</span><h3>סדנאות שמחה וצחוק</h3></div>
+        <div class="ded open">לעילוי נשמת ______ · בתיאום עם המשפחה</div>
+        <div class="funds-t">התרומה ממנת:</div>
+        <ul><li>מנחי סדנאות</li><li>ערבי שמחה</li><li>״להיות שמח בחלקך״</li></ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- sourcing & consent -->
+<section class="sec">
+  <div class="wrap">
+    <span class="eyebrow">📋 איך נבחרים השמות</span>
+    <h2>בכבוד, בדיוק, ובאישור</h2>
+    <div class="source-box">
+      <p style="font-size:1.05rem;margin-bottom:6px;">השמות והתחומים נלקחים ממאגרי ההנצחה הרשמיים — ותמיד מתואמים עם המשפחה לפני שמקדישים ענף:</p>
+      <div class="grid">
+        <div class="item"><b>מאגרי הנצחה רשמיים</b><br>
+          <a href="https://www.kan.org.il/lobby/memorial/" target="_blank">כאן — שמות הנרצחים</a><br>
+          <a href="https://noflim.davar1.co.il/" target="_blank">דבר — שמות הנופלים והנרצחים</a><br>
+          <a href="https://www.710360.kan.org.il/en/nova" target="_blank">כאן 7.10.360 — טבח הנובה</a>
+        </div>
+        <div class="item"><b>שיוך לפי תחום חיים</b><br>
+          לכל נשמה — התחביב, התשוקה או מפעל החיים שאפיינו אותה. לדוגמה, נרצחים מעולם המוסיקה (כדוגמת הדי-ג׳יי מתן ״קידו״ אלמלם ז״ל שנרצח בנובה) משתייכים באופן טבעי לענף המוסיקה.
+        </div>
+      </div>
+      <div class="consent">🤍 חשוב: שום ענף לא יוקדש לשם של נרצח ללא אישור מפורש ובתיאום מלא עם בני המשפחה. ההנצחה נעשית מתוך כבוד עמוק.</div>
+    </div>
+  </div>
+</section>
+
+<!-- unity -->
+<section class="sec">
+  <div class="wrap">
+    <div class="unity">
+      <span class="eyebrow" style="background:rgba(231,185,78,.16);color:var(--gold-light);">🇮🇱 אחדות</span>
+      <h2>הנצחה שמחברת את עם ישראל</h2>
+      <p>כל מי שנפל באותו יום ימצא את מקומו כאן — וכל מי שיתרום יתחבר אליו. כך אנחנו <span class="gold">מחברים שומרי תורה ומצוות עם מי שעדיין לא</span>, סביב דבר אחד: נתינה.</p>
+      <p class="big">למגר את שנאת החינם — בנתינת חינם.</p>
+      <p>הופכים את האובדן הגדול ביותר לאחדות הגדולה ביותר — כדי שדבר כזה לא יקרה עוד.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-box">
+  <a class="cta" href="#" onclick="return false;">להקדיש ענף לעילוי נשמה 🕯️</a>
+</div>
+
+<footer>
+  <div class="kaddish">יִזְכֹּר · תְּהֵא נִשְׁמָתָם צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
+  <div>בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש 💧🔥</div>
+</footer>
+
+</body>
+</html>

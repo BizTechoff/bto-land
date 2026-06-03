@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בֵּית הַמַּעֲשֵׂר — חיבור בין מים לאש</title>
+<style>
+  :root{
+    --water:#0e6ba8;
+    --water-deep:#073b5c;
+    --water-light:#3aa6e0;
+    --fire:#e8602c;
+    --fire-deep:#c23b13;
+    --gold:#d4a02a;
+    --gold-light:#f1c75b;
+    --ink:#1f2733;
+    --paper:#fbf7ef;
+    --paper-2:#ffffff;
+    --muted:#5d6776;
+    --line:#e7ddc9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Heebo","Segoe UI",Arial,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.75;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    padding:60px 24px;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(58,166,224,.55), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(232,96,44,.55), transparent 55%),
+      linear-gradient(135deg, var(--water-deep) 0%, var(--water) 45%, var(--fire-deep) 100%);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.04) 0 2px, transparent 2px 9px);
+    opacity:.6;
+  }
+  .hero > *{position:relative;z-index:2;}
+  .kicker{
+    letter-spacing:.35em;
+    font-size:.8rem;
+    text-transform:uppercase;
+    opacity:.85;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,7vw,5.4rem);
+    font-weight:900;
+    line-height:1.05;
+    text-shadow:0 6px 26px rgba(0,0,0,.35);
+  }
+  .hero .sub{
+    margin-top:18px;
+    font-size:clamp(1.1rem,2.6vw,1.6rem);
+    font-weight:600;
+    opacity:.95;
+  }
+  .hero .dedication{
+    margin-top:10px;
+    font-size:1rem;
+    opacity:.8;
+    font-style:italic;
+  }
+  .scroll-hint{
+    margin-top:46px;
+    font-size:.9rem;
+    opacity:.85;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* ===== LAYOUT ===== */
+  main{max-width:1060px;margin:0 auto;padding:0 22px;}
+  .section{padding:64px 0 28px;}
+  .step-tag{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.85rem;font-weight:700;letter-spacing:.08em;
+    color:var(--fire-deep);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 16px;
+    margin-bottom:14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.05);
+  }
+  .step-tag .n{
+    background:linear-gradient(135deg,var(--water),var(--fire));
+    color:#fff;width:24px;height:24px;border-radius:50%;
+    display:grid;place-items:center;font-size:.8rem;
+  }
+  h2.section-title{
+    font-size:clamp(1.8rem,4vw,2.7rem);
+    font-weight:900;
+    color:var(--water-deep);
+    line-height:1.15;
+    margin-bottom:8px;
+  }
+  .section-lead{
+    color:var(--muted);
+    font-size:1.08rem;
+    max-width:760px;
+    margin-bottom:26px;
+  }
+
+  /* ===== VISION ===== */
+  .vision{
+    background:linear-gradient(135deg,#fff 0%,#fff8ec 100%);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:38px clamp(22px,5vw,52px);
+    box-shadow:0 12px 40px rgba(14,107,168,.08);
+    position:relative;
+    overflow:hidden;
+  }
+  .vision::before{
+    content:"";position:absolute;top:-40px;left:-40px;
+    width:160px;height:160px;border-radius:50%;
+    background:radial-gradient(circle,var(--gold-light),transparent 70%);
+    opacity:.5;
+  }
+  .vision p{font-size:1.18rem;position:relative;}
+  .vision .verse{
+    margin-top:18px;font-weight:800;font-size:1.32rem;
+    color:var(--fire-deep);
+  }
+
+  /* ===== CARD GRID ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:16px;
+    margin-top:8px;
+  }
+  .card{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:20px 20px 18px;
+    box-shadow:0 6px 18px rgba(0,0,0,.04);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s;
+    position:relative;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(14,107,168,.14);
+    border-color:var(--water-light);
+  }
+  .card .ico{font-size:1.6rem;margin-bottom:8px;display:block;}
+  .card h3{font-size:1.12rem;color:var(--water-deep);margin-bottom:4px;font-weight:800;}
+  .card p{font-size:.96rem;color:var(--muted);}
+
+  /* category accent strips */
+  .cat-spirit .card{border-top:3px solid var(--water);}
+  .cat-community .card{border-top:3px solid var(--gold);}
+  .cat-events .card{border-top:3px solid var(--fire);}
+  .cat-body .card{border-top:3px solid var(--water-light);}
+  .cat-couples .card{border-top:3px solid #b1559a;}
+  .cat-torah .card{border-top:3px solid var(--gold);}
+  .cat-chesed .card{border-top:3px solid #2f9e6b;}
+
+  /* ===== MODEL / TIMELINE ===== */
+  .flow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+    margin-top:10px;
+  }
+  .flow-step{
+    background:linear-gradient(160deg,var(--water-deep),var(--water));
+    color:#fff;
+    border-radius:16px;
+    padding:22px;
+    position:relative;
+  }
+  .flow-step:nth-child(even){
+    background:linear-gradient(160deg,var(--fire-deep),var(--fire));
+  }
+  .flow-step .num{
+    font-size:2rem;font-weight:900;opacity:.45;line-height:1;
+  }
+  .flow-step h4{font-size:1.12rem;margin:6px 0 6px;font-weight:800;}
+  .flow-step p{font-size:.95rem;opacity:.94;}
+
+  .pill-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .pill{
+    background:#fff;border:1px solid var(--line);border-radius:999px;
+    padding:8px 16px;font-size:.94rem;font-weight:600;color:var(--water-deep);
+    box-shadow:0 3px 10px rgba(0,0,0,.04);
+  }
+
+  /* ===== OPS (problem/solution) ===== */
+  .ops-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px;}
+  .ops-card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;
+    box-shadow:0 6px 18px rgba(0,0,0,.04);
+  }
+  .ops-card h3{color:var(--water-deep);font-size:1.15rem;margin-bottom:12px;font-weight:800;}
+  .ops-card ul{list-style:none;}
+  .ops-card li{padding:7px 0;border-bottom:1px dashed var(--line);font-size:.98rem;color:var(--ink);}
+  .ops-card li:last-child{border-bottom:none;}
+  .ops-card li::before{content:"◆";color:var(--fire);margin-left:8px;font-size:.7rem;}
+
+  .prob-sol{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .prob-sol .head{padding:14px 18px;font-weight:800;color:#fff;}
+  .prob-sol .ph{background:var(--fire-deep);}
+  .prob-sol .sh{background:var(--water-deep);}
+  .prob-sol .cell{padding:14px 18px;border-top:1px solid var(--line);font-size:.98rem;}
+  .prob-sol .pc{background:#fff6f1;}
+  .prob-sol .sc{background:#f0f7fc;}
+
+  /* ===== CLOSING ===== */
+  .closing{
+    margin:50px 0 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(241,199,91,.4), transparent 50%),
+      linear-gradient(135deg,var(--water-deep),var(--fire-deep));
+    color:#fff;border-radius:24px;padding:54px clamp(24px,6vw,64px);text-align:center;
+    box-shadow:0 18px 50px rgba(0,0,0,.18);
+  }
+  .closing h2{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:900;margin-bottom:16px;}
+  .closing p{font-size:1.2rem;opacity:.96;max-width:720px;margin:0 auto;}
+  .closing .crown{font-size:2.4rem;margin-bottom:10px;}
+
+  footer{text-align:center;padding:38px 20px 56px;color:var(--muted);font-size:.92rem;}
+
+  /* divider */
+  .wave{height:3px;background:linear-gradient(90deg,var(--water),var(--gold),var(--fire));border-radius:3px;margin:6px 0 0;opacity:.6;}
+
+  /* בס"ד */
+  .bsd{
+    position:absolute;
+    top:14px;
+    right:20px;
+    z-index:5;
+    font-size:1rem;
+    font-weight:700;
+    color:#fff;
+    opacity:.92;
+    letter-spacing:.04em;
+    text-shadow:0 2px 8px rgba(0,0,0,.35);
+  }
+
+  @media(max-width:560px){
+    .prob-sol{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="bsd">בס"ד</div>
+  <div class="kicker">מרכז רוחני ע״ש מאיה</div>
+  <h1>בֵּית הַמַּעֲשֵׂר</h1>
+  <div class="sub">חיבור בין מים לאש 💧🔥</div>
+  <div class="dedication">״באנו לעולם לתת, לא לקחת — נתחיל לתת, נתחיל לקבל״</div>
+  <div class="scroll-hint">⌄ גלול למטה ⌄</div>
+</header>
+
+<main>
+
+  <!-- ===================== 1. VISION ===================== -->
+  <section class="section" id="vision">
+    <span class="step-tag"><span class="n">1</span> נקודת ההתחלה · הרעיון</span>
+    <h2 class="section-title">הרעיון האלוקי</h2>
+    <div class="vision">
+      <p>
+        הקדוש ברוך הוא ברא את העולם על מנת להיטיב לברואיו, וכל מי שמטיב לבריות נעשה
+        שותף של הבורא. אנחנו באנו לעולם לתת — לא לקחת.
+      </p>
+      <p class="verse">נתחיל לתת — נתחיל לקבל.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 2. ACTIVITIES ===================== -->
+  <section class="section" id="activities">
+    <span class="step-tag"><span class="n">2</span> הלב הפועם · הפעילויות</span>
+    <h2 class="section-title">בנק הפעילויות</h2>
+    <p class="section-lead">
+      כל פעילות היא נתינה. הקהל בוחר לאיזו פעילות יופנה כסף המעשר שלו — ומוזמן להיות נוכח,
+      או לקבל סרטון מתיעוד הערב.
+    </p>
+
+    <!-- 2a spiritual services -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:18px 0 10px;font-weight:800;">בדק רוחני ושירותי רבנות</h3>
+    <div class="grid cat-spirit">
+      <div class="card"><span class="ico">📜</span><h3>בדק רוחני</h3><p>בדיקת מזוזות, תפילין והכשרת מטבחים.</p></div>
+      <div class="card"><span class="ico">🕊️</span><h3>שירותי רבנות חינם</h3><p>ליווי רבני לבר מצווה — ללא תשלום.</p></div>
+      <div class="card"><span class="ico">✒️</span><h3>אות בספר תורה</h3><p>תרומה לכתיבת אות בסכום של עשרה שקלים לאדם.</p></div>
+    </div>
+
+    <!-- 2b community evenings -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:26px 0 10px;font-weight:800;">ערבי חיזוק וקהילה</h3>
+    <div class="grid cat-community">
+      <div class="card"><span class="ico">🔥</span><h3>ערבי גיבוש לחיילים</h3><p>ערבי על האש ותמיכה בלוחמים.</p></div>
+      <div class="card"><span class="ico">🎙️</span><h3>ערבי חיזוק</h3><p>רבנים אורחים ומרצים מעוררי השראה.</p></div>
+      <div class="card"><span class="ico">🎵</span><h3>מוסיקאים אורחים</h3><p>כבוד ואוכל לערב, ניגון שמרומם את הנפש.</p></div>
+      <div class="card"><span class="ico">✨</span><h3>ערב ניסים</h3><p>אנשים מספרים את הנס הפרטי שלהם — מצולם ומופץ במדיה.</p></div>
+      <div class="card"><span class="ico">🧠</span><h3>סבב מוחות</h3><p>איך להציל את הילדים מהפלאפונים — שיח פתוח והצעת חלופות אופרטיביות.</p></div>
+    </div>
+
+    <!-- 2c events -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:26px 0 10px;font-weight:800;">אירועים ושמחות</h3>
+    <div class="grid cat-events">
+      <div class="card"><span class="ico">🎉</span><h3>בית שמחות</h3><p>אירועים, בר מצוות ובריתות — גם למעוטי יכולת.</p></div>
+      <div class="card"><span class="ico">🤝</span><h3>ערבי רווקים ורווקות</h3><p>מפגש לפי מודל התאמה לדרישות — בלי לראות אחד את השני בתחילה.</p></div>
+      <div class="card"><span class="ico">👩‍🍳</span><h3>ערבי נשים</h3><p>הפרשות חלה ומפגשי קהילה.</p></div>
+    </div>
+
+    <!-- 2d body & soul -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:26px 0 10px;font-weight:800;">גוף ונפש · ימי כיף וסדנאות</h3>
+    <div class="grid cat-body">
+      <div class="card"><span class="ico">🏄</span><h3>ימי כיף</h3><p>יום גלישה משולב, יוגה, אמבטיות קרח ושיעור תניא לנשמה.</p></div>
+      <div class="card"><span class="ico">🧘</span><h3>יוגה ואמבטיות קרח</h3><p>חיבור בין הגוף לרוח — מים ואש.</p></div>
+      <div class="card"><span class="ico">😄</span><h3>סדנאות צחוק</h3><p>איך להיות שמח בחלקך — בלי לשנות את החלק.</p></div>
+      <div class="card"><span class="ico">🍽️</span><h3>אכילה כפייתית</h3><p>סדנה חינמית, ממומנת על ידי תורמים.</p></div>
+      <div class="card"><span class="ico">🌿</span><h3>רטריט רוחני ופיזי</h3><p>חוויה מלאה — בחינם.</p></div>
+      <div class="card"><span class="ico">🌊</span><h3>גלישה לילדים מיוחדים</h3><p>שיעורי גלישה חינם לילדים עם צרכים מיוחדים.</p></div>
+    </div>
+
+    <!-- 2e couples & family -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:26px 0 10px;font-weight:800;">זוגיות ומשפחה</h3>
+    <div class="grid cat-couples">
+      <div class="card"><span class="ico">💞</span><h3>ערבי זוגות</h3><p>שלום בית וחינוך ילדים.</p></div>
+      <div class="card"><span class="ico">🕯️</span><h3>ערבי טהרת המשפחה</h3><p>ליווי וחיזוק בקדושת הבית.</p></div>
+      <div class="card"><span class="ico">🌉</span><h3>״הגשר״</h3><p>ערבי זוגות מעורבים — חיבור וגישור.</p></div>
+    </div>
+
+    <!-- 2f torah -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:26px 0 10px;font-weight:800;">תורה ולימוד</h3>
+    <div class="grid cat-torah">
+      <div class="card"><span class="ico">📖</span><h3>כולל תורה</h3><p>תרומה לאברכים העמלים בתורה.</p></div>
+      <div class="card"><span class="ico">⏳</span><h3>מעשר מהזמן</h3><p>רשימת אנשי מקצוע — רופאים ועוד — שנותנים מעשר מזמנם.</p></div>
+    </div>
+
+    <!-- 2g chesed -->
+    <h3 style="color:var(--fire-deep);font-size:1.25rem;margin:26px 0 10px;font-weight:800;">חסד וחלוקת מזון</h3>
+    <div class="grid cat-chesed">
+      <div class="card"><span class="ico">🥖</span><h3>חלוקת מזון לנצרכים</h3><p>נתינה ישירה למי שזקוק לה.</p></div>
+      <div class="card"><span class="ico">📷</span><h3>תיעוד והפצה בהתנדבות</h3><p>צילום, עריכה והפצה — הכל על בסיס מעשר מהזמן של בעלי המקצוע.</p></div>
+    </div>
+  </section>
+
+  <div class="wave"></div>
+
+  <!-- ===================== 3. MODEL ===================== -->
+  <section class="section" id="model">
+    <span class="step-tag"><span class="n">3</span> איך זה עובד · המודל</span>
+    <h2 class="section-title">בנק המצוות — המסע של התרומה</h2>
+    <p class="section-lead">
+      כל הכספים עוברים דרך עמותה עם אישור טופס 46. כל אדם בוחר בעצמו לאן יופנה כסף המעשר שלו.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step"><div class="num">1</div><h4>בוחרים מצווה</h4><p>התורם בוחר מבנק הפעילויות לאן יילך כסף המעשר שלו.</p></div>
+      <div class="flow-step"><div class="num">2</div><h4>תורמים</h4><p>הוראת קבע למקום או תרומה חד-פעמית — כל מי שבא לפעילות מוזמן.</p></div>
+      <div class="flow-step"><div class="num">3</div><h4>נוכחים בערב</h4><p>התורם מוזמן להיות נוכח בפועל באירוע שמימן.</p></div>
+      <div class="flow-step"><div class="num">4</div><h4>מקבלים תיעוד</h4><p>נשלח אליו סרטון של הערב — לראות את הנתינה מתממשת.</p></div>
+    </div>
+
+    <h3 style="color:var(--water-deep);font-size:1.25rem;margin:30px 0 6px;font-weight:800;">ערוצי גיוס</h3>
+    <div class="pill-list">
+      <span class="pill">עמותה · טופס 46</span>
+      <span class="pill">שדרים לגיוס פיזי מחברות ואנשים פרטיים</span>
+      <span class="pill">גיוס לפי חתך סוציו-אקונומי</span>
+      <span class="pill">מדיה · עשרה ש״ח לחודש ממעמד נמוך</span>
+      <span class="pill">הוראת קבע / תרומה חד-פעמית</span>
+      <span class="pill">תרומת אות בספר תורה · 10 ₪</span>
+    </div>
+  </section>
+
+  <div class="wave"></div>
+
+  <!-- ===================== 4. OPERATIONS ===================== -->
+  <section class="section" id="ops">
+    <span class="step-tag"><span class="n">4</span> מאחורי הקלעים · תפעול וניהול</span>
+    <h2 class="section-title">איך מנהלים את המקום</h2>
+
+    <div class="ops-grid">
+      <div class="ops-card">
+        <h3>👥 כוח אדם וחלוקת תפקידים</h3>
+        <ul>
+          <li>פעילי העמותה עובדים כמתנדבים — לפי X שעות בחודש</li>
+          <li>עובדי ליבה על משכורת לפי חלוקת תפקידים</li>
+          <li>בעלי מקצוע (צילום, עריכה, הפצה) על בסיס מעשר מהזמן</li>
+          <li>אדם אחראי על פרסום והפצת התכנים</li>
+        </ul>
+      </div>
+      <div class="ops-card">
+        <h3>📣 שיווק וכניסה</h3>
+        <ul>
+          <li>שיווק ופרסום הערבים לפי קהל יעד מתאים מראש</li>
+          <li>כניסה למקום לפי רישום והזמנה מראש</li>
+          <li>תמונות רבנים ושלטי משפטים מעוררי השראה</li>
+          <li>תיעוד הניסים והסיפורים והעלאתם למדיה</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="color:var(--water-deep);font-size:1.25rem;margin:30px 0 10px;font-weight:800;">מגבלות ופתרונות</h3>
+    <div class="prob-sol">
+      <div class="head ph">⚠️ מגבלה</div>
+      <div class="head sh">✔️ פתרון</div>
+      <div class="cell pc">רעש ותלונות של השכנים</div>
+      <div class="cell sc">תכנון מראש, שעות מוגדרות, וכניסה לפי רישום ובקרה</div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. CLOSING ===================== -->
+  <section class="section" id="closing">
+    <div class="closing">
+      <div class="crown">👑</div>
+      <h2>החזון</h2>
+      <p>
+        שכל מי שיראה וישמע את הפעילות שלנו — ירצה להיות חלק ממנה בכל לבבו, בכל נפשו ובכל מאודו.
+        שיראו שזה מאה אחוז נתינה, בלי חארטות. הלב נכנס —
+        <strong>ואז השמים הם הגבול.</strong>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה · חיבור בין מים לאש 💧🔥
+</footer>
+
+</body>
+</html>

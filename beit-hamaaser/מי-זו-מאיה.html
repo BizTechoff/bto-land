@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מי זו מאיה? · בֵּית הַמַּעֲשֵׂר — לעילוי נשמת מאיה בן דוד ז״ל</title>
+<style>
+:root{
+  --night:#0a1a2b;--night-2:#102942;--ink:#1d2430;--muted:#5d6776;
+  --water:#3aa6e0;--water-deep:#0e6ba8;--fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#e7b94e;--gold-soft:#f3d27a;--gold-light:#f6e3a8;
+  --paper:#fbf8f1;--white:#fff;--line:#e8dfcc;
+  --shadow:0 18px 50px rgba(8,26,43,.20);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.9;}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px;}
+section{scroll-margin-top:30px;}
+
+/* ===== HERO ===== */
+.hero{position:relative;text-align:center;color:#fff;padding:84px 22px 76px;overflow:hidden;
+  background:radial-gradient(circle at 50% 16%,rgba(231,185,78,.32),transparent 46%),
+            linear-gradient(180deg,#06121f 0%,var(--night) 48%,var(--night-2) 100%);}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,transparent 2px 11px);}
+.hero>*{position:relative;z-index:2;}
+.bsd{font-size:.9rem;font-weight:700;color:var(--gold-light);letter-spacing:.1em;margin-bottom:22px;opacity:.9;}
+.candle{width:50px;margin:0 auto 8px;}
+.flame{transform-origin:center bottom;animation:flick 2.6s ease-in-out infinite;}
+@keyframes flick{0%,100%{transform:scale(1) rotate(-1deg);}50%{transform:scale(1.07,1.12) rotate(1.6deg);}}
+.hero .ask{font-size:clamp(2.4rem,7vw,4rem);font-weight:900;line-height:1.1;text-shadow:0 4px 24px rgba(0,0,0,.5);margin-top:14px;}
+.hero .ded{margin-top:14px;font-size:1.1rem;color:var(--gold-light);font-weight:700;letter-spacing:.04em;}
+.hero .lead{margin:20px auto 0;max-width:600px;font-size:1.15rem;opacity:.93;font-style:italic;}
+.scroll-hint{margin-top:36px;opacity:.7;font-size:.9rem;animation:bob 2.6s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ===== CHAPTERS ===== */
+.chapter{padding:64px 0 18px;}
+.ch-num{font-size:.84rem;font-weight:800;letter-spacing:.14em;color:var(--fire-deep);text-transform:uppercase;margin-bottom:8px;}
+.chapter h2{font-size:clamp(1.7rem,4.4vw,2.4rem);font-weight:900;color:var(--water-deep);line-height:1.2;margin-bottom:18px;}
+.chapter p{font-size:1.14rem;margin-bottom:16px;}
+.chapter p .hl{color:var(--fire-deep);font-weight:800;}
+.chapter.dark{background:linear-gradient(180deg,var(--night),var(--night-2));color:#fff;border-radius:26px;padding:54px clamp(24px,5vw,54px);margin:30px 0;box-shadow:var(--shadow);}
+.chapter.dark h2{color:#fff;}
+.chapter.dark .ch-num{color:var(--gold-light);}
+.chapter.dark p{opacity:.94;}
+.chapter.dark p .hl{color:var(--gold-light);}
+
+/* family cards */
+.family{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px;}
+.fmember{flex:1;min-width:140px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:18px;text-align:center;}
+.fmember .ic{font-size:1.8rem;}
+.fmember b{display:block;color:#fff;margin-top:6px;font-size:1.05rem;}
+.fmember span{font-size:.9rem;opacity:.8;}
+
+/* pull quote */
+.pull{margin:28px 0;padding:26px 32px;border-right:5px solid var(--gold);background:#fff;border-radius:14px;box-shadow:var(--shadow);
+  font-size:1.3rem;font-weight:800;color:var(--water-deep);}
+
+/* wordplay feature */
+.wordplay{background:linear-gradient(135deg,#fff,#fff8ec);border:1px solid var(--line);border-radius:22px;padding:40px clamp(24px,5vw,50px);text-align:center;box-shadow:var(--shadow);margin:26px 0;}
+.wordplay .wp{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;line-height:1.5;}
+.wordplay .wp .maya{color:var(--gold);position:relative;}
+.wordplay .wp .maya::after{content:"";position:absolute;right:0;left:0;bottom:-4px;height:3px;background:var(--gold);border-radius:3px;opacity:.5;}
+.wordplay .wp .strike{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--fire);opacity:.6;font-size:.7em;}
+.wordplay .note{margin-top:14px;color:var(--muted);font-size:1rem;}
+
+/* connect bridge */
+.bridge{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-top:26px;}
+.bcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 20px;text-align:center;box-shadow:var(--shadow);}
+.bcard .ic{font-size:2.2rem;}
+.bcard h3{font-size:1.2rem;font-weight:900;margin:8px 0 4px;color:var(--water-deep);}
+.bcard p{font-size:.96rem;color:var(--muted);}
+.bridge .eq{font-size:1.8rem;color:var(--gold);font-weight:900;}
+@media(max-width:680px){.bridge{grid-template-columns:1fr;}.bridge .eq{transform:rotate(90deg);}.family{flex-direction:column;}}
+
+/* donor CTA */
+.donor{padding:60px 0;}
+.donor-box{background:linear-gradient(135deg,var(--water-deep),var(--fire-deep));color:#fff;border-radius:26px;padding:54px clamp(26px,5vw,60px);text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.donor-box::before{content:"";position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(231,185,78,.5),transparent 70%);}
+.donor-box>*{position:relative;z-index:2;}
+.donor-box h2{color:#fff;font-size:clamp(1.7rem,4.4vw,2.4rem);font-weight:900;margin-bottom:14px;}
+.donor-box p{font-size:1.18rem;opacity:.96;max-width:660px;margin:0 auto 14px;}
+.donor-box .big{font-size:1.45rem;font-weight:900;color:var(--gold-light);margin:20px 0;}
+.cta{display:inline-flex;gap:10px;align-items:center;margin-top:14px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;
+  font-weight:900;font-size:1.1rem;border:none;border-radius:999px;padding:16px 38px;cursor:pointer;box-shadow:0 12px 30px rgba(231,185,78,.4);text-decoration:none;transition:transform .15s;}
+.cta:hover{transform:translateY(-3px);}
+
+/* manifesto */
+.mintro{font-size:1.18rem !important;opacity:.95;}
+.mgrid{display:grid;gap:18px;margin-top:26px;}
+.mblock{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:28px;display:flex;gap:22px;align-items:center;}
+.mblock .vis{flex-shrink:0;width:96px;}
+.mblock .txt h3{color:var(--gold-light);font-size:1.3rem;font-weight:900;margin-bottom:8px;}
+.mblock .txt p{font-size:1.08rem;opacity:.94;margin:0;}
+.mblock .txt p .hl{color:var(--gold-light);font-weight:800;}
+@media(max-width:680px){.mblock{flex-direction:column;text-align:center;}}
+.gimel{margin-top:28px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;border-radius:20px;
+  padding:30px;text-align:center;font-weight:900;}
+.gimel .l1{font-size:clamp(1.4rem,4vw,2rem);line-height:1.4;}
+.gimel .l2{font-size:1.05rem;font-weight:700;margin-top:10px;opacity:.85;}
+footer{background:var(--night);color:#9bbdd4;text-align:center;padding:38px 22px;font-size:.92rem;}
+footer a{color:var(--gold-light);}
+.kaddish{font-size:1.05rem;color:var(--gold-light);margin-bottom:10px;font-weight:700;}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:10px;right:14px;z-index:9999;font-weight:700;font-size:.82rem;color:#f6e3a8;background:rgba(10,26,43,.62);padding:3px 11px;border-radius:9px;">בס"ד</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="candle">
+    <svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="86" rx="22" ry="4" fill="rgba(231,185,78,.25)"/>
+      <rect x="20" y="40" width="20" height="44" rx="4" fill="#f4ecd8"/>
+      <rect x="28.5" y="32" width="3" height="10" fill="#5a4a2a"/>
+      <g class="flame">
+        <path d="M30 6 C38 18 40 26 30 34 C20 26 22 18 30 6 Z" fill="#e7b94e"/>
+        <path d="M30 14 C34 21 35 26 30 31 C25 26 26 21 30 14 Z" fill="#fff3cf"/>
+      </g>
+    </svg>
+  </div>
+  <div class="ask">מי זו מאיה?</div>
+  <div class="ded">לעילוי נשמת מאיה בן דוד ז״ל הי״ד</div>
+  <p class="lead">לפני שמדברים על תרומה, על בנייה, על חזון — צריך להכיר אישה אחת. כי הכל מתחיל ממנה.</p>
+  <div class="scroll-hint">⌄ הכירו את מאיה ⌄</div>
+</section>
+
+<!-- ===================== CH 1: WHO ===================== -->
+<section class="chapter">
+  <div class="wrap">
+    <div class="ch-num">פרק א׳ · מי הייתה</div>
+    <h2>אישה שכל כולה הייתה נתינה</h2>
+    <p>מאיה בן דוד ז״ל, בת 48 מכפר חיים, הייתה <span class="hl">אשת חינוך אהובה ומוערכת</span> — ואמא. אחרי לידת בנה הבכור היא חיפשה דבר אחד: עשייה שתמלא אותה במשמעות אמיתית, בנתינה.</p>
+    <p>היא מצאה אותה בצמח המורינגה. מאיה למדה, חקרה ופיתחה, והפכה לשגרירה הגדולה שלו בארץ — עד שרבים הכירו אותה פשוט בשם <span class="hl">״מאיה מורינגה״</span>. החלום שלה היה ברור: ליצור עולם מרפא, בריא וטוב יותר. היא נתנה בריאות וריפוי לכל מי שפגשה, בלי לבקש דבר בחזרה.</p>
+    <div class="pull">הנתינה של מאיה לא הכירה גבולות — והיא נתנה לכל אדם, בלי תנאים ובלי לשאול לאן הוא שייך.</div>
+  </div>
+</section>
+
+<!-- ===================== CH 2: THAT MORNING ===================== -->
+<section class="chapter dark">
+  <div class="wrap" style="padding:0;">
+    <div class="ch-num">פרק ב׳ · הבוקר ההוא</div>
+    <h2>שמחת תורה, כפר עזה</h2>
+    <p>בסוף השבוע של חג שמחת תורה נסעה מאיה עם משפחתה לבקר בקיבוץ כפר עזה, אצל הורי בעלה צפריר — <span class="hl">מוותיקי ומייסדי הקיבוץ</span>. חג של שמחה, של משפחה, של חיבור.</p>
+    <p>לקראת השעה 11:00 בבוקר הגיעו המחבלים אל בית המשפחה וניסו לפרוץ אל הממ״ד שבו הסתתרו. במהלך הניסיון נורתה ירייה שחדרה את דלת הממ״ד — ופגעה במאיה. <span class="hl">באותו בוקר ארור נקטעו חייה.</span></p>
+    <p>אבל גם ברגע הקשה מכל — הנתינה לא נעצרה. חבריה הרבים נשבעו להמשיך את מפעל חייה, ולהפיץ הלאה את הריפוי, הבריאות והאהבה שהיא זרעה.</p>
+  </div>
+</section>
+
+<!-- ===================== CH 3: WHO SHE LEFT ===================== -->
+<section class="chapter dark" style="background:linear-gradient(180deg,#102942,#0a1a2b);">
+  <div class="wrap" style="padding:0;">
+    <div class="ch-num">פרק ג׳ · את מי השאירה</div>
+    <h2>משפחה שנשארה עם חלל שאי אפשר למלא</h2>
+    <p>מאיה השאירה אחריה בעל אוהב, ילדים, וקהילה שלמה שאהבה אותה. כל אחד מהם נושא איתו את הזיכרון שלה — ואת השליחות להמשיך לתת בשמה.</p>
+    <div class="family">
+      <div class="fmember"><div class="ic">🤍</div><b>צפריר</b><span>בעלה</span></div>
+      <div class="fmember"><div class="ic">🕯️</div><b>אורי</b><span>בנה הבכור</span></div>
+      <div class="fmember"><div class="ic">🌸</div><b>אלה</b><span>בתה</span></div>
+      <div class="fmember"><div class="ic">🌿</div><b>קהילה</b><span>חברים שממשיכים את דרכה</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CH 4: FROM MAYA TO ALL ===================== -->
+<section class="chapter">
+  <div class="wrap">
+    <div class="ch-num">פרק ד׳ · ממאיה — אל כולם</div>
+    <h2>מאיה היא הסיפור של כולם</h2>
+    <p>מאיה היא אחת מתוך מאות סיפורים שנקטעו באותו יום. מאחורי כל שם — אדם שלם, חלום, משפחה, נתינה שלא הספיקה. <span class="hl">בֵּית הַמַּעֲשֵׂר נבנה לזכרה — ולזכר כל קדושי השבעה באוקטובר.</span></p>
+    <p>לא אנדרטה של אבן. לא רגע של שתיקה שחולף. אלא <span class="hl">נתינה חיה שממשיכה כל יום</span> — שמחה שחוזרת, ריפוי שזורם, לבבות שמתחברים. כך הופכים את הכאב הגדול ביותר לאור הגדול ביותר.</p>
+  </div>
+</section>
+
+<!-- ===================== CH 5: THE CONNECTION + WORDPLAY ===================== -->
+<section class="chapter">
+  <div class="wrap">
+    <div class="ch-num">פרק ה׳ · החיבור</div>
+    <h2>מהדרך של מאיה — אל בֵּית הַמַּעֲשֵׂר</h2>
+    <p>מאיה ריפאה את הגוף ואת הנפש מתוך אהבת אדם טהורה. זה בדיוק לב הקונספט: <b>מים</b> שמרפאים את הגוף והנפש, <b>אש</b> שמדליקה את הרוח, ושניהם נפגשים ב<b>שלום</b>. כל אדם מוזמן — שומר תורה ומצוות, ומי שעדיין לא — להתחבר לנתינה הזו בכל לבו.</p>
+
+    <div class="bridge">
+      <div class="bcard"><div class="ic">💧</div><h3>הדרך של מאיה</h3><p>ריפוי, בריאות ונתינה אין-סופית לכל אדם.</p></div>
+      <div class="eq">→</div>
+      <div class="bcard"><div class="ic">🔥</div><h3>בֵּית הַמַּעֲשֵׂר</h3><p>מים ואש שנפגשים בשלום. הכל חינם, הכל מתרומות.</p></div>
+    </div>
+
+    <div class="wordplay">
+      <div class="wp"><span class="strike">מאה</span> <span class="maya">מאיה</span> אחוז נתינה</div>
+      <div class="note">לא ״מאה אחוז נתינה״ — אלא <b>מאיה אחוז נתינה</b>. השם שלה הוא מידת הנתינה.</div>
+    </div>
+
+    <div class="wordplay">
+      <div class="wp"><span class="maya">מאיה</span> ה׳ דורש ממך?</div>
+      <div class="note">״<span style="text-decoration:line-through;opacity:.6;">מה</span> ה׳ דורש ממך כי אם עשות משפט ואהבת חסד״ — והתשובה היא <b>מאיה</b>: לתת, לרפא, לאהוב.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CH 6: THE BIG IDEA / MANIFESTO ===================== -->
+<section class="chapter dark" style="background:linear-gradient(180deg,#0a1a2b,#102942);">
+  <div class="wrap" style="padding:0;">
+    <div class="ch-num">פרק ו׳ · הרעיון הגדול</div>
+    <h2>הרעיון שנולד מתוך האובדן</h2>
+    <p class="mintro">הרעיון של הנתינה לא היה נולד לולא הם. <span class="hl">במותם — ציוו לנו את החיים.</span> אנחנו לוקחים את מותם והופכים אותו למקור של חיים, של חיבור, של נתינה אין-סופית.</p>
+
+    <div class="mgrid">
+
+      <!-- seed -->
+      <div class="mblock">
+        <div class="vis">
+          <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="16" cy="70" rx="9" ry="13" fill="#e7b94e" transform="rotate(-18 16 70)"/>
+            <path d="M34 60 L52 60" stroke="#9bbdd4" stroke-width="3" stroke-linecap="round" marker-end="url(#a2)"/>
+            <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L6,4 L0,8 Z" fill="#9bbdd4"/></marker></defs>
+            <rect x="86" y="48" width="6" height="34" rx="2" fill="#8a6d3b"/>
+            <circle cx="89" cy="38" r="20" fill="#2f9e6b"/><circle cx="75" cy="46" r="13" fill="#3bb87e"/><circle cx="103" cy="46" r="13" fill="#3bb87e"/>
+          </svg>
+        </div>
+        <div class="txt">
+          <h3>הזרע 🌱</h3>
+          <p>הזרע הוא <span class="hl">המחשבה הראשונה שיוצאת מן הראש</span>. אנחנו לוקחים את המחשבה של מאיה — ומנביטים אותה לעץ שלם של נתינה. מה שנזרע מתוך האובדן, מצמיח חיים.</p>
+        </div>
+      </div>
+
+      <!-- redemption / circle = zero -->
+      <div class="mblock">
+        <div class="vis">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50,12 A38,38 0 0 1 50,88" fill="none" stroke="#3aa6e0" stroke-width="9" stroke-linecap="round"/>
+            <path d="M50,12 A38,38 0 0 0 50,88" fill="none" stroke="#e8602c" stroke-width="9" stroke-linecap="round"/>
+            <text x="50" y="60" text-anchor="middle" font-size="34" font-weight="900" fill="#f6e3a8">0</text>
+            <text x="84" y="20" text-anchor="middle" font-size="11" fill="#3aa6e0" font-weight="800">מים</text>
+            <text x="16" y="20" text-anchor="middle" font-size="11" fill="#e8602c" font-weight="800">אש</text>
+          </svg>
+        </div>
+        <div class="txt">
+          <h3>גאולה — חיבור הקצוות 🔄</h3>
+          <p>גאולה היא חיבור בין קצוות. קח שני קצוות — מים ואש — חבר אותם, וקיבלת <span class="hl">עיגול. ועיגול הוא אפס.</span> כולנו אפס מול הבורא — וגם אפס עלות. כאן הכל בחינם.</p>
+        </div>
+      </div>
+
+      <!-- everything free / divine -->
+      <div class="mblock">
+        <div class="vis">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#f6e3a8" stroke-width="2" stroke-dasharray="4 5" opacity=".6"/>
+            <text x="50" y="64" text-anchor="middle" font-size="40">🤲</text>
+          </svg>
+        </div>
+        <div class="txt">
+          <h3>הכל חינם — הכל אלוקי ✨</h3>
+          <p>כמו שכל אדם מקבל אוויר בחינם, הקדוש ברוך הוא מפרנס את כולם — מקרני ראמים ועד ביצי כינים. כולם אוכלים חינם, כולם ישנים חינם, השם מפזר. <span class="hl">כאן באים להראות הלכה למעשה שאפשר לתת בלי להרוויח.</span></p>
+        </div>
+      </div>
+
+      <!-- who profits -->
+      <div class="mblock">
+        <div class="vis">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="50" y="62" text-anchor="middle" font-size="40">🫵</text>
+          </svg>
+        </div>
+        <div class="txt">
+          <h3>מי מרוויח כאן? 🤍</h3>
+          <p>כולם ירימו גבה וישאלו: מי מרוויח כאן? התשובה — <span class="hl">אתה. השם נמצא פה בשבילך.</span> נתינה של מאיה אחוז — אפס אחוז רווח. וזה הרווח הכי גדול שיש.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gimel">
+      <div class="l1">למגר את שִׂנְאַת הַחִינָּם — בְּנְתִינַת חִינָּם 🇮🇱</div>
+      <div class="l2">אתר נתינה לזכר כל קדושי השבעה באוקטובר · לחבר את עם ישראל · כדי שדבר כזה לא יקרה עוד</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DONOR CTA ===================== -->
+<section class="donor">
+  <div class="wrap">
+    <div class="donor-box">
+      <h2>עכשיו, כשהכרת את מאיה —</h2>
+      <p>אתה מבין שזו לא עוד עמותה. זו הזדמנות להפוך זיכרון לחיים, ואובדן לאור. להמשיך בידיים שלך את הנתינה שנקטעה — ולתת לה להמשיך לזרום בשמה של מאיה ובשם כל מי שנלקחו.</p>
+      <p class="big">״מי שמטיב לבריות נעשה שותף של הבורא.״</p>
+      <p>תרומה לבֵית הַמַּעֲשֵׂר היא לעילוי נשמתה של מאיה — ולעילוי נשמת כולם. הלב נכנס — ואז השמים הם הגבול.</p>
+      <a class="cta" href="#" onclick="return false;">אני רוצה לתרום לעילוי נשמתה 🤍</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="kaddish">תְּהֵא נִשְׁמָתָהּ צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
+  <div>בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש 💧🔥</div>
+  <div style="margin-top:10px;opacity:.7;font-size:.85rem;">לזכרה מונצח בהר הרצל · מפעל חייה ״מאיה מורינגה״ ממשיך ·
+    <a href="https://laad.btl.gov.il/Web/He/TerrorVictims/Page/Default.aspx?ID=43482" target="_blank">דף ההנצחה הרשמי</a>
+  </div>
+</footer>
+
+</body>
+</html>

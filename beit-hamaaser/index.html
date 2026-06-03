@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בֵּית הַמַּעֲשֵׂר — מרכז הפרויקט</title>
+<style>
+:root{
+  --night:#0a1a2b;--night-2:#102942;--ink:#1d2430;--muted:#5d6776;
+  --water:#3aa6e0;--water-deep:#0e6ba8;--fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#e7b94e;--gold-soft:#f3d27a;--gold-light:#f6e3a8;
+  --paper:#fbf8f1;--white:#fff;--line:#e8dfcc;
+  --shadow:0 14px 40px rgba(8,26,43,.14);
+  --shadow-lg:0 22px 54px rgba(8,26,43,.22);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.7;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px;}
+
+/* sticky TOC */
+.toc{position:sticky;top:0;z-index:1000;background:rgba(251,248,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);}
+.toc-inner{max-width:1100px;margin:0 auto;padding:0 18px;height:56px;display:flex;align-items:center;gap:18px;}
+.toc .bsd{font-weight:700;font-size:.85rem;color:var(--fire-deep);letter-spacing:.04em;}
+.toc .brand{font-weight:900;color:var(--water-deep);font-size:1.02rem;white-space:nowrap;}
+.toc nav{margin-inline-start:auto;display:flex;gap:6px;flex-wrap:wrap;}
+.toc nav a{font-weight:700;font-size:.92rem;color:var(--ink);padding:7px 13px;border-radius:999px;transition:all .15s;text-decoration:none;}
+.toc nav a:hover{background:var(--water-deep);color:#fff;}
+@media(max-width:720px){.toc .brand{display:none;} .toc nav a{padding:6px 10px;font-size:.85rem;}}
+
+/* fixed corner בס"ד (kept for when toc scrolled, subtle) */
+.bsd-corner{display:none;}
+
+/* hero */
+.hero{position:relative;text-align:center;color:#fff;padding:64px 22px 56px;overflow:hidden;
+  background:radial-gradient(circle at 22% 28%,rgba(58,166,224,.5),transparent 52%),
+            radial-gradient(circle at 80% 72%,rgba(232,96,44,.5),transparent 52%),
+            linear-gradient(135deg,var(--night) 0%,var(--water-deep) 55%,var(--fire-deep) 115%);}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.04) 0 2px,transparent 2px 10px);}
+.hero>*{position:relative;z-index:2;}
+.logo{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:1.8rem;margin:0 auto 12px;
+  background:radial-gradient(circle at 30% 30%,var(--water),var(--water-deep) 55%,var(--fire) 130%);box-shadow:var(--shadow-lg);}
+.hero h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:900;line-height:1.1;text-shadow:0 4px 22px rgba(0,0,0,.4);}
+.hero .tag{margin-top:12px;font-size:1.12rem;opacity:.94;font-weight:600;}
+.hero .ded{margin-top:8px;font-size:.96rem;color:var(--gold-light);font-weight:700;}
+
+/* place photo banner */
+.place{max-width:1100px;margin:-30px auto 0;padding:0 22px;position:relative;z-index:5;}
+.place-frame{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);border:3px solid var(--gold);height:340px;}
+.place-frame img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block;}
+.place-cap{position:absolute;inset:auto 0 0 0;padding:30px 26px 16px;color:#fff;
+  background:linear-gradient(transparent,rgba(6,18,31,.82));}
+.place-cap b{font-size:1.3rem;font-weight:900;display:block;}
+.place-cap span{font-size:.95rem;opacity:.92;}
+
+/* intro */
+.intro{text-align:center;padding:40px 0 6px;}
+.intro p{max-width:720px;margin:0 auto;font-size:1.1rem;color:var(--muted);}
+
+/* group */
+.group{padding:32px 0 6px;scroll-margin-top:70px;}
+.group-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.group-head .bar{width:6px;height:30px;border-radius:6px;background:linear-gradient(var(--water),var(--fire));}
+.group-head h2{font-size:1.45rem;font-weight:900;color:var(--water-deep);}
+.group-head .cnt{font-size:.85rem;color:var(--muted);font-weight:700;}
+
+/* cards */
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:16px;}
+.card{flex:1 1 300px;max-width:345px;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;
+  box-shadow:var(--shadow);text-decoration:none;color:inherit;position:relative;overflow:hidden;
+  transition:transform .16s,box-shadow .16s,border-color .16s;border-top:5px solid var(--water);}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--water-light);}
+.card .step{position:absolute;top:0;left:0;background:var(--water-deep);color:#fff;font-weight:900;font-size:.85rem;
+  padding:5px 13px;border-bottom-right-radius:14px;}
+.card .ic{font-size:2.2rem;margin-bottom:8px;}
+.card h3{font-size:1.22rem;font-weight:900;color:var(--water-deep);margin-bottom:6px;}
+.card p{font-size:.96rem;color:var(--muted);flex:1;}
+.card .open{margin-top:14px;font-weight:800;font-size:.92rem;color:var(--fire-deep);}
+.card .type{display:inline-block;margin-top:10px;font-size:.74rem;font-weight:800;letter-spacing:.04em;color:var(--muted);
+  background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 11px;width:fit-content;}
+
+/* accent per group */
+.g-heart .card{border-top-color:var(--gold);}
+.g-idea .card{border-top-color:var(--fire);}
+.g-plan .card{border-top-color:#2f9e6b;}
+.g-digital .card{border-top-color:#b1559a;}
+.g-deck .card{border-top-color:var(--water-deep);}
+
+/* start badge */
+.card.start{background:linear-gradient(180deg,#fffdf6,#fff8ea);}
+.card.start .startbadge{position:absolute;top:0;left:0;background:linear-gradient(135deg,var(--gold),var(--fire));color:#fff;
+  font-weight:900;font-size:.8rem;padding:5px 13px;border-bottom-right-radius:14px;}
+
+/* presentation feature card */
+.deck-card{background:linear-gradient(135deg,var(--night),var(--water-deep));color:#fff;border-top-color:var(--gold)!important;}
+.deck-card h3{color:#fff;}
+.deck-card p{color:#d6e6f2;}
+.deck-card .type{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#d6e6f2;}
+.deck-card .open{color:var(--gold-light);}
+.deck-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap;}
+.deck-actions .open{margin-top:0;}
+.dl-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-weight:800;font-size:.85rem;border-radius:999px;padding:7px 16px;text-decoration:none;transition:background .15s;cursor:pointer;}
+.dl-btn:hover{background:rgba(255,255,255,.24);}
+
+footer{background:var(--night);color:#9bbdd4;text-align:center;padding:40px 22px;font-size:.92rem;margin-top:40px;}
+.kaddish{font-size:1.02rem;color:var(--gold-light);margin-bottom:8px;font-weight:700;}
+</style>
+</head>
+<body>
+
+<!-- STICKY TOC -->
+<div class="toc">
+  <div class="toc-inner">
+    <span class="bsd">בס"ד</span>
+    <span class="brand">בֵּית הַמַּעֲשֵׂר</span>
+    <nav>
+      <a href="#story">הסיפור</a>
+      <a href="#idea">הרעיון</a>
+      <a href="#plan">השטח</a>
+      <a href="#digital">דיגיטל</a>
+      <a href="#deck">מצגת</a>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="logo">💧🔥</div>
+  <h1>בֵּית הַמַּעֲשֵׂר</h1>
+  <div class="tag">מרכז הפרויקט · כל החומר במקום אחד</div>
+  <div class="ded">מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש</div>
+</section>
+
+<!-- PLACE PHOTO -->
+<div class="place">
+  <div class="place-frame">
+    <img src="המקום.jpeg" alt="המקום — המגרש של בית המעשר">
+    <div class="place-cap">
+      <b>המקום</b>
+      <span>כחצי דונם + ביתן קיים — ממתין לקום. כאן ייבנה חיבור המים והאש.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="intro">
+    <p>זהו מרכז הניווט של הפרויקט. מומלץ להציג לפי הסדר — מתחילים מהנשמה (הסיפור של מאיה), ממשיכים לרעיון, לתכנון השטח, למוקאפ הדיגיטלי, ולמצגת. כל כרטיס נפתח בלחיצה.</p>
+  </div>
+
+  <!-- HEART -->
+  <section class="group g-heart" id="story">
+    <div class="group-head"><span class="bar"></span><h2>הנשמה של הפרויקט</h2><span class="cnt">· מתחילים כאן</span></div>
+    <div class="cards">
+      <a class="card start" href="מי-זו-מאיה.html">
+        <span class="startbadge">★ נקודת הפתיחה</span>
+        <div class="ic">🕯️</div>
+        <h3>מי זו מאיה?</h3>
+        <p>דף הנחיתה הרגשי — סיפורה של מאיה, מה שעשתה, מה קרה בכפר עזה, והחיבור לרעיון הגדול של הנתינה האין-סופית.</p>
+        <span class="type">דף נחיתה · רגשי</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+      <a class="card" href="לעילוי-נשמת-מאיה.html">
+        <span class="step">2</span>
+        <div class="ic">🤍</div>
+        <h3>לעילוי נשמת מאיה</h3>
+        <p>דף ההקדשה — מאיה וכל קדושי השבעה באוקטובר, וכיצד הופכים זיכרון לנתינה חיה.</p>
+        <span class="type">דף הקדשה</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- IDEA -->
+  <section class="group g-idea" id="idea">
+    <div class="group-head"><span class="bar"></span><h2>הרעיון</h2><span class="cnt">· הקונספט והמודל</span></div>
+    <div class="cards">
+      <a class="card" href="בית-המעשר.html">
+        <span class="step">3</span>
+        <div class="ic">📜</div>
+        <h3>הקונספט המלא</h3>
+        <p>כל הרעיון מסודר לפי שלבים — החזון, בנק הפעילויות, המודל הכלכלי והתפעול. סקירה מקיפה של הכל.</p>
+        <span class="type">מסמך קונספט</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+      <a class="card" href="מודל-הנצחה-ענפים.html">
+        <span class="step">4</span>
+        <div class="ic">🌿</div>
+        <h3>מודל ההנצחה — ענפים</h3>
+        <p>כל נשמה וענף משלה: כיצד כל נרצח מוצא מקום בתחום שאהב, והתרומה לעילוי נשמתו ממנת אותו ענף.</p>
+        <span class="type">מודל הנצחה</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PLANNING -->
+  <section class="group g-plan" id="plan">
+    <div class="group-head"><span class="bar"></span><h2>התכנון והשטח</h2><span class="cnt">· מהשרטוט אל התרשים</span></div>
+    <div class="cards">
+      <a class="card" href="המקום.jpeg">
+        <span class="step">5</span>
+        <div class="ic">📷</div>
+        <h3>תמונת המקום</h3>
+        <p>צילום המגרש בפועל — כחצי דונם והביתן הקיים, עם מגדלי העיר ברקע.</p>
+        <span class="type">תמונה</span>
+        <span class="open">לצפייה בתמונה ←</span>
+      </a>
+      <a class="card" href="תרשים כללי.jpeg">
+        <span class="step">6</span>
+        <div class="ic">✏️</div>
+        <h3>כללי — השרטוט המקורי</h3>
+        <p>השרטוט הידני של הלקוח לחלוקת השטח. נקודת המוצא של תכנון המקום.</p>
+        <span class="type">תמונה · שרטוט יד</span>
+        <span class="open">לצפייה בתמונה ←</span>
+      </a>
+      <a class="card" href="תרשים-קונספט-בית-המעשר.html">
+        <span class="step">7</span>
+        <div class="ic">🗺️</div>
+        <h3>תרשים הקונספט</h3>
+        <p>חלוקת השטח המסודרת: כולל לימוד, אזור מים (סדנאות), אזור אש (רוחני), נקודת השלום והבמה — עם מסע הלקוח.</p>
+        <span class="type">תרשים שטח</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- DIGITAL -->
+  <section class="group g-digital" id="digital">
+    <div class="group-head"><span class="bar"></span><h2>הביצוע הדיגיטלי</h2><span class="cnt">· מוקאפ האתר</span></div>
+    <div class="cards">
+      <a class="card" href="בית-המעשר-פלטפורמה.html">
+        <span class="step">8</span>
+        <div class="ic">🌐</div>
+        <h3>הפלטפורמה — מוקאפ האתר</h3>
+        <p>אתר התרומות המלא והאינטראקטיבי: בנק מצוות, פאנל תרומה, לוח אירועים, סיפורי ניסים וצור קשר.</p>
+        <span class="type">מוקאפ אתר · אינטראקטיבי</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRESENTATION -->
+  <section class="group g-deck" id="deck">
+    <div class="group-head"><span class="bar"></span><h2>מצגת</h2><span class="cnt">· להצגה לתורמים ושותפים</span></div>
+    <div class="cards">
+      <div class="card deck-card" style="cursor:pointer;" onclick="window.location.href='מצגת-בית-המעשר.pptx'">
+        <span class="startbadge">★ מצגת רגשית</span>
+        <div class="ic">🎬</div>
+        <h3>מצגת בֵּית הַמַּעֲשֵׂר</h3>
+        <p>מצגת פיץ' רגשית ב-10 שקפים — מהסיפור של מאיה, דרך הקונספט, השטח ומודל ההנצחה, ועד הקריאה לשותפות. נתינה טהורה, בלי חשבון.</p>
+        <span class="type">PowerPoint · ‎10 שקפים</span>
+        <div class="deck-actions">
+          <span class="open">לחצו לפתיחת המצגת ←</span>
+          <a class="dl-btn" href="מצגת-בית-המעשר.pdf" download onclick="event.stopPropagation()">הורד כ-PDF ⬇</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="kaddish">תְּהֵא נִשְׁמָתָהּ צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
+  <div>בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש 💧🔥</div>
+</footer>
+
+</body>
+</html>

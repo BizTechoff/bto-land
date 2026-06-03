@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בֵּית הַמַּעֲשֵׂר — תרשים קונספט השטח</title>
+<style>
+:root{
+  --water:#0e6ba8;--water-deep:#063b5c;--water-light:#3aa6e0;
+  --fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#d4a02a;--gold-light:#f1c75b;
+  --kolel:#2f9e6b;--kolel-deep:#1c6e49;
+  --stage:#8a4fa3;--stage-deep:#5f2f74;
+  --ink:#1d2430;--muted:#5d6776;--paper:#fbf8f1;--white:#fff;--line:#e8dfcc;
+  --shadow:0 12px 36px rgba(6,59,92,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 20px 56px;}
+
+/* header */
+.head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
+.head .left{display:flex;align-items:center;gap:14px;}
+.head .logo{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  background:radial-gradient(circle at 30% 30%,var(--water-light),var(--water) 55%,var(--fire) 130%);box-shadow:var(--shadow);}
+.head h1{font-size:1.7rem;font-weight:900;color:var(--water-deep);line-height:1.1;}
+.head h1 small{display:block;font-size:.8rem;font-weight:600;color:var(--muted);}
+.head .bsd{font-size:.85rem;font-weight:700;color:var(--fire-deep);}
+.head .meta{text-align:left;font-size:.82rem;color:var(--muted);}
+.subtitle{text-align:center;color:var(--muted);font-size:1.02rem;margin:6px 0 22px;}
+.subtitle b{color:var(--fire-deep);}
+.free-banner{text-align:center;font-weight:900;font-size:1.05rem;color:#3a2c06;margin:0 auto 22px;max-width:760px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));border-radius:999px;padding:12px 24px;
+  box-shadow:0 10px 26px rgba(212,160,42,.35);}
+
+/* diagram card */
+.diagram{background:var(--white);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:14px;overflow:hidden;}
+svg{width:100%;height:auto;display:block;}
+
+/* journey strip */
+.journey{display:flex;align-items:stretch;gap:0;margin:26px 0 8px;flex-wrap:wrap;justify-content:center;}
+.jstep{flex:1;min-width:150px;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:16px 14px;text-align:center;
+  box-shadow:var(--shadow);position:relative;}
+.jstep .ic{font-size:1.8rem;}
+.jstep .n{position:absolute;top:10px;right:12px;width:24px;height:24px;border-radius:50%;background:var(--water-deep);color:#fff;
+  font-size:.8rem;font-weight:800;display:grid;place-items:center;}
+.jstep h4{font-size:1.05rem;font-weight:800;color:var(--water-deep);margin:4px 0 2px;}
+.jstep p{font-size:.85rem;color:var(--muted);}
+.jarrow{display:grid;place-items:center;font-size:1.6rem;color:var(--fire);min-width:36px;}
+@media(max-width:760px){.jarrow{transform:rotate(90deg);}.jstep{min-width:46%;}}
+
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:22px;}
+.lg{display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:700;color:var(--ink);
+  background:var(--white);border:1px solid var(--line);border-radius:999px;padding:8px 16px;box-shadow:var(--shadow);}
+.lg .sw{width:16px;height:16px;border-radius:5px;}
+
+.note{margin-top:20px;background:#fff;border:1px dashed var(--line);border-radius:16px;padding:16px 20px;color:var(--muted);font-size:.92rem;text-align:center;}
+.note b{color:var(--water-deep);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="left">
+      <div class="logo">💧🔥</div>
+      <div>
+        <div class="bsd">בס"ד</div>
+        <h1>בֵּית הַמַּעֲשֵׂר<small>תרשים קונספט השטח · מרכז רוחני ע״ש מאיה</small></h1>
+      </div>
+    </div>
+    <div class="meta">תרשים כללי<br>מבוסס על שרטוט הלקוח · 3.6.26</div>
+  </div>
+
+  <p class="subtitle">המסע: מתחילים ב<b>מים</b> 💧 · עוברים ל<b>אש</b> 🔥 · וביחד מגיעים ל<b>שלום</b> 🕊️ · ומי שירצה — בא ללמוד ב<b>כולל</b> 📖</p>
+
+  <div class="free-banner">🎁 הכל חינם · 100% ממומן מתרומות · מאה אחוז נתינה — בלי חארטות</div>
+
+  <!-- ===================== DIAGRAM ===================== -->
+  <div class="diagram">
+  <svg viewBox="0 0 1000 820" xmlns="http://www.w3.org/2000/svg" font-family="Heebo, Arial, sans-serif">
+    <defs>
+      <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eaf6fd"/><stop offset="1" stop-color="#cfeafb"/>
+      </linearGradient>
+      <linearGradient id="fireGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fdeee6"/><stop offset="1" stop-color="#fbd9c8"/>
+      </linearGradient>
+      <linearGradient id="kolelGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e7f6ee"/><stop offset="1" stop-color="#cdeedd"/>
+      </linearGradient>
+      <linearGradient id="stageGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f1e6f6"/><stop offset="1" stop-color="#e1cdec"/>
+      </linearGradient>
+      <radialGradient id="shalomGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#fff6da"/><stop offset="1" stop-color="#f1c75b"/>
+      </radialGradient>
+      <linearGradient id="seam" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f1c75b" stop-opacity="0"/>
+        <stop offset="0.5" stop-color="#f1c75b" stop-opacity="0.9"/>
+        <stop offset="1" stop-color="#f1c75b" stop-opacity="0"/>
+      </linearGradient>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="#bf3a12"/>
+      </marker>
+      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#063b5c" flood-opacity="0.12"/>
+      </filter>
+    </defs>
+
+    <!-- plot boundary -->
+    <rect x="30" y="30" width="940" height="760" rx="26" fill="#ffffff" stroke="#d8ccae" stroke-width="2.5" stroke-dasharray="2 0"/>
+    <text x="500" y="20" text-anchor="middle" font-size="15" fill="#9a8f73" font-weight="700">גבול המגרש · כ-חצי דונם + ביתן קיים</text>
+
+    <!-- KOLEL (top band, existing pavilion) -->
+    <g filter="url(#soft)">
+      <rect x="58" y="56" width="884" height="120" rx="18" fill="url(#kolelGrad)" stroke="#2f9e6b" stroke-width="2.5"/>
+    </g>
+    <text x="500" y="100" text-anchor="middle" font-size="30">📖</text>
+    <text x="500" y="138" text-anchor="middle" font-size="26" font-weight="900" fill="#1c6e49">כּוֹלֵל לימוד</text>
+    <text x="500" y="162" text-anchor="middle" font-size="15" fill="#2f9e6b" font-weight="700">בביתן הקיים · פתוח למי שירצה לבוא וללמוד (רשות)</text>
+
+    <!-- ===== FIRE zone (left) ===== -->
+    <g filter="url(#soft)">
+      <rect x="58" y="206" width="420" height="368" rx="18" fill="url(#fireGrad)" stroke="#e8602c" stroke-width="2.5"/>
+    </g>
+    <text x="268" y="258" text-anchor="middle" font-size="44">🔥</text>
+    <text x="268" y="300" text-anchor="middle" font-size="30" font-weight="900" fill="#bf3a12">אֵשׁ — רוּחָנִי</text>
+    <line x1="120" y1="320" x2="416" y2="320" stroke="#e8602c" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="268" y="356" text-anchor="middle" font-size="17" fill="#7a3b22" font-weight="600">בדק רוחני · מזוזות ותפילין</text>
+    <text x="268" y="386" text-anchor="middle" font-size="17" fill="#7a3b22" font-weight="600">ערבי חיזוק · רבנים אורחים</text>
+    <text x="268" y="416" text-anchor="middle" font-size="17" fill="#7a3b22" font-weight="600">ערבי טהרת המשפחה</text>
+    <text x="268" y="446" text-anchor="middle" font-size="17" fill="#7a3b22" font-weight="600">ערבי זוגות · ״הגשר״</text>
+    <text x="268" y="476" text-anchor="middle" font-size="17" fill="#7a3b22" font-weight="600">שיעורי תורה · ערב ניסים</text>
+    <text x="268" y="506" text-anchor="middle" font-size="17" fill="#7a3b22" font-weight="600">הפרשות חלה · ערבי נשים</text>
+
+    <!-- ===== WATER zone (right) ===== -->
+    <g filter="url(#soft)">
+      <rect x="522" y="206" width="420" height="368" rx="18" fill="url(#waterGrad)" stroke="#0e6ba8" stroke-width="2.5"/>
+    </g>
+    <text x="732" y="258" text-anchor="middle" font-size="44">💧</text>
+    <text x="732" y="300" text-anchor="middle" font-size="30" font-weight="900" fill="#063b5c">מַיִם — סדנאות</text>
+    <line x1="584" y1="320" x2="880" y2="320" stroke="#0e6ba8" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="732" y="356" text-anchor="middle" font-size="17" fill="#234a60" font-weight="600">יוגה · אמבטיות קרח</text>
+    <text x="732" y="386" text-anchor="middle" font-size="17" fill="#234a60" font-weight="600">ימי כיף · גלישה</text>
+    <text x="732" y="416" text-anchor="middle" font-size="17" fill="#234a60" font-weight="600">סדנאות צחוק ושמחה</text>
+    <text x="732" y="446" text-anchor="middle" font-size="17" fill="#234a60" font-weight="600">סדנת אכילה כפייתית</text>
+    <text x="732" y="476" text-anchor="middle" font-size="17" fill="#234a60" font-weight="600">סבב מוחות · פלאפונים</text>
+    <text x="732" y="506" text-anchor="middle" font-size="17" fill="#234a60" font-weight="600">רטריט גוף ונפש</text>
+
+    <!-- ===== SHALOM seam + medallion (center, where water meets fire) ===== -->
+    <rect x="486" y="206" width="28" height="368" fill="url(#seam)"/>
+    <g filter="url(#soft)">
+      <circle cx="500" cy="390" r="62" fill="url(#shalomGrad)" stroke="#d4a02a" stroke-width="3"/>
+    </g>
+    <text x="500" y="378" text-anchor="middle" font-size="30">🕊️</text>
+    <text x="500" y="412" text-anchor="middle" font-size="22" font-weight="900" fill="#7a5a10">שָׁלוֹם</text>
+
+    <!-- journey arrow: enter (right) -> water -> through shalom -> fire -->
+    <path d="M905,560 C835,520 800,470 760,440 C700,408 640,400 568,398"
+          fill="none" stroke="#bf3a12" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+    <path d="M432,398 C360,400 320,408 270,440"
+          fill="none" stroke="#bf3a12" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10" marker-end="url(#arrow)"/>
+
+    <!-- entrance marker -->
+    <g>
+      <rect x="838" y="540" width="118" height="44" rx="12" fill="#063b5c"/>
+      <text x="897" y="568" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">כניסה ←</text>
+    </g>
+
+    <!-- step badges -->
+    <circle cx="780" cy="430" r="19" fill="#0e6ba8"/><text x="780" y="437" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">1</text>
+    <circle cx="252" cy="430" r="19" fill="#e8602c"/><text x="252" y="437" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">2</text>
+    <circle cx="500" cy="318" r="19" fill="#d4a02a"/><text x="500" y="325" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">3</text>
+
+    <!-- ===== STAGE (bottom, facing the area) ===== -->
+    <g filter="url(#soft)">
+      <rect x="270" y="618" width="460" height="138" rx="18" fill="url(#stageGrad)" stroke="#8a4fa3" stroke-width="2.5"/>
+    </g>
+    <text x="500" y="664" text-anchor="middle" font-size="30">🎤</text>
+    <text x="500" y="702" text-anchor="middle" font-size="25" font-weight="900" fill="#5f2f74">בָּמָה · הופעות</text>
+    <text x="500" y="728" text-anchor="middle" font-size="14.5" fill="#7a4f8c" font-weight="700">ממול לשטח · מוסיקאים אורחים, ערבי השראה ותיעוד</text>
+    <!-- stage facing arrows -->
+    <text x="190" y="690" text-anchor="middle" font-size="22" fill="#8a4fa3">↗</text>
+    <text x="810" y="690" text-anchor="middle" font-size="22" fill="#8a4fa3">↖</text>
+  </svg>
+  </div>
+
+  <!-- ===================== JOURNEY STRIP ===================== -->
+  <div class="journey">
+    <div class="jstep"><span class="n">1</span><div class="ic">💧</div><h4>מים</h4><p>הלקוח נכנס ומתחיל בסדנאות — גוף, נפש ושמחה.</p></div>
+    <div class="jarrow">←</div>
+    <div class="jstep"><span class="n">2</span><div class="ic">🔥</div><h4>אש</h4><p>ממשיך אל הרוחני — חיזוק, תורה ומשפחה.</p></div>
+    <div class="jarrow">←</div>
+    <div class="jstep"><span class="n">3</span><div class="ic">🕊️</div><h4>שלום</h4><p>מים ואש נפגשים — וביחד מגיעים לשלמות.</p></div>
+    <div class="jarrow">←</div>
+    <div class="jstep"><span class="n">+</span><div class="ic">📖</div><h4>כולל</h4><p>מי שירצה — נכנס ללמוד בביתן הקיים.</p></div>
+  </div>
+
+  <!-- ===================== LEGEND ===================== -->
+  <div class="legend">
+    <div class="lg"><span class="sw" style="background:#3aa6e0;"></span>מים · סדנאות (גוף ונפש)</div>
+    <div class="lg"><span class="sw" style="background:#e8602c;"></span>אש · רוחני</div>
+    <div class="lg"><span class="sw" style="background:#f1c75b;"></span>שלום · נקודת המפגש</div>
+    <div class="lg"><span class="sw" style="background:#2f9e6b;"></span>כולל לימוד · ביתן קיים</div>
+    <div class="lg"><span class="sw" style="background:#8a4fa3;"></span>במה · הופעות</div>
+  </div>
+
+  <div class="note">
+    <b>חלוקת השטח:</b> הביתן הקיים משמש ככולל לימוד · יתרת השטח (כ-חצי דונם) מחולקת לשניים — אש (רוחני) ומים (סדנאות) — שנפגשים בנקודת השלום במרכז · במה להופעות ממוקמת ממול. &nbsp;·&nbsp; <b>טיוטת קונספט לתכנון</b> — מידות סופיות ייקבעו עם מנהל התפעול.
+  </div>
+
+</div>
+</body>
+</html>
