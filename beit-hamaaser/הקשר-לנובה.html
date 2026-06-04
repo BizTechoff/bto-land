@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בֵּית הַמַּעֲשֵׂר לניצולי הנובה ולמשפחות — הקשר הישיר</title>
+<link rel="icon" type="image/png" href="פרח-מורינגה.png">
+<link rel="apple-touch-icon" href="פרח-מורינגה.png">
+<style>
+:root{
+  --night:#0a1a2b;--night-2:#102942;--ink:#1d2430;--muted:#5d6776;
+  --water:#3aa6e0;--water-deep:#0e6ba8;--fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#e7b94e;--gold-light:#f6e3a8;--purple:#8a4fa3;--green:#2f9e6b;
+  --paper:#fbf8f1;--white:#fff;--line:#e8dfcc;--shadow:0 16px 44px rgba(8,26,43,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.85;}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px;}
+.bsd-corner{position:fixed;top:10px;right:14px;z-index:9999;font-weight:700;font-size:.82rem;color:var(--gold-light);
+  background:rgba(10,26,43,.62);padding:3px 11px;border-radius:9px;}
+
+.hero{position:relative;text-align:center;color:#fff;padding:84px 22px 70px;overflow:hidden;
+  background:radial-gradient(circle at 22% 25%,rgba(138,79,163,.45),transparent 55%),
+            radial-gradient(circle at 80% 70%,rgba(58,166,224,.5),transparent 55%),
+            linear-gradient(135deg,#06121f,var(--night-2) 55%,var(--water-deep) 120%);}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.03) 0 2px,transparent 2px 11px);}
+.hero>*{position:relative;z-index:2;}
+.hero .eyebrow{letter-spacing:.3em;font-size:.82rem;text-transform:uppercase;opacity:.85;margin-bottom:14px;}
+.hero h1{font-size:clamp(2.1rem,5.5vw,3.3rem);font-weight:900;line-height:1.12;text-shadow:0 4px 24px rgba(0,0,0,.5);}
+.hero .lead{margin:18px auto 0;max-width:680px;font-size:1.18rem;opacity:.96;}
+.hero .free{display:inline-block;margin-top:18px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;font-weight:900;border-radius:999px;padding:9px 22px;}
+
+.sec{padding:56px 0 12px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:800;letter-spacing:.06em;color:var(--fire-deep);
+  background:#fdeee6;border-radius:999px;padding:6px 16px;margin-bottom:14px;}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;color:var(--water-deep);line-height:1.2;margin-bottom:14px;}
+.sec p{font-size:1.13rem;margin-bottom:15px;}
+.sec p .hl{color:var(--fire-deep);font-weight:800;}
+.center{text-align:center;}.center .eyebrow{margin-inline:auto;}.center p{max-width:740px;margin-inline:auto;}
+
+/* need stats */
+.nstats{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin:24px 0;}
+.nstat{background:#fff;border:1px solid var(--line);border-top:4px solid var(--purple);border-radius:16px;padding:18px 26px;text-align:center;box-shadow:var(--shadow);min-width:150px;}
+.nstat .num{font-size:2rem;font-weight:900;color:var(--purple);}
+.nstat .lbl{font-size:.9rem;color:var(--muted);font-weight:600;}
+
+/* proof box */
+.proof{background:linear-gradient(135deg,#fff,#fff8ec);border:1px solid var(--line);border-right:6px solid var(--green);border-radius:20px;padding:30px clamp(22px,4vw,40px);box-shadow:var(--shadow);margin:18px 0;}
+.proof h3{font-size:1.3rem;color:var(--green);font-weight:900;margin-bottom:10px;}
+.proof p{font-size:1.08rem;margin-bottom:10px;}
+.proof a{color:var(--water-deep);font-weight:700;}
+
+/* programs */
+.progs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:24px;}
+.prog{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);border-top:5px solid var(--water);}
+.prog.heal{border-top-color:var(--green);}
+.prog.music{border-top-color:var(--purple);}
+.prog.family{border-top-color:var(--fire);}
+.prog.spirit{border-top-color:var(--gold);}
+.prog .ic{font-size:2rem;}
+.prog h3{font-size:1.16rem;font-weight:900;color:var(--water-deep);margin:6px 0 6px;}
+.prog p{font-size:.98rem;color:var(--ink);}
+
+/* closing */
+.closing{background:linear-gradient(135deg,var(--water-deep),var(--fire-deep));color:#fff;border-radius:26px;padding:54px clamp(24px,5vw,60px);text-align:center;box-shadow:var(--shadow);margin:30px 0 50px;position:relative;overflow:hidden;}
+.closing::before{content:"";position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(231,185,78,.5),transparent 70%);}
+.closing>*{position:relative;z-index:2;}
+.closing h2{color:#fff;}
+.closing p{font-size:1.18rem;opacity:.96;max-width:680px;margin:0 auto 12px;}
+.closing .big{font-size:1.5rem;font-weight:900;color:var(--gold-light);margin:18px 0;}
+
+footer{background:var(--night);color:#9bbdd4;text-align:center;padding:34px 22px;font-size:.9rem;}
+footer a{color:var(--gold-light);}
+.kaddish{color:var(--gold-light);font-weight:700;margin-bottom:8px;}
+.srcline{margin-top:8px;opacity:.75;font-size:.84rem;}
+</style>
+</head>
+<body>
+<div class="bsd-corner">בס"ד</div>
+
+<section class="hero">
+  <div class="eyebrow">בֵּית הַמַּעֲשֵׂר · הקשר הישיר לנובה</div>
+  <h1>בית של ריפוי — לניצולי הנובה ולמשפחות השכולות</h1>
+  <p class="lead">הנובה לא הסתיימה ב-7 באוקטובר. אלפי ניצולים נושאים טראומה, ומשפחות שכולות נושאות אובדן. בֵּית הַמַּעֲשֵׂר הוא הבית שמחזיר להם ריפוי, שמחה וקהילה.</p>
+  <span class="free">הכל חינם · לכל ניצול ולכל משפחה</span>
+</section>
+
+<!-- THE NEED -->
+<section class="sec">
+  <div class="wrap center">
+    <span class="eyebrow">💔 הצורך</span>
+    <h2>הפצע של הנובה עדיין פתוח</h2>
+    <p>בפסטיבל נובה נרצחו מאות, ואלפי צעירים שרדו — ונושאים מאז טראומה קשה. רבים מתקשים לחזור לשגרה, והמשפחות השכולות זקוקות לחיבוק מתמשך. <span class="hl">הצורך בריפוי, בקהילה ובמשמעות — אמיתי, דחוף ונמשך.</span></p>
+    <div class="nstats">
+      <div class="nstat"><div class="num">~378</div><div class="lbl">נרצחו בנובה</div></div>
+      <div class="nstat"><div class="num">אלפי</div><div class="lbl">ניצולים עם טראומה</div></div>
+      <div class="nstat"><div class="num">מאות</div><div class="lbl">משפחות שכולות</div></div>
+    </div>
+    <p style="font-size:.95rem;color:var(--muted);">משרד הבריאות אף הקים מסלול טיפול ייעודי לשורדי מסיבות ה-7 באוקטובר — הכרה רשמית בעומק הצורך.</p>
+  </div>
+</section>
+
+<!-- PROOF: it works -->
+<section class="sec">
+  <div class="wrap">
+    <span class="eyebrow">✅ המודל כבר עובד</span>
+    <h2>זה לא רעיון — זה כבר מרפא</h2>
+    <div class="proof">
+      <h3>🧘 תוכנית ״כרמל״ — לזכר כרמל גת ז״ל</h3>
+      <p>כרמל גת ז״ל, מרפאה בעיסוק בתחום הנפש ומורה ליוגה, העבירה יוגה ומדיטציה לחטופים בשבי. לזכרה הוקמה תוכנית שיקום ב<span class="hl">יוגה טיפולית לניצולי הנובה ולמשפחות השכולות</span> — בשיתוף הביטוח הלאומי.</p>
+      <p>ניצולים נפגשים בסופי שבוע מול הים, בליווי מטפלים מתנדבים — יוגה, מדיטציה, יצירה ושיחות — כדי לעבד את הטראומה ולמנוע פוסט-טראומה. <span class="hl">בדיוק זה מה שבֵּית הַמַּעֲשֵׂר נותן — בית קבוע, מקיף וחינמי.</span></p>
+      <p>
+        <a href="https://www.ynet.co.il/activism/article/syzbicwwlg" target="_blank" rel="noopener">מורשת היוגה של כרמל גת (ynet) ←</a> ·
+        <a href="https://www.ynet.co.il/activism/article/rknetfzya" target="_blank" rel="noopener">ניצולים מול הים, בליווי מטפלים (ynet) ←</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE SERVE THEM -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">🤲 איך בֵּית הַמַּעֲשֵׂר משרת אותם</span>
+      <h2>בית אחד, לכל מה שצריך — חינם</h2>
+      <p>הענפים של בֵּית הַמַּעֲשֵׂר הם בדיוק מה שניצול וטראומה צריכים. הכל תחת קורת גג אחת, מול הים, בחינם.</p>
+    </div>
+    <div class="progs">
+      <div class="prog heal">
+        <div class="ic">🌿</div>
+        <h3>רטריט וריפוי לניצולים</h3>
+        <p>יוגה טיפולית, אמבטיות קרח, מדיטציה ושהייה מול הים — לוויסות הנפש ולהרגעת הטראומה. בדיוק כמודל ״כרמל״.</p>
+      </div>
+      <div class="prog music">
+        <div class="ic">🎵</div>
+        <h3>״עוד נחזור לרקוד״ — במרחב בטוח</h3>
+        <p>במה, מוזיקה וניגון — להחזיר לניצולים את השמחה והריקוד שנקטעו, במקום מחבק ומוגן.</p>
+      </div>
+      <div class="prog family">
+        <div class="ic">🤍</div>
+        <h3>ליווי וקהילה למשפחות השכולות</h3>
+        <p>ערבי זיכרון, חיבור בין משפחות, וקהילה תומכת — שלא יישארו לבד עם האובדן.</p>
+      </div>
+      <div class="prog spirit">
+        <div class="ic">🕯️</div>
+        <h3>משמעות, ערכים והנצחה</h3>
+        <p>מחלקות ע״ש נרצחי נובה (מוזיקה, ים, ריפוי) — מה שהם אהבו ממשיך, ומשרת בפועל את הניצולים והמשפחות.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING / DONOR -->
+<section class="sec">
+  <div class="wrap">
+    <div class="closing">
+      <h2>זה מה שאתה בונה</h2>
+      <p>תרומתך מקימה את <span style="color:var(--gold-light);font-weight:900;">הבית הקבוע שמרפא את ניצולי הנובה ואת המשפחות השכולות</span> — רטריט, יוגה, מוזיקה, קהילה וליווי, חינם, לנצח. לזכר מי שרקדו ולא חזרו.</p>
+      <div class="big">״עוד נחזור לרקוד״ — וכאן גם נרפא, נתחבר וניתן</div>
+      <p>מאיה אחוז נתינה · אפס אחוז רווח · הכל מתרומות</p>
+      <a href="שותפות-מייסדת.html" style="display:inline-block;margin-top:18px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;font-weight:900;font-size:1.12rem;border-radius:999px;padding:15px 38px;text-decoration:none;box-shadow:0 12px 30px rgba(231,185,78,.4);">להיות שותף מייסד 🤍 ←</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="kaddish">לזכר כל נרצחי פסטיבל נובה · ולמען כל מי שנותרו · תְּהֵא נִשְׁמָתָם צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
+  <div>בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש 💧🔥</div>
+  <div class="srcline">מקורות: <a href="https://www.ynet.co.il/activism/article/syzbicwwlg" target="_blank" rel="noopener">תוכנית כרמל (ynet)</a> · <a href="https://me.health.gov.il/mental-health/therapy-rehabilitation/war-survivors/festival-survivors/" target="_blank" rel="noopener">משרד הבריאות — שורדי המסיבות</a> · <a href="https://www.710360.kan.org.il/en/nova/nova" target="_blank" rel="noopener">כאן 7.10.360</a></div>
+</footer>
+
+</body>
+</html>
