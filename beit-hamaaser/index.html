@@ -58,7 +58,8 @@ body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background
   background:linear-gradient(transparent,rgba(6,18,31,.85));}
 .place-cap b{font-size:1.12rem;font-weight:900;display:block;}
 .place-cap span{font-size:.88rem;opacity:.92;}
-.toc-flower{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow);flex-shrink:0;border:1.5px solid var(--gold-light);}
+.toc-flower{width:38px;height:38px;object-fit:contain;flex-shrink:0;transition:transform .15s;}
+.toc-flower:hover{transform:scale(1.12);}
 @media(max-width:680px){.place-frame{flex:1 1 100%;}}
 
 /* intro */
@@ -212,6 +213,13 @@ footer{background:var(--night);color:#9bbdd4;text-align:center;padding:40px 22px
         <h3>מודל ההנצחה — ענפים</h3>
         <p>כל נשמה וענף משלה: כיצד כל נרצח מוצא מקום בתחום שאהב, והתרומה לעילוי נשמתו ממנת אותו ענף.</p>
         <span class="type">מודל הנצחה</span>
+        <span class="open">לצפייה ←</span>
+      </a>
+      <a class="card" href="טבלת-הנצחה-מתועדת.html">
+        <div class="ic">🕯️</div>
+        <h3>טבלת הנצחה מתועדת</h3>
+        <p>נשמות מהשבעה באוקטובר שתחביבן תועד ופורסם — משויכות לענפי בית המעשר, כל אחת עם ציטוט ומקור.</p>
+        <span class="type">נתונים מאומתים</span>
         <span class="open">לצפייה ←</span>
       </a>
     </div>
