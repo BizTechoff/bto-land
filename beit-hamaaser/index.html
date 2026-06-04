@@ -21,7 +21,7 @@ body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background
 /* sticky TOC */
 .toc{position:sticky;top:0;z-index:1000;background:rgba(251,248,241,.92);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);}
-.toc-inner{max-width:1100px;margin:0 auto;padding:0 18px;height:56px;display:flex;align-items:center;gap:18px;}
+.toc-inner{max-width:1100px;margin:0 auto;padding:0 18px;height:50px;display:flex;align-items:center;gap:18px;}
 .toc .bsd{font-weight:700;font-size:.85rem;color:var(--fire-deep);letter-spacing:.04em;}
 .toc .brand{font-weight:900;color:var(--water-deep);font-size:1.02rem;white-space:nowrap;}
 .toc nav{margin-inline-start:auto;display:flex;gap:6px;flex-wrap:wrap;}
@@ -58,6 +58,7 @@ body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background
   background:linear-gradient(transparent,rgba(6,18,31,.85));}
 .place-cap b{font-size:1.12rem;font-weight:900;display:block;}
 .place-cap span{font-size:.88rem;opacity:.92;}
+.toc-brandgroup{display:flex;align-items:center;gap:10px;}
 .toc-flower{width:38px;height:38px;object-fit:contain;flex-shrink:0;transition:transform .15s;}
 .toc-flower:hover{transform:scale(1.12);}
 @media(max-width:680px){.place-frame{flex:1 1 100%;}}
@@ -121,11 +122,13 @@ footer{background:var(--night);color:#9bbdd4;text-align:center;padding:40px 22px
 <!-- STICKY TOC -->
 <div class="toc">
   <div class="toc-inner">
-    <span class="bsd">בס"ד</span>
-    <a href="https://laad.btl.gov.il/Web/He/TerrorVictims/Page/Default.aspx?ID=43482" target="_blank" rel="noopener" title="לזכר מאיה בן דוד ז״ל — דף ההנצחה הרשמי">
-      <img class="toc-flower" src="פרח-מורינגה.png" alt="פרח המורינגה של מאיה — לזכרה">
-    </a>
-    <span class="brand">בֵּית הַמַּעֲשֵׂר</span>
+    <div class="toc-brandgroup">
+      <span class="bsd">בס"ד</span>
+      <a href="https://laad.btl.gov.il/Web/He/TerrorVictims/Page/Default.aspx?ID=43482" target="_blank" rel="noopener" title="לזכר מאיה בן דוד ז״ל — דף ההנצחה הרשמי">
+        <img class="toc-flower" src="פרח-מורינגה.png" alt="פרח המורינגה של מאיה — לזכרה">
+      </a>
+      <span class="brand">בֵּית הַמַּעֲשֵׂר</span>
+    </div>
     <nav>
       <a href="#story">הסיפור</a>
       <a href="#idea">הרעיון</a>
