@@ -47,12 +47,19 @@ body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background
 
 /* place photo banner */
 .place{max-width:1100px;margin:-30px auto 0;padding:0 22px;position:relative;z-index:5;}
-.place-frame{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);border:3px solid var(--gold);height:340px;}
+.place-compare{display:flex;gap:16px;flex-wrap:wrap;align-items:stretch;}
+.place-frame{position:relative;flex:1 1 320px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);border:3px solid var(--gold);height:320px;}
+.place-frame.now{border-color:#9fb0bd;}
 .place-frame img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block;}
-.place-cap{position:absolute;inset:auto 0 0 0;padding:30px 26px 16px;color:#fff;
-  background:linear-gradient(transparent,rgba(6,18,31,.82));}
-.place-cap b{font-size:1.3rem;font-weight:900;display:block;}
-.place-cap span{font-size:.95rem;opacity:.92;}
+.place-tag{position:absolute;top:12px;right:12px;z-index:2;font-size:.8rem;font-weight:800;color:#fff;border-radius:999px;padding:4px 13px;}
+.place-tag.now{background:rgba(55,71,86,.92);}
+.place-tag.future{background:linear-gradient(135deg,var(--fire),var(--fire-deep));}
+.place-cap{position:absolute;inset:auto 0 0 0;padding:30px 20px 13px;color:#fff;
+  background:linear-gradient(transparent,rgba(6,18,31,.85));}
+.place-cap b{font-size:1.12rem;font-weight:900;display:block;}
+.place-cap span{font-size:.88rem;opacity:.92;}
+.toc-flower{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow);flex-shrink:0;border:1.5px solid var(--gold-light);}
+@media(max-width:680px){.place-frame{flex:1 1 100%;}}
 
 /* intro */
 .intro{text-align:center;padding:40px 0 6px;}
@@ -114,6 +121,7 @@ footer{background:var(--night);color:#9bbdd4;text-align:center;padding:40px 22px
 <div class="toc">
   <div class="toc-inner">
     <span class="bsd">בס"ד</span>
+    <img class="toc-flower" src="פרח מורינגה.jpg" alt="פרח המורינגה של מאיה">
     <span class="brand">בֵּית הַמַּעֲשֵׂר</span>
     <nav>
       <a href="#story">הסיפור</a>
@@ -133,13 +141,24 @@ footer{background:var(--night);color:#9bbdd4;text-align:center;padding:40px 22px
   <div class="ded">מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש</div>
 </section>
 
-<!-- PLACE PHOTO -->
+<!-- PLACE PHOTO — TODAY vs VISION -->
 <div class="place">
-  <div class="place-frame">
-    <img src="המקום.jpeg" alt="המקום — המגרש של בית המעשר">
-    <div class="place-cap">
-      <b>המקום</b>
-      <span>כחצי דונם + ביתן קיים — ממתין לקום. כאן ייבנה חיבור המים והאש.</span>
+  <div class="place-compare">
+    <div class="place-frame now">
+      <span class="place-tag now">היום</span>
+      <img src="המקום.jpeg" alt="המקום היום — המגרש">
+      <div class="place-cap">
+        <b>המקום היום</b>
+        <span>כחצי דונם + ביתן קיים — ממתין לקום.</span>
+      </div>
+    </div>
+    <div class="place-frame future">
+      <span class="place-tag future">החזון</span>
+      <img src="הדמייה.jpeg" alt="הדמיית בית המעשר — החזון">
+      <div class="place-cap">
+        <b>וכך זה ייראה</b>
+        <span>חיבור המים והאש — המתחם הפועל, חי ונותן.</span>
+      </div>
     </div>
   </div>
 </div>

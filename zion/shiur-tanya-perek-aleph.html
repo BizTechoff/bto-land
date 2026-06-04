@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור פרק א׳ בתניא — הנשמה שבך</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="שיעור רגשי על פרק א׳ בתניא — כוחות הנפש, חמש הדרגות, והלכה למעשה לחיים">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/shiur-tanya-perek-aleph">
+<meta property="og:title" content="שיעור פרק א׳ בתניא — הנשמה שבך">
+<meta property="og:description" content="מסע אל כוחות הנפש — שיעור רגשי עם הלכה למעשה לחיים">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="שיעור פרק א׳ בתניא — הנשמה שבך">
+<meta name="twitter:description" content="מסע אל כוחות הנפש — שיעור רגשי עם הלכה למעשה לחיים">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%);
+    color: var(--ink); line-height: 1.6; min-height: 100vh; padding: 40px 18px;
+  }
+
+  .page {
+    max-width: 820px; margin: 0 auto 32px;
+    background: linear-gradient(180deg, rgba(255,250,235,0.65), rgba(245,236,217,0.32));
+    padding: 40px 46px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 24px 64px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .page::before { content:""; position:absolute; inset:10px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .page-tag { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--gold-deep); margin-bottom:4px; }
+  .ornament { text-align:center; color:var(--gold); font-size:18px; letter-spacing:7px; margin-bottom:12px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px; }
+  h1 { font-weight:900; font-size:clamp(28px,4.5vw,40px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:6px; }
+  .page-title { font-weight:900; font-size:clamp(23px,3.6vw,32px); text-align:center; color:var(--ink); line-height:1.2; margin-bottom:6px; }
+  .subtitle { text-align:center; font-size:15.5px; color:var(--ink-soft); font-style:italic; margin-bottom:20px; }
+
+  .section { margin-bottom:16px; }
+  .section-title { font-weight:700; font-size:19px; color:var(--crimson); margin-bottom:6px; display:flex; align-items:center; gap:10px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:12px; }
+  p { font-size:15px; color:var(--ink); margin-bottom:9px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:10px 18px; margin:12px 0; font-family:'David Libre',serif; font-size:15.5px; color:var(--ink-soft); border-radius:2px; text-align:center; }
+  .pasuk-source { display:block; font-size:12px; color:var(--gold-deep); margin-top:5px; letter-spacing:1px; }
+
+  .parable { margin:16px 0; padding:16px 20px; background:linear-gradient(135deg, rgba(184,138,44,0.10), rgba(184,138,44,0.03)); border:1px solid rgba(184,138,44,0.25); border-radius:4px; }
+  .parable-label { font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:6px; }
+  .parable p { font-size:14px; margin-bottom:6px; line-height:1.55; }
+  .parable p:last-child { margin-bottom:0; }
+
+  .levels { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin:16px 0; }
+  .level { text-align:center; padding:10px 4px; border-radius:4px; background:rgba(43,29,16,0.04); border:1px solid rgba(184,138,44,0.25); font-size:12.5px; font-weight:700; color:var(--ink-soft); line-height:1.35; }
+  .level.goal { background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--gold); border-color:var(--gold-deep); }
+
+  .halacha { margin:16px 0 6px; padding:16px 20px; background:rgba(140,42,30,0.05); border:1px solid rgba(140,42,30,0.25); border-right:5px solid var(--crimson); border-radius:4px; }
+  .halacha-label { font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--crimson); text-transform:uppercase; margin-bottom:9px; font-weight:700; }
+  .halacha ul { list-style:none; }
+  .halacha li { font-size:14px; color:var(--ink); margin-bottom:7px; padding-right:24px; position:relative; line-height:1.5; }
+  .halacha li:last-child { margin-bottom:0; }
+  .halacha li::before { content:"✓"; position:absolute; right:0; color:var(--gold-deep); font-weight:700; }
+  .halacha li strong { color:var(--crimson); }
+
+  .final-message { margin-top:16px; padding:16px; text-align:center; background:rgba(184,138,44,0.06); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); }
+  .final-message-label { font-family:'Bellefair',serif; font-size:11px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:8px; }
+  .final-pasuk { font-family:'David Libre',serif; font-size:17px; color:var(--ink); line-height:1.5; margin-bottom:6px; font-weight:500; }
+  .final-explanation { font-size:14px; color:var(--ink-soft); font-style:italic; margin:0; }
+
+  .attribution { margin-top:18px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:13.5px; color:var(--gold-deep); letter-spacing:1px; font-weight:500; }
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .page{padding:28px 20px;} .page::before{inset:7px;}
+    .levels{grid-template-columns:1fr 1fr;} p{font-size:14.5px;}
+  }
+
+  /* ===== PRINT: body 12pt, each .page fills one A4 ===== */
+  @media print {
+    @page { size: A4 portrait; margin: 13mm; }
+    body { background:#fff; padding:0; line-height:1.6; }
+    .page {
+      box-shadow:none; margin:0; max-width:100%; border:none; border-radius:0;
+      padding: 7mm 9mm; page-break-after: always; break-after: page;
+    }
+    .page:last-of-type { page-break-after:auto; break-after:auto; }
+    .page::before { inset:4mm; }
+    .ornament{margin-bottom:14px; font-size:16pt;} .subtitle{margin-bottom:22px; font-size:13pt;}
+    .page-tag{font-size:9pt;} .eyebrow{font-size:9pt;}
+    h1{font-size:26pt;} .page-title{font-size:21pt;}
+    .section{margin-bottom:16px;} .section-title{font-size:15pt; margin-bottom:7px;}
+    p{font-size:12pt; margin-bottom:10px;}
+    .parable{margin:16px 0; padding:15px 20px;} .parable p{font-size:11.5pt; margin-bottom:8px;}
+    .parable-label{font-size:8.5pt;}
+    .pasuk{margin:15px 0; padding:13px 20px; font-size:12.5pt;} .pasuk-source{font-size:9pt;}
+    .levels{margin:16px 0;} .level{font-size:10.5pt; padding:13px 5px;}
+    .halacha{margin:16px 0; padding:15px 20px;} .halacha-label{font-size:9pt;} .halacha li{font-size:11.5pt; margin-bottom:9px;}
+    .final-message{margin-top:16px; padding:15px;} .final-message-label{font-size:9pt;} .final-pasuk{font-size:15pt;} .final-explanation{font-size:11.5pt;}
+    .attribution{margin-top:18px; padding-top:13px;} .attribution-line{font-size:10.5pt;}
+    /* דף ב׳ עמוס — הידוק עדין כדי שיישאר בעמוד אחד */
+    #page2 { line-height: 1.5; }
+    #page2 .section{margin-bottom:8px;} #page2 .section-title{margin-bottom:4px;}
+    #page2 .parable{margin:9px 0; padding:11px 18px;} #page2 .pasuk{margin:9px 0;}
+    #page2 .halacha{margin:9px 0; padding:12px 18px;} #page2 .levels{margin:10px 0;}
+    #page2 .subtitle{margin-bottom:10px;} #page2 .ornament{margin-bottom:8px;}
+    #page2 p{margin-bottom:6px;} #page2 .halacha li{margin-bottom:7px;}
+  }
+
+  .page { animation: fadeUp 0.7s ease-out backwards; }
+  .page:nth-of-type(2){animation-delay:0.08s;} .page:nth-of-type(3){animation-delay:0.16s;}
+  @keyframes fadeUp { from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+
+<!-- ===== דף א׳ ===== -->
+<article class="page">
+  <div class="page-tag">דף א׳ · מתוך שלוש</div>
+  <div class="ornament">✦ ❖ ✦</div>
+  <div class="eyebrow">שיעור · פרק א׳ בתניא</div>
+  <h1>הַנְּשָׁמָה שֶׁבְּךָ</h1>
+  <p class="subtitle">מסע אל כוחות הנפש — ואיך לנצל אותם לחיים</p>
+
+  <div class="section">
+    <p>
+      התניא היא <em>נְתַנְיָה</em> — היא תשנה לנו את החיים. היא מלמדת להכיר את
+      <strong>כוחות הנפש</strong> שבתוך הגוף, ואיך לנצל אותם. אבל קודם כול:
+      זה לא ספר שלומדים — זה <strong>מסע</strong>, ושינוי החיים הוא <em>תהליך מבורך</em>.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">כּוֹחַ הָאֵינְסוֹף שֶׁבְּךָ</h2>
+    <p>
+      אישה רגילה מרימה שלושים קילו — אך אם רכב עולה על ילדהּ, היא מרימה <strong>טון</strong>.
+      יש בנו כוחות נסתרים, אינסופיים; כשמתחברים אליהם — מתחברים לקדוש ברוך הוא ממש.
+      הטבע הוא רק <em>למראית עין</em>, ובאינסוף אין בריא וחולה, עשיר ועני.
+    </p>
+  </div>
+
+  <div class="parable">
+    <div class="parable-label">סיפור · הבבא סאלי והילדה</div>
+    <p>
+      ילדה מונשמת ללא סיכוי. אמר הבבא סאלי לאב: "נַתֵּק אותה וקח הביתה." בלב פועם ניתק —
+      ובדרך קמה הילדה. הסביר הצדיק: "הייתי חייב לנתק אותה <strong>מן הטבע</strong> —
+      ואז היא שייכת לבורא, והוא ריפא בשנייה."
+    </p>
+    <p>כל עוצמתנו — למשוך את מעל-הטבע אל הטבע. לזה צריך <strong>אמונה חזקה</strong>, דווקא כשהכול נראה אבוד.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">הַשְּׁבוּעָה — "תִּהְיֶה צַדִּיק"</h2>
+    <p>
+      טרם ירידתהּ הנשמה יושבת ב<em>אוצר הנשמות</em>, ומשביעים אותה: <strong>"תהיה צדיק ואל תהיה רשע"</strong> (נידה ל).
+      היא יורדת <em>מאיגרא רמא לבירא עמיקתא</em>, ובגוף חשה כבכלא. אך כמו נר שלהבתו שואפת תמיד מעלה —
+      <strong>נֵר ה' נִשְׁמַת אָדָם</strong> — היא תמיד מבקשת לשוב אל מקורהּ.
+    </p>
+    <p>
+      וכשהיא יורדת לגוף נוצרת <strong>שותפות</strong>: האם נותנת את האודם (הבשר והדם),
+      האב את הלובן (העצמות), והקדוש ברוך הוא נותן את <em>הנשמה</em>.
+      ובסוף — הוא לוקח חזרה את חלקו.
+    </p>
+  </div>
+
+  <div class="halacha">
+    <div class="halacha-label">הלכה למעשה לחיים</div>
+    <ul>
+      <li>גופך — ואף נשמתך — <strong>אינם רכושך</strong>, אלא פיקדון. נהג בעצמך ככבוד שמירת אוצר.</li>
+      <li>גם הילדים של הקדוש ברוך הוא. <strong>לא מרימים יד</strong> — חבק במקום להכות.</li>
+      <li>כשמשהו נראה אבוד "לפי הטבע" — זכור שיש <em>מעל הטבע</em>, ושם הכול פתוח.</li>
+    </ul>
+  </div>
+
+  <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · פרק א׳ בתניא</div></div>
+</article>
+
+<!-- ===== דף ב׳ ===== -->
+<article class="page" id="page2">
+  <div class="page-tag">דף ב׳ · מתוך שלוש</div>
+  <div class="ornament">✦ ❖ ✦</div>
+  <h2 class="page-title">חָמֵשׁ דְּרָגוֹת וְהַמִּלְחָמָה הַפְּנִימִית</h2>
+  <p class="subtitle">מי שולט בנפש שלך — ואיך מנצחים</p>
+
+  <div class="section">
+    <div class="levels">
+      <div class="level">צדיק<br>וטוב לו</div>
+      <div class="level">צדיק<br>ורע לו</div>
+      <div class="level">רשע<br>וטוב לו</div>
+      <div class="level">רשע<br>ורע לו</div>
+      <div class="level goal">בֵּינוֹנִי</div>
+    </div>
+    <p>חמש הדרגות מן הגמרא ילוו אותנו לכל אורך התניא. <strong>צדיק וטוב לו</strong> — צדיק גמור שאין בו רע; הזין את הטוב עד שהרע <em>מת ברעב</em>.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">אֱמוּנָה וּבִטָּחוֹן</h2>
+    <p>
+      <strong>בעל אמונה</strong> רואה רע ומאמין שייהפך לטוב. <strong>בעל ביטחון</strong> כלל אינו רואה רע:
+      <em>"כל דעביד רחמנא לטב עביד"</em> — כמו רבי עקיבא, שאיבד בלילה אחד חמור, תרנגול ונר,
+      ולמחרת הבין שכל אובדן <strong>הציל את חייו</strong> מן החיילים שפשטו על העיירה.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">הָאוֹיֵב הַגָּדוֹל — אַתָּה</h2>
+    <p>
+      הרמב"ם: האויב הגדול של האדם הוא עצמו. רוב החולי בא מן הנפש — צער, כעס, לחץ.
+      <strong>הטוב והרע בידינו</strong> — ואנחנו מחליטים את מי להזין.
+    </p>
+  </div>
+
+  <div class="parable">
+    <div class="parable-label">משל · שני הזאבים</div>
+    <p>"בכל אחד נלחמים שני זאבים: השחור — כעס ותאווה; הלבן — חיוך, צדקה ושמחה." "סבא, מי מנצח?" ענה הזקן: <strong>"את מי שאתה מאכיל."</strong></p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">יִסּוּרִים שֶׁמְּרַפְּאִים</h2>
+    <p>
+      כל מצווה בוראת מלאך סנגור, כל עבירה — קטגור. והיסורים <strong>ממרקים עוונות</strong> —
+      כמו חייט שחותך בד יקר לחתיכות, ותופר ממנו חליפה בול.
+      <strong>עיקר ההבנה: להבין שאיננו מבינים.</strong>
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">הַבֵּינוֹנִי — הַגִּבּוֹר</h2>
+    <p>
+      לבינוני יש מחשבות טובות ולא-טובות, והמלחמה בוערת — אבל הוא <strong>לעולם לא חוטא</strong>,
+      כנהג שידו תמיד על הבלם. <em>"זה ספר — לבינונים":</em> גבורה אינה היעדר מלחמה, אלא <strong>הניצחון</strong> בה.
+    </p>
+  </div>
+
+  <div class="halacha">
+    <div class="halacha-label">הלכה למעשה לחיים</div>
+    <ul>
+      <li><strong>האכל את הזאב הלבן</strong>: מילה טובה, חיוך, מחשבה טובה — והשחור נחלש.</li>
+      <li>כשמשהו נראה "רע" — אמור <em>"כל דעביד רחמנא לטב עביד"</em> והרפֵּה.</li>
+      <li>כשהעליבו אותך בחינם — <strong>שתוק</strong>; הביזיון בא לתקן, ושתיקה ממרקת.</li>
+    </ul>
+  </div>
+
+  <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · פרק א׳ בתניא</div></div>
+</article>
+
+<!-- ===== דף ג׳ ===== -->
+<article class="page">
+  <div class="page-tag">דף ג׳ · מתוך שלוש</div>
+  <div class="ornament">✦ ❖ ✦</div>
+  <h2 class="page-title">כֻּלָּנוּ גּוּף אֶחָד</h2>
+  <p class="subtitle">ערבות הדדית — והלכה למעשה לחיים</p>
+
+  <div class="section">
+    <h2 class="section-title">הַפַּאזֶל שֶׁל עַם יִשְׂרָאֵל</h2>
+    <p>
+      לכל יהודי שליחות משלו; כולנו חלקים בפאזל ענק שרק יחד נשלם. כולנו <strong>גוף אחד</strong> —
+      תלוש ציפורן, וכל הגוף כואב. כשיהודי נפרד מן הכלל, <em>כואב לכולם</em>.
+    </p>
+  </div>
+
+  <div class="parable">
+    <div class="parable-label">משל · החור באונייה</div>
+    <p>אדם קדח חור בחדרו שבאונייה: "זה החדר שלי!" אמרו לו: "ייכנסו מים — <strong>וכולנו נטבע.</strong>"</p>
+    <p>לכן כשאדם טועה: <strong>אל תוכיח — הַצֵּל.</strong> ואם אינו רוצה עזרה — <em>התפלל עליו.</em> לטובע מצילים, לא צועקים.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">לִרְאוֹת אֶת עַצְמְךָ — בְּלִי לִפֹּל</h2>
+    <p>
+      קושיית האדמו"ר הזקן: מצד אחד "תהיה בעיניך כרשע" (נגד גאווה), ומצד שני אם אֶפול לעצבות —
+      <em>"אין השכינה שורה אלא מתוך שמחה"</em>! התשובה: הענווה נועדה <strong>להצמיח</strong>, לא להשפיל.
+      לראות בכנות את העבודה שלפניך — ולעבוד את ה' <em>בשמחה</em>.
+    </p>
+  </div>
+
+  <div class="halacha">
+    <div class="halacha-label">הלכה למעשה לחיים · כלים לתיק</div>
+    <ul>
+      <li><strong>שמירת הלשון:</strong> שתי הלכות לשון הרע ביום — "אי-ידיעת החוק אינה פוטרת מעונש".</li>
+      <li><strong>היסודות באהבה:</strong> נטילת ידיים, ברכות, קריאת שמע, שבת — כחיבור, לא כעול.</li>
+      <li><strong>הרפֵּה ודע:</strong> "הרפו ודעו כי אנכי ה'" — סמוך על מנהיג העולם.</li>
+      <li><strong>היה בינוני:</strong> בלוֹם לפני המילה והמחשבה הרעה — ולעולם אל "תעשה תאונה".</li>
+    </ul>
+  </div>
+
+  <div class="final-message">
+    <div class="final-message-label">סוף דבר</div>
+    <p class="final-pasuk">הַטּוֹב וְהָרָע בְּיָדְךָ — אַתָּה מַחְלִיט אֵיזֶה זְאֵב לְהַאֲכִיל.</p>
+    <p class="final-explanation">התניא היא מסע ותהליך מבורך. צא אליו בשמחה ובערבות — כי כולנו גוף אחד.</p>
+  </div>
+
+  <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · פרק א׳ בתניא</div></div>
+</article>
+
+</body>
+</html>
