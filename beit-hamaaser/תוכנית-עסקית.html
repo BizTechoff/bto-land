@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בֵּית הַמַּעֲשֵׂר — תוכנית עסקית 2026 · לעמותת קהילת שבט הנובה</title>
+<link rel="icon" type="image/png" href="פרח-מורינגה.png">
+<link rel="apple-touch-icon" href="פרח-מורינגה.png">
+<style>
+:root{
+  --night:#081320;--night-2:#0d2034;--ink:#1d2430;--muted:#5d6776;
+  --water:#3aa6e0;--water-deep:#0e6ba8;--fire:#e8602c;--fire-deep:#bf3a12;
+  --gold:#e7b94e;--gold-light:#f6e3a8;--green:#2f9e6b;--purple:#8a4fa3;
+  --paper:#fbf8f1;--white:#fff;--line:#e8dfcc;--shadow:0 14px 40px rgba(8,26,43,.12);
+  --d1:#8a4fa3;--d2:#0e6ba8;--d3:#2f9e6b;--d4:#e7b94e;--d0:#5d6776;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Heebo","Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.7;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+.bsd-corner{position:fixed;top:10px;right:14px;z-index:9999;font-weight:700;font-size:.8rem;color:var(--gold-light);background:rgba(8,19,32,.7);padding:3px 11px;border-radius:9px;}
+a{color:var(--water-deep);}
+
+/* hero */
+.hero{position:relative;text-align:center;color:#fff;padding:74px 22px 60px;overflow:hidden;
+  background:radial-gradient(circle at 20% 25%,rgba(58,166,224,.4),transparent 55%),radial-gradient(circle at 82% 75%,rgba(232,96,44,.4),transparent 55%),linear-gradient(150deg,#05101d,#0d2034 60%,#1a0f22);}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.03) 0 2px,transparent 2px 12px);}
+.hero>*{position:relative;z-index:2;}
+.hero .kick{letter-spacing:.28em;font-size:.8rem;text-transform:uppercase;color:var(--gold-light);margin-bottom:14px;}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;}
+.hero .sub{margin:16px auto 0;max-width:760px;font-size:1.12rem;opacity:.95;}
+.hero .for{margin-top:18px;font-size:.98rem;color:var(--gold-light);font-weight:700;}
+
+/* section */
+section{padding:50px 0 10px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;letter-spacing:.05em;color:var(--fire-deep);background:#fdeee6;border-radius:999px;padding:6px 15px;margin-bottom:12px;}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:900;color:var(--water-deep);line-height:1.2;margin-bottom:12px;}
+h2 .num{color:var(--gold);}
+p{font-size:1.06rem;margin-bottom:12px;}
+.lead{color:var(--muted);max-width:820px;}
+.hl{color:var(--fire-deep);font-weight:700;}
+
+/* tribe stats */
+.tstats{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0;}
+.tstat{flex:1;min-width:120px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--water);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow);}
+.tstat .n{font-size:1.5rem;font-weight:900;color:var(--water-deep);}
+.tstat .l{font-size:.82rem;color:var(--muted);font-weight:600;}
+
+/* dept overview cards */
+.depts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:18px;}
+.deptc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-top:5px solid var(--d0);}
+.deptc.c1{border-top-color:var(--d1);}.deptc.c2{border-top-color:var(--d2);}.deptc.c3{border-top-color:var(--d3);}.deptc.c4{border-top-color:var(--d4);}
+.deptc .ic{font-size:2rem;}
+.deptc h3{font-size:1.15rem;font-weight:900;color:var(--water-deep);margin:6px 0 4px;}
+.deptc p{font-size:.94rem;color:var(--muted);margin:0;}
+
+/* PRICE TOGGLE BAR */
+.pricebar{position:sticky;top:0;z-index:50;background:rgba(251,248,241,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 0;margin-top:10px;}
+.pricebar-in{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.toggle-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c06;font-weight:900;font-size:1rem;border:none;border-radius:999px;padding:10px 22px;cursor:pointer;box-shadow:var(--shadow);}
+.total-badge{font-weight:900;color:var(--water-deep);font-size:1.05rem;display:none;}
+body.show-prices .total-badge{display:inline-block;}
+.total-badge b{color:var(--fire-deep);}
+
+/* TREE */
+.tree{margin-top:18px;}
+.node{margin:0;}
+.node>.head{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:8px;cursor:pointer;box-shadow:0 4px 14px rgba(8,26,43,.05);transition:border-color .15s,background .15s;}
+.node>.head:hover{border-color:var(--water-light);background:#fffdf6;}
+.node>.head .caret{width:18px;flex-shrink:0;color:var(--muted);font-size:.9rem;transition:transform .2s;}
+.node.open>.head .caret{transform:rotate(-90deg);}
+.node>.head .ic{font-size:1.2rem;flex-shrink:0;}
+.node>.head .nm{font-weight:800;flex:1;}
+.node>.head .price{font-weight:900;color:var(--water-deep);font-size:.95rem;white-space:nowrap;display:none;}
+body.show-prices .node>.head .price{display:inline-block;}
+.node.lvl0>.head{border-right:6px solid var(--d0);}
+.node.lvl0.d1>.head{border-right-color:var(--d1);} .node.lvl0.d2>.head{border-right-color:var(--d2);}
+.node.lvl0.d3>.head{border-right-color:var(--d3);} .node.lvl0.d4>.head{border-right-color:var(--d4);} .node.lvl0.d0>.head{border-right-color:var(--d0);}
+.node.lvl0>.head .nm{font-size:1.12rem;color:var(--water-deep);}
+.node .body{display:none;padding:4px 0 4px 0;margin-right:22px;border-right:2px dashed var(--line);padding-right:14px;}
+.node.open>.body{display:block;}
+.node.leaf>.head .caret{visibility:hidden;}
+
+/* category detail */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px;}
+.cat{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;}
+.cat .ct{font-size:.78rem;font-weight:800;color:var(--fire-deep);margin-bottom:2px;}
+.cat .cv{font-size:.92rem;color:var(--ink);}
+.cat.bud{background:#fff4d6;border-color:var(--gold);}
+.cat.bud .ct{color:#7a5a10;}
+body:not(.show-prices) .cat.bud{display:none;}
+@media(max-width:680px){.cats{grid-template-columns:1fr;}}
+
+/* physical plan */
+.phys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:18px;}
+.physc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);}
+.physc h3{font-size:1.08rem;font-weight:900;color:var(--water-deep);margin-bottom:6px;}
+.physc .tag{display:inline-block;font-size:.74rem;font-weight:800;border-radius:999px;padding:2px 10px;margin-bottom:8px;}
+.physc p{font-size:.94rem;color:var(--muted);margin:0;}
+.modesty{background:linear-gradient(135deg,#fff,#fff8ec);border:1px solid var(--line);border-right:6px solid var(--gold);border-radius:18px;padding:26px 30px;box-shadow:var(--shadow);margin-top:20px;}
+.modesty h3{color:#7a5a10;font-size:1.2rem;font-weight:900;margin-bottom:8px;}
+.modesty ul{list-style:none;margin-top:8px;}
+.modesty li{padding:7px 0;border-bottom:1px dashed var(--line);font-size:1rem;}
+.modesty li:last-child{border:none;}
+.modesty li b{color:var(--water-deep);}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;}
+.phase{background:#fff;border:1px solid var(--line);border-top:4px solid var(--water);border-radius:16px;padding:18px;box-shadow:var(--shadow);}
+.phase .ph{font-size:.78rem;font-weight:800;color:var(--fire-deep);}
+.phase h4{font-size:1.02rem;color:var(--water-deep);font-weight:900;margin:4px 0 6px;}
+.phase p{font-size:.9rem;color:var(--muted);margin:0;}
+@media(max-width:820px){.road{grid-template-columns:repeat(2,1fr);}}
+
+/* third party */
+.tp{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.tpchip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.92rem;color:var(--water-deep);box-shadow:var(--shadow);}
+
+/* closing */
+.closing{background:linear-gradient(135deg,var(--water-deep),var(--fire-deep));color:#fff;border-radius:24px;padding:48px clamp(24px,5vw,56px);text-align:center;box-shadow:var(--shadow);margin:30px 0 50px;}
+.closing h2{color:#fff;}
+.closing p{font-size:1.12rem;opacity:.96;max-width:700px;margin:0 auto 12px;}
+.closing .big{font-size:1.35rem;font-weight:900;color:var(--gold-light);margin:14px 0;}
+
+footer{background:var(--night);color:#9bbdd4;text-align:center;padding:30px 22px;font-size:.88rem;}
+footer a{color:var(--gold-light);}
+.disc{max-width:1080px;margin:8px auto 0;padding:0 22px;color:var(--muted);font-size:.86rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="bsd-corner">בס"ד</div>
+
+<section class="hero">
+  <div class="kick">תוכנית עסקית · 2026</div>
+  <h1>בֵּית הַמַּעֲשֵׂר</h1>
+  <div class="sub">הבית הקבוע לריפוי, לחוסן ולנתינה — מול הים, בחינם. תוכנית עבודה מלאה: מטרתית · תפעולית · תקציבית · פיזית · ממשקי צד ג׳.</div>
+  <div class="for">מוגש לעמותת קהילת שבט הנובה · We Will Dance Again</div>
+</section>
+
+<!-- EXECUTIVE / WHY -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">🎯 תקציר מנהלים</span>
+    <h2>בית קבוע לפעילות שכבר עובדת</h2>
+    <p class="lead">עמותת קהילת שבט הנובה כבר מובילה ריפוי ושיקום ל-<span class="hl">10,000+ חברים</span> — ריטריטים, ימי וולנס, שיקום בעזרת ספורט, טיפול בטבע, מנטורינג וגלישה — אך <span class="hl">ללא בית קבוע משלה</span>. בֵּית הַמַּעֲשֵׂר הוא הבית הזה: כחצי דונם מול הים, מתחם אחד שמרכז את כל עולמות הריפוי, חינם, לנצח — לזכר 413 מלאכי הנובה.</p>
+    <div class="tstats">
+      <div class="tstat"><div class="n">10,000+</div><div class="l">חברי הקהילה</div></div>
+      <div class="tstat"><div class="n">413</div><div class="l">מלאכי הנובה</div></div>
+      <div class="tstat"><div class="n">31</div><div class="l">ריטריטים שכבר התקיימו</div></div>
+      <div class="tstat"><div class="n">25</div><div class="l">ימי וולנס</div></div>
+      <div class="tstat"><div class="n">10</div><div class="l">קבוצות ספורט</div></div>
+    </div>
+    <p class="lead">בֵּית הַמַּעֲשֵׂר מנוהל כעמותה (טופס 46) בארבע מחלקות עצמאיות, כל אחת עם מתחם, צוות, תקציב ויעדים — ועם ממשקים מובְנים ביניהן. מודל ״מאיה אחוז נתינה״: 100% נתינה, אפס רווח, הכל מתרומות.</p>
+  </div>
+</section>
+
+<!-- 4 DEPARTMENTS OVERVIEW -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">🏛️ מבנה הניהול</span>
+    <h2>ארבע מחלקות מרכזיות</h2>
+    <div class="depts">
+      <div class="deptc c1"><div class="ic">🕯️</div><h3>1 · מחלקה רוחנית</h3><p>בית כנסת ותפילות, ערבי חיזוק, אירועים, משפחה וזוגיות, בדק רוחני.</p></div>
+      <div class="deptc c2"><div class="ic">🌊</div><h3>2 · ספורט, וולנס ורטריט</h3><p>ריטריטים, יוגה, אמבטיות קרח, גלישה ושיקום בעזרת ספורט — ליבת הריפוי לנובה.</p></div>
+      <div class="deptc c3"><div class="ic">🥖</div><h3>3 · צדקה ומזון</h3><p>חלוקת מזון, תמיכה במשפחות ובנק המצוות.</p></div>
+      <div class="deptc c4"><div class="ic">📖</div><h3>4 · כולל ולימוד תורה</h3><p>כולל אברכים, שיעורים פתוחים, והנצחה דרך לימוד.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE TREE -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">🌳 דריל-דאון מלא</span>
+    <h2>מחלקות · ענפים · תתי-ענפים</h2>
+    <p class="lead">לחצו על כל שורה כדי לפתוח אותה — ולראות את חמש הקטגוריות: 🎯 מטרתית · ⚙️ תפעולית · 🤝 ממשקי צד ג׳ · 🏗️ פיזית · 💰 תקציבית. כל ענף נפתח לתתי-ענפים.</p>
+  </div>
+  <div class="pricebar">
+    <div class="wrap pricebar-in">
+      <button class="toggle-btn" id="priceToggle">💰 הצג מחירים</button>
+      <span class="total-badge">תקציב שנתי כולל (תפעול): <b id="grandTotal">—</b> · בנוסף הקמה חד-פעמית: <b id="setupTotal">—</b></span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="tree" id="tree"></div>
+  </div>
+</section>
+
+<!-- PHYSICAL PLAN -->
+<section style="background:linear-gradient(180deg,#fff,#fff8ec);border-block:1px solid var(--line);">
+  <div class="wrap">
+    <span class="eyebrow">🏗️ תכנון פיזי</span>
+    <h2>ארבעה מתחמים, שתי כניסות נפרדות</h2>
+    <p class="lead">המבנה מחולק לארבעה חלקים, כך שכל מחלקה מתנהלת עצמאית במתחם משלה — עם ממשקים בנקודות המפגש. שתי כניסות נפרדות מבטיחות הפרדה וכבוד הדדי.</p>
+    <div class="phys-grid">
+      <div class="physc"><span class="tag" style="background:#f3e9f7;color:#5f2f74;">חלק 1 · קדמי</span><h3>בית כנסת ובית תפילות</h3><p>שחרית, מנחה וערבית · שבתות וחגים · לב רוחני קבוע.</p></div>
+      <div class="physc"><span class="tag" style="background:#f3e9f7;color:#5f2f74;">חלק 2</span><h3>אירועים, הרצאות ורבנים</h3><p>ערבי חיזוק, ערב ניסים, הופעות, אירועי משפחה — והבמה.</p></div>
+      <div class="physc"><span class="tag" style="background:#eaf4fb;color:#0e6ba8;">חלק 3</span><h3>ספורט, וולנס ורטריט</h3><p>ים, גלישה, יוגה, אמבטיות קרח, סדנאות — עולם הריפוי לנובה.</p></div>
+      <div class="physc"><span class="tag" style="background:#e7f6ee;color:#1c6e49;">חלק 4</span><h3>צדקה וחלוקת מזון</h3><p>סלי מזון, בית תמחוי, וחלוקת חלות לנזקקים.</p></div>
+    </div>
+    <div class="phys-grid" style="margin-top:16px;">
+      <div class="physc"><span class="tag" style="background:#eaf4fb;color:#0e6ba8;">כניסה מערבית</span><h3>״שביל ישראל״ (מאחור)</h3><p>הכניסה לעולם הרטריט והספורט הימי — מהשביל האחורי, ישירות אל הים והוולנס.</p></div>
+      <div class="physc"><span class="tag" style="background:#fff4d6;color:#7a5a10;">כניסה דרומית</span><h3>הכניסה התורנית</h3><p>הכניסה לכולל ולבית התפילות — נפרדת לחלוטין, לעולם הרוח והלימוד.</p></div>
+      <div class="physc"><span class="tag" style="background:#fdeee6;color:#bf3a12;">נקודת המפגש</span><h3>חצר ה״שלום״ המרכזית</h3><p>״הגשר״ בין עולם הרוח לעולם החומר — מרחב מעבר מכבד שמחבר את המתחמים בלי לערבב.</p></div>
+    </div>
+
+    <div class="modesty">
+      <h3>🤍 שמירה על צניעות — וחיבור בין העולמות</h3>
+      <p>העיקרון: לחבר את עולם הרוח עם עולם החומר, תוך שמירה מלאה על כבוד וצניעות — כך ששני העולמות מתקיימים יחד בלי להתנגש.</p>
+      <ul>
+        <li><b>הפרדה במרחב:</b> אירוע דתי בצד אחד לא גובל בפעילות ים בצד השני — הזרמים מופרדים פיזית ובכניסות נפרדות (מערבית לספורט, דרומית לתורה).</li>
+        <li><b>הפרדה בזמן:</b> לוח זמנים שמשבץ פעילויות שונות בשעות/ימים נפרדים, כדי למנוע חפיפה לא רצויה.</li>
+        <li><b>אמבטיות קרח וסאונה — בתאים פרטיים:</b> כמו מקלחות ושירותים — תאי טבילה סגורים, לא חשופים לעיני כולם. אדם נכנס לתא, לא ״כולם רואים את כולם״.</li>
+        <li><b>קוד לבוש במתחם:</b> פעילות עם חולצה ומכנסיים (יוגה/ספורט) — כן; ביקיני או ללא חולצה בתוך המתחם — לא. שמירה על צניעות מאפשרת לכולם להרגיש בנוח.</li>
+        <li><b>הגשר:</b> חצר השלום המרכזית היא מרחב מעבר מכובד — מי שירצה יעבור מעולם המים אל עולם הרוח, בבחירה חופשית, בלי כפייה.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONAL MODEL -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">⚙️ מודל תפעולי</span>
+    <h2>איך זה מתנהל ביום-יום</h2>
+    <p class="lead"><b>ניהול מטריציוני:</b> מנכ״ל עמותה ← 4 מנהלי מחלקות ← רכזי ענפים. כל מחלקה אוטונומית בתפעול, תקציב ויעדים, ומדווחת למטה. <b>כוח אדם משולב:</b> ליבה בשכר (מנהלים, מטפלים מוסמכים, מאבטח, אב בית) + מאות מתנדבים על בסיס ״מעשר מהזמן״ (X שעות בחודש). <b>ממשל ושקיפות:</b> עמותה רשומה, אישור טופס 46, רו״ח מבקר, דו״ח שנתי לתורמים, ועד מנהל וועדת ביקורת.</p>
+  </div>
+</section>
+
+<!-- THIRD PARTY -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">🤝 ממשקי צד ג׳</span>
+    <h2>שותפים ומערכות חיצוניות</h2>
+    <p class="lead">בֵּית הַמַּעֲשֵׂר נשען על רשת שותפויות — חלקן כבר פעילות בעמותת שבט הנובה.</p>
+    <div class="tp">
+      <span class="tpchip">עמותת קהילת שבט הנובה</span>
+      <span class="tpchip">המוסד לביטוח לאומי (שיקום נפגעי טראומה)</span>
+      <span class="tpchip">משרד הבריאות — שורדי המסיבות</span>
+      <span class="tpchip">נט״ל / ער״ן (תמיכה נפשית)</span>
+      <span class="tpchip">עמותת ״הגל שלי״ (גלישה טיפולית)</span>
+      <span class="tpchip">רבנות מקומית</span>
+      <span class="tpchip">מטפלים ומדריכים מוסמכים</span>
+      <span class="tpchip">אמנים ומוסיקאים</span>
+      <span class="tpchip">ספקי מזון ולוגיסטיקה</span>
+      <span class="tpchip">רשות מקומית / עירייה</span>
+      <span class="tpchip">קרנות ותורמים (טופס 46)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">🗺️ תוכנית עבודה</span>
+    <h2>מהיום אל הפתיחה — ומעבר</h2>
+    <div class="road">
+      <div class="phase"><div class="ph">שלב 1 · 0–3 ח׳</div><h4>הקמה וביסוס</h4><p>אישור עמותה ותב״ע, גיוס שותף מייסד, תכנון אדריכלי וצניעות, צוות ליבה.</p></div>
+      <div class="phase"><div class="ph">שלב 2 · 3–9 ח׳</div><h4>בנייה ופיילוט</h4><p>בניית 4 המתחמים, תאי טבילה, במה וכולל. פיילוט ריטריטים מול הים עם שבט הנובה.</p></div>
+      <div class="phase"><div class="ph">שלב 3 · 9–12 ח׳</div><h4>פתיחה רשמית</h4><p>הדלקת הנר הראשון, השקת כל המחלקות, מפגש ״עוד נחזור לרקוד״.</p></div>
+      <div class="phase"><div class="ph">שלב 4 · שנה+</div><h4>צמיחה והרחבה</h4><p>הגדלת מחזורי הריטריטים, הנצחת ענפים ע״ש נרצחי נובה, דו״ח אימפקט שנתי.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section>
+  <div class="wrap">
+    <div class="closing">
+      <h2>תוכנית מדויקת — לתוצאה ודאית</h2>
+      <p>ארבע מחלקות, ענפים מתוקצבים, מודל תפעולי ברור, שותפויות קיימות ותכנון פיזי ששומר על כבוד כולם. לא חלום — <span style="color:var(--gold-light);font-weight:900;">דרך פעולה.</span></p>
+      <div class="big">מאיה אחוז נתינה · אפס אחוז רווח · הכל מתרומות</div>
+      <p>״עוד נחזור לרקוד״ — וכאן גם נרפא, נתחבר וניתן. לנצח.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>בֵּית הַמַּעֲשֵׂר · מרכז רוחני ע״ש מאיה בן דוד ז״ל · חיבור בין מים לאש 💧🔥</div>
+  <div style="margin-top:6px;opacity:.7;">מוגש לעמותת קהילת שבט הנובה · 2026</div>
+</footer>
+<div class="disc">המספרים התקציביים הם <b>אומדני תכנון</b> להמחשת המודל, לאישור והתאמה סופית של הנהלת העמותה. מקורות נתוני הקהילה: אתר עמותת קהילת שבט הנובה.</div>
+
+<script>
+/* ===================== BUSINESS DATA ===================== */
+const DATA = [
+ {id:"d1",cls:"d1",ic:"🕯️",name:"1 · מחלקה רוחנית",
+  goal:"לחבר את הקהילה לרוח, למשמעות ולשמחה — ולהוות גשר עדין ולא-כופה אל עולם האמונה.",
+  ops:"מנהל/ת מחלקה, רב בית, רכז אירועים ומתנדבים; לוח אירועים שבועי.",
+  third:"רבנות מקומית, אמנים ומוסיקאים, מרצים ורבנים אורחים.",
+  phys:"חלקים 1–2 (קדמי) · כניסה דרומית. בית כנסת, אולם אירועים ובמה.",
+  children:[
+    {ic:"🛐",name:"בית כנסת ובית תפילות",goal:"מקום תפילה קבוע, בוקר וערב.",ops:"מניינים קבועים, גבאי, לוח זמנים.",third:"רבנות, סופר סת״ם.",phys:"חלק קדמי, כניסה דרומית.",children:[
+      {ic:"🕊️",name:"תפילות יומיות (שחרית/מנחה/ערבית)",goal:"שלושה מניינים ביום.",ops:"גבאי ומתנדבים.",third:"רבנות.",phys:"אולם בית הכנסת.",budget:60000},
+      {ic:"📜",name:"ספר תורה וחזנות",goal:"קריאת התורה וחזנות בשבתות.",ops:"בעל קורא, חזן.",third:"סופר סת״ם.",phys:"ארון קודש ובמה.",budget:40000},
+      {ic:"🕯️",name:"שבתות וחגים",goal:"תפילות וסעודות בשבתות וחגים.",ops:"רכז שבתות, כיבוד.",third:"ספקי מזון.",phys:"אולם + מטבח קצה.",budget:50000}]},
+    {ic:"🎙️",name:"ערבי חיזוק והשראה",goal:"לחזק את הרוח דרך תוכן, עדות ומוזיקה.",ops:"רכז אירועים, תיעוד.",third:"רבנים, אמנים, מתעדים.",phys:"חלק 2 + במה.",children:[
+      {ic:"📣",name:"רבנים אורחים והרצאות",goal:"ערבי תוכן ומרצים.",ops:"הזמנות, שיווק.",third:"מרצים ורבנים.",phys:"אולם הרצאות.",budget:80000},
+      {ic:"✨",name:"ערב ניסים (עדויות)",goal:"שיתוף סיפורי נס, מתועד ומופץ.",ops:"רכז, צוות תיעוד.",third:"מתעדים, מדיה.",phys:"במה + צילום.",budget:50000},
+      {ic:"🎵",name:"מוסיקה והופעות (במה)",goal:"מוזיקה מרפאת — ״עוד נחזור לרקוד״.",ops:"רכז במה, ציוד הגברה.",third:"מוסיקאים, חברת הגברה.",phys:"במה מרכזית מול השטח.",budget:130000}]},
+    {ic:"🎉",name:"אירועים ושמחות",goal:"לאפשר שמחות גם למעוטי יכולת.",ops:"רכז אירועים, רבנות חינם.",third:"רבנים, ספקים.",phys:"אולם אירועים.",children:[
+      {ic:"🎊",name:"בר/בת מצווה ובריתות",goal:"אירועי מצווה לכל משפחה.",ops:"תיאום, הפקה.",third:"רבנים, מוהל, ספקים.",phys:"אולם + חצר.",budget:90000},
+      {ic:"🏠",name:"בית שמחות",goal:"מרחב לשמחות קהילתיות.",ops:"לוח הזמנות, אחזקה.",third:"ספקי קייטרינג.",phys:"אולם רב-תכליתי.",budget:70000},
+      {ic:"🕊️",name:"שירותי רבנות חינם",goal:"ליווי רבני לבר מצווה ואירועים.",ops:"רב בית.",third:"רבנות.",phys:"משרד רבני.",budget:40000}]},
+    {ic:"💞",name:"ערבי משפחה וזוגיות",goal:"חוסן משפחתי — שלום בית, זוגיות וחיבור.",ops:"מנחים ויועצים.",third:"יועצי זוגיות, מנחות.",phys:"חדרי סדנאות.",children:[
+      {ic:"🌉",name:"שלום בית ו״הגשר״",goal:"ערבי זוגות, כולל מעורבים.",ops:"מנחים מוסמכים.",third:"יועצים.",phys:"חדר סדנה.",budget:60000},
+      {ic:"🕯️",name:"טהרת המשפחה",goal:"ליווי בקדושת הבית.",ops:"מדריכות.",third:"רבנות, בלניות.",phys:"מרחב נשים.",budget:30000},
+      {ic:"👩‍🍳",name:"ערבי נשים והפרשת חלה",goal:"מפגשי נשים וקהילה.",ops:"רכזת, כיבוד.",third:"מנחות.",phys:"מרחב נשים נפרד.",budget:40000},
+      {ic:"🤝",name:"ערבי היכרות (רווקים/ות)",goal:"מפגשים לפי מודל התאמה ומכובד.",ops:"רכז/ת שידוכים.",third:"מערכת התאמה.",phys:"אולם + חדרים.",budget:40000}]},
+    {ic:"📿",name:"בדק רוחני",goal:"שמירה רוחנית — מזוזות, תפילין, כשרות.",ops:"סופר סת״ם, משגיח.",third:"סופר, רבנות.",phys:"עמדת בדיקה.",children:[
+      {ic:"📜",name:"מזוזות ותפילין",goal:"בדיקה והגהה.",ops:"סופר סת״ם.",third:"סופר.",phys:"עמדה ייעודית.",budget:40000},
+      {ic:"🍽️",name:"הכשרת מטבחים",goal:"הכשרה וייעוץ כשרות.",ops:"משגיח כשרות.",third:"רבנות.",phys:"ניידת/עמדה.",budget:30000}]}
+  ]},
+
+ {id:"d2",cls:"d2",ic:"🌊",name:"2 · מחלקת ספורט, וולנס ורטריט",
+  goal:"ליבת הריפוי לקהילת הנובה — שיקום הגוף והנפש מטראומה, מול הים, בחינם.",
+  ops:"מנהל/ת מחלקה, מטפלים מוסמכים, מדריכי ספורט ויוגה, רכז ריטריטים.",
+  third:"ביטוח לאומי, משרד הבריאות, ״הגל שלי״, נט״ל/ער״ן, מטפלים.",
+  phys:"חלק 3 · כניסה מערבית (״שביל ישראל״), צמוד לים.",
+  children:[
+    {ic:"🌿",name:"רטריט וריפוי (ע״ש מאיה)",goal:"ריטריטים לעיבוד טראומה ובניית חוסן.",ops:"רכז ריטריטים, מטפלים.",third:"ביטוח לאומי, פסיכולוגים.",phys:"מתחם רטריט, צריפי לינה.",children:[
+      {ic:"🏕️",name:"ריטריטים לניצולי הנובה",goal:"מחזורי ריטריט מתמשכים לשורדים ומשפחות.",ops:"צוות רב-מקצועי.",third:"שבט הנובה, ביטוח לאומי.",phys:"מתחם רטריט מול הים.",budget:280000},
+      {ic:"🍃",name:"מורינגה וריפוי טבעי",goal:"המשך מפעל חייה של מאיה — ריפוי טבעי.",ops:"גינה טיפולית.",third:"ספקי צמחי מרפא.",phys:"גינת מרפא.",budget:70000},
+      {ic:"🧠",name:"טיפול רגשי וקבוצות",goal:"קבוצות עיבוד וטיפול פרטני.",ops:"פסיכולוגים, עו״ס.",third:"משרד הבריאות, נט״ל.",phys:"חדרי טיפול.",budget:160000}]},
+    {ic:"🧘",name:"וולנס ויוגה",goal:"ויסות נפשי דרך גוף — יוגה, נשימה, מדיטציה.",ops:"מורי יוגה מוסמכים.",third:"מורשת ״כרמל גת״, מטפלים.",phys:"אולם יוגה ומרפסת ים.",children:[
+      {ic:"🧎",name:"יוגה ומדיטציה",goal:"שיעורי יוגה טיפולית.",ops:"מורות יוגה.",third:"עמותות יוגה.",phys:"אולם + דשא.",budget:110000},
+      {ic:"☀️",name:"ימי וולנס",goal:"ימי רגיעה (עד 40 משתתפים).",ops:"רכז יום, מנחים.",third:"מנחי וולנס.",phys:"כל המתחם.",budget:120000},
+      {ic:"🌬️",name:"סדנאות נשימה ושחרור",goal:"כלים לוויסות עצמי.",ops:"מנחי נשימה.",third:"מנחים מוסמכים.",phys:"חדר סדנה.",budget:60000}]},
+    {ic:"❄️",name:"אמבטיות קרח וסאונה (צנוע)",goal:"חוסן והתחדשות — בתאים פרטיים ומכובדים.",ops:"מפעיל/אחזקה, ליווי בטיחות.",third:"ספק תשתיות, אחזקה.",phys:"תאי טבילה פרטיים + סאונה.",children:[
+      {ic:"🛁",name:"תאי טבילה פרטיים",goal:"טבילת קרח בתאים סגורים — כמו מקלחת.",ops:"אחזקת מים וקרח.",third:"ספק קירור.",phys:"תאים נפרדים, מוסתרים.",budget:80000},
+      {ic:"♨️",name:"סאונה",goal:"סאונה להרפיה.",ops:"אחזקה ובטיחות.",third:"ספק סאונה.",phys:"תא סאונה נפרד.",budget:50000},
+      {ic:"🦺",name:"ליווי מקצועי",goal:"בטיחות וליווי נכון.",ops:"מדריך מוסמך.",third:"ביטוח.",phys:"עמדת ליווי.",budget:40000}]},
+    {ic:"🏄",name:"ספורט ימי וגלישה",goal:"חיבור מחודש לגוף דרך הים.",ops:"מדריכי גלישה, ביטוח, הסעות.",third:"עמותת ״הגל שלי״, ביטוח.",phys:"גישה לים (~100 מ׳), מחסן גלשנים.",children:[
+      {ic:"🌊",name:"גלישה (כולל ילדים מיוחדים)",goal:"שיעורי גלישה טיפוליים, בשיתוף ״הגל שלי״.",ops:"מדריכים מוסמכים, ציוד.",third:"״הגל שלי״.",phys:"חוף + מחסן ציוד.",budget:180000},
+      {ic:"🏊",name:"שחייה וים",goal:"פעילות מים מרגיעה.",ops:"מציל, מדריך.",third:"רשות החופים.",phys:"חוף סמוך.",budget:60000},
+      {ic:"⚽",name:"שיקום בעזרת ספורט",goal:"קבוצות ספורט לשחרור ולשליטה.",ops:"מאמנים.",third:"עמותות ספורט.",phys:"מגרש/דשא.",budget:140000}]},
+    {ic:"😄",name:"ימי כיף וסדנאות",goal:"שמחה, צחוק ויצירה ככלי ריפוי.",ops:"מנחי סדנאות.",third:"מנחים, אמני טיפול.",phys:"חדרי סדנאות + חצר.",children:[
+      {ic:"🤗",name:"ימי קהילה",goal:"מרחב בטוח ומחזק לקהילה.",ops:"רכז קהילה.",third:"שבט הנובה.",phys:"כל המתחם.",budget:120000},
+      {ic:"😂",name:"סדנאות צחוק ושמחה",goal:"״להיות שמח בחלקך״.",ops:"מנחי צחוק.",third:"מנחים.",phys:"חדר סדנה.",budget:60000},
+      {ic:"🎨",name:"טיפול באמנות (חימר/טבע)",goal:"עיבוד דרך יצירה.",ops:"מטפלות באמנות.",third:"מטפלים מוסמכים.",phys:"סטודיו יצירה.",budget:70000}]}
+  ]},
+
+ {id:"d3",cls:"d3",ic:"🥖",name:"3 · מחלקת צדקה ומזון",
+  goal:"נתינה ישירה לנזקקים ולמשפחות — מזון, תמיכה וכבוד.",
+  ops:"מנהל/ת מחלקה, רכז לוגיסטיקה, מתנדבי אריזה והפצה.",
+  third:"ספקי מזון, רשת חלוקה, מיצוי זכויות.",
+  phys:"חלק 4. מחסן, מטבח ועמדת חלוקה.",
+  children:[
+    {ic:"📦",name:"חלוקת מזון",goal:"להאכיל כל נזקק, בכבוד.",ops:"אריזה והפצה, מתנדבים.",third:"ספקי מזון, לוגיסטיקה.",phys:"מחסן + מטבח.",children:[
+      {ic:"🛒",name:"סלי מזון לנזקקים",goal:"חלוקת סלי מזון שבועיים.",ops:"רכז, מתנדבים.",third:"ספקים, תורמי מזון.",phys:"מחסן קירור.",budget:240000},
+      {ic:"🍲",name:"בית תמחוי / ארוחות חמות",goal:"ארוחות חמות במקום.",ops:"טבח, מתנדבים.",third:"ספקי מזון.",phys:"מטבח + אולם.",budget:160000},
+      {ic:"🥖",name:"חלוקת חלות (ערב שבת)",goal:"חלות לכל דורש לפני שבת.",ops:"אפייה/רכש, חלוקה.",third:"מאפיות.",phys:"עמדת חלוקה.",budget:60000}]},
+    {ic:"🤍",name:"תמיכה במשפחות",goal:"ליווי משפחות נזקקות ושכולות.",ops:"עו״ס, רכז זכויות.",third:"ביטוח לאומי, רשויות רווחה.",phys:"משרד ליווי.",children:[
+      {ic:"🎈",name:"אירועים נתמכים למעוטי יכולת",goal:"שמחות במימון מלא.",ops:"רכז אירועים.",third:"ספקים.",phys:"אולם אירועים.",budget:90000},
+      {ic:"📋",name:"מיצוי זכויות וליווי",goal:"סיוע במימוש זכויות.",ops:"עו״ס/יועץ זכויות.",third:"ביטוח לאומי, רווחה.",phys:"משרד.",budget:80000}]},
+    {ic:"🏦",name:"בנק המצוות (מנוע הנתינה)",goal:"ניתוב כל תרומה לענף שהתורם בחר — שקיפות מלאה.",ops:"מערכת ניהול תרומות, גזבר.",third:"מערכת סליקה, רו״ח.",phys:"משרד הנהלה.",children:[
+      {ic:"💳",name:"ניתוב תרומות לפי ענף",goal:"כל שקל לענף הנבחר.",ops:"מערכת + בקרה.",third:"סליקה, בנק.",phys:"משרד.",budget:60000},
+      {ic:"⏳",name:"מעשר מהזמן (מתנדבים מקצועיים)",goal:"רופאים ובעלי מקצוע תורמים שעות.",ops:"רכז מתנדבים.",third:"מאגר מתנדבים.",phys:"משרד תיאום.",budget:30000}]}
+  ]},
+
+ {id:"d4",cls:"d4",ic:"📖",name:"4 · כולל ולימוד תורה",
+  goal:"החזקת האש הרוחנית — לימוד תורה, שיעורים והנצחה דרך לימוד.",
+  ops:"ראש כולל, רכז שיעורים.",
+  third:"רבנות, מוסדות תורה.",
+  phys:"אגף הכולל · כניסה דרומית (עם בית התפילות).",
+  children:[
+    {ic:"📚",name:"כולל אברכים",goal:"לימוד תורה קבוע של אברכים.",ops:"ראש כולל, מלגות.",third:"רבנות, מוסדות.",phys:"בית מדרש.",children:[
+      {ic:"🎓",name:"מלגות אברכים",goal:"החזקת אברכים העמלים בתורה.",ops:"ניהול מלגות.",third:"מוסדות תורה.",phys:"בית מדרש.",budget:300000},
+      {ic:"🏛️",name:"בית מדרש (ספרים ואחזקה)",goal:"מרחב לימוד מאובזר.",ops:"אחזקה, ספרייה.",third:"ספקי ספרים.",phys:"אולם בית מדרש.",budget:60000}]},
+    {ic:"📖",name:"שיעורי תורה ושיעורים",goal:"שיעורים פתוחים לקהל הרחב.",ops:"רכז שיעורים, מגידי שיעור.",third:"רבנים ומרצים.",phys:"חדרי לימוד.",children:[
+      {ic:"📘",name:"תניא וחסידות",goal:"שיעורי תניא וחסידות.",ops:"מגיד שיעור.",third:"רבנות.",phys:"חדר לימוד.",budget:50000},
+      {ic:"🔥",name:"רבי נחמן",goal:"שיעורי ברסלב והתחזקות.",ops:"מגיד שיעור.",third:"רבנות.",phys:"חדר לימוד.",budget:40000},
+      {ic:"👥",name:"שיעורים פתוחים לקהל",goal:"שיעורים לכל דורש, נגישים.",ops:"לוח שיעורים.",third:"מרצים.",phys:"אולם.",budget:50000}]},
+    {ic:"🕯️",name:"הנצחה ומצוות",goal:"לימוד והנצחה לעילוי נשמת נרצחי 7.10.",ops:"רכז הנצחה.",third:"משפחות, סופר סת״ם.",phys:"בית מדרש.",children:[
+      {ic:"✒️",name:"אות בספר תורה",goal:"תרומת אות לעילוי נשמה (₪10 לאדם).",ops:"קמפיין, סופר.",third:"סופר סת״ם.",phys:"ארון קודש.",budget:20000},
+      {ic:"📿",name:"לימוד לעילוי נשמת",goal:"שיעורים וחברותות לזכר הנרצחים.",ops:"רכז, חברותות.",third:"משפחות.",phys:"בית מדרש.",budget:30000}]}
+  ]},
+
+ {id:"d0",cls:"d0",ic:"🏢",name:"מטה העמותה (תקורה וניהול)",
+  goal:"ניהול, ממשל, שקיפות ואחזקה — התשתית שמאפשרת לכל המחלקות לפעול.",
+  ops:"מנכ״ל, מנהלת כספים, ועד מנהל, מאבטח, אב בית.",
+  third:"רו״ח מבקר, עו״ד, ביטוחים, בנק.",
+  phys:"משרדי הנהלה + תשתיות כלל-מתחמיות.",
+  children:[
+    {ic:"⚖️",name:"הנהלה, ממשל ושקיפות",goal:"ניהול עמותה תקין, טופס 46, דו״חות.",ops:"מנכ״ל, גזבר, ועדת ביקורת.",third:"רו״ח, רשם העמותות.",phys:"משרד הנהלה.",budget:220000},
+    {ic:"🔧",name:"אחזקת מבנה",goal:"חשמל, מים, ניקיון, אבטחה ובטיחות.",ops:"אב בית, מאבטח, ניקיון.",third:"חברות אחזקה ואבטחה.",phys:"כלל המתחם.",budget:240000},
+    {ic:"📣",name:"שיווק, מדיה ותיעוד",goal:"חשיפה, גיוס תרומות ותיעוד הפעילות.",ops:"רכז מדיה, צלמים מתנדבים.",third:"מתעדים, פלטפורמות.",phys:"עמדת מדיה.",budget:120000}
+  ]}
+];
+
+const SETUP_BUDGET = 6000000; // אומדן הקמה חד-פעמי
+
+/* ===================== RENDER ===================== */
+const fmt = n => "₪" + n.toLocaleString("he-IL");
+function sumNode(node){
+  if(node.budget!=null && (!node.children||!node.children.length)) return node.budget;
+  let s = node.budget||0;
+  (node.children||[]).forEach(c=> s+=sumNode(c));
+  return s;
+}
+function render(node, level, deptCls){
+  const total = sumNode(node);
+  const hasKids = node.children && node.children.length;
+  const el = document.createElement("div");
+  el.className = "node lvl"+level+(hasKids?"":" leaf")+(level===0?(" "+(deptCls||"")):"");
+  const cats = `
+    <div class="cats">
+      <div class="cat"><div class="ct">🎯 מטרתית</div><div class="cv">${node.goal||"—"}</div></div>
+      <div class="cat"><div class="ct">⚙️ תפעולית</div><div class="cv">${node.ops||"—"}</div></div>
+      <div class="cat"><div class="ct">🤝 ממשקי צד ג׳</div><div class="cv">${node.third||"—"}</div></div>
+      <div class="cat"><div class="ct">🏗️ פיזית</div><div class="cv">${node.phys||"—"}</div></div>
+      <div class="cat bud"><div class="ct">💰 תקציבית (שנתי, אומדן)</div><div class="cv">${fmt(total)}${hasKids?" — מצרפי (סכום תתי-הענפים)":""}</div></div>
+    </div>`;
+  el.innerHTML = `<div class="head"><span class="caret">▾</span><span class="ic">${node.ic||"•"}</span><span class="nm">${node.name}</span><span class="price">${fmt(total)}</span></div>
+    <div class="body">${cats}<div class="children"></div></div>`;
+  const head = el.querySelector(".head");
+  head.addEventListener("click",()=> el.classList.toggle("open"));
+  const kidsWrap = el.querySelector(".children");
+  (node.children||[]).forEach(c=> kidsWrap.appendChild(render(c, level+1, deptCls)));
+  return el;
+}
+const tree = document.getElementById("tree");
+let grand = 0;
+DATA.forEach(d=>{ tree.appendChild(render(d,0,d.cls)); grand += sumNode(d); });
+document.getElementById("grandTotal").textContent = fmt(grand);
+document.getElementById("setupTotal").textContent = fmt(SETUP_BUDGET);
+
+/* price toggle */
+const btn = document.getElementById("priceToggle");
+btn.addEventListener("click",()=>{
+  document.body.classList.toggle("show-prices");
+  const on = document.body.classList.contains("show-prices");
+  btn.textContent = on ? "🙈 הסתר מחירים" : "💰 הצג מחירים";
+});
+</script>
+</body>
+</html>

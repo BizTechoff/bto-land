@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>איך הגאולה באה — סוד שעבוד מלכויות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf3df;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #d9a943;
+    --crimson: #8c2a1e;
+    --sage: #6b8a4a;
+    --sage-deep: #4d6638;
+    --sun: #e8b942;
+    --dark: #1a1108;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(232, 185, 66, 0.14) 0%, transparent 62%),
+      radial-gradient(ellipse at bottom, rgba(184, 138, 44, 0.08) 0%, transparent 60%);
+    color: var(--ink);
+    line-height: 1.85;
+    min-height: 100vh;
+    padding: 50px 18px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 250, 235, 0.65) 0%, rgba(245, 236, 217, 0.35) 100%);
+    padding: 66px 56px 56px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184, 138, 44, 0.15);
+    position: relative;
+  }
+  .container::before {
+    content: ""; position: absolute; inset: 12px;
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    pointer-events: none; border-radius: 2px;
+  }
+  .bezras {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 14px; letter-spacing: 8px; color: var(--gold-deep);
+    margin-bottom: 24px; opacity: 0.85;
+  }
+  .ornament {
+    text-align: center; color: var(--gold);
+    font-size: 24px; letter-spacing: 10px;
+    margin-bottom: 20px; opacity: 0.72;
+  }
+  .eyebrow {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 900;
+    font-size: clamp(32px, 5vw, 44px); text-align: center;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 14px; letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; font-size: 18px; color: var(--ink-soft);
+    font-weight: 400; font-style: italic; margin-bottom: 38px;
+    line-height: 1.5;
+  }
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    margin: 46px 0 34px; gap: 20px;
+  }
+  .divider::before, .divider::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .divider-symbol { color: var(--gold); font-size: 18px; letter-spacing: 4px; }
+
+  .section { margin-bottom: 34px; }
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif; font-weight: 700;
+    font-size: 25px; color: var(--crimson); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+    line-height: 1.3;
+  }
+  .section-title::before {
+    content: "❖"; color: var(--gold); font-size: 14px; flex-shrink: 0;
+  }
+  p { font-size: 18px; color: var(--ink); margin-bottom: 14px; }
+  strong { color: var(--crimson); font-weight: 700; }
+  em { color: var(--gold-deep); font-style: italic; font-weight: 500; }
+
+  .pasuk {
+    background: rgba(184, 138, 44, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 18px 24px; margin: 18px 0;
+    font-family: 'David Libre', serif; font-size: 17px;
+    color: var(--ink-soft); border-radius: 2px;
+  }
+  .pasuk-source {
+    display: block; font-size: 13px; color: var(--gold-deep);
+    margin-top: 8px; letter-spacing: 1px;
+  }
+
+  /* Opening question */
+  .question-card {
+    margin: 0 0 38px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, var(--dark) 0%, #0d0805 100%);
+    color: var(--paper);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 22px 55px -18px rgba(43, 29, 16, 0.6);
+  }
+  .question-card::before {
+    content: ""; position: absolute; inset: 9px;
+    border: 1px solid rgba(184, 138, 44, 0.4);
+    border-radius: 5px; pointer-events: none;
+  }
+  .question-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--sun);
+    text-transform: uppercase; margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .question-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(22px, 3.4vw, 28px);
+    font-weight: 700; line-height: 1.5;
+    color: var(--paper); position: relative; z-index: 1;
+  }
+  .question-text strong { color: var(--sun); }
+  .question-text em { color: #e5b95c; font-style: italic; }
+
+  /* The Two Choices */
+  .choices-card {
+    margin: 30px 0;
+    padding: 32px 26px;
+    background: rgba(245, 236, 217, 0.5);
+    border: 1px solid rgba(184, 138, 44, 0.3);
+    border-radius: 8px;
+  }
+  .choices-label {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  .choices-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .choice {
+    padding: 24px 20px; border-radius: 6px; text-align: center;
+  }
+  .choice.gehinom {
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.10) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border: 2px dashed var(--crimson);
+  }
+  .choice.shibud {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.05) 100%);
+    border: 2px solid var(--gold);
+  }
+  .choice-tag {
+    display: inline-block; font-family: 'Bellefair', serif;
+    font-size: 10px; letter-spacing: 3px; padding: 4px 14px;
+    border-radius: 12px; margin-bottom: 14px;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .choice.gehinom .choice-tag { background: var(--crimson); color: var(--paper); }
+  .choice.shibud .choice-tag { background: var(--gold); color: var(--paper); }
+  .choice-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; font-weight: 700;
+    margin-bottom: 10px; line-height: 1.3;
+  }
+  .choice.gehinom .choice-name { color: var(--crimson); }
+  .choice.shibud .choice-name { color: var(--gold-deep); }
+  .choice-desc {
+    font-size: 14px; color: var(--ink-soft);
+    line-height: 1.55; margin: 0;
+  }
+
+  /* 50/50 Scale */
+  .balance-card {
+    margin: 30px 0;
+    padding: 34px 28px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.16) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+  }
+  .balance-label {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  .scale {
+    display: flex; justify-content: center; align-items: center;
+    gap: 0; margin-bottom: 18px;
+    background: rgba(255, 250, 235, 0.85);
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(184, 138, 44, 0.3);
+  }
+  .scale-half {
+    flex: 1; padding: 22px 16px; text-align: center;
+  }
+  .scale-half.faith {
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.25) 0%, rgba(184, 138, 44, 0.10) 100%);
+  }
+  .scale-half.denial {
+    background: linear-gradient(135deg, rgba(43, 29, 16, 0.15) 0%, rgba(43, 29, 16, 0.05) 100%);
+  }
+  .scale-percent {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 38px; font-weight: 900;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .scale-half.faith .scale-percent { color: var(--gold-deep); }
+  .scale-half.denial .scale-percent { color: var(--ink-soft); }
+  .scale-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .scale-half.faith .scale-label { color: var(--gold-deep); }
+  .scale-half.denial .scale-label { color: var(--ink-soft); }
+  .scale-divider {
+    width: 1px; background: var(--gold);
+    align-self: stretch;
+  }
+  .balance-note {
+    text-align: center; font-size: 14px;
+    color: var(--ink-soft); font-style: italic;
+    line-height: 1.5; margin-top: 12px;
+  }
+
+  /* Insight */
+  .insight {
+    margin: 22px 0; padding: 22px 26px;
+    background: linear-gradient(135deg, rgba(140, 42, 30, 0.10) 0%, rgba(140, 42, 30, 0.02) 100%);
+    border-right: 3px solid var(--crimson); border-radius: 4px;
+  }
+  .insight-label {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--crimson);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .insight p {
+    font-size: 17px; color: var(--ink); margin: 0;
+    line-height: 1.7; font-weight: 500;
+  }
+
+  /* The Inversion - bottom and top */
+  .inversion-card {
+    margin: 34px 0;
+    padding: 36px 30px;
+    background: linear-gradient(180deg, rgba(232, 185, 66, 0.18) 0%, rgba(184, 138, 44, 0.04) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+  }
+  .inversion-label {
+    text-align: center; font-family: 'Bellefair', serif;
+    font-size: 11px; letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  .inversion-pair {
+    display: flex; align-items: center;
+    background: rgba(255, 250, 235, 0.85);
+    border: 1px solid rgba(184, 138, 44, 0.25);
+    border-radius: 6px;
+    padding: 18px 22px; margin-bottom: 12px;
+  }
+  .inversion-realm {
+    font-family: 'Bellefair', serif; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+    width: 80px; flex-shrink: 0;
+  }
+  .inversion-pair.earth .inversion-realm { color: var(--crimson); }
+  .inversion-pair.heaven .inversion-realm { color: var(--gold-deep); }
+  .inversion-content {
+    flex: 1; font-size: 17px; color: var(--ink);
+    line-height: 1.5; font-weight: 600;
+  }
+  .inversion-arrow {
+    text-align: center; color: var(--gold);
+    font-size: 22px; margin: 4px 0; opacity: 0.7;
+  }
+
+  /* Promise card */
+  .promise-card {
+    margin: 34px 0;
+    padding: 38px 30px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.22) 0%, rgba(184, 138, 44, 0.08) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .promise-symbol {
+    color: var(--gold); font-size: 32px; line-height: 1;
+    margin-bottom: 14px;
+  }
+  .promise-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--ink);
+    font-weight: 700; line-height: 1.55; margin: 0;
+  }
+  .promise-text strong { color: var(--crimson); }
+  .promise-text em { color: var(--gold-deep); font-style: italic; }
+
+  /* Final */
+  .final-message {
+    margin-top: 48px; padding: 40px 32px;
+    background: linear-gradient(135deg, rgba(232, 185, 66, 0.20) 0%, rgba(184, 138, 44, 0.06) 100%);
+    border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+    text-align: center;
+  }
+  .final-label {
+    font-family: 'Bellefair', serif; font-size: 11px;
+    letter-spacing: 5px; color: var(--gold-deep);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .final-text {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 22px; color: var(--ink);
+    font-weight: 700; line-height: 1.55; margin: 0;
+  }
+  .final-text strong { color: var(--crimson); }
+  .final-text em { color: var(--gold-deep); font-style: italic; }
+  .final-hope {
+    margin-top: 18px; font-size: 16px;
+    color: var(--gold-deep); font-style: italic;
+  }
+
+  .attribution {
+    margin-top: 48px; text-align: center; padding-top: 28px;
+    border-top: 1px solid rgba(184, 138, 44, 0.3);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 16px; color: var(--gold-deep);
+    letter-spacing: 2px; font-weight: 500;
+  }
+  .footer-ornament {
+    text-align: center; margin-top: 26px;
+    color: var(--gold); font-size: 18px;
+    letter-spacing: 12px; opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 24px 10px; }
+    .container { padding: 40px 22px 44px; }
+    .container::before { inset: 8px; }
+    h1 { font-size: 26px; }
+    .subtitle { font-size: 15px; }
+    p { font-size: 17px; }
+    .section-title { font-size: 21px; }
+    .question-text { font-size: 20px; }
+    .choices-grid { grid-template-columns: 1fr; gap: 14px; }
+    .choice-name { font-size: 19px; }
+    .scale-percent { font-size: 30px; }
+    .inversion-pair { flex-direction: column; gap: 8px; padding: 14px 16px; }
+    .inversion-realm { width: auto; }
+    .inversion-content { font-size: 16px; text-align: center; }
+    .promise-text { font-size: 19px; }
+    .final-text { font-size: 19px; }
+    .insight p { font-size: 16px; }
+  }
+  @media print { body { background: white; padding: 0; } .container { box-shadow: none; } }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · ביאת המשיח</div>
+    <h1>אֵיךְ הַגְּאֻלָּה בָּאָה</h1>
+    <p class="subtitle">
+      סוד ברית בין הבתרים —<br>
+      ולמה כל הקושי הוא בעצם המנגנון
+    </p>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <!-- ============================== -->
+    <!-- THE OPENING QUESTION           -->
+    <!-- ============================== -->
+    <div class="question-card">
+      <div class="question-label">השאלה</div>
+      <div class="question-text">
+        אַתָּה מִסְתַּכֵּל עַל הָעוֹלָם —<br>
+        רוֹאֶה אֲסוֹנוֹת, יִסּוּרִים, חוּצְפָּה.<br><br>
+        אֵיךְ מִכָּל זֶה<br>
+        תָּבוֹא <strong>גְּאֻלָּה</strong>?
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 1. BRIT BEIN HABETARIM         -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">ברית בין הבתרים — שתי האפשרויות</h2>
+      <p>
+        הכל מתחיל ב<em>אברהם אבינו</em>.
+        בברית בין הבתרים, אברהם <strong>הטיל ספק</strong>
+        בהבטחה של הקב״ה — שאל "<em>במה אדע</em>".
+      </p>
+      <p>
+        אמר לו הקב״ה: על שאלה זו —
+        אני נותן לך לבחור בין <strong>שתי אפשרויות</strong>.
+        או שאני אביא את בנייך ב<em>גהינום</em>,
+        או שאני אביא אותם ב<em>שעבוד מלכויות</em>.
+      </p>
+    </div>
+
+    <div class="choices-card">
+      <div class="choices-label">שתי הדרכים שהקב״ה הציע</div>
+      <div class="choices-grid">
+
+        <div class="choice gehinom">
+          <span class="choice-tag">אפשרות א'</span>
+          <div class="choice-name">גֵּיהִנּוֹם</div>
+          <p class="choice-desc">
+            סבל ישיר —<br>
+            אחרי המוות,<br>
+            ללא בחירה.
+          </p>
+        </div>
+
+        <div class="choice shibud">
+          <span class="choice-tag">אפשרות ב' · נבחרה</span>
+          <div class="choice-name">שִׁעְבּוּד מַלְכֻיּוֹת</div>
+          <p class="choice-desc">
+            סבל בעולם הזה —<br>
+            דרך גלות ושעבוד,<br>
+            <strong>שמוביל לגאולה</strong>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        ולמה אברהם בחר ב<em>שעבוד מלכויות</em>?
+        כי שעבוד מלכויות זה לא רק <em>סבל</em> — זה <strong>מנגנון</strong>.
+        זה הדרך שדרכה זוכים לגאולה האמיתית והשלמה.
+      </p>
+      <div class="insight">
+        <div class="insight-label">סוד "שעבוד מלכויות"</div>
+        <p>
+          ה<strong>מלכות</strong> היא החיות של החומר.
+          הניצוץ שמחיה את החומר.
+          כשהמלכות הולכת ל<em>סטרא אחרא</em> —
+          אנחנו משועבדים לה.
+          אבל דווקא <strong>מתוך השעבוד הזה</strong> —
+          באה הגאולה האמיתית.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 2. THE 50/50 BALANCE           -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">איך זה מסתדר? — חוק ה־50/50</h2>
+      <p>
+        אומר ה<em>רמח״ל</em>: הקב״ה מנהיג את העולם
+        <strong>חמישים אחוז גלוי, חמישים אחוז נסתר</strong>.
+        למה? <em>כדי שתהיה זכות בחירה</em>.
+      </p>
+      <p>
+        ולכן יש שני סוגי אנשים:
+      </p>
+    </div>
+
+    <div class="balance-card">
+      <div class="balance-label">המאזניים של בורא עולם</div>
+
+      <div class="scale">
+        <div class="scale-half faith">
+          <div class="scale-percent">50%</div>
+          <div class="scale-label">מאמינים</div>
+        </div>
+        <div class="scale-divider"></div>
+        <div class="scale-half denial">
+          <div class="scale-percent">50%</div>
+          <div class="scale-label">מכחישים</div>
+        </div>
+      </div>
+      <p class="balance-note">
+        ושני הצדדים מצויים בעולם — כדי שתהיה <em>בחירה אמיתית</em>
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="pasuk">
+        הַכֹּל צָפוּי — וְהָרְשׁוּת נְתוּנָה,<br>
+        וּבְטוֹב הָעוֹלָם נִדּוֹן —<br>
+        וְהַכֹּל לְפִי <strong>רֹב הַמַּעֲשֶׂה</strong>
+        <span class="pasuk-source">— פרקי אבות ג, טו</span>
+      </div>
+      <p>
+        כשבן אדם חוזר בתשובה — <strong>אחוז אחד</strong> בלבד —
+        הוא מטה את הכף.
+        51% מול 49% — וההכרעה כבר נמצאת.
+      </p>
+      <div class="insight">
+        <div class="insight-label">הנקודה</div>
+        <p>
+          <strong>אחוז אחד מספיק</strong> להטות את כל המאזניים.
+          זאת הסיבה שמעשה קטן שלך —
+          הוא משמעותי מאוד <em>בכלל</em>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 3. HESTER PANIM                -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">הסתר פנים — מה הקב״ה עושה לפני המשיח</h2>
+      <p>
+        ועכשיו — הנקודה הקריטית.
+        לפני שבא משיח, הקב״ה <strong>מסתיר</strong>.
+        כבר לא 50/50.
+      </p>
+      <div class="pasuk">
+        וְאָנֹכִי <strong>הַסְתֵּר אַסְתִּיר פָּנַי</strong>
+        בַּיּוֹם הַהוּא
+        <span class="pasuk-source">— דברים לא, יח</span>
+      </div>
+      <p>
+        ואז נוצרת מציאות <em>כאילו</em> הקב״ה לא נמצא בעולם.
+        היצר רק <strong>גובר</strong>.
+      </p>
+      <p>
+        השאלה הגדולה: <em>מה הקב״ה מקבל מזה?</em>
+      </p>
+      <div class="insight">
+        <div class="insight-label">התשובה המפתיעה</div>
+        <p>
+          הוא מקבל מזה <strong>שהייסורים גוברים</strong>.<br><br>
+          כי ברגע שיש הסתרה —<br>
+          החוצפה גוברת,<br>
+          השיקול הדעת יותר טועה,<br>
+          האנשים <em>חוטאים בלא ידיעתם</em>.<br>
+          ואז באים הייסורים.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 4. THE INVERSION               -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">ההיפוך הגדול — ייסורים למטה, חסדים למעלה</h2>
+      <p>
+        ועכשיו זה הסוד <strong>הגדול מכולם</strong> —
+        מה שעולם עוד לא גילה:
+      </p>
+    </div>
+
+    <div class="inversion-card">
+      <div class="inversion-label">הסוד · מטה ומעלה</div>
+
+      <div class="inversion-pair earth">
+        <div class="inversion-realm">למטה</div>
+        <div class="inversion-content">
+          הייסורים <strong>גוברים</strong>
+        </div>
+      </div>
+
+      <div class="inversion-arrow">↑</div>
+
+      <div class="inversion-pair heaven">
+        <div class="inversion-realm">למעלה</div>
+        <div class="inversion-content">
+          ה<em>חסדים</em> גוברים — בהיפוך מדויק
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        ככל שגובר ה<strong>דין</strong> פה למטה —
+        ה<strong>חסד</strong> למעלה הולך וגובר.
+        עד שהחסד מטה את הכף למעלה,
+        ואז:
+      </p>
+      <div class="pasuk">
+        וְאֶת רוּחַ הַטֻּמְאָה<br>
+        <strong>אַעֲבִיר מִן הָאָרֶץ</strong>
+        <span class="pasuk-source">— זכריה יג, ב</span>
+      </div>
+      <p>
+        והוא מביא לנו את הגאולה האמיתית והשלמה.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 5. THE BIG PICTURE             -->
+    <!-- ============================== -->
+    <div class="section">
+      <h2 class="section-title">המנגנון השלם — למה דווקא ככה</h2>
+      <p>
+        למה הקב״ה בחר במנגנון הזה?
+        הוא אומר: <em>״אני חייב להביא גאולה לכולם״</em> —
+        גם לאלה שלא עובדים את השם.
+      </p>
+      <div class="insight">
+        <div class="insight-label">הצדק האלוקי</div>
+        <p>
+          איך אביא גאולה לכל עם ישראל?<br>
+          ה<strong>ייסורים יגלו</strong> גם את האנשים שלא עובדים את השם.<br>
+          ועל ידי הייסורים —<br>
+          <em>הם גואלים</em>.<br><br>
+          הייסור מטה — הוא <em>הגילוי</em> שמעלה אותם למעלה.
+        </p>
+      </div>
+      <p>
+        ה<strong>ייסורים מרכזים את הבחנות</strong>.
+        מי שאיכפת לו — מתעורר.
+        מי שמרחיק — חוזר.
+        מי שישן — מתעורר מהזעזוע.
+      </p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- FINAL                          -->
+    <!-- ============================== -->
+    <div class="final-message">
+      <div class="final-label">סוף דבר</div>
+      <p class="final-text">
+        בְּעֶזְרַת הַשֵּׁם —<br>
+        <strong>לֹא הֵם וְלֹא שְׂכָרָם</strong>.<br><br>
+        אֲבָל אִם כְּבָר הֵם בָּאִים —<br>
+        <em>אָז נִשְׂמַח בָּהֶם</em>.<br><br>
+        וְכָכָה נַעֲשֶׂה <strong>״אֲחִישֶׁנָּה״</strong><br>
+        עַל יְדֵי הַ<em>שִּׂמְחָה</em> —<br>
+        וְנַקְדִּים אֶת הַגְּאֻלָּה<br>
+        שֶׁל כֻּלָּנוּ תֵּכֶף וּמִיָּד.
+      </p>
+      <p class="final-hope">
+        ✦ אכי״ר ✦
+      </p>
+    </div>
+
+    <div class="attribution">
+      מדברי ציון אבירם הי״ו
+    </div>
+
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
