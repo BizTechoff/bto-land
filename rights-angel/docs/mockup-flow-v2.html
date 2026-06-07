@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מלאך הזכויות · 2 Flows · אדמין + אזרח</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1a1a;
+    --ink-2:#3a3631;
+    --paper:#fbfaf6;
+    --muted:#6a6660;
+    --line:#e6e0d4;
+    --soft:#f3eee2;
+    --accent:#c8501e;
+    --accent-soft:#fbeee5;
+    --admin:#5f5e5a;        /* gray for admin */
+    --admin-soft:#f1efe8;
+    --citizen:#0f6e56;      /* green for citizen */
+    --citizen-soft:#e1f5ee;
+    --bg-loop:#7a5d10;      /* amber for background */
+    --bg-loop-soft:#fff8e8;
+    --success:#3b6d11;
+    --success-soft:#eaf3de;
+    --danger:#a52a2a;
+    --danger-soft:#fcecec;
+  }
+  html,body{background:var(--paper);min-height:100vh}
+  body{
+    font-family:'Heebo',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    line-height:1.6;
+    font-size:14px;
+  }
+
+  /* ============ TOP BAR ============ */
+  .topbar{
+    background:var(--ink);color:#fff;padding:16px 32px;
+    display:flex;align-items:center;gap:24px;
+    position:sticky;top:0;z-index:50;
+  }
+  .logo{font-family:'Frank Ruhl Libre',Georgia,serif;font-size:22px;font-weight:700}
+  .logo .accent{color:var(--accent)}
+  .logo small{
+    display:block;font-family:Heebo,sans-serif;
+    font-size:10px;letter-spacing:2px;
+    color:rgba(255,255,255,0.55);margin-top:-4px;font-weight:600;
+  }
+  .top-meta{
+    margin-right:auto;font-size:11px;color:rgba(255,255,255,0.7);
+    text-align:left;letter-spacing:0.5px;
+  }
+  .top-meta b{display:block;color:#fff;font-size:12px}
+
+  /* ============ INTRO ============ */
+  .intro{
+    max-width:1080px;margin:40px auto 32px;padding:0 32px;
+  }
+  .intro h1{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:38px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;
+  }
+  .intro h1 em{color:var(--accent);font-style:italic}
+  .intro .sub{color:var(--muted);font-size:15px;line-height:1.6}
+
+  /* ============ TABS ============ */
+  .tabs{
+    max-width:1080px;margin:30px auto 0;padding:0 32px;
+    display:flex;gap:14px;
+  }
+  .tab-btn{
+    flex:1;background:#fff;border:2px solid var(--line);
+    border-radius:12px;padding:18px 22px;cursor:pointer;
+    font-family:inherit;text-align:right;
+    display:flex;align-items:center;gap:14px;
+    transition:all 0.15s;color:var(--ink);
+  }
+  .tab-btn:hover{border-color:#b3afa3;background:#fefefa}
+  .tab-btn .tab-ic{font-size:28px;flex-shrink:0}
+  .tab-btn .tab-info{flex:1}
+  .tab-btn h3{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:18px;font-weight:800;margin-bottom:2px;
+  }
+  .tab-btn p{font-size:11.5px;color:var(--muted);line-height:1.4}
+  .tab-btn .tab-arrow{
+    font-size:16px;color:var(--muted);flex-shrink:0;
+    opacity:0;transition:opacity 0.15s;
+  }
+  .tab-btn:hover .tab-arrow{opacity:1}
+  .tab-btn.active{border-color:var(--accent);background:linear-gradient(135deg,#fff,#fffaf5)}
+  .tab-btn.active.admin-tab{border-color:var(--admin);background:linear-gradient(135deg,#fff,#f8f6f1)}
+  .tab-btn.active.citizen-tab{border-color:var(--citizen);background:linear-gradient(135deg,#fff,#f5fcf6)}
+  .tab-btn.active h3{color:var(--accent)}
+  .tab-btn.active.admin-tab h3{color:var(--admin)}
+  .tab-btn.active.citizen-tab h3{color:var(--citizen)}
+  .tab-btn.active .tab-arrow{opacity:1}
+
+  /* tab content visibility */
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+
+  /* ============ FLOW WRAPPER ============ */
+  .flow-wrap{max-width:1080px;margin:0 auto 60px;padding:0 32px}
+
+  /* ============ FLOW HEADER ============ */
+  .flow-header{
+    border-radius:12px;padding:24px 28px;margin:50px 0 30px;
+    color:#fff;display:flex;align-items:center;gap:18px;
+  }
+  .flow-header.admin{background:linear-gradient(135deg,#3a3631 0%,#1a1a1a 100%)}
+  .flow-header.citizen{background:linear-gradient(135deg,#0f6e56 0%,#085041 100%)}
+  .flow-header .ic{font-size:42px;flex-shrink:0}
+  .flow-header h2{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:28px;font-weight:800;letter-spacing:-0.3px;
+  }
+  .flow-header p{color:rgba(255,255,255,0.75);font-size:14px;margin-top:4px;line-height:1.55}
+  .flow-header .badge{
+    background:rgba(255,255,255,0.18);
+    font-size:10.5px;letter-spacing:2px;font-weight:700;
+    padding:5px 12px;border-radius:3px;margin-right:auto;
+    border:1px solid rgba(255,255,255,0.3);
+  }
+
+  /* ============ STEP ROW (arrow between steps) ============ */
+  .arrow-down{
+    width:2px;height:36px;background:#d6d2c8;
+    margin:0 auto;position:relative;
+  }
+  .arrow-down::after{
+    content:'';position:absolute;bottom:-2px;left:50%;
+    transform:translateX(-50%);
+    width:0;height:0;
+    border-left:7px solid transparent;border-right:7px solid transparent;
+    border-top:10px solid #b3afa3;
+  }
+
+  /* ============ PLATFORM SCREEN ============ */
+  .screen{
+    background:#fff;border:2px solid var(--line);border-radius:10px;
+    overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.05);
+  }
+  .screen.admin-frame{border-color:var(--admin)}
+  .screen.citizen-frame{border-color:var(--citizen)}
+  .screen.amber-frame{border-color:var(--bg-loop)}
+  .screen.success-frame{border-color:var(--success)}
+  .screen.danger-frame{border-color:var(--danger)}
+
+  .screen .bar{
+    background:#1a1a1a;padding:9px 14px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;font-size:11px;
+  }
+  .bar-left{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .dots{display:flex;gap:4px;direction:ltr;flex-shrink:0}
+  .dots span{width:9px;height:9px;border-radius:50%}
+  .step-tag{
+    background:rgba(200,80,30,0.22);border:1px solid var(--accent);
+    color:#fff;font-family:'Frank Ruhl Libre',serif;
+    font-size:11px;font-weight:800;letter-spacing:0.5px;
+    padding:2px 9px;border-radius:3px;flex-shrink:0;
+  }
+  .bar-url{
+    font-family:'Menlo',monospace;font-size:10.5px;
+    direction:ltr;color:#fff;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    flex-shrink:1;min-width:0;text-align:left;
+  }
+  .screen-body{padding:24px 28px}
+
+  /* ============ SCREEN HEADER (inside the body) ============ */
+  .screen-h{
+    padding-bottom:14px;margin-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+  .screen-h h3{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:21px;font-weight:800;margin-bottom:6px;line-height:1.25;
+  }
+  .screen.admin-frame .screen-h h3{color:#444441}
+  .screen.citizen-frame .screen-h h3{color:#085041}
+  .screen.amber-frame .screen-h h3{color:var(--bg-loop)}
+  .screen.success-frame .screen-h h3{color:var(--success)}
+  .screen.danger-frame .screen-h h3{color:var(--danger)}
+  .screen-h p{font-size:13px;color:var(--muted);line-height:1.6}
+
+  /* ============ CONTENT HELPERS ============ */
+  .row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 0;border-bottom:1px dotted var(--line);
+    font-size:13.5px;
+  }
+  .row:last-child{border-bottom:0}
+  .row .lbl{color:var(--muted)}
+  .row .val{font-weight:600}
+
+  .input{
+    width:100%;padding:9px 13px;
+    border:1px solid #d8d4cc;border-radius:5px;
+    font-size:13.5px;font-family:inherit;background:#fff;
+    margin-bottom:8px;
+  }
+  .input.filled{background:#fafff7;border-color:#9ec78a}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    padding:10px 18px;border-radius:5px;font-weight:600;font-size:13px;
+    border:none;cursor:pointer;font-family:inherit;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-success{background:var(--citizen);color:#fff}
+  .btn-ghost{background:transparent;border:1px solid #c8c4ba;color:var(--muted)}
+  .btn-wide{width:100%}
+
+  .tag{
+    display:inline-block;font-size:10.5px;font-weight:700;
+    letter-spacing:0.5px;padding:3px 9px;border-radius:3px;
+  }
+  .tag-ai{background:#eef0fb;color:#3c3489}
+  .tag-ok{background:var(--citizen-soft);color:var(--citizen)}
+  .tag-warn{background:var(--bg-loop-soft);color:var(--bg-loop)}
+  .tag-req{background:var(--danger-soft);color:var(--danger)}
+  .tag-admin{background:var(--admin-soft);color:var(--admin)}
+
+  .callout{
+    background:var(--soft);padding:12px 16px;border-radius:6px;
+    font-size:12.5px;color:var(--ink-2);line-height:1.6;
+    border-right:3px solid var(--accent);margin-top:14px;
+  }
+  .callout.info{background:#eef0fb;color:#3c3489;border-color:#534ab7}
+  .callout.warn{background:var(--bg-loop-soft);color:var(--bg-loop);border-color:var(--bg-loop)}
+  .callout.ok{background:var(--citizen-soft);color:var(--citizen);border-color:var(--citizen)}
+
+  /* ============ BACKGROUND MECHANISM BANNER ============ */
+  .bg-mechanism{
+    background:linear-gradient(135deg,#fff8e8 0%,#fcf0d0 100%);
+    border:2px dashed var(--bg-loop);border-radius:12px;
+    padding:24px 28px;margin:24px 0;
+    display:flex;align-items:center;gap:20px;
+  }
+  .bg-mechanism .ic{
+    width:60px;height:60px;background:var(--bg-loop);
+    color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;flex-shrink:0;
+  }
+  .bg-mechanism h4{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:18px;font-weight:800;color:var(--bg-loop);margin-bottom:4px;
+  }
+  .bg-mechanism p{font-size:13px;color:#5e4a0b;line-height:1.5}
+  .bg-mechanism small{
+    display:block;font-size:11px;color:var(--bg-loop);
+    margin-top:6px;font-style:italic;
+  }
+
+  /* ============ PAYMENT OPTIONS ============ */
+  .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .pay-option{
+    background:#fff;border:1.5px solid #d8d4cc;border-radius:8px;
+    padding:14px 18px;cursor:pointer;
+  }
+  .pay-option.active{border-color:var(--accent);background:#fff8f0}
+  .pay-option h5{font-size:13px;font-weight:700;margin-bottom:4px}
+  .pay-option .price{
+    font-family:'Frank Ruhl Libre',serif;font-size:22px;font-weight:800;color:var(--accent);
+  }
+  .pay-option p{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+  /* ============ KIT LIST ============ */
+  .kit-letter{
+    background:#fff;border:1px solid var(--line);border-radius:6px;
+    padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;
+  }
+  .kit-letter .ic{
+    width:34px;height:34px;background:var(--accent-soft);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;
+  }
+  .kit-letter .info{flex:1}
+  .kit-letter .info b{display:block;font-size:13px}
+  .kit-letter .info small{color:var(--muted);font-size:11.5px}
+
+  /* ============ CITIZEN OFFER CARD ============ */
+  .offer-card{
+    background:linear-gradient(135deg,#fff 0%,#fafff7 100%);
+    border:2px solid var(--citizen);border-radius:10px;
+    padding:18px 22px;margin-bottom:10px;
+  }
+  .offer-card h5{
+    font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:700;color:#085041;
+    margin-bottom:4px;
+  }
+  .offer-card .save{
+    font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:800;
+    color:var(--accent);margin:6px 0;
+  }
+  .offer-card .reason{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+
+  /* ============ FINAL CELEBRATION ============ */
+  .celebration{
+    background:linear-gradient(135deg,var(--success-soft),#d4e9b0);
+    border:3px solid var(--success);border-radius:12px;padding:36px;
+    text-align:center;
+  }
+  .celebration h2{
+    font-family:'Frank Ruhl Libre',Georgia,serif;
+    font-size:48px;font-weight:900;color:#27500a;margin-bottom:8px;
+  }
+  .celebration p{font-size:16px;color:var(--success);margin-bottom:20px}
+
+  /* ============ DECISION BOX ============ */
+  .decision-box{
+    background:var(--bg-loop-soft);border:1.5px solid var(--bg-loop);
+    border-radius:8px;padding:18px;margin-bottom:14px;
+  }
+  .decision-box .q{
+    text-align:center;font-size:13.5px;color:var(--bg-loop);
+    font-weight:700;margin-bottom:14px;
+  }
+  .decision-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .outcome{
+    background:#fff;border:1.5px solid;border-radius:8px;
+    padding:14px 16px;text-align:center;
+  }
+  .outcome.yes{border-color:var(--success)}
+  .outcome.no{border-color:var(--danger)}
+  .outcome .emoji{font-size:32px;margin-bottom:6px}
+  .outcome b{font-size:14px;display:block;margin-bottom:4px}
+  .outcome.yes b{color:#27500a}
+  .outcome.no b{color:#7c1f1f}
+  .outcome p{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:#1a1a1a;color:#fff;padding:24px 32px;
+    text-align:center;font-size:11px;letter-spacing:1px;margin-top:60px;
+  }
+  footer .brand{font-family:'Frank Ruhl Libre',serif;font-size:14px;margin-bottom:4px;letter-spacing:0}
+  footer .meta{color:rgba(255,255,255,0.5)}
+
+  @media (max-width:780px){
+    .intro{padding:0 16px}.intro h1{font-size:28px}
+    .flow-wrap{padding:0 16px}
+    .flow-header{flex-direction:column;text-align:center;gap:12px}
+    .flow-header .badge{margin:0}
+    .screen-body{padding:18px 20px}
+    .bg-mechanism{flex-direction:column;text-align:center}
+    .pay-grid,.decision-outcomes{grid-template-columns:1fr}
+    .celebration h2{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="logo">
+    מלאך<span class="accent"> הזכויות</span>
+    <small>RIGHTS ANGEL · אב-טיפוס · 2 Flows</small>
+  </div>
+  <div class="top-meta">
+    <b>שני flows · אדמין + אזרח</b>
+    מנגנון רקע מצליב בין השניים
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<div class="intro">
+  <h1>מלאך הזכויות · <em>2 Flows</em></h1>
+  <p class="sub">
+    <b>A · ניהול הפלטפורמה</b> - איך זכות חדשה נכנסת למאגר הזכויות.<br>
+    <b>B · מסע האזרח</b> - איך אזרח מקבל זכות שמגיעה לו.<br>
+    בין שניהם - <b>מנגנון רקע</b> שמצליב כל זכות עם כל תאום-דיגיטלי, ומציע התאמות אוטומטית.
+  </p>
+</div>
+
+<!-- ============ TABS NAVIGATION ============ -->
+<div class="tabs">
+  <button class="tab-btn admin-tab active" data-tab="flow-a">
+    <span class="tab-ic">🛠️</span>
+    <div class="tab-info">
+      <h3>Flow A · ניהול הפלטפורמה</h3>
+      <p>איך זכות חדשה נכנסת למאגר · 5 שלבים אדמין</p>
+    </div>
+    <span class="tab-arrow">→</span>
+  </button>
+  <button class="tab-btn citizen-tab" data-tab="flow-b">
+    <span class="tab-ic">👤</span>
+    <div class="tab-info">
+      <h3>Flow B · מסע האזרח</h3>
+      <p>איך אזרח מקבל זכות · 9 שלבים מהרשמה עד "הללויה!"</p>
+    </div>
+    <span class="tab-arrow">→</span>
+  </button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ============ FLOW A · ADMIN / ENGINE ====================== -->
+<!-- ============================================================ -->
+
+<div class="tab-content active" id="flow-a">
+<div class="flow-wrap">
+
+  <div class="flow-header admin">
+    <div class="ic">🛠️</div>
+    <div>
+      <h2>Flow A · ניהול הפלטפורמה</h2>
+      <p>איך זכות חדשה נכנסת למאגר - מהזנת URL ועד אישור עו"ד</p>
+    </div>
+    <div class="badge">5 שלבים · אדמין בלבד</div>
+  </div>
+
+  <!-- A1: Enter URLs -->
+  <div class="screen admin-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">A1</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/admin/forge/new</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>הזנת מקור הזכות + ניתוח AI</h3>
+        <p>אדמין מזין URL אחד או יותר (כל זכות, חוק, תקנה). לחיצה על "נתח זכות" מפעילה את ה-AI עם פרומפטים שמורים מראש - שמוציא JSON מובנה של הזכות.</p>
+      </div>
+
+      <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">מקורות (URLs)</label>
+      <input class="input filled" value="kolzchut.org.il/he/הנחה_בארנונה_לחיילי_מילואים">
+      <input class="input filled" value="kolzchut.org.il/he/הנחה_בארנונה_למפקדים_במילואים">
+      <input class="input" placeholder="+ הוסף עוד מקור (אופציונלי)">
+
+      <button class="btn btn-primary btn-wide" style="margin-top:12px">✨ נתח זכות בעזרת AI</button>
+
+      <div class="callout info">
+        <b>AI עם פרומפטים מותאמים:</b> מפעיל Claude עם תבנית פרומפט שמוציאה JSON ב-schema שלנו (תנאי זכאות · חישובים · מסמכים · מכתבים · ערעור).
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- A2: Display Analysis -->
+  <div class="screen admin-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">A2</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/admin/forge/review</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>הצגת ניתוח AI + סימון חוסרים</h3>
+        <p>המערכת מציגה את כל מרכיבי הניתוח. כל פריט שה-AI לא בטוח לגביו מסומן כדורש בדיקה ידנית של מנהל.</p>
+      </div>
+
+      <div class="row"><span class="lbl">שם הזכות</span><span class="val">הנחה בארנונה למילואים <span class="tag tag-ai">AI · 98%</span></span></div>
+      <div class="row"><span class="lbl">תנאי זכאות</span><span class="val">תעודת מילואים פעיל ✓ <span class="tag tag-ai">AI · 96%</span></span></div>
+      <div class="row"><span class="lbl">אחוז הנחה (חייל)</span><span class="val">5% <span class="tag tag-ai">AI · 100%</span></span></div>
+      <div class="row"><span class="lbl">אחוז הנחה (מפקד)</span><span class="val">25% על 100 מ"ר ראשונים <span class="tag tag-ai">AI · 100%</span></span></div>
+      <div class="row"><span class="lbl">מועד תגובה גזברות</span><span class="val">60-90 יום <span class="tag tag-warn">⚠ דורש אישור</span></span></div>
+      <div class="row"><span class="lbl">תהליך ערעור</span><span class="val">השגה 90 יום · ועדת ערר 30 יום <span class="tag tag-ai">AI · 92%</span></span></div>
+
+      <div class="callout warn">
+        <b>⚠ דורש בדיקה ידנית:</b> פריט אחד (מועד תגובה) - ה-AI מצא מקורות סותרים. נא לאשר ידנית.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- A3: Manual Review -->
+  <div class="screen admin-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">A3</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/admin/forge/manual-edit</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>סקירה והשלמה ידנית של מנהל</h3>
+        <p>המנהל סוקר את הניתוח, מאשר/מתקן פריטים שה-AI לא היה בטוח לגביהם, ומשלים שדות חסרים.</p>
+      </div>
+
+      <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">מועד תגובה גזברות (השלמה ידנית)</label>
+      <input class="input filled" value="60 יום · עד 90 עם הארכה רשמית">
+
+      <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px;margin-top:10px">הערות לעו"ד (אופציונלי)</label>
+      <input class="input" placeholder="הערות לחתימה...">
+
+      <div class="callout ok">
+        <b>✅ כל הפריטים אושרו ידנית.</b> מוכן להעברה לעו"ד לחתימה.
+      </div>
+
+      <button class="btn btn-primary btn-wide" style="margin-top:12px">📤 העבר לעו"ד לאישור</button>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- A4: Lawyer Approval -->
+  <div class="screen admin-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">A4</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/admin/forge/lawyer-sign</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>אישור וחתימה של עו"ד</h3>
+        <p>עו"ד צמרת סוקר את הזכות הסופית, מאשר משפטית, וחותם דיגיטלית. בלי זה - הזכות לא נכנסת למאגר.</p>
+      </div>
+
+      <div class="row"><span class="lbl">סוקר משפטי</span><span class="val">עו"ד צמרת</span></div>
+      <div class="row"><span class="lbl">סטטוס</span><span class="val"><span class="tag tag-ok">✓ אושר משפטית</span></span></div>
+      <div class="row"><span class="lbl">חתימה דיגיטלית</span><span class="val">22/05/2026 14:32</span></div>
+
+      <div class="callout info">
+        <b>⚖️ ה-audit trail מלא:</b> עו"ד צמרת חתם דיגיטלית · ניתן להציג בוועדת ערר במידת הצורך.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- A5: Right Added -->
+  <div class="screen success-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">A5</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/admin/registry</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>הזכות נוספה למאגר ✓</h3>
+        <p>הזכות חיה במאגר הפלטפורמה. החל מהרגע הזה - <b>מנגנון הרקע מצליב אותה אוטומטית</b> עם כל האזרחים הרשומים.</p>
+      </div>
+
+      <div class="row"><span class="lbl">🛡️ הנחת ארנונה למילואים פעיל</span><span class="val"><span class="tag tag-ok">פעיל · v1</span></span></div>
+      <div class="row"><span class="lbl">👵 הנחת ארנונה לאזרחים ותיקים</span><span class="val"><span class="tag tag-admin">בהכנה</span></span></div>
+      <div class="row"><span class="lbl">סה"כ זכויות במאגר</span><span class="val">1</span></div>
+
+      <div class="callout ok">
+        <b>🎯 הזכות נכנסה למנגנון הצליבה הקיים:</b> המנגנון רץ ברקע באופן רציף תמידי - מעכשיו הוא יבדוק גם את הזכות הזו מול כל אזרח רשום (קיים או חדש).
+      </div>
+    </div>
+  </div>
+
+  <!-- Background mechanism banner inside Flow A (always-on continuous) -->
+  <div class="bg-mechanism" style="margin-top:30px">
+    <div class="ic">🔁</div>
+    <div>
+      <h4>המנגנון רץ ברקע באופן רציף · 24/7</h4>
+      <p>המנגנון <b>תמיד רץ</b> - מצליב את כל הזכויות הפעילות מול כל התאומים הדיגיטליים של האזרחים הרשומים. נוספת זכות חדשה? היא נכנסת למחזור הצליבה הקיים. נרשם אזרח חדש? אותו דבר.</p>
+      <small>טריגרים לסריקה ייעודית: זכות חדשה (A5) · אזרח חדש (B2) · עדכון תאום של אזרח קיים</small>
+    </div>
+  </div>
+</div>
+</div><!-- /flow-a -->
+
+<!-- ============================================================ -->
+<!-- ============ FLOW B · CITIZEN JOURNEY ===================== -->
+<!-- ============================================================ -->
+
+<div class="tab-content" id="flow-b">
+<div class="flow-wrap">
+
+  <div class="flow-header citizen">
+    <div class="ic">👤</div>
+    <div>
+      <h2>Flow B · מסע האזרח</h2>
+      <p>איך אזרח מקבל זכות - מהרשמה ועד "הללויה!" (כולל ערעור אוטומטי אם נדחה)</p>
+    </div>
+    <div class="badge">9 שלבים</div>
+  </div>
+
+  <!-- B1: Citizen Registration -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B1</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/register</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>הרשמת אזרח + הזנת נתונים</h3>
+        <p>האזרח מזין פרטים אישיים. אופציונלי: מעלה מסמכים (תעודת חוגר · ת"ז · רישיון · טפסי ביטוח לאומי) - ו-AI ימלא וישלים את הנתונים מהם.</p>
+      </div>
+
+      <input class="input filled" placeholder="שם מלא" value="משה כהן">
+      <input class="input filled" placeholder="תעודת זהות" value="123456789">
+      <input class="input filled" placeholder="כתובת" value="הזית 14, הוד השרון">
+
+      <div class="callout info">
+        <b>📎 העלאת מסמכים (אופציונלי):</b> תעודת חוגר · ת"ז · רישיון נהיגה · טפסי ביטוח לאומי<br>
+        ה-AI יחלץ אוטומטית את הנתונים וישלים את התאום הדיגיטלי.
+      </div>
+
+      <button class="btn btn-success btn-wide" style="margin-top:12px">המשך לאישור התאום</button>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B2: Twin Confirmation -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B2</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/twin/confirm</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>אישור התאום הדיגיטלי ושמירה</h3>
+        <p>האזרח רואה את כל הנתונים שלו (כולל אלו ש-AI חילץ ממסמכים), מאשר ושומר.</p>
+      </div>
+
+      <div class="row"><span class="lbl">שם</span><span class="val">משה כהן</span></div>
+      <div class="row"><span class="lbl">ת"ז</span><span class="val">123456789</span></div>
+      <div class="row"><span class="lbl">כתובת</span><span class="val">הזית 14, הוד השרון</span></div>
+      <div class="row"><span class="lbl">תעודת מילואים</span><span class="val">מפקד פעיל · 26 ימים <span class="tag tag-ai">חולץ אוטומטית</span></span></div>
+
+      <button class="btn btn-success btn-wide" style="margin-top:14px">✓ אשר ושמור תאום</button>
+    </div>
+  </div>
+
+  <!-- Background mechanism callout (continuous) -->
+  <div class="bg-mechanism" style="margin:24px 0">
+    <div class="ic">🔁</div>
+    <div>
+      <h4>המנגנון מצליב את משה (תאום חדש) עם המאגר</h4>
+      <p>התאום של משה נשמר → המנגנון (שרץ באופן רציף) מריץ אותו מול כל הזכויות הפעילות במאגר → מוצא התאמה (הנחת ארנונה למילואים, כי הוא מפקד עם 26 ימי מילואים) → מציע למשה.</p>
+      <small>במקביל - המנגנון ממשיך לרוץ על כל יתר האזרחים והזכויות במערכת</small>
+    </div>
+  </div>
+
+  <!-- B3: Rights Offered -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B3</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/my-rights</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>זכויות מותאמות עבורך</h3>
+        <p>המערכת מצאה זכויות שמגיעות לך. לכל זכות מוצג השווי המחושב (בהתבסס על התאום שלך).</p>
+      </div>
+
+      <div class="offer-card">
+        <h5>🛡️ הנחת ארנונה למילואים פעיל</h5>
+        <div class="save">חיסכון: ₪ 1,237 / שנה</div>
+        <p class="reason">מבוסס על תעודת מפקד פעיל + 26 ימי מילואים · 25% הנחה על 100 מ"ר ראשונים</p>
+        <button class="btn btn-primary">בקש את הזכות ←</button>
+      </div>
+
+      <div class="callout info">
+        <b>💡 נדבר מאוחר יותר:</b> ככל שיוסיף האדמין זכויות חדשות למאגר, ובכל פעם שתעדכן את התאום שלך - נציע לך אוטומטית זכויות נוספות שמגיעות לך.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B4: Payment -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B4</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/pay</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>תשלום עבור השירות</h3>
+        <p>18 ₪ עבור השירות הראשון · אפשרות להוסיף זכויות נוספות במחיר מוזל · או לשלם בנפרד.</p>
+      </div>
+
+      <div class="pay-grid">
+        <div class="pay-option active">
+          <h5>זכות בודדת</h5>
+          <div class="price">₪ 18</div>
+          <p>השירות המלא לזכות אחת · קיט · נודניק · ערעור אוטומטי</p>
+        </div>
+        <div class="pay-option">
+          <h5>זכות + 1 נוספת</h5>
+          <div class="price">₪ 24</div>
+          <p>18 ₪ + 6 ₪ על הזכות הנוספת · חיסכון משמעותי</p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-wide" style="margin-top:14px">🔒 שלם 18 ₪ · Payme</button>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B5: Kit + Signature -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B5</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/kit/2026-04891</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>הקיט מוכן · סקירה וחתימה</h3>
+        <p>המערכת יצרה את כל המסמכים ומילאה את הנתונים. כעת המשתמש סוקר את שורות הקיט וחותם דיגיטלית - כאן בפלטפורמה, עם audit trail.</p>
+      </div>
+
+      <div class="kit-letter">
+        <div class="ic">📄</div>
+        <div class="info">
+          <b>מכתב בקשה לגזברות הוד השרון</b>
+          <small>מולא אוטומטית מהתאום הדיגיטלי</small>
+        </div>
+        <span class="tag tag-warn">דורש חתימה</span>
+      </div>
+      <div class="kit-letter">
+        <div class="ic">⚖️</div>
+        <div class="info">
+          <b>מכתב השגה (טיוטה)</b>
+          <small>מוכן מראש לערעור אם תידחה הבקשה</small>
+        </div>
+        <span class="tag tag-admin">אופציונלי</span>
+      </div>
+
+      <label style="font-size:12.5px;font-weight:700;display:block;margin-top:18px;margin-bottom:6px">חתימה דיגיטלית · אחת לכל המסמכים</label>
+      <div style="background:#fafafa;border:2px dashed #888;border-radius:6px;height:90px;display:flex;align-items:center;justify-content:center;position:relative">
+        <svg viewBox="0 0 140 60" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:140px;height:60px">
+          <path d="M10 40 Q25 10 45 30 Q60 50 80 25 Q100 5 130 35" stroke="#c8501e" fill="none" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span style="position:relative;top:32px;font-size:11px;color:#555">חתימת משה כהן · 31/05/2026 14:42</span>
+      </div>
+
+      <div class="callout ok">
+        <b>✅ חתימה אחת חלה על כל מסמכי הקיט</b> · נשמרת ב-DB עם חותמת זמן · audit trail מלא.
+      </div>
+
+      <button class="btn btn-success btn-wide" style="margin-top:12px">המשך לבחירת ערוץ שליחה ←</button>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B6: Channel + Send Approval -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B6</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/kit/2026-04891/send</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>בחירת ערוץ שליחה ואישור</h3>
+        <p>הקיט חתום. בחר באיזה ערוץ הפלטפורמה תשלח את הבקשה לגזברות הוד השרון - ואשר.</p>
+      </div>
+
+      <label style="font-size:12.5px;font-weight:700;display:block;margin-bottom:6px">ערוץ שליחה לגזברות</label>
+      <div class="pay-grid">
+        <div class="pay-option active">
+          <h5>📧 דוא"ל</h5>
+          <p>treasurer@hod-hasharon.muni.il</p>
+        </div>
+        <div class="pay-option">
+          <h5>💬 WhatsApp</h5>
+          <p>שליחה ישירה לגזבר</p>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:14px">
+        <b>📋 לפני השליחה:</b><br>
+        ✓ קיט מוכן (2 מסמכים) · ✓ חתום דיגיטלית · ✓ ערוץ נבחר (דוא"ל) · ✓ פרטי גזברות אומתו
+      </div>
+
+      <button class="btn btn-success btn-wide" style="margin-top:14px;padding:14px;font-size:15px">📤 אשר ושלח לגזברות - הפלטפורמה תטפל בכל השאר</button>
+
+      <div style="text-align:center;margin-top:8px;font-size:11.5px;color:var(--muted)">
+        🤖 מהרגע הזה - הפלטפורמה רצה אוטונומית · נודניק · ערעור אם נדחה · עדכונים אליך
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B7: Sent + Proactive starts -->
+  <div class="screen citizen-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B7</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/tracking/2026-04891</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>הבקשה נשלחה · המנגנון הפרו-אקטיבי מטפל</h3>
+        <p>מהרגע הזה - הפלטפורמה מנהלת את הבקשה אוטונומית. עוקבת אחר deadlines, שולחת נודניק, ומעדכנת אותך.</p>
+      </div>
+
+      <div class="row"><span class="lbl">בקשה נשלחה</span><span class="val">31/05/2026 · דוא"ל</span></div>
+      <div class="row"><span class="lbl">תקופת תגובה</span><span class="val">60 יום (עד 90 עם הארכה)</span></div>
+      <div class="row"><span class="lbl">סטטוס</span><span class="val"><span class="tag tag-warn">ממתין לתשובה</span></span></div>
+      <div class="row"><span class="lbl">נודניק הבא</span><span class="val">14/06/2026</span></div>
+
+      <div class="callout warn">
+        <b>🔔 ביום 61 (או 91 אם הוארך):</b> אם אין תשובה - <b>הבקשה נחשבת כמאושרת בשתיקה</b>. הודעה אוטומטית אליך.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B8: Decision -->
+  <div class="screen amber-frame">
+    <div class="bar">
+      <div class="bar-left">
+        <div class="dots"><span style="background:#ff6058"></span><span style="background:#ffbd2e"></span><span style="background:#27ca40"></span></div>
+        <span class="step-tag">B8</span>
+      </div>
+      <span class="bar-url">rights-angel.co.il/tracking/2026-04891/response</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-h">
+        <h3>תגובת הגזברות התקבלה</h3>
+        <p>הבקשה נשלחה רק אחרי שהמערכת ראתה זכאות + תשלום. ההחלטה כעת תלויה רק בתשובת הגזברות.</p>
+      </div>
+
+      <div class="decision-box">
+        <div class="q">⬨ מה אמרה הגזברות? ⬨</div>
+        <div class="decision-outcomes">
+          <div class="outcome yes">
+            <div class="emoji">🎉</div>
+            <b>הגזברות אמרה "כן"</b>
+            <p>הללויה! הזכות אושרה</p>
+          </div>
+          <div class="outcome no">
+            <div class="emoji">⚖️</div>
+            <b>הגזברות אמרה "לא"</b>
+            <p>ערעור אוטומטי (תוך 30 יום) · אזרח חותם · הפלטפורמה שולחת</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <b>💡 למה אין ענף שלישי?</b> כי הפלטפורמה לא הייתה שולחת אם לא ראתה זכאות מלכתחילה. אם הגזברות אמרה "לא" - אנו עומדים על שלנו ומערערים.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"></div>
+
+  <!-- B9: Success -->
+  <div class="celebration">
+    <h2>🎉 הללויה!</h2>
+    <p>הזכות מומשה · ההנחה אושרה ונרשמה בחשבון הארנונה</p>
+    <div style="background:#fff;border:1px solid var(--success);border-radius:8px;padding:18px 22px;display:inline-block;text-align:right;font-size:13px">
+      <div class="row"><span class="lbl">חיסכון שנתי</span><span class="val">₪ 1,237</span></div>
+      <div class="row"><span class="lbl">עלות השירות</span><span class="val">₪ 18</span></div>
+      <div class="row" style="border:0;padding-top:8px;border-top:2px solid var(--success);margin-top:4px"><span class="lbl"><b>ROI</b></span><span class="val"><b style="color:#27500a">×68.7</b></span></div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /flow-b -->
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="brand">מלאך הזכויות · אב-טיפוס v4 · 2 Flows</div>
+  <div class="meta">BIZTECHOFF™ · Flow A: 5 שלבים אדמין · Flow B: 9 שלבים אזרח · Background Cross Mechanism</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      // Toggle button active state
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Toggle content visibility
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+      // Scroll to top of content smoothly
+      window.scrollTo({top:btn.parentElement.offsetTop + btn.parentElement.offsetHeight, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
