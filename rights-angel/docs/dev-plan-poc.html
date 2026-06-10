@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<!-- בס"ד -->
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>זכותון מילואים · תכנון פיתוח · BizTechoff™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Frank+Ruhl+Libre:wght@500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#1a1a1a;
+    --ink-2:#3a3631;
+    --paper:#ffffff;
+    --accent:#c8501e;
+    --accent-2:#a93f10;
+    --accent-soft:#fbeee5;
+    --muted:#6a6660;
+    --line:#dcd6c9;
+    --soft:#f3eee2;
+    --success:#2d7a4f;
+    --success-soft:#e5f1ea;
+    --info:#1e5f8f;
+    --info-soft:#e5eff8;
+    --mono:'JetBrains Mono','Menlo',monospace;
+  }
+  html,body{background:#f1eee7}
+  body{
+    font-family:'Heebo',sans-serif;
+    color:var(--ink);
+    line-height:1.65;
+    font-size:14px;
+  }
+  .page{
+    background:#fff;
+    max-width:880px;
+    margin:32px auto;
+    padding:40px 56px 56px;
+    box-shadow:0 6px 32px rgba(0,0,0,0.08);
+    position:relative;
+  }
+  .bsd{
+    position:absolute; top:14px; right:20px;
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:12px; color:var(--muted); font-style:italic;
+  }
+
+  /* HEADER */
+  .head{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px; margin-bottom:28px;
+  }
+  .head .label{
+    font-family:var(--mono);
+    font-size:10px; letter-spacing:2.5px;
+    color:var(--accent); font-weight:600; text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .head h1{
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:38px; font-weight:900;
+    letter-spacing:-1px; line-height:1.1;
+  }
+  .head h1 em{ color:var(--accent); font-style:italic }
+  .head .sub{
+    color:var(--muted); font-size:14px;
+    margin-top:8px; line-height:1.6;
+  }
+
+  /* SECTION */
+  section{ margin-bottom:30px; page-break-inside:avoid }
+  .sec-h{
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:14px;
+  }
+  .sec-h .num{
+    font-family:'Frank Ruhl Libre',serif;
+    color:var(--accent); font-size:14px; font-weight:800; letter-spacing:2px;
+  }
+  .sec-h h2{
+    font-size:20px; font-weight:800; letter-spacing:-0.3px;
+  }
+  .sec-h::after{
+    content:''; flex:1; height:1px; background:var(--line);
+  }
+  p{ color:var(--ink-2); margin-bottom:8px }
+  p b{ color:var(--ink); font-weight:700 }
+
+  /* PRINCIPLE BAR */
+  .principle{
+    background:var(--accent-soft);
+    border-right:4px solid var(--accent);
+    padding:12px 18px;
+    border-radius:6px;
+    margin:6px 0 14px;
+  }
+  .principle h4{
+    color:var(--accent-2);
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:4px;
+    letter-spacing:0.3px;
+  }
+  .principle p{
+    color:var(--ink); font-size:12.5px; line-height:1.55; margin:0;
+  }
+
+  /* TREE / ARCHITECTURE */
+  .arch{
+    background:#1a1a1a;
+    color:#e5e5e5;
+    padding:18px 22px;
+    border-radius:8px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    line-height:1.65;
+    margin-top:4px;
+    overflow-x:auto;
+  }
+  .arch .folder{ color:#ffa07a; font-weight:700 }
+  .arch .file{ color:#e5e5e5 }
+  .arch .note{ color:#888 }
+  .arch .new{ color:#7ee787 }
+  .arch .future{ color:#79c0ff }
+
+  /* MODULE TABLE */
+  .modules{
+    display:grid; grid-template-columns:1fr; gap:8px;
+    margin-top:6px;
+  }
+  .mod{
+    display:grid; grid-template-columns:140px 1fr 200px;
+    gap:14px;
+    background:var(--soft);
+    border-right:3px solid var(--accent);
+    border-radius:5px;
+    padding:10px 14px;
+    align-items:flex-start;
+  }
+  .mod .name{
+    font-family:var(--mono);
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .mod .desc{
+    font-size:12.5px; color:var(--ink-2); line-height:1.5;
+  }
+  .mod .desc b{ color:var(--ink) }
+  .mod .future{
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.45;
+    font-style:italic;
+  }
+  .mod .future::before{
+    content:'→ עתיד: ';
+    color:var(--accent);
+    font-style:normal;
+    font-weight:700;
+  }
+
+  /* PHASES */
+  .phases{ display:grid; grid-template-columns:1fr; gap:8px; margin-top:6px }
+  .phase{
+    display:grid; grid-template-columns:60px 1fr 90px;
+    gap:14px;
+    background:var(--soft);
+    border-right:3px solid var(--accent);
+    border-radius:5px;
+    padding:11px 16px;
+    align-items:flex-start;
+  }
+  .phase .p{
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:18px;
+    font-weight:900;
+    color:var(--accent);
+    line-height:1;
+  }
+  .phase .title{
+    font-weight:700; color:var(--ink);
+    margin-bottom:2px; font-size:14px;
+  }
+  .phase .desc{
+    font-size:12.5px; color:var(--muted); line-height:1.55;
+  }
+  .phase .hours{
+    font-family:var(--mono);
+    font-size:11px;
+    background:var(--ink);
+    color:#fff;
+    text-align:center;
+    padding:4px 8px;
+    border-radius:4px;
+    font-weight:600;
+    height:fit-content;
+  }
+
+  /* INTEGRATION TABLE */
+  .integration{ display:grid; grid-template-columns:1fr; gap:6px; margin-top:6px }
+  .integ-row{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:14px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:6px;
+    padding-top:4px;
+  }
+  .integ-row:last-child{ border-bottom:none }
+  .integ-row .now{
+    font-size:12.5px; color:var(--ink-2);
+  }
+  .integ-row .now::before{
+    content:'POC: ';
+    color:var(--success); font-weight:700;
+    font-family:var(--mono); font-size:11px;
+  }
+  .integ-row .future-col{
+    font-size:12.5px; color:var(--ink-2);
+  }
+  .integ-row .future-col::before{
+    content:'מלאך הזכויות: ';
+    color:var(--accent); font-weight:700;
+    font-family:var(--mono); font-size:11px;
+  }
+
+  /* TOTAL HOURS */
+  .total-box{
+    background:var(--ink); color:#fff;
+    padding:14px 22px;
+    border-radius:8px;
+    display:grid; grid-template-columns:auto 1fr auto;
+    gap:18px; align-items:center;
+    margin-top:10px;
+  }
+  .total-box .lbl{
+    font-size:10px; letter-spacing:1.8px;
+    color:#bfbab1; font-weight:700; text-transform:uppercase;
+  }
+  .total-box .val{
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:32px; font-weight:900;
+  }
+  .total-box .note{
+    font-size:12px; line-height:1.5; color:#dcd6c9;
+  }
+  .total-box .note b{ color:#fff }
+
+  /* FOOTER */
+  footer{
+    margin-top:24px; padding-top:14px;
+    border-top:1px solid var(--line);
+    text-align:center;
+    font-size:10px; letter-spacing:1.2px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  @media print{
+    body{ background:#fff }
+    .page{ box-shadow:none; margin:0 auto; max-width:100%; padding:24px 32px }
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="bsd">בס״ד</div>
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="label">⟢ &nbsp; תכנון פיתוח &nbsp; ⟣ POC</div>
+    <h1>זכותון <em>מילואים</em> · תכנון פיתוח מודולרי</h1>
+    <p class="sub">
+      מסמך זה מתאר את ארכיטקטורת ה-POC ואת המודולים שיבנו בבנק 30 השעות -
+      <b>מתוכננים מהיום הראשון להשתלב במלאך הזכויות המקיף</b> בעתיד, ללא צורך בכתיבה מחדש.
+    </p>
+  </div>
+
+  <!-- 1. עקרונות הליבה -->
+  <section>
+    <div class="sec-h"><span class="num">01</span><h2>עקרונות הליבה - חובה</h2></div>
+
+    <div class="principle">
+      <h4>🧱 מודולריות לפני הכל</h4>
+      <p>כל יחידה (Module) - מוגדרת, מבודדת, ובעלת ממשק יחיד וברור. אפשר להחליף, להרחיב, או להוציא כל מודול - בלי לפגוע בשאר. כל פעולה עוברת דרך Module Interface, אף פעם לא דרך גישה ישירה לפרטים פנימיים.</p>
+    </div>
+
+    <div class="principle">
+      <h4>🔗 השתלבות עתידית - לא רק POC</h4>
+      <p>הקוד שייבנה ב-30 השעות מהווה <b>היסוד</b> של מלאך הזכויות המקיף. כל ישות, מודול, ושירות מתוכנן כך שיתאים לארכיטקטורה הסופית (DSL Engine, Digital Twin, Right Forge, Proactive Layer) - בלי כתיבה מחדש בעתיד.</p>
+    </div>
+
+    <div class="principle">
+      <h4>📐 ארכיטקטורה תקנית של src/</h4>
+      <p>app (common, route, service) · assets · server (index, server, jwt, remult-api, json-body) · shared (entity, enum, controller, type) - כפי שנקבע מראש, ללא חריגות.</p>
+    </div>
+  </section>
+
+  <!-- 2. ארכיטקטורה -->
+  <section>
+    <div class="sec-h"><span class="num">02</span><h2>מבנה תיקיות (src/)</h2></div>
+
+    <div class="arch">
+<span class="folder">src/</span>
+├── <span class="folder">app/</span>                          <span class="note">// Angular 19</span>
+│   ├── <span class="folder">common/</span>                   <span class="note">// תשתית משותפת (חובה)</span>
+│   │   ├── servicetools/        <span class="note">// HttpInterceptor, RemultBridge</span>
+│   │   ├── users/               <span class="note">// משתמשים + AuthGuard</span>
+│   │   ├── dialog/              <span class="note">// MatDialog wrapper</span>
+│   │   ├── wait/                <span class="note">// Loading service</span>
+│   │   ├── error-handler/       <span class="note">// GlobalErrorHandler</span>
+│   │   ├── guards/              <span class="note">// CanActivate routes</span>
+│   │   ├── routing/             <span class="note">// Routes + lazy modules</span>
+│   │   ├── jwt/                 <span class="note">// JWT utils</span>
+│   │   ├── env/                 <span class="note">// Environment vars</span>
+│   │   ├── middlewares/         <span class="note">// Pipes/Interceptors</span>
+│   │   └── remult-integration/  <span class="note">// Remult client setup</span>
+│   ├── <span class="folder">route/</span>                    <span class="note">// פיצ'רים = דפים</span>
+│   │   ├── wizard/              <span class="new">[POC]</span> שאלון 3-4 שאלות
+│   │   ├── result/              <span class="new">[POC]</span> תוצאת חישוב
+│   │   ├── payment/             <span class="new">[POC]</span> מסך תשלום (Payme)
+│   │   ├── letter-preview/      <span class="new">[POC]</span> צפייה במכתב
+│   │   ├── signature/           <span class="new">[POC]</span> חתימה דיגיטלית
+│   │   └── confirmation/        <span class="new">[POC]</span> אישור שליחה
+│   └── <span class="folder">service/</span>                  <span class="note">// שירותי Angular</span>
+│       ├── citizen.service.ts
+│       ├── calc.service.ts
+│       ├── payment.service.ts
+│       └── letter.service.ts
+│
+├── <span class="folder">assets/</span>                       <span class="note">// תמונות, גופנים</span>
+│
+├── <span class="folder">server/</span>                       <span class="note">// Node.js + Express</span>
+│   ├── index.ts                 <span class="note">// nodemon entry</span>
+│   ├── server.ts                <span class="note">// Express app</span>
+│   ├── jwt.ts                   <span class="note">// JWT middleware</span>
+│   ├── remult-api.ts            <span class="note">// Remult bootstrap</span>
+│   └── json-body.ts             <span class="note">// body-parser config</span>
+│
+└── <span class="folder">shared/</span>                       <span class="note">// משותף ל-Front + Back</span>
+    ├── <span class="folder">entity/</span>                   <span class="note">// Remult entities</span>
+    │   ├── citizen.entity.ts            <span class="new">[POC]</span>
+    │   ├── miluim-service.entity.ts     <span class="new">[POC]</span>
+    │   ├── right-application.entity.ts  <span class="new">[POC]</span>
+    │   ├── letter-request.entity.ts     <span class="new">[POC]</span>
+    │   ├── payment.entity.ts            <span class="new">[POC]</span>
+    │   ├── authority.entity.ts          <span class="new">[POC]</span> <span class="note">// 1,267 רשויות</span>
+    │   └── audit-log.entity.ts          <span class="new">[POC]</span>
+    ├── <span class="folder">enum/</span>
+    │   ├── certificate-type.enum.ts     <span class="note">// SOLDIER / COMMANDER</span>
+    │   ├── application-status.enum.ts
+    │   └── payment-status.enum.ts
+    ├── <span class="folder">controller/</span>               <span class="note">// Remult controllers</span>
+    │   ├── calculation.controller.ts
+    │   ├── letter.controller.ts
+    │   └── payment.controller.ts
+    └── <span class="folder">type/</span>
+        ├── interface-req.ts
+        └── interface-res.ts</div>
+  </section>
+
+  <!-- 3. מודולים -->
+  <section>
+    <div class="sec-h"><span class="num">03</span><h2>מודולי ליבה (POC) + מסלול עתידי</h2></div>
+
+    <div class="modules">
+
+      <div class="mod">
+        <div class="name">@citizen</div>
+        <div class="desc"><b>זהות האזרח.</b> אוסף פרטי המגיש - עיר, תעודת זהות, תאריכי שירות, גודל דירה, פרטי בנק.</div>
+        <div class="future">Digital Twin מלא - היסטוריה, זכויות פעילות, וכל המידע הקבוע.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@rights-registry</div>
+        <div class="desc"><b>מאגר זכויות.</b> בשלב זה - זכות אחת בלבד (הנחת ארנונה למילואים) מוטמעת hardcoded.</div>
+        <div class="future">מנוע DSL גנרי - כל זכות מוגדרת כ-RightDefinition JSON.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@calc-engine</div>
+        <div class="desc"><b>מנוע חישוב.</b> הנוסחה מהאקסל - 3 שנים (2023-2025), 5% לחייל, מוגבל 100 מ"ר ראשונים, פרו-רטה ימי שירות.</div>
+        <div class="future">Interpreter גנרי - מקבל RightDefinition + DigitalTwin ומחזיר תוצאה.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@authority</div>
+        <div class="desc"><b>מאגר רשויות.</b> טעינת קובץ ה-1,267 יישובים מ-Excel ל-PostgreSQL. lookup לפי שם עיר → אימייל גזבר.</div>
+        <div class="future">Authority Adapters - לכל עירייה adapter ייעודי (PDF templates, API).</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@document</div>
+        <div class="desc"><b>יצירת מכתב.</b> תבנית המכתב מהאקסל + הזרקת נתוני האזרח + יצירת HTML/PDF.</div>
+        <div class="future">Template Engine - תבניות שונות לסוגי זכויות, רב-לשוני.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@signature</div>
+        <div class="desc"><b>חתימה דיגיטלית.</b> Canvas signature pad. שמירה כ-PNG ב-DB + צירוף ל-PDF.</div>
+        <div class="future">חתימה תקפה משפטית עם audit log + timestamp + IP.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@payment</div>
+        <div class="desc"><b>תשלום.</b> אינטגרציה ל-Payme - 18 ₪ קבוע. webhook לעדכון סטטוס.</div>
+        <div class="future">תמחור גמיש לכל זכות + תשלום מנוי + ערכות.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@mailer</div>
+        <div class="desc"><b>שליחת אימייל.</b> שירות SendGrid/SES - שולח את המכתב + ה-PDF לאימייל הגזבר.</div>
+        <div class="future">Multi-channel: Email, WhatsApp, SMS, מערכת תיוק.</div>
+      </div>
+
+      <div class="mod">
+        <div class="name">@audit</div>
+        <div class="desc"><b>יומן ביקורת.</b> כל פעולה (יצירה, חתימה, שליחה) נרשמת ב-audit_log. מהיום הראשון.</div>
+        <div class="future">בסיס לכל ניהול תהליכי השגות, ערעורים, ומחלוקות.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. שלבי הפיתוח -->
+  <section>
+    <div class="sec-h"><span class="num">04</span><h2>שלבי הפיתוח - 30 שעות</h2></div>
+
+    <div class="phases">
+
+      <div class="phase">
+        <div class="p">D0</div>
+        <div>
+          <div class="title">הקמת תשתית src/ + DB schema</div>
+          <div class="desc">יצירת מבנה התיקיות, התקנת Remult, חיבור PostgreSQL, הקמת common (auth, jwt, dialog, wait, error-handler). הגדרת כל ה-Entities ב-shared.</div>
+        </div>
+        <div class="hours">5 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D1</div>
+        <div>
+          <div class="title">@authority - טעינת מאגר 1,267 רשויות</div>
+          <div class="desc">סקריפט one-time שטוען את ה-Excel של אלימלך ל-PostgreSQL. controller לחיפוש city → email.</div>
+        </div>
+        <div class="hours">2 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D2</div>
+        <div>
+          <div class="title">@wizard + @citizen - שאלון כניסה</div>
+          <div class="desc">דף השאלון: 4 שאלות (עיר, תעודת חייל, תאריכי שירות, גודל דירה). שמירת נתוני אזרח ב-DB. עיצוב בהשראת miluim.net.</div>
+        </div>
+        <div class="hours">5 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D3</div>
+        <div>
+          <div class="title">@calc-engine - מנוע חישוב</div>
+          <div class="desc">הטמעת הנוסחה מהאקסל. חישוב ל-3 שנים. מסך תוצאה עם פירוט - כמה לכל שנה והסכום הכולל.</div>
+        </div>
+        <div class="hours">4 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D4</div>
+        <div>
+          <div class="title">@payment - אינטגרציה ל-Payme</div>
+          <div class="desc">דף תשלום 18 ₪. קריאה ל-Payme API. webhook לאישור התשלום. שמירת סטטוס ב-DB.</div>
+        </div>
+        <div class="hours">4 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D5</div>
+        <div>
+          <div class="title">@document + @signature - מכתב + חתימה</div>
+          <div class="desc">יצירת המכתב מהתבנית עם הזרקת נתונים. Canvas signature pad. הטמעת החתימה במכתב + יצירת PDF.</div>
+        </div>
+        <div class="hours">5 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D6</div>
+        <div>
+          <div class="title">@mailer + שליחה לגזברות</div>
+          <div class="desc">חיבור ל-SendGrid. שליחת המכתב + PDF לאימייל הגזבר (שנבחר אוטומטית מ-@authority). עמוד הצלחה.</div>
+        </div>
+        <div class="hours">3 שעות</div>
+      </div>
+
+      <div class="phase">
+        <div class="p">D7</div>
+        <div>
+          <div class="title">בדיקות + העלאה לאוויר</div>
+          <div class="desc">בדיקות end-to-end. תיקוני באגים. דיפלוי לסביבת production. בדיקה עם נתונים אמיתיים.</div>
+        </div>
+        <div class="hours">2 שעות</div>
+      </div>
+
+    </div>
+
+    <div class="total-box">
+      <div>
+        <div class="lbl">סה"כ</div>
+        <div class="val">30 שעות</div>
+      </div>
+      <div class="note">
+        <b>D0-D7 · 8 שלבים</b><br>
+        מ-יום ג' 9/6 ועד יום א' 14/6 בשעה 10:45.
+        תיאום ביניים: יום ו' 12/6 בשעה 9:00.
+      </div>
+      <div></div>
+    </div>
+  </section>
+
+  <!-- 5. השתלבות עתידית במלאך הזכויות -->
+  <section>
+    <div class="sec-h"><span class="num">05</span><h2>השתלבות עתידית במלאך הזכויות המקיף</h2></div>
+
+    <p>כל מודול ב-POC נכתב כך שיוכל להיכלל בפלטפורמה המלאה ללא כתיבה מחדש. הטבלה למטה ממפה את המעבר מ-POC אל הגרסה המקיפה:</p>
+
+    <div class="integration">
+
+      <div class="integ-row">
+        <div class="now">@citizen מאחסן את 4 השאלות מהשאלון בלבד.</div>
+        <div class="future-col">@citizen מכיל את ה-Digital Twin המלא - זהות, כל הזכאויות, היסטוריה, מסמכים.</div>
+      </div>
+
+      <div class="integ-row">
+        <div class="now">@calc-engine מחשב hardcoded לארנונה+מילואים.</div>
+        <div class="future-col">@calc-engine הופך ל-DSL Interpreter שמריץ כל RightDefinition.</div>
+      </div>
+
+      <div class="integ-row">
+        <div class="now">@rights-registry מכיל זכות אחת.</div>
+        <div class="future-col">@rights-registry מנוהל דרך Right Forge - AI שמכניס זכויות חדשות מקריאת חוקים.</div>
+      </div>
+
+      <div class="integ-row">
+        <div class="now">@mailer שולח לאימייל גזבר.</div>
+        <div class="future-col">@mailer הופך ל-Multi-channel: Email + WhatsApp + SMS + ערוצים נוספים.</div>
+      </div>
+
+      <div class="integ-row">
+        <div class="now">@authority - lookup פשוט.</div>
+        <div class="future-col">@authority הופך לאוסף של Authority Adapters - לכל עירייה adapter ייעודי.</div>
+      </div>
+
+      <div class="integ-row">
+        <div class="now">@audit מתעד פעולות בסיסיות.</div>
+        <div class="future-col">@audit הוא היסוד של ה-Proactive Layer + Appeals Flow.</div>
+      </div>
+
+      <div class="integ-row">
+        <div class="now">אין מעקב פרואקטיבי.</div>
+        <div class="future-col">Deadline Watcher רץ ברקע - מעקב אחרי תגובת גזברויות, השגות, ערעורים.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. החלטות טכניות מרכזיות -->
+  <section>
+    <div class="sec-h"><span class="num">06</span><h2>החלטות טכניות מרכזיות</h2></div>
+
+    <div class="principle">
+      <h4>📦 Database: PostgreSQL מהיום הראשון</h4>
+      <p>כל ה-Entities נכתבות מהיום הראשון על Remult + PostgreSQL. לא SQLite. הסכמה מוגדרת multi-tenant ready (יש tenant_id בכל טבלה) - אפילו אם בשלב זה יש tenant אחד.</p>
+    </div>
+
+    <div class="principle">
+      <h4>🔐 Auth: JWT + Email/Password מהיום הראשון</h4>
+      <p>אזרח נכנס לשאלון - נוצר משתמש אנונימי עם session JWT. אחרי תשלום - האזרח יכול לשמור את האימייל שלו ולחזור. כל הטוקנים עם refresh token לפי הסטנדרט.</p>
+    </div>
+
+    <div class="principle">
+      <h4>📝 Audit Log מהיום הראשון</h4>
+      <p>כל פעולה (יצירת בקשה, חתימה, תשלום, שליחה) נרשמת ב-audit_log עם user_id, action, timestamp, ip, payload. זה לא "לעתיד" - זה מהיום הראשון, כי אי-אפשר להוסיף audit retroactively.</p>
+    </div>
+
+    <div class="principle">
+      <h4>🌐 i18n מהיום הראשון</h4>
+      <p>גם אם השלב הזה בעברית בלבד - כל מחרוזת UI עוברת דרך i18n service. ברגע שנצטרך אנגלית/ערבית - אין צורך לכתוב מחדש שום מסך.</p>
+    </div>
+
+    <div class="principle">
+      <h4>📤 Deploy: דומיין + SSL מהיום הראשון</h4>
+      <p>גם ה-POC עולה לאוויר עם דומיין רשמי (rights-angel.co.il או דומיין שיבחר) + HTTPS. הלקוח רואה את ה-POC ככלי פרודקשן מהרגע הראשון.</p>
+    </div>
+  </section>
+
+  <footer>
+    <b>BizTechoff™</b> · תכנון פיתוח · POC זכותון מילואים · יוני 2026
+  </footer>
+
+</div>
+
+</body>
+</html>

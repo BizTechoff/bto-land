@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דקמן Pro — מערכת ניהול העסק | פרגולות, דקים וגדרות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a35c; --gold-light:#e7cf9d; --gold-dark:#a8843e;
+  --dark:#1c1a17; --dark2:#26231f; --dark3:#33302a;
+  --cream:#f7f4ee; --card:#ffffff; --line:#e8e2d6;
+  --text:#2b2823; --muted:#8a8377;
+  --green:#3d8b5f; --green-bg:#e4f2ea;
+  --blue:#3a6ea5; --blue-bg:#e4edf6;
+  --orange:#c97b2d; --orange-bg:#faeede;
+  --red:#b8503f; --red-bg:#f7e6e2;
+  --purple:#7a5ba6; --purple-bg:#eee8f6;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Heebo',sans-serif}
+body{background:var(--cream);color:var(--text);display:flex;min-height:100vh}
+
+/* ===== Sidebar ===== */
+.sidebar{width:248px;background:var(--dark);color:#cfc8bb;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;right:0;z-index:10}
+.logo{padding:26px 24px 22px;border-bottom:1px solid #ffffff14}
+.logo .brand{font-size:21px;font-weight:800;color:#fff;letter-spacing:.5px}
+.logo .brand span{color:var(--gold)}
+.logo .tag{font-size:11.5px;color:#9b937f;margin-top:3px}
+.nav{padding:18px 12px;flex:1}
+.nav-label{font-size:10.5px;letter-spacing:1.5px;color:#6f685c;padding:0 14px;margin:14px 0 6px}
+.nav a{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:10px;color:#cfc8bb;text-decoration:none;font-size:14.5px;margin-bottom:2px;cursor:pointer;transition:.15s}
+.nav a:hover{background:#ffffff0d;color:#fff}
+.nav a.active{background:linear-gradient(90deg,#c9a35c2b,#c9a35c12);color:var(--gold-light);font-weight:600;border-right:3px solid var(--gold);padding-right:11px}
+.nav a .ico{width:20px;text-align:center;font-size:16px}
+.nav a .badge{margin-right:auto;background:var(--gold);color:var(--dark);font-size:11px;font-weight:700;border-radius:20px;padding:1px 8px}
+.user-box{padding:16px 20px;border-top:1px solid #ffffff14;display:flex;align-items:center;gap:11px}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--dark);font-size:15px}
+.user-box .nm{font-size:14px;font-weight:600;color:#fff}
+.user-box .rl{font-size:11.5px;color:#9b937f}
+
+/* ===== Main ===== */
+.main{margin-right:248px;flex:1;display:flex;flex-direction:column;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:14px 30px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:5}
+.topbar h1{font-size:18px;font-weight:700}
+.search{flex:1;max-width:380px;position:relative}
+.search input{width:100%;border:1px solid var(--line);background:var(--cream);border-radius:10px;padding:9px 38px 9px 14px;font-size:13.5px;outline:none}
+.search .si{position:absolute;right:12px;top:8px;color:var(--muted)}
+.tb-actions{margin-right:auto;display:flex;gap:10px;align-items:center}
+.btn{border:none;border-radius:10px;padding:9px 18px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;box-shadow:0 2px 8px #c9a35c55}
+.btn-ghost{background:#fff;border:1px solid var(--line);color:var(--text)}
+.bell{position:relative;font-size:18px;cursor:pointer;color:var(--muted)}
+.bell::after{content:'';position:absolute;top:-2px;left:-2px;width:8px;height:8px;background:var(--red);border-radius:50%}
+
+.content{padding:26px 30px;flex:1}
+.page{display:none}
+.page.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--gold)}
+.kpi .k-label{font-size:13px;color:var(--muted)}
+.kpi .k-val{font-size:27px;font-weight:800;margin:4px 0 2px}
+.kpi .k-sub{font-size:12.5px;font-weight:600}
+.up{color:var(--green)} .down{color:var(--red)}
+
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-bottom:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h3{font-size:15.5px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.card h3 .more{font-size:12.5px;color:var(--gold-dark);font-weight:600;cursor:pointer}
+
+/* chart */
+.chart{display:flex;align-items:flex-end;gap:14px;height:180px;padding-top:10px}
+.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bar{width:100%;max-width:42px;border-radius:7px 7px 0 0;background:linear-gradient(180deg,var(--gold-light),var(--gold));transition:.3s}
+.bar.hot{background:linear-gradient(180deg,var(--gold),var(--gold-dark))}
+.bar-w .bl{font-size:11.5px;color:var(--muted)}
+.bar-w .bv{font-size:11px;font-weight:700;color:var(--gold-dark)}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:right;color:var(--muted);font-weight:600;font-size:12px;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid #f1ece1}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#faf7f0}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;border-radius:20px;padding:3px 11px}
+.p-green{background:var(--green-bg);color:var(--green)}
+.p-blue{background:var(--blue-bg);color:var(--blue)}
+.p-orange{background:var(--orange-bg);color:var(--orange)}
+.p-red{background:var(--red-bg);color:var(--red)}
+.p-purple{background:var(--purple-bg);color:var(--purple)}
+.p-gold{background:#f5ecd9;color:var(--gold-dark)}
+
+/* activity */
+.act{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f1ece1;font-size:13px}
+.act:last-child{border:none}
+.act .dot{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.act .t{color:var(--muted);font-size:11.5px;margin-top:2px}
+
+/* kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kcol{background:#f1ece1aa;border-radius:14px;padding:12px}
+.kcol h4{font-size:13.5px;font-weight:700;padding:4px 6px 10px;display:flex;justify-content:space-between;color:#5d574c}
+.kcol h4 .cnt{background:#fff;border-radius:20px;padding:0 9px;font-size:12px;color:var(--muted)}
+.kcard{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px;margin-bottom:10px;cursor:grab;box-shadow:0 1px 3px #0000000a}
+.kcard .kn{font-weight:700;font-size:13.5px}
+.kcard .kd{font-size:12px;color:var(--muted);margin:4px 0 8px}
+.kcard .kf{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.kcard .kf .sum{font-weight:700;color:var(--gold-dark)}
+
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal .h{font-size:11.5px;color:var(--muted);text-align:center;padding:5px 0;font-weight:600}
+.cal .d{background:#fff;border:1px solid var(--line);border-radius:9px;min-height:72px;padding:6px;font-size:11.5px}
+.cal .d .n{color:var(--muted);font-size:11px}
+.cal .d.off{background:transparent;border:none}
+.cal .ev{border-radius:6px;padding:2px 6px;margin-top:4px;font-size:10.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev.e1{background:var(--blue-bg);color:var(--blue)}
+.ev.e2{background:#f5ecd9;color:var(--gold-dark)}
+.ev.e3{background:var(--green-bg);color:var(--green)}
+
+/* projects */
+.proj{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pimg{height:110px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;font-size:14.5px;text-shadow:0 1px 4px #0008}
+.pi1{background:linear-gradient(135deg,#5d4a2f,#8a6c41)}
+.pi2{background:linear-gradient(135deg,#33414f,#5a7186)}
+.pi3{background:linear-gradient(135deg,#3f4a3a,#6b7c5e)}
+.pbody{padding:14px 16px}
+.pmeta{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+.prog{height:7px;background:#f1ece1;border-radius:10px;overflow:hidden;margin-bottom:6px}
+.prog i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--gold),var(--gold-dark))}
+.pfoot{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.pfoot b{color:var(--text)}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.section-head h2{font-size:20px;font-weight:800}
+.section-head p{font-size:13px;color:var(--muted);margin-top:2px}
+
+.demo-note{position:fixed;bottom:14px;left:14px;background:var(--dark);color:var(--gold-light);font-size:11.5px;padding:7px 14px;border-radius:20px;opacity:.92;z-index:50}
+
+/* configurator */
+.builder{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
+.opt-group{margin-bottom:20px}
+.opt-group .og-title{font-size:13.5px;font-weight:700;margin-bottom:9px}
+.opt-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.opt{border:1.5px solid var(--line);border-radius:11px;padding:12px;cursor:pointer;text-align:center;transition:.15s;background:#fff}
+.opt:hover{border-color:var(--gold-light)}
+.opt.sel{border-color:var(--gold);background:#f5ecd9;box-shadow:0 0 0 1px var(--gold)}
+.opt .o-ico{font-size:20px;margin-bottom:4px}
+.opt .o-name{font-size:13px;font-weight:700}
+.opt .o-price{font-size:11.5px;color:var(--muted);margin-top:2px}
+.slider-row{display:flex;align-items:center;gap:14px}
+.slider-row input[type=range]{flex:1;accent-color:var(--gold-dark)}
+.slider-row .sv{min-width:84px;text-align:center;background:#f5ecd9;color:var(--gold-dark);font-weight:800;border-radius:9px;padding:7px 0;font-size:14px}
+.addon{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:#fff;transition:.15s;font-size:13.5px}
+.addon:hover{border-color:var(--gold-light)}
+.addon.sel{border-color:var(--gold);background:#f5ecd9}
+.addon .a-price{margin-right:auto;font-weight:700;color:var(--gold-dark);font-size:12.5px}
+.addon .chk{width:19px;height:19px;border:2px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0}
+.addon.sel .chk{background:var(--gold);border-color:var(--gold)}
+.summary{position:sticky;top:84px}
+.summary .preview{height:150px;border-radius:11px;background:linear-gradient(135deg,#5d4a2f,#8a6c41);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;margin-bottom:16px;text-shadow:0 1px 4px #0007}
+.summary .preview .pv-ico{font-size:38px}
+.summary .preview .pv-name{font-weight:700;font-size:14.5px;margin-top:5px}
+.sline{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.sline .sl-v{font-weight:600}
+.total{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:2px solid var(--gold)}
+.total .t-label{font-size:14px;font-weight:700}
+.total .t-val{font-size:26px;font-weight:800;color:var(--gold-dark)}
+.total small{display:block;font-size:11px;color:var(--muted);font-weight:400;text-align:left}
+.summary .btn{width:100%;margin-top:14px;padding:12px}
+@media(max-width:1100px){.builder{grid-template-columns:1fr}.opt-row{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.kanban,.proj{grid-template-columns:1fr}.sidebar{display:none}.main{margin-right:0}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="logo">
+    <div class="brand">דקמן <span>Pro</span></div>
+    <div class="tag">מומחיות · מקוריות · ניסיון — מאז 2006</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">תפעול</div>
+    <a class="active" data-page="dash" onclick="go(this)"><span class="ico">▦</span> דשבורד</a>
+    <a data-page="leads" onclick="go(this)"><span class="ico">◎</span> לידים <span class="badge">5</span></a>
+    <a data-page="quotes" onclick="go(this)"><span class="ico">▤</span> הצעות מחיר</a>
+    <a data-page="builder" onclick="go(this)"><span class="ico">✦</span> מחולל הצעות</a>
+    <a data-page="projects" onclick="go(this)"><span class="ico">⌂</span> פרויקטים</a>
+    <a data-page="calendar" onclick="go(this)"><span class="ico">▣</span> יומן התקנות</a>
+    <div class="nav-label">ניהול</div>
+    <a data-page="customers" onclick="go(this)"><span class="ico">☺</span> לקוחות</a>
+    <a onclick="alert('מודול תחזוקה וחידוש דקים — תזכורות שנתיות אוטומטיות ללקוחות עבר. הכנסה חוזרת! — בגרסה המלאה')"><span class="ico">↻</span> תחזוקה וחידוש</a>
+    <a onclick="alert('מאגר אדריכלים ומעצבים מפנים + מעקב עמלות — בגרסה המלאה')"><span class="ico">✎</span> אדריכלים מפנים</a>
+    <a onclick="alert('מסך ספקים ומלאי — בגרסה המלאה')"><span class="ico">⚒</span> ספקים ומלאי</a>
+    <a onclick="alert('דוחות ואנליטיקה — בגרסה המלאה')"><span class="ico">↗</span> דוחות</a>
+    <a onclick="alert('הגדרות — בגרסה המלאה')"><span class="ico">⚙</span> הגדרות</a>
+  </nav>
+  <div class="user-box">
+    <div class="avatar">אס</div>
+    <div><div class="nm">אורי סלמן</div><div class="rl">בעלים ומנהל</div></div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <h1 id="pageTitle">דשבורד</h1>
+    <div class="search"><span class="si">⌕</span><input placeholder="חיפוש לקוח, פרויקט או הצעה..."></div>
+    <div class="tb-actions">
+      <span class="bell">◔</span>
+      <button class="btn btn-ghost" onclick="alert('יצוא דוח PDF — בגרסה המלאה')">יצוא דוח</button>
+      <button class="btn btn-gold" onclick="alert('טופס ליד חדש — בגרסה המלאה')">+ ליד חדש</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- ============ דשבורד ============ -->
+  <section class="page active" id="dash">
+    <div class="kpis">
+      <div class="kpi"><div class="k-label">הכנסות החודש</div><div class="k-val">₪487,500</div><div class="k-sub up">▲ 18% מהחודש הקודם</div></div>
+      <div class="kpi"><div class="k-label">לידים חדשים</div><div class="k-val">23</div><div class="k-sub up">▲ 5 השבוע</div></div>
+      <div class="kpi"><div class="k-label">הצעות פתוחות</div><div class="k-val">₪1.24M</div><div class="k-sub" style="color:var(--muted)">11 הצעות ממתינות</div></div>
+      <div class="kpi"><div class="k-label">התקנות החודש</div><div class="k-val">8</div><div class="k-sub down">▼ 2 בהמתנה לאישור</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>מכירות חצי שנה אחרונה <span class="more">לדוח המלא ←</span></h3>
+        <div class="chart">
+          <div class="bar-w"><span class="bv">310K</span><div class="bar" style="height:48%"></div><span class="bl">ינו׳</span></div>
+          <div class="bar-w"><span class="bv">285K</span><div class="bar" style="height:43%"></div><span class="bl">פבר׳</span></div>
+          <div class="bar-w"><span class="bv">402K</span><div class="bar" style="height:63%"></div><span class="bl">מרץ</span></div>
+          <div class="bar-w"><span class="bv">365K</span><div class="bar" style="height:56%"></div><span class="bl">אפר׳</span></div>
+          <div class="bar-w"><span class="bv">441K</span><div class="bar" style="height:70%"></div><span class="bl">מאי</span></div>
+          <div class="bar-w"><span class="bv">487K</span><div class="bar hot" style="height:78%"></div><span class="bl">יוני</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>פעילות אחרונה</h3>
+        <div class="act"><div class="dot" style="background:var(--green-bg)">✓</div><div><b>הצעה אושרה</b> — משפ׳ לוי, פרגולת אלומיניום חשמלית<div class="t">לפני 25 דקות · ₪96,000</div></div></div>
+        <div class="act"><div class="dot" style="background:var(--green-bg)">✆</div><div><b>ליד חדש מוואטסאפ</b> — רונית כהן, סביון<div class="t">לפני שעה · פרגולת עץ + דק לבריכה</div></div></div>
+        <div class="act"><div class="dot" style="background:#f5ecd9">▤</div><div><b>הצעה נשלחה</b> — וילה ברעננה, פרגולת עץ איפאה (הפניית אדריכל)<div class="t">לפני 3 שעות · ₪142,000</div></div></div>
+        <div class="act"><div class="dot" style="background:var(--orange-bg)">↻</div><div><b>תזכורת תחזוקה</b> — דק של משפ׳ שטרן בן שנתיים, מועמד לחידוש<div class="t">היום · נשלחה הודעת וואטסאפ אוטומטית</div></div></div>
+        <div class="act"><div class="dot" style="background:var(--purple-bg)">▣</div><div><b>התקנה הושלמה</b> — פנטהאוז בהרצליה פיתוח<div class="t">אתמול · צוות ב׳</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>הצעות מחיר אחרונות <span class="more">לכל ההצעות ←</span></h3>
+      <table>
+        <tr><th>לקוח</th><th>פרויקט</th><th>סכום</th><th>סטטוס</th><th>תוקף</th></tr>
+        <tr><td><b>משפ׳ לוי</b> · כפר שמריהו</td><td>פרגולה חשמלית 45 מ״ר + תאורה</td><td><b>₪96,000</b></td><td><span class="pill p-green">אושרה</span></td><td>—</td></tr>
+        <tr><td><b>רונית כהן</b> · סביון</td><td>פרגולת עץ + דק היקפי לבריכה</td><td><b>₪215,000</b></td><td><span class="pill p-orange">בהכנה</span></td><td>—</td></tr>
+        <tr><td><b>אדר׳ גיא ברק</b> · רעננה</td><td>פרגולת איפאה 60 מ״ר (הפניית אדריכל)</td><td><b>₪142,000</b></td><td><span class="pill p-blue">נשלחה</span></td><td>24.06</td></tr>
+        <tr><td><b>מלון "אחוזת הים"</b></td><td>3 פרגולות מסעדה + דק בר גג</td><td><b>₪388,000</b></td><td><span class="pill p-purple">במו״מ</span></td><td>30.06</td></tr>
+        <tr><td><b>משפ׳ אזולאי</b> · מודיעין</td><td>חידוש דק 40 מ״ר + גדר עץ</td><td><b>₪64,500</b></td><td><span class="pill p-red">פג תוקף</span></td><td>01.06</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ לידים ============ -->
+  <section class="page" id="leads">
+    <div class="section-head">
+      <div><h2>ניהול לידים</h2><p>צינור מכירות — גרירת ליד בין שלבים מעדכנת סטטוס אוטומטית</p></div>
+      <button class="btn btn-gold" onclick="alert('טופס ליד חדש — בגרסה המלאה')">+ ליד חדש</button>
+    </div>
+    <div class="kanban">
+      <div class="kcol"><h4>חדשים <span class="cnt">3</span></h4>
+        <div class="kcard"><div class="kn">רונית כהן · סביון</div><div class="kd">פרגולת עץ + דק לבריכה · וואטסאפ</div><div class="kf"><span class="pill p-green">וואטסאפ</span><span class="sum">~₪200K</span></div></div>
+        <div class="kcard"><div class="kn">איתן שרון · קיסריה</div><div class="kd">פרגולת אלומיניום לגג · הפניית אדריכל</div><div class="kf"><span class="pill p-purple">אדריכל</span><span class="sum">~₪85K</span></div></div>
+        <div class="kcard"><div class="kn">נטע ברנע · ת״א</div><div class="kd">דק + גדר עץ למרפסת פנטהאוז · אינסטגרם</div><div class="kf"><span class="pill p-blue">אינסטגרם</span><span class="sum">~₪55K</span></div></div>
+      </div>
+      <div class="kcol"><h4>נקבעה פגישה <span class="cnt">2</span></h4>
+        <div class="kcard"><div class="kn">משפ׳ פרידמן · הוד השרון</div><div class="kd">פגישת מדידה — 12.06 בשעה 10:00</div><div class="kf"><span class="pill p-orange">מדידה</span><span class="sum">~₪120K</span></div></div>
+        <div class="kcard"><div class="kn">קפה "שורש" · זכרון</div><div class="kd">הצללה לחצר מסעדה — 15.06</div><div class="kf"><span class="pill p-orange">מדידה</span><span class="sum">~₪170K</span></div></div>
+      </div>
+      <div class="kcol"><h4>נשלחה הצעה <span class="cnt">2</span></h4>
+        <div class="kcard"><div class="kn">אדר׳ גיא ברק · רעננה</div><div class="kd">הצעה #1042 · נשלחה 05.06</div><div class="kf"><span class="pill p-blue">מעקב</span><span class="sum">₪142K</span></div></div>
+        <div class="kcard"><div class="kn">מלון "אחוזת הים"</div><div class="kd">הצעה #1039 · סבב מו״מ שני</div><div class="kf"><span class="pill p-purple">מו״מ</span><span class="sum">₪388K</span></div></div>
+      </div>
+      <div class="kcol"><h4>נסגרו החודש <span class="cnt">4</span></h4>
+        <div class="kcard"><div class="kn">משפ׳ לוי · כפר שמריהו</div><div class="kd">נחתם 09.06 · מקדמה התקבלה</div><div class="kf"><span class="pill p-green">נסגר ✓</span><span class="sum">₪96K</span></div></div>
+        <div class="kcard"><div class="kn">יואב מנור · הרצליה</div><div class="kd">נחתם 03.06</div><div class="kf"><span class="pill p-green">נסגר ✓</span><span class="sum">₪78K</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ הצעות מחיר ============ -->
+  <section class="page" id="quotes">
+    <div class="section-head">
+      <div><h2>הצעות מחיר</h2><p>יצירת הצעה ממחירון מובנה — חומרים, מידות והתקנה מחושבים אוטומטית</p></div>
+      <button class="btn btn-gold" onclick="alert('מחולל הצעות מחיר — בגרסה המלאה')">+ הצעה חדשה</button>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>#</th><th>לקוח</th><th>תיאור</th><th>סכום</th><th>נשלחה</th><th>סטטוס</th><th></th></tr>
+        <tr><td>1044</td><td><b>רונית כהן</b></td><td>פרגולה חשמלית 70 מ״ר + הצללת בריכה</td><td><b>₪215,000</b></td><td>—</td><td><span class="pill p-orange">בהכנה</span></td><td><span class="more">פתח ←</span></td></tr>
+        <tr><td>1043</td><td><b>משפ׳ לוי</b></td><td>פרגולת אלומיניום חשמלית 45 מ״ר + תאורת לד</td><td><b>₪96,000</b></td><td>02.06</td><td><span class="pill p-green">אושרה ✓</span></td><td><span class="more">פתח ←</span></td></tr>
+        <tr><td>1042</td><td><b>אדר׳ גיא ברק</b></td><td>פרגולת עץ איפאה 60 מ״ר, גוון טבעי</td><td><b>₪142,000</b></td><td>05.06</td><td><span class="pill p-blue">ממתינה</span></td><td><span class="more">פתח ←</span></td></tr>
+        <tr><td>1039</td><td><b>מלון "אחוזת הים"</b></td><td>3 פרגולות אלומיניום למסעדה ובר גג</td><td><b>₪388,000</b></td><td>28.05</td><td><span class="pill p-purple">במו״מ</span></td><td><span class="more">פתח ←</span></td></tr>
+        <tr><td>1038</td><td><b>משפ׳ אזולאי</b></td><td>פרגולה קבועה 28 מ״ר</td><td><b>₪64,500</b></td><td>18.05</td><td><span class="pill p-red">פג תוקף</span></td><td><span class="more">חדש ←</span></td></tr>
+        <tr><td>1036</td><td><b>יואב מנור</b></td><td>פרגולת הצללה 35 מ״ר + סגירת זכוכית</td><td><b>₪78,000</b></td><td>20.05</td><td><span class="pill p-green">אושרה ✓</span></td><td><span class="more">פתח ←</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ מחולל הצעות ============ -->
+  <section class="page" id="builder">
+    <div class="section-head">
+      <div><h2>מחולל הצעות מחיר</h2><p>קונפיגורטור לכל מוצרי דקמן — פרגולות, דקים וגדרות · המחיר מתעדכן בזמן אמת</p></div>
+    </div>
+    <div class="builder">
+      <div class="card">
+        <div class="opt-group">
+          <div class="og-title">1 · סוג מוצר</div>
+          <div class="opt-row" id="gType">
+            <div class="opt sel" data-v="wood" data-p="1450" onclick="pick(this,'type')"><div class="o-ico">🪵</div><div class="o-name">פרגולת עץ</div><div class="o-price">₪1,450 / מ״ר</div></div>
+            <div class="opt" data-v="alum" data-p="1900" onclick="pick(this,'type')"><div class="o-ico">◈</div><div class="o-name">פרגולת אלומיניום</div><div class="o-price">₪1,900 / מ״ר</div></div>
+            <div class="opt" data-v="iron" data-p="1700" onclick="pick(this,'type')"><div class="o-ico">▣</div><div class="o-name">פרגולת ברזל ועץ</div><div class="o-price">₪1,700 / מ״ר</div></div>
+            <div class="opt" data-v="deck" data-p="950" onclick="pick(this,'type')"><div class="o-ico">▤</div><div class="o-name">דק</div><div class="o-price">₪950 / מ״ר</div></div>
+            <div class="opt" data-v="renew" data-p="380" onclick="pick(this,'type')"><div class="o-ico">↻</div><div class="o-name">חידוש דק</div><div class="o-price">₪380 / מ״ר</div></div>
+            <div class="opt" data-v="fence" data-p="700" onclick="pick(this,'type')"><div class="o-ico">▥</div><div class="o-name">גדר עץ / אלומ׳</div><div class="o-price">₪700 / מ׳ רץ</div></div>
+          </div>
+        </div>
+        <div class="opt-group">
+          <div class="og-title">2 · רמת גימור וחומר גלם</div>
+          <div class="opt-row" id="gMat">
+            <div class="opt sel" data-v="std" data-f="1" onclick="pick(this,'mat')"><div class="o-ico">✦</div><div class="o-name">אורן צפוני</div><div class="o-price">מחיר בסיס</div></div>
+            <div class="opt" data-v="ipe" data-f="1.35" onclick="pick(this,'mat')"><div class="o-ico">✦✦</div><div class="o-name">עץ איפאה</div><div class="o-price">+35%</div></div>
+            <div class="opt" data-v="prem" data-f="1.2" onclick="pick(this,'mat')"><div class="o-ico">✦+</div><div class="o-name">פרימיום / צבע בתנור</div><div class="o-price">+20%</div></div>
+          </div>
+        </div>
+        <div class="opt-group">
+          <div class="og-title">3 · שטח (מ״ר)</div>
+          <div class="slider-row">
+            <input type="range" id="area" min="10" max="150" value="40" oninput="calc()">
+            <div class="sv"><span id="areaVal">40</span> מ״ר</div>
+          </div>
+        </div>
+        <div class="opt-group" style="margin-bottom:0">
+          <div class="og-title">4 · תוספות</div>
+          <div class="addon sel" data-p="6500" onclick="tog(this)"><span class="chk">✓</span> תאורת לד היקפית + דימר <span class="a-price">₪6,500</span></div>
+          <div class="addon" data-p="14500" onclick="tog(this)"><span class="chk">✓</span> דק עץ משלים (עד 15 מ״ר) <span class="a-price">₪14,500</span></div>
+          <div class="addon" data-p="7800" onclick="tog(this)"><span class="chk">✓</span> הצללה נגללת / קירוי פוליקרבונט <span class="a-price">₪7,800</span></div>
+          <div class="addon" data-p="5200" onclick="tog(this)"><span class="chk">✓</span> ספסל ישיבה / אדניות מובנות <span class="a-price">₪5,200</span></div>
+          <div class="addon" data-p="8900" onclick="tog(this)"><span class="chk">✓</span> גדר עץ תואמת (עד 12 מ׳) <span class="a-price">₪8,900</span></div>
+          <div class="addon" data-p="0" onclick="tog(this)"><span class="chk">✓</span> הדמיית תלת־ממד + תכנון קונסטרוקטור <span class="a-price">כלול ✦</span></div>
+        </div>
+      </div>
+      <div class="card summary">
+        <div class="preview"><div class="pv-ico">⛩</div><div class="pv-name" id="pvName">פרגולת עץ · אורן צפוני</div></div>
+        <div class="sline"><span>פרגולה (<span id="sArea">40</span> מ״ר × ₪<span id="sRate">2,100</span>)</span><span class="sl-v">₪<span id="sBase">84,000</span></span></div>
+        <div class="sline"><span>תוספת חומר</span><span class="sl-v">₪<span id="sMat">0</span></span></div>
+        <div class="sline"><span>תוספות (<span id="sAddCnt">1</span>)</span><span class="sl-v">₪<span id="sAdd">6,500</span></span></div>
+        <div class="sline"><span>התקנה ושינוע</span><span class="sl-v">₪<span id="sInst">8,400</span></span></div>
+        <div class="total">
+          <div class="t-label">סה״כ הצעה</div>
+          <div class="t-val">₪<span id="sTotal">98,900</span><small>לא כולל מע״מ</small></div>
+        </div>
+        <button class="btn btn-gold" onclick="alert('הפקת הצעת מחיר ממותגת דקמן (PDF) ושליחה ישירה בוואטסאפ ללקוח — בגרסה המלאה')">✆ הפק הצעה ושלח בוואטסאפ</button>
+        <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="alert('שמירה כטיוטה — בגרסה המלאה')">שמור כטיוטה</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ פרויקטים ============ -->
+  <section class="page" id="projects">
+    <div class="section-head">
+      <div><h2>פרויקטים פעילים</h2><p>מעקב שלבים: מדידה → ייצור → התקנה → מסירה</p></div>
+      <button class="btn btn-gold" onclick="alert('פרויקט חדש — בגרסה המלאה')">+ פרויקט</button>
+    </div>
+    <div class="proj">
+      <div class="pcard">
+        <div class="pimg pi1">וילה כפר שמריהו · משפ׳ לוי</div>
+        <div class="pbody">
+          <div class="pmeta">פרגולה חשמלית 45 מ״ר · צוות א׳ · התקנה: 22.06</div>
+          <div class="prog"><i style="width:35%"></i></div>
+          <div class="pfoot"><span>שלב: <b>ייצור</b></span><span>35%</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg pi2">פנטהאוז הרצליה · יואב מנור</div>
+        <div class="pbody">
+          <div class="pmeta">הצללה 35 מ״ר + סגירת זכוכית · צוות ב׳ · התקנה: 16.06</div>
+          <div class="prog"><i style="width:72%"></i></div>
+          <div class="pfoot"><span>שלב: <b>התקנה</b></span><span>72%</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pimg pi3">חצר מסעדה · קפה "שורש"</div>
+        <div class="pbody">
+          <div class="pmeta">170 מ״ר הצללה · ממתין למדידה: 15.06</div>
+          <div class="prog"><i style="width:10%"></i></div>
+          <div class="pfoot"><span>שלב: <b>מדידה</b></span><span>10%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ יומן ============ -->
+  <section class="page" id="calendar">
+    <div class="section-head">
+      <div><h2>יומן התקנות ומדידות — יוני 2026</h2><p>שיבוץ צוותים אוטומטי · סנכרון ליומן גוגל</p></div>
+      <button class="btn btn-gold" onclick="alert('קביעת אירוע — בגרסה המלאה')">+ קביעת מועד</button>
+    </div>
+    <div class="card">
+      <div class="cal">
+        <div class="h">א׳</div><div class="h">ב׳</div><div class="h">ג׳</div><div class="h">ד׳</div><div class="h">ה׳</div><div class="h">ו׳</div><div class="h">ש׳</div>
+        <div class="d off"></div><div class="d"><span class="n">1</span></div><div class="d"><span class="n">2</span></div><div class="d"><span class="n">3</span><div class="ev e3">חתימה · מנור</div></div><div class="d"><span class="n">4</span></div><div class="d"><span class="n">5</span></div><div class="d off"><span class="n">6</span></div>
+        <div class="d"><span class="n">7</span></div><div class="d"><span class="n">8</span></div><div class="d"><span class="n">9</span><div class="ev e3">חתימה · לוי</div></div><div class="d" style="border-color:var(--gold)"><span class="n">10</span><div class="ev e2">היום</div></div><div class="d"><span class="n">11</span></div><div class="d"><span class="n">12</span><div class="ev e1">מדידה · פרידמן</div></div><div class="d off"><span class="n">13</span></div>
+        <div class="d"><span class="n">14</span></div><div class="d"><span class="n">15</span><div class="ev e1">מדידה · "שורש"</div></div><div class="d"><span class="n">16</span><div class="ev e2">התקנה · מנור</div></div><div class="d"><span class="n">17</span><div class="ev e2">התקנה · מנור</div></div><div class="d"><span class="n">18</span></div><div class="d"><span class="n">19</span></div><div class="d off"><span class="n">20</span></div>
+        <div class="d"><span class="n">21</span></div><div class="d"><span class="n">22</span><div class="ev e2">התקנה · לוי</div></div><div class="d"><span class="n">23</span><div class="ev e2">התקנה · לוי</div></div><div class="d"><span class="n">24</span></div><div class="d"><span class="n">25</span><div class="ev e3">מסירה · מנור</div></div><div class="d"><span class="n">26</span></div><div class="d off"><span class="n">27</span></div>
+        <div class="d"><span class="n">28</span></div><div class="d"><span class="n">29</span></div><div class="d"><span class="n">30</span></div><div class="d off"></div><div class="d off"></div><div class="d off"></div><div class="d off"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ לקוחות ============ -->
+  <section class="page" id="customers">
+    <div class="section-head">
+      <div><h2>לקוחות</h2><p>היסטוריית פרויקטים, מסמכים ותקשורת במקום אחד</p></div>
+      <button class="btn btn-gold" onclick="alert('לקוח חדש — בגרסה המלאה')">+ לקוח</button>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>לקוח</th><th>עיר</th><th>טלפון</th><th>פרויקטים</th><th>סה״כ עסקאות</th><th>סטטוס</th></tr>
+        <tr><td><b>משפ׳ לוי</b></td><td>כפר שמריהו</td><td>052-555-0134</td><td>1</td><td>₪96,000</td><td><span class="pill p-gold">בייצור</span></td></tr>
+        <tr><td><b>יואב מנור</b></td><td>הרצליה פיתוח</td><td>054-555-0188</td><td>2</td><td>₪193,000</td><td><span class="pill p-blue">בהתקנה</span></td></tr>
+        <tr><td><b>רונית כהן</b></td><td>סביון</td><td>050-555-0290</td><td>—</td><td>—</td><td><span class="pill p-orange">ליד חם</span></td></tr>
+        <tr><td><b>מלון "אחוזת הים"</b></td><td>נתניה</td><td>09-555-0142</td><td>—</td><td>—</td><td><span class="pill p-purple">במו״מ</span></td></tr>
+        <tr><td><b>משפ׳ שטרן</b></td><td>רמת השרון</td><td>053-555-0177</td><td>3</td><td>₪247,000</td><td><span class="pill p-gold">תחזוקת דק שנתית ↻</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  </div>
+</main>
+
+<div class="demo-note">✦ מוקאפ הדגמה — דקמן Pro · הותאם ע״פ deckman.co.il</div>
+
+<script>
+const titles={dash:'דשבורד',leads:'ניהול לידים',quotes:'הצעות מחיר',builder:'מחולל הצעות מחיר',projects:'פרויקטים',calendar:'יומן התקנות',customers:'לקוחות'};
+function go(el){
+  const p=el.dataset.page; if(!p) return;
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
+  document.getElementById(p).classList.add('active');
+  document.getElementById('pageTitle').textContent=titles[p];
+}
+
+/* ===== configurator ===== */
+const typeNames={wood:'פרגולת עץ',alum:'פרגולת אלומיניום',iron:'פרגולת ברזל ועץ',deck:'דק',renew:'חידוש דק',fence:'גדר'};
+const matNames={std:'אורן צפוני',ipe:'עץ איפאה',prem:'פרימיום'};
+const fmt=n=>Math.round(n).toLocaleString('he-IL');
+function pick(el,group){
+  el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel'); calc();
+}
+function tog(el){ el.classList.toggle('sel'); calc(); }
+function calc(){
+  const t=document.querySelector('#gType .sel'), m=document.querySelector('#gMat .sel');
+  const area=+document.getElementById('area').value;
+  const rate=+t.dataset.p, f=+m.dataset.f;
+  const base=area*rate, matExtra=base*(f-1);
+  let add=0,cnt=0;
+  document.querySelectorAll('.addon.sel').forEach(a=>{add+=+a.dataset.p;cnt++});
+  const inst=(base+matExtra)*0.10;
+  document.getElementById('areaVal').textContent=area;
+  document.getElementById('sArea').textContent=area;
+  document.getElementById('sRate').textContent=fmt(rate);
+  document.getElementById('sBase').textContent=fmt(base);
+  document.getElementById('sMat').textContent=fmt(matExtra);
+  document.getElementById('sAdd').textContent=fmt(add);
+  document.getElementById('sAddCnt').textContent=cnt;
+  document.getElementById('sInst').textContent=fmt(inst);
+  document.getElementById('sTotal').textContent=fmt(base+matExtra+add+inst);
+  document.getElementById('pvName').textContent=typeNames[t.dataset.v]+' · '+matNames[m.dataset.v];
+}
+calc();
+</script>
+</body>
+</html>
