@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מעשים מרובין מחכמה — למה היום המעשה עיקר</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="השכל אינו מזיז את הלב — רק המעשה. ולמה דווקא בדורנו המעשה הוא העיקר">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/maasim-merubin">
+<meta property="og:title" content="מעשים מרובין מחכמה — למה היום המעשה עיקר">
+<meta property="og:description" content="השכל אינו מזיז את הלב — רק המעשה. ולמה דווקא בדורנו המעשה הוא העיקר">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="מעשים מרובין מחכמה — למה היום המעשה עיקר">
+<meta name="twitter:description" content="השכל אינו מזיז את הלב — רק המעשה. ולמה דווקא בדורנו המעשה הוא העיקר">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --royal: #5b3a78;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink); line-height: 1.85; min-height: 100vh; padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding: 70px 60px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .container::before { content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .bezras { text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:40px; opacity:0.85; }
+  .ornament { text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:30px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-weight:900; font-size:clamp(32px,5.2vw,50px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:16px; letter-spacing:-0.5px; }
+  .subtitle { text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:40px; }
+
+  .opening-quote { background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:28px 32px; margin-bottom:50px; border-radius:3px; }
+  .opening-quote-label { font-family:'Bellefair',serif; font-size:11px; letter-spacing:4px; color:var(--gold-deep); margin-bottom:12px; text-transform:uppercase; }
+  .opening-quote p { font-family:'David Libre',serif; font-size:18px; color:var(--ink); line-height:1.75; margin:0; }
+  .opening-quote-source { display:block; margin-top:12px; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic; }
+
+  .divider { display:flex; align-items:center; justify-content:center; margin:50px 0; gap:20px; }
+  .divider::before, .divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px; }
+  .divider-symbol { color:var(--gold); font-size:18px; }
+
+  .section { margin-bottom:38px; }
+  .section-title { font-weight:700; font-size:24px; color:var(--crimson); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:14px; }
+  p { font-size:18px; color:var(--ink); margin-bottom:14px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; }
+  .pasuk-source { display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px; }
+
+  /* left/right heart card */
+  .pillars-card { margin:40px 0; padding:40px 30px; background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border-radius:6px; position:relative; overflow:hidden; box-shadow:0 20px 50px -15px rgba(43,29,16,0.5); }
+  .pillars-card::before { content:""; position:absolute; inset:8px; border:1px solid rgba(184,138,44,0.3); border-radius:4px; pointer-events:none; }
+  .pillars-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold); text-transform:uppercase; margin-bottom:28px; text-align:center; }
+  .pillars-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:20px; align-items:stretch; }
+  .pillar { padding:24px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.2); border-radius:4px; text-align:center; }
+  .pillar-title { font-size:21px; font-weight:700; color:var(--gold); margin-bottom:10px; }
+  .pillar-root { font-size:13px; color:rgba(245,236,217,0.6); margin-bottom:14px; letter-spacing:1px; }
+  .pillar-arrow { font-size:20px; color:var(--gold); margin-bottom:8px; }
+  .pillar-realm { font-family:'David Libre',serif; font-size:16px; color:var(--parchment); font-weight:500; }
+  .pillar-divider { display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:22px; }
+
+  /* two eras */
+  .eras { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:36px 0; }
+  .era { padding:22px 20px; border-radius:5px; }
+  .era.then { background:rgba(184,138,44,0.08); border:1px solid rgba(184,138,44,0.25); }
+  .era.now { background:rgba(140,42,30,0.06); border:1px solid rgba(140,42,30,0.25); }
+  .era h4 { font-size:19px; margin-bottom:6px; }
+  .era.then h4 { color:var(--gold-deep); }
+  .era.now h4 { color:var(--crimson); }
+  .era .who { font-size:13px; color:var(--ink-soft); font-style:italic; margin-bottom:10px; letter-spacing:0.5px; }
+  .era p { font-size:15.5px; margin:0; }
+  .era .verdict { margin-top:12px; font-weight:700; }
+  .era.then .verdict { color:var(--gold-deep); }
+  .era.now .verdict { color:var(--crimson); }
+
+  .final-message { margin-top:50px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center; }
+  .final-message-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px; }
+  .final-pasuk { font-family:'David Libre',serif; font-size:22px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500; }
+  .final-explanation { font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0; }
+
+  .attribution { margin-top:50px; text-align:center; padding-top:30px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500; }
+  .footer-ornament { text-align:center; margin-top:30px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5; }
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 24px;} .container::before{inset:8px;}
+    .pillars-grid{grid-template-columns:1fr; gap:14px;} .pillar-divider{transform:rotate(90deg); padding:4px 0;}
+    .eras{grid-template-columns:1fr;}
+    .opening-quote p{font-size:17px;} p{font-size:17px;}
+  }
+  @media print { body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עבודת השם · פנימיות התורה</div>
+    <h1>מַעֲשִׂים מְרֻבִּין מֵחׇכְמָה</h1>
+    <p class="subtitle">השכל אינו מזיז את הלב — ולמה דווקא היום המעשה הוא העיקר</p>
+
+    <div class="opening-quote">
+      <div class="opening-quote-label">פתיחת הענין</div>
+      <p>
+        כָּל שֶׁמַּעֲשָׂיו מְרֻבִּין מֵחׇכְמָתוֹ — <strong>חׇכְמָתוֹ מִתְקַיֶּמֶת</strong>;
+        וְכָל שֶׁחׇכְמָתוֹ מְרֻבָּה מִמַּעֲשָׂיו — <strong>אֵין חׇכְמָתוֹ מִתְקַיֶּמֶת</strong>.
+      </p>
+      <span class="opening-quote-source">— אבות ג, ט</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הַשֵּׂכֶל אֵינוֹ מַגִּיעַ אֶל הַלֵּב</h2>
+      <p>
+        כדי להגביר את המעשה על הלימוד, ברא הקדוש ברוך הוא מציאות
+        ש<strong>השכל אינו יכול להשפיע על הלב</strong> לצאת מן הטבע אל האין סוף.
+        רק ה<strong>מעשה</strong> — בכפייה על הגוף, נגד רצונו ונגד מקור חיותו —
+        מסוגל לעשות זאת.
+      </p>
+      <p>
+        ומאחר שהשכל בא <em>לשרת</em> את האדם, ניתן ה<strong>גוף לעזרה לנשמה</strong>:
+        שבכוח המעשה הבא בכפיית הרצון נגד השכל — הוא מזיז ומושך את הלב.
+      </p>
+    </div>
+
+    <div class="pillars-card">
+      <div class="pillars-label">המעשה מושך את הלב</div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-title">צַד שְׂמֹאל</div>
+          <div class="pillar-root">דעת הנפש הבהמית</div>
+          <div class="pillar-arrow">⟵</div>
+          <div class="pillar-realm">הרצון העצמי<br><span style="font-size:13px;color:rgba(245,236,217,0.6);">משם המעשה מושך אותך החוצה</span></div>
+        </div>
+        <div class="pillar-divider">⟸</div>
+        <div class="pillar">
+          <div class="pillar-title">צַד יָמִין</div>
+          <div class="pillar-root">דעת הנפש האלוקית</div>
+          <div class="pillar-arrow">✦</div>
+          <div class="pillar-realm">רצון השם<br><span style="font-size:13px;color:rgba(245,236,217,0.6);">לשם המעשה מושך את הלב</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        ולכן <strong>מי שמעשיו קטנים מחכמתו — אין חכמתו מתקיימת בו</strong>.
+        החכמה בלי המעשה אין לה במה להיאחז, כי לא הזיזה את הלב ממקומו.
+      </p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <div class="section">
+      <h2 class="section-title">רַשְׁבִּ"י מוּל דּוֹרֵנוּ</h2>
+      <p>
+        ומדוע בדורות הקודמים היה דווקא ה<em>לימוד</em> עיקר?
+        כי בדורו של <strong>רבי שמעון בר יוחאי</strong> היה אפשר
+        <strong>לברר את הניצוץ האלוקי מתוך התורה</strong> —
+        שהם היו תנאים, <em>בעלי דעת עליון</em>.
+      </p>
+    </div>
+
+    <div class="eras">
+      <div class="era then">
+        <h4>אָז</h4>
+        <div class="who">דורות רשב"י · בעלי דעת עליון</div>
+        <p>אפשר היה לברר את הניצוץ מתוך הלימוד עצמו.</p>
+        <div class="verdict">הלימוד — עיקר</div>
+      </div>
+      <div class="era now">
+        <h4>הַיּוֹם</h4>
+        <div class="who">דורנו · בהעדר הדעת</div>
+        <p>הלב אינו נמשך מן השכל — רק המעשה מזיז אותו.</p>
+        <div class="verdict">המעשה — עיקר</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        אבל היום, <strong>בהעדר הדעת</strong> — ה<strong>מעשה הוא העיקר</strong>.
+        כך מסביר <em>הרבי מליובאוויטש</em>: לא משום שהלימוד פחת בערכו,
+        אלא משום שהדרך אל הלב, בדורנו, עוברת דרך <strong>היד</strong> — לא דרך הראש.
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">קֹדֶם תַּעֲשֶׂה — וְאַחַר כָּךְ תָּבִין</p>
+      <p class="final-explanation">
+        אל תחכה שהלב "ירגיש" כדי לעשות.<br>
+        עשֵׂה — בכפייה, נגד הרצון — והלב יימשך אחר המעשה.<br>
+        בדורנו, זה המפתח שמוציא מן הטבע אל האין סוף.
+      </p>
+    </div>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על פי תורת הרבי מליובאוויטש</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>

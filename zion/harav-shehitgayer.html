@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הרב שהתגייר — משל הרב הפנימי</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="סיפור על הרב הפנימי, הגאווה שנשברה, והלידה מחדש — כתינוק שנולד">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/harav-shehitgayer">
+<meta property="og:title" content="הרב שהתגייר — משל הרב הפנימי">
+<meta property="og:description" content="סיפור על הרב הפנימי, הגאווה שנשברה, והלידה מחדש — כתינוק שנולד">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="הרב שהתגייר — משל הרב הפנימי">
+<meta name="twitter:description" content="סיפור על הרב הפנימי, הגאווה שנשברה, והלידה מחדש — כתינוק שנולד">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --royal: #5b3a78;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink); line-height: 1.85; min-height: 100vh; padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding: 70px 60px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .container::before { content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .bezras { text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:40px; opacity:0.85; }
+  .ornament { text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:30px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-weight:900; font-size:clamp(34px,5.5vw,52px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:16px; letter-spacing:-0.5px; }
+  .subtitle { text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:40px; }
+
+  .divider { display:flex; align-items:center; justify-content:center; margin:46px 0; gap:20px; }
+  .divider::before, .divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px; }
+  .divider-symbol { color:var(--gold); font-size:18px; }
+
+  .section { margin-bottom:34px; }
+  .section-title { font-weight:700; font-size:24px; color:var(--crimson); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:14px; }
+  p { font-size:18px; color:var(--ink); margin-bottom:14px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; }
+  .pasuk-source { display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px; }
+
+  /* story card */
+  .story { margin:34px 0; padding:34px 32px; background:linear-gradient(135deg, rgba(184,138,44,0.10), rgba(184,138,44,0.03)); border:1px solid rgba(184,138,44,0.25); border-radius:5px; }
+  .story-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:18px; }
+  .story p { font-size:17px; line-height:1.8; margin-bottom:13px; }
+  .story p:last-child { margin-bottom:0; }
+  .story .beat { font-weight:700; color:var(--crimson); }
+
+  /* nimshal mapping */
+  .map { margin:30px 0; }
+  .map-row { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; padding:12px 0; border-bottom:1px dashed rgba(184,138,44,0.3); }
+  .map-row:last-child { border-bottom:none; }
+  .map-mashal { text-align:left; font-weight:700; color:var(--ink-soft); font-size:16px; }
+  .map-arrow { color:var(--gold); font-size:18px; }
+  .map-nimshal { text-align:right; color:var(--crimson); font-weight:700; font-size:16px; }
+
+  .final-message { margin-top:46px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center; }
+  .final-message-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px; }
+  .final-pasuk { font-family:'David Libre',serif; font-size:22px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500; }
+  .final-explanation { font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0; }
+
+  .attribution { margin-top:46px; text-align:center; padding-top:30px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500; }
+  .footer-ornament { text-align:center; margin-top:30px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5; }
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 24px;} .container::before{inset:8px;}
+    .story p{font-size:16px;} p{font-size:17px;}
+    .map-row{grid-template-columns:1fr; gap:4px; text-align:center;}
+    .map-mashal,.map-nimshal{text-align:center;} .map-arrow{transform:rotate(90deg);}
+  }
+  @media print { body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עבודת השם · משל ונמשל</div>
+    <h1>הָרַב שֶׁהִתְגַּיֵּר</h1>
+    <p class="subtitle">סיפור על הרב הפנימי, הגאווה שנשברה — והלידה מחדש</p>
+
+    <div class="story">
+      <div class="story-label">המעשה</div>
+      <p>
+        היה אדם שלמד עם רבו והביא לו את כספי המעשרות. יום אחד, באקראי,
+        פגש <strong>"רבי חדש"</strong> והתחיל ללמוד עמו תורה — והפסיק ללמוד מרבו הקודם,
+        ואף נתן את מעשרותיו לרבי החדש.
+      </p>
+      <p>
+        או אז <span class="beat">התגלה פרצופו האמיתי</span> של הרב הקודם:
+        הוא החל לכעוס עליו בכל מיני כעסים. אבל היהודי לא פחד —
+        והמשיך ללמוד עם הרבי החדש.
+      </p>
+      <p>
+        והנה יום אחד בא הרב הקודם <em>בחשאי</em>, הקשיב לדברי הרבי החדש —
+        ו<strong>התאהב בתורתו</strong>. מאז היה בא ללמוד בכל יום,
+        עד שנעשה <span class="beat">כתינוק קטן</span> — וכל גאוותו עזבה אותו.
+      </p>
+      <p>
+        יום אחד התקשרו הוריו ואמרו לו שאינו בנם הביולוגי — והוא <strong>גוי</strong>.
+        מיד נשבר ליבו, הלך והתגייר, ונעשה כתינוק בן יומו.
+        כמה בושה — להבין שלא היה יהודי, וגם לא "רב".
+      </p>
+      <p>
+        הלך אל תלמידו הראשון, ביקש <strong>סליחה ומחילה</strong> על כל התנהגותו,
+        והחליט שהרבי החדש יהיה גם <em>הרב שלו</em>.
+      </p>
+    </div>
+
+    <div class="pasuk" style="text-align:center;">
+      גֵּר שֶׁנִּתְגַּיֵּר — כְּקָטָן שֶׁנּוֹלַד דָּמֵי
+      <span class="pasuk-source">— יבמות כב ע"א</span>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <div class="section">
+      <h2 class="section-title">וּמִיהוּ "הָרַב הַקּוֹדֵם"?</h2>
+      <p>
+        זהו ה<strong>רב הפנימי</strong> שבכל אחד — ה<em>"אני"</em>, הרצון העצמי
+        המתחפש ל"רב" ומייעץ לך כל היום. כל עוד אתה "משלם לו מעשרות" —
+        נותן לו את כל תשומת הלב, האנרגיה והנאמנות — הוא יושב במלכותו.
+      </p>
+      <p>
+        אבל ברגע שאתה פוגש את ה<strong>"רבי החדש"</strong> — את <em>האמת</em>,
+        את רצון השם — ומתחיל ללכת אחריו, ה"אני" <strong>מתקומם</strong>:
+        מגיע הכעס, ההתנגדות, כל מיני "כעסים". זה הסימן שאתה בדרך הנכונה.
+      </p>
+    </div>
+
+    <div class="map">
+      <div class="map-row"><div class="map-mashal">הרב הקודם</div><div class="map-arrow">⟸</div><div class="map-nimshal">ה"אני" · הרצון העצמי</div></div>
+      <div class="map-row"><div class="map-mashal">המעשרות</div><div class="map-arrow">⟸</div><div class="map-nimshal">הנאמנות והאנרגיה שאתה נותן לו</div></div>
+      <div class="map-row"><div class="map-mashal">הרבי החדש</div><div class="map-arrow">⟸</div><div class="map-nimshal">האמת · רצון השם</div></div>
+      <div class="map-row"><div class="map-mashal">הכעסים</div><div class="map-arrow">⟸</div><div class="map-nimshal">התקוממות האגו כשעוזבים אותו</div></div>
+      <div class="map-row"><div class="map-mashal">"אתה לא יהודי"</div><div class="map-arrow">⟸</div><div class="map-nimshal">גילוי: ה"אני" אינו הזהות האמיתית שלך</div></div>
+    </div>
+
+    <div class="section">
+      <p>
+        אם תחזיק מעמד ולא תפחד — יקרה הנס: יום אחד גם ה"אני" עצמו
+        <strong>יקשיב לאמת</strong>, ויתאהב בה, ויתחיל לבוא ללמוד בכל יום —
+        עד ש<em>כל גאוותו עוזבת אותו</em>. ואז הוא מגלה את האמת הגדולה:
+        מעולם <strong>לא היה הוא ה"רב" האמיתי</strong>, ולא הזהות הקדושה שבך.
+      </p>
+      <p>
+        וכשהוא מבין זאת — הוא <strong>"מתגייר"</strong>: מתבטל לגמרי,
+        נשבר, ונולד מחדש כתינוק. הוא מבקש מחילה על שנות שלטונו,
+        ומקבל עליו את האמת כ<strong>רבו</strong>.
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">אֲפִילּוּ הָאֲנִי שֶׁבְּךָ — יָכוֹל לְהִתְגַּיֵּר</p>
+      <p class="final-explanation">
+        אל תפחד מכעסי הרב הפנימי כשתעזוב אותו.<br>
+        החזק באמת — וגם הוא, בסוף, ייכנע לה וייוולד מחדש.<br>
+        ואז כולך, כתינוק שנולד, פנוי לרבי האמיתי.
+      </p>
+    </div>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
