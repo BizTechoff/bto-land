@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סם חיים או סם מוות — אותה תורה, שני הפכים</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="מה הופך את אותה תורה מסם חיים לסם מוות — והאזהרה לחכמים">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/sam-chaim-o-sam-mavet">
+<meta property="og:title" content="סם חיים או סם מוות — אותה תורה, שני הפכים">
+<meta property="og:description" content="מה הופך את אותה תורה מסם חיים לסם מוות — והאזהרה לחכמים">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="סם חיים או סם מוות — אותה תורה, שני הפכים">
+<meta name="twitter:description" content="מה הופך את אותה תורה מסם חיים לסם מוות — והאזהרה לחכמים">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink); line-height: 1.85; min-height: 100vh; padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding: 70px 60px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .container::before { content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .bezras { text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:40px; opacity:0.85; }
+  .ornament { text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:30px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-weight:900; font-size:clamp(34px,5.5vw,54px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:16px; letter-spacing:-0.5px; }
+  .subtitle { text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:40px; }
+
+  .opening-quote { background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:28px 32px; margin-bottom:50px; border-radius:3px; }
+  .opening-quote-label { font-family:'Bellefair',serif; font-size:11px; letter-spacing:4px; color:var(--gold-deep); margin-bottom:12px; text-transform:uppercase; }
+  .opening-quote p { font-family:'David Libre',serif; font-size:18px; color:var(--ink); line-height:1.75; margin:0; }
+  .opening-quote-source { display:block; margin-top:12px; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic; }
+
+  .divider { display:flex; align-items:center; justify-content:center; margin:50px 0; gap:20px; }
+  .divider::before, .divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px; }
+  .divider-symbol { color:var(--gold); font-size:18px; }
+
+  .question-box { background:rgba(140,42,30,0.06); border:1px dashed rgba(140,42,30,0.3); padding:22px 26px; margin:20px 0; border-radius:3px; text-align:center; }
+  .question-mark { font-family:'Bellefair',serif; color:var(--crimson); font-size:32px; margin-bottom:6px; line-height:1; }
+  .question-box p { font-size:19px; color:var(--ink); margin:0; font-weight:500; font-style:italic; }
+
+  .section { margin-bottom:38px; }
+  .section-title { font-weight:700; font-size:24px; color:var(--crimson); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:14px; }
+  p { font-size:18px; color:var(--ink); margin-bottom:14px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; }
+  .pasuk-source { display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px; }
+
+  /* sam chaim vs sam mavet contrast */
+  .pillars-card { margin:40px 0; padding:40px 30px; background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border-radius:6px; position:relative; overflow:hidden; box-shadow:0 20px 50px -15px rgba(43,29,16,0.5); }
+  .pillars-card::before { content:""; position:absolute; inset:8px; border:1px solid rgba(184,138,44,0.3); border-radius:4px; pointer-events:none; }
+  .pillars-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold); text-transform:uppercase; margin-bottom:28px; text-align:center; }
+  .pillars-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:20px; align-items:stretch; }
+  .pillar { padding:24px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.2); border-radius:4px; text-align:center; }
+  .pillar-title { font-size:23px; font-weight:700; color:var(--gold); margin-bottom:10px; }
+  .pillar-root { font-size:13px; color:rgba(245,236,217,0.6); margin-bottom:14px; letter-spacing:1px; }
+  .pillar-arrow { font-size:18px; color:var(--gold); margin-bottom:8px; }
+  .pillar-realm { font-family:'David Libre',serif; font-size:16.5px; color:var(--parchment); font-weight:500; }
+  .pillar-divider { display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:20px; }
+
+  .final-message { margin-top:50px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center; }
+  .final-message-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px; }
+  .final-pasuk { font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500; }
+  .final-explanation { font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0; }
+
+  .attribution { margin-top:50px; text-align:center; padding-top:30px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500; }
+  .footer-ornament { text-align:center; margin-top:30px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5; }
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 24px;} .container::before{inset:8px;}
+    .pillars-grid{grid-template-columns:1fr; gap:14px;} .pillar-divider{transform:rotate(90deg); padding:4px 0;}
+    .opening-quote p{font-size:17px;} .question-box p{font-size:17px;} p{font-size:17px;}
+  }
+  @media print { body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עבודת השם · פנימיות התורה</div>
+    <h1>סַם חַיִּים אוֹ סַם מָוֶת</h1>
+    <p class="subtitle">אותה תורה ממש — ומה שמכריע לאן היא הופכת</p>
+
+    <div class="opening-quote">
+      <div class="opening-quote-label">פתיחת הענין</div>
+      <p>
+        זָכָה — נַעֲשֵׂית לוֹ <strong>סַם חַיִּים</strong>;
+        לֹא זָכָה — נַעֲשֵׂית לוֹ <strong>סַם מָוֶת</strong>.
+      </p>
+      <span class="opening-quote-source">— יומא עב ע"ב, על "וְזֹאת הַתּוֹרָה"</span>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <div class="question-box">
+      <div class="question-mark">?</div>
+      <p>
+        הרי זו אותה תורה, אותו לימוד בדיוק —<br>
+        אז מה הופך אותה אצל אחד לחיים, ואצל אחר למוות?
+      </p>
+    </div>
+
+    <div class="section">
+      <p>
+        התשובה היא <strong>לא התורה, ולא הלימוד</strong> — שהרי הם זהים.
+        מה שמבדיל בין סם החיים לסם המוות הוא <strong>המעשה</strong>:
+        מעשה שנגוע ב<em>רצון עצמי</em>. שם, באותה נקודה דקה,
+        הוא פועל שהתורה נלמדת <strong>שלא לשמה</strong>.
+      </p>
+    </div>
+
+    <!-- contrast card -->
+    <div class="pillars-card">
+      <div class="pillars-label">אותה תורה · שני הפכים</div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-title">סַם חַיִּים</div>
+          <div class="pillar-root">המעשה — לשם שמים</div>
+          <div class="pillar-arrow">↑</div>
+          <div class="pillar-realm">תורה לשמה<br><span style="font-size:13px;color:rgba(245,236,217,0.6);">מחיה את הלומד ואת השומעים</span></div>
+        </div>
+        <div class="pillar-divider">↔</div>
+        <div class="pillar">
+          <div class="pillar-title">סַם מָוֶת</div>
+          <div class="pillar-root">המעשה — נגוע ברצון עצמי</div>
+          <div class="pillar-arrow">↓</div>
+          <div class="pillar-realm">תורה לא לשמה<br><span style="font-size:13px;color:rgba(245,236,217,0.6);">ממיתה את הלומד ואת השומעים</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">כְּשֶׁהַסַּם מִתְפַּשֵּׁט</h2>
+      <p>
+        וכאן הסכנה מחריפה. ככל שאדם <strong>מפיץ</strong> יותר ויותר תורה שלא לשמה,
+        הוא <strong>מחטיא</strong> יותר ויותר אנשים. ועל זה אמרו חז"ל דבר נורא:
+      </p>
+      <div class="pasuk">
+        גָּדוֹל הַמַּחֲטִיא אֶת הָאָדָם — יוֹתֵר מִן הַהוֹרְגוֹ
+        <span class="pasuk-source">— ספרי; ומובא ברש"י דברים כג, ח</span>
+      </div>
+      <p>
+        ההורג מוציא את חברו מן העולם הזה בלבד;
+        ה<strong>מחטיא</strong> מוציאו מן העולם הזה <em>ומן העולם הבא</em>.
+        ואין הוא יכול לתלות בשגגה, שהרי:
+      </p>
+      <div class="pasuk">
+        שִׁגְגַת תַּלְמוּד — עוֹלָה זָדוֹן
+        <span class="pasuk-source">— אבות ד, יג</span>
+      </div>
+      <p>
+        טעות בהוראה נחשבת כמזיד. וכך אותו "סם" עצמו
+        <strong>הופך לממית — למדבר ולשומעים כאחד</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">אַזְהָרַת הַחֲכָמִים</h2>
+      <p>
+        ועל כך מזהיר אבטליון את כל מי שמלמד תורה ברבים:
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">אבות א, יא</div>
+      <p class="final-pasuk">
+        חֲכָמִים, הִזָּהֲרוּ בְּדִבְרֵיכֶם!
+      </p>
+      <p class="final-explanation">
+        שֶׁמָּא תָּחוּבוּ חוֹבַת גָּלוּת, וְתִגְלוּ לִמְקוֹם מַיִם הָרָעִים,<br>
+        וְיִשְׁתּוּ הַתַּלְמִידִים הַבָּאִים אַחֲרֵיכֶם וְיָמוּתוּ —<br>
+        וְנִמְצָא שֵׁם שָׁמַיִם מִתְחַלֵּל.
+      </p>
+    </div>
+
+    <div class="section" style="margin-top:50px;">
+      <p>
+        אין זה גזר דין — אלא <strong>מפתח</strong>. אותה תורה ממש,
+        כשהמעשה שמאחוריה מטוהר מן הרצון העצמי, חוזרת להיות
+        <strong>סם חיים</strong> — מים חיים שמשקים את כל הבאים אחריך.
+        טַהֵר את המעשה — ותַשְׁקֶה חיים.
+      </p>
+    </div>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
