@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דעת הויה ודעת אלוקים — אל תהיה הרב של עצמך</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="שני רבדים בתורה, יעקב ועשו — ולמה כל הלימוד לבדו הוא 'שגגת תלמוד'">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/daat-havaya-velokim">
+<meta property="og:title" content="דעת הויה ודעת אלוקים — אל תהיה הרב של עצמך">
+<meta property="og:description" content="שני רבדים בתורה, יעקב ועשו — ולמה כל הלימוד לבדו הוא 'שגגת תלמוד'">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="דעת הויה ודעת אלוקים — אל תהיה הרב של עצמך">
+<meta name="twitter:description" content="שני רבדים בתורה, יעקב ועשו — ולמה כל הלימוד לבדו הוא 'שגגת תלמוד'">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --royal: #5b3a78;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink); line-height: 1.85; min-height: 100vh; padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding: 70px 60px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .container::before { content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .bezras { text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:40px; opacity:0.85; }
+  .ornament { text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:30px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-weight:900; font-size:clamp(32px,5.2vw,50px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:16px; letter-spacing:-0.5px; }
+  .subtitle { text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:40px; }
+
+  .divider { display:flex; align-items:center; justify-content:center; margin:44px 0; gap:20px; }
+  .divider::before, .divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px; }
+  .divider-symbol { color:var(--gold); font-size:18px; }
+
+  .section { margin-bottom:34px; }
+  .section-title { font-weight:700; font-size:23px; color:var(--crimson); margin-bottom:13px; display:flex; align-items:center; gap:12px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:13px; }
+  p { font-size:18px; color:var(--ink); margin-bottom:14px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; }
+  .pasuk-source { display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px; }
+
+  /* two layers contrast */
+  .layers { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:30px 0; }
+  .layer { padding:22px 18px; border-radius:5px; }
+  .layer.spirit { background:rgba(184,138,44,0.10); border:1px solid rgba(184,138,44,0.3); }
+  .layer.matter { background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.22); }
+  .layer h4 { font-size:20px; margin-bottom:4px; }
+  .layer.spirit h4 { color:var(--gold-deep); } .layer.matter h4 { color:var(--crimson); }
+  .layer .sub { font-size:14px; font-style:italic; color:var(--ink-soft); margin-bottom:10px; }
+  .layer p { font-size:15px; margin:0; }
+
+  /* what to do box */
+  .todo { margin:30px 0; padding:26px 28px; background:rgba(140,42,30,0.05); border:1px solid rgba(140,42,30,0.25); border-right:5px solid var(--crimson); border-radius:4px; }
+  .todo-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px; font-weight:700; }
+  .todo ol { list-style:none; counter-reset:t; }
+  .todo li { font-size:16.5px; color:var(--ink); margin-bottom:14px; padding-right:34px; position:relative; line-height:1.6; }
+  .todo li:last-child { margin-bottom:0; }
+  .todo li::before { counter-increment:t; content:counter(t); position:absolute; right:0; top:2px; width:24px; height:24px; background:var(--crimson); color:var(--paper); border-radius:50%; text-align:center; font-size:13px; font-family:'Bellefair',serif; line-height:24px; }
+  .todo li strong { color:var(--crimson); }
+
+  /* epidural final (dark) */
+  .epidural { margin:40px 0 0; padding:36px 32px; background:linear-gradient(135deg,#1c232c,#11161d); color:#f3e9d2; border-radius:6px; position:relative; overflow:hidden; box-shadow:0 20px 50px -15px rgba(0,0,0,0.5); }
+  .epidural::before { content:""; position:absolute; inset:8px; border:1px solid rgba(184,138,44,0.3); border-radius:4px; pointer-events:none; }
+  .epidural-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:#e8c98a; text-transform:uppercase; text-align:center; margin-bottom:16px; }
+  .epidural p { font-size:17px; color:rgba(243,233,210,0.92); line-height:1.85; margin-bottom:12px; }
+  .epidural p:last-child { margin-bottom:0; }
+  .epidural strong { color:#e8c98a; }
+  .epidural em { color:#cfe0ec; }
+
+  .attribution { margin-top:44px; text-align:center; padding-top:30px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500; }
+  .footer-ornament { text-align:center; margin-top:30px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5; }
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 24px;} .container::before{inset:8px;}
+    .layers{grid-template-columns:1fr;} .epidural p{font-size:16px;} p{font-size:17px;}
+  }
+  @media print { body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עבודת השם · פנימיות התורה</div>
+    <h1>דַּעַת הֲוָיָ״ה וְדַעַת אֱלֹקִים</h1>
+    <p class="subtitle">שני רבדים בתורה — ולמה אסור להיות הרב של עצמך</p>
+
+    <div class="section">
+      <p>
+        לתורה יש <strong>רובד רוחני</strong> (יעקב) ו<strong>רובד גשמי</strong> (עשו).
+        הרוחני הוא <em>הסיבה</em>, והגשמי הוא <em>התוצאה</em>.
+      </p>
+    </div>
+
+    <div class="layers">
+      <div class="layer spirit">
+        <h4>יַעֲקֹב</h4>
+        <div class="sub">הרובד הרוחני · הסיבה</div>
+        <p>דַּעַת הֲוָיָ״ה — בחינת משה רבנו.</p>
+      </div>
+      <div class="layer matter">
+        <h4>עֵשָׂו</h4>
+        <div class="sub">הרובד הגשמי · התוצאה</div>
+        <p>דַּעַת אֱלֹקִים — הדעת השנייה.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        כולנו נבראים ב<strong>דעת אלוקים</strong> — מחטא עץ הדעת —
+        בדעת השנייה. ושם אנו לומדים תורה ומקיימים אותה.
+        ו<strong>זוהי טעות גדולה</strong>.
+      </p>
+      <p>
+        כל הלימוד שלנו הוא <strong>"שגגת תלמוד"</strong> —
+        כי הוא <em>רוב חכמה ומיעוט מעשה</em>. ועד שאדם לא זוכה ל<strong>דעת הוי״ה</strong>,
+        הוא אינו יודע באמת את עוונותיו ואת <em>מקור יסוריו</em>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הָרַב שֶׁטּוֹעֶה — וּמַטְעֶה</h2>
+      <p>
+        ולפעמים אדם נעשה <strong>"רב גדול"</strong> בדעת אלוקים —
+        וגם חוטא, וגם <strong>מחטיא את תלמידיו</strong> —
+        ואין לו שום מושג שהוא <em>תועה ומטעה</em>.
+      </p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <div class="section">
+      <h2 class="section-title">אָז מָה עוֹשִׂים?!</h2>
+    </div>
+
+    <div class="todo">
+      <div class="todo-label">שני דברים</div>
+      <ol>
+        <li>
+          לחפש ולתור אחרי <strong>איש אמת בחייו</strong>, ולהיות <em>עפר לרגליו</em>.
+          וזה קשה — כי אדם מעדיף <strong>קב אחד שלו על תשעה של חברו</strong>.
+        </li>
+        <li>
+          <strong>לא ללמוד מעצמי, ולא להיות הרב של עצמי.</strong>
+          וכן לחפש איש אמת <em>שהסתלק מן העולם</em>, שלא התעסק בחכמה אלא ב<strong>מעשה</strong>
+          (כרבי מליובאוויטש).
+        </li>
+      </ol>
+    </div>
+
+    <div class="epidural">
+      <div class="epidural-label">משל · האפידורל של הגלות</div>
+      <p>
+        החכמה לבדה היא כמו <strong>אֶפִּידוּרָל</strong> לגלות:
+        אנחנו <em>נרדמים עם ספר ביד</em>, ואין כוח לדחוף עם כל הגוף.
+      </p>
+      <p>
+        ולכן ה<strong>לידה מתעכבת</strong> — הגאולה מתעכבת —
+        ואנחנו חיים ב<em>צירי לידה כל החיים</em>.
+      </p>
+      <p>
+        רק מעשה — בכוח כל הגוף, מתוך ביטול לאיש אמת —
+        מוציא את הוולד אל האור.
+      </p>
+    </div>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
