@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>יתרון האור הבא מן החושך — השכל הנעלם</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="השכל מגיע עד החצר — והמעשה עד חדר המלך. ולמה דווקא מן החושך בא האור">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/yitron-haor">
+<meta property="og:title" content="יתרון האור הבא מן החושך — השכל הנעלם">
+<meta property="og:description" content="השכל מגיע עד החצר — והמעשה עד חדר המלך. ולמה דווקא מן החושך בא האור">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="יתרון האור הבא מן החושך — השכל הנעלם">
+<meta name="twitter:description" content="השכל מגיע עד החצר — והמעשה עד חדר המלך. ולמה דווקא מן החושך בא האור">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --gold-light: #e8c98a;
+    --crimson: #8c2a1e;
+    --royal: #5b3a78;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink); line-height: 1.9; min-height: 100vh; padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding: 70px 60px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .container::before { content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .bezras { text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:40px; opacity:0.85; }
+  .ornament { text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:30px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-weight:900; font-size:clamp(31px,5vw,48px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:16px; letter-spacing:-0.5px; }
+  .subtitle { text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:44px; }
+
+  .lead { font-size:20px; color:var(--ink); text-align:center; font-weight:500; line-height:1.7; margin-bottom:32px; }
+  .lead strong { color:var(--crimson); }
+
+  .divider { display:flex; align-items:center; justify-content:center; margin:42px 0; gap:20px; }
+  .divider::before, .divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px; }
+  .divider-symbol { color:var(--gold); font-size:18px; }
+
+  .section { margin-bottom:30px; }
+  .section-title { font-weight:700; font-size:23px; color:var(--crimson); margin-bottom:13px; display:flex; align-items:center; gap:12px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:13px; }
+  p { font-size:18px; color:var(--ink); margin-bottom:14px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:18px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; }
+  .pasuk-source { display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px; }
+
+  .chamber { margin:28px 0; padding:26px; text-align:center; background:linear-gradient(135deg, rgba(91,58,120,0.10), rgba(184,138,44,0.05)); border:1px solid rgba(91,58,120,0.25); border-radius:6px; }
+  .chamber .glyph { font-size:26px; margin-bottom:8px; }
+  .chamber .ttl { font-size:21px; font-weight:700; color:var(--royal); margin-bottom:6px; }
+  .chamber .cap { font-size:15px; font-style:italic; color:var(--ink-soft); }
+
+  .stage { margin:40px 0 0; padding:38px 32px; background:linear-gradient(135deg,#15110a,#0e0b06); color:#f3e9d2; border-radius:6px; position:relative; overflow:hidden; box-shadow:0 20px 50px -15px rgba(0,0,0,0.55); }
+  .stage::before { content:""; position:absolute; inset:8px; border:1px solid rgba(184,138,44,0.3); border-radius:4px; pointer-events:none; }
+  .stage-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--gold-light); text-transform:uppercase; text-align:center; margin-bottom:16px; }
+  .stage .verse { font-family:'David Libre',serif; font-size:21px; text-align:center; color:#fbf3e0; line-height:1.6; margin-bottom:16px; }
+  .stage .verse .src { display:block; font-size:12px; color:rgba(243,233,210,0.55); letter-spacing:1px; margin-top:6px; }
+  .stage p { font-size:16.5px; color:rgba(243,233,210,0.92); line-height:1.85; margin:0; text-align:center; }
+  .stage strong { color:var(--gold-light); }
+  .stage em { color:#cfe0ec; }
+
+  .attribution { margin-top:44px; text-align:center; padding-top:30px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500; }
+  .footer-ornament { text-align:center; margin-top:30px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5; }
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 24px;} .container::before{inset:8px;}
+    .lead{font-size:18px;} .stage .verse{font-size:18px;} p{font-size:17px;}
+  }
+  @media print { body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · סוד</div>
+    <h1>יִתְרוֹן הָאוֹר הַבָּא מִן הַחֹשֶׁךְ</h1>
+    <p class="subtitle">השכל מגיע עד החצר — והמעשה עד חדר המלך</p>
+
+    <p class="lead">
+      יש שתי דרכים להתקרב אל המלך.<br>
+      הַשֵּׂכֶל מגיע עד החצרות החיצוניות — והַמַּעֲשֶׂה, רק הוא, נכנס עד חֲדַר הַמִּטּוֹת.
+    </p>
+
+    <div class="section">
+      <p>
+        אֵין לו לאדם משכלו אלא <strong>מה שהשם נותן לו להבין</strong> מיגיעתו בתורה —
+        שכלנו מקבל, תלוי, מוגבל. אבל ב<strong>מעשה</strong> האדם <em>בן חורין</em>:
+        הוא יכול להגיע לאן שירצה — עד <strong>"חדר המיטות של המלך והמלכה"</strong>,
+        המקום האינטימי שאין המלך חולק עם איש. ולשם מגיעים רק
+        ב<strong>"בכל לבבך ובכל נפשך ובכל מאֹדך"</strong> — זוהי מסירות הנפש.
+        שום ספר אינו מגיע לשם, כי השכל אינו משיג מידות — <em>רק המעשה</em>.
+      </p>
+    </div>
+
+    <div class="chamber">
+      <div class="glyph">👑</div>
+      <div class="ttl">חֲדַר הַמֶּלֶךְ וְהַמַּלְכָּה</div>
+      <div class="cap">המקום הפנימי ביותר — שאין המלך חולק עם איש</div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">לָמָּה הַשֵּׂכֶל נֶעֱצָר בַּחוּץ</h2>
+      <p>
+        כי השכל עצמו הוא <strong>קליפה</strong>. הוא שומר על <em>מידות השם</em> —
+        שהן הן ה<strong>"שכל הנעלם"</strong>, הפרי שבפנים. אנחנו אוחזים בקליפה
+        ובטוחים שתפסנו את הפרי.
+      </p>
+      <p>
+        ויתרה מזו: השכל קיים <strong>רק במקום הרצון</strong> — בעולמות
+        בריאה־יצירה־עשייה, ששם אחיזת ה<em>חיצוניים</em>, ולכן שם הבורא <strong>נעלם</strong>.
+        כל זמן שאתה בתוך השכל — אתה בתוך עולם של רצון ושל <em>"אני"</em>,
+        ובעולם הזה, מעצם הגדרתו, פני המלך מכוסים.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הַמַּפְתֵּחַ אֵינוֹ עוֹד שֵׂכֶל — אֶלָּא בִּטּוּל</h2>
+      <p>
+        אם כן, מה פותח את הדלת הפנימית? לא הבנה נוספת — אלא מעשה.
+        אך לא מעשה רגיל, הבא <em>בגבול ולמען עצמי</em>, אלא מעשה של
+        <strong>ביטול הרצון</strong>, הנעשה <strong>למען הכלל ולא למען הפרט</strong>.
+      </p>
+      <p>
+        שם, מעבר לעולם הרצון, יושבות מידות השם — <em>"זעיר אנפין"</em>,
+        נקודת ה<strong>"עצם"</strong> שבעולם האצילות, בחינת <em>משה</em> (אותיות השם).
+        המעשה אינו "מבין" את המלך — הוא <strong>נכנס אליו</strong>.
+      </p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <div class="section">
+      <h2 class="section-title">לָמָּה רֻבֵּנוּ נִשְׁאָרִים בַּחוּץ</h2>
+      <p>
+        ואם כך הדבר — מדוע רובנו אינם זוכים לו? כי המעשה הזה תובע להיכנס
+        אל המקום שממנו השכל <strong>מפחד</strong>: מקום ה<strong>הפקר</strong>,
+        המקום שבו <em>"אני" איני נמצא</em>, מקום של חוסר ודאות מוחלט.
+      </p>
+      <p>
+        רוב מעשינו בגבול ולעצמנו, כי הגבול בטוח וה"אני" מוכר.
+        אבל דווקא המקום הזה — חֲסַר הוודאות, חֲסַר ה"אני" —
+        הוא <strong>מקום החושך. ושם, דווקא שם, גנוז האור האלוקי.</strong>
+      </p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-label">הוילון עולה</div>
+      <p style="margin-bottom:14px;">
+        בין עולם הבריאה לעולם האצילות עומד <strong>חושך</strong> —
+        ואין הוא היעדר, אלא <em>מסך</em>. הוא מחשיך את הדעת התחתונה,
+        דעת ה"אני" (בחינת <strong>"בורא חושך"</strong>), וברגע שהיא כבה —
+        מתגלה השכל הנעלם, הדעת העליונה.
+      </p>
+      <p class="verse">
+        גּוֹלֵל אוֹר מִפְּנֵי חֹשֶׁךְ, וְחֹשֶׁךְ מִפְּנֵי אוֹר
+        <span class="src">— ברכת מעריב · על פי ישעיהו מה, ז</span>
+      </p>
+      <p>
+        כשהשכל מחשיך — הוילון עולה. וברגע שה"אני" יורד מן הבמה,
+        מתחילה <strong>ההצגה האמיתית</strong>: פני המלך.<br>
+        זהו <em>יתרון האור — דווקא הבא מן החושך</em>.
+      </p>
+    </div>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הסוד</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
