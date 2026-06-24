@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>אלו את ניצן · מרכז בקרה תפעולי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@300;400;500;600;700;800&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15211B; --paper:#F4F7F1; --surface:#FFFFFF;
+    --pine:#1E4A38; --pine-700:#163C2D; --pine-300:#5C8C76; --pine-050:#EAF1EC;
+    --amber:#E2902F; --amber-soft:#FBEAD0;
+    --sky:#2F7E91; --sky-soft:#E1F0F2;
+    --clay:#C2543E; --clay-soft:#F8E3DD;
+    --grass:#6FA84B;
+    --line:#E3E8DF; --muted:#6E7C72;
+    --radius:16px; --shadow:0 1px 2px rgba(21,33,27,.05), 0 8px 24px rgba(21,33,27,.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Assistant',sans-serif; background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; line-height:1.45;
+  }
+  /* בס"ד marker — Moti's document signature */
+  .bsd{position:fixed; top:6px; left:0; right:0; text-align:center; font-family:'Heebo'; font-size:11px; color:var(--pine-300); letter-spacing:.5px; z-index:200; pointer-events:none; opacity:.7;}
+  .layout{display:flex; min-height:100vh;}
+
+  /* ---------- Sidebar (right in RTL) ---------- */
+  .sidebar{
+    width:248px; flex-shrink:0; background:var(--pine); color:#E9F1EB;
+    padding:22px 16px; display:flex; flex-direction:column; gap:6px;
+    position:sticky; top:0; height:100vh;
+  }
+  .brand{display:flex; align-items:center; gap:11px; padding:4px 8px 20px;}
+  .brand .mark{width:38px; height:38px; flex-shrink:0;}
+  .brand h1{font-family:'Secular One'; font-size:19px; font-weight:400; margin:0; line-height:1.05; letter-spacing:.2px;}
+  .brand small{display:block; font-size:11px; color:var(--pine-300); font-weight:600; margin-top:2px; letter-spacing:.3px;}
+  .nav-label{font-size:10.5px; font-weight:700; color:#7FA992; letter-spacing:1px; padding:14px 12px 6px;}
+  .nav-item{
+    display:flex; align-items:center; gap:11px; padding:10px 12px; border-radius:11px;
+    color:#CFE0D5; font-weight:500; font-size:14.5px; cursor:pointer; border:none; background:none;
+    width:100%; text-align:right; font-family:inherit; transition:background .15s,color .15s;
+  }
+  .nav-item:hover{background:rgba(255,255,255,.07); color:#fff;}
+  .nav-item.active{background:#fff; color:var(--pine); font-weight:700;}
+  .nav-item svg{width:19px; height:19px; flex-shrink:0;}
+  .nav-item .badge{margin-inline-start:auto; background:var(--amber); color:#fff; font-size:11px; font-weight:700; border-radius:20px; padding:1px 8px; font-family:'Heebo';}
+  .nav-item.active .badge{background:var(--amber);}
+  .side-foot{margin-top:auto; padding:14px 10px 0; border-top:1px solid rgba(255,255,255,.1); font-size:12px; color:#9CBBA8;}
+  .side-foot b{color:#fff; font-weight:600;}
+
+  /* ---------- Main ---------- */
+  .main{flex:1; min-width:0; display:flex; flex-direction:column;}
+  .topbar{
+    display:flex; align-items:center; gap:16px; padding:16px 30px;
+    background:rgba(244,247,241,.85); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;
+  }
+  .topbar h2{font-family:'Secular One'; font-weight:400; font-size:21px; margin:0;}
+  .search{
+    flex:1; max-width:340px; display:flex; align-items:center; gap:8px;
+    background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:8px 13px; color:var(--muted); font-size:13.5px;
+  }
+  .search svg{width:16px; height:16px;}
+  .topbar .spacer{flex:1;}
+  .pill-btn{background:var(--pine); color:#fff; border:none; font-family:inherit; font-weight:600; font-size:13.5px; padding:9px 16px; border-radius:11px; cursor:pointer; display:flex; align-items:center; gap:7px;}
+  .pill-btn svg{width:16px;height:16px;}
+  .avatar{width:38px; height:38px; border-radius:50%; background:var(--amber-soft); color:var(--pine-700); display:grid; place-items:center; font-weight:700; font-size:14px;}
+
+  .content{padding:26px 30px 60px; max-width:1280px;}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:1.4px; color:var(--pine-300); text-transform:uppercase;}
+  .section-h{display:flex; align-items:baseline; gap:12px; margin:30px 0 14px;}
+  .section-h h3{font-family:'Secular One'; font-weight:400; font-size:18px; margin:0;}
+  .section-h span{font-size:13px; color:var(--muted);}
+  .clickhint{display:inline-flex; align-items:center; gap:7px; background:var(--amber-soft); color:#8a5e16; font-weight:700; font-size:12.5px; padding:5px 12px; border-radius:20px; border:1px solid #EAD3A8;}
+  .clickhint svg{width:15px; height:15px;}
+
+  /* KPI */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .kpi{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px 16px; box-shadow:var(--shadow); position:relative; overflow:hidden;}
+  .kpi .ico{width:34px; height:34px; border-radius:10px; display:grid; place-items:center; margin-bottom:12px;}
+  .kpi .ico svg{width:18px; height:18px;}
+  .kpi .num{font-family:'Heebo'; font-weight:700; font-size:32px; line-height:1; color:var(--ink);}
+  .kpi .lbl{font-size:13px; color:var(--muted); margin-top:5px; font-weight:500;}
+  .kpi .delta{font-size:12px; font-weight:600; margin-top:9px;}
+  .delta.up{color:var(--grass);} .delta.warn{color:var(--clay);}
+
+  /* Pipeline rail */
+  .rail-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px 8px; box-shadow:var(--shadow); overflow-x:auto;}
+  .rail{display:flex; gap:0; min-width:980px;}
+  .stage{flex:1; min-width:120px; position:relative; padding:0 5px;}
+  .stage-head{display:flex; align-items:center; gap:7px; margin-bottom:12px;}
+  .stage-dot{width:11px; height:11px; border-radius:50%; flex-shrink:0;}
+  .stage-name{font-size:12.5px; font-weight:700; color:var(--ink);}
+  .stage-count{font-family:'Heebo'; font-size:11px; color:var(--muted); background:var(--pine-050); border-radius:20px; padding:0 7px; font-weight:600;}
+  .stage-line{position:absolute; top:5px; right:-50%; left:50%; height:2px; background:var(--line); z-index:0;}
+  .pcard{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:9px 11px 9px 32px; margin-bottom:9px; cursor:pointer; transition:transform .12s, box-shadow .12s, border-color .12s, background .12s;}
+  .pcard::after{content:''; position:absolute; top:50%; left:9px; transform:translateY(-50%); width:20px; height:20px; border-radius:50%; background:var(--pine-050); transition:background .12s;}
+  .pcard::before{content:'‹'; position:absolute; top:50%; left:14px; transform:translateY(-50%); z-index:1; color:var(--pine); font-size:16px; font-weight:800; line-height:1; transition:transform .12s, color .12s;}
+  .pcard:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(21,33,27,.12); border-color:var(--pine); background:#fff;}
+  .pcard:hover::after{background:var(--pine);}
+  .pcard:hover::before{color:#fff; transform:translateY(-50%) translateX(-2px);}
+  .pcard .t{font-size:13px; font-weight:700; line-height:1.25;}
+  .pcard .m{font-size:11.5px; color:var(--muted); margin-top:3px; display:flex; align-items:center; gap:5px;}
+  .pcard .tagrow{margin-top:7px; display:flex; gap:5px; flex-wrap:wrap;}
+  .tag{font-size:10.5px; font-weight:600; padding:2px 7px; border-radius:20px;}
+  .tag.due{background:var(--clay-soft); color:var(--clay);}
+  .tag.std{background:var(--sky-soft); color:var(--sky);}
+  .tag.ok{background:var(--pine-050); color:var(--pine);}
+
+  /* two-col */
+  .grid2{display:grid; grid-template-columns:1fr 360px; gap:20px; align-items:start;}
+  .panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;}
+  .panel-h{padding:15px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:9px;}
+  .panel-h h4{margin:0; font-size:15px; font-weight:700;}
+  .panel-h .more{margin-inline-start:auto; font-size:12px; color:var(--sky); font-weight:600; cursor:pointer;}
+  .panel-b{padding:8px 6px;}
+
+  /* crew rows */
+  .crew{display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:11px;}
+  .crew:hover{background:var(--paper);}
+  .crew .cdot{width:9px; height:42px; border-radius:6px; flex-shrink:0;}
+  .crew .cinfo{flex:1; min-width:0;}
+  .crew .cinfo b{font-size:13.5px;}
+  .crew .cinfo .s{font-size:12px; color:var(--muted);}
+  .crew .cstatus{font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:20px; white-space:nowrap;}
+
+  /* alerts */
+  .alert{display:flex; gap:11px; padding:12px 14px; border-bottom:1px solid var(--line);}
+  .alert:last-child{border-bottom:none;}
+  .alert .ad{width:30px; height:30px; border-radius:9px; flex-shrink:0; display:grid; place-items:center;}
+  .alert .ad svg{width:15px; height:15px;}
+  .alert .atxt{font-size:13px; line-height:1.35;}
+  .alert .atxt time{display:block; font-size:11px; color:var(--muted); margin-top:2px;}
+
+  /* timeline (project detail) */
+  .crumbs{font-size:13px; color:var(--muted); margin-bottom:6px;}
+  .crumbs a{color:var(--sky); text-decoration:none; cursor:pointer;}
+  .proj-head{display:flex; align-items:flex-start; gap:18px; flex-wrap:wrap; margin-bottom:8px;}
+  .proj-head h2{font-family:'Secular One'; font-weight:400; font-size:25px; margin:0 0 4px;}
+  .proj-head .sub{font-size:14px; color:var(--muted);}
+  .proj-head .hd-actions{margin-inline-start:auto; display:flex; gap:9px;}
+  .ghost-btn{background:var(--surface); border:1px solid var(--line); color:var(--pine); font-family:inherit; font-weight:600; font-size:13px; padding:9px 15px; border-radius:11px; cursor:pointer;}
+
+  .progress-rail{display:flex; gap:6px; margin:20px 0 6px; overflow-x:auto; padding-bottom:6px;}
+  .pstep{flex:1; min-width:78px; text-align:center;}
+  .pstep .bar{height:6px; border-radius:6px; background:var(--line); margin-bottom:8px;}
+  .pstep.done .bar{background:var(--grass);}
+  .pstep.curr .bar{background:var(--amber);}
+  .pstep .pl{font-size:11px; color:var(--muted); font-weight:600;}
+  .pstep.done .pl, .pstep.curr .pl{color:var(--ink);}
+
+  .tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin:24px 0 0;}
+  .tab{background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:var(--muted); padding:11px 15px; cursor:pointer; border-bottom:2.5px solid transparent;}
+  .tab.active{color:var(--pine); border-bottom-color:var(--pine);}
+  .tabpane{display:none; padding:22px 2px;}
+  .tabpane.active{display:block;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th{text-align:right; font-size:11.5px; font-weight:700; color:var(--muted); padding:8px 12px; border-bottom:1px solid var(--line); letter-spacing:.3px;}
+  td{padding:11px 12px; border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  .chip{font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-block;}
+
+  /* checklist */
+  .check{display:flex; align-items:center; gap:12px; padding:13px 14px; border:1px solid var(--line); border-radius:12px; margin-bottom:10px; background:var(--surface);}
+  .check .box{width:22px; height:22px; border-radius:7px; flex-shrink:0; display:grid; place-items:center;}
+  .check .box svg{width:13px;height:13px;}
+  .check.done .box{background:var(--grass);}
+  .check.pending .box{background:var(--amber-soft); border:1.5px solid var(--amber);}
+  .check .ctxt{flex:1;}
+  .check .ctxt b{font-size:14px;}
+  .check .ctxt .cs{font-size:12px; color:var(--muted);}
+  .check .cmeta{font-size:12px; color:var(--muted); text-align:left;}
+
+  .audit{font-family:'Heebo'; font-size:12.5px; color:var(--muted); border-inline-start:2px solid var(--pine-300); padding:3px 14px; margin:0 0 14px;}
+  .audit b{color:var(--ink); font-weight:500;}
+
+  /* gantt week */
+  .gantt{overflow-x:auto;}
+  .gantt table{min-width:760px;}
+  .gantt .day{text-align:center; font-size:11px;}
+  .gbar{height:24px; border-radius:6px; color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; padding:0 9px; white-space:nowrap;}
+
+  .note{background:var(--amber-soft); border:1px solid #EAD3A8; border-radius:12px; padding:13px 16px; font-size:13px; color:#7a5418; display:flex; gap:10px; align-items:flex-start; margin-top:24px;}
+  .note svg{width:18px; height:18px; flex-shrink:0; margin-top:1px;}
+
+  @media (max-width:920px){
+    .sidebar{display:none;}
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .grid2{grid-template-columns:1fr;}
+    .content{padding:20px 16px 50px;}
+    .topbar{padding:14px 16px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="bsd">בס״ד</div>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="11" fill="#fff" opacity=".12"/>
+        <path d="M20 31c0-6 0-10 0-13" stroke="#9FD0AE" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M20 21c-5 0-8-3-8-7 4 0 8 2 8 7Z" fill="#9FD0AE"/>
+        <path d="M20 24c4 0 7-2 7-6-3 0-7 2-7 6Z" fill="#E2902F"/>
+        <circle cx="20" cy="31" r="2.4" fill="#E2902F"/>
+      </svg>
+      <div>
+        <h1>אלו את ניצן</h1>
+        <small>מרכז בקרה תפעולי</small>
+      </div>
+    </div>
+
+    <div class="nav-label">תפעול</div>
+    <button class="nav-item active" data-view="dash">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      לוח בקרה
+    </button>
+    <button class="nav-item" data-view="proj">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+      פרויקטים <span class="badge">18</span>
+    </button>
+    <button class="nav-item" data-view="crews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M16 14c3 0 5 2 5 5"/></svg>
+      צוותי הקמה
+    </button>
+    <button class="nav-item" data-view="ware">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21v-7h6v7"/></svg>
+      מחסן ורכש <span class="badge">7</span>
+    </button>
+
+    <div class="nav-label">ניהול</div>
+    <button class="nav-item" data-view="dash">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      תקן ובטיחות
+    </button>
+    <button class="nav-item" data-view="dash">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16V9M13 16v-4M18 16V7"/></svg>
+      דוחות
+    </button>
+
+    <div class="side-foot">
+      מונע ע״י <b>BizTechoff™</b><br>בית תוכנה · מוקאפ הדגמה
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <h2 id="page-title">לוח בקרה</h2>
+      <div class="spacer"></div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        חיפוש פרויקט, אתר או מק״ט…
+      </div>
+      <button class="pill-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+        פרויקט חדש
+      </button>
+      <div class="avatar">ניצ</div>
+    </header>
+
+    <div class="content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section class="view active" id="view-dash">
+        <div class="eyebrow">תמונת מצב · שבוע 26</div>
+        <div class="kpis" style="margin-top:12px">
+          <div class="kpi">
+            <div class="ico" style="background:var(--pine-050);color:var(--pine)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+            <div class="num">18</div><div class="lbl">פרויקטים פעילים</div>
+            <div class="delta up">+3 החודש</div>
+          </div>
+          <div class="kpi">
+            <div class="ico" style="background:var(--sky-soft);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <div class="num">6</div><div class="lbl">הקמות מתוכננות השבוע</div>
+            <div class="delta up">2 צוותים בשטח</div>
+          </div>
+          <div class="kpi">
+            <div class="ico" style="background:var(--amber-soft);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div class="num">142</div><div class="lbl">פריטים בהזמנת יבוא בדרך</div>
+            <div class="delta warn">מכולה אחת באיחור 4 ימים</div>
+          </div>
+          <div class="kpi">
+            <div class="ico" style="background:var(--clay-soft);color:var(--clay)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+            <div class="num">4</div><div class="lbl">בדיקות תקן ממתינות</div>
+            <div class="delta warn">2 חורגות מ-SLA</div>
+          </div>
+        </div>
+
+        <!-- PIPELINE -->
+        <div class="section-h">
+          <h3>צינור הפרויקטים</h3>
+          <span class="clickhint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l-4 4 4 4"/><path d="M5 15h11a4 4 0 0 0 4-4V5"/></svg> לחצו על כל כרטיס לפתיחת תיק הפרויקט</span>
+        </div>
+        <div class="rail-wrap">
+          <div class="rail">
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#B8C4BC"></span><span class="stage-name">ליד</span><span class="stage-count">3</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">מתחם נינג'ה · עפולה</div><div class="m">עיריית עפולה</div></div>
+              <div class="pcard" data-open><div class="t">גן שעשועים · שכ׳ הדרים</div><div class="m">יזם פרטי</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#8FB39E"></span><span class="stage-name">סקר שטח</span><span class="stage-count">2</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">מתקני כושר · טיילת נתניה</div><div class="m">עיריית נתניה</div><div class="tagrow"><span class="tag due">סקר ב-25.6</span></div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--sky)"></span><span class="stage-name">תכנון ועיצוב</span><span class="stage-count">4</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">פארק חבלים · רמת השרון</div><div class="m">אדר׳ א. לבנון</div><div class="tagrow"><span class="tag std">נגישות</span></div></div>
+              <div class="pcard" data-open><div class="t">גן משחקים · קריית אונו</div><div class="m">מח׳ עיצוב</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#3E6FA0"></span><span class="stage-name">הצעה ואישור</span><span class="stage-count">3</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">מתחם משולב נגיש · הוד השרון</div><div class="m">ממתין לאישור הזמנה</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--amber)"></span><span class="stage-name">רכש ויבוא</span><span class="stage-count">2</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">גן שעשועים · מודיעין</div><div class="m">שכ׳ הרקפות</div><div class="tagrow"><span class="tag due">מכולה בדרך</span></div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#A07A2C"></span><span class="stage-name">תשתיות</span><span class="stage-count">2</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">פארק עירוני · כפר סבא</div><div class="m">יציקת בטון + הצללה</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--grass)"></span><span class="stage-name">הקמה</span><span class="stage-count">3</span><div class="stage-line"></div></div>
+              <div class="pcard" data-open><div class="t">משטח גומי · ראשל״צ</div><div class="m">צוות מרכז</div><div class="tagrow"><span class="tag ok">בשטח</span></div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--pine)"></span><span class="stage-name">תקן ומסירה</span><span class="stage-count">2</span></div>
+              <div class="pcard" data-open><div class="t">גן ילדים · גבעתיים</div><div class="m">בדיקת תקן 1498</div><div class="tagrow"><span class="tag std">מעבדה 27.6</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- two col -->
+        <div class="grid2" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-h">
+              <svg viewBox="0 0 24 24" width="18" fill="none" stroke="var(--pine)" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/></svg>
+              <h4>צוותי הקמה — היום בשטח</h4>
+              <span class="more" data-goto="crews">לוח שבועי ←</span>
+            </div>
+            <div class="panel-b">
+              <div class="crew"><span class="cdot" style="background:var(--sky)"></span><div class="cinfo"><b>צוות מרכז · 4 עובדים</b><div class="s">משטח גומי · ראשל״צ — שלב 2/3</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--grass)"></span><div class="cinfo"><b>צוות שרון · 3 עובדים</b><div class="s">הרכבת מתקנים · קריית אונו</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--amber)"></span><div class="cinfo"><b>צוות דרום · 4 עובדים</b><div class="s">ממתין למכולת יבוא · באר שבע</div></div><span class="cstatus" style="background:var(--amber-soft);color:#8a5e16">בהמתנה</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--clay)"></span><div class="cinfo"><b>קבלן משנה · בטון</b><div class="s">יציקת יסודות · כפר סבא</div></div><span class="cstatus" style="background:var(--clay-soft);color:var(--clay)">איחור יום</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-h">
+              <svg viewBox="0 0 24 24" width="18" fill="none" stroke="var(--clay)" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+              <h4>דורש טיפול</h4>
+            </div>
+            <div>
+              <div class="alert"><div class="ad" style="background:var(--clay-soft);color:var(--clay)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="atxt">מכולת יבוא #IL-2207 באיחור — צוות דרום מושבת<time>לפני 2 שעות</time></div></div>
+              <div class="alert"><div class="ad" style="background:var(--amber-soft);color:#8a5e16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="atxt">בדיקת תקן 1498 · גבעתיים — תיאום מעבדה תוך 24ש׳<time>SLA חורג</time></div></div>
+              <div class="alert"><div class="ad" style="background:var(--sky-soft);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="atxt">הצעת מחיר · הוד השרון — ממתינה לאישור 6 ימים<time>מעקב לקוח</time></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>זהו מוקאפ הדגמה. כל הנתונים לדוגמה בלבד. כל מודול (פרויקטים, צוותים, מחסן, תקן) נבנה כיחידה עצמאית — ניתן להפעיל בשלבים לפי סדר העדיפויות שלכם.</div>
+        </div>
+      </section>
+
+      <!-- ===== PROJECT DETAIL ===== -->
+      <section class="view" id="view-proj">
+        <div class="crumbs"><a data-goto="dash">לוח בקרה</a> ‹ <a data-goto="dash">פרויקטים</a> ‹ פארק חבלים · רמת השרון</div>
+        <div class="proj-head">
+          <div>
+            <h2>פארק חבלים · רמת השרון</h2>
+            <div class="sub">לקוח: עיריית רמת השרון · מנהל פרויקט: ל. כהן · מק״ט פרויקט P-202126</div>
+          </div>
+          <div class="hd-actions">
+            <button class="ghost-btn">מסמכים</button>
+            <button class="pill-btn">עדכון שלב</button>
+          </div>
+        </div>
+
+        <div class="progress-rail">
+          <div class="pstep done"><div class="bar"></div><div class="pl">ליד</div></div>
+          <div class="pstep done"><div class="bar"></div><div class="pl">סקר שטח</div></div>
+          <div class="pstep curr"><div class="bar"></div><div class="pl">תכנון</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">הצעה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">הזמנה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">רכש ויבוא</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">תשתיות</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">הקמה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">תקן</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">מסירה</div></div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="ov">סקירה</button>
+          <button class="tab" data-tab="mat">חומרים ורכש</button>
+          <button class="tab" data-tab="crew">צוות וזמנים</button>
+          <button class="tab" data-tab="std">תקן ובטיחות</button>
+        </div>
+
+        <div class="tabpane active" id="tab-ov">
+          <div class="grid2">
+            <div class="panel">
+              <div class="panel-h"><h4>פרטי הפרויקט</h4></div>
+              <div style="padding:6px 4px">
+                <table>
+                  <tr><td style="color:var(--muted)">סוג מתקן</td><td>מתחם משולב נגיש + מתקני חבלים</td></tr>
+                  <tr><td style="color:var(--muted)">שטח</td><td>420 מ״ר</td></tr>
+                  <tr><td style="color:var(--muted)">סביבת בטיחות</td><td>משטח גומי יצוק EN-1177</td></tr>
+                  <tr><td style="color:var(--muted)">אדריכל</td><td>אסף לבנון (חיצוני)</td></tr>
+                  <tr><td style="color:var(--muted)">יעד מסירה</td><td>14.9.2026</td></tr>
+                  <tr><td style="color:var(--muted)">סטטוס תקן</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">בתכנון — דורש בדיקת נגישות</span></td></tr>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-h"><h4>יומן שלבים</h4></div>
+              <div style="padding:14px 16px">
+                <p class="audit"><b>12.6 · סקר שטח הושלם</b><br>מדידות + צילום, הועלה לתיק הפרויקט</p>
+                <p class="audit"><b>15.6 · תכנון אדריכלי הוחל</b><br>הוקצה לאסף לבנון</p>
+                <p class="audit"><b>20.6 · בקשת בדיקת נגישות</b><br>נשלחה ליועץ נגישות</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="tab-mat">
+          <div class="panel">
+            <div class="panel-h"><h4>כתב כמויות ומצב רכש (BOM)</h4><span class="more">ייצוא</span></div>
+            <div style="padding:4px">
+              <table>
+                <thead><tr><th>מק״ט</th><th>פריט</th><th>כמות</th><th>מקור</th><th>זמן אספקה</th><th>סטטוס</th></tr></thead>
+                <tbody>
+                  <tr><td>NX-440</td><td>מגדל טיפוס משולב</td><td>1</td><td>יבוא · גרמניה</td><td>8 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בהזמנה</span></td></tr>
+                  <tr><td>RP-118</td><td>גלשת נירוסטה כפולה</td><td>2</td><td>יבוא · איטליה</td><td>6 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בהזמנה</span></td></tr>
+                  <tr><td>GR-901</td><td>גומי יצוק (מ״ר)</td><td>420</td><td>מלאי מחסן</td><td>זמין</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">במלאי</span></td></tr>
+                  <tr><td>FN-220</td><td>יסודות בטון מתועשים</td><td>14</td><td>קבלן משנה</td><td>בתיאום</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">דורש הזמנה</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="tab-crew">
+          <div class="panel">
+            <div class="panel-h"><h4>שיבוץ צוותי הקמה</h4></div>
+            <div class="gantt" style="padding:16px">
+              <table>
+                <thead><tr><th>צוות</th><th class="day">א׳</th><th class="day">ב׳</th><th class="day">ג׳</th><th class="day">ד׳</th><th class="day">ה׳</th></tr></thead>
+                <tbody>
+                  <tr><td><b>צוות שרון</b></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">תשתיות</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">הרכבה</div></td></tr>
+                  <tr><td><b>קבלן בטון</b></td><td colspan="2"><div class="gbar" style="background:#A07A2C">יציקת יסודות</div></td><td></td><td></td><td></td></tr>
+                  <tr><td><b>צוות גומי</b></td><td></td><td></td><td></td><td></td><td><div class="gbar" style="background:var(--clay)">משטח</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="tab-std">
+          <div class="eyebrow" style="margin-bottom:14px">שרשרת תקן ובטיחות · מבוקרת ומתועדת</div>
+          <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>סקר שטח ומדידות</b><div class="cs">תועד · ל. כהן · 12.6.2026</div></div><div class="cmeta">חתום דיגיטלית</div></div>
+          <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>בחירת חומרים נטולי PVC</b><div class="cs">תקן EN-1176 · אישור ספק מצורף</div></div><div class="cmeta">מסמך #4471</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>בדיקת נגישות</b><div class="cs">ממתין לאישור יועץ נגישות</div></div><div class="cmeta">יעד 28.6</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>בדיקת מעבדה מוסמכת · תקן 1498</b><div class="cs">טרם תואם</div></div><div class="cmeta">לפני מסירה</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>תעודת מסירה ואחריות</b><div class="cs">חתימת לקוח דיגיטלית + תו פלטינה</div></div><div class="cmeta">בסיום</div></div>
+          <div class="note" style="margin-top:18px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <div>כל שלב נחתם ומתוארך — שרשרת ראיות שלמה מהסקר ועד תעודת המסירה. בדיוק הסטנדרט שבזכותו אתם מחזיקים בתו פלטינה של מכון התקנים, עכשיו מתועד אוטומטית לכל פרויקט.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CREWS ===== -->
+      <section class="view" id="view-crews">
+        <div class="eyebrow">לוח שבועי · שבוע 26</div>
+        <div class="section-h"><h3>שיבוץ צוותי הקמה בכל הארץ</h3><span>גרירה לשינוי שיבוץ · התראה על חפיפות</span></div>
+        <div class="panel">
+          <div class="gantt" style="padding:18px">
+            <table>
+              <thead><tr><th style="min-width:130px">צוות / קבלן</th><th class="day">ראשון</th><th class="day">שני</th><th class="day">שלישי</th><th class="day">רביעי</th><th class="day">חמישי</th></tr></thead>
+              <tbody>
+                <tr><td><b>צוות מרכז</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">משטח גומי · ראשל״צ</div></td><td colspan="3"><div class="gbar" style="background:var(--pine)">הרכבה · קריית אונו</div></td></tr>
+                <tr><td><b>צוות שרון</b><div style="font-size:12px;color:var(--muted)">3 עובדים</div></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">תשתיות · רמת השרון</div></td><td colspan="2"><div class="gbar" style="background:var(--grass)">הרכבה · רמת השרון</div></td></tr>
+                <tr><td><b>צוות דרום</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="3"><div class="gbar" style="background:var(--amber)">ממתין למכולת יבוא · ב״ש</div></td><td colspan="2"><div class="gbar" style="background:var(--pine)">הרכבה · ב״ש</div></td></tr>
+                <tr><td><b>קבלן בטון</b><div style="font-size:12px;color:var(--muted)">קבלן משנה</div></td><td colspan="2"><div class="gbar" style="background:#A07A2C">יסודות · כפר סבא</div></td><td></td><td colspan="2"><div class="gbar" style="background:#A07A2C">יסודות · מודיעין</div></td></tr>
+                <tr><td><b>צוות הצללות</b><div style="font-size:12px;color:var(--muted)">2 עובדים</div></td><td></td><td></td><td></td><td colspan="2"><div class="gbar" style="background:var(--clay)">הצללה · כפר סבא</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>צוות דרום מושבת 3 ימים בהמתנה למכולה — המערכת מזהה חלון פנוי ומציעה שיבוץ חלופי. כך מצמצמים זמני המתנה יקרים.</div>
+        </div>
+      </section>
+
+      <!-- ===== WAREHOUSE ===== -->
+      <section class="view" id="view-ware">
+        <div class="eyebrow">מחסן ורכש</div>
+        <div class="section-h"><h3>מלאי, הזמנות יבוא ומכולות בדרך</h3></div>
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><div class="num">3</div><div class="lbl">מכולות יבוא בדרך</div><div class="delta warn">אחת באיחור</div></div>
+          <div class="kpi"><div class="num">142</div><div class="lbl">פריטים בהזמנה פתוחה</div></div>
+          <div class="kpi"><div class="num">9</div><div class="lbl">פריטים מתחת לסף מלאי</div><div class="delta warn">דורש חידוש</div></div>
+        </div>
+        <div class="panel" style="margin-top:22px">
+          <div class="panel-h"><h4>הזמנות יבוא פעילות</h4><span class="more">הזמנה חדשה</span></div>
+          <div style="padding:4px">
+            <table>
+              <thead><tr><th>מכולה</th><th>ספק</th><th>פריטים</th><th>מיועד לפרויקט</th><th>ETA</th><th>סטטוס</th></tr></thead>
+              <tbody>
+                <tr><td>IL-2207</td><td>Kompan · דנמרק</td><td>38</td><td>גן · מודיעין</td><td>+4 ימים</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">באיחור</span></td></tr>
+                <tr><td>IL-2211</td><td>Lappset · פינלנד</td><td>52</td><td>נינג'ה · כפר סבא</td><td>9 ימים</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">בהפלגה</span></td></tr>
+                <tr><td>IL-2214</td><td>Proludic · צרפת</td><td>52</td><td>פארק חבלים · רה״ש</td><td>3 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בייצור</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>כל מכולה מקושרת לפרויקט ולשיבוץ הצוות שלו — איחור ביבוא מקפיץ התראה ומציע תזמון מחדש של הצוות אוטומטית.</div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const titles={dash:'לוח בקרה',proj:'פארק חבלים · רמת השרון',crews:'צוותי הקמה',ware:'מחסן ורכש'};
+  function show(view){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById('view-'+view).classList.add('active');
+    document.getElementById('page-title').textContent=titles[view]||'לוח בקרה';
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.view===view));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>show(n.dataset.view)));
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));
+  document.querySelectorAll('[data-open]').forEach(c=>c.addEventListener('click',()=>show('proj')));
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tabpane').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-'+t.dataset.tab).classList.add('active');
+  }));
+</script>
+</body>
+</html>
