@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מה רצון השם? — למחוק את ה״אני״</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="מאורח בעולם, דרך מחיקת ה'אני' מן המשוואה, ועד לב בשר — מהו באמת רצון השם">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/mah-retzon-hashem">
+<meta property="og:title" content="מה רצון השם? — למחוק את ה״אני״">
+<meta property="og:description" content="מאורח בעולם, דרך מחיקת ה'אני' מן המשוואה, ועד לב בשר — מהו באמת רצון השם">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="מה רצון השם? — למחוק את ה״אני״">
+<meta name="twitter:description" content="מאורח בעולם, דרך מחיקת ה'אני' מן המשוואה, ועד לב בשר — מהו באמת רצון השם">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5ecd9;
+    --paper: #fbf4e2;
+    --ink: #2b1d10;
+    --ink-soft: #4a3520;
+    --gold: #b88a2c;
+    --gold-deep: #8a6620;
+    --crimson: #8c2a1e;
+    --royal: #5b3a78;
+    --shadow: rgba(43, 29, 16, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Frank Ruhl Libre', 'David Libre', serif;
+    background: var(--parchment);
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink); line-height: 1.9; min-height: 100vh; padding: 60px 20px;
+  }
+  .container {
+    max-width: 780px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding: 70px 60px; border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position: relative;
+  }
+  .container::before { content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px; }
+
+  .bezras { text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:40px; opacity:0.85; }
+  .ornament { text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:30px; opacity:0.7; }
+  .eyebrow { text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-weight:900; font-size:clamp(33px,5.3vw,50px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:16px; letter-spacing:-0.5px; }
+  .subtitle { text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:42px; }
+
+  .lead { text-align:center; font-size:clamp(19px,3.3vw,22px); color:var(--ink); font-weight:500; line-height:1.7; margin-bottom:30px; }
+  .lead strong { color:var(--crimson); }
+
+  .divider { display:flex; align-items:center; justify-content:center; margin:42px 0; gap:20px; }
+  .divider::before, .divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px; }
+  .divider-symbol { color:var(--gold); font-size:18px; }
+
+  .section { margin-bottom:30px; }
+  .section-title { font-weight:700; font-size:23px; color:var(--crimson); margin-bottom:13px; display:flex; align-items:center; gap:12px; }
+  .section-title::before { content:"❖"; color:var(--gold); font-size:13px; }
+  p { font-size:18px; color:var(--ink); margin-bottom:14px; }
+  strong { color:var(--crimson); font-weight:700; }
+  em { color:var(--gold-deep); font-style:italic; font-weight:500; }
+
+  .pasuk { background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:18px 24px; margin:18px 0; font-family:'David Libre',serif; font-size:18px; color:var(--ink-soft); border-radius:2px; text-align:center; }
+  .pasuk-source { display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px; }
+
+  /* the answer reveal */
+  .reveal { margin:36px 0; padding:34px 28px; text-align:center; background:linear-gradient(135deg, rgba(140,42,30,0.09), rgba(184,138,44,0.05)); border:1px solid rgba(140,42,30,0.28); border-radius:6px; }
+  .reveal .q { font-family:'Bellefair',serif; font-size:14px; letter-spacing:3px; color:var(--crimson); margin-bottom:12px; }
+  .reveal .a { font-size:clamp(28px,6vw,42px); font-weight:900; color:var(--ink); line-height:1.2; }
+  .reveal .a span { color:var(--crimson); }
+  .reveal .seal { margin-top:12px; font-style:italic; color:var(--gold-deep); font-size:16px; }
+
+  /* equation card */
+  .equation { margin:34px 0; padding:30px 26px; background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border-radius:6px; position:relative; overflow:hidden; box-shadow:0 20px 50px -15px rgba(43,29,16,0.5); }
+  .equation::before { content:""; position:absolute; inset:8px; border:1px solid rgba(184,138,44,0.3); border-radius:4px; pointer-events:none; }
+  .equation-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--gold); text-transform:uppercase; text-align:center; margin-bottom:20px; }
+  .eq-line { text-align:center; font-size:clamp(17px,3.6vw,22px); font-weight:700; line-height:1.7; }
+  .eq-line .strike { color:#c87a6e; text-decoration:line-through; text-decoration-color:#8c2a1e; text-decoration-thickness:2px; opacity:0.85; }
+  .eq-line .add { color:var(--gold); }
+  .eq-arrow { text-align:center; color:var(--gold); font-size:22px; margin:10px 0; }
+  .eq-cap { text-align:center; font-size:14px; font-style:italic; color:rgba(245,236,217,0.7); margin-top:14px; }
+
+  .final-message { margin-top:42px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center; }
+  .final-message-label { font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px; }
+  .final-pasuk { font-family:'David Libre',serif; font-size:19px; color:var(--ink); line-height:1.7; margin-bottom:12px; font-weight:500; }
+  .final-explanation { font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0; }
+
+  .attribution { margin-top:42px; text-align:center; padding-top:30px; border-top:1px solid rgba(184,138,44,0.3); }
+  .attribution-line { font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500; }
+  .footer-ornament { text-align:center; margin-top:30px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5; }
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 24px;} .container::before{inset:8px;}
+    .lead{font-size:18px;} p{font-size:17px;}
+  }
+  @media print { body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container { animation: fadeUp 1s ease-out; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בעז״ה</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עבודת השם · פנימיות התורה</div>
+    <h1>מַה רְצוֹן הַשֵּׁם?</h1>
+    <p class="subtitle">מאורח בעולם — דרך מחיקת ה״אני״ — עד לב בשר</p>
+
+    <p class="lead">
+      לא יכול להיות שהבורא ברא את העולם <strong>להיטיב לברואיו</strong> —
+      והם תמיד סובלים.<br>
+      סביר יותר להניח שאנחנו <strong>מפספסים את כוונת הבריאה</strong> בדרך החיים שלנו.
+    </p>
+
+    <div class="section">
+      <h2 class="section-title">אוֹרֵחַ בָּעוֹלָם</h2>
+      <p>
+        אדם אינו מאמין שהוא <strong>אורח</strong> בעולם. אינו יודע באמת
+        שהעולם הזה הוא <em>מעבר בין עולמות</em> — שבאים אליו רק כדי
+        <strong>לקחת צידה לעולם הבא</strong>.
+      </p>
+      <div class="pasuk">
+        הָעוֹלָם הַזֶּה דּוֹמֶה לִפְרוֹזְדוֹר בִּפְנֵי הָעוֹלָם הַבָּא;
+        הַתְקֵן עַצְמְךָ בַּפְּרוֹזְדוֹר — כְּדֵי שֶׁתִּכָּנֵס לַטְּרַקְלִין
+        <span class="pasuk-source">— אבות ד, טז</span>
+      </div>
+      <p>
+        וזו אינה <em>השגה שכלית</em> — זו <strong>דרך חיים</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">עַד שֶׁלֹּא תֵּדַע — אֵין גִּילּוּי</h2>
+      <p>
+        כדי להשיג את רצון השם — לא יעזרו לא לימוד, ולא מעשה, ולא שום עצה.
+        <strong>עד שאדם לא יֵדע מה רצון השם — אין שום גילוי משמים.</strong>
+        קודם יודעים לאן הולכים, ורק אז נפתחת הדרך.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="q">וּמַה רְצוֹן הַשֵּׁם?!</div>
+      <div class="a">שֶׁנְּבַטֵּל אֶת <span>רְצוֹנֵנוּ</span></div>
+      <div class="seal">— זֶה רְצוֹן הַשֵּׁם.</div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">מוֹחֲקִים אֶת הָ״אֲנִי״</h2>
+      <p>
+        ואיך זוכים לזה? פשוט מאוד — <strong>משנים את המשוואה</strong>.
+      </p>
+    </div>
+
+    <div class="equation">
+      <div class="equation-label">שינוי המשוואה</div>
+      <div class="eq-line">הַקָּדוֹשׁ בָּרוּךְ הוּא &nbsp;·&nbsp; <span class="strike">אֲנִי</span> &nbsp;·&nbsp; הַתּוֹרָה</div>
+      <div class="eq-arrow">⟱</div>
+      <div class="eq-line"><span class="add">עַם יִשְׂרָאֵל</span> &nbsp;·&nbsp; הַקָּדוֹשׁ בָּרוּךְ הוּא &nbsp;·&nbsp; הַתּוֹרָה</div>
+      <div class="eq-cap">זוֹ הַמִּשְׁוָואָה שֶׁבָּהּ זוֹכִים לְגִילּוּי הָעֶצֶם — שֶׁשָּׁם הָאֶחָד</div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">כָּל הַהֶסְתֵּר — בַּדַּעַת</h2>
+      <p>
+        כל הסתרת השם נמצאת ב<strong>דעת</strong> — שאדם אינו מפסיק לחשוב על עצמו.
+        וכדי <strong>להרעיב את הדעת הזאת למוות</strong>, דע:
+        המרוויח הראשי במעשי האדם בעולם הוא <strong>עם ישראל</strong>.
+      </p>
+      <p>
+        באופן שאינו מבדיל בין דתי למי שעדיין לא, בין איש לאשה,
+        בין קרובי משפחה לחברים — <em>כולם זה אחד, ואחד זה כולם</em>.
+      </p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">✦</span></div>
+
+    <div class="section">
+      <h2 class="section-title">לֵב בָּשָׂר</h2>
+      <p>
+        ומי שפועל כך — לא רחוק הזמן שיזכה, <strong>בהיסח הדעת</strong>,
+        לביקור מעולמות עליונים: מלאך שיוריד לו את האבן מן הלב,
+        ויגלה לו <strong>לב בשר</strong>.
+      </p>
+      <div class="pasuk">
+        וְנָתַתִּי לָכֶם לֵב חָדָשׁ וְרוּחַ חֲדָשָׁה אֶתֵּן בְּקִרְבְּכֶם,
+        וַהֲסִרֹתִי אֶת לֵב הָאֶבֶן מִבְּשַׂרְכֶם — וְנָתַתִּי לָכֶם לֵב בָּשָׂר
+        <span class="pasuk-source">— יחזקאל לו, כו</span>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">תחילת הדרך</div>
+      <p class="final-pasuk">שָׁם — הָאַהֲבָה הַמְסֻתֶּרֶת שֶׁל הַתַּנְיָא</p>
+      <p class="final-explanation">
+        ושם — <strong>רק שם</strong> — מתחילה הדרך.<br>
+        ועד שמגיעים לשם, אנחנו רק מסתובבים במעגלים —<br>
+        <em>לְמַעַן שְׁמוֹ, בְּאַהֲבָה</em>.
+      </p>
+    </div>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך החסידות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
