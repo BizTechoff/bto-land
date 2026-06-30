@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שלושה כתרים — שלוש תורות עד הכתר</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="שלוש תורות עד הכתר: תורת הרצון, תורת ביטול הרצון, ותורת הכתר — רצון השם">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/shlosha-ketarim">
+<meta property="og:title" content="שלושה כתרים — שלוש תורות עד הכתר">
+<meta property="og:description" content="שלוש תורות עד הכתר: תורת הרצון, תורת ביטול הרצון, ותורת הכתר — רצון השם">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="שלושה כתרים — שלוש תורות עד הכתר">
+<meta name="twitter:description" content="שלוש תורות עד הכתר: תורת הרצון, תורת ביטול הרצון, ותורת הכתר — רצון השם">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:68px 58px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(34px,5.5vw,54px); text-align:center; color:var(--ink); line-height:1.12; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:36px;}
+
+  /* three crowns overview */
+  .crowns{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:30px 0 8px;}
+  .crown{padding:18px 12px; border-radius:6px; text-align:center; border:1px solid rgba(184,138,44,0.3); background:rgba(184,138,44,0.06);}
+  .crown.c3{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border-color:var(--gold-deep);}
+  .crown .ic{font-size:22px; margin-bottom:6px;}
+  .crown .lv{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:4px;}
+  .crown.c3 .lv{color:var(--gold-light);}
+  .crown .nm{font-size:16px; font-weight:700; color:var(--crimson); line-height:1.3;}
+  .crown.c3 .nm{color:var(--gold);}
+
+  .part{margin-top:46px;}
+  .part-tag{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--gold); margin-bottom:4px;}
+  .part-title{text-align:center; font-weight:900; font-size:clamp(24px,4vw,34px); color:var(--ink); margin-bottom:8px;}
+  .part-rule{display:flex; align-items:center; justify-content:center; gap:16px; margin:14px 0 26px; color:var(--gold);}
+  .part-rule::before,.part-rule::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:180px;}
+
+  .section{margin-bottom:26px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:15px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:7px; letter-spacing:1px;}
+
+  /* heart left->right */
+  .heart{margin:28px 0; padding:26px; background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border-radius:6px; position:relative; overflow:hidden; box-shadow:0 18px 44px -16px rgba(43,29,16,0.5);}
+  .heart::before{content:""; position:absolute; inset:8px; border:1px solid rgba(184,138,44,0.3); border-radius:4px; pointer-events:none;}
+  .heart-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--gold); text-transform:uppercase; text-align:center; margin-bottom:18px;}
+  .heart-row{display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center;}
+  .heart-side{text-align:center; padding:16px 12px; border-radius:5px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.2);}
+  .heart-side .s{font-size:13px; color:rgba(245,236,217,0.6); letter-spacing:1px; margin-bottom:6px;}
+  .heart-side .n{font-size:18px; font-weight:700;}
+  .heart-side.left .n{color:#c87a6e;} .heart-side.right .n{color:var(--gold);}
+  .heart-arrow{color:var(--gold); font-size:24px;}
+
+  /* nrn ladder */
+  .nrn{margin:28px 0; padding:24px 22px; background:linear-gradient(135deg, rgba(184,138,44,0.10), rgba(184,138,44,0.03)); border:1px solid rgba(184,138,44,0.25); border-radius:6px;}
+  .nrn-row{display:grid; grid-template-columns:auto 1fr 1fr 1fr; gap:10px; align-items:center; padding:9px 0; border-bottom:1px dashed rgba(184,138,44,0.3); font-size:15px;}
+  .nrn-row:last-child{border-bottom:none;}
+  .nrn-row .lvl{font-weight:700; color:var(--crimson); font-size:17px; min-width:62px;}
+  .nrn-row .c{color:var(--ink-soft); text-align:center;}
+  .nrn-head{font-family:'Bellefair',serif; font-size:11px; letter-spacing:1px; color:var(--gold-deep); border-bottom:1px solid rgba(184,138,44,0.4); padding-bottom:6px; text-transform:uppercase;}
+
+  .final-message{margin-top:46px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:22px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+  .attribution{margin-top:40px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 22px;} .container::before{inset:8px;}
+    .crowns{grid-template-columns:1fr;} .heart-row{grid-template-columns:1fr;} .heart-arrow{transform:rotate(90deg);}
+    .nrn-row{grid-template-columns:1fr; text-align:center; gap:3px;} .nrn-row .lvl{min-width:0;}
+    p{font-size:17px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · חסידות</div>
+    <h1>שְׁלוֹשָׁה כְּתָרִים</h1>
+    <p class="subtitle">שלוש תורות עד הכתר</p>
+
+    <div class="crowns">
+      <div class="crown"><div class="ic">♕</div><div class="lv">כתר א׳</div><div class="nm">תּוֹרַת הָרָצוֹן</div></div>
+      <div class="crown"><div class="ic">♕</div><div class="lv">כתר ב׳</div><div class="nm">בִּטּוּל הָרָצוֹן</div></div>
+      <div class="crown c3"><div class="ic">♚</div><div class="lv">כתר ג׳</div><div class="nm">רְצוֹן הַשֵּׁם</div></div>
+    </div>
+
+    <!-- ===== PART I ===== -->
+    <div class="part">
+      <div class="part-tag">תּוֹרָה רִאשׁוֹנָה</div>
+      <div class="part-title">תּוֹרַת הָרָצוֹן</div>
+      <div class="part-rule"><span>✦</span></div>
+
+      <div class="section">
+        <p>
+          זה אדם שעדיין לא קיבל החלטה אמיצה ולא ביטל את תאוותיו —
+          אוכל, ממון, נשים — והוא לומד תורה מגיל קטן. <strong>חכם גדול בלי דעת</strong>.
+          וברוב חכמתו הוא <em>מסתיר את רצונו הפנימי</em>, עד שלמראית עין נראה צדיק —
+          ובאמת, בחדרי חדרים, <strong>הוא לא</strong>. פיו וליבו אינם שווים.
+        </p>
+        <p>
+          <strong>אדם כזה מלא יסורים במחשבה — ואינו יודע למה</strong>, כי עוונותיו
+          מוסתרים ממנו, לפי שאינו <em>ישר</em>. ונברא לו מלאך הנקרא <strong>"חַמְסָן"</strong>,
+          שצובע עבירות למצוות ומצוות לעבירות (על פי הבעש"ט).
+        </p>
+        <div class="pasuk">
+          הָאָדָם יִרְאֶה לַעֵינַיִם — וַה׳ יִרְאֶה לַלֵּבָב
+          <span class="pasuk-source">— שמואל א טז, ז</span>
+        </div>
+        <p>
+          ואם הוא רב גדול או משפיע — הוא <strong>מחטיא אנשים</strong> ב<em>שגגת תלמוד</em>,
+          וזה עוונו, כי היא <strong>עולה זדון</strong>.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">אֵיךְ תֵּדַע שֶׁאַתָּה כָּאן?</h2>
+        <p>
+          אם אתה כל הזמן חושב על עצמך; אם אתה <em>מאוכזב, כועס או דואג</em>
+          שרצונך אינו מתקיים — זוהי <strong>דעת הנחש</strong>, שמאז חטא עץ הדעת
+          התערב הטוב ברע, ואנחנו עובדים גם לרצוננו וגם לרצונו —
+          <strong>פוסחים על שני הסעיפים</strong>.
+        </p>
+        <div class="pasuk">
+          עַד מָתַי אַתֶּם פֹּסְחִים עַל שְׁתֵּי הַסְּעִפִּים? אִם ה׳ הָאֱלֹהִים — לְכוּ אַחֲרָיו
+          <span class="pasuk-source">— מלכים א יח, כא</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PART II ===== -->
+    <div class="part">
+      <div class="part-tag">תּוֹרָה שְׁנִיָּה</div>
+      <div class="part-title">תּוֹרַת בִּטּוּל הָרָצוֹן</div>
+      <div class="part-rule"><span>✦</span></div>
+
+      <div class="section">
+        <p>
+          תורה זו <strong>נרכשת במעשים — לא נלמדת בספרים</strong>. על ידי שאדם נעשה
+          <strong>יָשָׁר במעשיו בלי מחשבה</strong> — <em>"מרכבה" לשכינה</em> —
+          מבטל את שכלו וליבו ב<strong>קבלת עול</strong>, עבודת האבות; אינו מקשיב
+          ומתעלם מן הקול הפנימי הנגוע ברצון עצמי, ופועל <strong>למען עם ישראל</strong>
+          בלי רצון לקבל "פרס".
+        </p>
+        <p>
+          וכך הוא מעביר את ה<em>"היולי"</em> (הניצוץ המחיה), את ה"מלכות" שבחומר,
+          אל המלך האמיתי: <strong>ניצוצות הקדושה</strong> עוברים מצד <em>שמאל</em> שבליבו
+          (נפשו הבהמית) אל צד <em>ימין</em> שבליבו (נפשו האלוקית).
+        </p>
+      </div>
+
+      <div class="heart">
+        <div class="heart-label">העברת הניצוצות שבלב</div>
+        <div class="heart-row">
+          <div class="heart-side left"><div class="s">צד שמאל</div><div class="n">נפש בהמית</div></div>
+          <div class="heart-arrow">⟸</div>
+          <div class="heart-side right"><div class="s">צד ימין</div><div class="n">נפש אלוקית</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <p>
+          וכך הוא מגלה את ה<strong>נֶּפֶשׁ</strong> — שהיא <em>אברהם אבינו</em> —
+          וזו תחילת הקשר עם בורא עולם. ובעקבות מעשיו, ליבו נמשך אל השם, וכן דיבוריו,
+          והוא זוכה ל<strong>רוּחַ</strong> (יצחק, עולה תמימה) היושבת בלב.
+          ואז זוכה ל<strong>סייעתא דשמיא</strong> — שמגלים לו את <strong>נשמתו</strong>:
+        </p>
+        <div class="pasuk">
+          הַבָּא לִטַּהֵר — מְסַיְּעִין אוֹתוֹ
+          <span class="pasuk-source">— שבת קד ע"א</span>
+        </div>
+        <p>כי זכה להדליק את הנר (נפש־רוח שבליבו):</p>
+        <div class="pasuk">
+          נֵר ה׳ נִשְׁמַת אָדָם — חֹפֵשׂ כָּל חַדְרֵי בָטֶן
+          <span class="pasuk-source">— משלי כ, כז</span>
+        </div>
+      </div>
+
+      <div class="nrn">
+        <div class="nrn-row nrn-head"><div>דרגה</div><div class="c">אב</div><div class="c">עולם</div><div class="c">תיקון</div></div>
+        <div class="nrn-row"><div class="lvl">נֶפֶשׁ</div><div class="c">אברהם</div><div class="c">עשייה</div><div class="c">המעשה</div></div>
+        <div class="nrn-row"><div class="lvl">רוּחַ</div><div class="c">יצחק</div><div class="c">יצירה</div><div class="c">הדיבור</div></div>
+        <div class="nrn-row"><div class="lvl">נְשָׁמָה</div><div class="c">"ישראל"</div><div class="c">בריאה</div><div class="c">המחשבה</div></div>
+      </div>
+
+      <div class="section">
+        <p>
+          כאן אדם זוכה ל<strong>דעת של עולם הבריאה</strong> (חב״ד). כלומר: תיקן את
+          עולם המעשה (אברהם), את עולם הדיבור (יצחק) — ועכשיו זכה לעזרה משמים שתיקנה
+          את עולם הבריאה כנגד <em>המחשבה</em> שהיתה פגומה. עכשיו הוא זוכה ל<strong>דעת חדשה</strong>,
+          להיכל חדש, לדיבור משמים הנקרא <strong>"יִשְׂרָאֵל"</strong> —
+          וכאן ניצח את ה<strong>שטן הזכר, סמא"ל</strong>, ששולט במחשבה.
+        </p>
+        <p>
+          ועכשיו מתחיל <strong>תיקון המידות</strong> שבלב — זוהי <em>"אשת השטן"</em>,
+          הקשה עשרות מונים מן הזכר. עליה אמר ה<strong>אור החיים הקדוש</strong>:
+          <em>"על הזכר הצלחתי — על הנקבה עדיין לא"</em>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== PART III ===== -->
+    <div class="part">
+      <div class="part-tag">תּוֹרָה שְׁלִישִׁית</div>
+      <div class="part-title">תּוֹרַת הַכֶּתֶר — רְצוֹן הַשֵּׁם</div>
+      <div class="part-rule"><span>✦</span></div>
+
+      <div class="section">
+        <p>
+          ותיקון המידות (ה"נקבה") כבר אינו נעשה בכוח האדם. כאן האדם <strong>נדבק בשלום</strong> —
+          והשם בעצמו <strong>נלחם עבורו</strong>:
+        </p>
+        <div class="pasuk">
+          ה׳ יִלָּחֵם לָכֶם — וְאַתֶּם תַּחֲרִשׁוּן
+          <span class="pasuk-source">— שמות יד, יד</span>
+        </div>
+        <p>
+          כאן <strong>נכנס הבורא בכל הכוח אל חיי האדם</strong>. הרצון כבר אינו של האדם —
+          הוא <strong>רצון השם</strong>. זהו <em>הכתר</em>.
+        </p>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">שלושת הכתרים</div>
+      <p class="final-pasuk">מֵהָרָצוֹן — אֶל בִּטּוּלוֹ — אֶל רְצוֹן הַשֵּׁם</p>
+      <p class="final-explanation">
+        תורה ראשונה נלחמת ב"אני", השנייה נקנית במעשה —<br>
+        ובשלישית, כשהאדם שותק, <strong>הבורא עצמו נלחם ומולך</strong>.
+      </p>
+    </div>
+
+    <p class="note">
+      * דברי סוד וחסידות, בקצרה ובלשון משל. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הסוד והחסידות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
