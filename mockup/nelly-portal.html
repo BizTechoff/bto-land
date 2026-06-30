@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מועדון האופים · האזור האישי שלי | נלי ימפולסקי</title>
+<style>
+  /* ===== Nelly's world: baked crust, sourdough amber, oven char ===== */
+  :root{
+    --crust:#3a2417;        /* deep baked crust brown */
+    --char:#241610;         /* oven char — bg */
+    --char2:#2e1d14;        /* raised panel */
+    --crumb:#f3e8d8;        /* bread crumb / ink */
+    --crumb-dim:#b8a591;    /* muted ink */
+    --amber:#d98c3f;        /* active sourdough amber */
+    --amber-deep:#b66f28;
+    --gold:#e8b85c;         /* highlight gold */
+    --flour:#efe4d2;        /* flour cream — surfaces */
+    --rye:#7a5a3a;          /* rye line */
+    --rise:#8fae6b;         /* "risen"/done green */
+    --rise-soft:#1e2a17;
+    --line:#43301f;
+    --shadow:rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--char);
+    color:var(--crumb);
+    font-family:"Heebo","Assistant","Segoe UI",sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    /* subtle flour-dust grain */
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(217,140,63,.05) 0, transparent 38%),
+      radial-gradient(circle at 88% 82%, rgba(232,184,92,.04) 0, transparent 40%);
+  }
+
+  .app{display:flex;min-height:100vh;max-width:1280px;margin:0 auto;
+    box-shadow:0 0 80px rgba(0,0,0,.35)}
+
+  /* ===== Sidebar ===== */
+  .side{
+    width:248px;flex:0 0 248px;
+    background:linear-gradient(180deg,var(--crust),#311e12);
+    border-left:1px solid var(--line);
+    padding:26px 18px;
+    display:flex;flex-direction:column;gap:6px;
+    position:sticky;top:0;height:100vh;
+  }
+  .brand{display:flex;align-items:center;gap:11px;padding:0 6px 20px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+  .brand .mark{
+    width:42px;height:42px;border-radius:11px;flex:0 0 42px;
+    background:radial-gradient(circle at 32% 30%,var(--gold),var(--amber-deep));
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+    box-shadow:inset 0 -3px 8px rgba(0,0,0,.3);
+  }
+  .brand b{font-size:1.05rem;color:var(--flour);display:block;letter-spacing:.01em}
+  .brand span{font-size:.72rem;color:var(--amber);font-weight:600}
+
+  .nav-label{font-size:.66rem;color:var(--crumb-dim);letter-spacing:.12em;
+    text-transform:uppercase;padding:14px 10px 6px;font-weight:700}
+  .nav a{
+    display:flex;align-items:center;gap:11px;
+    padding:10px 12px;border-radius:9px;
+    color:var(--crumb-dim);text-decoration:none;font-size:.92rem;font-weight:500;
+    transition:.15s;
+  }
+  .nav a .ic{width:20px;text-align:center;font-size:1rem;flex:0 0 20px}
+  .nav a:hover{background:rgba(217,140,63,.08);color:var(--crumb)}
+  .nav a.on{background:linear-gradient(90deg,rgba(217,140,63,.22),rgba(217,140,63,.04));
+    color:var(--gold);font-weight:700;box-shadow:inset 2px 0 0 var(--amber) }
+  .nav a .badge{margin-right:auto;background:var(--amber);color:#2a1808;
+    font-size:.66rem;font-weight:800;padding:1px 7px;border-radius:20px}
+
+  .side .me{margin-top:auto;display:flex;align-items:center;gap:10px;
+    padding:12px 8px 2px;border-top:1px solid var(--line)}
+  .side .me .av{width:36px;height:36px;border-radius:50%;flex:0 0 36px;
+    background:linear-gradient(135deg,#a8763f,#6b4424);display:flex;align-items:center;
+    justify-content:center;font-weight:700;color:var(--flour);font-size:.85rem}
+  .side .me .nm{font-size:.84rem;color:var(--crumb);font-weight:600}
+  .side .me .tier{font-size:.68rem;color:var(--amber)}
+
+  /* ===== Main ===== */
+  .main{flex:1;min-width:0;padding:30px 40px 60px}
+  .top{display:flex;justify-content:space-between;align-items:flex-end;
+    flex-wrap:wrap;gap:14px;margin-bottom:26px}
+  .hello h1{margin:0 0 4px;font-size:1.7rem;color:var(--flour);font-weight:800;letter-spacing:-.01em}
+  .hello p{margin:0;color:var(--crumb-dim);font-size:.94rem}
+  .hello .accent{color:var(--gold);font-weight:700}
+  .streak{
+    background:var(--char2);border:1px solid var(--line);border-radius:14px;
+    padding:12px 18px;text-align:center;min-width:128px;
+  }
+  .streak .n{font-size:1.5rem;font-weight:800;color:var(--amber);line-height:1}
+  .streak .l{font-size:.7rem;color:var(--crumb-dim);margin-top:4px;letter-spacing:.04em}
+
+  /* progress band */
+  .journey{
+    background:linear-gradient(135deg,var(--char2),#291a12);
+    border:1px solid var(--line);border-radius:18px;
+    padding:22px 24px;margin-bottom:24px;position:relative;overflow:hidden;
+  }
+  .journey::after{content:"";position:absolute;left:-40px;bottom:-40px;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(217,140,63,.10),transparent 70%);pointer-events:none}
+  .journey h2{margin:0 0 3px;font-size:1.04rem;color:var(--flour)}
+  .journey .sub{margin:0 0 16px;font-size:.84rem;color:var(--crumb-dim)}
+  .bar{height:9px;border-radius:20px;background:#1b1009;overflow:hidden;border:1px solid #4a3018}
+  .bar > i{display:block;height:100%;width:62%;
+    background:linear-gradient(90deg,var(--amber-deep),var(--gold));border-radius:20px}
+  .bar-meta{display:flex;justify-content:space-between;margin-top:9px;font-size:.78rem;color:var(--crumb-dim)}
+  .bar-meta b{color:var(--gold)}
+
+  /* steps row */
+  .steps{display:flex;gap:10px;margin-top:18px;overflow-x:auto;padding-bottom:4px}
+  .step{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px;width:74px;text-align:center}
+  .step .dot{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;
+    justify-content:center;font-size:1.15rem;border:1.5px solid var(--line);position:relative}
+  .step.done .dot{background:var(--rise-soft);border-color:#3c5a26;color:var(--rise)}
+  .step.now .dot{background:linear-gradient(135deg,var(--amber),var(--amber-deep));
+    border-color:var(--gold);color:#2a1808;box-shadow:0 0 0 4px rgba(217,140,63,.16)}
+  .step.todo .dot{background:#1f130b;color:var(--crumb-dim)}
+  .step small{font-size:.68rem;color:var(--crumb-dim);line-height:1.25}
+  .step.now small{color:var(--gold);font-weight:700}
+  .step.done small{color:var(--crumb-dim)}
+
+  /* grid cards */
+  .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-bottom:20px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--char2);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .card h3{margin:0 0 2px;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--amber);font-weight:700}
+  .card .big{margin:6px 0 2px;font-size:1.18rem;color:var(--flour);font-weight:700}
+  .card .meta{font-size:.84rem;color:var(--crumb-dim);margin:0}
+
+  /* monthly masterclass feature */
+  .feature{display:flex;gap:18px;align-items:center}
+  .feature .thumb{
+    width:104px;height:104px;flex:0 0 104px;border-radius:13px;
+    background:
+      linear-gradient(135deg,rgba(232,184,92,.25),rgba(58,36,23,.6)),
+      repeating-linear-gradient(45deg,#5a3a22 0 6px,#4a2f1b 6px 12px);
+    border:1px solid var(--rye);display:flex;align-items:center;justify-content:center;
+    font-size:2.2rem;box-shadow:inset 0 -6px 14px rgba(0,0,0,.35)}
+  .feature .body{flex:1;min-width:0}
+  .cta{display:inline-flex;align-items:center;gap:7px;margin-top:11px;
+    background:linear-gradient(135deg,var(--amber),var(--amber-deep));color:#2a1707;
+    border:none;border-radius:10px;padding:9px 17px;font-size:.88rem;font-weight:700;
+    cursor:pointer;font-family:inherit;box-shadow:0 3px 10px var(--shadow)}
+  .cta:hover{filter:brightness(1.06)}
+
+  /* challenge card */
+  .chal{background:linear-gradient(160deg,#2f2113,#241710);border-color:#5a431f}
+  .chal .pill{display:inline-block;background:rgba(232,184,92,.16);color:var(--gold);
+    font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:9px}
+  .chal .countdown{font-size:.78rem;color:var(--crumb-dim);margin-top:10px}
+  .chal .countdown b{color:var(--gold)}
+
+  /* my questions — the "rescued from whatsapp" panel */
+  .qs{background:var(--char2);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .qs .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .qs .hd h3{margin:0;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:700}
+  .qs .hd .note{font-size:.74rem;color:var(--crumb-dim)}
+  .q{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+  .q:first-of-type{border-top:none}
+  .q .qi{width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:#1f130b;
+    display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .q .qb{flex:1;min-width:0}
+  .q .qtopic{font-size:.7rem;color:var(--amber);font-weight:700;margin-bottom:2px}
+  .q .qtext{font-size:.9rem;color:var(--crumb);margin:0 0 3px}
+  .q .qans{font-size:.8rem;color:var(--crumb-dim);margin:0;display:flex;align-items:center;gap:6px}
+  .q .qans.answered b{color:var(--rise)}
+  .q .qans.waiting b{color:var(--gold)}
+
+  .foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-size:.76rem;color:var(--crumb-dim)}
+  .foot .logo{display:flex;align-items:center;gap:8px;color:var(--crumb-dim)}
+  .foot a{color:var(--amber);text-decoration:none}
+
+  /* mobile top bar (sidebar hidden) */
+  .m-top{display:none}
+  @media(max-width:720px){
+    .side{display:none}
+    .main{padding:18px 16px 50px}
+    .m-top{display:flex;align-items:center;gap:11px;margin-bottom:18px;
+      padding-bottom:14px;border-bottom:1px solid var(--line)}
+    .m-top .mark{width:38px;height:38px;border-radius:10px;flex:0 0 38px;
+      background:radial-gradient(circle at 32% 30%,var(--gold),var(--amber-deep));
+      display:flex;align-items:center;justify-content:center;font-size:1.15rem}
+    .m-top b{font-size:1rem;color:var(--flour)}
+    .m-top span{font-size:.7rem;color:var(--amber);display:block}
+    .grid{grid-template-columns:1fr}
+    .top{align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="side">
+    <div class="brand">
+      <div class="mark">🥖</div>
+      <div><b>מועדון האופים</b><span>האקדמיה המעשית</span></div>
+    </div>
+
+    <div class="nav-label">המרחב שלי</div>
+    <nav class="nav">
+      <a class="on" href="#"><span class="ic">🧭</span>המסע שלי</a>
+      <a href="#"><span class="ic">📹</span>ההדרכה החודשית<span class="badge">חדש</span></a>
+      <a href="#"><span class="ic">🏆</span>האתגר הנוכחי</a>
+      <a href="#"><span class="ic">💬</span>השאלות שלי</a>
+    </nav>
+
+    <div class="nav-label">הספרייה</div>
+    <nav class="nav">
+      <a href="#"><span class="ic">📚</span>ארכיון ההדרכות<span class="badge">40+</span></a>
+      <a href="#"><span class="ic">🍞</span>קורס הלחם</a>
+      <a href="#"><span class="ic">👥</span>הקהילה</a>
+    </nav>
+
+    <div class="me">
+      <div class="av">ר</div>
+      <div><div class="nm">רינת מ.</div><div class="tier">מסלול PRO · חברה 8 חודשים</div></div>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <!-- mobile brand -->
+    <div class="m-top">
+      <div class="mark">🥖</div>
+      <div><b>מועדון האופים</b><span>שלום רינת 👋</span></div>
+    </div>
+
+    <div class="top">
+      <div class="hello">
+        <h1>שלום רינת 👋</h1>
+        <p>החודש במועדון: <span class="accent">פוגאס מחמצת</span> · נשארו <span class="accent">6 ימים</span> לאתגר הטארטים</p>
+      </div>
+      <div class="streak">
+        <div class="n">5</div>
+        <div class="l">שבועות ברצף</div>
+      </div>
+    </div>
+
+    <!-- journey band -->
+    <section class="journey">
+      <h2>המסע שלך במועדון</h2>
+      <p class="sub">מתחילת החברות — 23 הדרכות הושלמו מתוך 40 בארכיון</p>
+      <div class="bar"><i></i></div>
+      <div class="bar-meta"><span>התקדמת יפה — <b>62%</b> מהארכיון</span><span>היעד הבא: <b>פטיסרי מתקדם</b></span></div>
+
+      <div class="steps">
+        <div class="step done"><div class="dot">✓</div><small>יסודות מחמצת</small></div>
+        <div class="step done"><div class="dot">✓</div><small>לחם כפרי</small></div>
+        <div class="step done"><div class="dot">✓</div><small>פוקאצ'ה 85%</small></div>
+        <div class="step done"><div class="dot">✓</div><small>בריוש</small></div>
+        <div class="step now"><div class="dot">🔥</div><small>פוגאס מחמצת</small></div>
+        <div class="step todo"><div class="dot">🥐</div><small>קרואסון</small></div>
+        <div class="step todo"><div class="dot">🎂</div><small>עוגת אופרה</small></div>
+        <div class="step todo"><div class="dot">🍋</div><small>טארט לימון</small></div>
+      </div>
+    </section>
+
+    <!-- monthly + challenge -->
+    <div class="grid">
+      <section class="card">
+        <h3>ההדרכה החודשית · יוני 2026</h3>
+        <div class="feature">
+          <div class="thumb">🥖</div>
+          <div class="body">
+            <div class="big">פוגאס מחמצת — בעבודת יד</div>
+            <p class="meta">הדרכת עומק חדשה: עיצוב הפוגאס הקלאסי, עבודה עם מחמצת בהידרציה גבוהה, וטיפים לקראסט מושלם בתנור ביתי.</p>
+            <button class="cta">▶ המשך לצפות · 14:32 מתוך 38:00</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card chal">
+        <span class="pill">🏆 אתגר הרבעון</span>
+        <div class="big">טארט הראווה שלך</div>
+        <p class="meta">העלי תמונה של טארט שהכנת החודש. הזוכה מקבל ערכת ציוד קונדיטוריה.</p>
+        <div class="countdown">נשארו <b>6 ימים</b> · כבר <b>34</b> אופות הגישו</div>
+        <button class="cta">📷 הגישי את היצירה שלך</button>
+      </section>
+    </div>
+
+    <!-- MY questions — rescued from whatsapp -->
+    <section class="qs">
+      <div class="hd">
+        <h3>💬 השאלות שלי</h3>
+        <span class="note">מרוכזות לפי נושא — לא נשטפות בקבוצה</span>
+      </div>
+
+      <div class="q">
+        <div class="qi">🍞</div>
+        <div class="qb">
+          <div class="qtopic">פוגאס מחמצת · ההדרכה החודשית</div>
+          <p class="qtext">הבצק שלי נדבק מאוד בעיצוב — להוסיף קמח או שזו בעיית התפחה?</p>
+          <p class="qans answered"><b>✓ נלי ענתה</b> · זו הידרציה גבוהה — הרטיבי ידיים במקום להוסיף קמח. צפי בדקה 22:10.</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="qi">🥐</div>
+        <div class="qb">
+          <div class="qtopic">קרואסון מחמצת · קורס הלחם</div>
+          <p class="qtext">כמה זמן קירור בין הקיפולים בימי קיץ חמים?</p>
+          <p class="qans waiting"><b>⏳ ממתינה לתשובה</b> · נשלחה אתמול 19:40</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="qi">🍋</div>
+        <div class="qb">
+          <div class="qtopic">טארט לימון · ארכיון ההדרכות</div>
+          <p class="qtext">אפשר להחליף את חמאת הקרם בפרווה לאירוע בשרי?</p>
+          <p class="qans answered"><b>✓ נלי ענתה</b> · כן, עם תחליף חמאה איכותי. שמרי על אותן כמויות.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div class="logo">🥖 מועדון האופים · נלי ימפולסקי</div>
+      <div>הדגמה · <a href="#">biztechoff.co.il</a></div>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>
