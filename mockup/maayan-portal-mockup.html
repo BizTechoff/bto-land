@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>במטבח של מעיין — האזור האישי שלי</title>
+<style>
+  :root{
+    --wine:#911938; --wine2:#b84a63; --rose:#e7c9cf; --cream:#faf6f0; --card:#ffffff;
+    --ink:#3a2b2e; --muted:#9c8b8e; --line:#ece2e0; --green:#6a9a5b; --green-soft:#eef4ea;
+    --gold:#d8a657; --amber-soft:#fdf3e2; --shadow:0 6px 24px rgba(145,25,56,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);
+    font-family:"Heebo","Segoe UI",Arial,sans-serif;line-height:1.65}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px 40px}
+  a{color:inherit;text-decoration:none}
+
+  /* top bar */
+  .top{display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;background:var(--wine);color:#fff;border-radius:0 0 20px 20px;
+    box-shadow:var(--shadow);position:sticky;top:0;z-index:5}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brandlogo{display:flex;align-items:center;justify-content:center;background:#fff;
+    border-radius:12px;padding:6px 12px;height:46px;box-shadow:0 2px 8px rgba(0,0,0,.12);transition:transform .15s}
+  .brandlogo:hover{transform:translateY(-1px)}
+  .brandlogo img{height:34px;width:auto;display:block}
+  .section{color:#fff;font-size:.92rem;opacity:.92;padding-inline-start:12px;
+    border-inline-start:1px solid rgba(255,255,255,.35)}
+  .me{display:flex;align-items:center;gap:9px;font-size:.9rem}
+  .avatar{width:38px;height:38px;border-radius:50%;background:var(--wine2);
+    display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff}
+
+  .hello{margin:26px 4px 6px;font-size:1.5rem;font-weight:800;color:var(--wine)}
+  .hello small{display:block;font-size:.9rem;font-weight:400;color:var(--muted);margin-top:2px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:20px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 14px;font-size:1.05rem;color:var(--wine);display:flex;align-items:center;gap:8px}
+  .tag{font-size:.7rem;font-weight:700;letter-spacing:.03em;padding:3px 10px;border-radius:20px;
+    background:var(--amber-soft);color:#a9741f;display:inline-block}
+
+  /* journey path */
+  .journey{grid-column:1/-1}
+  .path{display:flex;gap:8px;margin-top:6px}
+  .step{flex:1;text-align:center;position:relative}
+  .dot{width:34px;height:34px;border-radius:50%;margin:0 auto 8px;display:flex;
+    align-items:center;justify-content:center;font-weight:700;font-size:.9rem;
+    background:var(--rose);color:var(--wine)}
+  .step.done .dot{background:var(--green);color:#fff}
+  .step.now .dot{background:var(--wine);color:#fff;box-shadow:0 0 0 5px rgba(145,25,56,.14)}
+  .step small{font-size:.76rem;color:var(--muted);display:block}
+  .step b{font-size:.82rem;display:block;margin-bottom:2px}
+  .bar{height:7px;background:var(--rose);border-radius:20px;overflow:hidden;margin-top:16px}
+  .bar i{display:block;height:100%;width:42%;background:linear-gradient(90deg,var(--wine),var(--wine2))}
+  .barlbl{font-size:.78rem;color:var(--muted);margin-top:7px;text-align:left}
+
+  /* task + streak */
+  .task{display:flex;align-items:flex-start;gap:12px;padding:12px;border:1px dashed var(--rose);
+    border-radius:14px;background:#fdf9f9}
+  .check{width:26px;height:26px;border-radius:8px;border:2px solid var(--green);flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:800}
+  .task p{margin:0;font-size:.92rem}
+  .task p small{color:var(--muted);display:block;font-size:.8rem}
+  .streak{display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px 14px;
+    background:var(--amber-soft);border-radius:14px}
+  .streak .num{font-size:1.6rem;font-weight:800;color:var(--gold)}
+  .streak span{font-size:.86rem;color:#8a6a2a}
+  .flames{margin-inline-start:auto;font-size:1.05rem;letter-spacing:2px}
+
+  /* goals */
+  .goal{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.93rem}
+  .goal:last-child{border-bottom:none}
+  .gc{width:22px;height:22px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;
+    justify-content:center;font-size:.8rem;font-weight:800}
+  .gc.on{background:var(--green);color:#fff}
+  .gc.off{background:var(--rose);color:var(--wine)}
+  .goal.off span{color:var(--muted)}
+
+  .live{display:flex;align-items:center;gap:14px}
+  .live .play{width:52px;height:52px;border-radius:14px;background:var(--wine);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex:0 0 auto}
+  .live b{display:block;font-size:.98rem}
+  .live small{color:var(--muted);font-size:.82rem}
+  .btn{display:inline-block;margin-top:12px;background:var(--wine);color:#fff;font-size:.86rem;
+    font-weight:600;padding:9px 16px;border-radius:12px}
+  .btn.ghost{background:transparent;color:var(--wine);border:1px solid var(--wine)}
+
+  /* community */
+  .msg{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .msg:last-child{border-bottom:none}
+  .mav{width:34px;height:34px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;
+    justify-content:center;font-weight:700;font-size:.82rem;color:#fff}
+  .msg b{font-size:.86rem}
+  .msg small{color:var(--muted);font-size:.76rem;margin-inline-start:6px}
+  .msg p{margin:2px 0 0;font-size:.88rem}
+  .pill{font-size:.72rem;color:var(--green);background:var(--green-soft);padding:2px 8px;border-radius:20px}
+
+  /* facilitator radar */
+  .seam{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:.82rem;text-align:center}
+  .seam::before,.seam::after{content:"";height:1px;background:var(--gold);opacity:.5;flex:1}
+  .seam b{color:#a9741f;font-weight:700}
+  .radar{grid-column:1/-1;margin-top:16px;background:linear-gradient(180deg,#fff, #fdf7f3);border:1px solid var(--gold)}
+  .radar h3{color:#a9741f}
+  .radar .sub{font-size:.84rem;color:var(--muted);margin:-8px 0 14px}
+  .who{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+    border-radius:30px;padding:6px 12px 6px 6px;font-size:.85rem}
+  .chip .mav{width:28px;height:28px;font-size:.72rem}
+  .chip em{font-style:normal;color:var(--wine);font-weight:600}
+  .chip .q{color:var(--muted);font-size:.78rem}
+
+  .foot{text-align:center;color:var(--muted);font-size:.76rem;margin-top:26px;
+    padding-top:16px;border-top:1px solid var(--line)}
+  .foot b{color:var(--wine2)}
+  .demoflag{position:fixed;bottom:14px;inset-inline-start:14px;background:var(--ink);color:#fff;
+    font-size:.72rem;padding:6px 12px;border-radius:20px;opacity:.85}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <a class="brandlogo" href="https://www.maayans-kitchen.co.il/" target="_blank" rel="noopener" title="לאתר של במטבח של מעיין">
+      <img src="https://images.cdn-files-a.com/uploads/6787121/400_filter_nobg_633958284731f.png" alt="במטבח של מעיין"
+        onerror="this.style.display='none';this.parentNode.innerHTML='<b style=&quot;color:#911938&quot;>במטבח של מעיין</b>'">
+    </a>
+    <span class="section">האזור האישי</span>
+  </div>
+  <div class="me"><span>רונית ל׳</span><div class="avatar">ר</div></div>
+</div>
+
+<div class="wrap">
+
+  <div class="hello">בוקר טוב, רונית 🌿
+    <small>את בשבוע השני של "ריסט קיץ" — הולכת מצוין. הנה הכול במקום אחד.</small>
+  </div>
+
+  <!-- JOURNEY -->
+  <div class="card journey">
+    <h3>🗺️ המסע שלי · ריסט קיץ</h3>
+    <div class="path">
+      <div class="step done"><div class="dot">✓</div><b>מתכוננות</b><small>שבוע 1</small></div>
+      <div class="step now"><div class="dot">2</div><b>ריסט ים־תיכוני</b><small>שבוע 2 · עכשיו</small></div>
+      <div class="step"><div class="dot">3</div><b>ממשיכות</b><small>שבוע 3</small></div>
+      <div class="step"><div class="dot">4</div><b>הטמעה ויציאה</b><small>שבוע 4</small></div>
+    </div>
+    <div class="bar"><i></i></div>
+    <div class="barlbl">42% מהדרך · המפגש הבא בזום: יום ג׳ 20:30</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- DAILY TASK + STREAK -->
+    <div class="card">
+      <h3>☀️ המשימה של היום <span class="tag">כוונה יומית ממעיין</span></h3>
+      <div class="task">
+        <div class="check">✓</div>
+        <p>לשתות כוס מים פושרים עם לימון לפני הקפה של הבוקר.
+          <small>"מתחילות את היום מהמקום שבוחר בנו" — מעיין</small></p>
+      </div>
+      <div class="streak">
+        <div class="num">7</div>
+        <span>ימים ברצף שאת מסמנת<br>את המשימה היומית</span>
+        <div class="flames">🔥🔥🔥</div>
+      </div>
+    </div>
+
+    <!-- MONTHLY LIVE + RECIPE -->
+    <div class="card">
+      <h3>🎥 הלייב החודשי + מתכון</h3>
+      <div class="live">
+        <div class="play">▶</div>
+        <div><b>מפגש יולי — קיץ קליל בלי כבדות</b>
+          <small>הוקלט 6.7 · 38 דק׳ · צפית 12 דק׳</small></div>
+      </div>
+      <a class="btn">המשך צפייה מהנקודה שעצרת</a>
+      <a class="btn ghost">המתכון: קרפצ׳יו סלק ואגוזים</a>
+    </div>
+
+    <!-- CLUB GOALS -->
+    <div class="card">
+      <h3>🎯 המטרות שלי · מועדון ממשיכות</h3>
+      <div class="goal"><div class="gc on">✓</div><span>3 ארוחות מסודרות ביום, בלי דילוגים</span></div>
+      <div class="goal"><div class="gc on">✓</div><span>בישול לייב אחד בשבוע עם מעיין</span></div>
+      <div class="goal off"><div class="gc off">2</div><span>להפחית נשנוש ערב — 2 ערבים השבוע</span></div>
+      <div style="font-size:.8rem;color:var(--muted);margin-top:10px">נושא החודש: <b style="color:var(--wine)">אכילה רגשית בקיץ</b></div>
+    </div>
+
+    <!-- COMMUNITY -->
+    <div class="card">
+      <h3>💬 השאלות שלי <span class="tag">לא נשטף בקבוצה</span></h3>
+      <div class="msg">
+        <div class="mav" style="background:#b84a63">ר</div>
+        <div><b>רונית</b><small>לפני 3 ימים</small>
+          <p>אפשר להחליף טחינה גולמית במשהו קליל יותר לערב?</p></div>
+      </div>
+      <div class="msg">
+        <div class="mav" style="background:#911938">מ</div>
+        <div><b>מעיין <span class="pill">נענה ✓</span></b><small>לפני יומיים</small>
+          <p>בטח! יוגורט צמחי + לימון + שום. שמור אצלך ב"המתכונים שלי".</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SEAM: member view ends here, facilitator view begins -->
+  <div class="seam"><b>🔒 מכאן ולמטה — גלוי רק למנהלת · לא לחברות</b></div>
+
+  <!-- FACILITATOR RADAR (Maayan's private admin view) -->
+  <div class="card radar">
+    <h3>👀 תצוגת מעיין — מי צריכה שיאספו אותה בחזרה</h3>
+    <div class="sub">גלוי רק למנהלת, לא לחברות. המערכת עוקבת אחרי כניסות, סימון משימות והשתתפות בלייבים — ומציפה מי שהתרחקה בשקט. בוואטסאפ המידע הזה פשוט לא קיים.</div>
+    <div class="who">
+      <div class="chip"><div class="mav" style="background:#b0798a">ד</div><em>דנה כ׳</em> <span class="q">· לא נכנסה 6 ימים</span></div>
+      <div class="chip"><div class="mav" style="background:#8a9a5b">שׁ</div><em>שירה מ׳</em> <span class="q">· לא סימנה משימה 5 ימים</span></div>
+      <div class="chip"><div class="mav" style="background:#c08a4a">נ</div><em>נטע ב׳</em> <span class="q">· פספסה 2 לייבים</span></div>
+    </div>
+    <a class="btn" style="margin-top:16px">שליחת הודעה עדינה אישית ל־3 ←</a>
+  </div>
+
+  <div class="foot">
+    הדגמה עבור <b>במטבח של מעיין</b> — האזור האישי שמחזיק את המסע במקום אחד.<br>
+    נבנה ע״י <b>BizTechoff</b> · מוטי דרוקמן · ארכיטקטורה ופיתוח פלטפורמות
+  </div>
+
+</div>
+
+<div class="demoflag">הדגמה · תוכן לדוגמה</div>
+</body>
+</html>
