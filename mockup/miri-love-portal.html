@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>חופשיה משחלות פוליציסטיות · האזור האישי שלי | מירי לאב</title>
+<style>
+  /* ===== Miri's world: healing rose, sage balance, warm cream, bloom gold ===== */
+  :root{
+    --rose:#c25f7d;          /* primary — warm healing rose */
+    --rose-deep:#9c3f5c;     /* deep raspberry */
+    --rose-soft:#f7e5ec;     /* blush surface */
+    --cream:#fbf5ef;         /* page bg — warm cream */
+    --card:#ffffff;
+    --sage:#7a9c62;          /* "balance restored" green */
+    --sage-deep:#5f8049;
+    --sage-soft:#eaf1e2;
+    --gold:#d8a657;          /* bloom gold accent */
+    --gold-soft:#fdf3e0;
+    --ink:#453039;           /* warm plum-brown ink */
+    --muted:#9d8890;         /* muted mauve */
+    --line:#efe0e6;
+    --shadow:0 6px 26px rgba(156,63,92,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Heebo","Assistant","Segoe UI",sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    background-image:
+      radial-gradient(circle at 10% 14%, rgba(194,95,125,.05) 0, transparent 40%),
+      radial-gradient(circle at 90% 86%, rgba(122,156,98,.05) 0, transparent 42%);
+  }
+  .app{display:flex;min-height:100vh;max-width:1280px;margin:0 auto;box-shadow:0 0 80px rgba(156,63,92,.07)}
+
+  /* ===== Sidebar ===== */
+  .side{
+    width:250px;flex:0 0 250px;
+    background:linear-gradient(180deg,#ffffff,#fdf4f7);
+    border-left:1px solid var(--line);
+    padding:24px 18px;display:flex;flex-direction:column;gap:5px;
+    position:sticky;top:0;height:100vh;
+  }
+  .brand{display:block;padding:2px 6px 16px;margin-bottom:6px;border-bottom:1px solid var(--line);text-decoration:none}
+  .brand .brandlogo{width:100%;max-width:198px;height:auto;display:block;margin:2px auto 0;transition:opacity .15s}
+  .brand:hover .brandlogo{opacity:.85}
+  .brandtext{display:none;text-align:center}
+  .brandtext b{font-size:1.02rem;color:var(--rose-deep);display:block;letter-spacing:.01em}
+  .brandtext span{font-size:.7rem;color:var(--sage-deep);font-weight:600}
+
+  .nav-label{font-size:.64rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:14px 10px 6px;font-weight:700}
+  .nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;
+    color:#7a666d;text-decoration:none;font-size:.9rem;font-weight:500;transition:.15s}
+  .nav a .ic{width:20px;text-align:center;font-size:1rem;flex:0 0 20px}
+  .nav a:hover{background:var(--rose-soft);color:var(--rose-deep)}
+  .nav a.on{background:linear-gradient(90deg,rgba(194,95,125,.16),rgba(194,95,125,.03));
+    color:var(--rose-deep);font-weight:700;box-shadow:inset 2px 0 0 var(--rose)}
+  .nav a .badge{margin-right:auto;background:var(--rose);color:#fff;font-size:.64rem;font-weight:800;padding:1px 7px;border-radius:20px}
+  .nav a .badge.sage{background:var(--sage)}
+
+  .side .me{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 8px 2px;border-top:1px solid var(--line)}
+  .side .me .av{width:38px;height:38px;border-radius:50%;flex:0 0 38px;
+    background:linear-gradient(135deg,#d98aa0,var(--rose-deep));display:flex;align-items:center;
+    justify-content:center;font-weight:700;color:#fff;font-size:.9rem}
+  .side .me .nm{font-size:.84rem;color:var(--ink);font-weight:700}
+  .side .me .tier{font-size:.66rem;color:var(--rose)}
+
+  /* ===== Main ===== */
+  .main{flex:1;min-width:0;padding:28px 38px 56px}
+  .top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+  .hello h1{margin:0 0 4px;font-size:1.6rem;color:var(--rose-deep);font-weight:800;letter-spacing:-.01em}
+  .hello p{margin:0;color:var(--muted);font-size:.92rem}
+  .hello .accent{color:var(--rose);font-weight:700}
+  .streak{background:var(--sage-soft);border:1px solid #d8e5cc;border-radius:15px;padding:11px 18px;text-align:center;min-width:150px}
+  .streak .n{font-size:1.35rem;font-weight:800;color:var(--sage-deep);line-height:1.15}
+  .streak .l{font-size:.68rem;color:#6d7d5c;margin-top:3px;letter-spacing:.02em}
+
+  /* bloom journey band */
+  .journey{background:linear-gradient(135deg,#fff,#fdf2f5);border:1px solid var(--line);border-radius:20px;
+    padding:22px 24px;margin-bottom:22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .journey::after{content:"🌸";position:absolute;left:-10px;bottom:-22px;font-size:6rem;opacity:.06;pointer-events:none}
+  .journey h2{margin:0 0 3px;font-size:1.08rem;color:var(--rose-deep)}
+  .journey .sub{margin:0 0 15px;font-size:.84rem;color:var(--muted)}
+  .bar{height:9px;border-radius:20px;background:#f0e2e7;overflow:hidden;border:1px solid #ecd7de}
+  .bar > i{display:block;height:100%;width:50%;background:linear-gradient(90deg,var(--rose),var(--gold));border-radius:20px}
+  .bar-meta{display:flex;justify-content:space-between;margin-top:9px;font-size:.78rem;color:var(--muted)}
+  .bar-meta b{color:var(--rose)}
+
+  .steps{display:flex;gap:8px;margin-top:18px;overflow-x:auto;padding-bottom:4px}
+  .step{flex:1 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px;width:88px;text-align:center}
+  .step .dot{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:1.15rem;border:1.5px solid var(--line);background:#fff}
+  .step.done .dot{background:var(--sage-soft);border-color:#bcd3a8;color:var(--sage-deep)}
+  .step.now .dot{background:linear-gradient(135deg,#f2c6d2,var(--rose));border-color:var(--gold);color:#fff;
+    box-shadow:0 0 0 5px rgba(194,95,125,.14)}
+  .step.todo .dot{background:#fbf3f6;color:#c9b3bb}
+  .step small{font-size:.68rem;color:var(--muted);line-height:1.25}
+  .step.now small{color:var(--rose-deep);font-weight:700}
+
+  .reassure{margin-top:16px;background:var(--gold-soft);border:1px solid #ecd9b0;border-radius:12px;
+    padding:11px 15px;font-size:.85rem;color:#8a6a2a;display:flex;align-items:center;gap:9px}
+  .reassure b{color:#7a5a1e}
+
+  /* grid cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 3px;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--rose);font-weight:700;display:flex;align-items:center;gap:7px}
+  .card .big{margin:6px 0 2px;font-size:1.12rem;color:var(--ink);font-weight:700}
+  .card .meta{font-size:.84rem;color:var(--muted);margin:0}
+  .tag{font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--sage-soft);color:var(--sage-deep);display:inline-block}
+  .tag.gold{background:var(--gold-soft);color:#a9741f}
+
+  /* monthly video feature */
+  .feature{display:flex;gap:16px;align-items:center;margin-top:8px}
+  .feature .thumb{width:96px;height:96px;flex:0 0 96px;border-radius:14px;
+    background:linear-gradient(135deg,#f2c6d2,#c25f7d);display:flex;align-items:center;justify-content:center;
+    font-size:2rem;color:#fff;box-shadow:inset 0 -6px 14px rgba(156,63,92,.25)}
+  .feature .body{flex:1;min-width:0}
+  .cta{display:inline-flex;align-items:center;gap:7px;margin-top:11px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));
+    color:#fff;border:none;border-radius:11px;padding:9px 17px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 10px rgba(156,63,92,.2)}
+  .cta:hover{filter:brightness(1.05)}
+  .cta.ghost{background:#fff;color:var(--rose-deep);border:1px solid var(--rose)}
+
+  /* personal precision card */
+  .prec .rows{margin-top:12px}
+  .prec .row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:.9rem}
+  .prec .row:first-child{border-top:none}
+  .prec .ic2{width:26px;height:26px;flex:0 0 26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+  .prec .ic2.add{background:var(--sage-soft);color:var(--sage-deep)}
+  .prec .ic2.rel{background:var(--rose-soft);color:var(--rose-deep)}
+  .prec .row b{color:var(--ink)}
+  .prec .note{font-size:.78rem;color:var(--muted);margin-top:11px;padding-top:10px;border-top:1px dashed var(--line)}
+
+  /* gentle tracker */
+  .track .metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .metric{background:var(--rose-soft);border-radius:13px;padding:11px 13px}
+  .metric.sage{background:var(--sage-soft)}
+  .metric .mv{font-size:1.15rem;font-weight:800;color:var(--rose-deep);line-height:1.2}
+  .metric.sage .mv{color:var(--sage-deep)}
+  .metric .ml{font-size:.72rem;color:var(--muted);margin-top:2px}
+  .track .win{margin-top:12px;font-size:.84rem;color:var(--sage-deep);display:flex;align-items:center;gap:8px;background:var(--sage-soft);border-radius:11px;padding:10px 13px}
+
+  /* playlist */
+  .pl{margin-top:10px}
+  .pl .ep{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+  .pl .ep:first-child{border-top:none}
+  .pl .epn{width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:var(--rose-soft);color:var(--rose-deep);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem}
+  .pl .ep .et{font-size:.88rem;color:var(--ink);margin:0;font-weight:600}
+  .pl .ep .es{font-size:.74rem;color:var(--muted);margin:0}
+  .pl .play{margin-inline-start:auto;color:var(--rose);font-size:1.1rem}
+
+  /* my questions — rescued from the challenge group */
+  .qs{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow)}
+  .qs .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+  .qs .hd h3{margin:0;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--rose);font-weight:700}
+  .qs .hd .note{font-size:.74rem;color:var(--muted)}
+  .q{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+  .q:first-of-type{border-top:none}
+  .q .qi{width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:var(--rose-soft);display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .q .qb{flex:1;min-width:0}
+  .q .qtopic{font-size:.7rem;color:var(--rose);font-weight:700;margin-bottom:2px}
+  .q .qtext{font-size:.9rem;color:var(--ink);margin:0 0 3px}
+  .q .qans{font-size:.8rem;color:var(--muted);margin:0}
+  .q .qans.answered b{color:var(--sage-deep)}
+  .q .qans.waiting b{color:var(--gold)}
+
+  .foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:10px;font-size:.76rem;color:var(--muted)}
+  .foot .logo{display:flex;align-items:center;gap:8px}
+  .foot b{color:var(--rose-deep)}
+
+  .m-top{display:none}
+  @media(max-width:720px){
+    .side{display:none}
+    .main{padding:18px 15px 46px}
+    .m-top{display:flex;align-items:center;gap:11px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line);text-decoration:none}
+    .m-logo{width:62%;max-width:190px;height:auto;display:block}
+    .m-fb{display:none}
+    .m-fb b{font-size:1rem;color:var(--rose-deep)}
+    .m-fb span{font-size:.7rem;color:var(--sage-deep);display:block}
+    .grid{grid-template-columns:1fr}
+    .top{align-items:flex-start}
+  }
+  .demoflag{position:fixed;bottom:14px;inset-inline-start:14px;background:var(--ink);color:#fff;font-size:.72rem;padding:6px 12px;border-radius:20px;opacity:.85}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="side">
+    <a class="brand" href="https://lovefood.co.il" target="_blank" rel="noopener" title="לאתר של מירי לאב">
+      <img class="brandlogo" src="miri-love-logo.png" alt="מירי לאב — המרכז לטיפול טבעי בשחלות פוליציסטיות"
+        onerror="this.remove();document.getElementById('brandfallback').style.display='block'">
+      <span id="brandfallback" class="brandtext"><b>מירי לאב</b><span>חופשיה משחלות פוליציסטיות</span></span>
+    </a>
+
+    <div class="nav-label">המרחב שלי</div>
+    <nav class="nav">
+      <a class="on" href="#"><span class="ic">🌸</span>מסע האיזון שלי</a>
+      <a href="#"><span class="ic">🎥</span>ההדרכה החודשית<span class="badge">חדש</span></a>
+      <a href="#"><span class="ic">🎯</span>הדיוק האישי שלי</a>
+      <a href="#"><span class="ic">🌙</span>המעקב העדין שלי</a>
+      <a href="#"><span class="ic">💬</span>הליווי האישי<span class="badge sage">2</span></a>
+    </nav>
+
+    <div class="nav-label">הספרייה</div>
+    <nav class="nav">
+      <a href="#"><span class="ic">🎧</span>הפלייליסט שלי</a>
+      <a href="#"><span class="ic">🍫</span>המתכונים שלי<span class="badge">50+</span></a>
+      <a href="#"><span class="ic">👭</span>הקהילה</a>
+    </nav>
+
+    <div class="me">
+      <div class="av">נ</div>
+      <div><div class="nm">נועה ב.</div><div class="tier">מסלול ליווי · חודש 3 מתוך 6</div></div>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <a class="m-top" href="https://lovefood.co.il" target="_blank" rel="noopener" title="לאתר של מירי לאב">
+      <img class="m-logo" src="miri-love-logo.png" alt="מירי לאב"
+        onerror="this.remove();document.getElementById('mfallback').style.display='block'">
+      <span id="mfallback" class="m-fb"><b>מירי לאב</b><span>שלום נועה 🌸</span></span>
+    </a>
+
+    <div class="top">
+      <div class="hello">
+        <h1>בוקר טוב, נועה 🌸</h1>
+        <p>את בחודש <span class="accent">האיזון ההורמונלי</span> · המפגש הקרוב בזום עם מירי: <span class="accent">יום ג׳ 20:30</span></p>
+      </div>
+      <div class="streak">
+        <div class="n">3 חודשים</div>
+        <div class="l">מחזור סדיר ברצף 🌙</div>
+      </div>
+    </div>
+
+    <!-- Bloom journey band -->
+    <section class="journey">
+      <h2>🌸 מסע האיזון שלך</h2>
+      <p class="sub">חצי שנה של ליווי — צעד אחר צעד, בקצב שלך. הגוף חוזר לפרוח כשנותנים לו את מה שהוא צריך.</p>
+      <div class="bar"><i></i></div>
+      <div class="bar-meta"><span>חודש <b>3</b> מתוך 6 · <b>50%</b> מהמסע</span><span>השלב הבא: <b>חיזוק המיקרוביום</b></span></div>
+
+      <div class="steps">
+        <div class="step done"><div class="dot">✓</div><small>הזנת הגוף</small></div>
+        <div class="step done"><div class="dot">✓</div><small>הורדת דלקתיות</small></div>
+        <div class="step now"><div class="dot">🌸</div><small>איזון הורמונלי</small></div>
+        <div class="step todo"><div class="dot">🌿</div><small>חיזוק המיקרוביום</small></div>
+        <div class="step todo"><div class="dot">🎯</div><small>דיוקים אישיים</small></div>
+        <div class="step todo"><div class="dot">🌷</div><small>פריחה ושמירה</small></div>
+      </div>
+
+      <div class="reassure">🤍 <span><b>את בדיוק במקום הנכון.</b> חודש 3 הוא הנקודה שבה הגוף מתחיל להיענות — זה בדיוק הזמן להישאר. מירי איתך.</span></div>
+    </section>
+
+    <!-- monthly video + personal precision -->
+    <div class="grid">
+      <section class="card">
+        <h3>🎥 ההדרכה החודשית · יולי 2026</h3>
+        <div class="feature">
+          <div class="thumb">▶</div>
+          <div class="body">
+            <div class="big">איזון אינסולין בקיץ — בלי לוותר על מתוק</div>
+            <p class="meta">הדרכת עומק חדשה: איך שומרים על סוכר מאוזן בחום, אילו פירות כן, ואיך מרגיעים חשק למתוק בערב.</p>
+            <button class="cta">▶ המשך צפייה · 9:12 מתוך 34:00</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card prec">
+        <h3>🎯 הדיוק האישי שלי <span class="tag gold">הסוג האינסוליני</span></h3>
+        <div class="rows">
+          <div class="row"><div class="ic2 add">＋</div><div>להוסיף השבוע: <b>חלבון בבוקר, קינמון, מגנזיום</b> — מייצבים סוכר ומרגיעים חשק.</div></div>
+          <div class="row"><div class="ic2 rel">−</div><div>להרפות באהבה: <b>סוכר לבן וקמח לבן</b> — מזינים את הדלקתיות והחשק.</div></div>
+          <div class="row"><div class="ic2 add">＋</div><div>הדגש שלך החודש: <b>ארוחת בוקר תוך שעה מהקימה</b>.</div></div>
+        </div>
+        <p class="note">🔒 הדיוקים שלך שמורים כאן — לא בראש של מירי ולא בהודעה שנעלמה בקבוצה.</p>
+      </section>
+    </div>
+
+    <!-- gentle tracker + playlist -->
+    <div class="grid">
+      <section class="card track">
+        <h3>🌙 המעקב העדין שלי</h3>
+        <div class="metrics">
+          <div class="metric"><div class="mv">28 יום</div><div class="ml">אורך המחזור האחרון</div></div>
+          <div class="metric sage"><div class="mv">ללא כאב</div><div class="ml">3 מחזורים ברצף</div></div>
+          <div class="metric sage"><div class="mv">↑ אנרגיה</div><div class="ml">7 מ־10 השבוע</div></div>
+          <div class="metric"><div class="mv">−4 ק״ג</div><div class="ml">מתחילת המסע</div></div>
+        </div>
+        <div class="win">🌷 <span>ראית? המחזור שלך סדיר <b>3 חודשים ברצף</b> — זו בדיוק ההיפוך שאנחנו עובדות עליו.</span></div>
+      </section>
+
+      <section class="card">
+        <h3>🎧 הפלייליסט שלי <span class="tag">מותאם לסוג שלך</span></h3>
+        <div class="pl">
+          <div class="ep"><div class="epn">130</div><div><p class="et">למה האינסולין גבוה גם כשאת עושה הכול נכון?</p><p class="es">33 דק׳ · מומלץ לסוג שלך</p></div><span class="play">▶</span></div>
+          <div class="ep"><div class="epn">131</div><div><p class="et">פירמידת המזון החדשה</p><p class="es">29 דק׳ · חדש</p></div><span class="play">▶</span></div>
+          <div class="ep"><div class="epn">118</div><div><p class="et">חשק למתוק בערב — מאיפה הוא בא</p><p class="es">24 דק׳ · שמור להמשך</p></div><span class="play">▶</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- MY questions — rescued from the challenge group -->
+    <section class="qs">
+      <div class="hd">
+        <h3>💬 הליווי האישי שלי</h3>
+        <span class="note">מרוכז לפי נושא — לא נשטף בקבוצת האתגר</span>
+      </div>
+
+      <div class="q">
+        <div class="qi">🍽️</div>
+        <div class="qb">
+          <div class="qtopic">איזון אינסולין · ההדרכה החודשית</div>
+          <p class="qtext">אני אוכלת בוקר טוב אבל ב־5 אחה״צ יש לי נפילת אנרגיה חזקה — מה עושים?</p>
+          <p class="qans answered"><b>✓ מירי ענתה</b> · הוסיפי חלבון+שומן בצהריים והזיזי פרי לארוחת הביניים. פרטים בדקה 21:40 בהדרכה.</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="qi">🌿</div>
+        <div class="qb">
+          <div class="qtopic">מיקרוביום · השלב הבא</div>
+          <p class="qtext">אפשר להתחיל כבר עם הפרוביוטיקה או לחכות לשלב הבא במסע?</p>
+          <p class="qans answered"><b>✓ רחל (נטורופתית) ענתה</b> · אפשר להתחיל בעדינות — נדבר על המינון במפגש יום ג׳.</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="qi">🍫</div>
+        <div class="qb">
+          <div class="qtopic">מתכונים · "גן עדן של פינוקים"</div>
+          <p class="qtext">יש חלופה לטחינה בעוגיות השוקולד צ'יפס? יש לי רגישות.</p>
+          <p class="qans waiting"><b>⏳ ממתינה לתשובה</b> · נשלחה אתמול 21:10</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div class="logo">🌸 מירי לאב · חופשיה משחלות פוליציסטיות</div>
+      <div>הדגמה · נבנה ע״י <b>BizTechoff</b> · מוטי דרוקמן · ארכיטקטורה ופיתוח פלטפורמות</div>
+    </div>
+
+  </main>
+</div>
+
+<div class="demoflag">הדגמה · תוכן לדוגמה</div>
+</body>
+</html>
