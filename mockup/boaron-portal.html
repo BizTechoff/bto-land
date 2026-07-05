@@ -73,8 +73,8 @@
   .content{padding:26px 30px 60px; max-width:1280px;}
   .view{display:none;}
   .view.active{display:block; animation:fade .35s ease;}
-  .view:target{display:block; animation:fade .35s ease;}
-  body:has(.view:target) .view.active:not(:target){display:none;}
+  body.no-js .view:target{display:block; animation:fade .35s ease;}
+  body.no-js:has(.view:target) .view.active:not(:target){display:none;}
   a.nav-item{text-decoration:none;}
 
   @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
@@ -205,7 +205,7 @@
   @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
 </style>
 </head>
-<body>
+<body class="no-js">
 <div class="bsd">בס״ד</div>
 <div class="layout">
 
@@ -597,6 +597,7 @@
 </div>
 
 <script>
+  document.body.classList.remove('no-js');
   const titles={dash:'לוח בקרה',proj:'שדרוג מעלית · מגדל סביון · רמת השרון',crews:'צוותי אחזקה',ware:'מחסן ורכש',std:'תקן ובטיחות',rep:'דוחות'};
   function show(view){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
