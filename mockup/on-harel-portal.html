@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>און הראל · מרכז בקרה תפעולי · הדגמה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@300;400;500;600;700;800&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2126; --paper:#F5F4F0; --surface:#FFFFFF;
+    --pine:#2E3138; --pine-700:#22252B; --pine-300:#C9A054; --pine-050:#F4EFE3;
+    --amber:#EFA22B; --amber-soft:#FCEFD4;
+    --sky:#2F7E91; --sky-soft:#E1F0F2;
+    --clay:#C2543E; --clay-soft:#F8E3DD;
+    --grass:#6FA84B;
+    --line:#E6E4DD; --muted:#73767D;
+    --radius:16px; --shadow:0 1px 2px rgba(21,33,27,.05), 0 8px 24px rgba(21,33,27,.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Assistant',sans-serif; background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; line-height:1.45;
+  }
+  /* בס"ד marker — Moti's document signature */
+  .bsd{position:fixed; top:6px; left:0; right:0; text-align:center; font-family:'Heebo'; font-size:11px; color:var(--pine-300); letter-spacing:.5px; z-index:200; pointer-events:none; opacity:.7;}
+  .layout{display:flex; min-height:100vh;}
+
+  /* ---------- Sidebar (right in RTL) ---------- */
+  .sidebar{
+    width:248px; flex-shrink:0; background:var(--pine); color:#F0EFEA;
+    padding:22px 16px; display:flex; flex-direction:column; gap:6px;
+    position:sticky; top:0; height:100vh;
+  }
+  .brand{display:flex; align-items:center; gap:11px; padding:4px 8px 20px;}
+  .brand .mark{width:40px; height:40px; flex-shrink:0;}
+  .brand h1{font-family:'Secular One'; font-size:19px; font-weight:400; margin:0; line-height:1.05; letter-spacing:.2px;}
+  .brand small{display:block; font-size:11px; color:var(--pine-300); font-weight:600; margin-top:2px; letter-spacing:.3px;}
+  .nav-label{font-size:10.5px; font-weight:700; color:#C9A054; letter-spacing:1px; padding:14px 12px 6px;}
+  .nav-item{
+    display:flex; align-items:center; gap:11px; padding:10px 12px; border-radius:11px;
+    color:#D8D7D0; font-weight:500; font-size:14.5px; cursor:pointer; border:none; background:none;
+    width:100%; text-align:right; font-family:inherit; transition:background .15s,color .15s;
+  }
+  .nav-item:hover{background:rgba(255,255,255,.07); color:#fff;}
+  .nav-item.active{background:#fff; color:var(--pine); font-weight:700;}
+  .nav-item svg{width:19px; height:19px; flex-shrink:0;}
+  .nav-item .badge{margin-inline-start:auto; background:var(--amber); color:#fff; font-size:11px; font-weight:700; border-radius:20px; padding:1px 8px; font-family:'Heebo';}
+  .nav-item.active .badge{background:var(--amber);}
+  .side-foot{margin-top:auto; padding:14px 10px 0; border-top:1px solid rgba(255,255,255,.1); font-size:12px; color:#A6A69E;}
+  .side-foot b{color:#fff; font-weight:600;}
+
+  /* ---------- Main ---------- */
+  .main{flex:1; min-width:0; display:flex; flex-direction:column;}
+  .topbar{
+    display:flex; align-items:center; gap:16px; padding:16px 30px;
+    background:rgba(244,247,241,.85); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;
+  }
+  .topbar h2{font-family:'Secular One'; font-weight:400; font-size:21px; margin:0;}
+  .search{
+    flex:1; max-width:340px; display:flex; align-items:center; gap:8px;
+    background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:8px 13px; color:var(--muted); font-size:13.5px;
+  }
+  .search svg{width:16px; height:16px;}
+  .topbar .spacer{flex:1;}
+  .pill-btn{background:var(--pine); color:#fff; border:none; font-family:inherit; font-weight:600; font-size:13.5px; padding:9px 16px; border-radius:11px; cursor:pointer; display:flex; align-items:center; gap:7px;}
+  .pill-btn svg{width:16px;height:16px;}
+  .avatar{width:38px; height:38px; border-radius:50%; background:var(--amber-soft); color:var(--pine-700); display:grid; place-items:center; font-weight:700; font-size:14px;}
+
+  .content{padding:26px 30px 60px; max-width:1280px;}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+  .eyebrow{font-size:11px; font-weight:700; letter-spacing:1.4px; color:var(--pine-300); text-transform:uppercase;}
+  .section-h{display:flex; align-items:baseline; gap:12px; margin:30px 0 14px;}
+  .section-h h3{font-family:'Secular One'; font-weight:400; font-size:18px; margin:0;}
+  .section-h span{font-size:13px; color:var(--muted);}
+  .clickhint{display:inline-flex; align-items:center; gap:7px; background:var(--amber-soft); color:#8a5e16; font-weight:700; font-size:12.5px; padding:5px 12px; border-radius:20px; border:1px solid #EAD3A8;}
+  .clickhint svg{width:15px; height:15px;}
+
+  /* KPI */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .kpi{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px 16px; box-shadow:var(--shadow); position:relative; overflow:hidden;}
+  .kpi .ico{width:34px; height:34px; border-radius:10px; display:grid; place-items:center; margin-bottom:12px;}
+  .kpi .ico svg{width:18px; height:18px;}
+  .kpi .num{font-family:'Heebo'; font-weight:700; font-size:32px; line-height:1; color:var(--ink);}
+  .kpi .lbl{font-size:13px; color:var(--muted); margin-top:5px; font-weight:500;}
+  .kpi .delta{font-size:12px; font-weight:600; margin-top:9px;}
+  .delta.up{color:var(--grass);} .delta.warn{color:var(--clay);}
+
+  /* Pipeline rail */
+  .rail-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px 8px; box-shadow:var(--shadow); overflow-x:auto;}
+  .rail{display:flex; gap:0; min-width:980px;}
+  .stage{flex:1; min-width:120px; position:relative; padding:0 5px;}
+  .stage-head{display:flex; align-items:center; gap:7px; margin-bottom:12px;}
+  .stage-dot{width:11px; height:11px; border-radius:50%; flex-shrink:0;}
+  .stage-name{font-size:12.5px; font-weight:700; color:var(--ink);}
+  .stage-count{font-family:'Heebo'; font-size:11px; color:var(--muted); background:var(--pine-050); border-radius:20px; padding:0 7px; font-weight:600;}
+  .pcard{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:9px 11px 9px 32px; margin-bottom:9px; cursor:pointer; transition:transform .12s, box-shadow .12s, border-color .12s, background .12s;}
+  .pcard::after{content:''; position:absolute; top:50%; left:9px; transform:translateY(-50%); width:20px; height:20px; border-radius:50%; background:var(--pine-050); transition:background .12s;}
+  .pcard::before{content:'‹'; position:absolute; top:50%; left:14px; transform:translateY(-50%); z-index:1; color:var(--pine); font-size:16px; font-weight:800; line-height:1; transition:transform .12s, color .12s;}
+  .pcard:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(21,33,27,.12); border-color:var(--pine); background:#fff;}
+  .pcard:hover::after{background:var(--pine);}
+  .pcard:hover::before{color:#fff; transform:translateY(-50%) translateX(-2px);}
+  .pcard .t{font-size:13px; font-weight:700; line-height:1.25;}
+  .pcard .m{font-size:11.5px; color:var(--muted); margin-top:3px; display:flex; align-items:center; gap:5px;}
+  .pcard .tagrow{margin-top:7px; display:flex; gap:5px; flex-wrap:wrap;}
+  .tag{font-size:10.5px; font-weight:600; padding:2px 7px; border-radius:20px;}
+  .tag.due{background:var(--clay-soft); color:var(--clay);}
+  .tag.std{background:var(--sky-soft); color:var(--sky);}
+  .tag.ok{background:var(--pine-050); color:var(--pine);}
+
+  /* two-col */
+  .grid2{display:grid; grid-template-columns:1fr 360px; gap:20px; align-items:start;}
+  .panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;}
+  .panel-h{padding:15px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:9px;}
+  .panel-h h4{margin:0; font-size:15px; font-weight:700;}
+  .panel-h .more{margin-inline-start:auto; font-size:12px; color:var(--sky); font-weight:600; cursor:pointer;}
+  .panel-b{padding:8px 6px;}
+
+  /* crew rows */
+  .crew{display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:11px;}
+  .crew:hover{background:var(--paper);}
+  .crew .cdot{width:9px; height:42px; border-radius:6px; flex-shrink:0;}
+  .crew .cinfo{flex:1; min-width:0;}
+  .crew .cinfo b{font-size:13.5px;}
+  .crew .cinfo .s{font-size:12px; color:var(--muted);}
+  .crew .cstatus{font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:20px; white-space:nowrap;}
+
+  /* alerts */
+  .alert{display:flex; gap:11px; padding:12px 14px; border-bottom:1px solid var(--line);}
+  .alert:last-child{border-bottom:none;}
+  .alert .ad{width:30px; height:30px; border-radius:9px; flex-shrink:0; display:grid; place-items:center;}
+  .alert .ad svg{width:15px; height:15px;}
+  .alert .atxt{font-size:13px; line-height:1.35;}
+  .alert .atxt time{display:block; font-size:11px; color:var(--muted); margin-top:2px;}
+
+  /* timeline (project detail) */
+  .crumbs{font-size:13px; color:var(--muted); margin-bottom:6px;}
+  .crumbs a{color:var(--sky); text-decoration:none; cursor:pointer;}
+  .proj-head{display:flex; align-items:flex-start; gap:18px; flex-wrap:wrap; margin-bottom:8px;}
+  .proj-head h2{font-family:'Secular One'; font-weight:400; font-size:25px; margin:0 0 4px;}
+  .proj-head .sub{font-size:14px; color:var(--muted);}
+  .proj-head .hd-actions{margin-inline-start:auto; display:flex; gap:9px;}
+  .ghost-btn{background:var(--surface); border:1px solid var(--line); color:var(--pine); font-family:inherit; font-weight:600; font-size:13px; padding:9px 15px; border-radius:11px; cursor:pointer;}
+
+  .progress-rail{display:flex; gap:6px; margin:20px 0 6px; overflow-x:auto; padding-bottom:6px;}
+  .pstep{flex:1; min-width:78px; text-align:center;}
+  .pstep .bar{height:6px; border-radius:6px; background:var(--line); margin-bottom:8px;}
+  .pstep.done .bar{background:var(--grass);}
+  .pstep.curr .bar{background:var(--amber);}
+  .pstep .pl{font-size:11px; color:var(--muted); font-weight:600;}
+  .pstep.done .pl, .pstep.curr .pl{color:var(--ink);}
+
+  .tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin:24px 0 0;}
+  .tab{background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:var(--muted); padding:11px 15px; cursor:pointer; border-bottom:2.5px solid transparent;}
+  .tab.active{color:var(--pine); border-bottom-color:var(--pine);}
+  .tabpane{display:none; padding:22px 2px;}
+  .tabpane.active{display:block;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th{text-align:right; font-size:11.5px; font-weight:700; color:var(--muted); padding:8px 12px; border-bottom:1px solid var(--line); letter-spacing:.3px;}
+  td{padding:11px 12px; border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  .chip{font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-block;}
+
+  /* checklist */
+  .check{display:flex; align-items:center; gap:12px; padding:13px 14px; border:1px solid var(--line); border-radius:12px; margin-bottom:10px; background:var(--surface);}
+  .check .box{width:22px; height:22px; border-radius:7px; flex-shrink:0; display:grid; place-items:center;}
+  .check .box svg{width:13px;height:13px;}
+  .check.done .box{background:var(--grass);}
+  .check.pending .box{background:var(--amber-soft); border:1.5px solid var(--amber);}
+  .check .ctxt{flex:1;}
+  .check .ctxt b{font-size:14px;}
+  .check .ctxt .cs{font-size:12px; color:var(--muted);}
+  .check .cmeta{font-size:12px; color:var(--muted); text-align:left;}
+
+  .audit{font-family:'Heebo'; font-size:12.5px; color:var(--muted); border-inline-start:2px solid var(--pine-300); padding:3px 14px; margin:0 0 14px;}
+  .audit b{color:var(--ink); font-weight:500;}
+
+  /* gantt week */
+  .gantt{overflow-x:auto;}
+  .gantt table{min-width:760px;}
+  .gantt .day{text-align:center; font-size:11px;}
+  .gbar{height:24px; border-radius:6px; color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; padding:0 9px; white-space:nowrap;}
+
+  .note{background:var(--amber-soft); border:1px solid #EAD3A8; border-radius:12px; padding:13px 16px; font-size:13px; color:#7a5418; display:flex; gap:10px; align-items:flex-start; margin-top:24px;}
+  .note svg{width:18px; height:18px; flex-shrink:0; margin-top:1px;}
+
+  @media (max-width:920px){
+    .sidebar{display:none;}
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .grid2{grid-template-columns:1fr;}
+    .content{padding:20px 16px 50px;}
+    .topbar{padding:14px 16px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="bsd">בס״ד</div>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand" style="display:block; padding:4px 4px 4px;">
+      <a href="https://www.onharel.com" target="_blank" rel="noopener" title="לאתר און הראל" style="display:block; background:#fff; border-radius:12px; padding:9px 12px; line-height:0;">
+        <img src="data:image/png;base64,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" alt="און הראל · חברה לניהול ואחזקת מבנים" style="width:100%; height:auto; display:block;">
+      </a>
+      <small style="display:block; padding:9px 6px 0; font-size:11.5px; color:#C9A054; font-weight:700; letter-spacing:.4px;">מרכז בקרה תפעולי · הדגמה</small>
+    </div>
+
+    <div class="nav-label">תפעול</div>
+    <button class="nav-item active" data-view="dash">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      לוח בקרה
+    </button>
+    <button class="nav-item" data-view="proj">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+      עבודות <span class="badge">18</span>
+    </button>
+    <button class="nav-item" data-view="crews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M16 14c3 0 5 2 5 5"/></svg>
+      צוותי אחזקה
+    </button>
+    <button class="nav-item" data-view="ware">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21v-7h6v7"/></svg>
+      מחסן ורכש <span class="badge">7</span>
+    </button>
+
+    <div class="nav-label">ניהול</div>
+    <button class="nav-item" data-view="dash">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      תקן ובטיחות
+    </button>
+    <button class="nav-item" data-view="dash">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16V9M13 16v-4M18 16V7"/></svg>
+      דוחות
+    </button>
+
+    <div class="side-foot">
+      הותאם עבור <b>און הראל</b><br>מונע ע״י <b>BizTechoff™</b> · מוקאפ הדגמה
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <h2 id="page-title">לוח בקרה</h2>
+      <div class="spacer"></div>
+      <a href="https://wa.me/972526526063?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%9E%D7%95%D7%98%D7%99%2C%20%D7%A6%D7%A4%D7%99%D7%AA%D7%99%20%D7%91%D7%94%D7%93%D7%9E%D7%94%20%D7%95%D7%94%D7%99%D7%90%20%D7%A1%D7%99%D7%A7%D7%A8%D7%A0%D7%94%20%D7%90%D7%95%D7%AA%D7%99%20%E2%80%94%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:9px;background:#25D366;color:#fff;text-decoration:none;font-family:'Heebo';font-weight:800;font-size:14px;box-shadow:0 3px 12px rgba(37,211,102,.45);white-space:nowrap;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="17" height="17"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 20l1.4-4.2A8.38 8.38 0 0 1 3.5 11.5 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>סיקרת אותי? דברו איתי</a>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        חיפוש בניין, עבודה או מס׳ קריאה…
+      </div>
+      <button class="pill-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+        עבודה חדשה
+      </button>
+      <div class="avatar">דמו</div>
+    </header>
+
+    <div class="content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section class="view active" id="view-dash">
+        <div class="eyebrow">תמונת מצב · שבוע 26</div>
+        <div class="kpis" style="margin-top:12px">
+          <div class="kpi">
+            <div class="ico" style="background:var(--pine-050);color:var(--pine)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+            <div class="num">18</div><div class="lbl">עבודות אחזקה פעילות</div>
+            <div class="delta up">+3 החודש</div>
+          </div>
+          <div class="kpi">
+            <div class="ico" style="background:var(--sky-soft);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <div class="num">6</div><div class="lbl">עבודות מתוכננות השבוע</div>
+            <div class="delta up">2 צוותים בשטח</div>
+          </div>
+          <div class="kpi">
+            <div class="ico" style="background:var(--amber-soft);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div class="num">142</div><div class="lbl">פריטים וחומרים בהזמנת רכש</div>
+            <div class="delta warn">אספקת חומרים באיחור 4 ימים</div>
+          </div>
+          <div class="kpi">
+            <div class="ico" style="background:var(--clay-soft);color:var(--clay)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+            <div class="num">4</div><div class="lbl">בדיקות גמר ומסירה ממתינות</div>
+            <div class="delta warn">2 חורגות מ-SLA</div>
+          </div>
+        </div>
+
+        <!-- PIPELINE -->
+        <div class="section-h">
+          <h3>צינור העבודות</h3>
+          <span class="clickhint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l-4 4 4 4"/><path d="M5 15h11a4 4 0 0 0 4-4V5"/></svg> לחצו על כל כרטיס לפתיחת תיק העבודה</span>
+        </div>
+        <div class="rail-wrap">
+          <div class="rail">
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#B8C4BC"></span><span class="stage-name">ליד</span><span class="stage-count">3</span></div>
+              <div class="pcard" data-open><div class="t">שיפוץ לובי · בניין הברוש 12</div><div class="m">ועד בית</div></div>
+              <div class="pcard" data-open><div class="t">החלפת תאורת חירום · מגדל אמות</div><div class="m">חברת ניהול</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#8FB39E"></span><span class="stage-name">אבחון בשטח</span><span class="stage-count">2</span></div>
+              <div class="pcard" data-open><div class="t">איטום גג · בניין הדקל 8 · נתניה</div><div class="m">ועד בית</div><div class="tagrow"><span class="tag due">סקר ב-25.6</span></div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--sky)"></span><span class="stage-name">תכנון ותיאום</span><span class="stage-count">4</span></div>
+              <div class="pcard" data-open><div class="t">שדרוג מעלית · מגדל סביון · רמת השרון</div><div class="m">יועץ מעליות א. לבנון</div><div class="tagrow"><span class="tag std">בטיחות</span></div></div>
+              <div class="pcard" data-open><div class="t">אחזקת מערכות · משרדים · הוד השרון</div><div class="m">מנהל נכס</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#3E6FA0"></span><span class="stage-name">הצעת מחיר ואישור ועד</span><span class="stage-count">3</span></div>
+              <div class="pcard" data-open><div class="t">שיפוץ חדר מדרגות · בניין · הוד השרון</div><div class="m">ממתין לאישור הזמנה</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--amber)"></span><span class="stage-name">רכש חומרים</span><span class="stage-count">2</span></div>
+              <div class="pcard" data-open><div class="t">תיקון אינסטלציה ראשית · רעננה</div><div class="m">ועד בית הרקפות</div><div class="tagrow"><span class="tag due">חומרים בדרך</span></div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:#A07A2C"></span><span class="stage-name">תשתיות</span><span class="stage-count">2</span></div>
+              <div class="pcard" data-open><div class="t">תחזוקת חניון · כפר סבא</div><div class="m">תאורה + ניקוז</div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--grass)"></span><span class="stage-name">ביצוע</span><span class="stage-count">3</span></div>
+              <div class="pcard" data-open><div class="t">שיפוץ לובי · ראשל״צ</div><div class="m">צוות מרכז</div><div class="tagrow"><span class="tag ok">בשטח</span></div></div>
+            </div>
+            <div class="stage">
+              <div class="stage-head"><span class="stage-dot" style="background:var(--pine)"></span><span class="stage-name">גמר ומסירה</span><span class="stage-count">2</span></div>
+              <div class="pcard" data-open><div class="t">מסירת עבודה · גבעתיים</div><div class="m">בדיקת גמר ומסירה</div><div class="tagrow"><span class="tag std">מסירה 27.6</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- two col -->
+        <div class="grid2" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-h">
+              <svg viewBox="0 0 24 24" width="18" fill="none" stroke="var(--pine)" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/></svg>
+              <h4>צוותי אחזקה — היום בשטח</h4>
+              <span class="more" data-goto="crews">לוח שבועי ←</span>
+            </div>
+            <div class="panel-b">
+              <div class="crew"><span class="cdot" style="background:var(--sky)"></span><div class="cinfo"><b>צוות מרכז · 4 טכנאים</b><div class="s">שיפוץ לובי · ראשל״צ — שלב 2/3</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--grass)"></span><div class="cinfo"><b>צוות שרון · 3 טכנאים</b><div class="s">אחזקה שוטפת · הוד השרון</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--amber)"></span><div class="cinfo"><b>צוות דרום · 4 טכנאים</b><div class="s">ממתין לאספקת חומרים · באר שבע</div></div><span class="cstatus" style="background:var(--amber-soft);color:#8a5e16">בהמתנה</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--clay)"></span><div class="cinfo"><b>קבלן חשמל</b><div class="s">עבודות חשמל · כפר סבא</div></div><span class="cstatus" style="background:var(--clay-soft);color:var(--clay)">איחור יום</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-h">
+              <svg viewBox="0 0 24 24" width="18" fill="none" stroke="var(--clay)" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+              <h4>דורש טיפול</h4>
+            </div>
+            <div>
+              <div class="alert"><div class="ad" style="background:var(--clay-soft);color:var(--clay)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="atxt">אספקת חומרים (ספק 2207) באיחור — צוות דרום ממתין<time>לפני 2 שעות</time></div></div>
+              <div class="alert"><div class="ad" style="background:var(--amber-soft);color:#8a5e16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="atxt">בדיקת גמר · גבעתיים — תיאום בודק תוך 24ש׳<time>SLA חורג</time></div></div>
+              <div class="alert"><div class="ad" style="background:var(--sky-soft);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="atxt">הצעת מחיר · הוד השרון — ממתינה לאישור 6 ימים<time>מעקב לקוח</time></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>זהו מוקאפ הדגמה. כל הנתונים לדוגמה בלבד. כל מודול (עבודות, צוותים, גבייה, גמר) נבנה כיחידה עצמאית — ניתן להפעיל בשלבים לפי סדר העדיפויות שלכם.</div>
+        </div>
+      </section>
+
+      <!-- ===== PROJECT DETAIL ===== -->
+      <section class="view" id="view-proj">
+        <div class="crumbs"><a data-goto="dash">לוח בקרה</a> ‹ <a data-goto="dash">עבודות</a> ‹ שדרוג מעלית · מגדל סביון · רמת השרון</div>
+        <div class="proj-head">
+          <div>
+            <h2>שדרוג מעלית · מגדל סביון · רמת השרון</h2>
+            <div class="sub">לקוח: ועד בית מגדל סביון · מנהל עבודה: ל. כהן · מס׳ עבודה P-202126</div>
+          </div>
+          <div class="hd-actions">
+            <button class="ghost-btn">מסמכים</button>
+            <button class="pill-btn">עדכון שלב</button>
+          </div>
+        </div>
+
+        <div class="progress-rail">
+          <div class="pstep done"><div class="bar"></div><div class="pl">ליד</div></div>
+          <div class="pstep done"><div class="bar"></div><div class="pl">אבחון בשטח</div></div>
+          <div class="pstep curr"><div class="bar"></div><div class="pl">תכנון</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">הצעה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">הזמנה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">רכש חומרים</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">עבודות בנייה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">ביצוע</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">גמר</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">מסירה</div></div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="ov">סקירה</button>
+          <button class="tab" data-tab="mat">חומרים ורכש</button>
+          <button class="tab" data-tab="crew">צוות וזמנים</button>
+          <button class="tab" data-tab="std">גמר ומסירה</button>
+        </div>
+
+        <div class="tabpane active" id="tab-ov">
+          <div class="grid2">
+            <div class="panel">
+              <div class="panel-h"><h4>פרטי העבודה</h4></div>
+              <div style="padding:6px 4px">
+                <table>
+                  <tr><td style="color:var(--muted)">סוג עבודה</td><td>שדרוג מעלית + מערכת בקרה</td></tr>
+                  <tr><td style="color:var(--muted)">מבנה</td><td>12 קומות / 48 דירות</td></tr>
+                  <tr><td style="color:var(--muted)">מערכות</td><td>פיר, תא ומערכת בקרה</td></tr>
+                  <tr><td style="color:var(--muted)">יועץ</td><td>יועץ מעליות אסף לבנון (חיצוני)</td></tr>
+                  <tr><td style="color:var(--muted)">יעד מסירה</td><td>14.9.2026</td></tr>
+                  <tr><td style="color:var(--muted)">סטטוס</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">בתכנון — דורש אישור בטיחות</span></td></tr>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-h"><h4>יומן שלבים</h4></div>
+              <div style="padding:14px 16px">
+                <p class="audit"><b>12.6 · אבחון בשטח הושלם</b><br>מדידות + צילום, הועלה לתיק העבודה</p>
+                <p class="audit"><b>15.6 · תיאום יועץ הוחל</b><br>הוקצה לאסף לבנון</p>
+                <p class="audit"><b>20.6 · בקשת בדיקת בטיחות</b><br>נשלחה ליועץ בטיחות</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="tab-mat">
+          <div class="panel">
+            <div class="panel-h"><h4>חומרים ורכש (BOM)</h4><span class="more">ייצוא</span></div>
+            <div style="padding:4px">
+              <table>
+                <thead><tr><th>מק״ט</th><th>פריט</th><th>כמות</th><th>מקור</th><th>זמן אספקה</th><th>סטטוס</th></tr></thead>
+                <tbody>
+                  <tr><td>PL-110</td><td>חומרים ועצים בוגרים</td><td>120</td><td>ספק חומרים · מקומי</td><td>3 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בהזמנה</span></td></tr>
+                  <tr><td>IR-220</td><td>מערכת אינסטלציה ובקרים</td><td>1</td><td>ספק אינסטלציה</td><td>2 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בהזמנה</span></td></tr>
+                  <tr><td>MT-901</td><td>כבלים ופסי הולכה</td><td>1</td><td>מלאי מחסן</td><td>זמין</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">במלאי</span></td></tr>
+                  <tr><td>ST-220</td><td>עבודות בנייה ותשתית</td><td>—</td><td>קבלן משנה</td><td>בתיאום</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">דורש הזמנה</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="tab-crew">
+          <div class="panel">
+            <div class="panel-h"><h4>שיבוץ צוותי אחזקה</h4></div>
+            <div class="gantt" style="padding:16px">
+              <table>
+                <thead><tr><th>צוות</th><th class="day">א׳</th><th class="day">ב׳</th><th class="day">ג׳</th><th class="day">ד׳</th><th class="day">ה׳</th></tr></thead>
+                <tbody>
+                  <tr><td><b>צוות שרון</b></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">עבודות בנייה</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">התקנה</div></td></tr>
+                  <tr><td><b>קבלן חשמל</b></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות בנייה</div></td><td></td><td></td><td></td></tr>
+                  <tr><td><b>צוות גומי</b></td><td></td><td></td><td></td><td></td><td><div class="gbar" style="background:var(--clay)">במלאי</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="tab-std">
+          <div class="eyebrow" style="margin-bottom:14px">שרשרת גמר ומסירה · מבוקרת ומתועדת</div>
+          <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>אבחון בשטח ומדידות</b><div class="cs">תועד · ל. כהן · 12.6.2026</div></div><div class="cmeta">חתום דיגיטלית</div></div>
+          <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>מפרט אחזקה ובחירת חומרים</b><div class="cs">מותאם אקלים · אישור מהנדס</div></div><div class="cmeta">מסמך #4471</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>בדיקת בטיחות</b><div class="cs">ממתין לאישור יועץ בטיחות</div></div><div class="cmeta">יעד 28.6</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>בדיקת אינסטלציה ומערכות</b><div class="cs">טרם תואם</div></div><div class="cmeta">לפני מסירה</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>תעודת מסירה ואחריות</b><div class="cs">חתימת לקוח דיגיטלית</div></div><div class="cmeta">בסיום</div></div>
+          <div class="note" style="margin-top:18px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <div>כל שלב נחתם ומתוארך — שרשרת ראיות שלמה מהאבחון ועד תעודת המסירה. מתועד אוטומטית לכל עבודה — שקיפות מלאה מול הוועד והדיירים.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CREWS ===== -->
+      <section class="view" id="view-crews">
+        <div class="eyebrow">לוח שבועי · שבוע 26</div>
+        <div class="section-h"><h3>שיבוץ צוותי אחזקה בכל הארץ</h3><span>גרירה לשינוי שיבוץ · התראה על חפיפות</span></div>
+        <div class="panel">
+          <div class="gantt" style="padding:18px">
+            <table>
+              <thead><tr><th style="min-width:130px">צוות / קבלן</th><th class="day">ראשון</th><th class="day">שני</th><th class="day">שלישי</th><th class="day">רביעי</th><th class="day">חמישי</th></tr></thead>
+              <tbody>
+                <tr><td><b>צוות מרכז</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">שיפוץ לובי · ראשל״צ</div></td><td colspan="3"><div class="gbar" style="background:var(--pine)">התקנה · קריית אונו</div></td></tr>
+                <tr><td><b>צוות שרון</b><div style="font-size:12px;color:var(--muted)">3 עובדים</div></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">עבודות בנייה · רמת השרון</div></td><td colspan="2"><div class="gbar" style="background:var(--grass)">התקנה · רמת השרון</div></td></tr>
+                <tr><td><b>צוות דרום</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="3"><div class="gbar" style="background:var(--amber)">ממתין לאספקת חומרים · ב״ש</div></td><td colspan="2"><div class="gbar" style="background:var(--pine)">התקנה · ב״ש</div></td></tr>
+                <tr><td><b>קבלן חשמל</b><div style="font-size:12px;color:var(--muted)">קבלן משנה</div></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות חשמל · כפר סבא</div></td><td></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות בנייה · רעננה</div></td></tr>
+                <tr><td><b>צוות אינסטלציה</b><div style="font-size:12px;color:var(--muted)">2 עובדים</div></td><td></td><td></td><td></td><td colspan="2"><div class="gbar" style="background:var(--clay)">אינסטלציה · כפר סבא</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>צוות דרום ממתין 3 ימים לאספקת חומרים — המערכת מזהה חלון פנוי ומציעה שיבוץ חלופי. כך מצמצמים זמני המתנה יקרים.</div>
+        </div>
+      </section>
+
+      <!-- ===== WAREHOUSE ===== -->
+      <section class="view" id="view-ware">
+        <div class="eyebrow">מחסן ורכש</div>
+        <div class="section-h"><h3>מלאי, רכש ואספקות בדרך</h3></div>
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><div class="num">3</div><div class="lbl">אספקות רכש בדרך</div><div class="delta warn">אחת באיחור</div></div>
+          <div class="kpi"><div class="num">142</div><div class="lbl">פריטים בהזמנה פתוחה</div></div>
+          <div class="kpi"><div class="num">9</div><div class="lbl">פריטים מתחת לסף מלאי</div><div class="delta warn">דורש חידוש</div></div>
+        </div>
+        <div class="panel" style="margin-top:22px">
+          <div class="panel-h"><h4>הזמנות רכש פעילות</h4><span class="more">הזמנה חדשה</span></div>
+          <div style="padding:4px">
+            <table>
+              <thead><tr><th>הזמנה</th><th>ספק</th><th>פריטים</th><th>מיועד לעבודה</th><th>ETA</th><th>סטטוס</th></tr></thead>
+              <tbody>
+                <tr><td>רכש-2207</td><td>ספק  השרון</td><td>38</td><td>אחזקה · רעננה</td><td>+4 ימים</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">באיחור</span></td></tr>
+                <tr><td>רכש-2211</td><td>ספק אינסטלציה · מרכז</td><td>52</td><td>בניין · כפר סבא</td><td>9 ימים</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">באספקה</span></td></tr>
+                <tr><td>רכש-2214</td><td>ספק  הצפון</td><td>52</td><td>פיתוח בניין · רה״ש</td><td>3 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בייצור</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>כל אספקה מקושרת לעבודה ולשיבוץ הצוות שלו — איחור מקפיץ התראה ומציע תזמון מחדש של הצוות אוטומטית.</div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const titles={dash:'לוח בקרה',proj:'שדרוג מעלית · מגדל סביון · רמת השרון',crews:'צוותי אחזקה',ware:'מחסן ורכש'};
+  function show(view){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById('view-'+view).classList.add('active');
+    document.getElementById('page-title').textContent=titles[view]||'לוח בקרה';
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.view===view));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>show(n.dataset.view)));
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));
+  document.querySelectorAll('[data-open]').forEach(c=>c.addEventListener('click',()=>show('proj')));
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tabpane').forEach(x=>x.classList.remove('active'));
+   
