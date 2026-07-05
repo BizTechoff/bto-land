@@ -73,6 +73,10 @@
   .content{padding:26px 30px 60px; max-width:1280px;}
   .view{display:none;}
   .view.active{display:block; animation:fade .35s ease;}
+  .view:target{display:block; animation:fade .35s ease;}
+  body:has(.view:target) .view.active:not(:target){display:none;}
+  a.nav-item{text-decoration:none;}
+
   @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
 
   .eyebrow{font-size:11px; font-weight:700; letter-spacing:1.4px; color:var(--pine-300); text-transform:uppercase;}
@@ -215,32 +219,32 @@
     </div>
 
     <div class="nav-label">תפעול</div>
-    <button class="nav-item active" data-view="dash">
+    <a class="nav-item active" href="#view-dash" data-view="dash">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
       לוח בקרה
-    </button>
-    <button class="nav-item" data-view="proj">
+    </a>
+    <a class="nav-item" href="#view-proj" data-view="proj">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
       עבודות <span class="badge">18</span>
-    </button>
-    <button class="nav-item" data-view="crews">
+    </a>
+    <a class="nav-item" href="#view-crews" data-view="crews">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M16 14c3 0 5 2 5 5"/></svg>
       צוותי אחזקה
-    </button>
-    <button class="nav-item" data-view="ware">
+    </a>
+    <a class="nav-item" href="#view-ware" data-view="ware">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21v-7h6v7"/></svg>
       מחסן ורכש <span class="badge">7</span>
-    </button>
+    </a>
 
     <div class="nav-label">ניהול</div>
-    <button class="nav-item" data-view="dash">
+    <a class="nav-item" href="#view-std" data-view="std">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
       תקן ובטיחות
-    </button>
-    <button class="nav-item" data-view="dash">
+    </a>
+    <a class="nav-item" href="#view-rep" data-view="rep">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16V9M13 16v-4M18 16V7"/></svg>
       דוחות
-    </button>
+    </a>
 
     <div class="side-foot">
       הותאם עבור <b>און הראל</b><br>מונע ע״י <b>BizTechoff™</b> · מוקאפ הדגמה
@@ -530,12 +534,60 @@
         </div>
       </section>
 
+      <!-- ===== תקן ובטיחות ===== -->
+      <section class="view" id="view-std">
+        <div class="eyebrow">תקן ובטיחות · כל הבניינים</div>
+        <div class="section-h"><h3>בדיקות תקופתיות ותאימות תקן</h3><span>התראה אוטומטית לפני כל מועד · אסמכתה חתומה לכל בדיקה</span></div>
+        <div class="panel">
+          <div class="panel-h"><h4>מעקב בדיקות · רבעון 3</h4><span class="more">היומן השנתי</span></div>
+          <div style="padding:4px">
+            <table>
+              <thead><tr><th>בדיקה</th><th>בניין</th><th>בוצע לאחרונה</th><th>מועד הבא</th><th>סטטוס</th></tr></thead>
+              <tbody>
+                <tr><td><b>ביקורת כיבוי אש</b></td><td>מגדל סביון · רמת השרון</td><td>12.3.2026</td><td>12.9.2026</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">תקין · אסמכתה</span></td></tr>
+                <tr><td><b>ניקוי מאגרי מים</b></td><td>בניין הדקל 8 · ראשון לציון</td><td>4.1.2026</td><td>בעוד 12 ימים</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">מתקרב · שובץ צוות</span></td></tr>
+                <tr><td><b>בדיקת מעליות תקן</b></td><td>בניין הברוש 12</td><td>20.5.2026</td><td>20.11.2026</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">תקין</span></td></tr>
+                <tr><td><b>בדיקת חשמל תקופתית</b></td><td>משרדים · רמת גן</td><td>2.2.2025</td><td>עבר המועד</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">באיחור · הוקפצה קריאה</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>כל בדיקה מקושרת לעבודה, לצוות ולאסמכתה חתומה — תיק תאימות מלא לכל בניין, זמין בקליק. מועד שמתקרב פותח קריאה ומשבץ צוות אוטומטית.</div>
+        </div>
+      </section>
+
+      <!-- ===== דוחות ===== -->
+      <section class="view" id="view-rep">
+        <div class="eyebrow">דוחות · שקיפות מלאה</div>
+        <div class="section-h"><h3>דוחות לוועד ולדיירים</h3><span>מופקים אוטומטית מהנתונים החיים · נשלחים בקליק</span></div>
+        <div class="panel">
+          <div class="panel-h"><h4>דוחות אחרונים</h4><span class="more">הפקת דוח חדש</span></div>
+          <div style="padding:4px">
+            <table>
+              <thead><tr><th>דוח</th><th>בניין</th><th>תקופה</th><th>נמען</th><th>סטטוס</th></tr></thead>
+              <tbody>
+                <tr><td><b>דוח הוצאות מול תקציב</b></td><td>מגדל סביון</td><td>רבעון 2/2026</td><td>ועד הבית</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">נשלח · נצפה ✓</span></td></tr>
+                <tr><td><b>דוח גבייה ופיגורים</b></td><td>כל הבניינים</td><td>יוני 2026</td><td>הנהלה</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">מוכן</span></td></tr>
+                <tr><td><b>דוח קריאות שירות וזמני טיפול</b></td><td>בניין הדקל 8</td><td>יוני 2026</td><td>ועד הבית</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">בהפקה</span></td></tr>
+                <tr><td><b>תיק תאימות תקן ובטיחות</b></td><td>בניין הברוש 12</td><td>שנתי</td><td>ועד + חברת ביטוח</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">זמין</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16V9M13 16v-4M18 16V7"/></svg>
+          <div>כל דוח נבנה אוטומטית מהנתונים החיים של המערכת — שקיפות מלאה מול הוועד והדיירים, כולל חיווי מי צפה ומתי. בלי אקסלים ידניים בסוף רבעון.</div>
+        </div>
+      </section>
+
     </div>
   </div>
 </div>
 
 <script>
-  const titles={dash:'לוח בקרה',proj:'שדרוג מעלית · מגדל סביון · רמת השרון',crews:'צוותי אחזקה',ware:'מחסן ורכש'};
+  const titles={dash:'לוח בקרה',proj:'שדרוג מעלית · מגדל סביון · רמת השרון',crews:'צוותי אחזקה',ware:'מחסן ורכש',std:'תקן ובטיחות',rep:'דוחות'};
   function show(view){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
     document.getElementById('view-'+view).classList.add('active');
@@ -549,4 +601,10 @@
   document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
     document.querySelectorAll('.tabpane').forEach(x=>x.classList.remove('active'));
-   
+    t.classList.add('active');
+    document.getElementById('tab-'+t.dataset.tab).classList.add('active');
+  }));
+  window.addEventListener('hashchange',()=>{const v=(location.hash||'').replace('#view-','');if(v&&document.getElementById('view-'+v))show(v);});
+</script>
+</body>
+</html>
