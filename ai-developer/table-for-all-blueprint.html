@@ -157,74 +157,65 @@
     <h2>2 · תרשים הארכיטקטורה</h2>
     <p class="h2sub">Gateway/Service — סוכנים רזים; כל משאב נגיש דרך שירות מרכזי בלבד. ✦ = Gateway שנוסף למודול ai-invoice</p>
     <div class="svgwrap">
-      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="תרשים ארכיטקטורה מעודכן">
-        <defs>
-          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#475569"/></marker>
-        </defs>
-        <rect x="6" y="6" width="748" height="300" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-        <text x="380" y="27" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Node.js Server · מונוליט יחיד</text>
-
-        <!-- agents -->
-        <rect x="20" y="40" width="228" height="52" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
-        <text x="134" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Meeting Agent</text>
-        <text x="134" y="80" text-anchor="middle" font-size="10.5" fill="#1e40af">סוכן פגישות</text>
-        <rect x="266" y="40" width="228" height="52" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
-        <text x="380" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Marketing Agent</text>
-        <text x="380" y="80" text-anchor="middle" font-size="10.5" fill="#1e40af">סוכן שיווק</text>
-        <rect x="512" y="40" width="228" height="52" rx="10" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2"/>
-        <text x="626" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#312e81">★ Finance Agent</text>
-        <text x="626" y="80" text-anchor="middle" font-size="10.5" fill="#3730a3">סוכן פיננסי · ai-invoice</text>
-
-        <!-- rail -->
-        <line x1="134" y1="92" x2="134" y2="112" stroke="#475569" stroke-width="1.3"/>
-        <line x1="380" y1="92" x2="380" y2="112" stroke="#475569" stroke-width="1.3"/>
-        <line x1="626" y1="92" x2="626" y2="112" stroke="#475569" stroke-width="1.3"/>
-        <line x1="134" y1="112" x2="626" y2="112" stroke="#475569" stroke-width="1.3"/>
+      <svg viewBox="0 0 820 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="תרשים ארכיטקטורה מעודכן">
+        <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#475569"/></marker></defs>
+        <rect x="6" y="6" width="808" height="300" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="410" y="27" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Node.js Server · מונוליט יחיד</text>
+        <rect x="18" y="40" width="248" height="52" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="142" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Meeting Agent</text>
+        <text x="142" y="80" text-anchor="middle" font-size="10.5" fill="#1e40af">סוכן פגישות</text>
+        <rect x="286" y="40" width="248" height="52" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="410" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Marketing Agent</text>
+        <text x="410" y="80" text-anchor="middle" font-size="10.5" fill="#1e40af">סוכן שיווק</text>
+        <rect x="554" y="40" width="248" height="52" rx="10" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2"/>
+        <text x="678" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#312e81">★ Finance Agent</text>
+        <text x="678" y="80" text-anchor="middle" font-size="10.5" fill="#3730a3">סוכן פיננסי · ai-invoice</text>
+        <line x1="142" y1="92" x2="142" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <line x1="410" y1="92" x2="410" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <line x1="678" y1="92" x2="678" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <line x1="142" y1="112" x2="678" y2="112" stroke="#475569" stroke-width="1.3"/>
         <text x="330" y="128" text-anchor="middle" font-size="9.5" fill="#64748b">כל הסוכנים → AI + DB · דרך Gateways בלבד</text>
-
-        <!-- shared gateway arrows -->
-        <line x1="100" y1="112" x2="100" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
-        <line x1="288" y1="112" x2="288" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
-        <!-- finance-specific dashed -->
-        <line x1="626" y1="112" x2="476" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
-        <line x1="700" y1="112" x2="664" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
-        <line x1="700" y1="92" x2="700" y2="112" stroke="#4f46e5" stroke-width="1.3"/>
-
-        <!-- gateways -->
-        <rect x="14" y="150" width="172" height="58" rx="10" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
-        <text x="100" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">AIManager</text>
-        <text x="100" y="192" text-anchor="middle" font-size="9.5" fill="#166534">+ adapters · PromptLog</text>
-        <rect x="202" y="150" width="172" height="58" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5"/>
-        <text x="288" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">DBManager</text>
-        <text x="288" y="192" text-anchor="middle" font-size="9.5" fill="#9a3412">Remult dataProvider</text>
-        <rect x="390" y="150" width="172" height="58" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
-        <text x="476" y="173" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">✦ TaxAuthorityManager</text>
-        <text x="476" y="192" text-anchor="middle" font-size="9.5" fill="#5b21b6">מספרי הקצאה</text>
-        <rect x="578" y="150" width="172" height="58" rx="10" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
-        <text x="664" y="173" text-anchor="middle" font-size="11" font-weight="700" fill="#115e59">✦ AccountantExportManager</text>
-        <text x="664" y="192" text-anchor="middle" font-size="9.5" fill="#0f766e">ייצוא לרו"ח</text>
-
-        <!-- gateway -> external -->
-        <line x1="100" y1="208" x2="100" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
-        <line x1="288" y1="208" x2="288" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
-        <line x1="476" y1="208" x2="476" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
-        <line x1="664" y1="208" x2="664" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
-
-        <!-- externals -->
-        <rect x="14" y="244" width="172" height="54" rx="9" fill="#fee2e2" stroke="#f87171" stroke-width="1.3"/>
-        <text x="100" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#7f1d1d">ספקי AI חיצוניים</text>
-        <text x="100" y="282" text-anchor="middle" font-size="9" fill="#991b1b">Grok·Claude·Gemini·OpenAI</text>
-        <rect x="202" y="244" width="172" height="54" rx="9" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.3"/>
-        <text x="288" y="266" text-anchor="middle" font-size="11" font-weight="700" fill="#78350f">Remult &amp; Database</text>
-        <text x="288" y="282" text-anchor="middle" font-size="9" fill="#92400e">Postgres / אחר</text>
-        <rect x="390" y="244" width="172" height="54" rx="9" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1.3"/>
-        <text x="476" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5b21b6">רשות המסים</text>
-        <text x="476" y="282" text-anchor="middle" font-size="9" fill="#6d28d9">מודל חשבוניות ישראל</text>
-        <rect x="578" y="244" width="172" height="54" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.3"/>
-        <text x="664" y="266" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">חשבשבת / רו"ח</text>
-        <text x="664" y="282" text-anchor="middle" font-size="9" fill="#0d9488">פקודות יומן / מבנה אחיד</text>
-
-        <text x="380" y="326" text-anchor="middle" font-size="9.5" fill="#94a3b8">— — — קו מקווקוו = Gateway ייעודי ל-Finance (מודול ai-invoice) — — —</text>
+        <line x1="150" y1="112" x2="90" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <line x1="250" y1="112" x2="250" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <line x1="660" y1="112" x2="410" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+        <line x1="678" y1="112" x2="570" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+        <line x1="700" y1="112" x2="730" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+        <rect x="15" y="150" width="150" height="58" rx="10" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="90" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">AIManager</text>
+        <text x="90" y="192" text-anchor="middle" font-size="9" fill="#166534">+adapters · PromptLog</text>
+        <rect x="175" y="150" width="150" height="58" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5"/>
+        <text x="250" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">DBManager</text>
+        <text x="250" y="192" text-anchor="middle" font-size="9" fill="#9a3412">Remult dataProvider</text>
+        <rect x="335" y="150" width="150" height="58" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="410" y="175" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">✦ TaxAuthority</text>
+        <text x="410" y="192" text-anchor="middle" font-size="9" fill="#5b21b6">מספרי הקצאה</text>
+        <rect x="495" y="150" width="150" height="58" rx="10" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
+        <text x="570" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#115e59">✦ AccountantExport</text>
+        <text x="570" y="192" text-anchor="middle" font-size="9" fill="#0f766e">ייצוא לרו"ח</text>
+        <rect x="655" y="150" width="150" height="58" rx="10" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+        <text x="730" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#3730a3">✦ PaymentProcessor</text>
+        <text x="730" y="192" text-anchor="middle" font-size="9" fill="#4338ca">סליקה</text>
+        <line x1="90" y1="208" x2="90" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="250" y1="208" x2="250" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="410" y1="208" x2="410" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="570" y1="208" x2="570" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="730" y1="208" x2="730" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <rect x="15" y="244" width="150" height="54" rx="9" fill="#fee2e2" stroke="#f87171" stroke-width="1.3"/>
+        <text x="90" y="266" text-anchor="middle" font-size="10" font-weight="700" fill="#7f1d1d">ספקי AI</text>
+        <text x="90" y="282" text-anchor="middle" font-size="8" fill="#991b1b">Grok·Claude·Gemini·OpenAI</text>
+        <rect x="175" y="244" width="150" height="54" rx="9" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.3"/>
+        <text x="250" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#78350f">Database</text>
+        <text x="250" y="282" text-anchor="middle" font-size="8" fill="#92400e">Remult · Postgres</text>
+        <rect x="335" y="244" width="150" height="54" rx="9" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1.3"/>
+        <text x="410" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5b21b6">רשות המסים</text>
+        <text x="410" y="282" text-anchor="middle" font-size="8" fill="#6d28d9">חשבוניות ישראל</text>
+        <rect x="495" y="244" width="150" height="54" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.3"/>
+        <text x="570" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0f766e">חשבשבת / רו"ח</text>
+        <text x="570" y="282" text-anchor="middle" font-size="8" fill="#0d9488">פקודות יומן</text>
+        <rect x="655" y="244" width="150" height="54" rx="9" fill="#eef2ff" stroke="#818cf8" stroke-width="1.3"/>
+        <text x="730" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3730a3">חברות סליקה</text>
+        <text x="730" y="282" text-anchor="middle" font-size="8" fill="#4338ca">טרנזילה·קארדקום·PayPlus</text>
+        <text x="410" y="326" text-anchor="middle" font-size="9.5" fill="#94a3b8">— — — מקווקוו = Gateway ייעודי ל-Finance · כל ה-Gateways בשם *Manager — — —</text>
       </svg>
     </div>
     <div class="legend">
@@ -249,6 +240,7 @@
         <tr><td>DBManager</td><td>service יחיד <b>בלי</b> adapters — ה-dataProvider של Remult הוא האדפטר.</td></tr>
         <tr><td class="c" style="background:#f5f3ff">✦ TaxAuthorityManager</td><td>Gateway חדש: מספרי הקצאה מרשות המסים בזמן-אמת, ניהול הרשאת 3-החודשים, ריטריי/תור. <code>adapters/</code>: rashut-hamisim.</td></tr>
         <tr><td class="c" style="background:#f0fdfa">✦ AccountantExportManager</td><td>Gateway חדש: ייצוא פקודות-יומן לרו"ח. <code>adapters/</code>: chashavshevet, bkmv-uniform (מבנה אחיד).</td></tr>
+        <tr><td class="c" style="background:#eef2ff">✦ PaymentProcessorManager</td><td>Gateway חדש: סליקת אשראי מול ספקי סליקה. <code>adapters/</code>: tranzila, cardcom, payplus, meshulam. הסוכן קורא <code>charge()</code>; ההצלחה נרשמת כ-<code>Payment</code>.</td></tr>
         <tr><td>היררכיה</td><td>Layer-first (server / shared / app), ואז domain-per-agent.</td></tr>
         <tr><td>server</td><td><code>core / gateways / agents</code>. core = index, server, jwt, remult-api, json-body.</td></tr>
         <tr><td>shared</td><td>היברידי: <code>core</code> לפי-סוג (entity/enum/controller/type) + <code>agents/&lt;domain&gt;</code> בסיומות.</td></tr>
@@ -288,7 +280,8 @@
       <div class="p">   │  │  ├─ db-manager/  <span class="tag t1">1</span></div><div class="nt">db-manager.service.ts</div>
       <div class="p">   │  │  ├─ ai-manager/  <span class="tag t2">2</span></div><div class="nt">service + adapters/(grok·claude·gemini·openai)</div>
       <div class="p">   │  │  ├─ tax-authority-manager/  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> service + adapters/rashut-hamisim</div>
-      <div class="p">   │  │  └─ accountant-export-manager/  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> service + adapters/(chashavshevet·bkmv)</div>
+      <div class="p">   │  │  ├─ accountant-export-manager/  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> service + adapters/(chashavshevet·bkmv)</div>
+      <div class="p">   │  │  └─ payment-processor-manager/  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> service + adapters/(tranzila·cardcom·payplus)</div>
       <div class="p">   │  └─ <span class="srv">agents/</span></div><div class="nt">לוגיקה · פרומפטים · סודות</div>
       <div class="p">   │     ├─ base/base.agent.ts  <span class="tag t3">3</span></div><div class="nt">מקבל את ה-Gateways בהזרקה</div>
       <div class="p">   │     ├─ meeting/  <span class="tag t3">3</span></div><div class="nt">meeting.agent · .prompts · .config</div>
@@ -402,6 +395,36 @@
         <li><b>אות phase-0</b> — כתיבת קוד מתחילה רק בהוראה מפורשת.</li>
       </ul>
     </div>
+  </section>
+
+  <!-- 9 ai-finance map -->
+  <section>
+    <h2>9 · מפת עמודי ai-finance — היעד המלא</h2>
+    <p class="h2sub">ai-finance = הנה"ח מלאה. ai-invoice הוא עמוד אחד (צד ההכנסות). מה בנוי / מה חסר:</p>
+    <table>
+      <thead><tr><th class="c">#</th><th>עמוד</th><th>סטטוס</th><th>מה כולל</th><th>שלב</th></tr></thead>
+      <tbody>
+        <tr><td class="c">1</td><td>הכנסות / חייבים — <b>ai-invoice</b></td><td><span style="color:#15803d;font-weight:700">✓ בנוי</span></td><td>Invoice · LineItem · Payment · Customer · הקצאה · dunning</td><td>—</td></tr>
+        <tr><td class="c">2</td><td>הנהלת חשבונות — Ledger</td><td><span style="color:#1d4ed8;font-weight:700">◐ ליבה</span></td><td>JournalEntry · JournalLine · Account · תרשים חשבונות</td><td>ליבה</td></tr>
+        <tr><td class="c">3</td><td>הוצאות / ספקים — AP</td><td><span style="color:#b45309;font-weight:700">✗ חסר</span></td><td>Supplier · חשבונית ספק · מס תשומות · OCR קבלות</td><td>MVP</td></tr>
+        <tr><td class="c">4</td><td>מע"מ — VAT</td><td><span style="color:#b45309;font-weight:700">✗ חסר</span></td><td>עסקאות − תשומות · <b>PCN874</b> לרשות המסים</td><td>MVP</td></tr>
+        <tr><td class="c">5</td><td>בנק — Bank</td><td><span style="color:#b45309;font-weight:700">✗ חסר</span></td><td>BankAccount · תנועות · התאמת בנק</td><td>MVP</td></tr>
+        <tr><td class="c">6</td><td>דוחות — Reports</td><td><span style="color:#b45309;font-weight:700">✗ חסר</span></td><td>מאזן בוחן · רווח והפסד · מאזן · כרטסת · גיול · תזרים</td><td>MVP בסיסי</td></tr>
+        <tr><td class="c">7</td><td>מיסים נוספים — Tax</td><td><span style="color:#6b7280;font-weight:700">✗ אחר כך</span></td><td>ניכוי מס במקור · מקדמות מס הכנסה</td><td>אחר כך</td></tr>
+        <tr><td class="c">8</td><td>שכר — Payroll</td><td><span style="color:#6b7280;font-weight:700">✗ אחר כך</span></td><td>תלושים · מס הכנסה · ביטוח לאומי</td><td>אחר כך</td></tr>
+        <tr><td class="c">9</td><td>רכוש קבוע — Assets</td><td><span style="color:#6b7280;font-weight:700">✗ אחר כך</span></td><td>רכוש קבוע · פחת</td><td>אחר כך</td></tr>
+      </tbody>
+    </table>
+    <h3>סדר בנייה (אחרי ai-invoice)</h3>
+    <div class="road">
+      <div><span class="dot d2">✓</span> ai-invoice</div>
+      <div><span class="dot d3">›</span> ספקים + תשומות</div>
+      <div><span class="dot d3">›</span> דוח מע"מ (PCN874)</div>
+      <div><span class="dot d4">›</span> דוחות בסיסיים</div>
+      <div><span class="dot d4">›</span> התאמת בנק</div>
+      <div><span class="dot d0">…</span> שכר · מיסים · רכוש</div>
+    </div>
+    <p style="margin:12px 0 0; font-size:.86rem; color:var(--muted)"><b>קישורי-חוץ:</b> <code>TaxAuthorityManager</code> (הקצאה + PCN874) · <code>AccountantExportManager</code> · <code>PaymentProcessorManager</code> · <b>חדש:</b> <code>BankManager</code> (open-banking).</p>
   </section>
 
   <div class="callout ok">
