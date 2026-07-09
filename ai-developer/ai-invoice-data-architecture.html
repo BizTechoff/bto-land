@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ai-invoice — מודל הנתונים B.P (יסודות)</title>
+<style>
+  :root{
+    --card:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --soft:#f8fafc;
+    --brand:#4f46e5; --brand-d:#4338ca; --brand-soft:#eef2ff;
+    --teal:#0d9488; --teal-soft:#ecfdf5; --amber:#b45309; --amber-soft:#fffbeb;
+    --red:#b91c1c; --red-soft:#fef2f2; --shadow:0 10px 30px rgba(17,24,39,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font-family:"Segoe UI","Assistant",Arial,sans-serif; color:var(--ink);
+    background:#eef1f8; line-height:1.62; font-size:15px}
+  .wrap{max-width:940px; margin:0 auto; padding:26px 16px 64px}
+  header.doc{background:linear-gradient(135deg,#0f172a,#4338ca); color:#fff; border-radius:18px;
+    padding:26px 26px 22px; margin-bottom:20px; box-shadow:var(--shadow)}
+  header.doc .kicker{font-size:12px; letter-spacing:.14em; color:#a5b4fc; text-transform:uppercase; margin:0 0 6px}
+  header.doc h1{margin:0 0 6px; font-size:26px; font-weight:800; letter-spacing:-.01em}
+  header.doc p{margin:0; color:#c7d2fe; font-size:14.5px}
+  .badges{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); color:#e0e7ff;
+    font-size:12px; padding:4px 10px; border-radius:999px}
+  section{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px;
+    margin-bottom:15px; box-shadow:0 1px 2px rgba(17,24,39,.04)}
+  h2{font-size:18px; margin:0 0 13px; display:flex; align-items:center; gap:10px}
+  h2 .n{background:var(--brand); color:#fff; width:26px; height:26px; border-radius:8px; display:inline-flex;
+    align-items:center; justify-content:center; font-size:14px; font-weight:700; flex:none}
+  h3{font-size:14.5px; margin:15px 0 7px; color:#1e293b}
+  p{margin:0 0 10px} .muted{color:var(--muted)}
+  b.hl{color:var(--brand-d)}
+  table{width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:13.5px}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:right; vertical-align:top}
+  th{background:var(--soft); font-weight:700; color:#334155}
+  td.c,th.c{text-align:center}
+  code{background:#eef1f7; padding:1px 6px; border-radius:5px; font-family:"Consolas",monospace; font-size:12.5px; direction:ltr; display:inline-block}
+  .verdict{background:var(--teal-soft); border:1px solid #a7f3d0; border-radius:12px; padding:14px 16px; margin-top:4px}
+  .verdict b{color:#065f46}
+  .callout{background:var(--amber-soft); border:1px solid #fde68a; border-radius:11px; padding:12px 14px; font-size:14px; margin-top:10px}
+  .callout b{color:var(--amber)}
+  .rec{display:grid; grid-template-columns:80px 1fr; gap:0; border:1px solid var(--line); border-radius:11px; overflow:hidden; margin-bottom:9px}
+  .rec .k{background:#0f172a; color:#fff; display:flex; align-items:center; justify-content:center; font-family:"Consolas",monospace; font-weight:800; font-size:15px}
+  .rec .v{padding:10px 13px}
+  .rec .v b{display:block; margin-bottom:2px; font-size:13.5px}
+  .rec .v span{font-size:12.5px; color:var(--muted)}
+  .rec.item .k{background:var(--brand)} .rec.pay .k{background:var(--teal)}
+  .erd{background:#0f172a; color:#e2e8f0; border-radius:12px; padding:16px 18px; font-family:"Consolas",monospace;
+    font-size:13px; direction:ltr; text-align:left; overflow-x:auto; line-height:1.95}
+  .erd .h{color:#c4b5fd} .erd .i{color:#7dd3fc} .erd .p{color:#5eead4} .erd .m{color:#94a3b8}
+  pre.code{background:#0f172a; color:#e5e7eb; border-radius:12px; padding:15px 16px; direction:ltr; text-align:left;
+    overflow-x:auto; font-family:"Consolas",monospace; font-size:12.5px; line-height:1.75; margin:6px 0}
+  pre.code .c{color:#94a3b8} pre.code .k{color:#c4b5fd} pre.code .s{color:#7dd3fc} pre.code .d{color:#5eead4}
+  .tag{font-size:11px; font-weight:800; padding:2px 8px; border-radius:6px}
+  .tag.y{background:var(--teal-soft); color:var(--teal); border:1px solid #a7f3d0}
+  .tag.n{background:#f1f5f9; color:#94a3b8; border:1px solid #e2e8f0}
+  ul.tight{margin:6px 0; padding-inline-start:20px} ul.tight li{margin-bottom:6px}
+  footer{color:var(--muted); font-size:12px; text-align:center; margin-top:20px; line-height:1.8}
+  @media print{ body{background:#fff} section,header.doc{box-shadow:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc">
+    <p class="kicker">ai-invoice · יסודות · Data Architecture</p>
+    <h1>מודל הנתונים B.P לחשבוניות</h1>
+    <p>"היכן שורות-החשבונית?" — חקירה יסודית, מעוגנת במבנה האחיד של רשות המסים</p>
+    <div class="badges">
+      <span class="badge">גרסה 0.3 — מחליף את סעיף 4 במסמך ה-Handoff</span>
+      <span class="badge">09.07.2026</span>
+      <span class="badge">אפיון בלבד — ללא קוד</span>
+    </div>
+  </header>
+
+  <!-- verdict up top -->
+  <section>
+    <h2><span class="n">0</span> השורה התחתונה (קודם)</h2>
+    <p>צדקת — המודל הקודם היה <b>שטוח</b> (שדה סכום אחד על החשבונית), ולא היה בו ישות שורות. זה לא B.P. המודל המתוקן:</p>
+    <div class="verdict">
+      <b>כותרת אחת + שני סוגי שורות.</b> <code>Invoice</code> (כותרת) ← <code>LineItem</code> (שורות פריט) + <code>Payment</code> (שורות תקבול). זהו בדיוק המבנה שרשות המסים עצמה מחייבת (רשומות <code>C100 / D110 / D120</code> במבנה האחיד). <b>ישות Invoice אחת + <code>docType</code> — נשארת נכונה</b>; מה שהיה חסר אינו עוד כותרות, אלא <b>ישויות השורות</b>.
+    </div>
+  </section>
+
+  <!-- 1 anchor -->
+  <section>
+    <h2><span class="n">1</span> העוגן: המבנה האחיד של רשות המסים</h2>
+    <p>כל תוכנת הנהלת חשבונות הרשומה בישראל <b>חייבת</b> לייצא את "הקובץ במבנה אחיד" (BKMVDATA) לצורכי ביקורת. זהו מודל הנתונים הרשמי למסמכים — ולכן העוגן ל-B.P שלנו. מסמך נבנה משלוש רשומות:</p>
+
+    <div class="rec">
+      <div class="k">C100</div>
+      <div class="v"><b>כותרת מסמך (Header)</b><span>אחת למסמך · סוג מסמך, מספר מסמך, תאריך, פרטי לקוח (שם/מזהה/כתובת), סה"כ, מע"מ, מטבע, מספר הקצאה</span></div>
+    </div>
+    <div class="rec item">
+      <div class="k">D110</div>
+      <div class="v"><b>שורת פירוט מסמך — שורת פריט</b><span>רבות למסמך · מק"ט, תיאור, יחידת מידה, כמות, מחיר יחידה, % הנחה, שיעור מע"מ, סכום שורה</span></div>
+    </div>
+    <div class="rec pay">
+      <div class="k">D120</div>
+      <div class="v"><b>שורת פירוט קבלה — אמצעי תשלום</b><span>רבות למסמך (בקבלה ובמס-קבלה) · סוג תשלום (מזומן/צ'ק/אשראי/העברה), סכום, בנק/סניף/חשבון, מס' צ'ק, תאריך פירעון, פרטי אשראי</span></div>
+    </div>
+
+    <div class="callout">
+      <b>שלוש מסקנות מיידיות:</b> (1) הכותרת אחת עם שדה "סוג מסמך" לכל הסוגים → <b>Invoice + docType מאושר</b>. (2) שורות הפריט הן ישות נפרדת <b>1‎:‎רבים</b> → <code>LineItem</code>. (3) קבלה אינה בנויה משורות פריט אלא <b>משורות תקבול</b> → <code>Payment</code> נפרדת. חשבונית מס-קבלה מכילה את <b>שתיהן</b>.
+    </div>
+  </section>
+
+  <!-- 2 ERD -->
+  <section>
+    <h2><span class="n">2</span> מודל הישויות המתוקן (ERD)</h2>
+    <table>
+      <tr><th>ישות</th><th class="c">קשר</th><th>ישות</th><th>הערה</th></tr>
+      <tr><td><code>BusinessProfile</code></td><td class="c">1 : *</td><td><code>Customer</code></td><td>לקוחות העסק</td></tr>
+      <tr><td><code>BusinessProfile</code></td><td class="c">1 : *</td><td><code>Invoice</code></td><td>העסק המנפיק</td></tr>
+      <tr><td><code>Customer</code></td><td class="c">1 : *</td><td><code>Invoice</code></td><td>הכותרת — <code>C100</code></td></tr>
+      <tr><td><code>Invoice</code></td><td class="c">1 : *</td><td><code>LineItem</code></td><td><code>D110</code> — שורות פריט</td></tr>
+      <tr><td><code>Invoice</code></td><td class="c">1 : *</td><td><code>Payment</code></td><td><code>D120</code> — שורות תקבול</td></tr>
+      <tr><td><code>Invoice</code></td><td class="c">* : 1</td><td><code>Invoice</code> (self)</td><td><code>linkedDocument</code> — עסקה→מס-קבלה, זיכוי→מקור</td></tr>
+      <tr><td>מספר הקצאה</td><td class="c">0 .. 1</td><td><code>Invoice</code></td><td>שדות על הכותרת</td></tr>
+      <tr><td>Product / מק"ט</td><td class="c">1 : *</td><td><code>LineItem</code></td><td>קטלוג פריטים (אופציונלי)</td></tr>
+    </table>
+    <p class="muted" style="margin-top:8px"><code>linkedDocument</code> מחבר את זרימת המסמכים: חשבונית עסקה → חשבונית מס-קבלה · חשבונית מס → קבלה · חשבונית זיכוי → המסמך המקורי.</p>
+  </section>
+
+  <!-- 3 the core table -->
+  <section>
+    <h2><span class="n">3</span> הטבלה המרכזית: <code>docType</code> → אילו שורות + הקצאה</h2>
+    <p>זו נקודת הליבה — היא מסבירה <b>למה צריך שתי ישויות שורות</b>, והיא מניעה את לוגיקת הסוכן:</p>
+    <table>
+      <tr>
+        <th>סוג מסמך (<code>docType</code>)</th>
+        <th class="c">שורות פריט<br>(D110)</th>
+        <th class="c">שורות תקבול<br>(D120)</th>
+        <th class="c">מספר הקצאה<br>(מעל סף)</th>
+        <th>מסמך מס?</th>
+      </tr>
+      <tr><td>דרישת תשלום</td><td class="c"><span class="tag y">✓</span></td><td class="c"><span class="tag n">—</span></td><td class="c"><span class="tag n">✗</span></td><td>לא</td></tr>
+      <tr><td>חשבונית עסקה</td><td class="c"><span class="tag y">✓</span></td><td class="c"><span class="tag n">—</span></td><td class="c"><span class="tag n">✗</span></td><td>לא</td></tr>
+      <tr><td><b>חשבונית מס</b></td><td class="c"><span class="tag y">✓</span></td><td class="c"><span class="tag n">—</span></td><td class="c"><span class="tag y">✓</span></td><td>כן</td></tr>
+      <tr><td>קבלה</td><td class="c"><span class="tag n">—</span></td><td class="c"><span class="tag y">✓</span></td><td class="c"><span class="tag n">✗</span></td><td>לא</td></tr>
+      <tr><td><b>חשבונית מס-קבלה</b></td><td class="c"><span class="tag y">✓</span></td><td class="c"><span class="tag y">✓</span></td><td class="c"><span class="tag y">✓</span></td><td>כן</td></tr>
+      <tr><td>חשבונית זיכוי</td><td class="c"><span class="tag y">✓ (שלילי)</span></td><td class="c"><span class="tag n">—</span></td><td class="c"><span class="tag y">✓</span></td><td>כן</td></tr>
+    </table>
+    <p class="muted" style="margin-top:8px">כל <code>docType</code> ממופה גם ל"קוד סוג מסמך" רשמי במבנה האחיד (חשבונית מס, מס-קבלה, קבלה, זיכוי…) — הקוד המספרי המדויק נעול מול הטבלה הרשמית בשלב ייצוא המבנה האחיד.</p>
+  </section>
+
+  <!-- 4 amounts -->
+  <section>
+    <h2><span class="n">4</span> איפה יושבים הסכומים — ולמה השטוח נשבר</h2>
+    <ul class="tight">
+      <li><b>הסכומים חיים על השורות, ומתגלגלים לכותרת.</b> כל <code>LineItem</code>: <code>כמות × מחיר − הנחה = נטו שורה</code> · <code>מע"מ שורה = נטו × שיעור</code> · <code>סה"כ שורה</code>. הכותרת = <b>סכום השורות</b>. מקור אמת יחיד = השורות (לכן שדה סכום בודד היה שגוי).</li>
+      <li><b>שיעור המע"מ הוא לפי שורה</b> — מסמך יכול לערבב 18% עם 0% (למשל שורת יצוא/מע"מ אפס לצד שורה מקומית). מחייב <code>vatRate</code> ברמת השורה, לא הכותרת.</li>
+      <li><b>עיגול</b> — הכותרת נושאת שדה עיגול (אגורות) לסכום הסופי.</li>
+      <li><b><code>Payment</code></b> — <code>paymentMethod</code> (מזומן / צ'ק / אשראי / העברה / שובר) + שדות ייעודיים (מס' צ'ק+פירעון, 4 ספרות אשראי+סוג, בנק/סניף/חשבון). <b>סכום התקבולים = הסכום ששולם.</b></li>
+    </ul>
+  </section>
+
+  <!-- 5 remult -->
+  <section>
+    <h2><span class="n">5</span> לוגיקת המימוש (Remult) — <span style="font-size:12px;color:var(--amber);font-weight:700">המחשה בלבד, לא קוד הפרויקט</span></h2>
+    <pre class="code"><span class="c">// ייכתב בפועל רק באות phase. כאן רק להראות את הלוגיקה.</span>
+<span class="k">@Entity</span>(<span class="s">'invoices'</span>)
+<span class="k">class</span> Invoice {
+  <span class="k">@Fields.cuid</span>() id
+  <span class="k">@Field</span>(() => DocType)        docType         <span class="c">// enum — כל הסוגים</span>
+  <span class="k">@Relations.toMany</span>(() => LineItem)  items      <span class="c">// D110 — שורות פריט</span>
+  <span class="k">@Relations.toMany</span>(() => Payment)  receipts   <span class="c">// D120 — שורות תקבול</span>
+  <span class="k">@Relations.toOne</span>(() => Invoice)      linkedDoc   <span class="c">// עסקה→מס-קבלה, זיכוי→מקור</span>
+  <span class="k">@Fields.string</span>({ allowNull: <span class="d">true</span> }) allocationNumber
+  <span class="k">@Field</span>(() => AllocationStatus) allocationStatus
+  <span class="k">@Field</span>(() => InvoiceStatus)       status          <span class="c">// draft → open (נעילה)</span>
+  <span class="c">// סכומי הכותרת נגזרים מ-items+receipts — מקור אמת יחיד</span>
+}
+
+<span class="k">class</span> LineItem { description; qty; unitPrice; discountPct; vatRate; <span class="c">/*→*/</span> lineTotal }
+<span class="k">class</span> Payment { paymentMethod; amount; checkNo?; dueDate?; cardLast4? }</pre>
+    <p class="muted">מיקום לפי קונבנציית הסיומות: <code>invoice.entity.ts</code>, <code>line-item.entity.ts</code>, <code>payment.entity.ts</code>, <code>invoice.enum.ts</code> ← <b>shared/finance</b> · חישוב הגלגול + קריאות <code>TaxAuthorityManager</code> ← <b>server/finance</b>.</p>
+  </section>
+
+  <!-- 6 integrity -->
+  <section>
+    <h2><span class="n">6</span> שלמות חשבונאית — חוקי היסוד (קריטי)</h2>
+    <ul class="tight">
+      <li><b>אי-שינוי (Append-only):</b> מסמך מס שהונפק הוא בלתי-ניתן-לעריכה/מחיקה בחוק. <code>status</code> עובר draft→open <b>ונועל</b>. "ביטול" = הנפקת <b>חשבונית זיכוי</b> מקושרת למקור. לדפר (ledger) מוסיפים, לא מוחקים.</li>
+      <li><b>רצף מספור:</b> מספור רץ ורציף לכל סוג מסמך (חובה חוקית) — הכותרת נושאת את המספר הרץ.</li>
+      <li><b>הקצאה נעולה על הכותרת:</b> <code>allocationNumber</code> נמשך פעם אחת ונשמר; לא מונפק מחדש.</li>
+    </ul>
+  </section>
+
+  <!-- 7 payoff -->
+  <section>
+    <h2><span class="n">7</span> תשואת היסודות</h2>
+    <p>אם נעצב את הישויות למבנה <code>C100/D110/D120</code> <b>עכשיו</b>, אז <b>ייצוא המבנה האחיד</b> (קובץ הביקורת שכל תוכנה חייבת) הופך כמעט לחינם בהמשך — נגזר ישירות מאותן ישויות דרך <code>TaxAuthorityManager</code>. זהו היסוד שעליו "בונים ארמון": מודל תואם-רגולציה מהיום הראשון, מודולרי, ואפס נגיעה בליבה.</p>
+    <div class="verdict">
+      <b>פסק דין:</b> ישות <code>Invoice</code> אחת + <code>docType</code> = B.P (כמו C100). התיקון הנדרש: הוספת <code>LineItem</code> (D110) ו-<code>Payment</code> (D120) כ-1:רבים, וסכומים שמתגלגלים מהשורות. מודל זה תואם את מה שכל מערכת חשבוניות ישראלית רשומה מיישמת.
+    </div>
+  </section>
+
+  <!-- 8 bookkeeping + accountant export -->
+  <section>
+    <h2><span class="n">8</span> שכבת הנהח"ש וייצוא לרו"ח (חשבשבת)</h2>
+    <p><b>הבחנה קריטית:</b> חשבשבת — כמו כל תוכנת הנה"ח של רו"ח — לא קולטת <b>מסמכים</b>, אלא <b>פקודות יומן</b> (חובה/זכות לחשבונות). במבנה האחיד אלה רשומות <code>B100</code> (תנועות יומן) + <code>B110</code> (חשבונות). כלומר "שידור לחשבשבת" חי שכבה אחת <b>מתחת</b> למסמך — ומכאן שהמסמכים לבדם לא מספיקים.</p>
+
+    <h3>ישויות נוספות (שכבה אדיטיבית, בצד ה-Finance)</h3>
+    <table>
+      <tr><th>ישות</th><th>תפקיד</th><th>שדות עיקריים</th></tr>
+      <tr><td><code>JournalEntry</code> (פקודת יומן)</td><td>הרישום החשבונאי של מסמך אחד — <code>B100</code></td><td>תאריך, אסמכתא (מס' מסמך), תיאור, קישור ל-<code>Invoice</code></td></tr>
+      <tr><td><code>JournalLine</code> (תנועה)</td><td>שורת חובה/זכות בפקודה</td><td>חשבון (ref→<code>Account</code>), חובה/זכות, סכום</td></tr>
+      <tr><td><code>Account</code> (חשבון)</td><td>חשבון בהנה"ח — <code>B110</code></td><td>קוד, שם, סוג (לקוח / הכנסות / מע"מ עסקאות / בנק)</td></tr>
+    </table>
+
+    <h3>כלל רישום לכל מסמך (סאב-לדג'ר ← יומן)</h3>
+    <table>
+      <tr><th>מסמך</th><th>חובה</th><th>זכות</th></tr>
+      <tr><td>חשבונית מס <span class="muted">(מצטבר)</span></td><td>לקוח</td><td>הכנסות + מע"מ עסקאות</td></tr>
+      <tr><td>חשבונית מס-קבלה</td><td>בנק / קופה</td><td>הכנסות + מע"מ עסקאות</td></tr>
+      <tr><td>קבלה <span class="muted">(אחרי חשבונית מס)</span></td><td>בנק / קופה</td><td>לקוח</td></tr>
+      <tr><td>חשבונית עסקה</td><td colspan="2" class="c muted">אין תנועה — אינה מסמך מס (מזומן: המע"מ נרשם רק בתשלום)</td></tr>
+      <tr><td>חשבונית זיכוי</td><td>הכנסות + מע"מ עסקאות</td><td>לקוח</td></tr>
+    </table>
+
+    <h3>Gateway לייצוא — בדפוס <code>TaxAuthorityManager</code></h3>
+    <p><code>AccountantExportManager</code> מאחורי Gateway, עם אדפטרים מתחלפים: (1) <b>מבנה-אחיד</b> (BKMVDATA מלא) · (2) <b>ממשק הקליטה של חשבשבת</b> — קובץ פקודות-יומן / Masofon · (3) בעתיד רמפלוס, ריווחית, ועוד. הסוכן לעולם לא כותב לפורמט ישירות — רק דרך ה-Gateway. שתי דרכי שידור לחשבשבת: <b>(א)</b> קובץ פקודות-יומן בפורמט הקליטה (הנפוץ), <b>(ב)</b> הסבה מקובץ מבנה-אחיד.</p>
+    <div class="callout" style="direction:rtl">
+      <b>הזרימה:</b> מסמך ← כלל רישום ← <code>JournalEntry</code> (+תנועות) ← <code>AccountantExportManager</code> ← { מבנה-אחיד · חשבשבת · … }
+    </div>
+
+    <div class="verdict">
+      <b>אותו יסוד, שני מוצאים:</b> מהמבנה האחיד יוצאים גם קובץ הביקורת לרשות המסים <b>וגם</b> השידור לחשבשבת/רו"ח — בדיוק ה"מסירה לרו"ח" שסימנו כבידול. שכבה אדיטיבית נטו בצד ה-Finance, אפס נגיעה בליבה.
+    </div>
+  </section>
+
+  <footer>
+    ai-invoice · מסמך יסודות מודל הנתונים · "צוות AI לעסק קטן"<br>
+    מעוגן במבנה האחיד של רשות המסים (BKMVDATA: C100 כותרת · D110 שורות פריט · D120 שורות תקבול) · מע"מ 18% · 2026
+  </footer>
+
+</div>
+</body>
+</html>

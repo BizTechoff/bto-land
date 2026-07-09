@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מילון השמות הקנוני — Table for All</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;800&family=Heebo:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1f2937;--muted:#5b6472;--paper:#f4f6f9;--card:#fff;--line:#dde3ea;--soft:#eef2f6;
+    --stripe:#635bff;--stripe-soft:#efeeff;--il:#0d9488;--il-soft:#ecfdf5;--acct:#b45309;--acct-soft:#fff7e0;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Heebo',system-ui,sans-serif;font-size:16px;line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:20px 16px 52px}
+  header{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin:0 0 6px}
+  h1{font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:2rem;margin:0 0 4px}
+  .sub{margin:0;color:var(--muted);font-size:.95rem}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0}
+  h2{font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:1.25rem;margin:0 0 4px}
+  .h2sub{margin:0 0 14px;color:var(--muted);font-size:.88rem}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{border:1px solid var(--line);padding:8px 11px;text-align:right;vertical-align:top}
+  thead th{background:var(--soft);font-weight:700;font-size:.83rem}
+  code{font-family:'Fira Code',monospace;font-size:.82em;background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:1px 5px;direction:ltr;unicode-bidi:embed;display:inline-block}
+  .src{font-size:.7rem;font-weight:700;padding:1px 7px;border-radius:5px;white-space:nowrap}
+  .src.s{background:var(--stripe-soft);color:var(--stripe)}
+  .src.i{background:var(--il-soft);color:var(--il)}
+  .src.a{background:var(--acct-soft);color:var(--acct)}
+  .layers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  @media(max-width:560px){.layers{grid-template-columns:1fr}}
+  .layer{border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .layer.s{background:var(--stripe-soft);border-color:#c7c4ff}
+  .layer.i{background:var(--il-soft);border-color:#a7f3d0}
+  .layer b{display:block;margin-bottom:4px}
+  .layer .ttl{font-size:1rem;font-weight:800}
+  ul.rules{margin:6px 0;padding-inline-start:20px}ul.rules li{margin-bottom:6px;font-size:.92rem}
+  .warn{background:#fff7e0;border-right:5px solid #e6b800;border-radius:11px;padding:12px 15px;margin-top:8px;font-size:.92rem}
+  .warn b{color:#8a6d00}
+  .foot{color:var(--muted);font-size:.78rem;text-align:center;margin-top:18px;line-height:1.7}
+  .leg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:.76rem}
+  .leg span{display:inline-flex;align-items:center;gap:5px;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Canonical Naming · מקור אמת יחיד לשמות</p>
+    <h1>מילון השמות</h1>
+    <p class="sub">Stripe לליבת הבילינג · מונחי הרגולציה לישראל · הנהלת חשבונות סטנדרטית. כל שם בקוד נשען על הטבלאות כאן.</p>
+    <div class="leg">
+      <span><i class="src s">Stripe</i> ליבת בילינג אוניברסלית</span>
+      <span><i class="src i">ישראל</i> ייחודי לרגולציה המקומית</span>
+      <span><i class="src a">הנה"ח</i> חשבונאות סטנדרטית</span>
+    </div>
+  </header>
+
+  <!-- 0 layers -->
+  <section>
+    <h2>0 · הכלל — שתי שכבות</h2>
+    <div class="layers">
+      <div class="layer s">
+        <span class="ttl">שכבה 1 — Stripe</span>
+        <b>מושגי בילינג אוניברסליים.</b>
+        משאב = שם-עצם ברבים · פעולה = פועל · שדות camelCase · סטטוסים של Stripe. זה ה-API שכל העולם מחקה.
+      </div>
+      <div class="layer i">
+        <span class="ttl">שכבה 2 — ישראל</span>
+        <b>מה ש-Stripe לא מכיר.</b>
+        מספר הקצאה, חשבונית מס-קבלה, מבנה אחיד, סוג עוסק — אין להם מקבילה. שם נשארים במונחי הרגולציה המקומית.
+      </div>
+    </div>
+    <ul class="rules" style="margin-top:12px">
+      <li><b>גרנולריות:</b> אזור/משאב = <b>שם-עצם</b> (<code>dunning</code>), פעולה = <b>פועל ספציפי</b> (<code>dunning.sendReminders()</code>). אף פעם לא פועל מעורפל כמו <code>run</code>, ואף פעם לא מתודה אחת שבולעת תחום שלם.</li>
+      <li><b>Casing:</b> טיפוסים/ישויות <code>PascalCase</code> · שדות ומתודות <code>camelCase</code> · ערכי enum <code>lowercase</code> (בסגנון Stripe: <code>draft, open, paid</code>).</li>
+    </ul>
+  </section>
+
+  <!-- 1 entities -->
+  <section>
+    <h2>1 · ישויות (Entities)</h2>
+    <p class="h2sub">ישות אחת <code>Invoice</code> לכל סוגי המסמכים (עוגן C100); ה-API חושף אותם כמשאבי Stripe נפרדים.</p>
+    <table>
+      <thead><tr><th>מזהה</th><th>עברית</th><th>מקור</th><th>הערה / עוגן</th></tr></thead>
+      <tbody>
+        <tr><td><code>Customer</code></td><td>לקוח</td><td><span class="src s">Stripe</span></td><td>היה <code>Client</code></td></tr>
+        <tr><td><code>Invoice</code></td><td>מסמך / חשבונית (כותרת)</td><td><span class="src s">Stripe</span> <span class="src i">C100</span></td><td>ישות אחת לכל ה-<code>docType</code></td></tr>
+        <tr><td><code>LineItem</code></td><td>שורת פריט</td><td><span class="src s">Stripe</span> <span class="src i">D110</span></td><td>היה <code>InvoiceLine</code></td></tr>
+        <tr><td><code>Payment</code></td><td>תקבול / תשלום</td><td><span class="src s">Stripe</span> <span class="src i">D120</span></td><td>היה <code>ReceiptLine</code></td></tr>
+        <tr><td><code>JournalEntry</code></td><td>פקודת יומן</td><td><span class="src a">הנה"ח</span> <span class="src i">B100</span></td><td>הנהלת חשבונות כפולה</td></tr>
+        <tr><td><code>JournalLine</code></td><td>תנועה (חובה/זכות)</td><td><span class="src a">הנה"ח</span> <span class="src i">B100</span></td><td></td></tr>
+        <tr><td><code>Account</code></td><td>חשבון</td><td><span class="src a">הנה"ח</span> <span class="src i">B110</span></td><td>לקוח/הכנסות/מע"מ/בנק</td></tr>
+        <tr><td><code>Expense</code></td><td>הוצאה</td><td><span class="src a">הנה"ח</span></td><td></td></tr>
+        <tr><td><code>BusinessProfile</code></td><td>פרופיל העסק</td><td>—</td><td>core · dealerType, reportingBasis</td></tr>
+        <tr><td><code>PromptLog</code></td><td>לוג פרומפטים</td><td>—</td><td>core</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2 enums -->
+  <section>
+    <h2>2 · Enums</h2>
+    <table>
+      <thead><tr><th>enum</th><th>ערכים</th><th>מקור</th></tr></thead>
+      <tbody>
+        <tr><td><code>InvoiceStatus</code></td><td><code>draft</code> → <code>open</code> → <code>paid</code> / <code>void</code> / <code>uncollectible</code></td><td><span class="src s">Stripe</span> (היה DocStatus)</td></tr>
+        <tr><td><code>docType</code></td><td><code>payment_demand</code> · <code>proforma</code> · <code>tax_invoice</code> · <code>receipt</code> · <code>tax_invoice_receipt</code> · <code>credit_note</code></td><td><span class="src i">ישראל</span> (מבנה אחיד)</td></tr>
+        <tr><td><code>AllocationStatus</code></td><td><code>not_required</code> · <code>pending</code> · <code>allocated</code> · <code>failed</code> · <code>expired</code></td><td><span class="src i">ישראל</span> (מספר הקצאה)</td></tr>
+        <tr><td><code>PaymentMethod</code></td><td><code>cash</code> · <code>check</code> · <code>card</code> · <code>bank_transfer</code></td><td><span class="src s">Stripe</span></td></tr>
+        <tr><td><code>DealerType</code></td><td><code>exempt</code> · <code>licensed</code> · <code>company</code></td><td><span class="src i">ישראל</span> (עוסק פטור/מורשה/חברה)</td></tr>
+        <tr><td><code>ReportingBasis</code></td><td><code>cash</code> · <code>accrual</code></td><td><span class="src a">הנה"ח</span> (מזומן/מצטבר)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3 resources/methods -->
+  <section>
+    <h2>3 · משאבים ופעולות (Stripe-style)</h2>
+    <p class="h2sub">משאב = שם-עצם ברבים (namespace) · פעולה = פועל</p>
+    <table>
+      <thead><tr><th>משאב</th><th>פעולות</th><th>מקור</th></tr></thead>
+      <tbody>
+        <tr><td><code>customers</code></td><td><code>create</code> · <code>retrieve</code> · <code>update</code> · <code>list</code></td><td><span class="src s">Stripe</span></td></tr>
+        <tr><td><code>invoices</code></td><td><code>create</code> · <code>finalize</code> · <code>pay</code> · <code>void</code> · <code>markUncollectible</code> · <code>sendInvoice</code></td><td><span class="src s">Stripe</span></td></tr>
+        <tr><td><code>creditNotes</code></td><td><code>create</code> → יוצר <code>Invoice</code> עם <code>docType=credit_note</code>, מקושר למקור</td><td><span class="src s">Stripe</span></td></tr>
+        <tr><td><code>dunning</code></td><td><code>sendReminders</code> · <code>listOverdue</code> · <code>escalate</code> · <code>getStatus</code></td><td><span class="src s">Stripe</span></td></tr>
+        <tr><td><code>allocations</code></td><td><code>request</code> · <code>renewAuthorization</code> <span style="color:var(--muted)">(דרך TaxAuthorityManager)</span></td><td><span class="src i">ישראל</span></td></tr>
+        <tr><td><code>accountantExport</code></td><td><code>toChashavshevet</code> · <code>toUniformFormat</code> <span style="color:var(--muted)">(דרך AccountantExportManager)</span></td><td><span class="src i">ישראל</span></td></tr>
+      </tbody>
+    </table>
+    <p style="margin:10px 0 0;font-size:.84rem;color:var(--muted)"><b>Gateways</b> (תשתית פנימית, לא Stripe): <code>AIManager</code> · <code>DBManager</code> · <code>TaxAuthorityManager</code> · <code>AccountantExportManager</code>.</p>
+  </section>
+
+  <!-- 4 glosses -->
+  <section>
+    <h2>4 · הבהרות מונחים (שלא נתבלבל)</h2>
+    <div class="warn">
+      <b>CreditNote = חשבונית זיכוי — לא "אשראי"!</b> "credit" כאן במובן החשבונאי: <b>לזכות</b> את הלקוח (להחזיר/להקטין חוב), ההפך מ-<code>debit</code> (חובה). אפס קשר לכרטיס אשראי (<code>card</code> ב-<code>PaymentMethod</code>).
+    </div>
+    <ul class="rules" style="margin-top:12px">
+      <li><b>Invoice אחת, לא חמש ישויות:</b> כל סוגי המסמכים הם <code>Invoice</code> עם <code>docType</code> (עוגן: כותרת C100 יחידה במבנה האחיד). ה-API רק <i>חושף</i> אותם כמשאבי Stripe (<code>invoices</code>, <code>creditNotes</code>) מעל אותה ישות.</li>
+      <li><b>Payment ≠ אמצעי תשלום:</b> <code>Payment</code> (ישות) = שורת תקבול בפועל (D120); <code>PaymentMethod</code> (enum) = <i>איך</i> שולם (מזומן/צ'ק/אשראי/העברה).</li>
+      <li><b>proforma</b> = חשבונית עסקה (לא מסמך מס) · <b>tax_invoice_receipt</b> = חשבונית מס-קבלה.</li>
+    </ul>
+  </section>
+
+  <div class="foot">
+    Table for All · מילון שמות קנוני · Stripe + מבנה אחיד (רשות המסים) + הנה"ח כפולה<br>
+    כל המסמכים (Blueprint, מודל הנתונים, עץ הסולושיין) מיושרים לשמות אלה.
+  </div>
+</div>
+</body>
+</html>

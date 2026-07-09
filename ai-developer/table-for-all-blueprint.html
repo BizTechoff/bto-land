@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table for All · Blueprint מאוחד</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;800&family=Heebo:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2937; --muted:#5b6472; --paper:#f4f6f9; --card:#ffffff;
+    --line:#dde3ea; --soft:#eef2f6;
+    --s0:#475569; --s1:#b45309; --s2:#15803d; --s3:#1d4ed8; --s4:#0369a1; --s5:#b91c1c;
+    --warnbg:#fff7e0; --warnline:#e6b800; --okbg:#e7f4ec; --okline:#9fd4b4;
+    --openbg:#f3f0ff; --openline:#8b5cf6; --newbg:#ecfdf5; --newline:#34d399;
+    --brand:#4338ca; --teal:#0d9488;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Heebo',system-ui,sans-serif; font-size:16px; line-height:1.65}
+  .wrap{max-width:900px; margin:0 auto; padding:20px 16px 52px}
+
+  header{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px 24px 22px; position:relative; overflow:hidden}
+  header::before{content:""; position:absolute; inset:0; opacity:.5; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='none' stroke='%23dbe4ee' stroke-width='1'%3E%3Cpath d='M20 160V95h55V40h85'/%3E%3Cpath d='M160 150h-60v-35H35'/%3E%3C/g%3E%3Cg fill='%23cfdae8'%3E%3Ccircle cx='20' cy='160' r='2.5'/%3E%3Ccircle cx='160' cy='40' r='2.5'/%3E%3Ccircle cx='160' cy='150' r='2.5'/%3E%3Ccircle cx='35' cy='115' r='2.5'/%3E%3C/g%3E%3C/svg%3E")}
+  header > *{position:relative}
+  .eyebrow{font-size:.72rem; font-weight:700; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin:0 0 6px}
+  h1{font-family:'Frank Ruhl Libre',serif; font-weight:800; font-size:2.1rem; margin:0 0 4px}
+  .sub{margin:0; color:var(--muted); font-size:.95rem}
+  .stack{margin-top:14px; display:flex; flex-wrap:wrap; gap:6px}
+  .stack span{font-size:.74rem; font-weight:500; background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:2px 10px; color:var(--muted)}
+
+  .callout{border-radius:12px; padding:14px 16px; margin:16px 0; font-size:.94rem}
+  .warn{background:var(--warnbg); border-right:5px solid var(--warnline); border-top:1px solid #f0dfa0; border-bottom:1px solid #f0dfa0; border-left:1px solid #f0dfa0}
+  .ok{background:var(--okbg); border:1px solid var(--okline)}
+  .recon{background:var(--newbg); border-right:5px solid var(--newline); border-top:1px solid #a7f3d0; border-bottom:1px solid #a7f3d0; border-left:1px solid #a7f3d0}
+  .callout b.t{display:block; margin-bottom:6px}
+  .callout ul{margin:6px 0 0; padding-right:18px}
+  .callout li{margin-bottom:5px}
+
+  section{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:16px 0}
+  h2{font-family:'Frank Ruhl Libre',serif; font-weight:800; font-size:1.3rem; margin:0 0 4px}
+  .h2sub{margin:0 0 14px; color:var(--muted); font-size:.88rem}
+  h3{font-size:1rem; margin:16px 0 7px}
+
+  table{width:100%; border-collapse:collapse; font-size:.9rem}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:right; vertical-align:top}
+  thead th{background:var(--soft); font-weight:700; font-size:.85rem}
+  td:first-child{font-weight:700; background:#fbfcfe}
+  td.c,th.c{text-align:center}
+
+  .svgwrap{background:#fbfcfe; border:1px solid var(--line); border-radius:12px; padding:10px 6px; overflow-x:auto}
+  .svgwrap svg{display:block; width:100%; height:auto; min-width:620px}
+  svg text{font-family:'Heebo',sans-serif}
+  .legend{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; font-size:.78rem; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:6px; background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:2px 10px}
+  .sw{width:10px; height:10px; border-radius:3px; display:inline-block}
+
+  .road{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+  .road div{display:flex; align-items:center; gap:7px; background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:.82rem; font-weight:500}
+  .dot{display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; color:#fff; font-weight:700; font-size:.72rem; flex:none}
+  .d0{background:var(--s0)} .d1{background:var(--s1)} .d2{background:var(--s2)} .d3{background:var(--s3)} .d4{background:var(--s4)} .d5{background:var(--s5)}
+
+  /* grid tree (bidi-safe: LTR path column + RTL note column) */
+  .tree{display:grid; grid-template-columns:max-content 1fr; column-gap:16px; row-gap:2px; direction:ltr;
+    background:#fbfcfe; border:1px solid var(--line); border-radius:12px; padding:14px 14px; overflow-x:auto;
+    font-family:'Fira Code',monospace; font-size:.78rem; line-height:1.6}
+  .tree .p{white-space:pre; color:#334155}
+  .tree .nt{direction:rtl; text-align:right; color:#8792a3; font-family:'Heebo',sans-serif; font-size:.76rem}
+  .tree .fd{color:#0f172a; font-weight:600}
+  .tree .app{color:#4f46e5; font-weight:700} .tree .srv{color:#b45309; font-weight:700} .tree .shr{color:#0f766e; font-weight:700}
+  .tag{display:inline-block; min-width:15px; text-align:center; border-radius:4px; color:#fff; font-size:.62rem; font-weight:700; padding:0 4px; font-family:'Heebo',sans-serif; vertical-align:1px}
+  .t0{background:var(--s0)} .t1{background:var(--s1)} .t2{background:var(--s2)} .t3{background:var(--s3)} .t4{background:var(--s4)} .t5{background:var(--s5)}
+  .new{color:#059669; font-weight:800}
+  .rec{color:#2563eb; font-family:'Fira Code',monospace; font-size:.72rem}
+
+  ul.conv{margin:0; padding-right:20px} ul.conv li{margin-bottom:9px; font-size:.93rem}
+  ul.conv b{color:#0f172a}
+  code{font-family:'Fira Code',monospace; font-size:.82em; background:var(--soft); border:1px solid var(--line); border-radius:5px; padding:1px 5px; direction:ltr; unicode-bidi:embed; display:inline-block}
+
+  .rececord{display:grid; grid-template-columns:64px 1fr; border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:8px}
+  .rececord .k{background:#0f172a; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Fira Code',monospace; font-weight:700; font-size:.9rem}
+  .rececord.i .k{background:var(--brand)} .rececord.p2 .k{background:var(--teal)} .rececord.j .k{background:#7c3aed}
+  .rececord .v{padding:8px 12px; font-size:.86rem}
+  .rececord .v b{display:block; font-size:.9rem}
+  .rececord .v span{color:var(--muted); font-size:.8rem}
+
+  .openbox{background:var(--openbg); border-right:5px solid var(--openline); border-radius:12px; padding:14px 16px; margin-top:8px}
+  .openbox h3{margin:0 0 6px; font-size:1rem}
+  .openbox ul{margin:6px 0 0; padding-right:18px} .openbox li{margin-bottom:7px; font-size:.9rem}
+  .bp{display:inline-block; background:#111827; color:#fff; border-radius:5px; font-size:.66rem; font-weight:700; padding:1px 7px; vertical-align:1px}
+  .facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; margin:6px 0}
+  .fact{background:var(--soft); border:1px solid var(--line); border-radius:9px; padding:9px 11px}
+  .fact .l{font-size:.7rem; color:var(--muted)} .fact .val{font-weight:800; font-size:1.02rem}
+  .fact .val.sm{font-size:.86rem; font-weight:700}
+  footer{margin-top:20px; text-align:center; color:var(--muted); font-size:.78rem; line-height:1.7}
+
+  @media (max-width:480px){
+    .wrap{padding:12px 10px 40px} header{padding:20px 16px} h1{font-size:1.7rem}
+    section{padding:16px 14px} th,td{padding:7px 8px} .tree{font-size:.68rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Master Blueprint · מסמך יסוד מאוחד · v2</p>
+    <h1>Table for All</h1>
+    <p class="sub">צוות AI לעסק קטן · איחוד מלא של הארכיטקטורה, השלד, המוסכמות ומודול ai-invoice — מקור אמת יחיד</p>
+    <div class="stack">
+      <span>Node.js</span><span>Remult</span><span>Angular</span><span>Multi-Agent</span><span>Monolith-First</span><span>Gateway/Service</span>
+    </div>
+  </header>
+
+  <div class="callout recon">
+    <b class="t">מה אוחד ומה תוקן (v1 מול הגרסאות שלי)</b>
+    <ul>
+      <li><b>מבנה server הוחזר לנעילה:</b> <code>server/{core · gateways · agents}</code>. (העץ הביניים שלי השטיח את זה — תוקן.)</li>
+      <li><b>מבנה shared הוחזר לנעילה:</b> <code>shared/core</code> לפי-סוג (entity/enum/controller/type) + <code>shared/agents/&lt;domain&gt;</code> בסיומות.</li>
+      <li><b>שני Gateways חדשים נכנסו למקום הנכון</b> — <code>server/gateways/</code>, בדיוק בדפוס AIManager/DBManager.</li>
+      <li><b>המוצר נסגר</b> (ב-v1 היה פתוח): "צוות AI לעסק קטן" — והישויות שלו שובצו לפי הכללים.</li>
+      <li><b>מודול ai-invoice</b> עוגן במבנה האחיד של רשות המסים ושולב כתת-דומיין ב-finance.</li>
+      <li><b>שמות מיושרים ל-Stripe</b> + מונחי התחום — המקור הקנוני הוא <code>naming-conventions.html</code> (Customer · LineItem · Payment · סטטוסי Stripe).</li>
+    </ul>
+  </div>
+
+  <div class="callout warn">
+    <b class="t">הנחיות עבודה (System Instructions) — מחייבות בכל סשן</b>
+    <ul>
+      <li><b>עקרון-העל:</b> אין גישה ישירה ל-AI / DB / מערכות חוץ מהסוכנים. הכול דרך Gateways (AIManager · DBManager · TaxAuthorityManager · AccountantExportManager).</li>
+      <li><b>אפס קוד</b> ללא אות מפורש. <b>אפס commit / push</b> ללא אישור מפורש.</li>
+      <li>כל שאלת בחירה כוללת אפשרות מסומנת <b>B.P</b>.</li>
+      <li>שפת עבודה <b>עברית</b>, תשובות קצרות למובייל, עדיפות לתוצרים מוחשיים. קבצים → <code>doc\</code>.</li>
+      <li>ערך עליון: <b>מודולריות</b> — כל תוספת Additive, אפס נגיעה בליבה.</li>
+    </ul>
+  </div>
+
+  <!-- 1 PRODUCT -->
+  <section>
+    <h2>1 · המוצר <span style="font-size:.8rem; color:var(--s2)">✓ נסגר</span></h2>
+    <p class="h2sub">צוות AI לעסק קטן / עצמאי — שלושה סוכנים, דומיין לכל אחד. Finance הוא הדגל (העומק המרכזי).</p>
+    <table>
+      <thead><tr><th>סוכן</th><th>תפקיד</th><th>ישויות דומיין</th></tr></thead>
+      <tbody>
+        <tr><td>Meeting</td><td>פגישות / יומן / תיאום מול לקוחות</td><td>Meeting <span style="color:var(--muted)">(Customer — ראה פתוחים)</span></td></tr>
+        <tr><td>Marketing</td><td>קמפיינים ותוכן</td><td>Campaign</td></tr>
+        <tr><td>Finance ★</td><td>הנפקת מסמכים, מע"מ/הקצאה, הנהח"ש, מסירה לרו"ח</td><td>Invoice · LineItem · Payment · JournalEntry · JournalLine · Account · Expense</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:10px 0 0; font-size:.86rem; color:var(--muted)">ליבה משותפת (core): BusinessProfile · PromptLog · Customer(מוצע). שלבים 0–2 ניטרליים למוצר.</p>
+  </section>
+
+  <!-- 2 ARCHITECTURE DIAGRAM -->
+  <section>
+    <h2>2 · תרשים הארכיטקטורה</h2>
+    <p class="h2sub">Gateway/Service — סוכנים רזים; כל משאב נגיש דרך שירות מרכזי בלבד. ✦ = Gateway שנוסף למודול ai-invoice</p>
+    <div class="svgwrap">
+      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="תרשים ארכיטקטורה מעודכן">
+        <defs>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#475569"/></marker>
+        </defs>
+        <rect x="6" y="6" width="748" height="300" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="380" y="27" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Node.js Server · מונוליט יחיד</text>
+
+        <!-- agents -->
+        <rect x="20" y="40" width="228" height="52" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="134" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Meeting Agent</text>
+        <text x="134" y="80" text-anchor="middle" font-size="10.5" fill="#1e40af">סוכן פגישות</text>
+        <rect x="266" y="40" width="228" height="52" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="380" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Marketing Agent</text>
+        <text x="380" y="80" text-anchor="middle" font-size="10.5" fill="#1e40af">סוכן שיווק</text>
+        <rect x="512" y="40" width="228" height="52" rx="10" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2"/>
+        <text x="626" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#312e81">★ Finance Agent</text>
+        <text x="626" y="80" text-anchor="middle" font-size="10.5" fill="#3730a3">סוכן פיננסי · ai-invoice</text>
+
+        <!-- rail -->
+        <line x1="134" y1="92" x2="134" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <line x1="380" y1="92" x2="380" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <line x1="626" y1="92" x2="626" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <line x1="134" y1="112" x2="626" y2="112" stroke="#475569" stroke-width="1.3"/>
+        <text x="330" y="128" text-anchor="middle" font-size="9.5" fill="#64748b">כל הסוכנים → AI + DB · דרך Gateways בלבד</text>
+
+        <!-- shared gateway arrows -->
+        <line x1="100" y1="112" x2="100" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <line x1="288" y1="112" x2="288" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <!-- finance-specific dashed -->
+        <line x1="626" y1="112" x2="476" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+        <line x1="700" y1="112" x2="664" y2="150" stroke="#4f46e5" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+        <line x1="700" y1="92" x2="700" y2="112" stroke="#4f46e5" stroke-width="1.3"/>
+
+        <!-- gateways -->
+        <rect x="14" y="150" width="172" height="58" rx="10" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="100" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">AIManager</text>
+        <text x="100" y="192" text-anchor="middle" font-size="9.5" fill="#166534">+ adapters · PromptLog</text>
+        <rect x="202" y="150" width="172" height="58" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5"/>
+        <text x="288" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">DBManager</text>
+        <text x="288" y="192" text-anchor="middle" font-size="9.5" fill="#9a3412">Remult dataProvider</text>
+        <rect x="390" y="150" width="172" height="58" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="476" y="173" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">✦ TaxAuthorityManager</text>
+        <text x="476" y="192" text-anchor="middle" font-size="9.5" fill="#5b21b6">מספרי הקצאה</text>
+        <rect x="578" y="150" width="172" height="58" rx="10" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
+        <text x="664" y="173" text-anchor="middle" font-size="11" font-weight="700" fill="#115e59">✦ AccountantExportManager</text>
+        <text x="664" y="192" text-anchor="middle" font-size="9.5" fill="#0f766e">ייצוא לרו"ח</text>
+
+        <!-- gateway -> external -->
+        <line x1="100" y1="208" x2="100" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="288" y1="208" x2="288" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="476" y1="208" x2="476" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+        <line x1="664" y1="208" x2="664" y2="244" stroke="#475569" stroke-width="1.4" marker-end="url(#ah)"/>
+
+        <!-- externals -->
+        <rect x="14" y="244" width="172" height="54" rx="9" fill="#fee2e2" stroke="#f87171" stroke-width="1.3"/>
+        <text x="100" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#7f1d1d">ספקי AI חיצוניים</text>
+        <text x="100" y="282" text-anchor="middle" font-size="9" fill="#991b1b">Grok·Claude·Gemini·OpenAI</text>
+        <rect x="202" y="244" width="172" height="54" rx="9" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.3"/>
+        <text x="288" y="266" text-anchor="middle" font-size="11" font-weight="700" fill="#78350f">Remult &amp; Database</text>
+        <text x="288" y="282" text-anchor="middle" font-size="9" fill="#92400e">Postgres / אחר</text>
+        <rect x="390" y="244" width="172" height="54" rx="9" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1.3"/>
+        <text x="476" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5b21b6">רשות המסים</text>
+        <text x="476" y="282" text-anchor="middle" font-size="9" fill="#6d28d9">מודל חשבוניות ישראל</text>
+        <rect x="578" y="244" width="172" height="54" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.3"/>
+        <text x="664" y="266" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">חשבשבת / רו"ח</text>
+        <text x="664" y="282" text-anchor="middle" font-size="9" fill="#0d9488">פקודות יומן / מבנה אחיד</text>
+
+        <text x="380" y="326" text-anchor="middle" font-size="9.5" fill="#94a3b8">— — — קו מקווקוו = Gateway ייעודי ל-Finance (מודול ai-invoice) — — —</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:#60a5fa"></i>סוכנים</span>
+      <span><i class="sw" style="background:#4ade80"></i>AIManager</span>
+      <span><i class="sw" style="background:#f97316"></i>DBManager</span>
+      <span><i class="sw" style="background:#8b5cf6"></i>TaxAuthority ✦</span>
+      <span><i class="sw" style="background:#14b8a6"></i>AccountantExport ✦</span>
+    </div>
+  </section>
+
+  <!-- 3 LOCKED DECISIONS -->
+  <section>
+    <h2>3 · החלטות נעולות</h2>
+    <p class="h2sub">מ-v1, בתוספת ההכרעות של מודול ai-invoice</p>
+    <table>
+      <thead><tr><th>נושא</th><th>החלטה</th></tr></thead>
+      <tbody>
+        <tr><td>ריצה</td><td>מונוליט Node.js יחיד; אסינכרוניות מלאה. "מונוליט" = החלטת deployment, לא design.</td></tr>
+        <tr><td>עקרון-על</td><td>Gateways בלבד — סוכן לא כותב שאילתות, לא פונה ל-API, לא נוגע במערכת חוץ.</td></tr>
+        <tr><td>AIManager</td><td>service + <code>adapters/</code> לכל ספק (grok/claude/gemini/openai), בחירה דינמית + fallback, כל קריאה ל-PromptLog.</td></tr>
+        <tr><td>DBManager</td><td>service יחיד <b>בלי</b> adapters — ה-dataProvider של Remult הוא האדפטר.</td></tr>
+        <tr><td class="c" style="background:#f5f3ff">✦ TaxAuthorityManager</td><td>Gateway חדש: מספרי הקצאה מרשות המסים בזמן-אמת, ניהול הרשאת 3-החודשים, ריטריי/תור. <code>adapters/</code>: rashut-hamisim.</td></tr>
+        <tr><td class="c" style="background:#f0fdfa">✦ AccountantExportManager</td><td>Gateway חדש: ייצוא פקודות-יומן לרו"ח. <code>adapters/</code>: chashavshevet, bkmv-uniform (מבנה אחיד).</td></tr>
+        <tr><td>היררכיה</td><td>Layer-first (server / shared / app), ואז domain-per-agent.</td></tr>
+        <tr><td>server</td><td><code>core / gateways / agents</code>. core = index, server, jwt, remult-api, json-body.</td></tr>
+        <tr><td>shared</td><td>היברידי: <code>core</code> לפי-סוג (entity/enum/controller/type) + <code>agents/&lt;domain&gt;</code> בסיומות.</td></tr>
+        <tr><td>קריטריון הקו</td><td>"האם הדפדפן מייבא?" כן → shared, לא → server.</td></tr>
+        <tr><td>מוסכמת שמות</td><td>בתוך דומיין — סיומות (<code>.entity/.enum/.controller/.types</code>), לא תתי-תיקיות.</td></tr>
+        <tr><td>בלי registry</td><td>רשימת ישויות+סוכנים ב-<code>remult-api.ts</code> (סגנון Remult). refactor הפיך של 10 דק' אם יידרש.</td></tr>
+        <tr><td class="c" style="background:#ecfdf5">✦ מודל הנתונים</td><td>עוגן במבנה האחיד: מסמך = <code>C100</code> כותרת + <code>D110</code> שורות פריט + <code>D120</code> שורות תקבול; הנהח"ש = <code>B100/B110</code>. ישות Invoice אחת + docType.</td></tr>
+        <tr><td class="c" style="background:#ecfdf5">✦ שלמות</td><td>מסמך מס שהונפק — append-only/נעול; תיקון רק ע"י חשבונית זיכוי מקושרת; מספור רץ.</td></tr>
+        <tr><td>Git</td><td>commit / push באישור מפורש בלבד.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4 TREE -->
+  <section>
+    <h2>4 · עץ הפרויקט המאוחד</h2>
+    <p class="h2sub">מבנה נעול (core/gateways/agents · core לפי-סוג) + המוצר + מודול ai-invoice. ● = נוסף במודול ai-invoice · תגית = שלב המילוי</p>
+    <div class="road" style="margin-bottom:12px">
+      <div><span class="dot d0">0</span>תשתית</div><div><span class="dot d1">1</span>נתונים</div><div><span class="dot d2">2</span>AIManager</div>
+      <div><span class="dot d3">3</span>סוכן ראשון</div><div><span class="dot d4">4</span>שכפול+Finance</div><div><span class="dot d5">5</span>Angular</div>
+    </div>
+    <div class="tree">
+      <div class="p"><span class="fd">ai-developer/</span></div><div class="nt">שורש הריפו</div>
+      <div class="p">├─ <span style="color:#94a3b8">doc/</span></div><div class="nt">מסמכי אפיון (מחוץ לגיט)</div>
+      <div class="p">├─ package.json  tsconfig.json  angular.json  <span class="tag t0">0</span></div><div class="nt">תצורה</div>
+      <div class="p">├─ .env  <span class="tag t0">0</span></div><div class="nt">מפתחות AI + הרשאות רשות המסים</div>
+      <div class="p">└─ <span class="fd">src/</span></div><div class="nt">&nbsp;</div>
+
+      <div class="p">   ├─ <span class="app">app/</span>  <span class="tag t5">5</span></div><div class="nt">Angular — דפדפן</div>
+      <div class="p">   │  ├─ common/  route/  service/</div><div class="nt">תשתית צד-לקוח</div>
+      <div class="p">   │  └─ finance/invoice-chat/</div><div class="nt">מסך "רו״ח AI" (המוקאפ)</div>
+      <div class="p">   ├─ <span class="app">assets/</span></div><div class="nt">&nbsp;</div>
+
+      <div class="p">   ├─ <span class="srv">server/</span></div><div class="nt">שרת בלבד — הדפדפן לא מייבא</div>
+      <div class="p">   │  ├─ <span class="srv">core/</span>  <span class="tag t0">0</span></div><div class="nt">index · server · jwt · remult-api · json-body</div>
+      <div class="p">   │  ├─ <span class="srv">gateways/</span></div><div class="nt">שער יחיד לכל משאב</div>
+      <div class="p">   │  │  ├─ db-manager/  <span class="tag t1">1</span></div><div class="nt">db-manager.service.ts</div>
+      <div class="p">   │  │  ├─ ai-manager/  <span class="tag t2">2</span></div><div class="nt">service + adapters/(grok·claude·gemini·openai)</div>
+      <div class="p">   │  │  ├─ tax-authority-manager/  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> service + adapters/rashut-hamisim</div>
+      <div class="p">   │  │  └─ accountant-export-manager/  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> service + adapters/(chashavshevet·bkmv)</div>
+      <div class="p">   │  └─ <span class="srv">agents/</span></div><div class="nt">לוגיקה · פרומפטים · סודות</div>
+      <div class="p">   │     ├─ base/base.agent.ts  <span class="tag t3">3</span></div><div class="nt">מקבל את ה-Gateways בהזרקה</div>
+      <div class="p">   │     ├─ meeting/  <span class="tag t3">3</span></div><div class="nt">meeting.agent · .prompts · .config</div>
+      <div class="p">   │     ├─ marketing/  <span class="tag t4">4</span></div><div class="nt">marketing.agent · .prompts · .config</div>
+      <div class="p">   │     └─ finance/  <span class="tag t4">4</span></div><div class="nt">finance.agent · .prompts · .config</div>
+      <div class="p">   │        ├─ invoice.service.ts</div><div class="nt"><span class="new">●</span> הנפקה · סיווג docType · גלגול · הקצאה</div>
+      <div class="p">   │        └─ posting-rules.ts</div><div class="nt"><span class="new">●</span> מסמך → פקודת יומן</div>
+
+      <div class="p">   └─ <span class="shr">shared/</span></div><div class="nt">דפדפן + שרת</div>
+      <div class="p">      ├─ <span class="shr">core/</span>  <span class="tag t1">1</span></div><div class="nt">לפי-סוג</div>
+      <div class="p">      │  ├─ entity/</div><div class="nt">prompt-log · business-profile · customer*</div>
+      <div class="p">      │  ├─ enum/</div><div class="nt">ai-provider · dealer (DealerType·ReportingBasis)</div>
+      <div class="p">      │  ├─ controller/  type/</div><div class="nt">interface-req · interface-res · agent.interface</div>
+      <div class="p">      └─ <span class="shr">agents/</span></div><div class="nt">חוזי דומיין (סיומות)</div>
+      <div class="p">         ├─ meeting/  <span class="tag t3">3</span></div><div class="nt">meeting.entity · .enum · .controller · .types</div>
+      <div class="p">         ├─ marketing/  <span class="tag t4">4</span></div><div class="nt">campaign.entity · .enum · .controller · .types</div>
+      <div class="p">         └─ <span class="shr">finance/</span>  <span class="tag t4">4</span></div><div class="nt"><span class="new">●</span> תת-דומיין ai-invoice</div>
+      <div class="p">            ├─ invoice.entity.ts</div><div class="nt">Invoice — כותרת · <span class="rec">C100</span></div>
+      <div class="p">            ├─ line-item.entity.ts</div><div class="nt"><span class="new">●</span> שורת פריט · <span class="rec">D110</span></div>
+      <div class="p">            ├─ payment.entity.ts</div><div class="nt"><span class="new">●</span> שורת תקבול · <span class="rec">D120</span></div>
+      <div class="p">            ├─ journal-entry.entity.ts</div><div class="nt"><span class="new">●</span> פקודת יומן · <span class="rec">B100</span></div>
+      <div class="p">            ├─ journal-line.entity.ts</div><div class="nt"><span class="new">●</span> תנועה (חובה/זכות)</div>
+      <div class="p">            ├─ account.entity.ts</div><div class="nt"><span class="new">●</span> חשבון · <span class="rec">B110</span></div>
+      <div class="p">            ├─ expense.entity.ts</div><div class="nt">Expense</div>
+      <div class="p">            ├─ invoice.enum.ts</div><div class="nt">DocType·AllocationStatus·InvoiceStatus·PaymentMethod</div>
+      <div class="p">            ├─ finance.controller.ts</div><div class="nt">invoices.create · finalize · pay · void · creditNotes.create</div>
+      <div class="p">            └─ finance.types.ts</div><div class="nt">interfaces (req/res)</div>
+    </div>
+    <p style="margin:10px 0 0; font-size:.8rem; color:var(--muted)">* <code>customer.entity</code> — מיקום להכרעה (ראה פריטים פתוחים).</p>
+  </section>
+
+  <!-- 5 LINE MODEL -->
+  <section>
+    <h2>5 · מודל הקו — server / shared / app</h2>
+    <p class="h2sub">האינטואיציה מאחורי כל החלטת מיקום</p>
+    <ul class="conv">
+      <li><b>server = המטבח.</b> לוגיקה, פרומפטים, סודות, גישה ל-DB ולמערכות חוץ. רוב-רובו של כל סוכן.</li>
+      <li><b>shared = התפריט.</b> רק מה שמונח מול הקליינט: entity, enum מוצג, טיפוסי רשת, הצהרות controller. רזה בכוונה.</li>
+      <li><b>app = חדר האוכל.</b> Angular קורא רק מהתפריט — לעולם לא נכנס למטבח (import מ-server אסור).</li>
+      <li><b>השם חוזר, התוכן לא.</b> <code>finance</code> בשני צדי הקו = אותו נושא משתי זוויות, לא כפילות.</li>
+    </ul>
+  </section>
+
+  <!-- 6 AI-INVOICE MODULE -->
+  <section>
+    <h2>6 · מודול ai-invoice — מאקרו→מיקרו</h2>
+    <p class="h2sub">תת-דומיין ב-Finance. עוגן במבנה האחיד של רשות המסים — אותו יסוד משרת גם ביקורת מס וגם מסירה לרו"ח</p>
+
+    <h3>עובדות רגולטוריות (2026)</h3>
+    <div class="facts">
+      <div class="fact"><div class="l">מע"מ</div><div class="val">18%</div></div>
+      <div class="fact"><div class="l">תקרת עוסק פטור</div><div class="val">122,833 ₪</div></div>
+      <div class="fact"><div class="l">סף מספר הקצאה (יוני 2026)</div><div class="val">5,000 ₪</div></div>
+      <div class="fact"><div class="l">מדידת סף</div><div class="val sm">לפני מע"מ</div></div>
+    </div>
+    <p style="font-size:.84rem; color:var(--muted); margin:2px 0 0">סולם ההקצאה: 25k (2024) ← 20k (2025) ← 10k (ינואר 2026) ← 5k (יוני 2026). בלי הקצאה — הקונה לא מנכה תשומות.</p>
+
+    <h3>שלוש רשומות המבנה האחיד = שלוש שכבות הישויות</h3>
+    <div class="rececord"><div class="k">C100</div><div class="v"><b>Invoice — כותרת מסמך</b><span>docType, מספר, תאריך, לקוח, סה"כ, מע"מ, מספר הקצאה, linkedDocument</span></div></div>
+    <div class="rececord i"><div class="k">D110</div><div class="v"><b>LineItem — שורת פריט</b><span>מק"ט, תיאור, כמות, מחיר יחידה, % הנחה, שיעור מע"מ (לפי שורה), סכום</span></div></div>
+    <div class="rececord p2"><div class="k">D120</div><div class="v"><b>Payment — שורת תקבול</b><span>אמצעי תשלום (מזומן/צ'ק/אשראי/העברה), סכום, פרטי צ'ק/אשראי/בנק</span></div></div>
+    <div class="rececord j"><div class="k">B100<br>B110</div><div class="v"><b>JournalEntry + JournalLine + Account — הנהח"ש</b><span>פקודת יומן (חובה/זכות) לכל מסמך → בסיס לייצוא לחשבשבת/רו"ח</span></div></div>
+
+    <h3>סוג מסמך → אילו שורות + הקצאה + רישום יומן</h3>
+    <table>
+      <thead><tr><th>docType</th><th class="c">פריט<br>D110</th><th class="c">תקבול<br>D120</th><th class="c">הקצאה</th><th>רישום יומן (חובה / זכות)</th></tr></thead>
+      <tbody>
+        <tr><td>דרישת תשלום</td><td class="c">✓</td><td class="c">—</td><td class="c">✗</td><td>—</td></tr>
+        <tr><td>חשבונית עסקה</td><td class="c">✓</td><td class="c">—</td><td class="c">✗</td><td>— (מזומן: מע"מ בתשלום)</td></tr>
+        <tr><td>חשבונית מס</td><td class="c">✓</td><td class="c">—</td><td class="c">✓</td><td>לקוח / הכנסות + מע"מ עסקאות</td></tr>
+        <tr><td>קבלה</td><td class="c">—</td><td class="c">✓</td><td class="c">✗</td><td>בנק / לקוח</td></tr>
+        <tr><td>חשבונית מס-קבלה</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td>בנק / הכנסות + מע"מ עסקאות</td></tr>
+        <tr><td>חשבונית זיכוי</td><td class="c">✓−</td><td class="c">—</td><td class="c">✓</td><td>הכנסות + מע"מ / לקוח (היפוך)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>הבידול</h3>
+    <ul class="conv">
+      <li><b>סיווג אוטומטי</b> של docType לפי סוג עוסק · בסיס דיווח · סכום · שולם-עכשיו · מדינת לקוח.</li>
+      <li><b>ניהול יזום של הקצאה</b> — משיכה מראש, חידוש אוטומטי של הרשאת 3-החודשים, ריטריי, סימון "בסיכון" לפני שליחה.</li>
+      <li><b>מסירה לרו"ח</b> — אותו יסוד מפיק קובץ ביקורת (מבנה אחיד) וגם שידור לחשבשבת (פקודות יומן).</li>
+    </ul>
+  </section>
+
+  <!-- 7 ROADMAP -->
+  <section>
+    <h2>7 · מפת שלבים</h2>
+    <p class="h2sub">כל שלב נסגר ונבדק לפני הבא. קודם Gateways — הסוכנים רק צורכים אותם</p>
+    <table>
+      <thead><tr><th>שלב</th><th>מה נבנה</th><th>סימן שהושלם</th></tr></thead>
+      <tbody>
+        <tr><td class="c"><span class="dot d0">0</span></td><td>שלד, core, חיבור Remult, env</td><td>השרת עולה נקי</td></tr>
+        <tr><td class="c"><span class="dot d1">1</span></td><td>Entities בסיסיים + DBManager</td><td>קריאה/כתיבה רק דרך Gateway</td></tr>
+        <tr><td class="c"><span class="dot d2">2</span></td><td>AIManager + 4 אדפטרים + fallback</td><td>פרומפט חוזר ונרשם ב-PromptLog</td></tr>
+        <tr><td class="c"><span class="dot d3">3</span></td><td>BaseAgent + Meeting</td><td>סוכן ראשון מקצה לקצה</td></tr>
+        <tr><td class="c"><span class="dot d4">4</span></td><td>Marketing + <b>Finance/ai-invoice</b> (2 Gateways · מסמכים · הנהח"ש · ייצוא)</td><td>הנפקה חוקית + הקצאה + שידור לרו"ח</td></tr>
+        <tr><td class="c"><span class="dot d5">5</span></td><td>Angular — דשבורד + מסך "רו"ח AI"</td><td>שליטה חזותית מקצה לקצה</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:10px 0 0; font-size:.84rem; color:var(--muted)">Finance הוא השלב הכבד — מומלץ לפצל ל-4a (מסמכים+הקצאה) ו-4b (הנהח"ש+ייצוא לרו"ח).</p>
+  </section>
+
+  <!-- 8 OPEN -->
+  <section>
+    <h2>8 · פריטים פתוחים — להכרעה לפני phase-0</h2>
+    <div class="openbox">
+      <ul>
+        <li><b>מיקום <code>Customer</code>:</b> ליבה משותפת <code>shared/core/entity/customer.entity.ts</code> <span class="bp">B.P</span> (כי גם Meeting וגם Finance צורכים אותו) — מול השארה בדומיין meeting.</li>
+        <li><b>פיצול שלב Finance</b> ל-4a / 4b <span class="bp">B.P</span> — מול שלב 4 אחד גדול.</li>
+        <li><b>מיקום שכבת הנהח"ש</b> (JournalEntry/Account): בתוך <code>finance</code> <span class="bp">B.P</span> — מול קידום ל-core פיננסי.</li>
+        <li><b>אות phase-0</b> — כתיבת קוד מתחילה רק בהוראה מפורשת.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="callout ok">
+    <b class="t">סטטוס</b>
+    כל הארכיטקטורה נעולה ומאוחדת. המוצר נסגר (צוות AI לעסק קטן). מודול ai-invoice מעוגן במבנה האחיד. על הדיסק קיים רק <code>doc/</code> — אין עדיין <code>src/</code>. ממתינים להכרעת הפתוחים ולאות phase-0. מסמך זה = מקור אמת יחיד.
+  </div>
+
+  <footer>
+    Table for All · צוות AI לעסק קטן · Node.js + Remult + Angular · Blueprint מאוחד v2 · 09.07.2026<br>
+    ✦ / ● = נוסף במודול ai-invoice · מעוגן במבנה האחיד של רשות המסים (C100·D110·D120·B100·B110)
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table for All · מסמך העברה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;800&family=Heebo:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2937; --muted:#5b6472; --paper:#f4f6f9; --card:#ffffff;
+    --line:#dde3ea; --soft:#eef2f6;
+    --s0:#475569; --s1:#b45309; --s2:#15803d; --s3:#1d4ed8; --s4:#0369a1; --s5:#b91c1c;
+    --warnbg:#fff7e0; --warnline:#e6b800; --okbg:#e7f4ec; --okline:#9fd4b4;
+    --openbg:#f3f0ff; --openline:#8b5cf6;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Heebo',system-ui,sans-serif; font-size:16px; line-height:1.65;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:20px 16px 48px}
+
+  header{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:26px 24px 22px; position:relative; overflow:hidden;
+  }
+  header::before{
+    content:""; position:absolute; inset:0; opacity:.55; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='none' stroke='%23dbe4ee' stroke-width='1'%3E%3Cpath d='M20 160V95h55V40h85'/%3E%3Cpath d='M160 150h-60v-35H35'/%3E%3C/g%3E%3Cg fill='%23cfdae8'%3E%3Ccircle cx='20' cy='160' r='2.5'/%3E%3Ccircle cx='160' cy='40' r='2.5'/%3E%3Ccircle cx='160' cy='150' r='2.5'/%3E%3Ccircle cx='35' cy='115' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  header > *{position:relative}
+  .eyebrow{font-size:.72rem; font-weight:700; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin:0 0 6px}
+  h1{font-family:'Frank Ruhl Libre',serif; font-weight:800; font-size:2.1rem; margin:0 0 4px; letter-spacing:-.01em}
+  .sub{margin:0; color:var(--muted); font-size:.95rem}
+  .stack{margin-top:14px; display:flex; flex-wrap:wrap; gap:6px}
+  .stack span{font-size:.74rem; font-weight:500; background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:2px 10px; color:var(--muted)}
+
+  .callout{border-radius:12px; padding:14px 16px; margin:18px 0; font-size:.94rem}
+  .warn{background:var(--warnbg); border-right:5px solid var(--warnline); border-top:1px solid #f0dfa0; border-bottom:1px solid #f0dfa0; border-left:1px solid #f0dfa0}
+  .ok{background:var(--okbg); border:1px solid var(--okline)}
+  .callout b{display:block; margin-bottom:4px}
+  .warn ul{margin:6px 0 0; padding-right:18px}
+  .warn li{margin-bottom:4px}
+
+  section{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0}
+  h2{font-family:'Frank Ruhl Libre',serif; font-weight:800; font-size:1.25rem; margin:0 0 4px}
+  .h2sub{margin:0 0 14px; color:var(--muted); font-size:.88rem}
+
+  table{width:100%; border-collapse:collapse; font-size:.9rem}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:right; vertical-align:top}
+  thead th{background:var(--soft); font-weight:700; font-size:.85rem}
+  td:first-child{font-weight:700; white-space:nowrap; background:#fbfcfe}
+
+  /* diagram */
+  .svgwrap{background:#fbfcfe; border:1px solid var(--line); border-radius:12px; padding:10px 6px; overflow-x:auto}
+  .svgwrap svg{display:block; width:100%; height:auto; min-width:560px}
+  svg text{font-family:'Heebo',sans-serif}
+  .legend{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; font-size:.78rem; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:6px; background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:2px 10px}
+  .sw{width:10px; height:10px; border-radius:3px; display:inline-block}
+
+  /* roadmap */
+  .road{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+  .road div{display:flex; align-items:center; gap:7px; background:var(--soft); border:1px solid var(--line); border-radius:999px; padding:4px 12px 4px 14px; font-size:.82rem; font-weight:500}
+  .dot{display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; color:#fff; font-weight:700; font-size:.72rem; flex:none}
+  .d0{background:var(--s0)} .d1{background:var(--s1)} .d2{background:var(--s2)}
+  .d3{background:var(--s3)} .d4{background:var(--s4)} .d5{background:var(--s5)}
+
+  /* tree */
+  .treebox{background:#fbfcfe; border:1px solid var(--line); border-radius:12px; padding:14px 6px 14px 14px; overflow-x:auto}
+  pre.tree{margin:0; direction:ltr; text-align:left; font-family:'Fira Code',monospace; font-size:.8rem; line-height:1.75; color:#334155}
+  pre.tree .d{color:#0f172a; font-weight:500}
+  pre.tree .cm{color:#94a3b8}
+  .c{display:inline-block; min-width:17px; text-align:center; border-radius:5px; color:#fff; font-size:.68rem; font-weight:600; padding:0 5px; line-height:1.5; vertical-align:1px; font-family:'Heebo',sans-serif}
+  .c0{background:var(--s0)} .c1{background:var(--s1)} .c2{background:var(--s2)}
+  .c3{background:var(--s3)} .c4{background:var(--s4)} .c5{background:var(--s5)}
+
+  ul.conv{margin:0; padding-right:20px}
+  ul.conv li{margin-bottom:9px; font-size:.94rem}
+  ul.conv b{color:#0f172a}
+  code{font-family:'Fira Code',monospace; font-size:.82em; background:var(--soft); border:1px solid var(--line); border-radius:5px; padding:1px 5px; direction:ltr; unicode-bidi:embed}
+
+  /* open items */
+  .openbox{background:var(--openbg); border-right:5px solid var(--openline); border-radius:12px; padding:14px 16px; margin-top:8px}
+  .openbox h3{margin:0 0 6px; font-size:1rem}
+  .openbox ul{margin:6px 0 0; padding-right:18px}
+  .openbox li{margin-bottom:6px; font-size:.92rem}
+  .bp{display:inline-block; background:#111827; color:#fff; border-radius:5px; font-size:.68rem; font-weight:700; padding:1px 7px; vertical-align:1px}
+
+  footer{margin-top:22px; text-align:center; color:var(--muted); font-size:.78rem}
+
+  @media (max-width:480px){
+    .wrap{padding:12px 10px 40px}
+    header{padding:20px 16px}
+    h1{font-size:1.7rem}
+    section{padding:16px 14px}
+    th,td{padding:7px 8px}
+    pre.tree{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    header,section,.callout{animation:rise .45s ease both}
+    @keyframes rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Handoff Blueprint · מסמך העברה לסשן חדש</p>
+    <h1>Table for All</h1>
+    <p class="sub">מערכת סוכנים מרובים · סיכום מלא של כל החלטות הארכיטקטורה, השלד, המוסכמות והפריטים הפתוחים</p>
+    <div class="stack">
+      <span>Node.js</span><span>Remult</span><span>Angular</span><span>Multi-Agent</span><span>Monolith-First</span><span>Gateway/Service</span>
+    </div>
+  </header>
+
+  <div class="callout warn">
+    <b>הנחיות עבודה (System Instructions) — מחייבות בכל סשן</b>
+    <ul>
+      <li><b>עקרון-העל:</b> אין גישה ישירה ל-AI או ל-DB מהסוכנים. כל פעולה עוברת דרך ה-Gateways — AIManager / DBManager. לשמור על זה בכל הצעת קוד.</li>
+      <li><b>אפס קוד</b> ללא אות מפורש מהמשתמש. <b>אפס commit / push</b> ללא אישור מפורש.</li>
+      <li>כל שאלת בחירה כוללת אפשרות מסומנת <b>B.P</b> (best practice).</li>
+      <li>שפת העבודה: <b>עברית</b>. תשובות קצרות וידידותיות למובייל. עדיפות לתוצרים מוחשיים (מסמכים / קבצים).</li>
+      <li>ערך עליון של הפרויקט: <b>מודולריות</b> — כל תוספת היא Additive ואינה נוגעת בליבה.</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>1 · תרשים הארכיטקטורה</h2>
+    <p class="h2sub">Gateway/Service — הסוכנים הם מוחות רזים; כל משאב נגיש דרך שירות מרכזי בלבד</p>
+    <div class="svgwrap">
+      <svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="תרשים ארכיטקטורה">
+        <defs>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9 Z" fill="#475569"/>
+          </marker>
+        </defs>
+
+        <!-- Node.js Server container -->
+        <rect x="15" y="20" width="530" height="520" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="280" y="46" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Node.js Server · Monolith</text>
+
+        <!-- Agents -->
+        <rect x="35" y="62" width="150" height="78" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="110" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Meeting Agent</text>
+        <text x="110" y="116" text-anchor="middle" font-size="11.5" fill="#1e40af">סוכן פגישות</text>
+
+        <rect x="205" y="62" width="150" height="78" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="280" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Marketing Agent</text>
+        <text x="280" y="116" text-anchor="middle" font-size="11.5" fill="#1e40af">סוכן שיווק</text>
+
+        <rect x="375" y="62" width="150" height="78" rx="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="450" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Finance Agent</text>
+        <text x="450" y="116" text-anchor="middle" font-size="11.5" fill="#1e40af">סוכן פיננסי</text>
+
+        <!-- Prompt arrows agents -> AIManager -->
+        <line x1="118" y1="140" x2="205" y2="233" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <line x1="280" y1="140" x2="280" y2="233" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <line x1="442" y1="140" x2="355" y2="233" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <text x="280" y="180" text-anchor="middle" font-size="11" fill="#64748b">פנייה לפרומפט (Prompt Request)</text>
+
+        <!-- AIManager -->
+        <rect x="155" y="235" width="250" height="88" rx="12" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="280" y="264" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">AIManager Service</text>
+        <text x="280" y="285" text-anchor="middle" font-size="11.5" fill="#166534">Gateway יחיד ל-AI · adapters</text>
+        <text x="280" y="304" text-anchor="middle" font-size="11" fill="#166534">בחירת ספק + fallback</text>
+
+        <!-- External providers -->
+        <rect x="570" y="150" width="135" height="264" rx="10" fill="#fee2e2" stroke="#f87171" stroke-width="1.5"/>
+        <text x="637" y="178" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7f1d1d">External AI</text>
+        <text x="637" y="196" text-anchor="middle" font-size="11" fill="#991b1b">ספקי AI חיצוניים</text>
+        <text x="637" y="232" text-anchor="middle" font-size="12" fill="#7f1d1d">Grok (xAI)</text>
+        <text x="637" y="270" text-anchor="middle" font-size="12" fill="#7f1d1d">Claude (Anthropic)</text>
+        <text x="637" y="308" text-anchor="middle" font-size="12" fill="#7f1d1d">Gemini (Google)</text>
+        <text x="637" y="346" text-anchor="middle" font-size="12" fill="#7f1d1d">ChatGPT (OpenAI)</text>
+        <text x="637" y="392" text-anchor="middle" font-size="10.5" fill="#b91c1c">adapter לכל ספק</text>
+
+        <!-- dotted arrows AIManager -> providers -->
+        <line x1="405" y1="255" x2="566" y2="230" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+        <line x1="405" y1="279" x2="566" y2="279" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+        <line x1="405" y1="303" x2="566" y2="330" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+
+        <!-- side arrows agents -> DBManager (read/write) -->
+        <line x1="70" y1="140" x2="70" y2="431" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+        <line x1="492" y1="140" x2="492" y2="396" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+
+        <!-- AIManager -> DBManager (PromptLog) -->
+        <line x1="250" y1="323" x2="185" y2="431" stroke="#475569" stroke-width="1.3" marker-end="url(#ah)"/>
+        <text x="248" y="384" text-anchor="middle" font-size="10.5" fill="#64748b">PromptLog</text>
+
+        <!-- Storage zone -->
+        <rect x="35" y="400" width="490" height="125" rx="12" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+        <text x="480" y="422" text-anchor="end" font-size="12" font-weight="700" fill="#9a3412">Storage · מאגר נתונים</text>
+
+        <rect x="60" y="435" width="200" height="72" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="1.5"/>
+        <text x="160" y="464" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">DBManager</text>
+        <text x="160" y="485" text-anchor="middle" font-size="11" fill="#9a3412">Gateway יחיד ל-Data</text>
+
+        <line x1="260" y1="471" x2="301" y2="471" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/>
+
+        <rect x="305" y="435" width="195" height="72" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="402" y="464" text-anchor="middle" font-size="13" font-weight="700" fill="#78350f">Remult &amp; Database</text>
+        <text x="402" y="485" text-anchor="middle" font-size="11" fill="#92400e">dataProvider = האדפטר</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:#60a5fa"></i>סוכנים — לוגיקה</span>
+      <span><i class="sw" style="background:#4ade80"></i>AIManager</span>
+      <span><i class="sw" style="background:#f97316"></i>שכבת נתונים</span>
+      <span><i class="sw" style="background:#f87171"></i>ספקים חיצוניים</span>
+      <span>חצי הצד: קריאה/כתיבה של הסוכנים — דרך DBManager בלבד</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>2 · החלטות נעולות</h2>
+    <p class="h2sub">כל מה שנסגר — עם הנימוק בקצרה</p>
+    <table>
+      <thead><tr><th>נושא</th><th>החלטה</th></tr></thead>
+      <tbody>
+        <tr><td>ריצה</td><td>מונוליט Node.js יחיד; אסינכרוניות מלאה (Promises) למקביליות בין סוכנים. "מונוליט" = החלטת deployment, לא design.</td></tr>
+        <tr><td>עקרון-על</td><td>Gateways בלבד: הסוכנים לא כותבים שאילתות ולא פונים ל-APIs — צורכים שירותים קיימים.</td></tr>
+        <tr><td>AIManager</td><td>service + <code>adapters/</code> לכל ספק (grok, claude, gemini, openai) — כי אין ספריית איחוד ל-AI. בחירת ספק דינמית + fallback. כל קריאה מתועדת ב-PromptLog.</td></tr>
+        <tr><td>DBManager</td><td>service יחיד, <b>בלי</b> adapters — ה-dataProvider של Remult הוא שכבת האדפטר. החלפת DB (Postgres → MySQL וכו') = שינוי שורה ב-<code>remult-api.ts</code> + דרייבר.</td></tr>
+        <tr><td>היררכיה</td><td>Layer-first למעלה (server / shared / app), ואז domain-per-agent בתוך server ו-shared. נבחר על פני Feature-First ("אפשרות ב").</td></tr>
+        <tr><td>server</td><td><code>core / gateways / agents</code> — core מכיל את הסטנדרט: index, server, jwt, remult-api, json-body.</td></tr>
+        <tr><td>shared</td><td>היברידי: <code>core</code> לפי סוג (entity, enum, controller, type) + <code>agents</code> פר-דומיין ורזה.</td></tr>
+        <tr><td>קריטריון הקו</td><td>לכל קובץ: <b>"האם הדפדפן מייבא את זה?"</b> כן → shared, לא → server. entity/enum-מוצג/טיפוסי-רשת/הצהרת-controller → shared; לוגיקה, פרומפטים, סודות → server בלבד.</td></tr>
+        <tr><td>controller</td><td>מוצהר ב-shared (קריאה מהקליינט עם טיפוסים); הגוף (<code>@BackendMethod</code>) רץ בשרת ומאציל לשירותי server.</td></tr>
+        <tr><td>מוסכמת שמות</td><td>בתוך דומיין סוכן — הסטנדרט כסיומות קבצים (<code>.entity / .enum / .controller / .types</code>), לא תתי-תיקיות.</td></tr>
+        <tr><td>ייבוא בין דומיינים</td><td>חוזים בלבד מ-shared (interfaces), לעולם לא מימוש. מוסכמת כתיבה — ללא ESLint boundaries וללא Workspaces.</td></tr>
+        <tr><td>מיקרוסרוויסים</td><td>אין הכנות בשלב זה. חילוץ עתידי: תיקיות הדומיין נוסעות, החוזה נשאר ב-shared, הצרכנים מקבלים Remote Adapter על אותו interface.</td></tr>
+        <tr><td>סוכנים</td><td>3 ל-MVP (Meeting, Marketing, Finance). סוכן נולד רק כשיש לו עבודה ודומיין; כל סוכן חדש = 2 תיקיות (server + shared), אפס נגיעה בליבה.</td></tr>
+        <tr><td>app ↔ סוכנים</td><td>ל-app תקום תיקיית סוכן רק אם יהיה לו מסך ייעודי — החלטה של שלב 5. הספירה לסוכן: 2 תמיד, 3 רק אם יש UI ייעודי.</td></tr>
+        <tr><td>Git</td><td>commit / push באישור מפורש בלבד.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3 · עץ הפרויקט</h2>
+    <p class="h2sub">קיים בפועל כ-zip (20 תיקיות, 37 קבצים) — כל קובץ עם שורת כותרת בלבד, אפס לוגיקה. התגית = השלב שבו הוא מתמלא</p>
+
+    <div class="road" aria-label="מפת שלבים">
+      <div><span class="dot d0">0</span>תשתית</div>
+      <div><span class="dot d1">1</span>שכבת נתונים</div>
+      <div><span class="dot d2">2</span>AIManager</div>
+      <div><span class="dot d3">3</span>סוכן ראשון</div>
+      <div><span class="dot d4">4</span>שכפול סוכנים</div>
+      <div><span class="dot d5">5</span>Angular</div>
+    </div>
+
+    <div class="treebox" style="margin-top:14px">
+<pre class="tree"><span class="d">table-for-all/</span>
+├─ package.json                 <span class="c c0">0</span>
+├─ tsconfig.json                <span class="c c0">0</span>
+├─ .env                         <span class="c c0">0</span>  <span class="cm">AI provider keys</span>
+└─ <span class="d">src/</span>
+   ├─ <span class="d">app/</span>                       <span class="c c5">5</span>
+   │  ├─ common/
+   │  ├─ route/
+   │  └─ service/
+   ├─ <span class="d">assets/</span>
+   ├─ <span class="d">server/</span>
+   │  ├─ <span class="d">core/</span>                   <span class="c c0">0</span>
+   │  │  ├─ index.ts
+   │  │  ├─ server.ts
+   │  │  ├─ jwt.ts
+   │  │  ├─ remult-api.ts
+   │  │  └─ json-body.ts
+   │  ├─ <span class="d">gateways/</span>
+   │  │  ├─ <span class="d">db-manager/</span>          <span class="c c1">1</span>
+   │  │  │  └─ db-manager.service.ts
+   │  │  └─ <span class="d">ai-manager/</span>          <span class="c c2">2</span>
+   │  │     ├─ ai-manager.service.ts
+   │  │     └─ <span class="d">adapters/</span>
+   │  │        ├─ grok.adapter.ts
+   │  │        ├─ claude.adapter.ts
+   │  │        ├─ gemini.adapter.ts
+   │  │        └─ openai.adapter.ts
+   │  └─ <span class="d">agents/</span>
+   │     ├─ <span class="d">base/</span>                <span class="c c3">3</span>
+   │     │  └─ base.agent.ts
+   │     ├─ <span class="d">meeting/</span>             <span class="c c3">3</span>
+   │     │  ├─ meeting.agent.ts
+   │     │  ├─ meeting.prompts.ts
+   │     │  └─ meeting.config.ts
+   │     ├─ <span class="d">marketing/</span>           <span class="c c4">4</span>
+   │     └─ <span class="d">finance/</span>             <span class="c c4">4</span>
+   └─ <span class="d">shared/</span>
+      ├─ <span class="d">core/</span>                   <span class="c c1">1</span>
+      │  ├─ <span class="d">entity/</span>
+      │  │  └─ prompt-log.entity.ts
+      │  ├─ <span class="d">enum/</span>
+      │  │  └─ ai-provider.enum.ts
+      │  ├─ controller/
+      │  └─ <span class="d">type/</span>
+      │     ├─ interface-req.ts
+      │     ├─ interface-res.ts
+      │     └─ agent.interface.ts
+      └─ <span class="d">agents/</span>
+         ├─ <span class="d">meeting/</span>             <span class="c c3">3</span>
+         │  ├─ meeting.entity.ts
+         │  ├─ meeting.enum.ts
+         │  ├─ meeting.controller.ts
+         │  └─ meeting.types.ts
+         ├─ <span class="d">marketing/</span>           <span class="c c4">4</span>
+         └─ <span class="d">finance/</span>             <span class="c c4">4</span></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>4 · מודל הקו — server / shared / app</h2>
+    <p class="h2sub">האינטואיציה שמאחורי כל החלטת מיקום</p>
+    <ul class="conv">
+      <li><b>server = המטבח.</b> רק שם מבשלים: לוגיקה, פרומפטים, סודות, גישה ל-DB. רוב-רובו של כל סוכן.</li>
+      <li><b>shared = התפריט.</b> רק מה שמונח על הדלפק מול הקליינט: entity, enum שמוצג, טיפוסי רשת, הצהרות controller. רזה בכוונה.</li>
+      <li><b>app = חדר האוכל.</b> Angular. קורא אך ורק מהתפריט — לעולם לא נכנס למטבח (import מ-server אסור: קוד שרת לא מגיע לדפדפן).</li>
+      <li><b>השם חוזר, התוכן לעולם לא.</b> תיקיית <code>meeting</code> בשני צדי הקו היא אותו נושא משתי זוויות — לא כפילות קוד.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5 · מפת שלבים</h2>
+    <p class="h2sub">כל שלב נסגר, נבדק, ורק אז ממשיכים. סדר מכוון: קודם Gateways, כי הסוכנים רק צורכים אותם</p>
+    <table>
+      <thead><tr><th>שלב</th><th>מה נבנה</th><th>סימן שהשלב הושלם</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot d0">0</span></td><td>שלד תיקיות, core, חיבור Remult, env</td><td>השרת עולה נקי</td></tr>
+        <tr><td><span class="dot d1">1</span></td><td>Entities בסיסיים + DBManager</td><td>קריאה/כתיבה עוברות רק דרך ה-Gateway</td></tr>
+        <tr><td><span class="dot d2">2</span></td><td>AIManager + ארבעה אדפטרים, בחירת ספק + fallback</td><td>פרומפט חוזר מכל ספק ונרשם ב-PromptLog</td></tr>
+        <tr><td><span class="dot d3">3</span></td><td>BaseAgent (מקבל את שני ה-Gateways בהזרקה) + סוכן Meeting</td><td>סוכן ראשון רץ מקצה לקצה</td></tr>
+        <tr><td><span class="dot d4">4</span></td><td>Marketing + Finance על אותו BaseAgent</td><td>שכפול Additive בלי לגעת בליבה</td></tr>
+        <tr><td><span class="dot d5">5</span></td><td>Angular — דשבורד ניהול</td><td>צפייה ושליטה בפעילות הסוכנים</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>6 · פריטים פתוחים</h2>
+    <p class="h2sub">שני דברים בלבד ממתינים להכרעת המשתמש</p>
+    <div class="openbox">
+      <h3>א · מה המוצר עושה? — טרם הוחלט</h3>
+      השם והסוכנים הקיימים הולידו מועמדים. ההחלטה תכתיב את ה-Entities הראשונים ואת תוכן הדשבורד:
+      <ul>
+        <li><b>ניהול מסעדה</b> — הזמנות שולחן, קמפיינים, פדיון <span class="bp">B.P</span></li>
+        <li><b>ארוחות קהילתיות</b> — שידוך זרים לשולחן משותף</li>
+        <li><b>צוות AI לעסק קטן</b> — פגישות, שיווק, כספים לעצמאי</li>
+        <li><b>ניהול אירועים</b> — הושבה, אישורי הגעה, תקציב</li>
+        <li><b>הזמנת עמדות Coworking</b></li>
+      </ul>
+      שלבים 0–2 ניטרליים למוצר — אפשר לבנות אותם לפני ההחלטה.
+    </div>
+    <div class="openbox" style="margin-top:12px">
+      <h3>ב · אות להתחלת שלב 0</h3>
+      השלד קיים; כתיבת קוד מתחילה רק בהוראה מפורשת של המשתמש.
+    </div>
+  </section>
+
+  <div class="callout ok">
+    <b>סטטוס נוכחי</b>
+    כל החלטות הארכיטקטורה נעולות. השלד קיים כ-zip אצל המשתמש (37 קבצים, כותרות בלבד). ממתינים להגדרת מוצר ולאות לשלב 0. מסמך זה מספיק לבדו כדי להמשיך את העבודה בסשן נקי.
+  </div>
+
+  <footer>Table for All · ארכיטקטורת סוכנים · Node.js + Remult + Angular · Handoff v1</footer>
+
+</div>
+</body>
+</html>

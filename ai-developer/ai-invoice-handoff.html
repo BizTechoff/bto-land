@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ai-invoice — מסמך אפיון / Handoff</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#ffffff; --ink:#0f172a; --muted:#64748b;
+    --line:#e2e8f0; --soft:#f8fafc; --accent:#2563eb; --accent-soft:#eff6ff;
+    --green:#0f766e; --green-soft:#f0fdfa; --amber:#b45309; --amber-soft:#fffbeb;
+    --red:#b91c1c; --red-soft:#fef2f2;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:"Segoe UI",Arial,"Helvetica Neue",sans-serif;
+    color:var(--ink); background:#eef2f7; line-height:1.6; font-size:15px;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:28px 18px 60px}
+  header.doc{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a); color:#fff;
+    border-radius:16px; padding:26px 26px 22px; margin-bottom:22px;
+    box-shadow:0 10px 30px rgba(15,23,42,.18);
+  }
+  header.doc .kicker{font-size:12.5px; letter-spacing:.14em; color:#93c5fd; text-transform:uppercase; margin:0 0 6px}
+  header.doc h1{margin:0 0 6px; font-size:27px; font-weight:800; letter-spacing:-.01em}
+  header.doc p{margin:0; color:#c7d2fe; font-size:14.5px}
+  .badges{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+    color:#e0e7ff; font-size:12px; padding:4px 10px; border-radius:999px}
+  section{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin-bottom:16px; box-shadow:0 1px 2px rgba(15,23,42,.04);
+  }
+  h2{font-size:18px; margin:0 0 14px; display:flex; align-items:center; gap:10px}
+  h2 .n{
+    background:var(--accent); color:#fff; width:26px; height:26px; border-radius:8px;
+    display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex:none;
+  }
+  h3{font-size:15px; margin:16px 0 8px; color:#1e293b}
+  p{margin:0 0 10px}
+  .muted{color:var(--muted)}
+  table{width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:14px}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:right; vertical-align:top}
+  th{background:var(--soft); font-weight:700; color:#334155}
+  code{background:#f1f5f9; padding:1px 6px; border-radius:5px; font-family:"Consolas",monospace; font-size:13px; direction:ltr; display:inline-block}
+  .facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-top:6px}
+  .fact{background:var(--soft); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .fact .lbl{font-size:12px; color:var(--muted); margin-bottom:3px}
+  .fact .val{font-size:17px; font-weight:800; color:#0f172a}
+  .fact .val.small{font-size:14.5px; font-weight:700}
+  .flow{border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:10px 0; background:var(--soft)}
+  .flow .who{font-weight:800; margin-bottom:8px; font-size:14.5px}
+  .flow .who .tag{font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:999px; margin-inline-start:8px}
+  .tag.exempt{background:var(--green-soft); color:var(--green); border:1px solid #99f6e4}
+  .tag.lic{background:var(--accent-soft); color:var(--accent); border:1px solid #bfdbfe}
+  .tag.now{background:var(--amber-soft); color:var(--amber); border:1px solid #fde68a}
+  .chain{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .doc-pill{background:#fff; border:1px solid var(--line); border-radius:8px; padding:6px 11px; font-size:13px; font-weight:600}
+  .doc-pill.tax{border-color:#bfdbfe; background:var(--accent-soft); color:#1e40af}
+  .doc-pill.opt{border-style:dashed; color:var(--muted); font-weight:500}
+  .arrow{color:var(--muted); font-weight:700}
+  .note-alloc{font-size:12.5px; color:var(--amber); margin-top:8px}
+  .arch{display:grid; grid-template-columns:1fr; gap:10px; margin-top:6px}
+  .box{border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .box.core{background:var(--accent-soft); border-color:#bfdbfe}
+  .box.gw{background:#fdf4ff; border-color:#f0abfc}
+  .box b{display:block; margin-bottom:4px}
+  .diagram{background:#0f172a; color:#e2e8f0; border-radius:12px; padding:16px 18px; font-family:"Consolas",monospace; font-size:13px; direction:ltr; text-align:left; overflow-x:auto; line-height:1.9}
+  .diagram .c{color:#7dd3fc}
+  .diagram .g{color:#f0abfc}
+  .diagram .m{color:#94a3b8}
+  ul.tight{margin:6px 0; padding-inline-start:20px}
+  ul.tight li{margin-bottom:6px}
+  .diff li{margin-bottom:8px}
+  .diff b{color:#1e293b}
+  .open li{margin-bottom:7px}
+  .bp{background:var(--green-soft); color:var(--green); border:1px solid #99f6e4; font-size:11px; font-weight:800; padding:1px 7px; border-radius:6px; margin-inline-start:6px}
+  footer{color:var(--muted); font-size:12.5px; text-align:center; margin-top:22px; line-height:1.9}
+  footer a{color:var(--accent); text-decoration:none}
+  .callout{background:var(--amber-soft); border:1px solid #fde68a; border-radius:10px; padding:12px 14px; font-size:14px; margin-top:10px}
+  .callout b{color:var(--amber)}
+  @media print{ body{background:#fff} section,header.doc{box-shadow:none} .wrap{max-width:100%} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc">
+    <p class="kicker">צוות AI לעסק קטן · עץ הסולושיין</p>
+    <h1>ai-invoice — מסמך אפיון / Handoff</h1>
+    <p>תת-דומיין הנפקת מסמכי חיוב, בתוך סוכן ה-Finance · מיפוי חשבונאי + החלטה ארכיטקטונית</p>
+    <div class="badges">
+      <span class="badge">גרסה 0.1 — לאישור/נעילה</span>
+      <span class="badge">09.07.2026</span>
+      <span class="badge">ללא קוד — אפיון בלבד</span>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <section>
+    <h2><span class="n">1</span> מטרת הסוכן</h2>
+    <p>אחריות על הנפקת שרשרת מסמכי החיוב לעסק, נכון לסוג העוסק ולבסיס הדיווח שלו:
+    דרישת תשלום, קבלה, חשבונית עסקה, חשבונית מס, וחשבונית מס-קבלה — כולל הטיפול
+    ב<b>מודל חשבוניות ישראל</b> (מספרי הקצאה מרשות המסים). הסוכן בוחר את המסמך הנכון
+    אוטומטית ומזין את סוכן ה-Finance (הנהלת חשבונות, תזרים, מסירה לרו"ח).</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2><span class="n">2</span> עובדות רגולטוריות נעולות (2026)</h2>
+    <div class="facts">
+      <div class="fact"><div class="lbl">שיעור מע"מ</div><div class="val">18%</div></div>
+      <div class="fact"><div class="lbl">תקרת עוסק פטור (מחזור שנתי)</div><div class="val">122,833 ₪</div></div>
+      <div class="fact"><div class="lbl">מדידת סף ההקצאה</div><div class="val small">לפי סכום לפני מע"מ</div></div>
+      <div class="fact"><div class="lbl">הרשאת חיבור לרשות המסים</div><div class="val small">בזמן אמת · תוקף 3 חודשים</div></div>
+    </div>
+
+    <h3>מודל חשבוניות ישראל — סולם הסף למספר הקצאה</h3>
+    <p class="muted" style="margin-bottom:6px">חלה על <b>חשבונית מס</b> ו<b>חשבונית מס-קבלה</b> שסכומן (לפני מע"מ) מעל הסף:</p>
+    <table>
+      <tr><th>תקופה</th><th>סף (לפני מע"מ)</th></tr>
+      <tr><td>מאי 2024</td><td>25,000 ₪</td></tr>
+      <tr><td>ינואר 2025</td><td>20,000 ₪</td></tr>
+      <tr><td>ינואר 2026</td><td>10,000 ₪</td></tr>
+      <tr><td><b>יוני 2026 ואילך</b></td><td><b>5,000 ₪</b></td></tr>
+    </table>
+    <div class="callout">
+      <b>המשמעות:</b> בלי מספר הקצאה — הלקוח <b>לא יכול לנכות מס תשומות</b>, והחשבונית
+      "מתה" מסחרית ב-B2B. הסף שקורס ל-5,000 ₪ אומר שכמעט כל חשבונית מס עסקית תדרוש
+      קריאת API בזמן אמת. <b>דרישת תשלום / קבלה / חשבונית עסקה — פטורות</b> (אינן מסמכי מס).
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2><span class="n">3</span> מיפוי הזרימות (State Machine) לפי סוג עוסק</h2>
+
+    <div class="flow">
+      <div class="who">עוסק פטור <span class="tag exempt">מחזור ≤ 122,833 ₪</span></div>
+      <div class="chain">
+        <span class="doc-pill opt">דרישת תשלום (אופציונלי)</span>
+        <span class="arrow">←</span>
+        <span class="doc-pill">קבלה — חובה, מיד עם קבלת הכסף</span>
+      </div>
+      <div class="note-alloc">אין מע"מ · אין חשבונית מס · אין מספר הקצאה. לעולם.</div>
+    </div>
+
+    <div class="flow">
+      <div class="who">עוסק מורשה / חברה בע"מ — בסיס מצטבר <span class="tag lic">סחורה / מסחר</span></div>
+      <div class="chain">
+        <span class="doc-pill tax">חשבונית מס — במכירה/מסירה (עד 14 יום)</span>
+        <span class="arrow">←</span>
+        <span class="doc-pill">קבלה — בתשלום</span>
+      </div>
+      <div class="chain" style="margin-top:6px">
+        <span class="muted" style="font-size:13px">שולם מיידית ⟵</span>
+        <span class="doc-pill tax">חשבונית מס-קבלה</span>
+      </div>
+      <div class="note-alloc">⚑ מספר הקצאה נדרש על חשבונית המס / מס-קבלה אם מעל הסף.</div>
+    </div>
+
+    <div class="flow">
+      <div class="who">עוסק מורשה / חברה בע"מ — בסיס מזומן <span class="tag lic">שירותים · מקצוע חופשי · עסק קטן (תיקון 42)</span></div>
+      <div class="chain">
+        <span class="doc-pill">חשבונית עסקה — במכירה (לא מסמך מס)</span>
+        <span class="arrow">←</span>
+        <span class="doc-pill tax">חשבונית מס-קבלה — בתשלום</span>
+      </div>
+      <div class="note-alloc">⚑ מספר הקצאה נדרש על המס-קבלה אם מעל הסף. חשבונית העסקה עצמה — פטורה.</div>
+    </div>
+
+    <div class="flow">
+      <div class="who">חיוב מיידי <span class="tag now">קופה · אונליין · POS</span></div>
+      <div class="chain">
+        <span class="doc-pill tax">חשבונית מס-קבלה — מסמך אחד (חשבונית מס + קבלה)</span>
+      </div>
+      <div class="note-alloc">⚑ מספר הקצאה נדרש אם מעל הסף.</div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2><span class="n">4</span> מודל הנתונים <span class="bp">B.P</span></h2>
+    <p>לא 5 ישויות — <b>ישות <code>Invoice</code> אחת</b> המונעת ב-enums וב-state, ו<b>מאפייני עוסק</b> על פרופיל העסק/הלקוח. מקסימום מודולריות, אפס כפילות.</p>
+
+    <table>
+      <tr><th>שדה</th><th>טיפוס</th><th>הערה</th></tr>
+      <tr><td><code>docType</code></td><td>enum</td><td>PaymentDemand · Receipt · ProformaInvoice · TaxInvoice · TaxInvoiceReceipt</td></tr>
+      <tr><td><code>allocationNumber</code></td><td>string | null</td><td>מספר הקצאה מרשות המסים</td></tr>
+      <tr><td><code>allocationStatus</code></td><td>enum</td><td>NotRequired · Pending · Allocated · Failed · Expired</td></tr>
+      <tr><td><code>status</code></td><td>enum</td><td>Draft · Issued · Paid · Cancelled</td></tr>
+      <tr><td><code>amountBeforeVat / vatAmount / total</code></td><td>number</td><td>vatRate = 0.18</td></tr>
+      <tr><td><code>linkedInvoiceId</code></td><td>ref | null</td><td>קושר קבלה לחשבונית מס וכד'</td></tr>
+      <tr><td><code>dealerType</code> <span class="muted">(על BusinessProfile)</span></td><td>enum</td><td>Exempt · Licensed · Company</td></tr>
+      <tr><td><code>reportingBasis</code> <span class="muted">(על BusinessProfile)</span></td><td>enum</td><td>Accrual (מצטבר) · Cash (מזומן)</td></tr>
+    </table>
+    <p class="muted" style="margin-top:8px">קונבנציית סיומות (ללא תיקיות-משנה): <code>invoice.entity.ts</code> · <code>invoice.enum.ts</code> · <code>invoice.types.ts</code> ← <b>shared/finance</b> (הדפדפן מייבא) · <code>invoice.controller.ts</code> + לוגיקת הסוכן ← <b>server/finance</b>.</p>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2><span class="n">5</span> ארכיטקטורה ומיקום בעץ</h2>
+    <div class="arch">
+      <div class="box core">
+        <b>מיקום: תת-דומיין בתוך סוכן Finance — לא סוכן עליון חדש</b>
+        הישות <code>Invoice</code> כבר מוגדרת ב-Finance ומזינה את אותו downstream (הוצאות, תזרים, דוחות). איחוד זה שומר על גבול-הדומיין ועל המודולריות.
+      </div>
+      <div class="box gw">
+        <b>Gateway חדש: <code>TaxAuthorityManager</code> <span class="bp">B.P</span></b>
+        מקביל ל-<code>AIManager</code> / <code>DBManager</code>, יושב ב-core (server). אחראי: קבלת מספר הקצאה (API רשות המסים), ניהול הרשאת 3-החודשים, תור + ריטריי בכשל, לוגים. אדפטרים: רשות המסים היום, הרחבה עתידית — בדיוק כמו אדפטרי ה-AIManager.
+      </div>
+    </div>
+
+    <div class="diagram">
+<span class="m">// הסוכן לעולם לא נוגע ב-DB/חוץ ישירות — רק דרך Gateway</span>
+<span class="c">FinanceAgent (ai-invoice)</span>
+      │
+      ├──▶ <span class="c">DBManager</span>  ──▶  DB        <span class="m">// נתונים</span>
+      │
+      └──▶ <span class="g">TaxAuthorityManager</span> ──▶ רשות המסים API  <span class="m">// מספר הקצאה</span>
+                    └─ הרשאת 3 חודשים · ריטריי · לוג
+    </div>
+    <p class="muted" style="margin-top:10px">מודולריות: הכל <b>additive</b> — שדות ה-Invoice וה-enums מתרחבים, ה-Gateway חדש ועצמאי, אפס נגיעה בליבה או בסוכנים אחרים.</p>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <h2><span class="n">6</span> הבידול — למה אנחנו (סוכן AI, לא טופס)</h2>
+    <ul class="tight diff">
+      <li><b>סיווג אוטומטי:</b> הסוכן בוחר את <code>docType</code> לפי סוג העוסק, בסיס הדיווח, הסכום, "שולם עכשיו/אח"כ" ומדינת הלקוח. בעל העסק לא צריך לדעת מה ההבדל בין חשבונית עסקה לחשבונית מס-קבלה.</li>
+      <li><b>ניהול יזום של ההקצאה:</b> משיכה מראש, <b>חידוש אוטומטי של הרשאת 3-החודשים</b> לפני שפגה, תור וריטריי כשה-API נופל, וסימון חשבונית "בסיכון" לפני שליחה. (המתחרים — מורנינג, iCount, EZcount, ריווחית — מטפלים בזה טכני וריאקטיבי: מציגים שגיאה, לא מונעים.)</li>
+      <li><b>שפה אנושית:</b> הסבר בעברית פשוטה לבעל עסק לא-חשבונאי — מה הונפק ולמה, ומה הלקוח צריך.</li>
+      <li><b>לא עומד לבד:</b> כל חשבונית מזינה את סוכן ה-Finance — הנהלת חשבונות, תזרים, ומסירה לרו"ח.</li>
+    </ul>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <h2><span class="n">7</span> נקודות פתוחות לנעילה (ללא קוד)</h2>
+    <ul class="tight open">
+      <li>שם ה-Gateway: <code>TaxAuthorityManager</code> <span class="bp">B.P</span> מול <code>InvoiceGatewayManager</code>.</li>
+      <li><code>reportingBasis</code> יושב על <b>BusinessProfile</b> (תכונת העסק) — לאישור.</li>
+      <li>אופן ההתממשקות בפועל לרשות המסים: חיבור ישיר מול שירות מתווך — להחלטה בשלב מימוש.</li>
+      <li>טיפול בלקוח בחו"ל / מע"מ אפס בתוך מנוע הסיווג.</li>
+      <li>אישור סופי לפני מתן אות phase להתחלת קוד.</li>
+    </ul>
+  </section>
+
+  <footer>
+    מבוסס על ארכיטקטורת "Table for All" / "צוות AI לעסק קטן" (Node.js · Remult · Angular).<br>
+    מקורות: מודל חשבוניות ישראל (Green Invoice, Amir CPA, Stark CPA, rashut hamisim) · תקרת עוסק פטור 2026 (Green Invoice) · מע"מ 18% 2026 · הבחנת מסמכים (כל-זכות).
+  </footer>
+
+</div>
+</body>
+</html>
