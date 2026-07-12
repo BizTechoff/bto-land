@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>מאזני שביט · אזור הלקוח · הדגמה</title>
+<title>רונאר · אזור הלקוח · הדגמה</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@300;400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#33383E; --navy-700:#23262B; --navy-050:#EEEFF1; --royal:#E8641E;
+    --navy:#1F4D46; --navy-700:#153833; --navy-050:#EAF2F0; --royal:#E67A26;
     --emerald:#10A37A; --emerald-soft:#E2F5EE;
     --amber:#E39A2E; --amber-soft:#FBEED3;
     --coral:#DB5A48; --coral-soft:#FBE4DF;
@@ -28,25 +28,25 @@
   h1,h2,h3,h4{margin:0;}
 
   /* ---------- Top bar ---------- */
-  .topbar{background:var(--navy); color:#EEEFF1; position:sticky; top:0; z-index:100;}
+  .topbar{background:var(--navy); color:#EEEFF0; position:sticky; top:0; z-index:100;}
   .topbar-in{max-width:1180px; margin:0 auto; display:flex; align-items:center; gap:16px; padding:12px 26px;}
   .brand{display:flex; align-items:center; gap:11px; text-decoration:none; color:#fff;}
   .brand .mark{width:42px; height:42px; border-radius:11px; background:#fff; display:grid; place-items:center; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,.18);}
   .brand .mark b{font-family:'Secular One'; color:var(--navy); font-size:15px; letter-spacing:.5px; line-height:1;}
   .brand h1{font-family:'Secular One'; font-weight:400; font-size:18px; letter-spacing:.3px; line-height:1;}
-  .brand small{display:block; font-size:11px; color:#B4B8BF; font-weight:600; margin-top:3px;}
+  .brand small{display:block; font-size:11px; color:#B4B7BC; font-weight:600; margin-top:3px;}
   .tb-spacer{flex:1;}
   .wa-cta{display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff; text-decoration:none; font-family:'Heebo'; font-weight:800; font-size:13.5px; padding:9px 15px; border-radius:11px; box-shadow:0 4px 14px rgba(37,211,102,.4); white-space:nowrap;}
   .wa-cta svg{width:17px; height:17px;}
   .client-chip{display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.14); padding:6px 8px 6px 13px; border-radius:12px;}
   .client-chip .c-av{width:34px; height:34px; border-radius:9px; background:#fff; color:var(--navy); display:grid; place-items:center; font-family:'Heebo'; font-weight:800; font-size:14px;}
   .client-chip .c-nm{font-size:13px; font-weight:700; line-height:1.15;}
-  .client-chip .c-sub{font-size:11px; color:#B4B8BF;}
+  .client-chip .c-sub{font-size:11px; color:#B4B7BC;}
 
   /* ---------- Nav tabs ---------- */
   .navbar{background:var(--navy-700); position:sticky; top:66px; z-index:90;}
   .navbar-in{max-width:1180px; margin:0 auto; display:flex; gap:2px; padding:0 22px; overflow-x:auto;}
-  .tab{appearance:none; border:none; background:none; color:#C6C9CF; font-family:inherit; font-weight:600; font-size:14.5px; padding:14px 16px; cursor:pointer; display:flex; align-items:center; gap:8px; border-bottom:3px solid transparent; white-space:nowrap; transition:color .15s,border-color .15s;}
+  .tab{appearance:none; border:none; background:none; color:#C6C8CC; font-family:inherit; font-weight:600; font-size:14.5px; padding:14px 16px; cursor:pointer; display:flex; align-items:center; gap:8px; border-bottom:3px solid transparent; white-space:nowrap; transition:color .15s,border-color .15s;}
   .tab svg{width:18px; height:18px;}
   .tab:hover{color:#fff;}
   .tab.active{color:#fff; border-bottom-color:var(--emerald);}
@@ -66,19 +66,19 @@
   .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm);}
 
   /* ---------- Hero ---------- */
-  .hero{background:linear-gradient(135deg,#33383E 0%,#454B54 55%,#E8641E 100%); color:#fff; border-radius:var(--radius-lg); padding:28px 30px; display:flex; align-items:center; gap:30px; box-shadow:var(--shadow); position:relative; overflow:hidden;}
+  .hero{background:linear-gradient(135deg,#24272B 0%,#33373C 55%,#E67A26 100%); color:#fff; border-radius:var(--radius-lg); padding:28px 30px; display:flex; align-items:center; gap:30px; box-shadow:var(--shadow); position:relative; overflow:hidden;}
   .hero::after{content:""; position:absolute; inset:0; background:radial-gradient(circle at 88% -10%,rgba(255,255,255,.16),transparent 42%); pointer-events:none;}
   .hero-txt{flex:1; min-width:0; position:relative; z-index:1;}
   .hero-txt .hello{font-family:'Secular One'; font-weight:400; font-size:25px; line-height:1.15;}
   .hero-txt .sig{display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:30px; padding:7px 15px; font-size:13.5px; font-weight:600;}
   .hero-txt .sig svg{width:16px; height:16px; color:#8FE3C8;}
-  .hero-txt p{margin:14px 0 0; font-size:14.5px; color:#DBDDE0; max-width:430px;}
+  .hero-txt p{margin:14px 0 0; font-size:14.5px; color:#D9DADD; max-width:430px;}
   .ring-box{display:flex; flex-direction:column; align-items:center; gap:10px; position:relative; z-index:1;}
   .ring{width:150px; height:150px; border-radius:50%; background:conic-gradient(var(--emerald) 0 80%, var(--amber) 80% 88%, var(--coral) 88% 92%, var(--sky) 92% 100%); display:grid; place-items:center; box-shadow:0 8px 26px rgba(0,0,0,.25);}
-  .ring-hole{width:112px; height:112px; border-radius:50%; background:#33383E; display:grid; place-items:center; text-align:center;}
+  .ring-hole{width:112px; height:112px; border-radius:50%; background:#24272B; display:grid; place-items:center; text-align:center;}
   .ring-hole b{font-family:'Heebo'; font-weight:800; font-size:34px; line-height:1; color:#fff;}
-  .ring-hole span{display:block; font-size:11.5px; color:#B4B8BF; margin-top:3px; font-weight:600;}
-  .ring-cap{font-size:12px; color:#E3E5E8;}
+  .ring-hole span{display:block; font-size:11.5px; color:#B4B7BC; margin-top:3px; font-weight:600;}
+  .ring-cap{font-size:12px; color:#E2E3E5;}
 
   /* ---------- KPI chips ---------- */
   .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:18px;}
@@ -143,7 +143,7 @@
   .chip{appearance:none; border:1px solid var(--line); background:var(--surface); color:var(--ink); font-family:inherit; font-weight:600; font-size:13px; padding:8px 15px; border-radius:22px; cursor:pointer; display:flex; align-items:center; gap:7px;}
   .chip .c{font-family:'Heebo'; font-weight:700; font-size:11px; color:var(--muted);}
   .chip.active{background:var(--navy); color:#fff; border-color:var(--navy);}
-  .chip.active .c{color:#C6C9CF;}
+  .chip.active .c{color:#C6C8CC;}
   .tablewrap{overflow-x:auto;}
   table.instr{width:100%; border-collapse:collapse; min-width:720px;}
   table.instr th{font-size:12px; font-weight:700; color:var(--muted); text-align:right; padding:12px 16px; border-bottom:1px solid var(--line);}
@@ -241,9 +241,9 @@
 <!-- ===== TOP BAR ===== -->
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="https://www.shavit-scales.co.il/" target="_blank" rel="noopener">
-      <span class="mark"><img src="shavit-logo.png" alt="מאזני שביט" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><b style="display:none">שביט</b></span>
-      <span><h1>מאזני שביט · אזור הלקוח</h1><small>מערכות שקילה ובקרה · מעבדת כיול ISO 17025</small></span>
+    <a class="brand" href="https://www.ronar.co.il/" target="_blank" rel="noopener">
+      <span class="mark"><img src="data:image/png;base64,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" alt="רונאר" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><b style="display:none">רונאר</b></span>
+      <span><h1>רונאר · אזור הלקוח</h1><small>מערכות מדידה בע״מ · מכשור מדויק ושירותי כיול</small></span>
     </a>
     <div class="tb-spacer"></div>
     <a class="wa-cta" href="https://wa.me/972526526063?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%9E%D7%95%D7%98%D7%99%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%93%D7%92%D7%9E%D7%AA%20%D7%A4%D7%95%D7%A8%D7%98%D7%9C%20%D7%94%D7%9C%D7%A7%D7%95%D7%97%D7%95%D7%AA%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93." target="_blank" rel="noopener">
@@ -251,8 +251,8 @@
       דברו איתי · מוטי
     </a>
     <div class="client-chip">
-      <span class="c-av">בה</span>
-      <span><span class="c-nm">מפעלי בשר הגליל בע"מ</span><span class="c-sub">משה דוד · מנהל אחזקה ואיכות</span></span>
+      <span class="c-av">מע</span>
+      <span><span class="c-nm">מכון תערובת עמק יזרעאל בע"מ</span><span class="c-sub">אבי לוי · מנהל תפעול</span></span>
     </div>
   </div>
 </header>
@@ -273,8 +273,8 @@
   <section class="view active" id="view-overview">
     <div class="hero">
       <div class="hero-txt">
-        <div class="hello">שלום משה, הציוד של הגליל — במבט אחד 👋</div>
-        <div class="sig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>כל מאזניים — תמיד בתוקף</div>
+        <div class="hello">שלום אבי, הציוד של עמק יזרעאל — במבט אחד 👋</div>
+        <div class="sig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>כל שקילה מתועדת, כל מועד בתוקף</div>
         <p>הפורטל מתעדכן אוטומטית מכל כיול שאנחנו מבצעים לכם. תזכורת נשלחת 90, 30 ו-7 יום לפני כל מועד — כדי שאף תעודה לא תפוג בלי שתדעו.</p>
       </div>
       <div class="ring-box">
@@ -335,14 +335,14 @@
 
     <div class="note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
-      <div>זהו מוקאפ הדגמה — הנתונים לדוגמה בלבד. כל מודול (סקירה, מכשירים, תעודות, מעקב מעבדה, תזכורות) נבנה כיחידה עצמאית וניתן להפעלה בשלבים, לפי סדר העדיפויות של מאזני שביט.</div>
+      <div>זהו מוקאפ הדגמה — הנתונים לדוגמה בלבד. כל מודול (סקירה, מכשירים, תעודות, מעקב מעבדה, תזכורות) נבנה כיחידה עצמאית וניתן להפעלה בשלבים, לפי סדר העדיפויות של רונאר.</div>
     </div>
-    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
+    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור רונאר</div>
   </section>
 
   <!-- ============ INSTRUMENTS ============ -->
   <section class="view" id="view-instruments">
-    <div class="sec-h"><h3>המכשירים שלי</h3><span class="hint">כל ציוד המדידה של הגליל שמכויל אצל מאזני שביט · מוצגים 8 מתוך 25</span></div>
+    <div class="sec-h"><h3>המכשירים שלי</h3><span class="hint">כל ציוד המדידה של עמק יזרעאל שמכויל אצל רונאר · מוצגים 8 מתוך 25</span></div>
     <div class="filters">
       <button class="chip active">הכל <span class="c">25</span></button>
       <button class="chip">בתוקף <span class="c">20</span></button>
@@ -354,7 +354,7 @@
       <table class="instr">
         <thead><tr><th>מכשיר</th><th>מיקום</th><th>מועד כיול הבא</th><th>סטטוס</th><th>תעודה</th><th>QR</th></tr></thead>
         <tbody>
-          <tr class="irow" data-open><td><div class="iname"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8h14M5 16h14"/></svg></span>מאזני רצפה נירוסטה 300 ק"ג<small>נכס A-118 · דגם MSA-FS300</small></div></td><td class="cellmuted">קו אריזה 2</td><td class="due-date">12.02.27</td><td><span class="status s-ok">בתוקף</span></td><td><a class="linkbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>PDF</a></td><td><svg class="qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20v.01"/></svg></td></tr>
+          <tr class="irow" data-open><td><div class="iname"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8h14M5 16h14"/></svg></span>מתמר עומס S-Type · 2 טון<small>נכס A-118 · דגם MSA-FS300</small></div></td><td class="cellmuted">קו אריזה 2</td><td class="due-date">12.02.27</td><td><span class="status s-ok">בתוקף</span></td><td><a class="linkbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>PDF</a></td><td><svg class="qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20v.01"/></svg></td></tr>
           <tr class="irow" data-open><td><div class="iname"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2 2"/></svg></span>סט משקולות ביקורת F1 · 1mg–1kg<small>נכס A-051 · מוסמך למסה</small></div></td><td class="cellmuted">מעבדת QA</td><td class="due-date" style="color:#8a5a12">20.07.26</td><td><span class="status s-due">מתקרב · 13 יום</span></td><td><a class="linkbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>PDF</a></td><td><svg class="qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20v.01"/></svg></td></tr>
           <tr class="irow" data-open><td><div class="iname"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 7l1 12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1l1-12M9 7V4h6v3"/></svg></span>משקל ביקורת בתנועה · Checkweigher<small>נכס A-204 · קצב עד 120/דק׳</small></div></td><td class="cellmuted">קו מילוי 1</td><td class="due-date" style="color:#8a5a12">28.07.26</td><td><span class="status s-due">מתקרב · 21 יום</span></td><td><a class="linkbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>PDF</a></td><td><svg class="qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20v.01"/></svg></td></tr>
           <tr class="irow" data-open><td><div class="iname"><span class="ii" style="background:var(--coral-soft);color:#a8392a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5M12 16h.01"/></svg></span>מאזני שולחן אנליטי · 0.001g<small>נכס A-077 · רזולוציה גבוהה</small></div></td><td class="cellmuted">מעבדת QA</td><td class="due-date" style="color:#a8392a">28.06.26</td><td><span class="status s-late">פג תוקף · 9 ימים</span></td><td class="cellmuted">—</td><td><svg class="qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20v.01"/></svg></td></tr>
@@ -365,7 +365,7 @@
         </tbody>
       </table>
     </div>
-    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
+    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור רונאר</div>
   </section>
 
   <!-- ============ CERTIFICATES ============ -->
@@ -379,7 +379,7 @@
       <div class="cert"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><div><div class="cno">תעודה C-2025-1130</div><div class="cds">Checkweigher קו מילוי 1 · נכס A-204 · הונפקה 28.11.25</div></div><span class="iso"><svg viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>ISO 17025</span><span class="dl"><a class="dlbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>הורדה</a></span></div>
       <div class="cert"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><div><div class="cno">תעודה C-2025-1042</div><div class="cds">משטח שקילה 600 ק"ג · נכס A-133 · הונפקה 03.11.25</div></div><span class="iso"><svg viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>ISO 17025</span><span class="dl"><a class="dlbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>הורדה</a></span></div>
     </div>
-    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
+    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור רונאר</div>
   </section>
 
   <!-- ============ IN LAB ============ -->
@@ -409,7 +409,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
       <div>ברגע שהתעודה מונפקת — היא נכנסת אוטומטית ל"תעודות", מועד הכיול הבא נקבע, והמכשיר חוזר ל"בתוקף". אתם מקבלים התראה במייל ובוואטסאפ.</div>
     </div>
-    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
+    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור רונאר</div>
   </section>
 
   <!-- ============ INSTRUMENT DETAIL ============ -->
@@ -418,7 +418,7 @@
     <div class="card d-head">
       <span class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8h14M5 16h14"/></svg></span>
       <div>
-        <h2 id="d-name">מאזני רצפה נירוסטה 300 ק"ג</h2>
+        <h2 id="d-name">מתמר עומס S-Type · 2 טון</h2>
         <div class="dsub" id="d-sub">נכס A-118 · דגם MSA-FS300 · קו אריזה 2</div>
         <div style="margin-top:10px" id="d-status"><span class="status s-ok">בתוקף</span></div>
       </div>
@@ -449,7 +449,7 @@
         </div>
       </div>
     </div>
-    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
+    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור רונאר</div>
   </section>
 
 </div>
