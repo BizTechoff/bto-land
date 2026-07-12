@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>בוארון · מרכז בקרה תפעולי · הדגמה</title>
+<title>רונאר · מרכז בקרה תפעולי · הדגמה</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@300;400;500;600;700;800&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#1E2126; --paper:#F5F4F0; --surface:#FFFFFF;
-    --pine:#212D52; --pine-700:#182240; --pine-300:#6F8B4A; --pine-050:#EFF2E6;
-    --amber:#6B8A45; --amber-soft:#E9F0DC;
+    --pine:#215E56; --pine-700:#17453F; --pine-300:#5FA79B; --pine-050:#E9F3F1;
+    --amber:#E2902F; --amber-soft:#FBEAD0;
     --sky:#2F7E91; --sky-soft:#E1F0F2;
     --clay:#C2543E; --clay-soft:#F8E3DD;
     --grass:#6FA84B;
@@ -38,7 +38,7 @@
   .brand .mark{width:40px; height:40px; flex-shrink:0;}
   .brand h1{font-family:'Secular One'; font-size:19px; font-weight:400; margin:0; line-height:1.05; letter-spacing:.2px;}
   .brand small{display:block; font-size:11px; color:var(--pine-300); font-weight:600; margin-top:2px; letter-spacing:.3px;}
-  .nav-label{font-size:10.5px; font-weight:700; color:#A9C284; letter-spacing:1px; padding:14px 12px 6px;}
+  .nav-label{font-size:10.5px; font-weight:700; color:#9ED4C9; letter-spacing:1px; padding:14px 12px 6px;}
   .nav-item{
     display:flex; align-items:center; gap:11px; padding:10px 12px; border-radius:11px;
     color:#D8D7D0; font-weight:500; font-size:14.5px; cursor:pointer; border:none; background:none;
@@ -87,7 +87,7 @@
   .section-h{display:flex; align-items:baseline; gap:12px; margin:30px 0 14px;}
   .section-h h3{font-family:'Secular One'; font-weight:400; font-size:18px; margin:0;}
   .section-h span{font-size:13px; color:var(--muted);}
-  .clickhint{display:inline-flex; align-items:center; gap:7px; background:var(--amber-soft); color:#4A6428; font-weight:700; font-size:12.5px; padding:5px 12px; border-radius:20px; border:1px solid #D3E2BB;}
+  .clickhint{display:inline-flex; align-items:center; gap:7px; background:var(--amber-soft); color:#8a5e16; font-weight:700; font-size:12.5px; padding:5px 12px; border-radius:20px; border:1px solid #EAD3A8;}
   .clickhint svg{width:15px; height:15px;}
 
   /* KPI */
@@ -101,6 +101,17 @@
   .delta.up{color:var(--grass);} .delta.warn{color:var(--clay);}
 
   /* Pipeline rail */
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .cal .dhead{font-size:11px;font-weight:700;color:var(--muted);text-align:center;padding:2px 0}
+  .cal .day{min-height:66px;border:1px solid var(--line);border-radius:9px;padding:4px 6px;background:var(--surface)}
+  .cal .day .dnum{display:block;font-family:'Heebo';font-size:10.5px;color:var(--muted);font-weight:600}
+  .cal .day.today{border-color:var(--pine);box-shadow:0 0 0 1.5px var(--pine)}
+  .cal .day.today .dnum{color:var(--pine);font-weight:800}
+  .cal .day.off{background:transparent;border-style:dashed;opacity:.45}
+  .cal-chip{display:block;font-size:10px;font-weight:700;border-radius:6px;padding:2px 6px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--pine-050);color:var(--pine)}
+  .cal-chip.warn{background:var(--amber-soft);color:#8a5e16}
+  .cal-chip.late{background:var(--clay-soft);color:var(--clay)}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;align-items:start}
   .rail-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px 8px; box-shadow:var(--shadow); overflow-x:auto;}
   .rail{display:flex; gap:0; min-width:980px;}
   .stage{flex:1; min-width:120px; position:relative; padding:0 5px;}
@@ -196,7 +207,7 @@
   .gantt .day{text-align:center; font-size:11px;}
   .gbar{height:24px; border-radius:6px; color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; padding:0 9px; white-space:nowrap;}
 
-  .note{background:var(--amber-soft); border:1px solid #D3E2BB; border-radius:12px; padding:13px 16px; font-size:13px; color:#7a5418; display:flex; gap:10px; align-items:flex-start; margin-top:24px;}
+  .note{background:var(--amber-soft); border:1px solid #EAD3A8; border-radius:12px; padding:13px 16px; font-size:13px; color:#7a5418; display:flex; gap:10px; align-items:flex-start; margin-top:24px;}
   .note svg{width:18px; height:18px; flex-shrink:0; margin-top:1px;}
 
   @media (max-width:920px){
@@ -235,6 +246,10 @@
     .grid2{grid-template-columns:1fr;}
     .panel{overflow-x:auto;}
     .wa-cta{position:fixed; bottom:12px; right:12px; left:12px; z-index:120; justify-content:center;}
+    .grid3{grid-template-columns:1fr;}
+    .cal{gap:3px;}
+    .cal .day{min-height:44px;padding:2px 3px;}
+    .cal-chip{font-size:8px;padding:1px 3px;}
   }
 </style>
 </head>
@@ -245,20 +260,10 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="brand" style="display:block; padding:4px 4px 4px;">
-      <a href="https://boaron.co.il" target="_blank" rel="noopener" title="לאתר בוארון" style="display:block; background:#fff; border-radius:12px; padding:9px 12px;">
-        <span style="display:flex; align-items:center; gap:10px; direction:rtl;">
-          <svg viewBox="0 0 132 96" width="46" height="34" style="flex-shrink:0" aria-hidden="true">
-            <path d="M14 34 L38 22 L38 82 L14 94 Z" fill="#3B3E42"/><path d="M14 34 L38 22 L26 16 L2 28 Z" fill="#585B60"/>
-            <path d="M52 26 L76 14 L76 74 L52 86 Z" fill="#27407E"/><path d="M52 26 L76 14 L64 8 L40 20 Z" fill="#3A57A0"/>
-            <path d="M90 34 L114 22 L114 82 L90 94 Z" fill="#5F7A3D"/><path d="M90 34 L114 22 L102 16 L78 28 Z" fill="#77934F"/>
-          </svg>
-          <span style="line-height:1.05;">
-            <b style="font-family:'Secular One','Assistant',sans-serif; font-weight:400; font-size:21px; color:#1E2F63; display:block;">בוארון</b>
-            <span style="font-size:11px; font-weight:700; color:#1E2F63; display:block; margin-top:3px;">ניהול ואחזקת מבנים</span>
-          </span>
-        </span>
+      <a href="https://www.ronar.co.il" target="_blank" rel="noopener" title="לאתר רונאר" style="display:block; background:#fff; border-radius:12px; padding:9px 12px;">
+        <img src="data:image/png;base64,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" alt="רונאר · מערכות מדידה" style="width:100%; height:auto; display:block; max-height:58px; object-fit:contain;">
       </a>
-      <small style="display:block; padding:9px 6px 0; font-size:11.5px; color:#A9C284; font-weight:700; letter-spacing:.4px;">מרכז בקרה תפעולי · הדגמה</small>
+      <small style="display:block; padding:9px 6px 0; font-size:11.5px; color:#9ED4C9; font-weight:700; letter-spacing:.4px;">מרכז בקרה תפעולי · הדגמה</small>
     </div>
     <input type="checkbox" id="navtoggle" class="navtoggle-cb">
     <label for="navtoggle" class="navtoggle" aria-label="תפריט">
@@ -272,11 +277,11 @@
     </a>
     <a class="nav-item" href="#view-proj" data-view="proj">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
-      עבודות <span class="badge">18</span>
+      כיולים <span class="badge">23</span>
     </a>
     <a class="nav-item" href="#view-crews" data-view="crews">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M16 14c3 0 5 2 5 5"/></svg>
-      צוותי אחזקה
+      צוותי טכנאים
     </a>
     <a class="nav-item" href="#view-ware" data-view="ware">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21v-7h6v7"/></svg>
@@ -286,7 +291,7 @@
     <div class="nav-label">ניהול</div>
     <a class="nav-item" href="#view-std" data-view="std">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-      תקן ובטיחות
+      יומן כיולים
     </a>
     <a class="nav-item" href="#view-rep" data-view="rep">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16V9M13 16v-4M18 16V7"/></svg>
@@ -294,7 +299,7 @@
     </a>
 
     <div class="side-foot">
-      הותאם עבור <b>בוארון</b><br>מונע ע״י <b>BizTechoff™</b> · מוקאפ הדגמה
+      הותאם עבור <b>רונאר</b><br>מונע ע״י <b>BizTechoff™</b> · מוקאפ הדגמה
     </div>
   </aside>
 
@@ -306,11 +311,11 @@
       <a class="wa-cta" href="https://wa.me/972526526063?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%9E%D7%95%D7%98%D7%99%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%94%D7%93%D7%9E%D7%94%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:9px;background:#25D366;color:#fff;text-decoration:none;font-family:'Heebo';font-weight:800;font-size:14px;box-shadow:0 3px 12px rgba(37,211,102,.45);white-space:nowrap;">דברו איתי · מוטי, BizTechoff<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
       <div class="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        חיפוש בניין, עבודה או מס׳ קריאה…
+        חיפוש לקוח, מכשיר או מס׳ תעודה…
       </div>
       <button class="pill-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
-        עבודה חדשה
+        כיול חדש
       </button>
       <div class="avatar">דמו</div>
     </header>
@@ -323,83 +328,84 @@
         <div class="kpis" style="margin-top:12px">
           <div class="kpi">
             <div class="ico" style="background:var(--pine-050);color:var(--pine)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
-            <div class="num">18</div><div class="lbl">עבודות אחזקה פעילות</div>
+            <div class="num">23</div><div class="lbl">כיולים פתוחים החודש</div>
             <div class="delta up">+3 החודש</div>
           </div>
           <div class="kpi">
             <div class="ico" style="background:var(--sky-soft);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-            <div class="num">6</div><div class="lbl">עבודות מתוכננות השבוע</div>
-            <div class="delta up">2 צוותים בשטח</div>
+            <div class="num">6</div><div class="lbl">כיולים מתוכננים השבוע</div>
+            <div class="delta up">3 צוותים בשטח</div>
           </div>
           <div class="kpi">
             <div class="ico" style="background:var(--amber-soft);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-            <div class="num">142</div><div class="lbl">פריטים וחומרים בהזמנת רכש</div>
-            <div class="delta warn">אספקת חומרים באיחור 4 ימים</div>
+            <div class="num">142</div><div class="lbl">מכשירים בכיול במעבדה</div>
+            <div class="delta warn">12 חוזרים ללקוחות השבוע</div>
           </div>
           <div class="kpi">
             <div class="ico" style="background:var(--clay-soft);color:var(--clay)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
-            <div class="num">4</div><div class="lbl">בדיקות גמר ומסירה ממתינות</div>
-            <div class="delta warn">2 חורגות מ-SLA</div>
+            <div class="num">4</div><div class="lbl">תעודות ממתינות לחתימת בודק</div>
+            <div class="delta warn">2 לקוחות בפיגור כיול</div>
           </div>
         </div>
 
         <!-- PIPELINE -->
         <div class="section-h">
-          <h3>צינור העבודות</h3>
-          <span class="clickhint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l-4 4 4 4"/><path d="M5 15h11a4 4 0 0 0 4-4V5"/></svg> לחצו על כל כרטיס לפתיחת תיק העבודה</span>
+          <h3>החודש במבט אחד · יולי 2026</h3>
+          <span>כל כיול נולד מתאריך תוקף — הלוח מתמלא לבד</span>
+          <span class="clickhint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l-6-6 6-6"/></svg> לחצו על כל כרטיס לפתיחת תיק הכיול</span>
         </div>
-        <div class="rail-wrap">
-          <div class="rail">
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:#B8C4BC"></span><span class="stage-name">ליד</span><span class="stage-count">3</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">שיפוץ לובי · בניין הברוש 12</div><div class="m">ועד בית</div></a>
-              <a class="pcard" data-open href="#view-proj"><div class="t">החלפת תאורת חירום · מגדל אמות</div><div class="m">חברת ניהול</div></a>
+
+        <div class="panel" style="padding:16px 18px 14px">
+          <div class="cal">
+            <div class="dhead">א׳</div><div class="dhead">ב׳</div><div class="dhead">ג׳</div><div class="dhead">ד׳</div><div class="dhead">ה׳</div><div class="dhead">ו׳</div><div class="dhead">ש׳</div>
+            <div class="day off"><span class="dnum">28.6</span></div><div class="day off"><span class="dnum">29</span></div><div class="day off"><span class="dnum">30</span></div><div class="day"><span class="dnum">1.7</span></div><div class="day"><span class="dnum">2</span><span class="cal-chip">מפעל בטון · חולון</span></div><div class="day"><span class="dnum">3</span></div><div class="day off"><span class="dnum">4</span></div>
+            <div class="day"><span class="dnum">5</span><span class="cal-chip">מאפייה · כפר סבא</span></div><div class="day today"><span class="dnum">6 · היום</span><span class="cal-chip late">מרלו״ג מודיעין · פג!</span><span class="cal-chip">סופר · רעננה</span></div><div class="day"><span class="dnum">7</span><span class="cal-chip">מחלבה · עמק חפר</span></div><div class="day"><span class="dnum">8</span></div><div class="day"><span class="dnum">9</span><span class="cal-chip">פארמה · הרצליה</span><span class="cal-chip">+1</span></div><div class="day"><span class="dnum">10</span></div><div class="day off"><span class="dnum">11</span></div>
+            <div class="day"><span class="dnum">12</span><span class="cal-chip warn">מפעל מזון · נתניה</span></div><div class="day"><span class="dnum">13</span></div><div class="day"><span class="dnum">14</span><span class="cal-chip">מרלו״ג · מודיעין</span></div><div class="day"><span class="dnum">15</span></div><div class="day"><span class="dnum">16</span><span class="cal-chip">מעבדת איכות · פ״ת</span></div><div class="day"><span class="dnum">17</span></div><div class="day off"><span class="dnum">18</span></div>
+            <div class="day"><span class="dnum">19</span></div><div class="day"><span class="dnum">20</span><span class="cal-chip warn">רשת סופרים · השרון</span></div><div class="day"><span class="dnum">21</span></div><div class="day"><span class="dnum">22</span><span class="cal-chip">משקל משאיות · נמל</span></div><div class="day"><span class="dnum">23</span></div><div class="day"><span class="dnum">24</span><span class="cal-chip">+3 כיולים</span></div><div class="day off"><span class="dnum">25</span></div>
+            <div class="day"><span class="dnum">26</span></div><div class="day"><span class="dnum">27</span><span class="cal-chip">מוסך · רעננה</span></div><div class="day"><span class="dnum">28</span></div><div class="day"><span class="dnum">29</span><span class="cal-chip warn">אוגוסט מתמלא…</span></div><div class="day"><span class="dnum">30</span></div><div class="day"><span class="dnum">31</span></div><div class="day off"><span class="dnum">1.8</span></div>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="panel">
+            <div class="panel-h"><h4>לתיאום · כיול מתקרב</h4><span class="stage-count">4</span></div>
+            <div style="padding:10px 12px">
+              <a class="pcard" data-open href="#view-proj"><div class="t">כיול מתמרים תקופתי · רשת סופרים · השרון</div><div class="m">תוקף עד 2.8 · טרם תואם</div><div class="tagrow"><span class="tag due">21 יום לתפוגה</span></div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">משקל משאיות · מרלו״ג · מודיעין</div><div class="m">חצי־שנתי · באתר הלקוח</div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">מתמרי עומס · מפעל בטון · חולון</div><div class="m">מנהל איכות</div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">מדי לחץ · מעבדת איכות · פ״ת</div><div class="m">GMP · תיאום גישה</div><div class="tagrow"><span class="tag std">דורש אישור כניסה</span></div></a>
             </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:#8FB39E"></span><span class="stage-name">אבחון בשטח</span><span class="stage-count">2</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">איטום גג · בניין הדקל 8 · תל אביב</div><div class="m">ועד בית</div><div class="tagrow"><span class="tag due">סקר ב-25.6</span></div></a>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><h4>מתואמים · השבוע בשטח</h4><span class="stage-count">3</span></div>
+            <div style="padding:10px 12px">
+              <a class="pcard" data-open href="#view-proj"><div class="t">משקל משאיות · מרלו״ג · מודיעין</div><div class="m">היום · נ. לוי</div><div class="tagrow"><span class="tag due">פג תוקף · הוקפץ</span></div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">מתמרים ומשקולות · מחלבה · עמק חפר</div><div class="m">מחר 08:00 · צוות שטח</div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">כיול שנתי · מפעל מזון · נתניה</div><div class="m">12.7 · תיק איכות</div><div class="tagrow"><span class="tag std">ISO 17025</span></div></a>
             </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:var(--sky)"></span><span class="stage-name">תכנון ותיאום</span><span class="stage-count">4</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">שדרוג מעלית · מגדל סביון · רמת השרון</div><div class="m">יועץ מעליות א. לבנון</div><div class="tagrow"><span class="tag std">בטיחות</span></div></a>
-              <a class="pcard" data-open href="#view-proj"><div class="t">אחזקת מערכות · משרדים · רמת גן</div><div class="m">מנהל נכס</div></a>
-            </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:#3E6FA0"></span><span class="stage-name">הצעת מחיר ואישור ועד</span><span class="stage-count">3</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">שיפוץ חדר מדרגות · בניין · רמת גן</div><div class="m">ממתין לאישור הזמנה</div></a>
-            </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:var(--amber)"></span><span class="stage-name">רכש חומרים</span><span class="stage-count">2</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">תיקון אינסטלציה ראשית · רמת גן</div><div class="m">ועד בית הרקפות</div><div class="tagrow"><span class="tag due">חומרים בדרך</span></div></a>
-            </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:#A07A2C"></span><span class="stage-name">תשתיות</span><span class="stage-count">2</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">תחזוקת חניון · תל אביב</div><div class="m">תאורה + ניקוז</div></a>
-            </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:var(--grass)"></span><span class="stage-name">ביצוע</span><span class="stage-count">3</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">שיפוץ לובי · ראשל״צ</div><div class="m">צוות תל אביב</div><div class="tagrow"><span class="tag ok">בשטח</span></div></a>
-            </div>
-            <div class="stage">
-              <div class="stage-head"><span class="stage-dot" style="background:var(--pine)"></span><span class="stage-name">גמר ומסירה</span><span class="stage-count">2</span></div>
-              <a class="pcard" data-open href="#view-proj"><div class="t">מסירת עבודה · גבעתיים</div><div class="m">בדיקת גמר ומסירה</div><div class="tagrow"><span class="tag std">מסירה 27.6</span></div></a>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><h4>בוצעו · תעודה וחיוב</h4><span class="stage-count">3</span></div>
+            <div style="padding:10px 12px">
+              <a class="pcard" data-open href="#view-proj"><div class="t">כיול סט משקולות F1 · פארמה · הרצליה</div><div class="m">תעודה מוכנה · ממתינה לחתימת בודק</div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">כיוונון דינמומטר · מוסך מוסמך · רעננה</div><div class="m">הצעת תיקון אושרה · לחיוב</div><div class="tagrow"><span class="tag ok">קישור תשלום נשלח</span></div></a>
+              <a class="pcard" data-open href="#view-proj"><div class="t">אישור הונפק · סופר · רעננה</div><div class="m">נשלח ללקוח + רשות</div><div class="tagrow"><span class="tag ok">שולם ✓</span></div></a>
             </div>
           </div>
         </div>
 
-        <!-- two col -->
         <div class="grid2" style="margin-top:24px">
           <div class="panel">
             <div class="panel-h">
               <svg viewBox="0 0 24 24" width="18" fill="none" stroke="var(--pine)" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/></svg>
-              <h4>צוותי אחזקה — היום בשטח</h4>
+              <h4>צוותי טכנאים — היום בשטח</h4>
               <a class="more" data-goto="crews" href="#view-crews">לוח שבועי ←</a>
             </div>
             <div class="panel-b">
-              <div class="crew"><span class="cdot" style="background:var(--sky)"></span><div class="cinfo"><b>צוות תל אביב · 4 טכנאים</b><div class="s">שיפוץ לובי · ראשל״צ — שלב 2/3</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--sky)"></span><div class="cinfo"><b>צוות מרכז · 4 טכנאים</b><div class="s">כיול מפעל · נתניה — שלב 2/3</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
               <div class="crew"><span class="cdot" style="background:var(--grass)"></span><div class="cinfo"><b>צוות תל אביב · 3 טכנאים</b><div class="s">אחזקה שוטפת · רמת גן</div></div><span class="cstatus" style="background:var(--pine-050);color:var(--pine)">פעיל בשטח</span></div>
-              <div class="crew"><span class="cdot" style="background:var(--amber)"></span><div class="cinfo"><b>צוות דרום · 4 טכנאים</b><div class="s">ממתין לאספקת חומרים · באר שבע</div></div><span class="cstatus" style="background:var(--amber-soft);color:#4A6428">בהמתנה</span></div>
-              <div class="crew"><span class="cdot" style="background:var(--clay)"></span><div class="cinfo"><b>קבלן חשמל</b><div class="s">עבודות חשמל · תל אביב</div></div><span class="cstatus" style="background:var(--clay-soft);color:var(--clay)">איחור יום</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--amber)"></span><div class="cinfo"><b>צוות דרום · 4 טכנאים</b><div class="s">ממתין לאספקת חומרים · באר שבע</div></div><span class="cstatus" style="background:var(--amber-soft);color:#8a5e16">בהמתנה</span></div>
+              <div class="crew"><span class="cdot" style="background:var(--clay)"></span><div class="cinfo"><b>בודק מוסמך</b><div class="s">עבודות חשמל · תל אביב</div></div><span class="cstatus" style="background:var(--clay-soft);color:var(--clay)">איחור יום</span></div>
             </div>
           </div>
 
@@ -410,7 +416,7 @@
             </div>
             <div>
               <div class="alert"><div class="ad" style="background:var(--clay-soft);color:var(--clay)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="atxt">אספקת חומרים (ספק 2207) באיחור — צוות דרום ממתין<time>לפני 2 שעות</time></div></div>
-              <div class="alert"><div class="ad" style="background:var(--amber-soft);color:#4A6428"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="atxt">בדיקת גמר · גבעתיים — תיאום בודק תוך 24ש׳<time>SLA חורג</time></div></div>
+              <div class="alert"><div class="ad" style="background:var(--amber-soft);color:#8a5e16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="atxt">בדיקת גמר · גבעתיים — תיאום בודק תוך 24ש׳<time>SLA חורג</time></div></div>
               <div class="alert"><div class="ad" style="background:var(--sky-soft);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="atxt">הצעת מחיר · רמת גן — ממתינה לאישור 6 ימים<time>מעקב לקוח</time></div></div>
             </div>
           </div>
@@ -418,17 +424,17 @@
 
         <div class="note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
-          <div>זהו מוקאפ הדגמה. כל הנתונים לדוגמה בלבד. כל מודול (עבודות, צוותים, גבייה, גמר) נבנה כיחידה עצמאית — ניתן להפעיל בשלבים לפי סדר העדיפויות שלכם.</div>
+          <div>זהו מוקאפ הדגמה. כל הנתונים לדוגמה בלבד. כל מודול (ביקורות, יומן כיולים, צוותים, אישורים) נבנה כיחידה עצמאית — ניתן להפעיל בשלבים לפי סדר העדיפויות שלכם.</div>
         </div>
       </section>
 
       <!-- ===== PROJECT DETAIL ===== -->
       <section class="view" id="view-proj">
-        <div class="crumbs"><a data-goto="dash" href="#view-dash">לוח בקרה</a> ‹ <a data-goto="dash" href="#view-dash">עבודות</a> ‹ שדרוג מעלית · מגדל סביון · רמת השרון</div>
+        <div class="crumbs"><a data-goto="dash" href="#view-dash">לוח בקרה</a> ‹ <a data-goto="dash" href="#view-dash">עבודות</a> ‹ כיול שנתי · מפעל מזון · נתניה</div>
         <div class="proj-head">
           <div>
-            <h2>שדרוג מעלית · מגדל סביון · רמת השרון</h2>
-            <div class="sub">לקוח: ועד בית מגדל סביון · מנהל עבודה: ל. כהן · מס׳ עבודה P-202126</div>
+            <h2>כיול שנתי · מפעל מזון · נתניה</h2>
+            <div class="sub">לקוח: מפעל מזון השרון בע״מ · טכנאי מוביל: נ. לוי · מס׳ כיול C-202631</div>
           </div>
           <div class="hd-actions">
             <button class="ghost-btn">מסמכים</button>
@@ -443,7 +449,7 @@
           <div class="pstep"><div class="bar"></div><div class="pl">הצעה</div></div>
           <div class="pstep"><div class="bar"></div><div class="pl">הזמנה</div></div>
           <div class="pstep"><div class="bar"></div><div class="pl">רכש חומרים</div></div>
-          <div class="pstep"><div class="bar"></div><div class="pl">עבודות בנייה</div></div>
+          <div class="pstep"><div class="bar"></div><div class="pl">כיולים באתר</div></div>
           <div class="pstep"><div class="bar"></div><div class="pl">ביצוע</div></div>
           <div class="pstep"><div class="bar"></div><div class="pl">גמר</div></div>
           <div class="pstep"><div class="bar"></div><div class="pl">מסירה</div></div>
@@ -451,9 +457,9 @@
 
         <div class="tabs">
           <button class="tab active" data-tab="ov">סקירה</button>
-          <button class="tab" data-tab="mat">חומרים ורכש</button>
+          <button class="tab" data-tab="mat">ציוד באתר</button>
           <button class="tab" data-tab="crew">צוות וזמנים</button>
-          <button class="tab" data-tab="std">גמר ומסירה</button>
+          <button class="tab" data-tab="std">תעודה ואישור</button>
         </div>
 
         <div class="tabpane active" id="tab-ov">
@@ -462,7 +468,7 @@
               <div class="panel-h"><h4>פרטי העבודה</h4></div>
               <div style="padding:6px 4px">
                 <table>
-                  <tr><td style="color:var(--muted)">סוג עבודה</td><td>שדרוג מעלית + מערכת בקרה</td></tr>
+                  <tr><td style="color:var(--muted)">סוג עבודה</td><td>כיול שנתי מלא · מאזניים, משקולות ומתמרי עומס</td></tr>
                   <tr><td style="color:var(--muted)">מבנה</td><td>12 קומות / 48 דירות</td></tr>
                   <tr><td style="color:var(--muted)">מערכות</td><td>פיר, תא ומערכת בקרה</td></tr>
                   <tr><td style="color:var(--muted)">יועץ</td><td>יועץ מעליות אסף לבנון (חיצוני)</td></tr>
@@ -484,15 +490,15 @@
 
         <div class="tabpane" id="tab-mat">
           <div class="panel">
-            <div class="panel-h"><h4>חומרים ורכש (BOM)</h4><span class="more">ייצוא</span></div>
+            <div class="panel-h"><h4>ציוד באתר · כיול לפי ISO 17025</h4><span class="more">ייצוא</span></div>
             <div style="padding:4px">
               <table>
                 <thead><tr><th>מק״ט</th><th>פריט</th><th>כמות</th><th>מקור</th><th>זמן אספקה</th><th>סטטוס</th></tr></thead>
                 <tbody>
-                  <tr><td>PL-110</td><td>חומרים ועצים בוגרים</td><td>120</td><td>ספק חומרים · מקומי</td><td>3 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#4A6428">בהזמנה</span></td></tr>
-                  <tr><td>IR-220</td><td>מערכת אינסטלציה ובקרים</td><td>1</td><td>ספק אינסטלציה</td><td>2 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#4A6428">בהזמנה</span></td></tr>
-                  <tr><td>MT-901</td><td>כבלים ופסי הולכה</td><td>1</td><td>מלאי מחסן</td><td>זמין</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">במלאי</span></td></tr>
-                  <tr><td>ST-220</td><td>עבודות בנייה ותשתית</td><td>—</td><td>קבלן משנה</td><td>בתיאום</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">דורש הזמנה</span></td></tr>
+                  <tr><td>DY-5K</td><td>דינמומטר דיגיטלי 5kN</td><td>4</td><td>כיול במעבדה שלנו</td><td>3 ימים</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בהזמנה</span></td></tr>
+                  <tr><td>SC-3T</td><td>משקל רצפה 3 טון</td><td>2</td><td>כיול באתר הלקוח</td><td>שבוע</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בהזמנה</span></td></tr>
+                  <tr><td>WT-F1</td><td>סט משקולות F1 · השוואה לאבני בוחן</td><td>6</td><td>מלאי ייחוס</td><td>זמין</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">במלאי</span></td></tr>
+                  <tr><td>TR-500</td><td>מתמרי עומס 500 ק״ג</td><td>8</td><td>ספק מתמרים</td><td>בתיאום</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">דורש הזמנה</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -501,14 +507,14 @@
 
         <div class="tabpane" id="tab-crew">
           <div class="panel">
-            <div class="panel-h"><h4>שיבוץ צוותי אחזקה</h4></div>
+            <div class="panel-h"><h4>שיבוץ צוותי טכנאים</h4></div>
             <div class="gantt" style="padding:16px">
               <table>
                 <thead><tr><th>צוות</th><th class="day">א׳</th><th class="day">ב׳</th><th class="day">ג׳</th><th class="day">ד׳</th><th class="day">ה׳</th></tr></thead>
                 <tbody>
-                  <tr><td><b>צוות תל אביב</b></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">עבודות בנייה</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">התקנה</div></td></tr>
-                  <tr><td><b>קבלן חשמל</b></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות בנייה</div></td><td></td><td></td><td></td></tr>
-                  <tr><td><b>צוות גומי</b></td><td></td><td></td><td></td><td></td><td><div class="gbar" style="background:var(--clay)">במלאי</div></td></tr>
+                  <tr><td><b>צוות מרכז</b></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">כיולים באתר</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">כיול מתמרים</div></td></tr>
+                  <tr><td><b>בודק מוסמך</b></td><td colspan="2"><div class="gbar" style="background:#A07A2C">כיולים באתר</div></td><td></td><td></td><td></td></tr>
+                  <tr><td><b>צוות גומי</b></td><td></td><td></td><td></td><td></td><td><div class="gbar" style="background:var(--clay)">מעבדה</div></td></tr>
                 </tbody>
               </table>
             </div>
@@ -516,15 +522,15 @@
         </div>
 
         <div class="tabpane" id="tab-std">
-          <div class="eyebrow" style="margin-bottom:14px">שרשרת גמר ומסירה · מבוקרת ומתועדת</div>
-          <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>אבחון בשטח ומדידות</b><div class="cs">תועד · ל. כהן · 12.6.2026</div></div><div class="cmeta">חתום דיגיטלית</div></div>
+          <div class="eyebrow" style="margin-bottom:14px">שרשרת כיול ותעודה · חתומה ומתועדת</div>
+          <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>כיול ומדידות בשטח</b><div class="cs">תועד · נ. לוי · 12.6.2026</div></div><div class="cmeta">חתום דיגיטלית</div></div>
           <div class="check done"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><div class="ctxt"><b>מפרט אחזקה ובחירת חומרים</b><div class="cs">מותאם אקלים · אישור מהנדס</div></div><div class="cmeta">מסמך #4471</div></div>
           <div class="check pending"><div class="box"></div><div class="ctxt"><b>בדיקת בטיחות</b><div class="cs">ממתין לאישור יועץ בטיחות</div></div><div class="cmeta">יעד 28.6</div></div>
-          <div class="check pending"><div class="box"></div><div class="ctxt"><b>בדיקת אינסטלציה ומערכות</b><div class="cs">טרם תואם</div></div><div class="cmeta">לפני מסירה</div></div>
+          <div class="check pending"><div class="box"></div><div class="ctxt"><b>מדידת סטיות והשוואה לייחוס</b><div class="cs">טרם תואם</div></div><div class="cmeta">לפני מסירה</div></div>
           <div class="check pending"><div class="box"></div><div class="ctxt"><b>תעודת מסירה ואחריות</b><div class="cs">חתימת לקוח דיגיטלית</div></div><div class="cmeta">בסיום</div></div>
           <div class="note" style="margin-top:18px">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-            <div>כל שלב נחתם ומתוארך — שרשרת ראיות שלמה מהאבחון ועד תעודת המסירה. מתועד אוטומטית לכל עבודה — שקיפות מלאה מול הוועד והדיירים.</div>
+            <div>כל שלב נחתם ומתוארך — שרשרת ראיות שלמה מהאבחון ועד תעודת המסירה. מתועד אוטומטית לכל עבודה — תיק ציוד מלא — זמין ללקוח ולמבדק ההסמכה בקליק.</div>
           </div>
         </div>
       </section>
@@ -532,17 +538,17 @@
       <!-- ===== CREWS ===== -->
       <section class="view" id="view-crews">
         <div class="eyebrow">לוח שבועי · שבוע 26</div>
-        <div class="section-h"><h3>שיבוץ צוותי אחזקה בכל הארץ</h3><span>גרירה לשינוי שיבוץ · התראה על חפיפות</span></div>
+        <div class="section-h"><h3>שיבוץ צוותי טכנאים בכל הארץ</h3><span>גרירה לשינוי שיבוץ · התראה על חפיפות</span></div>
         <div class="panel">
           <div class="gantt" style="padding:18px">
             <table>
               <thead><tr><th style="min-width:130px">צוות / קבלן</th><th class="day">ראשון</th><th class="day">שני</th><th class="day">שלישי</th><th class="day">רביעי</th><th class="day">חמישי</th></tr></thead>
               <tbody>
-                <tr><td><b>צוות תל אביב</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">שיפוץ לובי · ראשל״צ</div></td><td colspan="3"><div class="gbar" style="background:var(--pine)">התקנה · קריית אונו</div></td></tr>
-                <tr><td><b>צוות תל אביב</b><div style="font-size:12px;color:var(--muted)">3 עובדים</div></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">עבודות בנייה · רמת השרון</div></td><td colspan="2"><div class="gbar" style="background:var(--grass)">התקנה · רמת השרון</div></td></tr>
-                <tr><td><b>צוות דרום</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="3"><div class="gbar" style="background:var(--amber)">ממתין לאספקת חומרים · ב״ש</div></td><td colspan="2"><div class="gbar" style="background:var(--pine)">התקנה · ב״ש</div></td></tr>
-                <tr><td><b>קבלן חשמל</b><div style="font-size:12px;color:var(--muted)">קבלן משנה</div></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות חשמל · תל אביב</div></td><td></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות בנייה · רמת גן</div></td></tr>
-                <tr><td><b>צוות אינסטלציה</b><div style="font-size:12px;color:var(--muted)">2 עובדים</div></td><td></td><td></td><td></td><td colspan="2"><div class="gbar" style="background:var(--clay)">אינסטלציה · תל אביב</div></td></tr>
+                <tr><td><b>צוות מרכז</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="2"><div class="gbar" style="background:var(--sky)">משקולות · הרצליה</div></td><td colspan="3"><div class="gbar" style="background:var(--pine)">משקל משאיות · מודיעין</div></td></tr>
+                <tr><td><b>צוות מרכז</b><div style="font-size:12px;color:var(--muted)">3 עובדים</div></td><td></td><td colspan="2"><div class="gbar" style="background:var(--grass)">כיולים · השרון</div></td><td colspan="2"><div class="gbar" style="background:var(--grass)">כיול מפעל · נתניה</div></td></tr>
+                <tr><td><b>צוות דרום</b><div style="font-size:12px;color:var(--muted)">4 עובדים</div></td><td colspan="3"><div class="gbar" style="background:var(--amber)">ממתין לאבני בוחן</div></td><td colspan="2"><div class="gbar" style="background:var(--pine)">כיולים · אשדוד</div></td></tr>
+                <tr><td><b>בודק מוסמך</b><div style="font-size:12px;color:var(--muted)">קבלן משנה</div></td><td colspan="2"><div class="gbar" style="background:#A07A2C">עבודות חשמל · תל אביב</div></td><td></td><td colspan="2"><div class="gbar" style="background:#A07A2C">כיולים · השרון</div></td></tr>
+                <tr><td><b>טכנאי מעבדה</b><div style="font-size:12px;color:var(--muted)">2 עובדים</div></td><td></td><td></td><td></td><td colspan="2"><div class="gbar" style="background:var(--clay)">כיול פנימי · רעננה</div></td></tr>
               </tbody>
             </table>
           </div>
@@ -556,10 +562,10 @@
       <!-- ===== WAREHOUSE ===== -->
       <section class="view" id="view-ware">
         <div class="eyebrow">מחסן ורכש</div>
-        <div class="section-h"><h3>מלאי, רכש ואספקות בדרך</h3></div>
+        <div class="section-h"><h3>המעבדה ברעננה · כיול פנימי, מלאי ורכש</h3></div>
         <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
-          <div class="kpi"><div class="num">3</div><div class="lbl">אספקות רכש בדרך</div><div class="delta warn">אחת באיחור</div></div>
-          <div class="kpi"><div class="num">142</div><div class="lbl">פריטים בהזמנה פתוחה</div></div>
+          <div class="kpi"><div class="num">3</div><div class="lbl">מכשירים בכיול במעבדה</div><div class="delta warn">אחת באיחור</div></div>
+          <div class="kpi"><div class="num">142</div><div class="lbl">מכשירים ממתינים להחזרה ללקוח</div></div>
           <div class="kpi"><div class="num">9</div><div class="lbl">פריטים מתחת לסף מלאי</div><div class="delta warn">דורש חידוש</div></div>
         </div>
         <div class="panel" style="margin-top:22px">
@@ -568,9 +574,9 @@
             <table>
               <thead><tr><th>הזמנה</th><th>ספק</th><th>פריטים</th><th>מיועד לעבודה</th><th>ETA</th><th>סטטוס</th></tr></thead>
               <tbody>
-                <tr><td>רכש-2207</td><td>ספק המרכז</td><td>38</td><td>אחזקה · רמת גן</td><td>+4 ימים</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">באיחור</span></td></tr>
-                <tr><td>רכש-2211</td><td>ספק אינסטלציה · מרכז</td><td>52</td><td>בניין · תל אביב</td><td>9 ימים</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">באספקה</span></td></tr>
-                <tr><td>רכש-2214</td><td>ספק  הצפון</td><td>52</td><td>פיתוח בניין · רה״ש</td><td>3 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#4A6428">בייצור</span></td></tr>
+                <tr><td>רכש-2207</td><td>יצרן משקולות OIML</td><td>38</td><td>מלאי ייחוס</td><td>+4 ימים</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">באיחור</span></td></tr>
+                <tr><td>רכש-2211</td><td>יבואן מכשירי מדידה</td><td>52</td><td>מלאי חדש למכירה</td><td>9 ימים</td><td><span class="chip" style="background:var(--sky-soft);color:var(--sky)">באספקה</span></td></tr>
+                <tr><td>רכש-2214</td><td>ספק מתמרים</td><td>52</td><td>פרויקט שקילה · פ״ת</td><td>3 שבועות</td><td><span class="chip" style="background:var(--amber-soft);color:#8a5e16">בייצור</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -581,51 +587,52 @@
         </div>
       </section>
 
-      <!-- ===== תקן ובטיחות ===== -->
+      <!-- ===== יומן כיולים ===== -->
       <section class="view" id="view-std">
-        <div class="eyebrow">תקן ובטיחות · כל הבניינים</div>
-        <div class="section-h"><h3>בדיקות תקופתיות ותאימות תקן</h3><span>התראה אוטומטית לפני כל מועד · אסמכתה חתומה לכל בדיקה</span></div>
+        <div class="eyebrow">יומן כיולים · כל הלקוחות</div>
+        <div class="section-h"><h3>מועדי כיול ותעודות · מנוע ההתראות</h3><span>המערכת מתריעה מראש, פותחת ביקורת ומשבצת טכנאי — אוטומטית</span></div>
         <div class="panel">
-          <div class="panel-h"><h4>מעקב בדיקות · רבעון 3</h4><span class="more">היומן השנתי</span></div>
+          <div class="panel-h"><h4>תוקפים קרובים · רבעון 3</h4><span class="more">היומן השנתי המלא</span></div>
           <div style="padding:4px">
             <table>
-              <thead><tr><th>בדיקה</th><th>בניין</th><th>בוצע לאחרונה</th><th>מועד הבא</th><th>סטטוס</th></tr></thead>
+              <thead><tr><th>בדיקה / אישור</th><th>אתר</th><th>בוצע לאחרונה</th><th>תוקף עד</th><th>סטטוס</th></tr></thead>
               <tbody>
-                <tr><td><b>ביקורת כיבוי אש</b></td><td>מגדל סביון · רמת השרון</td><td>12.3.2026</td><td>12.9.2026</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">תקין · אסמכתה</span></td></tr>
-                <tr><td><b>ניקוי מאגרי מים</b></td><td>בניין הדקל 8 · תל אביב</td><td>4.1.2026</td><td>בעוד 12 ימים</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">מתקרב · שובץ צוות</span></td></tr>
-                <tr><td><b>בדיקת מעליות תקן</b></td><td>בניין הברוש 12</td><td>20.5.2026</td><td>20.11.2026</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">תקין</span></td></tr>
-                <tr><td><b>בדיקת חשמל תקופתית</b></td><td>משרדים · רמת גן</td><td>2.2.2025</td><td>עבר המועד</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">באיחור · הוקפצה קריאה</span></td></tr>
+                <tr><td><b>כיול מכשירי מדידה שנתי · ISO 17025</b></td><td>מפעל מזון · נתניה</td><td>12.8.2025</td><td>12.8.2026</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">מתקרב · שובץ טכנאי</span></td></tr>
+                <tr><td><b>משקל משאיות · חצי־שנתי</b></td><td>מרלו״ג · מודיעין</td><td>4.1.2026</td><td>4.7.2026</td><td><span class="chip" style="background:var(--clay-soft);color:var(--clay)">פג השבוע · הוקפצה ביקורת</span></td></tr>
+                <tr><td><b>אימות אבני בוחן · מדור מידות ומשקולות</b></td><td>המעבדה · רעננה</td><td>3.2022</td><td>3.2027</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">תקין</span></td></tr>
+                <tr><td><b>כיול מתמרי עומס · שנתי</b></td><td>מפעל בטון · חולון</td><td>20.5.2026</td><td>20.11.2026</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">תקין</span></td></tr>
+                <tr><td><b>מבדק הסמכה תקופתי · ISO 17025</b></td><td>רשת סופרים · השרון</td><td>2.8.2025</td><td>2.8.2026</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">מתקרב · תואם עם הלקוח</span></td></tr>
               </tbody>
             </table>
           </div>
         </div>
         <div class="note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-          <div>כל בדיקה מקושרת לעבודה, לצוות ולאסמכתה חתומה — תיק תאימות מלא לכל בניין, זמין בקליק. מועד שמתקרב פותח קריאה ומשבץ צוות אוטומטית.</div>
+          <div>כל מכשיר, מתמר ומשקל נושאים מועד כיול — פג־כיול אצל הלקוח = ממצא במבדק האיכות שלו ולקוח שעוזב אצלך. המנוע מתריע, מתאם, משבץ ומנפיק תעודה — בלי אקסל ובלי פנקס.</div>
         </div>
       </section>
 
       <!-- ===== דוחות ===== -->
       <section class="view" id="view-rep">
-        <div class="eyebrow">דוחות · שקיפות מלאה</div>
-        <div class="section-h"><h3>דוחות לוועד ולדיירים</h3><span>מופקים אוטומטית מהנתונים החיים · נשלחים בקליק</span></div>
+        <div class="eyebrow">תעודות ודוחות · בלי בירוקרטיה</div>
+        <div class="section-h"><h3>תעודות ללקוח ולתיק האיכות</h3><span>מופקים מהנתונים החיים · חתומים · נשלחים בקליק</span></div>
         <div class="panel">
-          <div class="panel-h"><h4>דוחות אחרונים</h4><span class="more">הפקת דוח חדש</span></div>
+          <div class="panel-h"><h4>אחרונים</h4><span class="more">הפקת תעודה חדשה</span></div>
           <div style="padding:4px">
             <table>
-              <thead><tr><th>דוח</th><th>בניין</th><th>תקופה</th><th>נמען</th><th>סטטוס</th></tr></thead>
+              <thead><tr><th>מסמך</th><th>אתר</th><th>תקופה</th><th>נמען</th><th>סטטוס</th></tr></thead>
               <tbody>
-                <tr><td><b>דוח הוצאות מול תקציב</b></td><td>מגדל סביון</td><td>רבעון 2/2026</td><td>ועד הבית</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">נשלח · נצפה ✓</span></td></tr>
-                <tr><td><b>דוח גבייה ופיגורים</b></td><td>כל הבניינים</td><td>יוני 2026</td><td>הנהלה</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">מוכן</span></td></tr>
-                <tr><td><b>דוח קריאות שירות וזמני טיפול</b></td><td>בניין הדקל 8</td><td>יוני 2026</td><td>ועד הבית</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">בהפקה</span></td></tr>
-                <tr><td><b>תיק תאימות תקן ובטיחות</b></td><td>בניין הברוש 12</td><td>שנתי</td><td>ועד + חברת ביטוח</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">זמין</span></td></tr>
+                <tr><td><b>תעודת כיול ISO 17025 · חתומה דיגיטלית</b></td><td>מפעל מזון · נתניה</td><td>2026</td><td>לקוח + תיק האיכות</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">נשלח · נצפה ✓</span></td></tr>
+                <tr><td><b>דוח סטיות + הצעת תיקון וכיוונון</b></td><td>מרלו״ג · מודיעין</td><td>יוני 2026</td><td>מנהל איכות</td><td><span class="chip" style="background:var(--amber-soft);color:var(--ink)">ממתין לאישור לקוח</span></td></tr>
+                <tr><td><b>קישור תשלום · כיול שנתי</b></td><td>המעבדה · רעננה</td><td>יולי 2026</td><td>ועד הבית</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">שולם ✓</span></td></tr>
+                <tr><td><b>דוח כיולים קרובים לרבעון</b></td><td>כל האתרים</td><td>Q3 2026</td><td>הנהלה</td><td><span class="chip" style="background:var(--pine-050);color:var(--pine)">מוכן</span></td></tr>
               </tbody>
             </table>
           </div>
         </div>
         <div class="note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16V9M13 16v-4M18 16V7"/></svg>
-          <div>כל דוח נבנה אוטומטית מהנתונים החיים של המערכת — שקיפות מלאה מול הוועד והדיירים, כולל חיווי מי צפה ומתי. בלי אקסלים ידניים בסוף רבעון.</div>
+          <div>מהלקוח כמעט לא נדרש דבר: האישור החתום, התוקף הבא וקישור תשלום — נשלחים אליו אוטומטית. אצלך נשאר הכול: ארכיון, חיווי צפייה, והצעות תיקון שלא הולכות יותר לאיבוד.</div>
         </div>
       </section>
 
@@ -635,7 +642,7 @@
 
 <script>
   document.body.classList.remove('no-js');
-  const titles={dash:'לוח בקרה',proj:'שדרוג מעלית · מגדל סביון · רמת השרון',crews:'צוותי אחזקה',ware:'מחסן ורכש',std:'תקן ובטיחות',rep:'דוחות'};
+  const titles={dash:'לוח בקרה',proj:'כיול שנתי · מפעל מזון · נתניה',crews:'צוותי טכנאים',ware:'המעבדה · כיול פנימי ומלאי',std:'יומן כיולים',rep:'תעודות ודוחות'};
   function show(view){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
     document.getElementById('view-'+view).classList.add('active');
