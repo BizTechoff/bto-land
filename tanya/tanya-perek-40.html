@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תניא · ליקוטי אמרים · פרק מ׳ — סיכום וביאור</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=IBM+Plex+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF4;
+    --ink:#262B3E;
+    --indigo:#333F6E;
+    --indigo-soft:#4A5788;
+    --sky:#6B84B3;
+    --gold:#A5813B;
+    --gold-soft:#C4A468;
+    --line:#E5E1D3;
+    --night:#272E4E;
+    --tint:#EFF2F8;
+    --serif:'Frank Ruhl Libre','David Libre','David','Narkisim',serif;
+    --sans:'IBM Plex Sans Hebrew','Assistant','Segoe UI',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:400;
+    font-size:17px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:46rem;margin:0 auto;padding:2.2rem 1.4rem 4rem}
+
+  /* ---------- header ---------- */
+  .bsd{
+    text-align:center;
+    font-family:var(--serif);
+    font-size:.95rem;
+    color:var(--gold);
+    letter-spacing:.35em;
+    margin-bottom:2.6rem;
+  }
+  header{text-align:center;margin-bottom:2.4rem;position:relative}
+  header::after{
+    content:"";display:block;width:64px;height:2px;background:var(--gold);
+    margin:2rem auto 0;opacity:.75;
+  }
+  .eyebrow{
+    font-size:.8rem;font-weight:600;letter-spacing:.28em;color:var(--sky);
+    margin-bottom:1.1rem;
+  }
+  h1{
+    font-family:var(--serif);font-weight:900;color:var(--indigo);
+    font-size:clamp(3.2rem,9vw,4.6rem);line-height:1;letter-spacing:-.01em;
+  }
+  .subtitle{
+    font-family:var(--serif);font-weight:500;color:var(--ink);
+    font-size:clamp(1.15rem,3.4vw,1.45rem);margin-top:1rem;line-height:1.5;
+  }
+  .subtitle em{font-style:normal;color:var(--gold)}
+
+  /* ---------- lede ---------- */
+  .lede{
+    background:var(--tint);
+    border-right:3px solid var(--indigo);
+    border-radius:4px;
+    padding:1.3rem 1.5rem;
+    margin:0 0 3rem;
+    font-size:1.06rem;
+  }
+  .lede .tag{
+    display:block;font-size:.74rem;font-weight:700;letter-spacing:.24em;
+    color:var(--indigo-soft);margin-bottom:.45rem;
+  }
+
+  /* ---------- sections ---------- */
+  section{margin-bottom:3.1rem}
+  .sec-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.05rem}
+  .sec-letter{
+    flex:0 0 auto;width:2rem;height:2rem;border:1.5px solid var(--gold);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:700;color:var(--gold);font-size:1.05rem;
+    transform:translateY(.35rem);
+  }
+  h2{
+    font-family:var(--serif);font-weight:700;color:var(--indigo);
+    font-size:clamp(1.4rem,4.2vw,1.7rem);line-height:1.35;
+  }
+  p{margin-bottom:1rem}
+  p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--indigo)}
+  .hl{color:var(--gold);font-weight:600}
+
+  /* ---------- quotes ---------- */
+  .quote{
+    font-family:var(--serif);font-size:1.14rem;line-height:1.9;color:var(--ink);
+    border-right:3px solid var(--gold);
+    padding:.35rem 1.25rem .45rem 0;
+    margin:1.4rem .2rem 1.4rem 0;
+  }
+  .quote .src{
+    display:block;font-family:var(--sans);font-size:.72rem;font-weight:700;
+    letter-spacing:.22em;color:var(--gold);margin-bottom:.3rem;
+  }
+  .quote .tr{
+    display:block;font-family:var(--sans);font-size:.92rem;color:var(--indigo-soft);
+    margin-top:.35rem;line-height:1.7;
+  }
+
+  /* ---------- numbered destinies ---------- */
+  .dest{margin:1.4rem 0;display:grid;gap:.9rem}
+  .dest .d{
+    border:1px solid var(--line);border-radius:6px;background:#fff;
+    padding:1rem 1.15rem;
+  }
+  .dest .d h3{
+    font-family:var(--serif);font-weight:700;font-size:1.08rem;color:var(--indigo);
+    margin-bottom:.35rem;
+  }
+  .dest .d h3 .n{color:var(--gold);margin-left:.4rem}
+  .dest .d p{font-size:.98rem;margin-bottom:.5rem}
+  .dest .d p:last-child{margin-bottom:0}
+
+  /* ---------- worlds diagram (signature) ---------- */
+  figure.worlds{margin:2.2rem 0 1rem}
+  .fig-title{
+    font-family:var(--serif);font-weight:700;color:var(--indigo);
+    font-size:1.12rem;margin-bottom:.9rem;text-align:center;
+  }
+  .w-head{
+    display:grid;grid-template-columns:5.2rem 1fr 1fr;gap:6px;
+    margin-bottom:6px;
+  }
+  .w-head .col{
+    font-size:.72rem;font-weight:700;letter-spacing:.06em;line-height:1.5;
+    color:var(--indigo-soft);text-align:center;padding:.3rem .4rem;
+    border-bottom:2px solid var(--line);
+  }
+  .w-head .spacer{border:none}
+  .world{
+    display:grid;grid-template-columns:5.2rem 1fr 1fr;gap:6px;margin-bottom:6px;
+  }
+  .w-name{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:700;color:var(--indigo);
+    font-size:1.02rem;border-radius:6px;padding:.5rem .2rem;text-align:center;
+  }
+  .w-name small{
+    font-family:var(--sans);font-weight:500;font-size:.66rem;color:var(--indigo-soft);
+    letter-spacing:.05em;margin-top:.15rem;
+  }
+  .cell{
+    border-radius:6px;padding:.7rem .8rem;font-size:.86rem;line-height:1.65;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .cell .who{font-weight:700;color:var(--indigo)}
+  .cell .what{color:var(--ink)}
+  .cell.empty{
+    background:transparent;border:1px dashed var(--line);color:#B9B4A3;
+    align-items:center;justify-content:center;font-size:.8rem;
+  }
+  .atzilut .w-name{background:#FBF4DF;border:1px solid #E8D9AE}
+  .atzilut .cell.pnim{background:#FBF4DF;border:1px solid #E8D9AE}
+  .beriah  .w-name{background:#EDF1F9}
+  .beriah  .cell.pnim{background:#EDF1F9}
+  .yetzirah .w-name{background:#E2E9F4}
+  .yetzirah .cell{background:#E2E9F4}
+  .yetzirah .cell.chitz{background:#ECF0F7;border:1px solid #D8DEEC}
+  .asiyah  .w-name{background:#D7E0EF}
+  .asiyah  .cell{background:#D7E0EF}
+  .asiyah  .cell.chitz{background:#E6EBF4;border:1px solid #CFD7E8}
+  .world.thisworld{grid-template-columns:5.2rem 1fr}
+  .thisworld .w-name{background:var(--night);color:#F2EFE4}
+  .thisworld .w-name small{color:#A9B0CC}
+  .thisworld .cell{
+    background:var(--night);color:#E8E6DA;
+  }
+  .thisworld .cell .who{color:#E4C883}
+  .w-legend{
+    margin-top:.7rem;font-size:.76rem;color:var(--indigo-soft);line-height:1.7;
+    text-align:center;
+  }
+  .arrowup{color:var(--gold);font-weight:700}
+
+  /* ---------- glossary ---------- */
+  .gloss{
+    border:1px solid var(--line);border-radius:8px;background:#fff;
+    padding:1.15rem 1.3rem;margin:1.6rem 0;
+  }
+  .gloss .g-title{
+    font-size:.74rem;font-weight:700;letter-spacing:.24em;color:var(--gold);
+    margin-bottom:.7rem;
+  }
+  .gloss dl{display:grid;gap:.45rem;font-size:.93rem}
+  .gloss dt{display:inline;font-weight:700;color:var(--indigo)}
+  .gloss dd{display:inline;color:var(--ink)}
+  .gloss .row{line-height:1.7}
+
+  /* ---------- hagahah asides ---------- */
+  .hagahah{
+    background:transparent;border:1px solid var(--gold-soft);border-radius:8px;
+    padding:1rem 1.2rem;margin:1.4rem 0;font-size:.94rem;
+  }
+  .hagahah .h-tag{
+    display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.24em;
+    color:var(--gold);border-bottom:1px solid var(--gold-soft);
+    margin-bottom:.5rem;padding-bottom:.15rem;
+  }
+
+  /* ---------- bird figure ---------- */
+  figure.bird{margin:2rem 0 .8rem;text-align:center}
+  figure.bird svg{max-width:300px;width:100%;height:auto}
+  .bird-legend{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem .9rem;
+    max-width:34rem;margin:1.1rem auto 0;text-align:right;font-size:.86rem;
+    line-height:1.6;
+  }
+  .bird-legend .bl{display:flex;gap:.55rem;align-items:flex-start}
+  .bl .ltr{
+    flex:0 0 auto;width:1.55rem;height:1.55rem;border-radius:50%;
+    background:var(--indigo);color:#F7F3E4;font-family:var(--serif);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:.95rem;
+    transform:translateY(.15rem);
+  }
+  .bl.wing .ltr{background:var(--gold)}
+  figcaption.bird-cap{
+    font-size:.8rem;color:var(--indigo-soft);margin-top:1rem;line-height:1.7;
+  }
+
+  /* ---------- spread strip (hagahah 4) ---------- */
+  .spread{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.3rem 0 .4rem;
+  }
+  .spread .s{
+    border:1px solid var(--line);border-radius:6px;background:#fff;
+    padding:.7rem .6rem;text-align:center;font-size:.84rem;line-height:1.6;
+  }
+  .spread .s b{
+    display:block;font-family:var(--serif);font-weight:700;color:var(--indigo);
+    font-size:1rem;margin-bottom:.15rem;
+  }
+  .spread .s span{color:var(--indigo-soft)}
+
+  /* ---------- takeaways ---------- */
+  .takeaways{display:grid;gap:.85rem;margin-top:1.2rem}
+  .takeaways .t{
+    display:flex;gap:.9rem;align-items:flex-start;
+    border-right:3px solid var(--gold);padding-right:1rem;
+  }
+  .takeaways .t .t-title{
+    font-family:var(--serif);font-weight:700;color:var(--indigo);
+    white-space:nowrap;font-size:1.02rem;
+  }
+  .takeaways .t p{font-size:.97rem;margin:0}
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:3.6rem;padding-top:1.6rem;border-top:1px solid var(--line);
+    text-align:center;font-size:.82rem;color:var(--indigo-soft);line-height:1.9;
+  }
+  footer .fserif{font-family:var(--serif);font-size:.95rem;color:var(--indigo)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:600px){
+    body{font-size:16px}
+    .w-head{grid-template-columns:3.6rem 1fr 1fr}
+    .world{grid-template-columns:3.6rem 1fr 1fr}
+    .world.thisworld{grid-template-columns:3.6rem 1fr}
+    .w-name{font-size:.86rem}
+    .cell{font-size:.76rem;padding:.55rem .55rem}
+    .spread{grid-template-columns:repeat(2,1fr)}
+    .bird-legend{grid-template-columns:1fr}
+    .takeaways .t{flex-direction:column;gap:.15rem}
+    .takeaways .t .t-title{white-space:normal}
+  }
+  @media print{
+    body{background:#fff}
+    .page{max-width:100%;padding:0 .5cm}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="bsd">בעז״ה</div>
+
+  <header>
+    <div class="eyebrow">תניא · ליקוטי אמרים · ספר של בינונים</div>
+    <h1>פרק מ׳</h1>
+    <p class="subtitle">יראה ואהבה — <em>הכנפיים</em> שמעלות את התורה והמצוות</p>
+  </header>
+
+  <div class="lede">
+    <span class="tag">הרעיון בשורה אחת</span>
+    התורה והמצוות עצמן הן הגוף — העיקר. היראה והאהבה הן הכנפיים: הן אינן מחליפות את המעשה, הן מרימות אותו.
+    בלי כנפיים — הלימוד והמצווה נשארים נמוך. וכנפיים בלי גוף — אהבה שאינה מתורגמת ללימוד ולעשייה —
+    הן כאדם העומד בתוך נהר וצועק ״מים, מים״.
+  </div>
+
+  <!-- ======================= א ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">א</span><h2>איפה הפרק תופס אותנו</h2></div>
+    <p>
+      פרקים לח–לט ביארו שלא כל לימוד ולא כל מצווה ״עפים״ לאותו מקום: <strong>הכוונה קובעת את הגובה</strong>.
+      יראה ואהבה <strong>טבעיות</strong> — שמעוררים מהאהבה המסותרת שבלב כל יהודי — מעלות את העבודה לעולם היצירה;
+      יראה ואהבה <strong>שכליות</strong> — שנולדו מהתבוננות הדעת בגדולת ה׳ — לעולם הבריאה.
+      ובסוף פרק לט נאמר: לימוד <strong>״בסתם״</strong> — בלי כוונה, אבל גם בלי פנייה זרה — איננו אבוד.
+      הוא ממתין; וכשהאדם חוזר ולומד את הדבר לשמה, גם הלימוד ההוא מצטרף ועולה עמו.
+    </p>
+    <p>
+      פרק מ׳ נפתח בדיוק בנקודה הזו: <span class="hl">״אך כל זמן שלא חזר ולמד דבר זה לשמה״</span> —
+      עד אז, איפה הלימוד באמת עומד? הפרק מצייר מפה מדויקת.
+    </p>
+  </section>
+
+  <!-- ======================= ב ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ב</span><h2>שלוש כתובות לאותו דף גמרא</h2></div>
+
+    <div class="dest">
+      <div class="d">
+        <h3><span class="n">1 ·</span> בלא כוונה (״בסתם״) — עולה, אבל רק אל ההיכלות</h3>
+        <p>
+          הלימוד עולה — אך אינו נכנס אל <strong>עשר הספירות</strong>, ואפילו לא אל אלו המאירות בעולמות
+          הנמוכים, היצירה והעשיה. הספירות הן <strong>אלקות ממש</strong> — בהן מתלבש ומתייחד אור אין־סוף —
+          ולשם, בלי יראה ואהבה, אין כניסה. הוא נשאר ב<strong>היכלות ומדורין</strong>: ״החצר החיצונית״ של
+          העולמות, מקום עמידת המלאכים.
+        </p>
+        <p>
+          ר׳ חיים ויטאל מוסיף: מתורה שלא בכוונה <strong>נבראים מלאכים</strong> בעולם היצירה, וממצוות בלי
+          כוונה — מלאכים בעולם העשייה. והמלאכים כולם ״בעלי חומר וצורה״ — נבראים מוגבלים, לא אלקות.
+        </p>
+      </div>
+
+      <div class="d">
+        <h3><span class="n">2 ·</span> שלא לשמה ממש — אינה עולה כלל</h3>
+        <p>
+          לימוד בשביל עצמי — למשל כדי להיקרא ״תלמיד חכם״, בשביל התואר והמעמד — אינו עולה אפילו אל היכלות
+          המלאכים. הוא נשאר למטה, בעולם הזה הגשמי, ״שהוא <strong>מדור הקליפות</strong>״. על זה דורש הזוהר את
+          הפסוק ״מה יתרון לאדם בכל עמלו שיעמול <strong>תחת השמש</strong>״ — אפילו עמל של תורה, אם הוא לכבוד
+          עצמו, נשאר ״תחת השמש״.
+        </p>
+        <p>
+          ומכאן מובן מאמר חז״ל: ״<strong>אשרי מי שבא לכאן ותלמודו בידו</strong>״ — אשרי מי שתלמודו עלה
+          איתו, ולא נשאר מאחור, למטה.
+        </p>
+      </div>
+
+      <div class="d">
+        <h3><span class="n">3 ·</span> לשמה, ביראה ואהבה — אל תוך הספירות עצמן</h3>
+        <p>
+          ביראה ואהבה טבעיות — אל עשר ספירות ד<strong>יצירה</strong>; ביראה ואהבה שכליות — ד<strong>בריאה</strong>.
+          ושם, כפי שיתבאר, מאיר אור אין־סוף בגילוי שאין לו שיעור.
+        </p>
+      </div>
+    </div>
+
+    <div class="quote">
+      <span class="src">לשון הפרק · ע״פ תיקוני הזוהר</span>
+      ״ובלא דחילו ורחימו — לא יכלא לסלקא ולמיקם קדם ה׳״
+      <span class="tr">בלי יראה ואהבה — אין [הלימוד] יכול לעלות ולעמוד לפני ה׳.</span>
+    </div>
+
+    <figure class="worlds">
+      <div class="fig-title">מפת העלייה — לאן מגיעים תורה, תפילה ומצוות</div>
+      <div class="w-head">
+        <span class="col spacer"></span>
+        <span class="col">פנימיות · עשר ספירות<br>אלקות ממש</span>
+        <span class="col">חיצוניות · היכלות<br>מדור המלאכים</span>
+      </div>
+
+      <div class="world atzilut">
+        <div class="w-name">אצילות</div>
+        <div class="cell pnim"><span class="who">עצם היחוד העליון</span><span class="what">״למעלה מעלה״ — ומשם רק הארתו יורדת לעולמות (הגהה)</span></div>
+        <div class="cell empty">—</div>
+      </div>
+
+      <div class="world beriah">
+        <div class="w-name">בריאה</div>
+        <div class="cell pnim"><span class="who"><span class="arrowup">↑</span> תורה ותפילה לשמה</span><span class="what">ביראה ואהבה שכליות</span></div>
+        <div class="cell empty">—</div>
+      </div>
+
+      <div class="world yetzirah">
+        <div class="w-name">יצירה</div>
+        <div class="cell pnim"><span class="who"><span class="arrowup">↑</span> תורה ותפילה לשמה</span><span class="what">ביראה ואהבה טבעיות</span></div>
+        <div class="cell chitz"><span class="who">תורה בלא כוונה</span><span class="what">נבראים ממנה מלאכים</span></div>
+      </div>
+
+      <div class="world asiyah">
+        <div class="w-name">עשיה</div>
+        <div class="cell pnim"><span class="who">מצוות מעשיות ומקרא</span><span class="what">גילוי היחוד גם בספירות דעשיה (הגהה)</span></div>
+        <div class="cell chitz"><span class="who">מצוות בלא כוונה</span><span class="what">נבראים מהן מלאכים</span></div>
+      </div>
+
+      <div class="world thisworld">
+        <div class="w-name">העולם הזה<small>הגשמי</small></div>
+        <div class="cell"><span class="who">תורה שלא לשמה ממש</span> <span class="what">— ״להיות תלמיד חכם״ בשביל הכבוד: אינה עולה כלל. נשארת כאן למטה, במדור הקליפות — עד שישוב.</span></div>
+      </div>
+
+      <div class="w-legend">ככל שעולים — אותו אור עצמו מאיר בגילוי גדול יותר, ודרך פחות לבושים ומסכים.</div>
+    </figure>
+
+    <div class="gloss">
+      <div class="g-title">מושגים בפרק</div>
+      <dl>
+        <div class="row"><dt>דחילו ורחימו</dt><dd> — יראה ואהבה (בארמית).</dd></div>
+        <div class="row"><dt>ספירות</dt><dd> — פנימיות העולם: אלקות ממש, שבה מתלבש ומתייחד אור אין־סוף.</dd></div>
+        <div class="row"><dt>היכלות ומדורין</dt><dd> — ״החצר החיצונית״ של העולם: מקום עמידת המלאכים.</dd></div>
+        <div class="row"><dt>בסתם</dt><dd> — לימוד בלי כוונה מיוחדת, אך גם בלי פנייה זרה.</dd></div>
+        <div class="row"><dt>שלא לשמה ממש</dt><dd> — לימוד בשביל עצמי: כבוד, תואר, מעמד.</dd></div>
+        <div class="row"><dt>קליפת נוגה</dt><dd> — הלבוש המסתיר את החיות האלוקית שבדברי הרשות של העולם הזה.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ======================= ג ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ג</span><h2>רגע — הרי ה׳ בכל מקום. מה משנה ״לאן זה עולה״?</h2></div>
+    <p>
+      את השאלה הזו הפרק שואל בעצמו: הרי <span class="hl">״אורייתא וקוב״ה כולא חד״</span> — התורה והקב״ה
+      אחד הם, והוא ״ממלא כל עלמין <strong>בשוה</strong>״. ובכל זאת — העולמות אינם שווים במעלתם.
+    </p>
+    <p>
+      התשובה: ההבדל אינו בו יתברך, אלא <strong>במקבלים</strong>, בשני דברים.
+      האחד — <strong>כמה מהאור מתגלה</strong>: העליונים מקבלים הארה גדולה לאין קץ מן התחתונים.
+      והשני — <strong>דרך כמה לבושים ומסכים</strong> ההארה עוברת עד שהיא מגיעה.
+      העולם הזה תחתון בשני המובנים: ההארה שבו מצומצמת ״עד קצה האחרון״ — ולכן הוא חומרי וגשמי —
+      והיא עטופה בלבושים רבים, עד שנתלבשה בקליפת נוגה, המחיה את כל הדברים הטהורים שבעולם —
+      ובכללם נפש החיונית המדברת שבאדם.
+    </p>
+    <p>
+      נמצא ש״עלייה״ אינה הזזה של הקב״ה חלילה ממקום למקום; היא העברת המעשה שלנו למקום שבו
+      <strong>אותו אור עצמו מאיר בגילוי</strong> — בלי המסכים.
+    </p>
+  </section>
+
+  <!-- ======================= ד ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ד</span><h2>מה קורה למילים — ומה הכוונה עושה להן</h2></div>
+    <p>
+      אותיות של תורה ותפילה הן <strong>קדושות גם בלי כוונה</strong>. שלא כדיבור של דברים בטלים —
+      קליפת נוגה איננה מסך המסתיר את הקדושה שבהן; אדרבה, היא מתהפכת לטוב ונכללת בקדושה.
+      אלא שההארה שבהן נמצאת <strong>בצמצום עד קצה האחרון</strong> — כי הקול והדיבור גשמיים.
+      הקדושה שם, אבל דחוסה וחתומה.
+    </p>
+    <p>
+      וכאן פועלת הכוונה. הכוונה — היראה והאהבה שמהן האדם ניגש ללמוד ולהתפלל — היא
+      <span class="hl">״מקור ושורש״ לאותיות</span>: בגללה ובסיבתה הוא מדבר אותן בכלל.
+      ולכן בכוחה למשוך אותן למעלה, <strong>עד מקומה שלה</strong>: עשר ספירות דיצירה או דבריאה,
+      לפי טיב היראה והאהבה — טבעיות או שכליות.
+    </p>
+    <p>
+      ושם מאיר ומתגלה אור אין־סוף ברוך הוא — רצון העליון המלובש באותיות התורה, בתפילה או במצווה —
+      ״בהארה גדולה <strong>לאין קץ</strong>״: גילוי שאינו יכול להאיר כאן בעולם הגשמי ״לא מינה ולא
+      מקצתה״ — עד קץ הימין, שיתעלה העולם מגשמיותו, ״ונגלה כבוד ה׳״.
+    </p>
+    <div class="hagahah">
+      <span class="h-tag">מן ההגהה</span>
+      שם מתגלה גם <strong>היחוד העליון</strong> הנעשה בכל מצווה ולימוד תורה: התכללות מידותיו יתברך זו
+      בזו — ״ונמתקות הגבורות בחסדים״. עצם היחוד הוא למעלה מעלה, בעולם האצילות; המעשה שלנו למטה הוא
+      ה״אתערותא דלתתא״ — ההתעוררות מלמטה — המעוררת אותו, והארתו מאירה בעולמות בריאה־יצירה־עשיה, בכל
+      עולם לפי מעלתו.
+    </div>
+  </section>
+
+  <!-- ======================= ה ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ה</span><h2>משל הציפור: ״ניטלו אגפיה — כשרה״</h2></div>
+    <p>
+      עכשיו מובן היטב מדוע נקראות היראה והאהבה <strong>״גדפין״ — כנפיים</strong>, כלשון הכתוב
+      ״ובשתים יעופף״. ובלשון התיקונים: העוסקים בתורה ומצוות ביראה ואהבה נקראים <strong>״בנים״</strong>;
+      ובלעדיהן — <strong>״אפרוחים״</strong>: גוזלים, שעדיין אינם יכולים לפרוח.
+    </p>
+    <p>
+      עומק המשל טמון בהלכה אחת: <span class="hl">״ניטלו אגפיה — כשרה״</span>. עוף שניטלו כנפיו —
+      כשר; חיותו אינה תלויה בכנפיים כלל. העיקר הוא <strong>הראש והגוף</strong>, והכנפיים אינן אלא
+      ״משמשים לראשו וגופו — לפרחא בהון״: לשרת אותו, להטיס אותו.
+    </p>
+    <p>
+      והנמשל, מילה במילה: <strong>התורה והמצוות הן ״עיקר היחוד העליון״</strong> — על ידן מתגלה רצון
+      העליון ברוך הוא. היראה והאהבה אינן העיקר; תפקידן — להעלות את התורה והמצוות אל המקום שבו הרצון,
+      אור אין־סוף והיחוד מתגלים.
+    </p>
+
+    <figure class="bird">
+      <svg viewBox="0 0 340 252" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ציור סכמטי של עוף: ראש, גוף ושתי כנפיים, עם אותיות שם הוי׳">
+        <!-- wings -->
+        <path d="M196,132 C238,100 272,68 320,46 C306,98 262,136 202,154 Z"
+              fill="#E2E9F4" stroke="#333F6E" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M144,132 C102,100 68,68 20,46 C34,98 78,136 138,154 Z"
+              fill="#E2E9F4" stroke="#333F6E" stroke-width="2" stroke-linejoin="round"/>
+        <!-- tail -->
+        <path d="M158,204 L170,238 L182,204 Z" fill="#EDF1F9" stroke="#333F6E" stroke-width="2" stroke-linejoin="round"/>
+        <!-- body -->
+        <ellipse cx="170" cy="152" rx="31" ry="55" fill="#FFFFFF" stroke="#333F6E" stroke-width="2.4"/>
+        <!-- head -->
+        <circle cx="170" cy="72" r="25" fill="#FFFFFF" stroke="#333F6E" stroke-width="2.4"/>
+        <!-- letters -->
+        <text x="170" y="82" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-weight="700" font-size="27" fill="#A5813B">י</text>
+        <text x="170" y="164" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-weight="700" font-size="30" fill="#333F6E">ו</text>
+        <text x="262" y="96" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-weight="700" font-size="26" fill="#A5813B">ה</text>
+        <text x="78" y="96" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-weight="700" font-size="26" fill="#A5813B">ה</text>
+      </svg>
+
+      <div class="bird-legend">
+        <div class="bl"><span class="ltr">י</span><span><strong>הראש</strong> — פנימיות ההלכות: טעמיהן וסודן (המוחין, חב״ד).</span></div>
+        <div class="bl"><span class="ltr">ו</span><span><strong>הגוף</strong> — גופי ההלכות שבמשנה.</span></div>
+        <div class="bl wing"><span class="ltr">ה</span><span><strong>כנף האהבה</strong> — ה׳ עילאה.</span></div>
+        <div class="bl wing"><span class="ltr">ה</span><span><strong>כנף היראה</strong> — יראה תתאה: קבלת עול מלכות שמים, ״כפחד המלך״ (ה׳ תתאה).</span></div>
+      </div>
+
+      <figcaption class="bird-cap">
+        ע״פ ההגהה מתיקון מ״ה: ה״עוף״ הוא עולם היצירה, ואותיות שם הוי׳ מצטיירות בו —
+        והיראה עילאה, ״ירא בושת״, שייכת למעלה מזה, בחכמה, ביו״ד עצמה.
+      </figcaption>
+    </figure>
+
+    <div class="hagahah">
+      <span class="h-tag">מן ההגהה · עד היכן מתפשט היחוד</span>
+      <div class="spread">
+        <div class="s"><b>מקרא</b><span>ומצוות מעשיות —<br>מאצילות עד העשיה</span></div>
+        <div class="s"><b>משנה</b><span>עד היצירה</span></div>
+        <div class="s"><b>תלמוד</b><span>עד הבריאה</span></div>
+        <div class="s"><b>קבלה</b><span>נשארת באצילות,<br>ואינה מתפשטת</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ו ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ו</span><h2>אם יראה ואהבה הן עצמן מצוות — למה רק ״כנפיים״?</h2></div>
+    <p>
+      הרי היראה והאהבה הן שתיים מ<strong>תרי״ג המצוות</strong>. ובכל זאת הן נקראות ״כנפיים״ בלבד —
+      כי <span class="hl">תכלית האהבה איננה הרגש, אלא ״העבודה מאהבה״</span>: מה שהאהבה מולידה בפועל.
+    </p>
+    <p>
+      אהבה בלי עבודה היא ״<strong>אהבה בתענוגים</strong>״ — להתענג על ה׳, מעין עולם הבא. וזה כבר שייך
+      לצד של <strong>קבלת השכר</strong>. ואילו הסדר שקבעה תורה הוא: ״<strong>היום לעשותם</strong> —
+      ולמחר לקבל שכרם״. העולם הזה הוא צד העשייה.
+    </p>
+  </section>
+
+  <!-- ======================= ז ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ז</span><h2>עומד בנהר וצועק ״מים״</h2></div>
+    <p>
+      ומי שעדיין לא הגיע למדרגת ״אהבה בתענוגים״, ונפשו באמת ״<strong>שוקקה וצמאה לה׳</strong>״ וכלה
+      אליו כל היום — ובכל זאת אינו מרווה את צימאונו <span class="hl">״במי התורה שלפניו״</span> —
+    </p>
+    <div class="quote">
+      <span class="src">לשון הפרק</span>
+      ״הרי זה כמי שעומד בנהר, וצועק: מים! מים לשתות!״
+    </div>
+    <p>
+      עליו זועק הנביא: ״<strong>הוי, כל צמא — לכו למים</strong>״. ולכאורה תמוה: מי שצמא ומתאווה
+      ללמוד — פשוט שילמד מעצמו; למה לנביא לזעוק עליו ״הוי״? אלא שזה בדיוק מה שקורה: אדם מתגעגע —
+      ואינו שותה. <strong>הגעגוע איננו המטרה; השתייה היא</strong>. האהבה נבראה כדי לשאת את הלימוד
+      והמעשה — לא כדי לרחף לבדה.
+    </p>
+  </section>
+
+  <!-- ======================= ח ======================= -->
+  <section>
+    <div class="sec-head"><span class="sec-letter">ח</span><h2>שורה תחתונה</h2></div>
+    <div class="takeaways">
+      <div class="t"><span class="t-title">העיקר הוא המעשה.</span><p>הרגש משרת את התורה והמצוות — לא להפך. הגוף חי גם בלי כנפיים; הכנפיים בלי גוף אינן כלום.</p></div>
+      <div class="t"><span class="t-title">הכוונה קובעת את הכתובת.</span><p>אותו דף, אותה מצווה — יכולים להישאר ב״חצר החיצונית״ אצל המלאכים, או לעמוד לפני ה׳ ממש.</p></div>
+      <div class="t"><span class="t-title">שום דבר טוב לא אבוד.</span><p>לימוד בסתם ממתין; חוזרים ולומדים לשמה — והכול מצטרף ועולה.</p></div>
+      <div class="t"><span class="t-title">צמא? שתה.</span><p>אהבה אמיתית נמדדת בכך שהיא מתלבשת עכשיו בלימוד ובעשייה — ״היום לעשותם״.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fserif">על פי לשון כ״ק אדמו״ר הזקן — ליקוטי אמרים, פרק מ׳, כולל ההגהות</div>
+    סיכום־עזר ללימוד ולחזרה · אינו תחליף ללימוד הפנים עם המפרשים
+  </footer>
+
+</div>
+</body>
+</html>
