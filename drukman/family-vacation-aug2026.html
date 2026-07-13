@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✈️ טיסה זולה למשפחה — אוגוסט 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#0b3d66; --sea:#0e7fb8; --sky:#e8f4fb; --sand:#fdf6ec; --sun:#f6a821;
+    --ok:#1e9e5a; --warn:#c0392b; --ink:#22303c; --muted:#5b6b78; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Heebo',-apple-system,'Segoe UI',Arial,sans-serif; background:var(--sand); color:var(--ink); line-height:1.6;}
+  .wrap{max-width:980px; margin:0 auto; padding:16px;}
+  /* ---------- HERO ---------- */
+  header.hero{background:linear-gradient(135deg,#0b3d66 0%,#0e7fb8 60%,#28a9d8 100%); color:#fff; border-radius:0 0 28px 28px; padding:38px 22px 30px; text-align:center;}
+  header.hero h1{font-size:clamp(24px,4.5vw,40px); font-weight:800; letter-spacing:-.5px;}
+  header.hero p.sub{opacity:.92; margin-top:8px; font-size:clamp(14px,2.2vw,18px);}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px;}
+  .chip{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); padding:6px 14px; border-radius:999px; font-size:13.5px; backdrop-filter:blur(2px);}
+  /* ---------- SECTIONS ---------- */
+  section{margin-top:28px;}
+  h2{color:var(--deep); font-size:clamp(20px,3vw,27px); font-weight:800; display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  h2 .em{font-size:1.15em;}
+  .card{background:var(--card); border-radius:18px; padding:20px; box-shadow:0 4px 18px rgba(11,61,102,.08); border:1px solid #eef3f7;}
+  /* ---------- WINNER ---------- */
+  .winner{border:2px solid var(--sun); position:relative; overflow:hidden;}
+  .winner .badge{position:absolute; top:0; left:0; background:var(--sun); color:#fff; font-weight:800; padding:6px 18px; border-radius:0 0 14px 0; font-size:14px;}
+  .winner h3{font-size:clamp(22px,3.4vw,30px); color:var(--deep); font-weight:800; margin-top:10px;}
+  .winner .price-line{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin:10px 0 4px;}
+  .winner .big{font-size:clamp(30px,5vw,44px); font-weight:800; color:var(--ok);}
+  .winner .per{color:var(--muted); font-size:14px;}
+  .flightbox{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:14px; margin-top:16px;}
+  .leg{background:var(--sky); border-radius:14px; padding:14px 16px; border:1px solid #d7eaf6;}
+  .leg .dir{font-weight:800; color:var(--sea); font-size:14px; letter-spacing:.3px;}
+  .leg .times{font-size:24px; font-weight:800; color:var(--deep); margin:4px 0;}
+  .leg .meta{font-size:13.5px; color:var(--muted);}
+  .leg .price{margin-top:6px; font-weight:700; color:var(--ink);}
+  ul.checks{list-style:none; margin-top:16px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:8px;}
+  ul.checks li{padding:8px 12px; background:#f2faf5; border:1px solid #d9efe2; border-radius:10px; font-size:14.5px;}
+  ul.checks li b{color:var(--ok);}
+  .note{background:#fff8ec; border:1px solid #f3e0b8; border-radius:12px; padding:12px 14px; font-size:14px; margin-top:14px;}
+  .note.red{background:#fdf0ee; border-color:#f0cfc9;}
+  /* ---------- BUTTONS ---------- */
+  .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+  a.btn{text-decoration:none; font-weight:700; padding:11px 20px; border-radius:12px; font-size:15px; display:inline-flex; align-items:center; gap:8px; transition:transform .12s;}
+  a.btn:hover{transform:translateY(-2px);}
+  a.btn.primary{background:var(--sea); color:#fff; box-shadow:0 4px 12px rgba(14,127,184,.35);}
+  a.btn.sun{background:var(--sun); color:#fff; box-shadow:0 4px 12px rgba(246,168,33,.35);}
+  a.btn.ghost{background:#fff; color:var(--sea); border:2px solid var(--sea);}
+  /* ---------- TABLES ---------- */
+  table{width:100%; border-collapse:collapse; font-size:14.5px; background:#fff; border-radius:14px; overflow:hidden;}
+  th{background:var(--deep); color:#fff; padding:10px 12px; text-align:right; font-weight:700; white-space:nowrap;}
+  td{padding:10px 12px; border-bottom:1px solid #eef3f7; vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr.hl td{background:#f2faf5; font-weight:700;}
+  .tbl-scroll{overflow-x:auto; border-radius:14px; box-shadow:0 4px 18px rgba(11,61,102,.08);}
+  td .tag{display:inline-block; font-size:12px; border-radius:999px; padding:2px 10px; font-weight:700;}
+  .tag.cheap{background:#e7f6ed; color:var(--ok);}
+  .tag.mid{background:#fff3dd; color:#a8720a;}
+  /* ---------- ATTRACTIONS ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px;}
+  .attr{background:#fff; border-radius:16px; padding:16px 18px; border:1px solid #eef3f7; box-shadow:0 3px 12px rgba(11,61,102,.06);}
+  .attr .ico{font-size:26px;}
+  .attr h4{color:var(--deep); font-size:17px; margin:6px 0 4px;}
+  .attr p{font-size:13.8px; color:var(--muted);}
+  .attr .ages{margin-top:8px; font-size:12.5px; color:var(--sea); font-weight:700;}
+  .attr a{color:var(--sea); font-weight:700; font-size:13.5px;}
+  /* ---------- FOOTER ---------- */
+  footer{margin:34px 0 20px; text-align:center; color:var(--muted); font-size:12.8px;}
+  .kosher{background:linear-gradient(135deg,#fff,#f4f9ff); border:1px solid #dbe9f5;}
+  @media print{ header.hero{border-radius:0;} a.btn{border:1px solid #ccc;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>✈️ החופשה המשפחתית הזולה — אוגוסט 2026</h1>
+  <p class="sub">חיפוש טיסות בלבד • 2 מבוגרים + 4 ילדים (4, 8, 9, 12) • שומרי שבת</p>
+  <div class="chips">
+    <span class="chip">🗓️ חלון: 10–20 באוגוסט</span>
+    <span class="chip">🛫 המראה הלוך: 10:30–16:00</span>
+    <span class="chip">🛬 נחיתה חזרה: 12:00–19:00</span>
+    <span class="chip">🕯️ בלי טיסות בשבת</span>
+    <span class="chip">🧳 2 מזוודות לבטן המטוס</span>
+    <span class="chip">🎒 3 תיקי יד לקבינה</span>
+    <span class="chip">🎡 אטרקציות לילדים — חובה</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ================= WINNER ================= -->
+<section>
+  <h2><span class="em">🏆</span> ההמלצה: לרנקה, קפריסין 🇨🇾</h2>
+  <div class="card winner">
+    <span class="badge">הזול ביותר בפער ענק</span>
+    <h3>שני 10.8 → שישי 14.8.2026 • טיסה ישירה של שעה בלבד</h3>
+    <div class="price-line">
+      <span class="big">‏≈ ₪5,052</span>
+      <span class="per">לכל המשפחה (6 נוסעים) הלוך ושוב • ‏₪842 לנוסע • שני כרטיסי one-way: איגיאן הלוך + ויז אייר חזור</span>
+    </div>
+    <div class="flightbox">
+      <div class="leg">
+        <div class="dir">🛫 הלוך — יום שני 10.8 • Aegean • ‏₪445</div>
+        <div class="times">13:05 ← 14:05</div>
+        <div class="meta">תל אביב (TLV) → לרנקה (LCA) • ישירה • שעה</div>
+        <div class="price">המראה 13:05 — בתוך חלון 10:30–16:00 ✓ • בחוף כבר ב־16:00</div>
+      </div>
+      <div class="leg">
+        <div class="dir">🛬 חזור — יום שישי 14.8 • Wizz Air • ‏₪397</div>
+        <div class="times">11:15 ← 12:20</div>
+        <div class="meta">לרנקה (LCA) → תל אביב (TLV) • ישירה • 1:05 שע'</div>
+        <div class="price">נחיתה 12:20 — בתוך חלון 12:00–19:00 ✓ • כ־7 שעות לפני שבת ✓</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li><b>✓</b> המראה 13:05 — בול בחלון 10:30–16:00</li>
+      <li><b>✓</b> נחיתה 12:20 בשישי — בחלון 12:00–19:00, מרווח ענק עד שבת</li>
+      <li><b>✓</b> אין טיסה בשבת — שני עד שישי</li>
+      <li><b>✓</b> טיסה של שעה — מושלם עם 4 ילדים</li>
+      <li><b>✓</b> אטרקציות שפע: פארק מים ענק, לונה פארק, פארק גמלים</li>
+      <li><b>✓</b> בהלוך (איגיאן) לכל נוסע טרולי 8 ק"ג בקבינה — חינם</li>
+    </ul>
+    <div class="note red">
+      ⚠️ <b>איך זה עובד:</b> שתי הזמנות נפרדות של כרטיס לכיוון אחד — הלוך באתר איגיאן, חזור באתר ויז אייר. זה מה שחוסך מאות שקלים מול הלוך־ושוב באותה חברה. בחזור לבחור דווקא את <b>Wizz של 11:15</b>: הטיסה של 16:05 (אותו מחיר) נוחתת 17:10 בשישי — צמוד מדי לשבת, וטיסות הבוקר (ארקיע 10:20→11:20) נוחתות לפני 12:00 — מחוץ לחלון שהגדרתם.
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20LCA%20on%202026-08-10%20oneway" target="_blank">🔎 הלוך 10.8 — Google Flights</a>
+      <a class="btn primary" href="https://www.google.com/travel/flights?q=Flights%20from%20LCA%20to%20TLV%20on%202026-08-14%20oneway" target="_blank">🔎 חזור 14.8 — Google Flights</a>
+      <a class="btn sun" href="https://en.aegeanair.com/" target="_blank">🛒 הלוך — Aegean</a>
+      <a class="btn sun" href="https://wizzair.com/" target="_blank">🛒 חזור — Wizz Air</a>
+      <a class="btn ghost" href="https://www.skyscanner.co.il/transport/flights/tlv/lca/260810/260814/?adultsv2=2&childrenv2=4%7C8%7C9%7C12&cabinclass=economy&rtn=1" target="_blank">👨‍👩‍👧‍👦 Skyscanner — מוגדר ל־2+4</a>
+    </div>
+    <div class="note">
+      🥈 <b>מעדיפים הזמנה אחת — ומקבלים לילה חמישי במתנה?</b> ראשון 9.8 → שישי 14.8 עם TUS Airways: הלוך א' 13:05→14:10 ✓, חזור ו' 11:05→12:05 ✓, ‏₪1,062 לנוסע ≈ <b>‏₪6,372 למשפחה</b> — כל האילוצים נשמרים, 5 לילות, חברה אחת. <a href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20LCA%20on%202026-08-09%20through%202026-08-14" target="_blank">בדיקה חיה ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COST ================= -->
+<section>
+  <h2><span class="em">💰</span> כמה זה באמת יעלה? (טיסות + כבודה)</h2>
+  <div class="card">
+    <div class="tbl-scroll"><table>
+      <tr><th>רכיב</th><th>פירוט</th><th>עלות משוערת</th></tr>
+      <tr><td><b>טיסות</b></td><td>6 נוסעים × ‏₪842 (הלוך איגיאן ‏₪445 + חזור ויז אייר ‏₪397; ילדים מגיל 2 בלואו־קוסט משלמים כמו מבוגר, באיגיאן ילדים עד 11 לעיתים בהנחה קלה)</td><td><b>‏₪5,052</b></td></tr>
+      <tr><td><b>2 מזוודות 20–23 ק"ג</b></td><td>הלוך באיגיאן (≈€25–40 למזוודה) + חזור בוויז אייר (€13–€86, באוגוסט צפו ל־€40–60) — סה"כ 2 מזוודות × 2 כיוונים</td><td>‏₪550–950</td></tr>
+      <tr><td><b>תיקי יד</b></td><td>הלוך (איגיאן): טרולי 8 ק"ג + תיק אישי לכל נוסע חינם. חזור (ויז אייר): תיק 40×30×20 ס"מ מתחת למושב חינם לכל נוסע — הדרישה של 3 תיקי יד מכוסה בשני הכיוונים ✓</td><td><b>חינם</b></td></tr>
+      <tr><td>אופציה: טרולי גם בחזור</td><td>WIZZ Priority — טרולי 10 ק"ג 55×40×23 + עלייה מהירה (€10–€59 לנוסע לכיוון)</td><td>לא חובה</td></tr>
+      <tr class="hl"><td colspan="2">סה"כ משוער למשפחה — טיסות + 2 מזוודות</td><td>‏≈ ₪5,600–6,000</td></tr>
+    </table></div>
+    <div class="note">💡 מחירי הכבודה בוויז אייר זולים משמעותית כשמוסיפים אותם <b>בעת ההזמנה</b> ולא אחר כך. פירוט מלא: <a href="https://www.wizzair.com/en-gb/information-and-services/prices-discounts/all-services-fees" target="_blank">מחירון שירותים רשמי — Wizz Air</a>.</div>
+  </div>
+</section>
+
+<!-- ================= ATTRACTIONS ================= -->
+<section>
+  <h2><span class="em">🎡</span> אטרקציות לילדים — קפריסין (בסיס: לרנקה)</h2>
+  <div class="grid">
+    <div class="attr">
+      <div class="ico">🌊</div>
+      <h4>WaterWorld — איה נאפה</h4>
+      <p>מפארקי המים הגדולים באירופה, בעיצוב יווני מיתולוגי: עשרות מגלשות, בריכת גלים ואזורי פעוטות. כ־40 דק' נסיעה מלרנקה. מבוגר (13+) €49, ילד (3–12) €29 — כולל שתייה.</p>
+      <div class="ages">מתאים ל: כל הגילאים 4–12 ✓</div>
+      <a href="https://waterworldwaterpark.com/" target="_blank">לאתר הרשמי ←</a> • <a href="https://waterworldwaterpark.com/prices/" target="_blank">מחירים</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🎠</div>
+      <h4>Parko Paliatso — לונה פארק, איה נאפה</h4>
+      <p>לונה פארק גדול על הטיילת: קרוסלות, מכוניות מתנגשות, רכבת הרים ומתקני אקסטרים לגדולים. כניסה חופשית, משלמים לפי מתקן.</p>
+      <div class="ages">מתאים ל: 4–12 ✓ (יש מתקנים לכל גיל)</div>
+      <a href="https://www.google.com/maps/search/Parko+Paliatso+Ayia+Napa" target="_blank">מיקום במפות ←</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🐪</div>
+      <h4>פארק הגמלים — מזוטוס</h4>
+      <p>רכיבה על גמלים, פינת חי, בריכה ומסעדה — רק 15 דק' משדה התעופה של לרנקה. חוויה שהקטנים לא שוכחים.</p>
+      <div class="ages">מתאים ל: 4–12 ✓</div>
+      <a href="https://www.camel-park.com/" target="_blank">לאתר הרשמי ←</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🧗</div>
+      <h4>WOW Action Park — לרנקה</h4>
+      <p>מתחם טיפוס ענק בן 3 קומות עם קיר טיפוס בגובה 6 מ' — פתרון מושלם לשעות הצהריים החמות, בתוך העיר.</p>
+      <div class="ages">מתאים ל: 4–12 ✓</div>
+      <a href="https://www.google.com/maps/search/WOW+Action+Park+Larnaca" target="_blank">מיקום במפות ←</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🐠</div>
+      <h4>אקווריום האוקיינוס — פרוטארס</h4>
+      <p>אקווריום עם מאות מינים, פינגווינים ותנינים, בדרך לחוף פיג טרי ביי — מהחופים הרדודים והמושלמים לילדים באי.</p>
+      <div class="ages">מתאים ל: 4–9 במיוחד</div>
+      <a href="https://www.google.com/maps/search/Ocean+Aquarium+Protaras" target="_blank">מיקום במפות ←</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🏖️</div>
+      <h4>חופי לרנקה: פיניקודס ומקנזי</h4>
+      <p>חופים עירוניים רדודים עם טיילת, מסעדות ומתקני ספורט ימי (בננות, אבובים). חוף מקנזי — ממש מתחת לנתיב הנחיתה של המטוסים, הילדים מתים על זה.</p>
+      <div class="ages">חינם ✓</div>
+      <a href="https://www.google.com/maps/search/Mackenzie+Beach+Larnaca" target="_blank">מיקום במפות ←</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🌿</div>
+      <h4>CyHerbia — מבוך וגנים בוטניים</h4>
+      <p>מבוך צמחייה בצורת האי קפריסין, גני תבלינים ופעילויות לילדים — בין לרנקה לאיה נאפה.</p>
+      <div class="ages">מתאים ל: 4–12 ✓</div>
+      <a href="https://www.google.com/maps/search/CyHerbia+Botanical+Park" target="_blank">מיקום במפות ←</a>
+    </div>
+    <div class="attr">
+      <div class="ico">🎳</div>
+      <h4>K Max + Ciokoland — לרנקה</h4>
+      <p>באולינג ומרכז משחקים בנושא שוקולד — קלף מנצח לערב או ליום חם מדי.</p>
+      <div class="ages">מתאים ל: 4–12 ✓</div>
+      <a href="https://www.google.com/maps/search/K+Max+Entertainment+Larnaca" target="_blank">מיקום במפות ←</a>
+    </div>
+  </div>
+  <div class="note" style="margin-top:14px">🚗 <b>טיפ:</b> רוב האטרקציות (איה נאפה/פרוטארס) במרחק 30–45 דק' מלרנקה — שקלו רכב שכור ל־6 (מיניוואן) או אוטובוס בין־עירוני זול (קו 711). מדריכים בעברית: <a href="https://cyprus.co.il/kids-in-larnaca/" target="_blank">אטרקציות לילדים בלרנקה</a> • <a href="https://cyprus.co.il/cyprus-with-kids/" target="_blank">קפריסין עם ילדים</a></div>
+</section>
+
+<!-- ================= SHABBAT ================= -->
+<section>
+  <h2><span class="em">🕯️</span> שומרי שבת בלרנקה — יש על מי לסמוך</h2>
+  <div class="card kosher">
+    <p>הטיול בנוי כך ש<b>אין שבת בחו"ל</b> (שני–שישי), אבל גם באמצע השבוע יש מענה כשר מלא בלרנקה:</p>
+    <ul style="margin:10px 22px 0; font-size:14.5px;">
+      <li><b>בית חב"ד לרנקה</b> — מרכז חב"ד פעיל, מניינים ואירוח: <a href="https://www.chabadcyprus.com/templates/articlecco_cdo/aid/5340800/jewish/Chabad-of-Larnaca.htm" target="_blank">chabadcyprus.com</a></li>
+      <li><b>אוכל כשר ומסעדות</b> בלרנקה (כולל מסעדה חלבית "שמיים" של חב"ד): <a href="https://www.chabadcyprus.com/templates/articlecco_cdo/aid/6801642/jewish/Kosher-Food-and-Restaurants-in-Larnaca.htm" target="_blank">מדריך הכשרות של חב"ד קפריסין</a></li>
+      <li><b>טייק־אווי לשבת</b> (אם בכל זאת תאריכו): <a href="https://www.chabadcyprus.com/templates/articlecco_cdo/aid/6084096/jewish/Shabbat-take-away-and-delivery.htm" target="_blank">הזמנת מנות שבת</a></li>
+    </ul>
+    <div class="note" style="margin-top:12px">🕯️ כניסת השבת בישראל ב־14.8.2026 היא בסביבות 19:00 — נחיתה ב־12:20 משאירה מרווח של כ־7 שעות כולל דרכונים, מזוודות ונסיעה הביתה.</div>
+  </div>
+</section>
+
+<!-- ================= RUNNER UPS ================= -->
+<section>
+  <h2><span class="em">🥈</span> החלופות שנבדקו (10–14.8, טיסות שעומדות באילוצים)</h2>
+  <div class="tbl-scroll"><table>
+    <tr><th>יעד</th><th>למשפחה (6)</th><th>לנוסע</th><th>טיסות שעומדות באילוצים (המראה 10:30–16:00, נחיתה 12:00–19:00)</th><th>יוקר המדינה</th><th>אטרקציה מרכזית לילדים</th><th>בדיקה</th></tr>
+    <tr class="hl">
+      <td>🇨🇾 לרנקה</td><td>‏₪5,052</td><td>‏₪842</td><td>איגיאן ב' 13:05→14:05 ✓ + ויז אייר ו' 11:15→12:20 ✓ (פיצול כרטיסים)</td><td><span class="tag mid">בינוני</span></td><td>WaterWorld, לונה פארק, פארק גמלים</td><td><a href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20LCA%20on%202026-08-10%20through%202026-08-14" target="_blank">Google Flights</a></td>
+    </tr>
+    <tr>
+      <td>🇬🇷 כרתים (הרקליון)</td><td>‏≈ ₪8,280</td><td>‏₪1,380</td><td>Bluebird ב' 13:00→14:50 ✓ • לוודא שחזרת שישי נוחתת בחלון</td><td><span class="tag mid">בינוני</span></td><td><a href="https://cretaquarium.gr/" target="_blank">CretAquarium</a>, פארק מים Acqua Plus, חופים</td><td><a href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20HER%20on%202026-08-10%20through%202026-08-14" target="_blank">Google Flights</a></td>
+    </tr>
+    <tr>
+      <td>🇬🇷 אתונה</td><td>‏≈ ₪8,350</td><td>‏₪1,392</td><td>ארקיע ב' 13:10→15:20 ✓ • חזרה ו' Bluebird 11:00→13:00 ✓ / Aegean 10:50→12:50 ✓</td><td><span class="tag mid">בינוני</span></td><td><a href="https://www.alloufunpark.gr/" target="_blank">Allou Fun Park</a>, חופי הריביירה</td><td><a href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20ATH%20on%202026-08-10%20through%202026-08-14" target="_blank">Google Flights</a></td>
+    </tr>
+    <tr>
+      <td>🇭🇺 בודפשט</td><td>‏≈ ₪10,470</td><td>‏₪1,745</td><td>Bluebird ב' 15:10→17:45 ✓</td><td><span class="tag cheap">זול</span></td><td><a href="https://www.aquaworldresort.hu/en/" target="_blank">Aquaworld</a>, בריכות פלטינוס, רכבת ילדים</td><td><a href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20BUD%20on%202026-08-10%20through%202026-08-14" target="_blank">Google Flights</a></td>
+    </tr>
+    <tr>
+      <td>🇧🇬 ורנה (חוף בולגרי)</td><td>‏≈ ₪11,380</td><td>‏₪1,896</td><td>ישראייר ב' 15:50→18:20 ✓</td><td><span class="tag cheap">זול מאוד</span></td><td>גולדן סנדס, אקווה פארק Aquapolis</td><td><a href="https://www.google.com/travel/flights?q=Flights%20from%20TLV%20to%20VAR%20on%202026-08-10%20through%202026-08-14" target="_blank">Google Flights</a></td>
+    </tr>
+  </table></div>
+  <div class="note red" style="margin-top:12px">❌ <b>יעדים שנפסלו בגלל חלון ההמראה 10:30–16:00:</b> סופיה (הזולות ממריאות 9:10 בבוקר או 17:20), בוקרשט (9:20 או 16:45), בורגס (8:40 או 19:30), פאפוס (9:00 או 18:00+) ובטומי (8:30 או 18:15) — אין להן אף טיסה ישירה בחלון המבוקש ב־10.8. לכן גם המדינות הזולות באמת (בולגריה/רומניה) ירדו מהמשחק, ולרנקה מנצחת גם במחיר וגם בהתאמה לאילוצים.</div>
+</section>
+
+<!-- ================= ALT DATES ================= -->
+<section>
+  <h2><span class="em">📅</span> "פזלנו" גם לתאריכים אחרים (לרנקה, לנוסע הלוך ושוב)</h2>
+  <div class="card">
+    <div class="tbl-scroll"><table>
+      <tr><th>תאריכים</th><th>ימים</th><th>לילות</th><th>מחיר לנוסע</th><th>למשפחה</th><th>הערה</th></tr>
+      <tr class="hl"><td><b>10–14.8</b></td><td>ב'–ו'</td><td>4</td><td>‏₪842 (פיצול: איגיאן+ויז)</td><td>‏≈ ₪5,052</td><td>🏆 הזול ביותר שעומד בחלונות השעות — הבחירה שלנו</td></tr>
+      <tr><td>9–14.8</td><td>א'–ו'</td><td>5</td><td>‏₪1,062 (TUS, הזמנה אחת)</td><td>‏≈ ₪6,372</td><td>🥈 הלוך א' 13:05 ✓, חזור ו' 11:05→12:05 ✓ — לילה נוסף בהזמנה אחת</td></tr>
+      <tr><td>10–14.8 (הזמנה אחת)</td><td>ב'–ו'</td><td>4</td><td>‏מ־₪1,170 (Cyprus Airways)</td><td>‏≈ ₪7,020+</td><td>הלוך 14:55→15:55 ✓ — לוודא שהחזרה המוצעת היא 11:45→12:45 ✓ ולא 17:30 (צמוד לשבת)</td></tr>
+      <tr><td>10–13.8</td><td>ב'–ה'</td><td>3</td><td>‏₪1,087 (איגיאן)</td><td>‏≈ ₪6,520</td><td>⚠️ החזרות הזולות ביום ה' נוחתות לפנות בוקר/בוקר — מחוץ לחלון 12:00–19:00</td></tr>
+      <tr><td>16–20.8 / 17–20.8</td><td>א'/ב'–ה'</td><td>3–4</td><td>—</td><td>‏₪8,000+</td><td>❌ נפסל: חזרות ה' 20.8 בחלון (ישראייר 16:05→17:10, ‏₪923) מייקרות את הקומבינציה</td></tr>
+    </table></div>
+    <div class="note">המסקנה: עם חלונות השעות המתוקנים, <b>שני 10.8 → שישי 14.8 בפיצול כרטיסים (≈₪5,052)</b> הוא הזול ביותר, ו<b>ראשון 9.8 → שישי 14.8 עם TUS (≈₪6,372)</b> נותן לילה חמישי בהזמנה אחת פשוטה.</div>
+  </div>
+</section>
+
+<!-- ================= TIPS ================= -->
+<section>
+  <h2><span class="em">📝</span> טיפים אחרונים לפני הזמנה</h2>
+  <div class="card">
+    <ul style="margin:0 22px; font-size:14.5px;">
+      <li><b>הזמינו מהר:</b> מחירי אוגוסט רק מטפסים ככל שמתקרבים. המחירים כאן נבדקו ב־13.7.2026 בגוגל פלייטס (לאחר תיקון חלונות השעות) והם למחלקת תיירים, כולל מיסים, ללא כבודה.</li>
+      <li><b>פיצול כרטיסים = שתי הזמנות נפרדות.</b> בטיסות ישירות הלוך־חזור אין סיכון של פספוס קונקשן, אבל אין אחריות צולבת בין החברות אם טיסה מתבטלת — מומלץ ביטוח נסיעות שכולל ביטול/עיכוב (ממילא חובה עם 4 ילדים).</li>
+      <li><b>הטיסה הלוך נוחתת 14:05</b> — מקבלים כמעט יום שלם בקפריסין כבר ביום הראשון. חלופות באותו יום בחלון השעות: Cyprus Airways 14:55→15:55 (‏₪576 לכיוון), TUS 12:55→14:00 (‏₪666 לכיוון).</li>
+      <li><b>גיבוי ישראלי:</b> ישראייר ב' 10:35→11:40 (‏₪1,202 לכיוון — יקר) • <a href="https://www.israir.co.il" target="_blank">israir.co.il</a> • <a href="https://www.arkia.co.il" target="_blank">arkia.co.il</a></li>
+      <li><b>בוויז אייר (כרטיס החזור) הרשמו ל־WIZZ Discount Club</b> אם אתם 6 — לעיתים ההנחה למלווים מכסה את דמי החברות בהזמנה אחת.</li>
+      <li><b>דרכונים:</b> ודאו תוקף 6 חודשים קדימה לכל הילדים. קפריסין באיחוד האירופי — ישראלים ללא ויזה.</li>
+      <li><b>מעקב מחירים:</b> הפעילו התראת מחיר בגוגל פלייטס בלינקים למעלה — תקבלו מייל אם המחיר יורד.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  נבנה עבור מוטי • גרסה מעודכנת לפי חלונות הזמנים המתוקנים: המראה הלוך 10:30–16:00, נחיתה חזרה 12:00–19:00 • המחירים נכונים ל־13.7.2026 (Google Flights, מחיר לנוסע כולל מיסים, ללא כבודה) והם משתנים בזמן אמת • ‏€1 ≈ ‏₪4 בקירוב<br>
+  מקורות כבודה ואטרקציות: Wizz Air, WaterWorld, חב"ד קפריסין, cyprus.co.il ✈️ נסיעה טובה!
+</footer>
+
+</div>
+</body>
+</html>
