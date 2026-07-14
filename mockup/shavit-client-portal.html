@@ -207,6 +207,68 @@
 
   .brand .mark{width:auto;min-width:42px;padding:3px 7px;}.brand .mark img{height:34px;width:auto;max-width:132px;object-fit:contain;display:block;}.wa-fab{display:none;}
 
+  /* ---------- Reminders (module 5) — מייל בלבד ---------- */
+  .ladder{display:flex; padding:26px 20px 18px; overflow-x:auto;}
+  .rung{flex:1; min-width:126px; text-align:center; padding:0 4px; position:relative;}
+  .rung::before{content:""; position:absolute; top:20px; right:50%; width:100%; height:3px; background:var(--line);}
+  .rung:first-child::before{display:none;}
+  .rung.on::before{background:var(--emerald);}
+  .rung .pip{width:42px; height:42px; border-radius:50%; margin:0 auto; display:grid; place-items:center; position:relative; z-index:1; background:var(--line); color:#fff;}
+  .rung .pip svg{width:19px; height:19px;}
+  .rung.on .pip{background:var(--emerald); box-shadow:0 0 0 5px var(--emerald-soft);}
+  .rung.warn .pip{background:var(--amber); box-shadow:0 0 0 5px var(--amber-soft);}
+  .rung.bad .pip{background:var(--coral); box-shadow:0 0 0 5px var(--coral-soft);}
+  .rung .rt{font-family:'Heebo'; font-weight:800; font-size:15px; margin-top:11px;}
+  .rung .rc{font-size:12px; color:var(--muted); margin-top:3px; line-height:1.45;}
+  .rung .rch{display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:700; border-radius:20px; padding:2px 9px; margin-top:8px; background:var(--navy-050); color:var(--navy);}
+
+  .stage-tabs{display:flex; gap:6px; padding:15px 18px 0; flex-wrap:wrap;}
+  .stg{appearance:none; border:1px solid var(--line); background:var(--surface); color:var(--muted); font-family:inherit; font-weight:700; font-size:12.5px; padding:7px 14px; border-radius:10px; cursor:pointer; transition:.12s;}
+  .stg:hover{border-color:var(--navy); color:var(--navy);}
+  .stg.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .stg.active.bad{background:var(--coral); border-color:var(--coral);}
+  .mail{margin:15px 18px 18px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface); box-shadow:var(--shadow-sm);}
+  .mail-h{padding:12px 15px; border-bottom:1px solid var(--line-2); background:var(--paper); display:flex; align-items:center; gap:10px;}
+  .mail-h .mav{width:32px; height:32px; border-radius:9px; background:var(--navy); color:#fff; display:grid; place-items:center; font-family:'Heebo'; font-weight:800; font-size:11.5px; flex-shrink:0;}
+  .mail-h .mn{font-weight:700; font-size:13px; line-height:1.25;}
+  .mail-h .me{font-size:11.5px; color:var(--muted);}
+  .mail-h .mto{margin-inline-start:auto; font-size:11px; color:var(--muted); text-align:left; white-space:nowrap; line-height:1.5;}
+  .mail-subj{font-family:'Secular One'; font-weight:400; font-size:16.5px; padding:14px 15px 0; line-height:1.35;}
+  .mail-body{padding:10px 15px 16px; font-size:13.5px; line-height:1.65;}
+  .minst{display:flex; gap:11px; align-items:center; background:var(--paper); border:1px solid var(--line); border-radius:11px; padding:11px 13px; margin:12px 0;}
+  .minst .ic{width:36px; height:36px; border-radius:10px; display:grid; place-items:center; flex-shrink:0;}
+  .minst .ic svg{width:18px; height:18px;}
+  .minst b{font-size:13.5px; display:block;}
+  .minst span{font-size:12px; color:var(--muted);}
+  .mail-acts{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .mact{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; border-radius:10px; padding:9px 13px; border:1px solid var(--line); background:var(--surface); color:var(--navy);}
+  .mact.pri{background:var(--emerald); border-color:var(--emerald); color:#fff;}
+  .mact.dang{background:var(--coral); border-color:var(--coral); color:#fff;}
+  .mail-foot{padding:10px 15px; border-top:1px solid var(--line-2); font-size:11.5px; color:var(--muted); background:var(--paper);}
+
+  .log{display:flex; align-items:center; gap:13px; padding:13px 18px; border-top:1px solid var(--line-2);}
+  .log:first-of-type{border-top:none;}
+  .log .ld{font-family:'Heebo'; font-weight:700; font-size:12.5px; min-width:52px; color:var(--muted);}
+  .log .lt{flex:1; min-width:0;}
+  .log .lt b{font-size:13.5px; display:block;}
+  .log .lt span{font-size:12px; color:var(--muted);}
+  .ch{display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:700; border-radius:20px; padding:2px 9px; white-space:nowrap; background:var(--navy-050); color:var(--navy);}
+
+  .pref{display:flex; align-items:center; gap:13px; padding:13px 18px; border-top:1px solid var(--line-2);}
+  .pref:first-of-type{border-top:none;}
+  .pref .pav{width:36px; height:36px; border-radius:10px; background:var(--navy-050); color:var(--navy); display:grid; place-items:center; font-family:'Heebo'; font-weight:800; font-size:12.5px; flex-shrink:0;}
+  .pref .pt{flex:1;}
+  .pref .pt b{font-size:13.5px; display:block;}
+  .pref .pt span{font-size:12px; color:var(--muted);}
+  .sw{width:40px; height:23px; border-radius:20px; background:var(--emerald); position:relative; flex-shrink:0;}
+  .sw::after{content:""; position:absolute; top:3px; right:3px; width:17px; height:17px; border-radius:50%; background:#fff;}
+  .sw.off{background:var(--line);}
+  .sw.off::after{right:auto; left:3px;}
+  .daychips{display:flex; gap:7px; padding:14px 18px 16px; flex-wrap:wrap; align-items:center;}
+  .dchip{background:var(--navy); color:#fff; font-family:'Heebo'; font-weight:700; font-size:12.5px; border-radius:9px; padding:6px 13px;}
+  .dchip.add{background:var(--surface); color:var(--muted); border:1px dashed var(--line);}
+  .heroLink{color:#fff; font-weight:700; text-decoration:underline; text-underline-offset:3px; cursor:pointer;}
+
   /* ---------- Mobile ---------- */
   @media (max-width:880px){
     .topbar-in{padding:10px 15px; gap:10px; flex-wrap:nowrap;}
@@ -264,6 +326,7 @@
     <button class="tab" data-tab="instruments"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>המכשירים שלי<span class="n">25</span></button>
     <button class="tab" data-tab="certs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>תעודות</button>
     <button class="tab" data-tab="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v6l-5 9a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-5-9V2M9 2h6M8 13h8"/></svg>במעבדה<span class="n warn">2</span></button>
+    <button class="tab" data-tab="reminders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>תזכורות<span class="n bad">1</span></button>
   </div>
 </nav>
 
@@ -275,7 +338,7 @@
       <div class="hero-txt">
         <div class="hello">שלום משה, הציוד של הגליל — במבט אחד 👋</div>
         <div class="sig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>כל מאזניים — תמיד בתוקף</div>
-        <p>הפורטל מתעדכן אוטומטית מכל כיול שאנחנו מבצעים לכם. תזכורת נשלחת 90, 30 ו-7 יום לפני כל מועד — כדי שאף תעודה לא תפוג בלי שתדעו.</p>
+        <p>הפורטל מתעדכן אוטומטית מכל כיול שאנחנו מבצעים לכם. תזכורת נשלחת 90, 30 ו-7 יום לפני כל מועד — כדי שאף תעודה לא תפוג בלי שתדעו. <span class="heroLink" data-goto="reminders">ראו בדיוק מה נשלח ←</span></p>
       </div>
       <div class="ring-box">
         <div class="ring"><div class="ring-hole"><div><b>80%</b><span>בתוקף</span></div></div></div>
@@ -407,7 +470,105 @@
     </div>
     <div class="note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
-      <div>ברגע שהתעודה מונפקת — היא נכנסת אוטומטית ל"תעודות", מועד הכיול הבא נקבע, והמכשיר חוזר ל"בתוקף". אתם מקבלים התראה במייל ובוואטסאפ.</div>
+      <div>ברגע שהתעודה מונפקת — היא נכנסת אוטומטית ל"תעודות", מועד הכיול הבא נקבע, והמכשיר חוזר ל"בתוקף". אתם מקבלים על כך מייל אוטומטי.</div>
+    </div>
+    <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
+  </section>
+
+  <!-- ============ REMINDERS ============ -->
+  <section class="view" id="view-reminders">
+    <div class="sec-h">
+      <h3>תזכורות</h3>
+      <span class="hint">אתם לא צריכים לזכור. המערכת שולחת מייל אוטומטי לפני כל מועד — ועוד אחד ביום שהוא פג.</span>
+    </div>
+
+    <div class="card">
+      <div class="panel-h"><h4>סולם התזכורות · אוטומטי, לכל מכשיר</h4><span class="count">4 מיילים</span></div>
+      <div class="ladder">
+        <div class="rung on">
+          <span class="pip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div class="rt">90 יום לפני</div><div class="rc">הודעה מקדימה — יש זמן לתקצב ולתאם</div><span class="rch">✉ מייל</span>
+        </div>
+        <div class="rung on">
+          <span class="pip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div class="rt">30 יום לפני</div><div class="rc">תיאום איסוף בלחיצה — בלי טלפון למשרד</div><span class="rch">✉ מייל</span>
+        </div>
+        <div class="rung warn">
+          <span class="pip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg></span>
+          <div class="rt">7 ימים לפני</div><div class="rc">התראה אחרונה — התעודה עומדת לפוג</div><span class="rch">✉ מייל</span>
+        </div>
+        <div class="rung bad">
+          <span class="pip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+          <div class="rt">ביום הפקיעה</div><div class="rc"><b>מייל תפעולי</b> — עם כפתורי פעולה, לא רק התראה</div><span class="rch">✉ מייל</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <div class="panel-h"><h4>המייל כפי שמשה דוד מקבל אותו</h4><span class="count">לחצו על שלב</span></div>
+      <div class="stage-tabs">
+        <button class="stg" data-stg="90">90 יום</button>
+        <button class="stg active" data-stg="30">30 יום</button>
+        <button class="stg" data-stg="7">7 ימים</button>
+        <button class="stg bad" data-stg="0">תוקף פג</button>
+      </div>
+      <div class="mail">
+        <div class="mail-h">
+          <span class="mav">שב</span>
+          <span><span class="mn">מאזני שביט · מעבדת כיול</span><span class="me">calibration@shavit-scales.co.il</span></span>
+          <span class="mto">אל: משה דוד<br><span id="m-date">—</span></span>
+        </div>
+        <div class="mail-subj" id="m-subj">—</div>
+        <div class="mail-body" id="m-body">—</div>
+        <div class="mail-foot">מייל אוטומטי מהפורטל של מאזני שביט · <span id="m-cc">העתק: מחלקת אחזקה</span></div>
+      </div>
+    </div>
+
+    <div class="sec-h"><h3>מה נשלח — ולמי</h3><span class="hint">תיעוד מלא של כל מייל. אף אחד לא יכול לומר "לא ידעתי".</span></div>
+    <div class="card">
+      <div class="log"><span class="ld">28.06</span>
+        <span class="lt"><b>תוקף פג · נכס A-077 — מאזני שולחן אנליטי</b><span>משה דוד · העתק: מחלקת אחזקה</span></span>
+        <span class="ch">✉ מייל</span><span class="status s-late">נפתח · ממתין לפעולה</span></div>
+      <div class="log"><span class="ld">21.06</span>
+        <span class="lt"><b>תזכורת 7 יום · נכס A-077</b><span>משה דוד</span></span>
+        <span class="ch">✉ מייל</span><span class="status s-due">נפתח · לא בוצע תיאום</span></div>
+      <div class="log"><span class="ld">20.06</span>
+        <span class="lt"><b>תזכורת 30 יום · נכס A-051 — סט משקולות F1</b><span>משה דוד · העתק: מחלקת אחזקה</span></span>
+        <span class="ch">✉ מייל</span><span class="status s-ok">נפתח</span></div>
+      <div class="log"><span class="ld">29.05</span>
+        <span class="lt"><b>תזכורת 30 יום · נכס A-077</b><span>משה דוד</span></span>
+        <span class="ch">✉ מייל</span><span class="status s-ok">נפתח</span></div>
+      <div class="log"><span class="ld">20.04</span>
+        <span class="lt"><b>תזכורת 90 יום · נכס A-051</b><span>משה דוד</span></span>
+        <span class="ch">✉ מייל</span><span class="status s-ok">נפתח</span></div>
+    </div>
+
+    <div class="grid2" style="margin-top:24px">
+      <div class="card">
+        <div class="panel-h"><h4>מי מקבל</h4><span class="count">2 נמענים</span></div>
+        <div class="pref"><span class="pav">מד</span>
+          <span class="pt"><b>משה דוד</b><span>נמען ראשי</span></span><span class="sw"></span></div>
+        <div class="pref"><span class="pav">אח</span>
+          <span class="pt"><b>מחלקת אחזקה</b><span>מקבלת העתק</span></span><span class="sw"></span></div>
+        <div class="pref"><span class="pav" style="background:var(--surface);border:1px dashed var(--line);color:var(--muted)">+</span>
+          <span class="pt"><b style="color:var(--royal)">הוספת נמען</b><span>למשל: מנהל המפעל, יועץ ISO</span></span></div>
+      </div>
+      <div class="card">
+        <div class="panel-h"><h4>מתי</h4><span class="count">ניתן לשינוי</span></div>
+        <div class="daychips">
+          <span class="dchip">90 יום</span><span class="dchip">30 יום</span><span class="dchip">7 ימים</span>
+          <span class="dchip">ביום הפקיעה</span><span class="dchip add">+ הוספת מועד</span>
+        </div>
+        <div class="pref" style="border-top:1px solid var(--line-2)">
+          <span class="pt"><b>ריכוז שבועי</b><span>מייל אחד ביום א' במקום התראות בודדות</span></span><span class="sw off"></span></div>
+        <div class="pref">
+          <span class="pt"><b>העתק למאזני שביט</b><span>שנדע לתאם מראש ולא נתפוס אתכם בהפתעה</span></span><span class="sw"></span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+      <div>זה מה שהופך את הפורטל מ<b>מסך שצריך לזכור להיכנס אליו</b> ל<b>מערכת שרודפת אחרי המועד</b>. המערכת שולחת ומתעדת — <b>ההחלטה מה לעשות אחר כך נשארת אצלכם.</b></div>
     </div>
     <div class="foot">מונע ע"י <b>BizTechoff™</b> · הדגמה עבור מאזני שביט</div>
   </section>
@@ -498,8 +659,47 @@
       show('detail');
     });
   });
-</script>
-</body>
 
+  var ICO = "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 3v18M5 8h14M5 16h14\"/></svg>";
+  var MAILS = {
+    "90": { date:"20.04.26 · 08:12", cc:"העתק: מחלקת אחזקה",
+      subj:"תכנון מראש · מכשיר אחד מגיע לכיול ברבעון הבא",
+      body:'שלום משה,<br>מכשיר אחד שלכם מתקרב למועד הכיול השנתי. שלחנו מוקדם כדי שיהיה זמן לתקצב ולשריין מקום ביומן.'
+        + '<div class="minst"><span class="ic" style="background:var(--emerald-soft);color:#0b7f60">' + ICO + '</span>'
+        + '<span><b>סט משקולות ביקורת F1 · 1mg–1kg</b><span>נכס A-051 · מעבדת QA · מועד הבא <b>20.07.26</b></span></span></div>'
+        + '<div class="mail-acts"><span class="mact pri">📅 תיאום מוקדם</span><span class="mact">📄 צפייה בפורטל</span></div>' },
+    "30": { date:"20.06.26 · 09:04", cc:"העתק: מחלקת אחזקה",
+      subj:"סט משקולות ביקורת F1 — הכיול בעוד 30 יום (20.07.26)",
+      body:'שלום משה,<br>המכשיר הבא מגיע למועד כיול בעוד 30 יום. אפשר לתאם איסוף ישירות מהמייל — בלי טלפון למשרד.'
+        + '<div class="minst"><span class="ic" style="background:var(--amber-soft);color:#8a5a12">' + ICO + '</span>'
+        + '<span><b>סט משקולות ביקורת F1 · 1mg–1kg</b><span>נכס A-051 · מעבדת QA · פג ב-<b style="color:#8a5a12">20.07.26</b></span></span></div>'
+        + '<div class="mail-acts"><span class="mact pri">📅 תיאום איסוף</span><span class="mact">📄 התעודה הנוכחית</span><span class="mact">🗓 בקשת דחייה</span></div>' },
+    "7": { date:"13.07.26 · 08:00", cc:"העתק: מחלקת אחזקה",
+      subj:"⚠ התראה אחרונה — התעודה של נכס A-051 פגה בעוד 7 ימים",
+      body:'שלום משה,<br>זו התזכורת האחרונה לפני הפקיעה. <b>מכשיר ללא תעודה בתוקף עלול להיפסל במבדק</b>, וכל מדידה שנעשית בו מאותו רגע נתונה לערעור.'
+        + '<div class="minst"><span class="ic" style="background:var(--amber-soft);color:#8a5a12">' + ICO + '</span>'
+        + '<span><b>סט משקולות ביקורת F1 · 1mg–1kg</b><span>נכס A-051 · פג ב-<b style="color:#8a5a12">20.07.26</b> — בעוד 7 ימים</span></span></div>'
+        + '<div class="mail-acts"><span class="mact pri">📅 תיאום איסוף מיידי</span><span class="mact">🚫 המכשיר לא בשימוש</span></div>' },
+    "0": { date:"28.06.26 · 06:30", cc:"העתק: מחלקת אחזקה · מאזני שביט",
+      subj:"🔴 תוקף פג — מאזני שולחן אנליטי (A-077) · נדרשת פעולה",
+      body:'שלום משה,<br><b>התעודה של המכשיר הבא פגה היום.</b> בפורטל הוא מסומן כעת באדום. עד לכיול מחדש — כל מדידה שנעשית בו עלולה להיפסל במבדק.'
+        + '<div class="minst" style="background:var(--coral-soft);border-color:#F0C4BB"><span class="ic" style="background:#fff;color:#a8392a">' + ICO + '</span>'
+        + '<span><b>מאזני שולחן אנליטי · 0.001g</b><span>נכס A-077 · מעבדת QA · <b style="color:#a8392a">פג ב-28.06.26</b></span></span></div>'
+        + '<b>מה תרצו לעשות?</b>'
+        + '<div class="mail-acts"><span class="mact dang">📅 תיאום איסוף דחוף</span><span class="mact">💰 בקשת הצעת מחיר</span><span class="mact">🗓 שינוי מרווח הכיול</span><span class="mact">🚫 הוצא משימוש — הסירו מהמעקב</span></div>' }
+  };
+  function mail(k){
+    var m = MAILS[k]; if(!m) return;
+    document.getElementById('m-date').textContent = m.date;
+    document.getElementById('m-subj').textContent = m.subj;
+    document.getElementById('m-body').innerHTML   = m.body;
+    document.getElementById('m-cc').textContent   = m.cc;
+    document.querySelectorAll('.stg').forEach(function(b){ b.classList.toggle('active', b.dataset.stg === k); });
+  }
+  document.querySelectorAll('.stg').forEach(function(b){
+    b.addEventListener('click', function(){ mail(b.dataset.stg); });
+  });
+  mail('30');
+</script>
 </body>
 </html>
