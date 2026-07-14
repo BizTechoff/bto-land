@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מטרה · מה זה, במאקרו</title>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14181C; --ink-2:#3E474E; --dim:#5A666F;
+  --bg:#F2F4F5; --c100:#E6E9EB; --c200:#D2D7DA;
+  --line:rgba(20,24,28,.13);
+  --tag:#F0B429; --tag-d:#9C6604;
+  --ok:#1E7A4C; --hot:#C81E24; --warn:#E8722C; --cool:#0F6E8C;
+  --sh:0 1px 0 rgba(20,24,28,.04), 0 10px 26px -20px rgba(20,24,28,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Assistant",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.62}
+.rail{height:4px;background:repeating-linear-gradient(-45deg,var(--tag) 0 12px,var(--ink) 12px 24px)}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 70px}
+header{padding:26px 0 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.g{width:36px;height:36px;border-radius:8px;background:var(--ink);color:var(--tag);display:grid;place-items:center;font-family:"Secular One";font-size:16px;flex:none}
+header h1{font-family:"Secular One";font-weight:400;font-size:21px;line-height:1.2}
+header p{font-size:12.5px;color:var(--dim)}
+header .sp{flex:1}
+.pr{font-family:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:8px;padding:7px 14px;cursor:pointer}
+.pr:hover{background:var(--tag);border-color:var(--tag);color:var(--ink)}
+
+.one{background:var(--ink);color:#fff;border-radius:14px;padding:24px;margin-bottom:22px}
+.one .eb{font-size:10.5px;font-weight:700;letter-spacing:.11em;color:var(--tag);margin-bottom:9px}
+.one h2{font-family:"Secular One";font-weight:400;font-size:26px;line-height:1.35}
+.one h2 b{color:var(--tag);font-weight:400}
+.one p{font-size:14px;color:rgba(255,255,255,.7);margin-top:11px;line-height:1.65}
+
+h2.s{font-family:"Secular One";font-weight:400;font-size:19px;margin:28px 0 3px;display:flex;gap:9px;align-items:center}
+h2.s .k{width:26px;height:26px;border-radius:7px;background:var(--tag);color:var(--ink);display:grid;place-items:center;font-family:"Heebo";font-weight:700;font-size:13px;flex:none}
+.lead{font-size:13.5px;color:var(--dim);margin-bottom:13px;padding-inline-start:35px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--sh);padding:18px 20px;margin-bottom:12px}
+
+/* מכניקה */
+.mech{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;margin:6px 0 4px}
+@media(max-width:720px){.mech{grid-template-columns:1fr;gap:12px}}
+.pool{background:var(--c100);border-radius:10px;padding:13px}
+.pool .h{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--dim);margin-bottom:8px}
+.ppl{display:flex;flex-wrap:wrap;gap:4px}
+.p1{width:19px;height:19px;border-radius:50%;background:var(--cool);color:#fff;font-size:9px;display:grid;place-items:center}
+.choke{padding:0 14px;text-align:center}
+@media(max-width:720px){.choke{padding:0}}
+.choke .dsk{background:var(--hot);color:#fff;border-radius:9px;padding:11px 13px;font-weight:700;font-size:13px;line-height:1.35}
+.choke .dsk span{display:block;font-weight:400;font-size:11px;opacity:.85;margin-top:2px}
+.choke .ar{font-size:19px;color:var(--hot);margin:5px 0}
+.lanes{display:flex;flex-direction:column;gap:4px}
+.ln{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--c200);border-radius:7px;padding:5px 8px;font-size:12px}
+.ln i{width:9px;height:9px;border-radius:50%;flex:none;font-style:normal}
+.ln.busy i{background:var(--ok)} .ln.idle i{background:var(--c200)}
+.ln.idle{color:var(--dim);border-style:dashed}
+.mnote{background:rgba(200,30,36,.06);border-inline-start:3px solid var(--hot);border-radius:0 8px 8px 0;padding:11px 14px;margin-top:14px;font-size:14px}
+.mnote b{color:var(--hot)}
+
+/* לולאות */
+.loop{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--c100);align-items:flex-start}
+.loop:first-child{border-top:none}
+.loop .n{width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--tag);display:grid;place-items:center;font-family:"Heebo";font-weight:700;font-size:12px;flex:none;margin-top:2px}
+.loop .b b{display:block;font-size:15px;font-family:"Secular One";font-weight:400}
+.loop .b p{font-size:13.5px;color:var(--ink-2);margin-top:2px}
+.loop .b .how{font-size:12.5px;color:var(--dim);margin-top:5px;padding-top:5px;border-top:1px dashed var(--c200)}
+.loop .b .how b{display:inline;color:var(--ink);font-family:inherit;font-weight:700}
+
+/* תפרים */
+.seam{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:720px){.seam{grid-template-columns:1fr}}
+.sd{border-radius:11px;padding:14px 16px}
+.s-t{background:rgba(240,180,41,.1);border:1px solid var(--tag)}
+.s-m{background:rgba(15,110,140,.07);border:1px solid rgba(15,110,140,.3)}
+.sd h4{font-family:"Secular One";font-weight:400;font-size:15.5px;margin-bottom:6px}
+.sd ul{list-style:none;font-size:13.5px}
+.sd li{padding:3px 0;color:var(--ink-2)}
+.sd li::before{content:"·";color:var(--tag-d);font-weight:700;margin-inline-end:6px}
+.plugs{background:var(--ink);color:#fff;border-radius:12px;padding:15px 18px;margin-top:12px;font-size:13.5px}
+.plugs b{color:var(--tag)}
+.plugs code{background:rgba(255,255,255,.1);border-radius:4px;padding:1px 6px;font-size:12.5px;direction:ltr;display:inline-block}
+
+/* הנחות */
+.as{display:flex;gap:11px;padding:12px 0;border-top:1px solid var(--c100);align-items:flex-start}
+.as:first-child{border-top:none}
+.as .r{font-family:"Heebo";font-weight:700;font-size:10px;border-radius:5px;padding:3px 7px;white-space:nowrap;flex:none;margin-top:2px}
+.r-k{background:rgba(200,30,36,.11);color:var(--hot)}
+.r-m{background:rgba(232,114,44,.14);color:#A9501A}
+.r-l{background:rgba(137,135,129,.15);color:var(--dim)}
+.as .b b{display:block;font-size:14.5px}
+.as .b p{font-size:13px;color:var(--ink-2);margin-top:2px}
+.as .b .chk{font-size:12.5px;color:var(--tag-d);margin-top:4px;font-weight:600}
+
+.not{border:1px dashed var(--c200);border-radius:12px;padding:15px 18px;margin-top:14px;background:#fff}
+.not h4{font-family:"Secular One";font-weight:400;font-size:16px;margin-bottom:7px}
+.not p{font-size:13.5px;color:var(--ink-2);padding:2px 0}
+.not p b{color:var(--ink)}
+footer{text-align:center;font-size:11.5px;color:var(--dim);margin-top:26px}
+@media print{
+  body{background:#fff;font-size:11.5pt}
+  .pr,.rail{display:none}
+  .card,.not,.one,.plugs{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  .one,.plugs{background:#fff;color:#000;border:2px solid #000}
+  .one h2 b,.one .eb,.plugs b{color:#000}
+  .one p{color:#333}
+  @page{size:A4;margin:11mm}
+}
+</style>
+</head>
+<body>
+<div class="rail"></div>
+<div class="wrap">
+
+<header>
+  <div class="g">◎</div>
+  <div><h1>מטרה — מה זה, במאקרו</h1><p>המודל שצריך להיות לך בראש כשאתה נכנס לחדר</p></div>
+  <div class="sp"></div>
+  <button class="pr" onclick="window.print()">🖨 הדפסה</button>
+</header>
+
+<div class="one">
+  <div class="eb">המשפט האחד</div>
+  <h2>מטרה לא מנהלת מטווח.<br>היא <b>מוציאה את הרישום מתוך זמן הירי.</b></h2>
+  <p>כל השאר — המסכים, המודולים, ה-AI — הם נגזרת של המשפט הזה.
+  אם אתה זוכר רק דבר אחד לפגישה, זה זה.</p>
+</div>
+
+<!-- 1 · המכניקה -->
+<h2 class="s"><span class="k">1</span>המכניקה — למה הסלוט לא מתמלא</h2>
+<p class="lead">זו לא בעיית ניהול. זו בעיית <b>תור</b>. ומרגע שרואים אותה ככה, הכל נופל למקום.</p>
+
+<div class="card">
+  <div class="mech">
+    <div class="pool">
+      <div class="h">12 אנשים מגיעים ב-10:00</div>
+      <div class="ppl">
+        <span class="p1">1</span><span class="p1">2</span><span class="p1">3</span><span class="p1">4</span>
+        <span class="p1">5</span><span class="p1">6</span><span class="p1">7</span><span class="p1">8</span>
+        <span class="p1">9</span><span class="p1">10</span><span class="p1">11</span><span class="p1">12</span>
+      </div>
+    </div>
+    <div class="choke">
+      <div class="dsk">הקופה<span>משרתת אחד בכל רגע</span></div>
+      <div class="ar">↓</div>
+      <div style="font-size:11.5px;color:var(--hot);font-weight:700">4 דק׳ × 12 = 48 דקות</div>
+    </div>
+    <div class="pool" style="background:#fff;border:1px solid var(--c200)">
+      <div class="h">12 עמדות — עובדות במקביל</div>
+      <div class="lanes">
+        <div class="ln busy"><i></i> עמדה 1–4 · יורות</div>
+        <div class="ln idle"><i></i> עמדה 5–8 · <b>ריקות, ממתינות</b></div>
+        <div class="ln idle"><i></i> עמדה 9–12 · <b>ריקות, ממתינות</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mnote">
+    <b>הקופה היא משאב טורי. העמדות הן משאב מקבילי.</b>
+    הטורי מרעיב את המקבילי — האחרון בתור מתחיל לירות 48 דקות אחרי שהסלוט נפתח,
+    ואז הסלוט נגמר לפני שכולם ירו. <b>העמדות לא היו תפוסות. הן חיכו.</b>
+  </div>
+
+  <p style="margin-top:13px;font-size:14.5px">
+    <b>ולכן הפתרון הוא לא "לייעל את הקופה".</b> הוא <b>להוציא את העבודה הטורית אל מחוץ לחלון הזמן</b> —
+    הביתה (צ׳ק-אין מראש) או לעמדה עצמאית בכניסה (QR / טאבלט).
+    <b>הסלוט מתחיל, וכולם כבר בעמדות.</b>
+  </p>
+</div>
+
+<!-- 2 · מה זה סוגר -->
+<h2 class="s"><span class="k">2</span>שלוש הלולאות שהיא סוגרת</h2>
+<p class="lead">כל מסך בפלטפורמה שייך לאחת מהשלוש. אם הוא לא — הוא לא צריך להיות שם.</p>
+
+<div class="card">
+  <div class="loop">
+    <span class="n">1</span>
+    <div class="b">
+      <b>מלאי הזמן</b>
+      <p>סלוט × עמדה = <b>מלאי מתכלה.</b> עמדה ריקה ב-10:00 לא חוזרת לעולם — בדיוק כמו מושב במטוס.</p>
+      <div class="how"><b>איך:</b> סלוטים, עמדות, תור, שיבוץ, מצב טווח (קר/חם). <b>זו הליבה. קורל לא נוגעת בה.</b></div>
+    </div>
+  </div>
+  <div class="loop">
+    <span class="n">2</span>
+    <div class="b">
+      <b>הזכאות</b>
+      <p>האם האדם הזה רשאי לירות את השירות הזה היום? רישיון בתוקף, רענון שלא פג, שירות מתאים.</p>
+      <div class="how"><b>איך:</b> נבדק מראש ואוטומטית — <b>לא בעיניים של פקיד בקופה, כשתשעה אנשים מחכים מאחוריו.</b></div>
+    </div>
+  </div>
+  <div class="loop">
+    <span class="n">3</span>
+    <div class="b">
+      <b>העדות</b>
+      <p>מי ירה, מתי, עם מי, ומי חתם. יומן יורים, אישורי אימון, דו״ח לרשות, בדיקת בטיחות.</p>
+      <div class="how"><b>איך:</b> נוצר <b>כתוצר לוואי</b> של הביקור — לא כמשימת סוף-שבוע של מישהו.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 · התפרים -->
+<h2 class="s"><span class="k">3</span>איפה זה נוגע בקורל — והתפר</h2>
+<p class="lead">מטרה מנהלת <b>זמן</b>. קורל מנהלת <b>כסף</b>. הסיידבר שכבר בנית מחלק אותם בדיוק כך.</p>
+
+<div class="seam">
+  <div class="sd s-t">
+    <h4>⏱ מטרה · זמן</h4>
+    <ul>
+      <li>לוח בקרה</li><li>צ׳ק-אין</li><li>מסך מדריך</li><li>סלוטים ולו״ז</li>
+      <li>עוזר חכם (AI)</li><li>ציות ובטיחות</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--tag-d);font-weight:700;margin-top:7px">לקורל אין אף אחד מאלה.</p>
+  </div>
+  <div class="sd s-m">
+    <h4>₪ קורל · כסף</h4>
+    <ul>
+      <li>מאגר לקוחות</li><li>מלאי ותחמושת</li><li>שטרי מכר</li>
+      <li>סליקה וקופה</li><li>אישורי אימון</li><li>SMS ומועדון</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--cool);font-weight:700;margin-top:7px">אצל 80% מהשוק. עובד. אל תיגע.</p>
+  </div>
+</div>
+
+<div class="plugs">
+  <b>שלושת התפרים — וכל אחד הוא תקע, לא קוד:</b><br><br>
+  <code>PaymentProvider</code> → קורל גובה | מטרה גובה<br>
+  <code>CustomerRegistry</code> → קורל מחזיקה | מטרה מחזיקה<br>
+  <code>ComplianceReporter</code> → קורל מפיקה | מטרה מפיקה<br><br>
+  <b>הליבה לא יודעת מי בצד השני, ולא אכפת לה.</b> התשובה של יואב <b>בוחרת מימוש — לא משנה ארכיטקטורה.</b>
+</div>
+
+<!-- 4 · ההנחות -->
+<h2 class="s"><span class="k">4</span>שבע הנחות — וכולן עלולות להיות שגויות</h2>
+<p class="lead">הפלטפורמה בנויה עליהן. <b>אף אחת לא נבדקה מול יואב.</b> את המסומנות באדום — תבדוק ראשונות.</p>
+
+<div class="card">
+  <div class="as">
+    <span class="r r-k">קריטי</span>
+    <div class="b"><b>1 · הסלוטים לא מלאים</b>
+      <p>אם כל סלוט מלא — <b>אין מה למכור.</b> כל טיעון התפוקה קורס.</p>
+      <div class="chk">→ "בסלוט ממוצע, כמה מקומות נשארים ריקים? ומה היום הכי חלש?"</div></div>
+  </div>
+  <div class="as">
+    <span class="r r-k">קריטי</span>
+    <div class="b"><b>2 · הצוואר הוא הקופה</b>
+      <p>אולי חסרים <b>מדריכים</b>, או שהעמדות תפוסות מהסלוט הקודם. אז ייעלת את הקופה — <b>והתור עבר הלאה.</b></p>
+      <div class="chk">→ "כשסלוט נתקע — איפה זה נתקע בפועל?"</div></div>
+  </div>
+  <div class="as">
+    <span class="r r-k">קריטי</span>
+    <div class="b"><b>3 · יש ביקוש למלא את הריק</b>
+      <p>מטרה <b>לא ממציאה לקוחות.</b> היא רק מונעת דליפה. אם רק 8 רצו לבוא ב-14:00 — 8 יבואו.</p>
+      <div class="chk">→ "קורה שאנשים מוותרים והולכים בגלל עומס?"</div></div>
+  </div>
+  <div class="as">
+    <span class="r r-m">בינוני</span>
+    <div class="b"><b>4 · לקוחות יעשו צ׳ק-אין מהבית</b>
+      <p>בעלי רישיון שמחדשים — לא בהכרח אוכלוסייה שממלאת טפסים אונליין.</p>
+      <div class="chk">→ גיבוי: טאבלט/QR בכניסה. <b>עובד גם אם אף אחד לא נרשם מהבית.</b></div></div>
+  </div>
+  <div class="as">
+    <span class="r r-m">בינוני</span>
+    <div class="b"><b>5 · "כניסה ללא תור" יכולה לחיות לצד סלוטים</b>
+      <p>זה נכס שיווקי שלהם. <b>אם השיבוץ יפגע בו — הם יסרבו.</b></p>
+      <div class="chk">→ "מה קורה למישהו שפשוט מגיע בלי להירשם?"</div></div>
+  </div>
+  <div class="as">
+    <span class="r r-m">בינוני</span>
+    <div class="b"><b>6 · קורל תסכים לשבת לצד מטרה</b>
+      <p>אין API מובטח. אם אין — <b>הסנכרון ידני או שאין.</b></p>
+      <div class="chk">→ "אתה יודע אם אפשר לחבר מערכות לקורל?"</div></div>
+  </div>
+  <div class="as">
+    <span class="r r-l">נמוך</span>
+    <div class="b"><b>7 · הצוות יאמץ את זה</b>
+      <p>מסך המדריך בנוי לשני כפתורים בדיוק בגלל ההנחה שהצוות מבוגר.</p>
+      <div class="chk">→ תן לו ללחוץ בעצמו על הנייד. <b>אל תסביר — תראה.</b></div></div>
+  </div>
+</div>
+
+<div class="not">
+  <h4>ומה שמטרה <u>לא</u> עושה — תגיד את זה בעצמך, לפני שהוא ישאל</h4>
+  <p><b>לא מביאה לקוחות חדשים.</b> היא מונעת דליפה של מי שכבר בא. שיווק זה משהו אחר.</p>
+  <p><b>לא מחליפה את קורל</b> (בענף A). הכסף, המלאי ושטרי המכר נשארים אצלה.</p>
+  <p><b>לא מוסיפה עמדות ולא מאריכה שעות.</b> היא רק לא נותנת לעמדה קיימת לעמוד ריקה.</p>
+  <p><b>וה-AI לא עובד ביום הראשון.</b> תחזית דורשת היסטוריה. או שמזינים מ-yoman, או שזה שלב ב׳.
+  <b style="color:var(--hot)">אל תבטיח אותו כפיצ׳ר יום-1.</b></p>
+</div>
+
+<footer>
+  BizTechoff · hunter-agent · doc/matara-macro.html<br>
+  <b>קרא את זה פעם אחת בשבת. ואם תזכור רק שורה אחת — "מטרה מוציאה את הרישום מתוך זמן הירי."</b>
+</footer>
+</div>
+</body>
+</html>
