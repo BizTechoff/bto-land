@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מלך נעלב — ללמוד ענווה מן המלך שהסתתר</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="המלך נגלה כדי ללמד ענווה; והמלך שהסתתר — נעלב ושותק, ונותן לכל למרות הכל. העולם הזה רק פרוזדור, ותכליתו להוריד את העולם הבא לכאן">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/melech-neelav">
+<meta property="og:title" content="מלך נעלב — ללמוד ענווה מן המלך שהסתתר">
+<meta property="og:description" content="המלך נגלה כדי ללמד ענווה; והמלך שהסתתר — נעלב ושותק, ונותן לכל למרות הכל. העולם הזה רק פרוזדור, ותכליתו להוריד את העולם הבא לכאן">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="מלך נעלב — ללמוד ענווה מן המלך שהסתתר">
+<meta name="twitter:description" content="המלך נגלה כדי ללמד ענווה; והמלך שהסתתר — נעלב ושותק, ונותן לכל למרות הכל. העולם הזה רק פרוזדור, ותכליתו להוריד את העולם הבא לכאן">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:790px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 58px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(36px,6vw,58px); text-align:center; color:var(--ink); line-height:1.12; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .opening-quote{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:24px 30px; margin-bottom:40px; border-radius:3px; text-align:center;}
+  .opening-quote p{font-family:'David Libre',serif; font-size:20px; color:var(--ink); line-height:1.7; margin:0;}
+  .opening-quote-source{display:block; margin-top:10px; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic;}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:40px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* reveal -> shiflut */
+  .reveal{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; margin:28px 0;}
+  .reveal .box{padding:20px 24px; border-radius:10px; text-align:center; min-width:150px;}
+  .r-glory{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .r-humble{background:linear-gradient(135deg, rgba(184,138,44,0.14), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32);}
+  .reveal .box .t{font-size:21px; font-weight:900; margin-bottom:4px;}
+  .r-glory .t{color:var(--gold);} .r-humble .t{color:var(--crimson);}
+  .reveal .box .s{font-size:13.5px;}
+  .r-glory .s{color:rgba(245,236,217,0.78);} .r-humble .s{color:var(--ink-soft);}
+  .reveal .to{color:var(--gold); font-size:26px;}
+
+  /* anava vs gaava */
+  .paths{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .path{padding:24px 22px; border-radius:6px;}
+  .p-anava{background:linear-gradient(135deg, rgba(184,138,44,0.10), rgba(184,138,44,0.03)); border:1px solid rgba(184,138,44,0.28);}
+  .p-gaava{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.28);}
+  .path .lbl{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; margin-bottom:8px; color:var(--gold-deep);}
+  .path h4{font-size:20px; margin-bottom:8px; color:var(--crimson);}
+  .path .crown{font-size:15px; font-weight:700; margin-bottom:6px;}
+  .p-anava .crown{color:var(--gold-deep);} .p-gaava .crown{color:var(--crimson);}
+  .path .d{font-size:14.5px; color:var(--ink-soft); line-height:1.6;}
+
+  /* ne'elav king box */
+  .neelav{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:10px; padding:30px 30px; margin:32px 0;}
+  .neelav .k{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-light); text-transform:uppercase; margin-bottom:14px; text-align:center;}
+  .neelav p{font-size:17px; color:rgba(245,236,217,0.9); margin-bottom:12px; line-height:1.8;}
+  .neelav p:last-child{margin-bottom:0;}
+  .neelav strong{color:var(--gold-light);}
+  .neelav em{color:#e8c98a;}
+  .neelav .src{display:block; text-align:center; font-size:12px; color:rgba(232,201,138,0.6); letter-spacing:2px; margin-top:6px;}
+
+  /* olam avoda / sachar */
+  .worlds{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .world{padding:24px 20px; border-radius:8px; text-align:center;}
+  .w-avoda{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.25);}
+  .w-sachar{background:linear-gradient(135deg, rgba(184,138,44,0.14), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32);}
+  .world .k{font-family:'Bellefair',serif; font-size:12px; letter-spacing:3px; margin-bottom:8px; color:var(--gold-deep);}
+  .world h4{font-size:20px; color:var(--crimson); margin-bottom:6px;}
+  .world .d{font-size:14px; color:var(--ink-soft);}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+  .attribution{margin-top:40px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 22px;} .container::before{inset:8px;}
+    .paths{grid-template-columns:1fr;} .worlds{grid-template-columns:1fr;} .reveal{flex-direction:column;} .reveal .to{transform:rotate(90deg);}
+    .opening-quote p{font-size:18px;} p{font-size:17px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">מוסר · פנימיות התורה</div>
+    <h1>מֶלֶךְ נֶעֱלָב</h1>
+    <p class="subtitle">ללמוד ענווה מן המלך שהסתתר — והעולם הזה רק פרוזדור</p>
+
+    <div class="opening-quote">
+      <p>רָאִיתִי בְּנֵי עֲלִיָּה — וְהֵם מוּעָטִים</p>
+      <span class="opening-quote-source">— סוכה מה ע"ב</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הַמֶּלֶךְ נִגְלֶה — לְלַמֵּד גְּדֻלָּה</h2>
+      <p>
+        המלך נגלה לאדם רק כדי ללמדו <strong>כמה הוא יתברך גדול</strong>. בתחילה מתגלה אליו
+        בצורת <em>״שליח־מלאך״</em>, ואחר כך באופן אישי. ומעטים הם — ״ראיתי בני עליה והם מועטים״ —
+        וכל זה רק כדי שהאדם ידע כמה המלך גדול ו<strong>בלתי מושג</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <p>
+        וברגע שמתגלה אליו המלך <strong>במלוא הדרו</strong> — האדם נעשה <strong>שפל ועניו</strong>.
+        הוא מסתובב בין אנשים חכמים, ורואים כמה הוא גדול — ועם זאת שפל ועניו.
+        לכך ניתנה לו הגדולה: כדי <strong>להוריש</strong> את השפלות ואת הענווה.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="box r-glory"><div class="t">הִתְגַּלּוּת</div><div class="s">המלך במלוא הדרו</div></div>
+      <div class="to">⟸</div>
+      <div class="box r-humble"><div class="t">שִׁפְלוּת וַעֲנָוָה</div><div class="s">וזו הגדולה האמיתית</div></div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">מֶלֶךְ בְּלֹא כֶּתֶר</h2>
+      <p>
+        ולעומת זאת — תלמידי חכמים הלובשים <strong>גאווה</strong>, לובשים <strong>עזות</strong>.
+        זהו <em>״מלך בלא כתר״</em>, וזהו <strong>״תלמיד חכם בלי דעת״</strong>. הם מובילים
+        ב<strong>תעות וטעות</strong> — כי ״שגגת תלמוד עולה זדון״ (אבות ד, יג), וזה
+        אם כל חטאת ומקור הייסורין בעלמא דין, ומחטיאים את לומדי התורה ואת העם.
+      </p>
+    </div>
+
+    <div class="paths">
+      <div class="path p-anava">
+        <div class="lbl">עם כתר</div>
+        <h4>עֲנָוָה</h4>
+        <div class="crown">♛ מלך עם כתר · תלמיד חכם עם דעת</div>
+        <div class="d">הגדולה מולידה שפלות — ומורישה ענווה לסובבים.</div>
+      </div>
+      <div class="path p-gaava">
+        <div class="lbl">בלא כתר</div>
+        <h4>גַּאֲוָה</h4>
+        <div class="crown">✗ מלך בלא כתר · תלמיד חכם בלי דעת</div>
+        <div class="d">העזות מטעה — ומחטיאה את הלומדים ואת העם.</div>
+      </div>
+    </div>
+
+    <div class="pasuk">
+      חֲכָמִים, הִזָּהֲרוּ בְּדִבְרֵיכֶם — שֶׁמָּא תָּחוֹבוּ חוֹבַת גָּלוּת וְתִגְלוּ לִמְקוֹם מַיִם הָרָעִים,
+      וְיִשְׁתּוּ הַתַּלְמִידִים הַבָּאִים אַחֲרֵיכֶם וְיָמוּתוּ — וְנִמְצָא שֵׁם שָׁמַיִם מִתְחַלֵּל
+      <span class="pasuk-source">— אבות א, יא</span>
+    </div>
+
+    <div class="neelav">
+      <div class="k">אֵין מֶלֶךְ נֶעֱלָב כְּמוֹתוֹ</div>
+      <p>
+        כי אין מלך <strong>עלוב ונעלב</strong> — בלשון המלאכים — יותר ממלך מלכי המלכים:
+        שברא את עולמו, כתב <em>ספר חוקים</em>, והלך <strong>להסתתר</strong>. ריבון על כל המעשים
+        ואדון עליהם — וכל העולם עושה <strong>הפוך מרצונו, הפוך מדעתו</strong> —
+        והוא ״ישמע ביזיונו וידום״.
+      </p>
+      <p>
+        אלפי שנים אינו מתגלה. ולמרות שכל מה שברא — לכבודו ברא, ולמרות שכולם עושים היפך רצונו —
+        הוא עדיין נותן להם <strong>בריאות, ילדים, ופרנסה</strong>. פלא פלאים.
+        <strong>ואת זאת צריך ללמוד מן המלך.</strong>
+      </p>
+      <span class="src">— על דרך תומר דבורה, פרק א׳</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">רַק בַּפְּרוֹזְדוֹר</h2>
+      <p>
+        וברגע שנבין שהעולם הזה <strong>זמני</strong> — שאנחנו רק ב<strong>״פרוזדור״</strong>,
+        בדרך למקום שכולו טוב: בלי ייסורי הגוף, בלי ייסורי המחשבה, בלי בעיות פרנסה,
+        בריאות וחינוך ילדים — כי כאן <strong>עולם העבודה</strong>, ושם <strong>עולם השכר</strong>.
+      </p>
+    </div>
+
+    <div class="worlds">
+      <div class="world w-avoda"><div class="k">כאן · עכשיו</div><h4>עוֹלַם הָעֲבוֹדָה</h4><div class="d">הפרוזדור — זמני, ומלא ייסורים</div></div>
+      <div class="world w-sachar"><div class="k">שם · לנצח</div><h4>עוֹלַם הַשָּׂכָר</h4><div class="d">הטרקלין — שכולו טוב</div></div>
+    </div>
+
+    <div class="section">
+      <p>
+        ואם נחליט להתנהג על פי מה שהמלך רצה — הוא <strong>יוריד לנו את העולם הבא לעולם הזה</strong>.
+        זו תכלית בריאת העולם: שנבין שאנחנו באים לכאן, והכל זמני, והכל שלו. שהרי אחרי מאה ועשרים —
+        <strong>הכל נשאר, ואנחנו הולכים</strong>. והוא מסוגל לתת לנו הכל ברגע אחד.
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">לְהַפְסִיק אֶת ״מְחוֹל הָעַכְבָּרִים״</p>
+      <p class="final-explanation">
+        נלמד מן המלך — ענווה, נתינה, וסבלנות;<br>
+        נבין שהכל שלו, והכל זמני — ונחדל מן המרדף המטורף.<br>
+        בעזרת השם, <strong>בביאת גואל צדק — תכף ומיד. אמן, כן יהי רצון.</strong>
+      </p>
+    </div>
+
+    <p class="note">
+      * דברי מוסר ופנימיות. מקורות: סוכה מה ע"ב (בני עליה מועטים) · אבות ד, יג (שגגת תלמוד עולה זדון) ·
+      אבות א, יא (חכמים הזהרו) · תומר דבורה פ״א (המלך הנעלב) · אבות ד, טז (העולם הזה פרוזדור).
+      דברי הכנעה וביקורת על הדור בכללו — לא פסק על יחיד. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך המוסר והפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
