@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מישור והר — למה המשכן במישור והמקדש בהר</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="המשכן נבנה במישור והמקדש במעלה ההר — שלוש קדושות: מחשבה, לב, וחיבורם. ביטול ועזות בשלוש שכבות המשכן, והדעת שנלחמת ביצר שנדמה כהר">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/mishor-vahar">
+<meta property="og:title" content="מישור והר — למה המשכן במישור והמקדש בהר">
+<meta property="og:description" content="המשכן נבנה במישור והמקדש במעלה ההר — שלוש קדושות: מחשבה, לב, וחיבורם. ביטול ועזות בשלוש שכבות המשכן, והדעת שנלחמת ביצר שנדמה כהר">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="מישור והר — למה המשכן במישור והמקדש בהר">
+<meta name="twitter:description" content="המשכן נבנה במישור והמקדש במעלה ההר — שלוש קדושות: מחשבה, לב, וחיבורם. ביטול ועזות בשלוש שכבות המשכן, והדעת שנלחמת ביצר שנדמה כהר">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 56px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(36px,6vw,58px); text-align:center; color:var(--ink); line-height:1.13; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .opening-quote{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:24px 30px; margin-bottom:30px; border-radius:3px;}
+  .opening-quote p{font-family:'David Libre',serif; font-size:18px; color:var(--ink); line-height:1.75; margin:0;}
+  .opening-quote-source{display:block; margin-top:10px; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic;}
+
+  .question{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.22); border-right:4px solid var(--crimson); padding:20px 28px; margin:26px 0 34px; border-radius:3px;}
+  .question .lbl{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:8px;}
+  .question p{font-size:19px; color:var(--ink); margin:0; font-weight:500;}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:40px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* three kedushot */
+  .kedushot{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:26px 0;}
+  .kd{padding:20px 16px; border-radius:8px; text-align:center;}
+  .kd .n{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:8px;}
+  .kd h4{font-size:18px; color:var(--crimson); margin-bottom:6px;}
+  .kd .d{font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+  .kd1{background:rgba(184,138,44,0.07); border:1px solid rgba(184,138,44,0.26);}
+  .kd2{background:rgba(184,138,44,0.11); border:1px solid rgba(184,138,44,0.30);}
+  .kd3{background:linear-gradient(135deg, rgba(91,58,120,0.13), rgba(91,58,120,0.04)); border:1px solid rgba(91,58,120,0.30);}
+
+  /* stacked mishkan */
+  .mishkan{margin:30px 0; border-radius:10px; overflow:hidden; border:1px solid rgba(184,138,44,0.30);}
+  .layer{display:flex; align-items:center; justify-content:space-between; padding:20px 24px; gap:14px; flex-wrap:wrap;}
+  .layer .part{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px;}
+  .layer .mat{font-size:19px; font-weight:900;}
+  .layer .mean{font-size:15px; font-style:italic;}
+  .lay-roof{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment);}
+  .lay-roof .part{color:var(--gold-light);} .lay-roof .mat{color:var(--gold);} .lay-roof .mean{color:rgba(245,236,217,0.85);}
+  .lay-wall{background:linear-gradient(135deg, rgba(91,58,120,0.16), rgba(91,58,120,0.05));}
+  .lay-wall .part{color:var(--royal);} .lay-wall .mat{color:var(--royal);} .lay-wall .mean{color:var(--ink-soft);}
+  .lay-floor{background:linear-gradient(135deg, rgba(184,138,44,0.16), rgba(184,138,44,0.05));}
+  .lay-floor .part{color:var(--gold-deep);} .lay-floor .mat{color:var(--crimson);} .lay-floor .mean{color:var(--ink-soft);}
+
+  .opposites{display:flex; justify-content:center; align-items:center; gap:16px; margin:20px 0; flex-wrap:wrap;}
+  .opposites .op{background:rgba(184,138,44,0.10); border:1px solid rgba(184,138,44,0.28); border-radius:20px; padding:8px 22px; font-size:16px; font-weight:700; color:var(--crimson);}
+  .opposites .vs{color:var(--gold); font-size:18px; font-family:'Bellefair',serif; letter-spacing:2px;}
+
+  /* NRN mapping */
+  .map{margin:26px 0; border-radius:8px; overflow:hidden; border:1px solid rgba(184,138,44,0.26);}
+  .map .mrow{display:grid; grid-template-columns:1fr 1fr 1fr 1fr; font-size:15px;}
+  .map .mrow>div{padding:12px 10px; text-align:center; border-bottom:1px solid rgba(184,138,44,0.16);}
+  .map .head>div{background:rgba(184,138,44,0.14); font-family:'Bellefair',serif; font-size:12px; letter-spacing:1px; color:var(--gold-deep); font-weight:700;}
+  .map .mrow>div:not(:last-child){border-left:1px solid rgba(184,138,44,0.16);}
+  .map .mrow:last-child>div{border-bottom:none;}
+  .map .k{color:var(--crimson); font-weight:700;}
+
+  /* final comparison */
+  .compare{margin:30px 0; border-radius:10px; overflow:hidden; border:1px solid rgba(184,138,44,0.30);}
+  .compare .crow{display:grid; grid-template-columns:0.8fr 1fr 1fr;}
+  .compare .crow>div{padding:13px 12px; text-align:center; font-size:15px; border-bottom:1px solid rgba(184,138,44,0.16);}
+  .compare .crow>div:not(:last-child){border-left:1px solid rgba(184,138,44,0.16);}
+  .compare .crow:last-child>div{border-bottom:none;}
+  .compare .chead>div{font-family:'Bellefair',serif; font-size:13px; letter-spacing:1px; font-weight:700;}
+  .compare .chead .lbl0{background:rgba(184,138,44,0.10); color:var(--gold-deep);}
+  .compare .chead .c1{background:rgba(184,138,44,0.16); color:var(--crimson); font-size:17px;}
+  .compare .chead .c2{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--gold); font-size:17px;}
+  .compare .lbl0{background:rgba(184,138,44,0.06); color:var(--gold-deep); font-family:'Bellefair',serif; font-size:12.5px; letter-spacing:1px;}
+  .compare .c1{color:var(--ink);}
+  .compare .c2{background:rgba(43,29,16,0.05); color:var(--ink); font-weight:600;}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+  .attribution{margin-top:40px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
+    .kedushot{grid-template-columns:1fr;} .map .mrow{grid-template-columns:1fr 1fr;} .map .head{display:none;}
+    .compare .crow{grid-template-columns:0.7fr 1fr 1fr; font-size:13px;}
+    .layer{flex-direction:column; text-align:center; gap:4px;}
+    .opening-quote p{font-size:17px;} p{font-size:17px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · מקדש</div>
+    <h1>מִישׁוֹר וָהָר</h1>
+    <p class="subtitle">למה המשכן נבנה במישור — ובית המקדש במעלה ההר</p>
+
+    <div class="opening-quote">
+      <p>
+        המשכן היה על <strong>מישור</strong>, ובית המקדש נבנה <strong>במעלה ההר</strong>.
+        המשכן מקומו ב<em>מדבר</em> — ובית המקדש מקומו ב<em>ארץ ישראל</em>.
+      </p>
+      <span class="opening-quote-source">— על פי הרמב״ם, הלכות בית הבחירה</span>
+    </div>
+
+    <div class="question">
+      <div class="lbl">נשאלת השאלה</div>
+      <p>מדוע?</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">שָׁלֹשׁ קְדֻשּׁוֹת</h2>
+      <p>נסביר. שלוש קדושות הן:</p>
+    </div>
+
+    <div class="kedushot">
+      <div class="kd kd1"><div class="n">קדושה ראשונה</div><h4>קְדֻשַּׁת הַמַּחֲשָׁבָה</h4><div class="d">ביטול השכל — בחינת המשכן</div></div>
+      <div class="kd kd2"><div class="n">קדושה שנייה</div><h4>קְדֻשַּׁת הַלֵּב</h4><div class="d">תיקון המידות שבלב</div></div>
+      <div class="kd kd3"><div class="n">קדושה שלישית</div><h4>חִבּוּר לֵב וְשֵׂכֶל</h4><div class="d">ואז השכינה יורדת לגוף — והגוף נעשה בית מקדש</div></div>
+    </div>
+
+    <div class="pasuk">
+      כָּל בֵּי עֲשָׂרָה — שְׁכִינְתָּא שָׁרְיָא
+      <span class="pasuk-source">— סנהדרין לט ע"א · כל מקום שיש בו עשרה, השכינה שורה</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הַמִּשְׁכָּן — קְדֻשַּׁת הַמַּחֲשָׁבָה</h2>
+      <p>
+        המשכן היה בנוי על <strong>עפר</strong> — עניין ה<strong>ביטול</strong>:
+        <em>״ונפשי כעפר לכל תהיה״</em>. וגם עניין של <strong>מישור</strong> —
+        שעניינו <strong>קבלת עול</strong>, ביטול השכל והלב בעבודת השם;
+        רמז שבאותו גובה שניהם.
+      </p>
+      <p>
+        ולכן אנו אומרים בקריאת שמע של <strong>ערבית</strong> (כנגד הגלות) —
+        <strong>״בְּשָׁכְבְּךָ״</strong>, עניין ה<em>מישור</em>. וזו מעשה המרכבה של האבות,
+        שהיו מבוטלים לשכינה ולא שאלו שאלות. כך זוכים לקדושה הראשונה — המשכן.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">שְׁנֵי הֲפָכִים בַּמִּשְׁכָּן</h2>
+      <p>ומאידך גיסא — התבונן בשלוש שכבות המשכן:</p>
+    </div>
+
+    <div class="mishkan">
+      <div class="layer lay-roof">
+        <div><div class="part">התקרה</div><div class="mat">עוֹרוֹת עִזִּים וּתְחָשִׁים</div></div>
+        <div class="mean">עַזּוּת דִּקְדֻשָּׁה</div>
+      </div>
+      <div class="layer lay-wall">
+        <div><div class="part">הקירות</div><div class="mat">עֲצֵי שִׁטִּים</div></div>
+        <div class="mean">מִלְּתָא דִּשְׁטוּתָא — שטות של קדושה, התלהבות</div>
+      </div>
+      <div class="layer lay-floor">
+        <div><div class="part">הרצפה</div><div class="mat">עָפָר</div></div>
+        <div class="mean">בִּטּוּל</div>
+      </div>
+    </div>
+
+    <div class="opposites">
+      <span class="op">בִּטּוּל</span>
+      <span class="vs">שני הפכים</span>
+      <span class="op">עַזּוּת</span>
+    </div>
+
+    <div class="section">
+      <p>
+        מצד אחד <strong>ביטול</strong>, ומצד שני <strong>עזות</strong> — שני הפכים.
+        זאת <strong>עבודת המשכן</strong>: עניין של תיקון <em>שלושה לבושי השכל</em> (נר״ן),
+        ובהם מתקנים את העולמות ומסלקים את אחיזת החיצוניים — כנגד חטא עץ הדעת.
+      </p>
+    </div>
+
+    <div class="map">
+      <div class="mrow head"><div>הלבוש</div><div>האב</div><div>הלבוש בפועל</div><div>העולם</div></div>
+      <div class="mrow"><div class="k">נֶפֶשׁ</div><div>אברהם</div><div>מַעֲשֶׂה</div><div>עֲשִׂיָּה</div></div>
+      <div class="mrow"><div class="k">רוּחַ</div><div>יצחק</div><div>דִּבּוּר</div><div>יְצִירָה</div></div>
+      <div class="mrow"><div class="k">נְשָׁמָה</div><div>יעקב</div><div>מַחֲשָׁבָה</div><div>בְּרִיאָה</div></div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">אֶרֶץ יִשְׂרָאֵל — דַּעַת שֶׁל אֲצִילוּת</h2>
+      <p>
+        עכשיו נכנסים ל<strong>ארץ ישראל</strong> — וברוחניות: <strong>דעת של אצילות</strong>.
+        זהו <strong>תיקון הלב והמידות שבלב</strong>. כאן נלחמים עם היצר הרע
+        <strong>בכוח הדעת</strong> שזוכים מן הבורא.
+      </p>
+      <p>
+        ולכן — <strong>במעלה ההר</strong>. שהיצר עצמו נקרא <em>״הר״</em>:
+      </p>
+      <div class="pasuk">
+        צַדִּיקִים — נִדְמֶה לָהֶם יֵצֶר הָרַע כְּהַר גָּבוֹהַּ
+        <span class="pasuk-source">— סוכה נב ע"א</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">בְּקוּמֶךָ — זָקוּף מוּל הַיֵּצֶר</h2>
+      <p>
+        ולכן <strong>קריאת שמע של בוקר</strong> היא כנגד ה<strong>דעת</strong>,
+        שנמשלה לבוקר. ולכן נאמר <strong>״בְּקוּמֶךָ״</strong> — שהאדם עומד
+        <strong>זקוף מול יצרו</strong>. כי עכשיו מרחמים עליו בדין:
+      </p>
+      <div class="pasuk">
+        אָדָם שֶׁאֵין בּוֹ דֵּעָה — אָסוּר לְרַחֵם עָלָיו
+        <span class="pasuk-source">— סנהדרין צב ע"א</span>
+      </div>
+      <p>
+        מכאן שמי <strong>שיש</strong> בו דעת — <strong>מרחמים</strong> עליו!
+      </p>
+    </div>
+
+    <div class="compare">
+      <div class="crow chead"><div class="lbl0">הבחינה</div><div class="c1">הַמִּשְׁכָּן</div><div class="c2">בֵּית הַמִּקְדָּשׁ</div></div>
+      <div class="crow"><div class="lbl0">המקום</div><div class="c1">מישור</div><div class="c2">במעלה ההר</div></div>
+      <div class="crow"><div class="lbl0">הארץ</div><div class="c1">מדבר</div><div class="c2">ארץ ישראל</div></div>
+      <div class="crow"><div class="lbl0">הקדושה</div><div class="c1">קדושת המחשבה</div><div class="c2">קדושת הלב והמידות</div></div>
+      <div class="crow"><div class="lbl0">העבודה</div><div class="c1">ביטול · קבלת עול</div><div class="c2">דעת · מלחמה ביצר</div></div>
+      <div class="crow"><div class="lbl0">קריאת שמע</div><div class="c1">בְּשָׁכְבְּךָ · ערבית</div><div class="c2">בְּקוּמֶךָ · שחרית</div></div>
+      <div class="crow"><div class="lbl0">המצב</div><div class="c1">גלות</div><div class="c2">דעת של אצילות</div></div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">בַּמִּישׁוֹר — בִּטּוּל; בָּהָר — דַּעַת</p>
+      <p class="final-explanation">
+        במדבר, בגלות — משתטחים במישור, מבטלים שכל ולב כאחד.<br>
+        ובארץ ישראל — עולים בהר, זקופים מול היצר שנדמה כהר,<br>
+        בכוח הדעת שנתן הבורא. וזו הסיבה שהמשכן נבנה במישור, והמקדש במעלה ההר.
+      </p>
+    </div>
+
+    <p class="note">
+      * דברי פנימיות. מקורות: סנהדרין לט ע"א (כל בי עשרה שכינתא שריא) · סוכה נב ע"א (יצר הרע כהר) ·
+      סנהדרין צב ע"א (אין בו דעה — אסור לרחם) · שמות כה–כו (עצי שטים, עורות עיזים ותחשים) ·
+      ״ונפשי כעפר לכל תהיה״ (סוף שמונה עשרה). מקום המקדש בהר המוריה — מפורש ברמב״ם הל׳ בית הבחירה
+      ובדברי הימים ב׳ ג, א. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+  </div>
+</body>
+</html>
