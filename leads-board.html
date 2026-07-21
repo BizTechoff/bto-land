@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לוח לידים — BizTechoff</title>
+<style>
+  :root{
+    --surface-1:#fcfcfb; --page:#f9f9f7;
+    --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --grid:#e1e0d9; --baseline:#c3c2b7; --ring:rgba(11,11,11,.10);
+    --blue-550:#1c5cab; --blue-450:#2a78d6; --blue-400:#3987e5; --blue-300:#6da7ec; --blue-250:#86b6ef; --blue-100:#cde2fb;
+    --good:#0ca30c; --good-text:#006300; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --tint-critical:rgba(208,59,59,.10); --tint-serious:rgba(236,131,90,.13); --tint-warning:rgba(250,178,25,.16);
+    --tint-good:rgba(12,163,12,.10); --tint-blue:rgba(42,120,214,.10); --tint-gray:rgba(137,135,129,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-1:#1a1a19; --page:#0d0d0d;
+      --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+      --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,.10);
+      --blue-550:#5598e7; --blue-450:#3987e5; --blue-400:#2a78d6; --blue-300:#256abf; --blue-250:#1c5cab; --blue-100:#184f95;
+      --good-text:#0ca30c;
+      --tint-critical:rgba(208,59,59,.22); --tint-serious:rgba(236,131,90,.20); --tint-warning:rgba(250,178,25,.18);
+      --tint-good:rgba(12,163,12,.18); --tint-blue:rgba(57,135,229,.20); --tint-gray:rgba(137,135,129,.22);
+    }
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:var(--page); color:var(--ink-1); padding:20px; font-size:14px; line-height:1.45;
+  }
+  .wrap{max-width:1200px; margin:0 auto}
+  header{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:16px}
+  header h1{font-size:22px; font-weight:700}
+  header .sub{color:var(--ink-3); font-size:13px}
+  .card{background:var(--surface-1); border:1px solid var(--ring); border-radius:10px; padding:14px}
+
+  /* KPI tiles */
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:14px}
+  .tile .lbl{font-size:12.5px; color:var(--ink-2)}
+  .tile .val{font-size:30px; font-weight:600; margin-top:2px}
+  .tile .det{font-size:12px; color:var(--ink-3); margin-top:2px}
+  .tile .det.bad{color:var(--critical); font-weight:600}
+  .tile .det.good{color:var(--good-text); font-weight:600}
+
+  /* two-column zone */
+  .zone{display:grid; grid-template-columns:1.1fr .9fr; gap:10px; margin-bottom:14px}
+  @media (max-width:840px){ .zone{grid-template-columns:1fr} }
+  h2{font-size:14.5px; font-weight:700; margin-bottom:10px}
+  h2 .n{color:var(--ink-3); font-weight:400}
+
+  /* action queue */
+  .act{display:flex; gap:9px; align-items:flex-start; padding:8px 6px; border-bottom:1px solid var(--grid)}
+  .act:last-child{border-bottom:none}
+  .act input{margin-top:3px; accent-color:var(--blue-450); width:15px; height:15px; cursor:pointer}
+  .act .t{flex:1}
+  .act .t .main{font-weight:600}
+  .act .t .who{color:var(--ink-2); font-size:12.5px}
+  .act.done .t{opacity:.45; text-decoration:line-through}
+  .chip{display:inline-block; font-size:11.5px; font-weight:600; padding:1px 8px; border-radius:20px; white-space:nowrap}
+  .chip.overdue{background:var(--tint-critical); color:var(--critical)}
+  .chip.today{background:var(--tint-serious); color:#a34a26}
+  .chip.soon{background:var(--tint-gray); color:var(--ink-2)}
+  @media (prefers-color-scheme: dark){ .chip.today{color:var(--serious)} }
+
+  /* funnel */
+  .frow{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+  .frow .flbl{width:118px; font-size:12.5px; color:var(--ink-2); text-align:start}
+  .frow .ftrack{flex:1; display:flex; align-items:center; gap:8px}
+  .fbar{height:20px; border-radius:4px 0 0 4px; min-width:3px; transition:opacity .15s}
+  html[dir="rtl"] .fbar{border-radius:4px 0 0 4px}
+  .frow .fval{font-size:12.5px; font-weight:600; color:var(--ink-1); white-space:nowrap}
+  .frow .fpct{font-size:11.5px; color:var(--ink-3); white-space:nowrap}
+  .frow:hover .fbar{opacity:.82}
+  details.ftable{margin-top:8px; font-size:12.5px; color:var(--ink-2)}
+  details.ftable summary{cursor:pointer; color:var(--ink-3)}
+  details.ftable table{border-collapse:collapse; margin-top:6px; font-variant-numeric:tabular-nums}
+  details.ftable td,details.ftable th{border:1px solid var(--grid); padding:3px 10px; text-align:start}
+  .fnote{font-size:11.5px; color:var(--ink-3); margin-top:8px}
+
+  /* filters */
+  .filters{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:12px}
+  .fchip{border:1px solid var(--ring); background:var(--surface-1); color:var(--ink-2); font-size:12.5px;
+    padding:4px 11px; border-radius:20px; cursor:pointer; font-family:inherit}
+  .fchip .c{color:var(--ink-3); font-size:11px}
+  .fchip.on{background:var(--ink-1); color:var(--page); border-color:var(--ink-1); font-weight:600}
+  .fchip.on .c{color:inherit; opacity:.7}
+  #q{border:1px solid var(--ring); background:var(--surface-1); color:var(--ink-1); border-radius:20px;
+    padding:5px 12px; font-family:inherit; font-size:12.5px; min-width:170px}
+  #q:focus{outline:2px solid var(--blue-300)}
+
+  /* lead cards */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(295px,1fr)); gap:10px}
+  .lead{display:flex; flex-direction:column; gap:7px}
+  .lead .top{display:flex; justify-content:space-between; gap:8px; align-items:flex-start}
+  .lead .nm{font-weight:700; font-size:14.5px}
+  .lead .person{color:var(--ink-2); font-size:12.5px}
+  .badge{font-size:11.5px; font-weight:600; padding:2px 9px; border-radius:20px; white-space:nowrap}
+  .b-hot{background:var(--tint-serious); color:#a34a26}
+  .b-revive{background:var(--tint-critical); color:var(--critical)}
+  .b-wait{background:var(--tint-gray); color:var(--ink-2)}
+  .b-cold{background:var(--tint-blue); color:var(--blue-550)}
+  .b-meeting{background:var(--tint-blue); color:var(--blue-550)}
+  .b-client{background:var(--tint-good); color:var(--good-text)}
+  .b-parked{background:var(--tint-gray); color:var(--ink-3)}
+  @media (prefers-color-scheme: dark){ .b-hot{color:var(--serious)} .b-cold,.b-meeting{color:var(--blue-300)} }
+  .lead .seg{font-size:11.5px; color:var(--ink-3)}
+  .lead .ev{font-size:12.5px; color:var(--ink-2)}
+  .lead .nx{font-size:12.5px; background:var(--tint-gray); border-radius:7px; padding:6px 9px}
+  .lead .nx b{font-weight:700}
+  .days{font-size:11.5px; font-weight:600}
+  .d-ok{color:var(--ink-3)} .d-warn{color:#9a6b00} .d-serious{color:#a34a26} .d-crit{color:var(--critical)}
+  @media (prefers-color-scheme: dark){ .d-warn{color:var(--warning)} .d-serious{color:var(--serious)} }
+  .lead .links{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:4px}
+  .lead .links a{font-size:12px; color:var(--blue-550); text-decoration:none; border:1px solid var(--ring);
+    border-radius:20px; padding:3px 10px}
+  .lead .links a:hover{background:var(--tint-blue)}
+  @media (prefers-color-scheme: dark){ .lead .links a{color:var(--blue-300)} }
+  .empty{color:var(--ink-3); padding:20px; text-align:center}
+  footer{margin-top:18px; color:var(--ink-3); font-size:12px; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>לוח לידים · BizTechoff</h1>
+    <span class="sub">מבוסס סריקת מייל + יומן · עדכון אחרון: 21.07.2026, 12:50 · טווח: 90 יום</span>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="zone">
+    <section class="card">
+      <h2>⚡ תור פעולות <span class="n" id="actN"></span></h2>
+      <div id="actions"></div>
+    </section>
+    <section class="card">
+      <h2>משפך 90 יום — איפה הצנרת דולפת</h2>
+      <div id="funnel"></div>
+      <details class="ftable"><summary>תצוגת טבלה</summary><div id="ftbl"></div></details>
+      <div class="fnote">כל שלב סופר לידים שהגיעו אליו · הדליפה הגדולה: אחרי הצעה, לפני פגישה.</div>
+    </section>
+  </div>
+
+  <section>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none">אין לידים בסינון הזה</div>
+  </section>
+
+  <footer>הלוח מתעדכן בסריקות המייל של סוכן הלידים (פרויקט email-agent) · הסימונים בתור הפעולות אינם נשמרים בין רענונים</footer>
+</div>
+<script>
+// ===== נתונים — מקור אמת יחיד. מתעדכן בכל סריקת מייל =====
+const UPDATED = "2026-07-21";
+const LEADS = [
+ {id:"elimelech", nm:"מלאך הזכויות · פייצ'קר", person:"אלימלך שחר בן־ארי, מנכ\"ל", seg:"פלטפורמת זכויות מילואים", temp:"parked",
+  stage:"מוקפא ל-3 חודשים — כמה ניסיונות חזרה, מתחמק", ev:"5 שבועות אנגייג'מנט (NDA, PoC, 4 הצעות) ואז שתיקה. מוטי ניסה כמה פעמים לחזור — ללא מענה. הוחלט להפסיק ליזום ולחכות",
+  nx:"לא ליצור קשר ביוזמתנו עד ~14.10 · אם הוא יחזור — להגיב מיד", due:"2026-10-14", lastTouch:"2026-07-13",
+  phone:"0505383328", wa:true, email:"e-benari@inter.net.il", thread:"19eab1c329bff171",
+  replied:true, quoted:true, meeting:false},
+ {id:"evyatar", nm:"חגי אביתר — מיגון אש", person:"שלי משה, מנהלת המשרד", seg:"יומן תוקפים וביקורות", temp:"hot",
+  stage:"עולה לדיון פנימי אצלם השבוע", ev:"13.7: \"אעלה את הרעיון… נשב על זה שבוע הבא, אעדכן\". ביקשה מחיר פעמיים — אין עדכון מאז",
+  nx:"☎ לשלי עם עוגן מחיר לפני הישיבה הפנימית", due:"2026-07-16", lastTouch:"2026-07-13",
+  phone:"049536104", email:"contact@evyatarsystems.com", thread:"19f568a891cba497",
+  replied:true, quoted:false, meeting:false},
+ {id:"yoav", nm:"מטווח הולנדר — יואב סלומון", person:"יואב סלומון, מנהל מטווח", seg:"פלטפורמת ניהול מטווח", temp:"wait",
+  stage:"הפגישה התקיימה! יום א' 19.7, 11:00-12:30 במטווח כפר סבא", ev:"פגישה פרונטלית של 1.5 שעה בפועל — משך זמן ארוך, סימן טוב. תוצאה/צעד הבא לא מתועדים בתיבה",
+  nx:"❓ לברר ממוטי: איך הלכה הפגישה? יש הצעת מחיר לשלוח?", due:"2026-07-21", lastTouch:"2026-07-19",
+  email:"yoav29@gmail.com", thread:"19f550be7f2502f3",
+  replied:true, quoted:false, meeting:true},
+ {id:"maayan-a", nm:"מעיין אלמגור", person:"יועצת הנקה · דולה", seg:"אזור אישי ללקוחות", temp:"wait",
+  stage:"ענתה בטלפון ב-19.7! באמצע פגישה, ביקשה לחזור אליה בעוד שבוע", ev:"מוטי התקשר וקיבל מענה בפועל — פריצת דרך אחרי שקט במייל. שיחה חוזרת מתוזמנת ביומן ל-27.7 11:10 (052-4203720 מהאתר לא נבדק/נוסה)",
+  nx:"📅 שיחה חוזרת קבועה ל-27.7 11:10 · אם אין מענה — ניסיון נוסף אותו יום ~11:50 ואז 15:40", due:"2026-07-27", lastTouch:"2026-07-19",
+  phone:"0548080818", wa:true, email:"almagormaayan@gmail.com", thread:"19f1e3fe38c05fed",
+  replied:true, quoted:false, meeting:false},
+ {id:"dora", nm:"דורה לוי · לחם מחמצת זה פשוט", person:"בית ספר אפייה + מאפייה פיזית בדרך", seg:"קהילה + מסלולי למידה", temp:"cold",
+  stage:"❄️ ניסיון טלפון נוסף היום — המנוי לא זמין (כבוי/בחו\"ל)", ev:"אומת: המייל האמיתי doralevi999@gmail.com (לא lehem.bari@ — תיבת צוות עם אוטומט שבלע 3 פניות). ניסיון 1 ב-19.7: לא ענתה, נשלח וואטסאפ בהבטחה לחזור. ניסיון 2 היום 10:45 + ניסיון נוסף מאוחר יותר היום — שניהם: \"המנוי אינו זמין\" (כבוי או בחו\"ל)",
+  nx:"✉️ ניסיונות הטלפון מוצו — לפי התוכנית: השלב הבא הוא מייל פרידה קצר. ממתין להחלטה/אישור של מוטי לפני שליחה", due:"2026-07-21", lastTouch:"2026-07-21",
+  phone:"0509126052", wa:true, email:"doralevi999@gmail.com", thread:"19f1721e20389ab5",
+  replied:true, quoted:false, meeting:false},
+ {id:"matmatik", nm:"מתמתיק", person:"זאב", seg:"פלטפורמת מורה AI למתמטיקה", temp:"revive",
+  stage:"הצעה נשלחה 1.6 — פתח אותה מחדש ב־12.6", ev:"פתיחה חוזרת שבועיים אחרי = סיגנל קנייה שלא טופל",
+  nx:"📧 \"ראיתי שחזרת להצעה\" + טלפון", due:"2026-07-13", lastTouch:"2026-06-01",
+  email:"useecell@gmail.com", thread:"19e824b6f91e9162",
+  replied:false, quoted:true, meeting:false},
+ {id:"kanesher", nm:"ארגון כנשר", person:"קשור ליעקב (yyg856) — לקוח קיים", seg:"הצעה ממאי", temp:"revive",
+  stage:"פתיחות חמות במאי — סטטוס לא ידוע", ev:"נפתח שוב 20.5 (revival). לברר מול יעקב יחד עם שיחת ההפניות",
+  nx:"לברר סטטוס ולהחליט: להחיות או לסגור", due:"2026-07-15", lastTouch:"2026-05-20",
+  replied:false, quoted:true, meeting:false},
+ {id:"hodhasharon", nm:"עיריית הוד השרון", person:"איתמר, מנהל אגף שפ\"ע (דרך sigalm@)", seg:"בדיקות מתקני משחק — רשות מקומית", temp:"wait",
+  stage:"פנייה נשלחה 13.7 אחה\"צ — יוזמה מקומית", ev:"ניהול דיגיטלי של בדיקות מתקני המשחק בעיר. רשות = מחזור החלטות איטי",
+  nx:"לאתר טלפון ישיר של האגף · פולו־אפ 16.7", due:"2026-07-16", lastTouch:"2026-07-13",
+  email:"sigalm@hod-hasharon.muni.il", thread:"19f5c4647ec36754",
+  replied:false, quoted:false, meeting:false},
+ {id:"referrals", nm:"מנוע הפניות — גליקסון + יעקב", person:"לקוחות ממליצים", seg:"הפניות חמות מלקוחות קיימים", temp:"hot",
+  stage:"⚠ 3 ימים אחרי המועד שנקבע לטלפון — עדיין שקט", ev:"תזכורת אחרונה 13.7 \"יש מישהו או כמה?\". יעקב אמר \"תזכיר לי תחילת שבוע\" עוד ב-23.6 ולא חזר",
+  nx:"☎ טלפון לשניהם — הכלל שקבענו (18.7) כבר עבר", due:"2026-07-21", lastTouch:"2026-07-13",
+  email:"i.t.glikson@gmail.com", thread:"19ef43bab19548bb",
+  replied:true, quoted:false, meeting:false},
+ {id:"nof", nm:"נוף ירוק", person:"—", seg:"ניהול פרויקטים ואחזקה בגינון", temp:"wait",
+  stage:"פולו־אפ נשלח 12.7", ev:"Mailsuite: נפתח הרבה פעמים / הועבר הלאה (6.7) — מתעניינים בשקט",
+  nx:"☎ טלפון 15.7 אם אין מענה", due:"2026-07-15", lastTouch:"2026-07-12",
+  email:"info@nof-yarok.co.il", thread:"19f3311cffb6e338",
+  replied:false, quoted:false, meeting:false},
+ {id:"shkila", nm:"שקילה", person:"—", seg:"מעבדת כיול ISO 17025", temp:"wait",
+  stage:"☎ התקשרנו 21.7 — צלצל עד שהתנתק, אין מענה", ev:"המענה האוטומטי (7.7): \"אם אין תשובה תוך יום עסקים — התקשרו\". ניסיון טלפוני ב-21.7 — צלצל עד ניתוק, ללא מענה אנושי. ייתכן שהניסיון היה מאוחר מדי ביום",
+  nx:"☎ לנסות שוב בשעות בוקר מוקדמות (09:00–10:30) — 04-6274411", due:"2026-07-22", lastTouch:"2026-07-21",
+  phone:"046274411", email:"sales@shkila.com", thread:"19f3c61b6e819c34",
+  replied:false, quoted:false, meeting:false},
+ {id:"gavan", nm:"גוון ירוק", person:"שי סלם", seg:"מוקד ותיאום שטח", temp:"hot",
+  stage:"🔥 שיחת גילוי בוצעה — מיפוי תהליך + 3 מועדי זום הוצעו", ev:"שי ענה אחרי הקפצת המייל לכתובת החדשה. תיאר את התהליך הקיים: הכל מנוהל היום באקסלים. מוטי הציג scope ראשוני: שלב א' — רק הליבה (שכפול דיגיטלי של מה שהאקסלים עושים היום); הרחבות (תיאום שטח, אוטומציות וכו') בשלב ב'. הוצעו 3 מועדי זום לבחירתו",
+  nx:"📅 לחכות לבחירת מועד מבין ה-3 שהוצעו — אם אין תגובה עד 23.7, תזכורת קצרה", due:"2026-07-23", lastTouch:"2026-07-21",
+  phone:"0538755078", wa:true, email:"shay@gavan-yarok.co.il",
+  replied:true, quoted:false, meeting:false},
+ {id:"ronar", nm:"רונאר", person:"—", seg:"פורטל לקוחות — מדידה וכיול", temp:"wait",
+  stage:"פנייה נשלחה 12.7", ev:"פנייה אישית עם פורטל לדוגמה",
+  nx:"פולו־אפ 15.7", due:"2026-07-15", lastTouch:"2026-07-12",
+  email:"info@ronar.co.il", thread:"19f56824ab212a7c",
+  replied:false, quoted:false, meeting:false},
+ {id:"menaesh", nm:"מנע אש", person:"לידי ניר", seg:"יומן תוקפים — מיגון אש", temp:"wait",
+  stage:"פנייה 6.7 — אין מענה", ev:"אותו פיץ' שעבד אצל חגי אביתר",
+  nx:"פולו־אפ/טלפון 14.7", due:"2026-07-14", lastTouch:"2026-07-06",
+  email:"Office@menaesh.co.il", thread:"19f37b8502d4bef0",
+  replied:false, quoted:false, meeting:false},
+ {id:"fiverr", nm:"Fiverr — joshua_neon191", person:"קונה פוטנציאלי", seg:"שוק חיצוני", temp:"wait",
+  stage:"1.7: \"בחרתי את השירות שלך ומילאתי פרטים\"", ev:"ההודעות ממתינות בפייבר — לא נבדקו",
+  nx:"להיכנס לפייבר ולבדוק", due:"2026-07-13", lastTouch:"2026-07-01",
+  link:"https://www.fiverr.com/inbox", linkTxt:"פייבר",
+  replied:true, quoted:false, meeting:false},
+ {id:"tikal", nm:"Tikal + CodeValue", person:"שת\"פ קבלנות משנה", seg:"Fullstack Node/Angular", temp:"revive",
+  stage:"פתיחות חמות ביוני — בלי המשך", ev:"info@tikalk.com (15.6), info@codevalue.net (22.6) פתחו שוב ושוב",
+  nx:"פולו־אפ קצר לשניהם", due:"2026-07-15", lastTouch:"2026-06-22",
+  email:"info@tikalk.com",
+  replied:false, quoted:false, meeting:false},
+ {id:"masa", nm:"מ.ש.א", person:"—", seg:"כיול — בליץ 7.7", temp:"cold",
+  stage:"אין מענה", ev:"חלק מבליץ 5 מיילים זהים באותה נישה — אפס תגובות",
+  nx:"פנייה אישית מחודשת או טלפון", due:"2026-07-16", lastTouch:"2026-07-07",
+  email:"masa@msa.co.il", thread:"19f3c27441884521",
+  replied:false, quoted:false, meeting:false},
+ {id:"carcom", nm:"כרכום", person:"—", seg:"שקילה — בליץ 7.7", temp:"cold",
+  stage:"אין מענה", ev:"יש להם בית תוכנה משלהם — פיץ' צריך זווית אחרת",
+  nx:"פנייה אישית מחודשת או טלפון", due:"2026-07-16", lastTouch:"2026-07-07",
+  email:"carcom88@carcom88.co.il", thread:"19f3c61e8f5701bc",
+  replied:false, quoted:false, meeting:false},
+ {id:"newtec", nm:"ניוטק איילון", person:"—", seg:"שקילה — בליץ 7.7", temp:"cold",
+  stage:"אין מענה", ev:"נשלח ל־sales@ — כנראה תיבה משותפת",
+  nx:"פנייה אישית מחודשת או טלפון", due:"2026-07-16", lastTouch:"2026-07-07",
+  email:"sales@weighing.co.il", thread:"19f3c61d1fff2436",
+  replied:false, quoted:false, meeting:false},
+ {id:"shavit", nm:"מאזני שביט — רני", person:"רני", seg:"פורטל לקוחות — יבוא/ייצור/כיול ISO 17025", temp:"meeting",
+  stage:"📅 זום קבוע: יום ה' 23.7, 13:00–13:45", ev:"שיחת טלפון ב-19.7 פתחה את הדלת אחרי 12 יום שקט. הכנה מפורטת: שאלת פתיחה על מעקב תוקף כיולים, 2 כאבים (טופס קריאות ל-2 סניפים; תעודות ISO שפגות = הכנסה חוזרת שנשרה), מענה מוכן ל\"יש לנו כבר תוכנה\"",
+  nx:"📤 לשלוח לרני לינק זום בוואטסאפ ~12:55 (תזכורת קיימת) · לצאת מהשיחה עם תאריך המשך מוגדר", due:"2026-07-23", lastTouch:"2026-07-19",
+  link:"https://biztechoff.co.il/mockup/shavit-client-portal", linkTxt:"הדגמה",
+  email:"info@shavit-scales.co.il", thread:"19f3c619cedd214d",
+  replied:true, quoted:false, meeting:true},
+ {id:"nelly", nm:"נלי · מועדון האופים", person:"—", seg:"קהילת מנויים בוואטסאפ", temp:"cold",
+  stage:"פנייה 30.6 — אין מענה", ev:"פיץ': הקהילה גדלה מעבר לוואטסאפ",
+  nx:"פולו־אפ אחרון או ויתור", due:"2026-07-16", lastTouch:"2026-06-30",
+  email:"info@nelly.co.il", thread:"19f18ba3f57f9b4b",
+  replied:false, quoted:false, meeting:false},
+ {id:"sary", nm:"שרי · בחזרה לבסיס", person:"—", seg:"תוכנית מחזורים", temp:"cold",
+  stage:"פנייה 1.7 — אין מענה", ev:"נשלח ל־office@ — שומרת סף",
+  nx:"פולו־אפ אחרון", due:"2026-07-16", lastTouch:"2026-07-01",
+  email:"office@sarygr.com", thread:"19f1dd79fc9efd98",
+  replied:false, quoted:false, meeting:false},
+ {id:"maayan-k", nm:"במטבח של מעיין — מעין אלרואי", person:"מעין אלרואי", seg:"קהילת בישול · מועדון \"ממשיכות בדרך\"", temp:"hot",
+  stage:"ענתה! מבקשת לתאם שיחה — ממתין לבחירת מועד", ev:"20.7: \"אשמח לתאם שיחה\". מוטי הציע 3 מועדים (22.7 11:00 / 26.7 14:00 / 28.7 11:00); היא שאלה כמה זמן לפנות, מוטי ענה \"10 דק עד חצי שעה\" (20.7 17:31) — עדיין לא בחרה",
+  nx:"אם אין בחירת מועד עד הערב — תזכורת קטנה: \"איזה מהמועדים הכי נוח?\"", due:"2026-07-21", lastTouch:"2026-07-20",
+  email:"maayan286@gmail.com", thread:"19f1d771a75fb3e8",
+  replied:true, quoted:false, meeting:false},
+ {id:"mmlaw", nm:"MM LAW — משרד עורכי דין", person:"שירי", seg:"מערכת AI מותאמת לניהול תיקים משפטיים (Filevine)", temp:"hot", inbound:true,
+  stage:"⚠ פנייה נכנסת מ-16.7 — 5 ימים בלי מענה!", ev:"שירי: \"בוחנים פיתוח מערכת AI לניהול ועיבוד מידע בתיקים — תקשורת לקוחות, איסוף מסמכים, מעקב מידע חסר, אינטגרציה עם Filevine\". ביקשה פגישת היכרות \"במהלך השבוע הבא\" — זה השבוע הזה, עכשיו",
+  nx:"🔥 לענות היום! פרויקט משפטי-AI מדויק בול בהתמחות — הכי גבוה בפוטנציאל בלוח כרגע", due:"2026-07-21", lastTouch:"2026-07-16",
+  email:"shiri@mm-law.com", thread:"19f6b11e63159078",
+  replied:false, quoted:false, meeting:false},
+ {id:"tandemg", nm:"Tandem G", person:"—", seg:"קבלנות משנה Node.js/Angular", temp:"hot",
+  stage:"🔥 פתיחה חמה תוך 26 דקות מהשליחה", ev:"פנייה נשלחה היום 07:58, Mailsuite hot open ב-08:24 — מעורבות מיידית וחזקה",
+  nx:"פולו־אפ תוך יום-יומיים אם אין תגובה", due:"2026-07-23", lastTouch:"2026-07-21",
+  email:"info@tandemg.com", thread:"19f7a4ae059bd572",
+  replied:false, quoted:false, meeting:false},
+ {id:"elad", nm:"Elad (בית תוכנה)", person:"קסם (בחופש) → עילאי כהן", seg:"קבלנות משנה Node.js/Angular, רקע פינטק", temp:"wait",
+  stage:"נשלח פעמיים 14.7 (info@ ו-IlayC@) — אין מענה עדיין", ev:"קסם ענתה אוטומטית שהיא בחופש עד 29.7 והפנתה לעילאי כהן",
+  nx:"פולו־אפ לעילאי אם אין מענה עד 24.7", due:"2026-07-24", lastTouch:"2026-07-14",
+  email:"IlayC@elad.co.il",
+  replied:false, quoted:false, meeting:false},
+ {id:"gizra", nm:"Gizra", person:"—", seg:"קבלנות משנה — פיתוח Web", temp:"cold",
+  stage:"⚠ הדוא\"ל הוחזר — הכתובת לא קיימת", ev:"hi@gizra.com בטעות (bounced). צריך ערוץ אחר: טופס יצירת קשר באתר או לינקדאין",
+  nx:"למצוא איש קשר נכון ב-gizra.com או בלינקדאין ולנסות שוב", due:"2026-07-23", lastTouch:"2026-07-14",
+  replied:false, quoted:false, meeting:false},
+ {id:"eatahel", nm:"חברת אחזקת מבנים (e.atahel)", person:"—", seg:"מרכז בקרה תפעולי — קריאות/צוותים/גבייה", temp:"revive",
+  stage:"פתיחה חוזרת כפולה — האחרונה אתמול (20.7)!", ev:"שתי פניות ישנות (25.6 ו-5.7) נפתחו מחדש: 15.7 (שבוע אחרי) ו-20.7 (4 שבועות אחרי). שתי חזרות לאותו איש קשר = עניין אמיתי",
+  nx:"מגע טרי היום — לא לחזור על אותו נוסח, לשאול ישירות על התפעול היום", due:"2026-07-21", lastTouch:"2026-06-25",
+  email:"e.atahel@gmail.com", thread:"19eff26388c7d3c3",
+  replied:false, quoted:false, meeting:false},
+ // ===== לקוחות קיימים =====
+ {id:"glikson", nm:"ישראל גליקסון", person:"לקוח קיים", seg:"תמיכה — תקלת חיפוש", temp:"client",
+  stage:"18.6: \"אעדכן עוד שבועיים־שלושה\" — הזמן הגיע", ev:"בעיית חיפוש בפלטפורמה, לא נסגרה סופית",
+  nx:"צ'ק־אין יזום השבוע", due:"2026-07-14", lastTouch:"2026-06-18",
+  phone:"033727400", email:"i.t.glikson@gmail.com", thread:"19ed0ddc382f4742",
+  client:true},
+ {id:"vizel", nm:"שי ויזל · בית הרבי", person:"לקוח קיים", seg:"אחסון שנתי 26-27", temp:"client",
+  stage:"פתח את דרישת התשלום (18.6) — לוודא ששולם", ev:"Mailsuite: פתיחות מרובות של הדרישה",
+  nx:"בדיקת תשלום + תזכורת אם צריך", due:"2026-07-15", lastTouch:"2026-06-18",
+  client:true},
+ {id:"scalar", nm:"שניר · Scalar", person:"לקוח קיים", seg:"אחסון שנתי — פורטל + DB", temp:"client",
+  stage:"שולם ✓ (אישור העברה 12.7)", ev:"אחרי תזכורת אחת",
+  nx:"להפיק קבלה/חשבונית", due:"2026-07-14", lastTouch:"2026-07-12",
+  email:"snir@scalar.co.il", thread:"19ef33a87eb79844",
+  client:true},
+];
+
+// ===== לוגיקה =====
+const TODAY = new Date(); TODAY.setHours(0,0,0,0);
+const day = 86400000;
+const d2 = s => { const d=new Date(s+"T00:00:00"); return d; };
+const daysSince = s => Math.round((TODAY - d2(s))/day);
+const fmtD = s => d2(s).toLocaleDateString("he-IL",{day:"numeric",month:"numeric"});
+const TEMPS = {
+  revive:{txt:"💣 להחיות", cls:"b-revive", ord:0},
+  hot:{txt:"🔥 חם", cls:"b-hot", ord:1},
+  meeting:{txt:"📅 פגישה", cls:"b-meeting", ord:2},
+  wait:{txt:"⏳ ממתין", cls:"b-wait", ord:3},
+  cold:{txt:"❄️ ללא מענה", cls:"b-cold", ord:4},
+  parked:{txt:"🧊 מוקפא", cls:"b-parked", ord:5},
+  client:{txt:"🤝 לקוח", cls:"b-client", ord:6},
+};
+const daysCls = n => n>=21?"d-crit":n>=8?"d-serious":n>=4?"d-warn":"d-ok";
+const dueChip = l => {
+  const dd = Math.round((d2(l.due)-TODAY)/day);
+  if(dd<0)  return '<span class="chip overdue">⚠ עבר ('+fmtD(l.due)+')</span>';
+  if(dd===0)return '<span class="chip today">● היום</span>';
+  return '<span class="chip soon">'+fmtD(l.due)+'</span>';
+};
+const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+// KPI
+const active = LEADS.filter(l=>!l.client);
+const outbound = active.filter(l=>!l.inbound);
+const dueNow = LEADS.filter(l=>d2(l.due)<=TODAY);
+const staleQuotes = active.filter(l=>l.quoted && !l.meeting && l.temp!=="parked" && daysSince(l.lastTouch)>14);
+const replies = outbound.filter(l=>l.replied).length;
+const inboundWaiting = active.filter(l=>l.inbound && !l.replied);
+document.getElementById("kpis").innerHTML = [
+ {lbl:"לידים פעילים", val:active.length, det:"+ "+LEADS.filter(l=>l.client).length+" לקוחות קיימים"},
+ {lbl:"דורש פעולה עכשיו", val:dueNow.length, det:"מועד היום או שעבר", cls:dueNow.length?"bad":""},
+ {lbl:"פנייה נכנסת ממתינה", val:inboundWaiting.length, det:inboundWaiting.map(l=>l.nm.split(" ")[0]+" ("+daysSince(l.lastTouch)+" י')").join(" · ")||"אין כרגע", cls:inboundWaiting.length?"bad":""},
+ {lbl:"הצעות שנשכחו", val:staleQuotes.length, det:staleQuotes.map(l=>l.nm.split(" ")[0]+" ("+daysSince(l.lastTouch)+" י')").join(" · ")||"אין", cls:staleQuotes.length?"bad":""},
+ {lbl:"פגישות קבועות", val:LEADS.filter(l=>l.meeting).length, det:"רני/שביט 23.7 · יואב היה 19.7 (ממתין לעדכון)"},
+ {lbl:"שיעור תגובה לפניות קרות", val:Math.round(replies/outbound.length*100)+"%", det:"פי 6 מהבנצ'מרק לקולד ✓", cls:"good"},
+].map(k=>'<div class="card tile"><div class="lbl">'+k.lbl+'</div><div class="val">'+k.val+'</div><div class="det '+(k.cls||"")+'">'+(k.det||"")+'</div></div>').join("");
+
+// תור פעולות — לפי חשיבות (טמפרטורה) קודם, ואז לפי מועד. אחרי פער של ימים, "הכי דחוף" ≠ "הכי ישן"
+const queue = LEADS.filter(l=>d2(l.due)-TODAY <= day)
+  .sort((a,b)=> (TEMPS[a.temp].ord-TEMPS[b.temp].ord) || (d2(a.due)-d2(b.due)));
+document.getElementById("actN").textContent = "("+queue.length+")";
+document.getElementById("actions").innerHTML = queue.map((l,i)=>
+ '<label class="act" id="a'+i+'"><input type="checkbox" onchange="this.closest(\'.act\').classList.toggle(\'done\',this.checked)">'+
+ '<span class="t"><span class="main">'+esc(l.nx)+'</span><br><span class="who">'+esc(l.nm)+(l.phone?' · '+l.phone.replace(/(\d{2,3})(\d{7})/,"$1-$2"):'')+'</span></span>'+
+ dueChip(l)+'</label>').join("");
+
+// משפך — נגזר מהנתונים עצמם (פניות קרות שלנו בלבד; לידים נכנסים כמו MM LAW לא חלק ממשפך היוצא)
+const stages = [
+ {n:"פנייה יצאה", v:outbound.length, c:"var(--blue-550)"},
+ {n:"תגובה אנושית", v:outbound.filter(l=>l.replied).length, c:"var(--blue-450)"},
+ {n:"הצעת מחיר", v:outbound.filter(l=>l.quoted).length, c:"var(--blue-400)"},
+ {n:"פגישה", v:outbound.filter(l=>l.meeting).length, c:"var(--blue-300)"},
+ {n:"נסגר", v:0, c:"var(--blue-250)"},
+];
+const mx = stages[0].v;
+document.getElementById("funnel").innerHTML = stages.map((s,i)=>{
+ const pct = i? (stages[i-1].v? Math.round(s.v/stages[i-1].v*100) : 0) : 100;
+ return '<div class="frow" title="'+s.n+': '+s.v+(i?' ('+pct+'% מהשלב הקודם)':'')+'">'+
+  '<span class="flbl">'+s.n+'</span><span class="ftrack">'+
+  '<span class="fbar" style="width:'+Math.max(s.v?2:0,s.v/mx*100)+'%;background:'+s.c+'"></span>'+
+  '<span class="fval">'+s.v+'</span>'+(i?'<span class="fpct">'+pct+'%</span>':'')+'</span></div>';
+}).join("");
+document.getElementById("ftbl").innerHTML = '<table><tr><th>שלב</th><th>לידים</th><th>המרה</th></tr>'+
+ stages.map((s,i)=>'<tr><td>'+s.n+'</td><td>'+s.v+'</td><td>'+(i&&stages[i-1].v?Math.round(s.v/stages[i-1].v*100)+'%':'—')+'</td></tr>').join("")+'</table>';
+
+// סינון + חיפוש
+let curF = "all", curQ = "";
+const FILTERS = [["all","הכול"],["due","דורש פעולה"],["revive","💣 להחיות"],["hot","🔥 חם"],["meeting","📅 פגישות"],["wait","⏳ ממתין"],["cold","❄️ ללא מענה"],["parked","🧊 מוקפא"],["client","🤝 לקוחות"]];
+const match = l =>
+  (curF==="all" || (curF==="due" ? d2(l.due)<=TODAY : l.temp===curF)) &&
+  (!curQ || (l.nm+" "+(l.person||"")+" "+(l.seg||"")+" "+(l.email||"")).toLowerCase().includes(curQ));
+function renderFilters(){
+  document.getElementById("filters").innerHTML = FILTERS.map(([k,t])=>{
+    const n = LEADS.filter(l=>k==="all"?true:(k==="due"?d2(l.due)<=TODAY:l.temp===k)).length;
+    return '<button class="fchip'+(curF===k?' on':'')+'" onclick="setF(\''+k+'\')">'+t+' <span class="c">'+n+'</span></button>';
+  }).join("") + '<input id="q" placeholder="חיפוש שם / תחום / אימייל…" value="'+esc(curQ)+'" oninput="setQ(this.value)">';
+}
+function setF(k){curF=k; renderFilters(); renderGrid(); document.getElementById("q").focus();}
+function setQ(v){curQ=v.toLowerCase(); renderGrid();}
+function renderGrid(){
+  const ls = LEADS.filter(match).sort((a,b)=>(TEMPS[a.temp].ord-TEMPS[b.temp].ord)||(daysSince(b.lastTouch)-daysSince(a.lastTouch)));
+  document.getElementById("empty").style.display = ls.length?"none":"block";
+  document.getElementById("grid").innerHTML = ls.map(l=>{
+    const ds = daysSince(l.lastTouch);
+    const links = [];
+    if(l.phone) links.push('<a href="tel:+972'+l.phone.slice(1)+'">☎ '+l.phone.replace(/(\d{2,3})(\d{7})/,"$1-$2")+'</a>');
+    if(l.wa)    links.push('<a href="https://wa.me/972'+l.phone.slice(1)+'" target="_blank">💬 וואטסאפ</a>');
+    if(l.email) links.push('<a href="mailto:'+l.email+'">✉ מייל</a>');
+    if(l.thread)links.push('<a href="https://mail.google.com/mail/#all/'+l.thread+'" target="_blank">📨 שרשור</a>');
+    if(l.link)  links.push('<a href="'+l.link+'" target="_blank">🔗 '+(l.linkTxt||"קישור")+'</a>');
+    return '<div class="card lead">'+
+     '<div class="top"><div><div class="nm">'+esc(l.nm)+'</div><div class="person">'+esc(l.person||"")+'</div></div>'+
+     '<span class="badge '+TEMPS[l.temp].cls+'">'+TEMPS[l.temp].txt+'</span></div>'+
+     '<div class="seg">'+(l.inbound?'📥 פנייה נכנסת · ':'')+esc(l.seg)+' · <span class="days '+daysCls(ds)+'">'+(ds===0?"מגע היום":ds+" ימים ללא מגע")+'</span></div>'+
+     '<div class="ev"><b>'+esc(l.stage)+'</b><br>'+esc(l.ev)+'</div>'+
+     '<div class="nx">◄ <b>הצעד הבא:</b> '+esc(l.nx)+' '+dueChip(l)+'</div>'+
+     '<div class="links">'+links.join("")+'</div></div>';
+  }).join("");
+}
+renderFilters(); renderGrid();
+</script>
+</body>
+</html>
