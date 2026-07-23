@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אפיון מפורט · פורטל הכיולים · מאזני שביט בע״מ</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-950:#101318; --brand-900:#181C22; --brand-800:#20252D; --brand-700:#2B323C;
+  --brand-600:#3A424E; --brand-500:#4A5462; --brand-400:#77828F; --brand-200:#D4DAE2;
+  --brand-100:#E9EDF2; --brand-50:#F5F7F9;
+  --orange:#E8821E; --gold:#F2A93B;
+  --ink:#1B222B; --muted:#5B6674; --line:#DFE4EA; --bg:#F3F5F7; --card:#FFFFFF;
+  --ok:#178A50; --ok-bg:#E4F5EC; --warn:#B96A0B; --warn-bg:#FCF0DC; --bad:#C03A2B; --bad-bg:#FBE7E4;
+  --radius:14px; --shadow:0 8px 28px rgba(16,19,24,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.75}
+.wrap{max-width:1020px;margin:0 auto;padding:28px 20px 60px}
+.cover{background:linear-gradient(130deg,var(--brand-950),var(--brand-700) 58%,var(--orange));border-radius:20px;color:#fff;padding:44px 44px 36px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.cover::after{content:"";position:absolute;inset-inline-start:-120px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.13),transparent 65%)}
+.doc-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);padding:5px 16px;border-radius:99px;font-size:13px;font-weight:600}
+.cover h1{font-size:36px;font-weight:900;margin:16px 0 4px;line-height:1.25}
+.cover .sub{font-size:18px;color:#DDE2E9}
+.logo-line{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.logo-mark{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:26px;position:relative;z-index:1}
+.meta .kv{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:9px 14px}
+.meta .k{font-size:11.5px;color:#F5C58A;font-weight:500}
+.meta .v{font-size:14.5px;font-weight:700}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 34px;margin-top:22px}
+h2.sec{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:800;color:var(--brand-800);margin-bottom:14px}
+h2.sec .num{flex:none;min-width:34px;height:34px;padding:0 6px;border-radius:10px;background:var(--brand-800);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center;font-weight:800}
+h3{font-size:16px;font-weight:800;color:var(--brand-700);margin:20px 0 8px;padding-right:10px;border-right:4px solid var(--orange)}
+h4{font-size:14.5px;font-weight:700;color:var(--brand-700);margin:14px 0 6px}
+p{margin-bottom:10px}
+.lead{font-size:16px;color:#28313D}
+ul.clean{list-style:none;margin:6px 0 10px}
+ul.clean li{padding:4.5px 26px 4.5px 0;position:relative}
+ul.clean li::before{content:"";position:absolute;right:6px;top:14px;width:8px;height:8px;border-radius:3px;background:var(--orange)}
+ol.steps{margin:6px 24px 12px 0}
+ol.steps li{padding:3px 6px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:8px;margin-top:6px}
+.toc a{display:flex;gap:9px;align-items:center;text-decoration:none;color:var(--brand-800);background:var(--brand-50);border:1px solid var(--brand-100);padding:8px 12px;border-radius:10px;font-weight:600;font-size:13.5px}
+.toc a:hover{background:var(--brand-100)}
+.toc .n{flex:none;min-width:22px;height:22px;padding:0 4px;border-radius:7px;background:var(--brand-200);color:var(--brand-900);font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.callout{border-radius:12px;padding:13px 16px;margin:12px 0;border:1px solid;font-size:14px}
+.callout .t{font-weight:800;display:block;margin-bottom:3px}
+.co-info{background:var(--brand-50);border-color:var(--brand-200);color:var(--brand-900)}
+.co-ok{background:var(--ok-bg);border-color:#BFE5D0;color:#14513A}
+.co-warn{background:var(--warn-bg);border-color:#F0DCB8;color:#7A4A08}
+table.tbl{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+.tbl th{background:var(--brand-800);color:#fff;font-weight:700;padding:8px 12px;text-align:right}
+.tbl th:first-child{border-radius:0 10px 0 0}
+.tbl th:last-child{border-radius:10px 0 0 0}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:nth-child(even) td{background:var(--brand-50)}
+.tbl code{direction:ltr;display:inline-block}
+code{font-family:'Consolas','Monaco',monospace;font-size:12.5px;background:var(--brand-100);color:var(--brand-900);padding:1px 7px;border-radius:6px}
+pre.tree{direction:ltr;text-align:left;background:var(--brand-950);color:#D8E3F0;border-radius:12px;padding:18px 22px;font-family:'Consolas','Monaco',monospace;font-size:13px;line-height:1.65;overflow-x:auto;margin:10px 0}
+pre.tree .c{color:#7C8DA6}
+pre.tree .o{color:#F5A85A}
+.pill{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:2px 10px;margin-inline-start:6px;vertical-align:2px}
+.pill.man{background:var(--brand-800);color:#fff}
+.pill.cust{background:#FDEBD7;color:#9A5A10;border:1px solid #F0CFA4}
+.pill.tech{background:var(--brand-100);color:var(--brand-700)}
+.pill.pub{background:var(--ok-bg);color:#14513A;border:1px solid #BFE5D0}
+.ent{border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+.ent .eh{background:linear-gradient(90deg,var(--brand-800),var(--brand-600));color:#fff;padding:10px 16px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ent .eh code{background:rgba(255,255,255,.15);color:#FFD9A8}
+.ent .eh .desc{font-weight:400;font-size:12.5px;color:#C9D2DC}
+.ent table{margin:0}
+.ent .tbl th{border-radius:0!important;background:var(--brand-100);color:var(--brand-800)}
+.erd{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:12px 0}
+.erd .e{background:var(--brand-50);border:1.5px solid var(--brand-200);border-radius:10px;padding:9px 12px;font-size:12.5px;text-align:center}
+.erd .e b{display:block;color:var(--brand-800);font-size:14px}
+.erd .e span{color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0 4px}
+.fstep{flex:1 1 150px;min-width:145px;background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:10px 12px;font-size:12.5px}
+.fstep b{display:block;color:var(--brand-800);font-size:13px;margin-bottom:2px}
+.fstep .s{color:var(--muted)}
+.farr{align-self:center;color:var(--brand-400);font-weight:900;font-size:18px;padding:0 2px}
+.fstep.hot{background:#FFF4E5;border-color:#F0D4AC}
+.fstep.hot b{color:#8A5A0B}
+.fstep.okk{background:var(--ok-bg);border-color:#BFE5D0}
+.fstep.okk b{color:#14513A}
+.email-mock{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:14px 0;max-width:620px;box-shadow:var(--shadow)}
+.email-mock .eh2{background:var(--brand-950);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.email-mock .eh2 b{font-size:15px}
+.email-mock .body{padding:20px 22px;background:#fff;font-size:14px}
+.email-mock .sbj{background:var(--brand-50);border-bottom:1px solid var(--line);padding:9px 20px;font-size:13px;color:var(--brand-800)}
+.email-mock table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0}
+.email-mock th{background:var(--brand-100);padding:6px 8px;text-align:right;color:var(--brand-800)}
+.email-mock td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.btn-o{display:inline-block;background:var(--orange);color:#fff;border-radius:99px;padding:8px 22px;font-weight:700;font-size:13.5px;margin:4px 4px 4px 0;text-decoration:none}
+.btn-g{display:inline-block;background:#fff;color:var(--brand-800);border:1.5px solid var(--brand-300,#A7B2BF);border-radius:99px;padding:8px 22px;font-weight:700;font-size:13.5px;margin:4px 4px 4px 0;text-decoration:none}
+.warn-days{color:var(--bad);font-weight:700}
+.doc-footer{margin-top:26px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.9}
+.doc-footer b{color:var(--brand-800)}
+.screen-box{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0;background:linear-gradient(180deg,#fff,var(--brand-50))}
+.screen-box .sh{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.screen-box .sh b{font-size:15.5px;color:var(--brand-900)}
+.screen-box .route{direction:ltr;font-family:monospace;font-size:12px;background:var(--brand-950);color:#FFC98A;border-radius:8px;padding:2px 10px}
+@media(max-width:640px){.cover{padding:30px 22px}.cover h1{font-size:26px}.sheet{padding:22px 16px}}
+@media print{body{background:#fff}.sheet,.cover{box-shadow:none;break-inside:avoid}.wrap{padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="logo-line">
+    <div class="logo-mark">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 6a3.5 3.5 0 0 0 7 0L6 7"/><path d="M19 7l-3 6a3.5 3.5 0 0 0 7 0l-3-6"/><path d="M8 21h8"/></svg>
+    </div>
+    <div>
+      <div style="font-weight:800;font-size:17px">מאזני שביט בע״מ</div>
+      <div style="font-size:12px;color:#D6DBE2">מעבדת כיול מוסמכת ISO/IEC 17025:2017</div>
+    </div>
+  </div>
+  <span class="doc-badge">📗 מסמך אפיון מפורט · גרסה 1.0</span>
+  <h1>פורטל הכיולים - אפיון מפורט</h1>
+  <div class="sub">מודל נתונים · הרשאות · מסכים · זרימות · מנוע תזכורות · ארכיטקטורה</div>
+  <div class="meta">
+    <div class="kv"><div class="k">לקוח</div><div class="v">מאזני שביט בע״מ</div></div>
+    <div class="kv"><div class="k">ספק</div><div class="v">BizTechoff™</div></div>
+    <div class="kv"><div class="k">תאריך</div><div class="v">23.07.2026</div></div>
+    <div class="kv"><div class="k">מסמך אב</div><div class="v">אפיון-על v1.0</div></div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="sheet">
+  <h2 class="sec"><span class="num">☰</span>תוכן העניינים</h2>
+  <div class="toc">
+    <a href="#d1"><span class="n">1</span>ארכיטקטורה ומבנה הפרויקט</a>
+    <a href="#d2"><span class="n">2</span>מודל הנתונים - ישויות</a>
+    <a href="#d3"><span class="n">3</span>רשימות ערכים (Enums)</a>
+    <a href="#d4"><span class="n">4</span>תפקידים והרשאות</a>
+    <a href="#d5"><span class="n">5</span>ניתוב, מסכים ופונקציונליות</a>
+    <a href="#d6"><span class="n">6</span>מנוע התזכורות - אלגוריתם</a>
+    <a href="#d7"><span class="n">7</span>תבניות דוא״ל</a>
+    <a href="#d8"><span class="n">8</span>קבצים וענן (S3)</a>
+    <a href="#d9"><span class="n">9</span>שכבת ה-API</a>
+    <a href="#d10"><span class="n">10</span>קליטת נתונים היסטוריים</a>
+    <a href="#d11"><span class="n">11</span>דרישות לא-פונקציונליות</a>
+    <a href="#d12"><span class="n">12</span>פיילוט, הדרכה ומסירה</a>
+    <a href="#d13"><span class="n">13</span>נושאים לסגירה</a>
+  </div>
+</div>
+
+<!-- 1 ARCHITECTURE -->
+<div class="sheet" id="d1">
+  <h2 class="sec"><span class="num">1</span>ארכיטקטורה ומבנה הפרויקט</h2>
+  <p class="lead">המערכת נבנית בארכיטקטורה מודולרית תלת-שכבתית עם קוד משותף (Shared) בין הלקוח לשרת - כך שכל ישות, כלל ולידציה והרשאה מוגדרים <b>פעם אחת</b> ונאכפים בשני הצדדים.</p>
+  <div class="flow">
+    <div class="fstep"><b>Angular (SPA)</b><span class="s">ממשק עברית RTL רספונסיבי · רכיבי UI משותפים · Guards לניתוב</span></div>
+    <div class="farr">⇄</div>
+    <div class="fstep"><b>Remult API</b><span class="s">ישויות + ולידציות + הרשאות · CRUD מאובטח · Backend Prefilter</span></div>
+    <div class="farr">⇄</div>
+    <div class="fstep"><b>Node.js Services</b><span class="s">JWT · מתזמן (Cron) · דיוור · חתימת S3</span></div>
+    <div class="farr">⇄</div>
+    <div class="fstep hot"><b>תשתיות</b><span class="s">אירוח Railway (שרת + PostgreSQL) · AWS S3 · דיוור Resend</span></div>
+  </div>
+  <h3>מבנה תיקיות (מודולריות מלאה)</h3>
+  <pre class="tree">src/
+├── app/                          <span class="c">// צד לקוח - Angular</span>
+│   ├── common/                   <span class="c">// רכיבים משותפים: טבלה, צ'יפ סטטוס, דיאלוג, אשף, Drop-Zone</span>
+│   ├── route/                    <span class="c">// ניתוב + auth.guard + role.guard (חזרה ליעד המקורי אחרי כניסה)</span>
+│   ├── service/                  <span class="c">// auth, api, upload(S3 direct), toast, config</span>
+│   └── pages/                    <span class="c">// מסך לכל מודול: calibrations, customers, upload, reminders, my-area…</span>
+├── assets/                       <span class="c">// לוגו מאזני שביט, ערכת צבעים, אייקונים</span>
+├── server/                       <span class="c">// צד שרת - Node.js</span>
+│   ├── index.ts                  <span class="c">// נקודת כניסה</span>
+│   ├── server.ts                 <span class="c">// Express + אבטחה (HTTPS, Headers, Rate-Limit)</span>
+│   ├── jwt.ts                    <span class="c">// הנפקה ואימות טוקנים, Remember-Me</span>
+│   ├── remult-api.ts             <span class="c">// רישום ישויות ובקרים, חיבור PostgreSQL</span>
+│   ├── json-body.ts              <span class="c">// טיפול בגוף הבקשות</span>
+│   ├── scheduler.ts              <span class="o">// Cron יומי 11:00 → מנוע התזכורות</span>
+│   ├── mailer.ts                 <span class="o">// דיוור ממותג (Resend) + תבניות + ויסות מכסה</span>
+│   └── s3.ts                     <span class="o">// קישורים חתומים להעלאה/הורדה</span>
+└── shared/                       <span class="c">// קוד משותף לקוח+שרת</span>
+    ├── entity/                   <span class="c">// Customer, Calibration, MediaFile, UploadBatch, ReminderLog, Request, User, Settings</span>
+    ├── enum/                     <span class="c">// Role, CalibStatus, UploadStatus, ReminderType, RequestType, RequestStatus</span>
+    ├── controller/               <span class="c">// Auth, Upload, Reminder, Report, Request</span>
+    └── type/                     <span class="c">// ממשקי בקשה/תגובה (interface-req / interface-res)</span></pre>
+  <div class="callout co-info"><span class="t">עיקרון המודולריות</span>כל מודול (כיולים, לקוחות, תזכורות, קריאות…) מחזיק ישות, בקר ומסך משלו, ונשען על רכיבי ה-common. מודול עתידי - למשל <b>קריאת שירות</b> - נבנה על התשתית הקיימת (סוג + טופס ייעודי) ומבודד מהמודולים האחרים.</div>
+</div>
+
+<!-- 2 DATA MODEL -->
+<div class="sheet" id="d2">
+  <h2 class="sec"><span class="num">2</span>מודל הנתונים - ישויות</h2>
+  <p class="lead">שמונה ישויות ליבה, כולן תחת <code>shared/entity</code>. קשרי המפתח:</p>
+  <div class="erd">
+    <div class="e"><b>Customer</b><span>לקוח</span></div>
+    <div class="e"><b>Calibration</b><span>כיול (N ללקוח)</span></div>
+    <div class="e"><b>MediaFile</b><span>קובץ (PDF / XLSX)</span></div>
+    <div class="e"><b>UploadBatch</b><span>סבב העלאה</span></div>
+    <div class="e"><b>ReminderLog</b><span>יומן תזכורות</span></div>
+    <div class="e"><b>Request</b><span>קריאה (כיול / שירות עתידי)</span></div>
+    <div class="e"><b>User</b><span>משתמש + תפקיד</span></div>
+    <div class="e"><b>Settings</b><span>הגדרות מערכת</span></div>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>Customer</code> לקוח <span class="desc">מוקם ידנית או אוטומטית בקליטה מרוכזת (לפי שם תיקייה)</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id</code></td><td>uuid</td><td>מזהה</td></tr>
+      <tr><td><code>name</code></td><td>string</td><td>שם החברה - ייחודי, חובה. משמש למיפוי תיקיות בקליטה</td></tr>
+      <tr><td><code>contactName</code></td><td>string</td><td>איש קשר ראשי</td></tr>
+      <tr><td><code>email</code></td><td>string</td><td>אימייל ראשי לתזכורות. לקוח ללא אימייל מסומן בדגל אזהרה ומופיע בדוח חריגים</td></tr>
+      <tr><td><code>extraEmails</code></td><td>string</td><td>נמענים נוספים (מופרדים בפסיק) - יקבלו עותק</td></tr>
+      <tr><td><code>phone / address</code></td><td>string</td><td>פרטי קשר</td></tr>
+      <tr><td><code>active</code></td><td>boolean</td><td>לקוח לא פעיל אינו מקבל תזכורות</td></tr>
+      <tr><td><code>notes</code></td><td>string</td><td>הערות פנימיות (משרד בלבד)</td></tr>
+      <tr><td><code>createdAt / updatedAt</code></td><td>Date</td><td>אוטומטי</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>Calibration</code> כיול <span class="desc">רשומת כיול אחת = תעודה אחת של מכשיר אצל לקוח</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id</code></td><td>uuid</td><td>מזהה</td></tr>
+      <tr><td><code>customerId</code></td><td>→ Customer</td><td>שיוך ללקוח, חובה</td></tr>
+      <tr><td><code>deviceName</code></td><td>string</td><td>המכשיר: משקל אנליטי / פלטפורמה / גשר שקילה / משקולת וכו'</td></tr>
+      <tr><td><code>manufacturer / model</code></td><td>string</td><td>יצרן ודגם</td></tr>
+      <tr><td><code>serialNumber</code></td><td>string</td><td>מספר סידורי יצרן</td></tr>
+      <tr><td><code>internalNumber</code></td><td>string</td><td>מספר פנימי אצל הלקוח (אם קיים)</td></tr>
+      <tr><td><code>certificateNumber</code></td><td>string</td><td>מספר תעודה</td></tr>
+      <tr><td><code>calibrationDate</code></td><td>Date</td><td>מועד ביצוע הכיול - חובה</td></tr>
+      <tr><td><code>validityMonths</code></td><td>int</td><td>תקופת תוקף. ברירת מחדל: 12 חודשים (ניתן לשינוי פר תעודה)</td></tr>
+      <tr><td><code>expiryDate</code></td><td>Date (מחושב)</td><td><code>calibrationDate + validityMonths</code> - הבסיס לתזכורות</td></tr>
+      <tr><td><code>periodKey</code></td><td>string (מחושב)</td><td><code>YYYY-MM</code> של מועד הביצוע - מפתח ההחלפה בקליטה (ר' פרק 10)</td></tr>
+      <tr><td><code>result</code></td><td>enum</td><td>מסקנה: תקין / תקין בהסתייגות / לא תקין</td></tr>
+      <tr><td><code>location / range / referenceDevice / technician</code></td><td>string</td><td>מיקום, טווח, מכשיר ייחוס, שם המכייל - כמו בתעודה</td></tr>
+      <tr><td><code>status</code></td><td>enum (מחושב)</td><td>בתוקף / לקראת תפוגה / פג תוקף - לפי expiryDate והמדרגות</td></tr>
+      <tr><td><code>version</code></td><td>int</td><td>מונה החלפות (תעודה שהוחלפה נשמרת כהיסטוריה)</td></tr>
+      <tr><td><code>certFileId</code></td><td>→ MediaFile</td><td>תעודת ה-PDF - גלויה ללקוח</td></tr>
+      <tr><td><code>workFileId</code></td><td>→ MediaFile</td><td>קובץ העבודה (אקסל) - <b>למשרד בלבד</b>, לעריכת התעודה הבאה בלי לחפש בתיקיות</td></tr>
+      <tr><td><code>createdAt / createdBy</code></td><td>Date / string</td><td>אוטומטי</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>MediaFile</code> קובץ מדיה <span class="desc">כל הקבצים בפועל יושבים תחת ישות אחת - עם שיוך ללקוח ולכיול</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id</code></td><td>uuid</td><td>מזהה</td></tr>
+      <tr><td><code>s3Key</code></td><td>string</td><td>מפתח מלא ב-S3 (ר' פרק 8)</td></tr>
+      <tr><td><code>originalName / folderName</code></td><td>string</td><td>שם הקובץ ושם התיקייה כפי שהועלו - לצורך שיוך והתחקות</td></tr>
+      <tr><td><code>kind</code></td><td>enum</td><td>CERT_PDF (ללקוח) / WORK_XLSX (פנימי)</td></tr>
+      <tr><td><code>size / mime</code></td><td>int / string</td><td>נתוני קובץ</td></tr>
+      <tr><td><code>uploadBatchId</code></td><td>→ UploadBatch</td><td>לאיזה סבב העלאה שייך</td></tr>
+      <tr><td><code>status</code></td><td>enum</td><td>ממתין / הועלה / נכשל / דולג / משויך + סיבת כשל</td></tr>
+      <tr><td><code>customerId / calibrationId</code></td><td>→</td><td>שיוך (נקבע בקליטה)</td></tr>
+      <tr><td><code>uploadedBy / uploadedAt</code></td><td>string / Date</td><td>אוטומטי</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>UploadBatch</code> סבב העלאה <span class="desc">כל העלאה מרוכזת נרשמת כסבב עם דוח מסכם</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id / startedBy / startedAt / finishedAt</code></td><td>-</td><td>זיהוי הסבב</td></tr>
+      <tr><td><code>mode</code></td><td>enum</td><td><b>HISTORY</b> (קליטת עבר - בלי מיילים ללקוחות) / <b>ONGOING</b> (שוטף - עם עדכון אוטומטי)</td></tr>
+      <tr><td><code>totals</code></td><td>json</td><td>סה"כ קבצים / הועלו / הוחלפו / נכשלו / דולגו / לקוחות חדשים</td></tr>
+      <tr><td><code>reportKey</code></td><td>string</td><td>דוח קליטה מפורט (CSV) להורדה</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>ReminderLog</code> יומן תזכורות <span class="desc">כל שליחה נרשמת - הבסיס למניעת כפילויות ולדוחות המעקב</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id / customerId</code></td><td>-</td><td>שיוך ללקוח</td></tr>
+      <tr><td><code>type</code></td><td>enum</td><td>תזכורת 30 יום / 14 יום / מדרגה מותאמת / עדכון תעודה חדשה / סימון ידני</td></tr>
+      <tr><td><code>calibrationIds</code></td><td>json</td><td>אילו כיולים נכללו במייל המרוכז</td></tr>
+      <tr><td><code>toEmail / sentAt</code></td><td>string / Date</td><td>נמען ומועד</td></tr>
+      <tr><td><code>sendStatus</code></td><td>enum</td><td>נשלח / נכשל + סיבה (כשל מוצג למשרד)</td></tr>
+      <tr><td><code>confirmToken</code></td><td>string</td><td>טוקן חד-פעמי לאישור תיאום מתוך המייל</td></tr>
+      <tr><td><code>confirmedAt / confirmNote</code></td><td>Date / string</td><td>אישור הלקוח + הערה שצירף</td></tr>
+      <tr><td><code>cycleKey</code></td><td>string</td><td>מזהה מחזור תפוגה (לקוח+תעודה+תוקף) - מניעת שליחה כפולה</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>Request</code> קריאה <span class="desc">תשתית גנרית לפי סוג: היום קריאת כיול, בעתיד קריאת שירות - אותה ישות, אותם מסכים</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id / customerId</code></td><td>-</td><td>שיוך ללקוח</td></tr>
+      <tr><td><code>type</code></td><td>enum</td><td><b>CALIBRATION</b> (פעיל בשלב זה) / SERVICE (עתידי - טופס תקלה כמו באתר: סוג משקל, דגם, תיאור תקלה, קובץ, עדיפות)</td></tr>
+      <tr><td><code>source</code></td><td>enum</td><td>אזור לקוח / קישור במייל / הוזן ע"י המשרד</td></tr>
+      <tr><td><code>preferredDate / notes</code></td><td>Date / string</td><td>מועד מועדף והערות הלקוח</td></tr>
+      <tr><td><code>payload</code></td><td>json</td><td>שדות דינמיים לפי סוג הקריאה (למשל: שדות טופס קריאת שירות בעתיד)</td></tr>
+      <tr><td><code>status</code></td><td>enum</td><td>חדשה / בטיפול / תואמה / בוצעה / בוטלה</td></tr>
+      <tr><td><code>createdAt / handledBy / handledAt</code></td><td>-</td><td>מעקב טיפול</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>User</code> משתמש <span class="desc">הזדהות ותפקיד; משתמש-לקוח מקושר לרשומת הלקוח שלו</span></div>
+    <table class="tbl">
+      <tr><th style="width:22%">שדה</th><th style="width:18%">סוג</th><th>הערות</th></tr>
+      <tr><td><code>id / name</code></td><td>-</td><td>פרטי המשתמש</td></tr>
+      <tr><td><code>email</code></td><td>string</td><td>ייחודי - משמש שם כניסה</td></tr>
+      <tr><td><code>passwordHash</code></td><td>string</td><td>סיסמה מוצפנת (bcrypt); נקבעת ע"י המשתמש בקישור הזמנה</td></tr>
+      <tr><td><code>role</code></td><td>enum</td><td>מנהל / משרד / לקוח / מכייל שטח</td></tr>
+      <tr><td><code>customerId</code></td><td>→ Customer</td><td>חובה כשהתפקיד "לקוח" - קובע מה הוא רואה</td></tr>
+      <tr><td><code>active / lastLoginAt / inviteToken</code></td><td>-</td><td>ניהול חשבון והזמנה ראשונית</td></tr>
+    </table>
+  </div>
+
+  <div class="ent">
+    <div class="eh"><code>Settings</code> הגדרות <span class="desc">רשומה יחידה - נשלטת ממסך ההגדרות (מנהל בלבד)</span></div>
+    <table class="tbl">
+      <tr><th style="width:26%">שדה</th><th>הערות</th></tr>
+      <tr><td><code>reminderOffsets</code></td><td>מדרגות תזכורת בימים לפני תפוגה. ברירת מחדל: [30, 14]. ניתן להוסיף/להסיר/לשנות ללא מגבלה</td></tr>
+      <tr><td><code>runHour</code></td><td>שעת ריצת המנוע: 11:00 (שעון ישראל)</td></tr>
+      <tr><td><code>senderName / senderEmail</code></td><td>פרטי השולח במיילים (כתובת רשמית של מאזני שביט)</td></tr>
+      <tr><td><code>newCertEmailEnabled</code></td><td>מתג: שליחת עדכון ללקוח על תעודה חדשה (פעיל כברירת מחדל)</td></tr>
+      <tr><td><code>emailTemplates</code></td><td>נושא וגוף לכל תבנית, עם משתני שיבוץ (שם לקוח, טבלת מכשירים, קישורים)</td></tr>
+      <tr><td><code>brandLogo / brandColors / siteUrl</code></td><td>מיתוג: לוגו, צבעים וקישור לאתר shavit-scales.co.il</td></tr>
+      <tr><td><code>historyMonths</code></td><td>עומק ההיסטוריה לקליטה: 12 חודשים (כפי שסוכם)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 3 ENUMS -->
+<div class="sheet" id="d3">
+  <h2 class="sec"><span class="num">3</span>רשימות ערכים (Enums)</h2>
+  <p>כל הרשימות תחת <code>shared/enum</code> - זמינות ללקוח ולשרת עם תוויות עברית מובנות:</p>
+  <table class="tbl">
+    <tr><th style="width:24%">Enum</th><th>ערכים</th></tr>
+    <tr><td><code>Role</code></td><td>ADMIN (מנהל) · OFFICE (משרד) · CUSTOMER (לקוח) · TECH (מכייל שטח)</td></tr>
+    <tr><td><code>CalibrationStatus</code></td><td>VALID (בתוקף) · EXPIRING (לקראת תפוגה - בתוך חלון המדרגה הגדולה) · EXPIRED (פג תוקף)</td></tr>
+    <tr><td><code>CalibrationResult</code></td><td>PASS (תקין) · CONDITIONAL (תקין בהסתייגות) · FAIL (לא תקין)</td></tr>
+    <tr><td><code>FileKind</code></td><td>CERT_PDF (תעודה ללקוח) · WORK_XLSX (קובץ עבודה פנימי) · OTHER</td></tr>
+    <tr><td><code>UploadFileStatus</code></td><td>PENDING (ממתין) · CHECKED (עבר בדיקה) · UPLOADED (הועלה) · FAILED (נכשל) · SKIPPED (דולג + סיבה) · LINKED (משויך)</td></tr>
+    <tr><td><code>BatchMode</code></td><td>HISTORY (קליטת עבר) · ONGOING (שוטף)</td></tr>
+    <tr><td><code>ReminderType</code></td><td>OFFSET (מדרגת תפוגה, לפי ההגדרות) · NEW_CERT (תעודה חדשה) · MANUAL (סומן ידנית)</td></tr>
+    <tr><td><code>SendStatus</code></td><td>SENT (נשלח) · FAILED (נכשל + סיבה)</td></tr>
+    <tr><td><code>RequestType</code></td><td>CALIBRATION (קריאת כיול - פעיל) · SERVICE (קריאת שירות - שמור להרחבה עתידית)</td></tr>
+    <tr><td><code>RequestStatus</code></td><td>NEW (חדשה) · IN_PROGRESS (בטיפול) · SCHEDULED (תואמה) · DONE (בוצעה) · CANCELLED (בוטלה)</td></tr>
+  </table>
+</div>
+
+<!-- 4 PERMISSIONS -->
+<div class="sheet" id="d4">
+  <h2 class="sec"><span class="num">4</span>תפקידים והרשאות</h2>
+  <table class="tbl">
+    <tr><th>יכולת \ תפקיד</th><th style="width:13%">מנהל</th><th style="width:13%">משרד</th><th style="width:13%">לקוח</th><th style="width:15%">מכייל שטח</th></tr>
+    <tr><td>צפייה בכיולים ותעודות PDF</td><td>✓ הכל</td><td>✓ הכל</td><td>✓ שלו בלבד</td><td>✓ רשימת עבודה</td></tr>
+    <tr><td>קובץ עבודה פנימי (XLSX)</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td></tr>
+    <tr><td>ניהול לקוחות</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td></tr>
+    <tr><td>העלאה מרוכזת וקליטה</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td></tr>
+    <tr><td>תזכורות: יומן, מעקב, הרצה</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td></tr>
+    <tr><td>דוחות וייצוא</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td></tr>
+    <tr><td>פתיחת קריאת כיול</td><td>✓</td><td>✓ (בשם לקוח)</td><td>✓</td><td>✗</td></tr>
+    <tr><td>טיפול בקריאות</td><td>✓</td><td>✓</td><td>צופה בשלו</td><td>✗</td></tr>
+    <tr><td>אישור תיאום מהמייל</td><td>-</td><td>-</td><td>✓ (טוקן, ללא כניסה)</td><td>-</td></tr>
+    <tr><td>ניהול משתמשים</td><td>✓</td><td>✗</td><td>✗</td><td>✗</td></tr>
+    <tr><td>מסך הגדרות ומיתוג</td><td>✓</td><td>✗</td><td>✗</td><td>✗</td></tr>
+  </table>
+  <h3>אכיפת הפרדת נתונים בשרת (Remult Backend Prefilter)</h3>
+  <p>הסינון לפי תפקיד מוגדר על הישות עצמה ונאכף בכל בקשת API - לא ניתן לעקיפה מהדפדפן:</p>
+  <pre class="tree">@Entity&lt;Calibration&gt;('calibrations', {
+  backendPrefilter: () =>
+    remult.user?.role === Role.CUSTOMER
+      ? { customerId: remult.user.customerId }   <span class="c">// לקוח: אך ורק הרשומות שלו</span>
+      : {}                                        <span class="c">// מנהל/משרד: הכל</span>
+})</pre>
+  <div class="callout co-info"><span class="t">אותו עיקרון בכל הישויות</span>MediaFile, Request ו-ReminderLog מסוננים באותה שיטה. מכייל שטח מקבל תצוגת רשימה מצומצמת ללא פרטי קשר מלאים של לקוחות.</div>
+</div>
+
+<!-- 5 SCREENS -->
+<div class="sheet" id="d5">
+  <h2 class="sec"><span class="num">5</span>ניתוב, מסכים ופונקציונליות</h2>
+  <h3>מפת ניתוב</h3>
+  <table class="tbl">
+    <tr><th style="width:22%">נתיב</th><th style="width:26%">מסך</th><th>גישה והתנהגות</th></tr>
+    <tr><td><code>/login</code></td><td>כניסה</td><td>ציבורי. משתמש לא מחובר מופנה לכאן מכל נתיב, וחוזר אחרי הכניסה ליעד שביקש (returnUrl)</td></tr>
+    <tr><td><code>/</code></td><td>הפניה לפי תפקיד</td><td>מנהל/משרד → כיולים · לקוח → האזור האישי · מכייל → רשימת עבודה</td></tr>
+    <tr><td><code>/calibrations</code></td><td>כיולים - המסך הראשי</td><td>מנהל/משרד. ברירת המחדל של המערכת</td></tr>
+    <tr><td><code>/customers</code></td><td>לקוחות</td><td>מנהל/משרד</td></tr>
+    <tr><td><code>/upload</code></td><td>העלאה מרוכזת</td><td>מנהל/משרד</td></tr>
+    <tr><td><code>/reminders</code></td><td>תזכורות ומעקב</td><td>מנהל/משרד</td></tr>
+    <tr><td><code>/requests</code></td><td>קריאות</td><td>מנהל/משרד. מסך גנרי לפי סוג - היום קריאות כיול</td></tr>
+    <tr><td><code>/users</code> · <code>/settings</code></td><td>משתמשים · הגדרות</td><td>מנהל בלבד</td></tr>
+    <tr><td><code>/my</code></td><td>אזור לקוח</td><td>לקוח - רואה רק את שלו</td></tr>
+    <tr><td><code>/tech</code></td><td>רשימת עבודה</td><td>מכייל שטח - תצוגה בסיסית</td></tr>
+    <tr><td><code>/confirm/:token</code></td><td>אישור תיאום</td><td>ציבורי עם טוקן חד-פעמי מהמייל - ללא צורך בכניסה</td></tr>
+  </table>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.1 · כניסה</b><span class="route">/login</span><span class="pill pub">ציבורי</span></div>
+    <ul class="clean">
+      <li>מסך ממותג: לוגו מאזני שביט, רקע כהה בשפת האתר, קישור לאתר החברה.</li>
+      <li>אימייל + סיסמה, "זכור אותי" פעיל כברירת מחדל - הלקוח מתחבר פעם אחת והחיבור נשמר (טוקן מתחדש).</li>
+      <li>שחזור סיסמה בקישור למייל; משתמש חדש נכנס לראשונה דרך קישור הזמנה וקובע סיסמה.</li>
+      <li>אחרי כניסה: חזרה ליעד המקורי אם היה (למשל קישור ישיר לתעודה), אחרת למסך ברירת המחדל לפי תפקיד.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.2 · כיולים - המסך הראשי</b><span class="route">/calibrations</span><span class="pill man">מנהל/משרד</span></div>
+    <ul class="clean">
+      <li><b>שורת מדדים:</b> סה"כ בתוקף · לקראת תפוגה (בתוך חלון המדרגה) · פגי תוקף · קריאות חדשות · לקוחות פעילים.</li>
+      <li><b>טבלה:</b> לקוח, מכשיר, דגם, מס"ד, מס' תעודה, תאריך כיול, בתוקף עד, ימים נותרו, סטטוס (צ'יפ צבעוני), תעודה (צפייה/הורדה), פעולות.</li>
+      <li><b>חיפוש וסינון:</b> טקסט חופשי, לקוח, סטטוס, טווח תאריכים; מיון בכל עמודה; עימוד לרשימות גדולות; ייצוא לאקסל.</li>
+      <li><b>כרטיס כיול (נפתח בלחיצה):</b> כל פרטי התעודה, קבצים (PDF ללקוח + XLSX פנימי), היסטוריית גרסאות (תעודות שהוחלפו), תזכורות שנשלחו בגינו, סימון "תואם ידנית".</li>
+      <li><b>כיול ידני חדש:</b> טופס הוספה של תעודה בודדת (כולל צירוף קבצים) - למקרים שוטפים בלי אשף ההעלאה.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.3 · לקוחות</b><span class="route">/customers</span><span class="pill man">מנהל/משרד</span></div>
+    <ul class="clean">
+      <li><b>טבלה:</b> שם, איש קשר, אימייל (עם דגל אזהרה אם חסר), טלפון, מס' מכשירים, כיול אחרון, הקרוב לפוג, סטטוס.</li>
+      <li><b>כרטיס לקוח:</b> פרטים + נמענים נוספים, רשימת המכשירים והכיולים שלו, תזכורות אחרונות, קריאות פתוחות, משתמש הפורטל שלו (+ שליחת הזמנה חוזרת).</li>
+      <li><b>הקמה:</b> ידנית ("לקוח חדש") או אוטומטית בקליטה מרוכזת. מיזוג כפילויות שם בקליטה - עם אישור המשרד.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.4 · העלאה מרוכזת (Bulk)</b><span class="route">/upload</span><span class="pill man">מנהל/משרד</span></div>
+    <p>אשף בארבעה שלבים. עשרות עד מאות קבצים בסבב אחד; ההעלאה ישירה מהדפדפן ל-S3 (Presigned URLs) - השרת מנהל, לא מתווך בקבצים.</p>
+    <div class="flow">
+      <div class="fstep"><b>שלב 1 · בחירה</b><span class="s">גרירת תיקיות שלמות (תיקייה = לקוח). תצוגה מקדימה: עץ תיקיות, ספירת קבצים, סה"כ נפח</span></div>
+      <div class="farr">←</div>
+      <div class="fstep"><b>שלב 2 · בדיקה מוקדמת</b><span class="s">הצלבת כל תיקייה מול רשימת הלקוחות לפני העלאה</span></div>
+      <div class="farr">←</div>
+      <div class="fstep"><b>שלב 3 · העלאה</b><span class="s">מקביליות מבוקרת, מד התקדמות כללי + פר קובץ, ניסיון חוזר אוטומטי לכשל רגעי</span></div>
+      <div class="farr">←</div>
+      <div class="fstep okk"><b>שלב 4 · קליטה ודוח</b><span class="s">יצירת רשומות, שיוך קבצים, דוח מסכם להורדה</span></div>
+    </div>
+    <h4>שלב 2 - כללי ההחלטה</h4>
+    <table class="tbl">
+      <tr><th style="width:26%">מצב תיקייה</th><th>התנהגות</th></tr>
+      <tr><td>מזוהה כלקוח קיים</td><td>יעלה וישויך. תעודה קיימת באותו חודש (periodKey) - תוחלף ותישמר כגרסה קודמת. המשרד רואה סימון "יחליף קיים" מראש</td></tr>
+      <tr><td>לקוח חדש</td><td>מסומן "ייווצר לקוח חדש" (אפשר לבטל יצירה פר תיקייה). נוצר ללא אימייל - ויסומן להשלמה</td></tr>
+      <tr><td>לא מזוהה / שגוי</td><td>לא יעלה. מוצגת סיבה: שם דו-משמעי, קובץ שאינו PDF/XLSX, כפילות שם קובץ וכו'</td></tr>
+    </table>
+    <ul class="clean">
+      <li><b>סיכום לפני העלאה:</b> "X קבצים ב-Y תיקיות: Z יעלו · N יוחלפו · M ידולגו (+סיבות)". ברירת מחדל: <b>המשך עם התקינים בלבד</b>; לחלופין - ביטול הסבב כולו.</li>
+      <li><b>זיהוי זוגות אוטומטי:</b> קובץ XLSX עם שם זהה ל-PDF באותה תיקייה נקשר לאותו כיול כקובץ עבודה פנימי.</li>
+      <li><b>שלב 4:</b> רשימה מלאה - כל קובץ עם שם מדויק, מזהה, סטטוס (עלה/לא עלה) והנתיב שלו בענן; מונים מסכמים; הורדת דוח קליטה (CSV); כשלים ניתנים להרצה חוזרת בלחיצה.</li>
+      <li><b>מצב הסבב:</b> קליטת היסטוריה (ללא מיילים ללקוחות) או שוטף (עדכון "תעודה חדשה" אוטומטי) - נקבע בתחילת האשף, ברירת מחדל לפי הקשר.</li>
+      <li><b>שרידות:</b> קריסה/רענון באמצע סבב אינם משאירים "יתומים" - קבצים שהועלו ממתינים בקליטה, וניתן להמשיך מאותה נקודה.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.5 · השלמת פרטים לקליטה</b><span class="pill man">מנהל/משרד</span></div>
+    <ul class="clean">
+      <li>טבלת עריכה מרוכזת לתעודות שנקלטו עם פרטים חלקיים: תאריך כיול, מס' תעודה, מכשיר, תוקף.</li>
+      <li>המערכת מציעה ערכים אוטומטית מתוך שם הקובץ לפי דפוס שמות אחיד (ייקבע מול דוגמאות אמת - ר' פרק 10); המשרד מאשר או מתקן.</li>
+      <li>עריכה ישירה בתאים, שמירה מרוכזת, סימון שורות שהושלמו.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.6 · תזכורות ומעקב</b><span class="route">/reminders</span><span class="pill man">מנהל/משרד</span></div>
+    <ul class="clean">
+      <li><b>רצועת מדיניות:</b> המדרגות הפעילות (30 → 14 יום), שעת ריצה 11:00, קיצור למסך ההגדרות; כפתור "הרצת בדיקה" (תצוגה מקדימה של מי יקבל היום - בלי לשלוח).</li>
+      <li><b>טאב "קרובות":</b> מי מתוכנן לקבל תזכורת בימים הקרובים - לקוח, מכשירים, תפוגה, מדרגה.</li>
+      <li><b>טאב "יומן שליחה":</b> כל המיילים שנשלחו - סוג, נמען, מועד, סטטוס (נשלח/נכשל+סיבה), נפתח אישור או לא.</li>
+      <li><b>טאב "מעקב אישורים":</b> חתך לפי מחזור - אישרו תיאום · לא הגיבו · תואמו ידנית · פג תוקפם ולא ביצעו. ייצוא כל חתך לאקסל.</li>
+      <li><b>פעולות שורה:</b> סימון "תואם ידנית" (עוצר תזכורות למחזור), שליחה חוזרת, פתיחת כרטיס הלקוח.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.7 · קריאות</b><span class="route">/requests</span><span class="pill man">מנהל/משרד</span></div>
+    <ul class="clean">
+      <li>רשימת כל הקריאות: סוג (כיול), לקוח, מקור (אזור אישי / מייל / משרד), מועד מועדף, הערות, סטטוס, מטפל.</li>
+      <li>עדכון סטטוס בזרימה: חדשה → בטיפול → תואמה → בוצעה; התראת מונה בתפריט על קריאות חדשות.</li>
+      <li>המסך גנרי לפי סוג - "קריאת שירות" עתידית תופיע כאן כסוג נוסף עם הטופס הייעודי שלה, באותו מסך.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.8 · אזור לקוח</b><span class="route">/my</span><span class="pill cust">לקוח</span></div>
+    <ul class="clean">
+      <li>פתיח אישי: שלום [איש קשר], מדדים קטנים - המכשירים שלי, בתוקף, לקראת תפוגה.</li>
+      <li><b>הכיולים שלי:</b> טבלת התעודות שלו בלבד - מכשיר, מס' תעודה, תאריך, בתוקף עד, סטטוס, צפייה/הורדת PDF (קישור חתום זמני).</li>
+      <li><b>קריאת כיול:</b> טופס קצר (מועד מועדף, הערות) → הקריאה נרשמת ומופיעה למשרד; הלקוח רואה את הסטטוס שלה.</li>
+      <li><b>עדכונים:</b> ציר אירועים - תעודות חדשות שהועלו, תזכורות שנשלחו, קריאות ועדכוני סטטוס.</li>
+      <li>אין ללקוח שום גישה לנתוני לקוחות אחרים, לקובצי עבודה פנימיים או למסכי ניהול - נאכף בשרת (פרק 4).</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.9 · אישור תיאום</b><span class="route">/confirm/:token</span><span class="pill pub">ציבורי בטוקן</span></div>
+    <ul class="clean">
+      <li>נפתח מכפתור "אישור תיאום" במייל התזכורת - בלי צורך בסיסמה (טוקן חד-פעמי, תקף 30 יום).</li>
+      <li>מציג את המכשירים שבתזכורת + אפשרות לציין מועד מועדף והערה → כפתור "אני מאשר תיאום כיול".</li>
+      <li>האישור נרשם מיידית: נעצרות תזכורות המשך למחזור, נפתחת קריאת כיול למשרד, והלקוח מקבל אישור על המסך.</li>
+      <li>טוקן שכבר מומש מציג את סטטוס האישור הקיים (ללא כפילות).</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.10 · רשימת עבודה למכייל</b><span class="route">/tech</span><span class="pill tech">מכייל שטח</span></div>
+    <ul class="clean">
+      <li>תצוגה בסיסית: כיולים קרובים ולקוחות לתיאום - תאריך, לקוח, כתובת, מכשירים.</li>
+      <li>מהווה בסיס להרחבה עתידית: הזנת תוצאות כיול מהשטח (טאבלט) והפקת תעודה במקום.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.11 · משתמשים</b><span class="route">/users</span><span class="pill man">מנהל</span></div>
+    <ul class="clean">
+      <li>רשימה: שם, אימייל, תפקיד, לקוח מקושר (אם רלוונטי), פעיל/מושבת, כניסה אחרונה.</li>
+      <li>הוספת משתמש → נשלח קישור הזמנה במייל לקביעת סיסמה; השבתה מיידית חוסמת גישה.</li>
+      <li>יצירת משתמש-לקוח ישירות מכרטיס הלקוח בלחיצה אחת.</li>
+    </ul>
+  </div>
+
+  <div class="screen-box">
+    <div class="sh"><b>5.12 · הגדרות</b><span class="route">/settings</span><span class="pill man">מנהל</span></div>
+    <ul class="clean">
+      <li><b>תזכורות:</b> ניהול המדרגות (הוספה/הסרה/שינוי - 30, 14, ואפשר גם 7 וכו'), שעת ריצה, מתג עדכון תעודה חדשה.</li>
+      <li><b>תבניות מייל:</b> עריכת נושא וגוף לכל תבנית עם משתני שיבוץ + תצוגה מקדימה חיה ושליחת מייל ניסיון.</li>
+      <li><b>מיתוג:</b> לוגו, צבעי מותג, קישור לאתר; משתקף מיידית בפורטל ובמיילים.</li>
+      <li><b>דיוור:</b> שם וכתובת השולח; חיווי תקינות הדומיין (SPF/DKIM) לשיפור עבירוּת.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 6 ENGINE -->
+<div class="sheet" id="d6">
+  <h2 class="sec"><span class="num">6</span>מנוע התזכורות - אלגוריתם</h2>
+  <p class="lead">משימת רקע יומית ב-11:00 (שעון ישראל, <code>scheduler.ts</code>). כל ריצה נרשמת ביומן עם תוצאותיה.</p>
+  <ol class="steps">
+    <li><b>איסוף:</b> לכל לקוח פעיל - התעודה העדכנית של כל מכשיר (הגרסה האחרונה בלבד; תעודות שהוחלפו אינן נספרות).</li>
+    <li><b>חישוב:</b> ימים לתפוגה = <code>expiryDate - היום</code>.</li>
+    <li><b>התאמת מדרגה:</b> תעודה נכללת אם הימים לתפוגה נמצאים בחלון של מדרגה מוגדרת (30 / 14) <b>וטרם נשלחה</b> תזכורת מאותה מדרגה לאותו מחזור (בדיקה מול <code>cycleKey</code> ביומן). חלון "השלמה" תופס גם מקרים שחלפו בזמן השבתה - אף אחד לא נופל בין הכיסאות.</li>
+    <li><b>סינון עצירות:</b> מחזור שאושר תיאום (מהמייל או ידנית) או שנפתחה בגינו קריאת כיול - לא מקבל תזכורות נוספות.</li>
+    <li><b>קיבוץ:</b> כל התעודות הרלוונטיות של אותו לקוח מאוחדות ל<b>מייל מרוכז אחד</b> - לא מציפים את הלקוח.</li>
+    <li><b>שליחה ותיעוד:</b> שליחה עם טוקן אישור ייחודי; רישום מלא ב-ReminderLog כולל כשלים (כתובת שגויה, תיבה מלאה) שמוצגים למשרד לטיפול.</li>
+    <li><b>לקוחות ללא אימייל:</b> לא נשלחים - נאספים לרשימת חריגים שמוצגת למשרד בכל ריצה.</li>
+  </ol>
+  <h3>כללי יסוד</h3>
+  <ul class="clean">
+    <li><b>לא מטרידים פעמיים:</b> אותה מדרגה לא נשלחת פעמיים לאותו מחזור - מובטח ברמת הנתונים, לא רק בלוגיקה.</li>
+    <li><b>אישור עוצר:</b> אישר הלקוח תיאום - נעצרות תזכורות ההמשך של המחזור. תואם טלפונית? המשרד מסמן "תואם ידנית" בלחיצה - ואותו אפקט.</li>
+    <li><b>תעודה חדשה מאפסת:</b> נקלטה תעודה חדשה למכשיר - נפתח מחזור חדש; התזכורות הבאות יחושבו מהתוקף החדש.</li>
+    <li><b>שקיפות מלאה:</b> "הרצת בדיקה" מציגה מראש מי יקבל היום מייל; היומן מתעד כל שליחה בפועל.</li>
+    <li><b>מודעות למכסת דיוור:</b> המנוע מכבד את מגבלת ספק הדיוור (100 ביום בתוכנית החינמית של Resend) - פריסת שליחות או התראה למשרד לפי הצורך (ר' פרק 7).</li>
+  </ul>
+</div>
+
+<!-- 7 EMAILS -->
+<div class="sheet" id="d7">
+  <h2 class="sec"><span class="num">7</span>תבניות דוא״ל</h2>
+  <p>כל המיילים ממותגים: לוגו מאזני שביט, שפת הצבעים של האתר, קישור לאתר וחתימת המעבדה. הנוסחים ניתנים לעריכה מלאה במסך ההגדרות. שתי התבניות המרכזיות:</p>
+
+  <h3>7.1 · תזכורת תוקף (מייל מרוכז ללקוח)</h3>
+  <div class="email-mock">
+    <div class="eh2"><b>⚖ מאזני שביט · מעבדת כיול מוסמכת</b><span style="font-size:11px;color:#9AA4B2">calibration@shavit-scales.co.il</span></div>
+    <div class="sbj"><b>נושא:</b> תזכורת: תוקף כיול עומד לפוג - [שם הלקוח]</div>
+    <div class="body">
+      <p>שלום [איש קשר],</p>
+      <p>ברצוננו להזכיר כי תוקף הכיול של המכשירים הבאים עומד לפוג:</p>
+      <table>
+        <tr><th>מכשיר</th><th>מס' תעודה</th><th>תאריך כיול</th><th>בתוקף עד</th><th>נותרו</th></tr>
+        <tr><td>משקל פלטפורמה 3 טון</td><td>SH-2508-0147</td><td>21.08.2025</td><td>21.08.2026</td><td class="warn-days">29 ימים</td></tr>
+        <tr><td>משקל שולחני 30 ק"ג</td><td>SH-2508-0148</td><td>21.08.2025</td><td>21.08.2026</td><td class="warn-days">29 ימים</td></tr>
+      </table>
+      <p>כדי לשמור על רציפות ההסמכה, מומלץ לתאם כיול מראש:</p>
+      <a class="btn-o" href="#">אישור תיאום כיול</a>
+      <a class="btn-g" href="#">כניסה לאזור האישי</a>
+      <p style="font-size:12px;color:#5B6674;margin-top:10px">האישור מתבצע בלחיצה אחת - ללא צורך בסיסמה. התעודות שלך זמינות תמיד באזור האישי בפורטל.</p>
+    </div>
+  </div>
+
+  <h3>7.2 · עדכון: תעודת כיול חדשה</h3>
+  <div class="email-mock">
+    <div class="eh2"><b>⚖ מאזני שביט · מעבדת כיול מוסמכת</b><span style="font-size:11px;color:#9AA4B2">calibration@shavit-scales.co.il</span></div>
+    <div class="sbj"><b>נושא:</b> תעודת כיול חדשה זמינה עבורך בפורטל</div>
+    <div class="body">
+      <p>שלום [איש קשר],</p>
+      <p>הועלתה זה עתה תעודת כיול חדשה עבור <b>[מכשיר]</b> (תעודה מס' [מספר]).</p>
+      <a class="btn-o" href="#">צפייה בתעודה</a>
+      <p style="font-size:12px;color:#5B6674;margin-top:10px">לידיעתך, כל תעודות הכיול שלך זמינות באזור האישי - כולל היסטוריית השנה האחרונה.</p>
+    </div>
+  </div>
+  <ul class="clean">
+    <li>משתני שיבוץ: שם לקוח, איש קשר, טבלת מכשירים, תאריכים, קישורים - מוחלפים אוטומטית בשליחה.</li>
+    <li>מיילים נוספים במערכת: הזמנת משתמש חדש, שחזור סיסמה, אישור קליטת קריאה - באותה שפה עיצובית.</li>
+    <li>שליחה מכתובת רשמית של מאזני שביט; הגדרות SPF/DKIM לדומיין - כדי שהמיילים יגיעו לתיבה הראשית ולא לספאם.</li>
+    <li><b>ספק הדיוור - Resend:</b> התוכנית החינמית מוגבלת ל-100 מיילים ביום (3,000 בחודש) - מספיקה לפעילות השוטפת הצפויה. בסבבי שליחה גדולים או עם הגידול: תוכנית Pro ($20 לחודש, 50,000 מיילים, ללא מגבלה יומית).</li>
+    <li><b>ויסות מכסה:</b> תור השליחה מודע למכסה היומית - חריגה צפויה (למשל עדכוני "תעודה חדשה" אחרי סבב קליטה גדול) נפרסת אוטומטית על פני ימים או מוצגת למשרד להחלטה.</li>
+  </ul>
+</div>
+
+<!-- 8 S3 -->
+<div class="sheet" id="d8">
+  <h2 class="sec"><span class="num">8</span>קבצים וענן (AWS S3)</h2>
+  <ul class="clean">
+    <li><b>העלאה ישירה מהדפדפן:</b> השרת מנפיק קישור חתום (Presigned PUT) לכל קובץ; הקובץ עולה ישירות ל-S3 בלי לעבור דרך השרת - מהיר, חסכוני ועמיד גם במאות קבצים במקביל.</li>
+    <li><b>הורדה מאובטחת:</b> צפייה/הורדה בקישור חתום זמני (Presigned GET, תוקף קצר) - אין קבצים ציבוריים; הבקשה עוברת בדיקת הרשאה לפני הנפקת הקישור.</li>
+    <li><b>מבנה מפתחות:</b></li>
+  </ul>
+  <pre class="tree">shavit-calibrations/
+└── customers/{customerId}/
+    ├── certificates/{year}/{fileName}.pdf      <span class="c">// תעודות - גלוי ללקוח דרך המערכת</span>
+    ├── worksheets/{year}/{fileName}.xlsx       <span class="c">// קובצי עבודה - משרד בלבד</span>
+    └── reports/batch-{batchId}.csv             <span class="c">// דוחות קליטה</span></pre>
+  <ul class="clean">
+    <li><b>שרידות וגיבוי:</b> S3 עם Versioning פעיל (הגנה מדריסה בטעות); בסיס הנתונים מגובה בגיבויים מתוזמנים מובנים של Railway - יומי (נשמר 6 ימים), שבועי (חודש) וחודשי (3 חודשים) במקביל. אין תשלום נפרד על הפיצ'ר - החיוב הוא על נפח האחסון האינקרמנטלי בלבד, זניח בסדרי הגודל של המערכת.</li>
+    <li><b>סדרי גודל:</b> תעודת PDF ממוצעת ~0.5MB; אלף תעודות בשנה ≈ 0.5GB - עלויות אחסון זניחות (חשבון הענן ע"ח הלקוח, מפורט בהצעת המחיר).</li>
+  </ul>
+</div>
+
+<!-- 9 API -->
+<div class="sheet" id="d9">
+  <h2 class="sec"><span class="num">9</span>שכבת ה-API</h2>
+  <p>רוב פעולות ה-CRUD מסופקות אוטומטית ע"י Remult על הישויות, עם ולידציות והרשאות מוגדרות בישות עצמה. בקרים ייעודיים (<code>shared/controller</code>) לפעולות מורכבות:</p>
+  <table class="tbl">
+    <tr><th style="width:20%">בקר</th><th style="width:32%">פעולות עיקריות</th><th>תפקיד</th></tr>
+    <tr><td><code>AuthController</code></td><td><code>signIn · refresh · invite · resetPassword</code></td><td>כניסה, חידוש טוקן, הזמנות ושחזור</td></tr>
+    <tr><td><code>UploadController</code></td><td><code>precheck · presign · complete · retryFailed</code></td><td>בדיקה מוקדמת, הנפקת קישורי העלאה, קליטה ושיוך, הרצה חוזרת לכשלים</td></tr>
+    <tr><td><code>ReminderController</code></td><td><code>preview · runNow · markManual · confirm(token)</code></td><td>תצוגה מקדימה, הרצה יזומה, סימון ידני, אישור ציבורי בטוקן</td></tr>
+    <tr><td><code>RequestController</code></td><td><code>create · updateStatus</code></td><td>קריאות - יצירה (לקוח/משרד) וניהול סטטוס; גנרי לפי סוג</td></tr>
+    <tr><td><code>ReportController</code></td><td><code>kpis · trackingList · exportCsv</code></td><td>מדדים, חתכי מעקב (אישרו/לא הגיבו/לא ביצעו) וייצוא</td></tr>
+    <tr><td><code>FileController</code></td><td><code>getDownloadUrl</code></td><td>הנפקת קישור הורדה חתום אחרי בדיקת הרשאה</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted)">כל חוזי הבקשה/תגובה מוגדרים כ-interfaces תחת <code>shared/type</code> (interface-req / interface-res) - חוזה אחיד בין לקוח לשרת.</p>
+</div>
+
+<!-- 10 HISTORY -->
+<div class="sheet" id="d10">
+  <h2 class="sec"><span class="num">10</span>קליטת נתונים היסטוריים (שנה אחורה)</h2>
+  <ol class="steps">
+    <li><b>קלט מהמשרד:</b> רשימת לקוחות (אקסל: שם, איש קשר, אימיילים, טלפון) + תיקיות התעודות של השנה האחרונה, מסודרות לפי שם לקוח - כפי שהן שמורות היום.</li>
+    <li><b>טעינת לקוחות:</b> ייבוא רשימת הלקוחות תחילה - היא הבסיס שמולו מוצלבות התיקיות.</li>
+    <li><b>קליטת תעודות:</b> דרך אשף ההעלאה במצב HISTORY - ללא שליחת מיילים ללקוחות.</li>
+    <li><b>חילוץ מטא-דאטה:</b> תאריך, מס' תעודה ומכשיר מחולצים משם הקובץ לפי דפוס השמות הקיים (ייקבע סופית מול מדגם קבצים אמיתי); מה שלא זוהה - מושלם מרוכז במסך "השלמת פרטים" (5.5).</li>
+    <li><b>תוקף:</b> ברירת מחדל 12 חודשים ממועד הכיול; חריגים נערכים פרטנית.</li>
+    <li><b>אימות מדגמי:</b> בדיקת נכונות שיוך על מדגם לקוחות יחד עם המשרד לפני הפעלת התזכורות.</li>
+  </ol>
+  <h3>מפתח ההחלפה (כפי שסוכם בפגישה)</h3>
+  <div class="callout co-info"><span class="t">כלל שנה+חודש</span>מפתח כיול לקליטה: לקוח + שנה + חודש (<code>periodKey</code>). קובץ נכנס כשקיים כבר כיול באותו מפתח - מחליף אותו (הקודם נשמר כגרסה); אחרת - נוצר כיול חדש.</div>
+  <div class="callout co-warn"><span class="t">המלצת ספק לאישור</span>ללקוח עם כמה מכשירים המכוילים באותו חודש, מפתח של שנה+חודש בלבד יגרום להחלפות שגויות. ההמלצה: המפתח יכלול גם את מספר המכשיר - לקוח + שנה + חודש + מס"ד (או מס' תעודה). ההחלטה תיסגר מול דוגמאות אמת בתחילת הפרויקט (ר' פרק 13).</div>
+</div>
+
+<!-- 11 NFR -->
+<div class="sheet" id="d11">
+  <h2 class="sec"><span class="num">11</span>דרישות לא-פונקציונליות</h2>
+  <table class="tbl">
+    <tr><th style="width:22%">תחום</th><th>דרישה</th></tr>
+    <tr><td>שפה וכיווניות</td><td>עברית מלאה, RTL בכל המסכים והמיילים; תאריכים בפורמט ישראלי</td></tr>
+    <tr><td>רספונסיביות</td><td>מחשב, טאבלט ונייד; אזור הלקוח מותאם היטב לנייד (שם הלקוחות בעיקר יצרכו אותו)</td></tr>
+    <tr><td>אבטחה</td><td>HTTPS בלבד · JWT עם Refresh · bcrypt לסיסמאות · Rate-Limit לכניסה · הפרדת נתונים בשרת (פרק 4) · קישורי קבצים חתומים · טוקני אישור חד-פעמיים</td></tr>
+    <tr><td>ביצועים</td><td>עימוד ואינדוקס לרשימות גדולות; יעד: טעינת מסך ראשי < 2 שניות על אלפי רשומות</td></tr>
+    <tr><td>אמינות המנוע</td><td>ריצה יומית עם רישום; ריצה שהוחמצה (השבתת שרת) מושלמת בריצה הבאה בזכות חלון ההשלמה</td></tr>
+    <tr><td>יומנים</td><td>רישום פעולות מרכזיות: כניסות, העלאות, שינויים בהגדרות, שליחות מייל</td></tr>
+    <tr><td>גיבוי והתאוששות</td><td>גיבויי Railway מתוזמנים: יומי + שבועי + חודשי; S3 Versioning לקבצים; נוהל שחזור מתועד</td></tr>
+    <tr><td>דפדפנים</td><td>Chrome / Edge / Safari / Firefox בגרסאות עדכניות</td></tr>
+  </table>
+</div>
+
+<!-- 12 PILOT -->
+<div class="sheet" id="d12">
+  <h2 class="sec"><span class="num">12</span>פיילוט, הדרכה ומסירה</h2>
+  <ul class="clean">
+    <li><b>מסירה (סוף יום 10):</b> מערכת מלאה בסביבת הענן, עם נתוני האמת שנקלטו (לקוחות + שנה אחורה של תעודות).</li>
+    <li><b>הדרכה (במסירה, לפני הפיילוט):</b> מפגש מעשי לצוות המשרד (עד 5 משתתפים, כשעתיים) על המערכת החיה: קליטת תעודות, מעקב תזכורות, ניהול לקוחות וקריאות + מדריך תפעול מקוצר ומאויר.</li>
+    <li><b>פיילוט (ימי עבודה 11-15):</b> עבודה שוטפת אמיתית בליווי צמוד - קליטת תעודות חדשות, ריצת תזכורות יומית, הפעלת אזור אישי ל-2-3 לקוחות נבחרים; תיקונים וכוונונים תוך כדי.</li>
+    <li><b>קריטריוני סיום פיילוט:</b> תזכורות נשלחות אוטומטית ונרשמות ביומן · הצוות קולט תעודות עצמאית · לקוחות הפיילוט צופים ומורידים תעודות · אפס תקלות חוסמות פתוחות.</li>
+    <li><b>לאחר הפיילוט:</b> עלייה מלאה לאוויר. ליווי ותחזוקה שוטפת - במסגרת הסכם נפרד, ככל שיסוכם.</li>
+  </ul>
+</div>
+
+<!-- 13 OPEN -->
+<div class="sheet" id="d13">
+  <h2 class="sec"><span class="num">13</span>נושאים לסגירה בתחילת הפרויקט</h2>
+  <table class="tbl">
+    <tr><th style="width:34%">נושא</th><th>ברירת המחדל המוצעת</th><th style="width:18%">נדרש מהלקוח</th></tr>
+    <tr><td>מפתח החלפה בקליטה</td><td>לקוח + שנה + חודש + מס"ד (המלצת ספק, ר' פרק 10)</td><td>אישור מול דוגמאות</td></tr>
+    <tr><td>דפוס שמות הקבצים</td><td>חילוץ תאריך/תעודה/מכשיר משם הקובץ</td><td>מדגם 20-30 קבצים</td></tr>
+    <tr><td>תקופת תוקף</td><td>12 חודשים אחיד</td><td>אישור + רשימת חריגים</td></tr>
+    <tr><td>מדרגות תזכורת</td><td>30 יום ואז 14 יום (למי שלא אישר)</td><td>אישור</td></tr>
+    <tr><td>נמעני תזכורות</td><td>אימייל ראשי + נמענים נוספים בעותק</td><td>עדכון רשימת הלקוחות</td></tr>
+    <tr><td>כתובת שולח</td><td>calibration@shavit-scales.co.il (או קיימת)</td><td>בחירה + גישה ל-DNS</td></tr>
+    <tr><td>סביבת ענן</td><td>אירוח Railway (שרת + PostgreSQL + גיבויים) · AWS S3 לקבצים · Resend לדיוור - החשבונות ע"ש הלקוח, העלויות השוטפות ישירות מולו</td><td>פתיחת חשבונות / הרשאות</td></tr>
+    <tr><td>היקף גישת לקוחות</td><td>כל הלקוחות מקבלים גישה; הפעלה מדורגת החל מלקוחות הפיילוט</td><td>החלטה תפעולית</td></tr>
+  </table>
+  <div class="callout co-ok"><span class="t">שום נושא אינו חוסם חתימה</span>לכל הנושאים קיימת ברירת מחדל עובדת; הסגירה הסופית מתבצעת בישיבת ההתנעה, בלי השפעה על המחיר או על לוח הזמנים.</div>
+</div>
+
+<div class="doc-footer">
+  <b>BizTechoff™</b> · התאמת העסק לעידן הדיגיטלי · biztechoff@gmail.com<br>
+  הופק עבור מאזני שביט בע״מ · 23.07.2026 · גרסה 1.0 · המסמך סודי ומיועד לנמען בלבד
+</div>
+</div>
+</body>
+</html>

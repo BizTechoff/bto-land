@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אפיון-על · פורטל הכיולים · מאזני שביט בע״מ</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* פלטת מותג מאזני שביט - כהה + כתום, בהתאם לשפת האתר shavit-scales.co.il */
+  --brand-950:#101318; --brand-900:#181C22; --brand-800:#20252D; --brand-700:#2B323C;
+  --brand-600:#3A424E; --brand-500:#4A5462; --brand-400:#77828F; --brand-200:#D4DAE2;
+  --brand-100:#E9EDF2; --brand-50:#F5F7F9;
+  --cyan:#E8821E; --gold:#F2A93B;
+  --ink:#1B222B; --muted:#5B6674; --line:#DFE4EA; --bg:#F3F5F7; --card:#FFFFFF;
+  --ok:#178A50; --ok-bg:#E4F5EC; --warn:#B96A0B; --warn-bg:#FCF0DC; --bad:#C03A2B; --bad-bg:#FBE7E4;
+  --radius:14px; --shadow:0 8px 28px rgba(8,44,77,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.75}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+/* ---------- cover ---------- */
+.cover{background:linear-gradient(130deg,var(--brand-950),var(--brand-700) 58%,var(--cyan));border-radius:20px;color:#fff;padding:46px 44px 38px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.cover::after{content:"";position:absolute;inset-inline-start:-120px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 65%)}
+.cover .doc-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);padding:5px 16px;border-radius:99px;font-size:13px;font-weight:600;letter-spacing:.3px;backdrop-filter:blur(4px)}
+.cover h1{font-size:38px;font-weight:900;margin:18px 0 4px;line-height:1.25}
+.cover .sub{font-size:19px;font-weight:400;color:#DDE2E9}
+.cover .logo-line{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.logo-mark{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:30px;position:relative;z-index:1}
+.meta .kv{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:9px 14px}
+.meta .k{font-size:11.5px;color:#F5C58A;font-weight:500}
+.meta .v{font-size:14.5px;font-weight:700}
+.related{margin-top:16px;font-size:13px;color:#D6DBE2}
+.related b{color:#fff}
+/* ---------- sections ---------- */
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 34px;margin-top:22px}
+h2.sec{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:800;color:var(--brand-800);margin-bottom:14px}
+h2.sec .num{flex:none;width:34px;height:34px;border-radius:10px;background:var(--brand-800);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;font-weight:800}
+h3{font-size:16.5px;font-weight:700;color:var(--brand-700);margin:20px 0 8px}
+p{margin-bottom:10px}
+.lead{font-size:16.5px;color:#243B55}
+ul.clean{list-style:none;margin:6px 0 10px}
+ul.clean li{padding:5px 26px 5px 0;position:relative}
+ul.clean li::before{content:"";position:absolute;right:6px;top:14px;width:8px;height:8px;border-radius:3px;background:var(--cyan)}
+/* toc */
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px;margin-top:6px}
+.toc a{display:flex;gap:9px;align-items:center;text-decoration:none;color:var(--brand-800);background:var(--brand-50);border:1px solid var(--brand-100);padding:8px 12px;border-radius:10px;font-weight:600;font-size:13.5px;transition:.15s}
+.toc a:hover{background:var(--brand-100)}
+.toc .n{flex:none;width:22px;height:22px;border-radius:7px;background:var(--brand-200);color:var(--brand-900);font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:800}
+/* callouts */
+.callout{border-radius:12px;padding:13px 16px;margin:12px 0;border:1px solid;font-size:14.5px}
+.callout .t{font-weight:800;display:block;margin-bottom:3px}
+.co-info{background:var(--brand-50);border-color:var(--brand-200);color:var(--brand-900)}
+.co-ok{background:var(--ok-bg);border-color:#BFE5D0;color:#14513A}
+.co-warn{background:var(--warn-bg);border-color:#F0DCB8;color:#7A4A08}
+/* tables */
+table.tbl{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+.tbl th{background:var(--brand-800);color:#fff;font-weight:700;padding:9px 12px;text-align:right}
+.tbl th:first-child{border-radius:0 10px 0 0}
+.tbl th:last-child{border-radius:10px 0 0 0}
+.tbl td{padding:8.5px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:nth-child(even) td{background:var(--brand-50)}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:12px 0}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:linear-gradient(180deg,#fff, var(--brand-50))}
+.card .ic{width:38px;height:38px;border-radius:11px;background:var(--brand-100);color:var(--brand-700);display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+.card b.t{display:block;font-size:15.5px;color:var(--brand-900);margin-bottom:4px}
+.card p{font-size:13.5px;color:var(--muted);margin:0}
+.card .badge{float:left;font-size:11px;font-weight:700;background:var(--brand-800);color:#fff;border-radius:99px;padding:2px 10px}
+.badge.gold{background:var(--gold)}
+/* roles */
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:12px 0}
+.role{border-radius:14px;padding:18px;border:1px solid var(--line);background:#fff;border-top:5px solid var(--brand-600)}
+.role.c2{border-top-color:var(--cyan)} .role.c3{border-top-color:var(--gold)} .role.c4{border-top-color:var(--brand-400)}
+.role b{display:block;font-size:16px;color:var(--brand-900)}
+.role .tag{display:inline-block;font-size:11px;background:var(--brand-100);color:var(--brand-800);border-radius:99px;padding:1px 10px;font-weight:700;margin:4px 0 8px}
+.role ul{margin:0;padding:0;list-style:none;font-size:13.5px;color:var(--muted)}
+.role li{padding:2.5px 14px 2.5px 0;position:relative}
+.role li::before{content:"✓";position:absolute;right:0;color:var(--ok);font-weight:700}
+/* flow */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0 4px}
+.fstep{flex:1 1 150px;min-width:150px;background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:10px 12px;font-size:13px}
+.fstep b{display:block;color:var(--brand-800);font-size:13.5px;margin-bottom:2px}
+.fstep .s{color:var(--muted)}
+.farr{align-self:center;color:var(--brand-400);font-weight:900;font-size:18px;padding:0 2px}
+.fstep.hot{background:#FFF7EA;border-color:#F0DCB8}
+.fstep.hot b{color:#8A5A0B}
+.fstep.okk{background:var(--ok-bg);border-color:#BFE5D0}
+.fstep.okk b{color:#14513A}
+.flow-title{font-weight:800;color:var(--brand-800);font-size:15px;margin-top:18px;display:flex;align-items:center;gap:8px}
+.flow-title .fl{font-size:11px;background:var(--cyan);color:#fff;padding:2px 10px;border-radius:99px}
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{background:#fff;border:1.5px dashed var(--cyan);color:var(--brand-700);border-radius:99px;padding:4px 14px;font-size:13px;font-weight:600}
+/* timeline */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.phase{border-radius:14px;padding:16px;color:#fff}
+.ph1{background:linear-gradient(135deg,var(--brand-900),var(--brand-600))}
+.ph2{background:linear-gradient(135deg,#A85A0C,var(--cyan))}
+.ph3{background:linear-gradient(135deg,#946008,var(--gold))}
+.phase .d{font-size:12px;opacity:.85;font-weight:600}
+.phase b{display:block;font-size:17px;margin:2px 0 6px}
+.phase p{font-size:12.5px;margin:0;opacity:.95}
+.gantt{margin:12px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.g-head,.g-row{display:grid;grid-template-columns:170px repeat(15,1fr);align-items:center}
+.g-head{background:var(--brand-800);color:#fff;font-size:11px;font-weight:700}
+.g-head div{padding:6px 4px;text-align:center;border-inline-start:1px solid rgba(255,255,255,.12)}
+.g-head .lbl{text-align:right;padding-right:12px}
+.g-row{border-top:1px solid var(--line);font-size:12.5px;background:#fff}
+.g-row:nth-child(even){background:var(--brand-50)}
+.g-row .lbl{padding:8px 12px;font-weight:600;color:var(--brand-900)}
+.g-cell{height:34px;position:relative;border-inline-start:1px solid var(--line)}
+.bar{position:absolute;top:8px;bottom:8px;inset-inline-start:2px;inset-inline-end:2px;border-radius:6px}
+.b1{background:var(--brand-600)} .b2{background:var(--cyan)} .b3{background:var(--gold)}
+/* two col scope */
+.scope{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.scope .box{border-radius:12px;padding:16px 18px}
+.scope .in{background:var(--ok-bg);border:1px solid #BFE5D0}
+.scope .out{background:#F6F7F9;border:1px solid var(--line)}
+.scope b.h{display:flex;gap:8px;font-size:15.5px;margin-bottom:8px}
+.scope .in b.h{color:#14513A}
+.scope .out b.h{color:#54606E}
+.scope ul{list-style:none;font-size:13.5px}
+.scope li{padding:3.5px 20px 3.5px 0;position:relative}
+.scope .in li::before{content:"✓";position:absolute;right:0;color:var(--ok);font-weight:800}
+.scope .out li::before{content:"✕";position:absolute;right:0;color:#98A4B1;font-weight:800}
+/* footer */
+.doc-footer{margin-top:26px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.9}
+.doc-footer b{color:var(--brand-800)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.kpi{background:var(--brand-50);border:1px solid var(--brand-100);border-radius:12px;padding:12px 16px}
+.kpi b{display:block;color:var(--brand-800);font-size:14.5px}
+.kpi span{font-size:12.5px;color:var(--muted)}
+@media(max-width:640px){.cover{padding:30px 22px}.cover h1{font-size:28px}.sheet{padding:22px 18px}.scope{grid-template-columns:1fr}.g-head,.g-row{grid-template-columns:110px repeat(15,1fr)}}
+@media print{body{background:#fff}.sheet,.cover{box-shadow:none;break-inside:avoid}.wrap{padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= COVER ================= -->
+<div class="cover">
+  <div class="logo-line">
+    <div class="logo-mark">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 6a3.5 3.5 0 0 0 7 0L6 7"/><path d="M19 7l-3 6a3.5 3.5 0 0 0 7 0l-3-6"/><path d="M8 21h8"/></svg>
+    </div>
+    <div>
+      <div style="font-weight:800;font-size:17px">מאזני שביט בע״מ</div>
+      <div style="font-size:12px;color:#D6DBE2">מעבדת כיול מוסמכת ISO/IEC 17025:2017</div>
+    </div>
+  </div>
+  <span class="doc-badge">📘 מסמך אפיון-על · גרסה 1.0</span>
+  <h1>פורטל הכיולים</h1>
+  <div class="sub">פלטפורמה לניהול תעודות כיול, אזור לקוח אישי ומנוע תזכורות פרואקטיבי</div>
+  <div class="meta">
+    <div class="kv"><div class="k">לקוח</div><div class="v">מאזני שביט בע״מ</div></div>
+    <div class="kv"><div class="k">ספק</div><div class="v">BizTechoff™</div></div>
+    <div class="kv"><div class="k">תאריך</div><div class="v">23.07.2026</div></div>
+    <div class="kv"><div class="k">סטטוס</div><div class="v">להצגה ללקוח</div></div>
+  </div>
+  <div class="related">מסמכים נלווים: <b>אפיון מפורט</b> · <b>מוקאפ אינטראקטיבי</b> · <b>הצעת מחיר Q-2026-0723</b></div>
+</div>
+
+<!-- ================= TOC ================= -->
+<div class="sheet">
+  <h2 class="sec"><span class="num">☰</span>תוכן העניינים</h2>
+  <div class="toc">
+    <a href="#s1"><span class="n">1</span>רקע ומצב קיים</a>
+    <a href="#s2"><span class="n">2</span>מטרות ועקרונות מנחים</a>
+    <a href="#s3"><span class="n">3</span>תמצית הפתרון</a>
+    <a href="#s4"><span class="n">4</span>משתמשים ותפקידים</a>
+    <a href="#s5"><span class="n">5</span>מודולי המערכת</a>
+    <a href="#s6"><span class="n">6</span>תהליכים מרכזיים</a>
+    <a href="#s7"><span class="n">7</span>טכנולוגיה ואבטחה</a>
+    <a href="#s8"><span class="n">8</span>תכולה, גבולות והרחבות</a>
+    <a href="#s9"><span class="n">9</span>לוח זמנים ואבני דרך</a>
+    <a href="#s10"><span class="n">10</span>מדדי הצלחה</a>
+    <a href="#s11"><span class="n">11</span>נדרש מהלקוח</a>
+  </div>
+</div>
+
+<!-- ================= 1 ================= -->
+<div class="sheet" id="s1">
+  <h2 class="sec"><span class="num">1</span>רקע ומצב קיים</h2>
+  <p class="lead">מאזני שביט בע״מ - יבואנית, יצרנית ומשווקת של מערכות שקילה - מפעילה מעבדת כיול מוסמכת <b>ISO/IEC 17025:2017</b> (בהסמכת A2LA), המכיילת משקלים, פלטפורמות וגשרי שקילה עד 5 טון אצל לקוחות בכל הארץ. פעילות הכיולים היא נישת שירות מרכזית מול מאות תעודות בשנה, אך היא מנוהלת כיום בתהליך ידני מלא.</p>
+  <h3>התהליך היום</h3>
+  <div class="flow">
+    <div class="fstep"><b>שטח</b><span class="s">המכייל ממלא טופס נייר אצל הלקוח</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>משרד</b><span class="s">הקלדה ידנית לפורמט אקסל מורכב (נוסחאות לפי תקן)</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>תעודה</b><span class="s">הפקת PDF ושליחה ללקוח במייל</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>תיוק</b><span class="s">שמירה בתיקיות במחשב לפי שם לקוח</span></div>
+    <div class="farr">←</div>
+    <div class="fstep hot"><b>תזכורות</b><span class="s">מעקב ידני ושליחת מיילים אחד־אחד, חודש–חודשיים מראש</span></div>
+  </div>
+  <h3>הכאבים המרכזיים</h3>
+  <ul class="clean">
+    <li><b>אין רשת ביטחון:</b> התזכורות תלויות בזיכרון ובדפדוף ידני בתיקיות ובמיילים - <i>"אנחנו לא יודעים אם אנחנו מפספסים"</i> (מתוך פגישת האפיון, 23.07.2026). לקוח שלא קיבל תזכורת הוא כיול שאבד - ולעיתים לקוח שעבר למתחרה.</li>
+    <li><b>אין תמונת מצב:</b> לא ניתן להפיק בלחיצה רשימה של מי אישר תיאום, מי לא הגיב ומי לא ביצע כיול בפועל.</li>
+    <li><b>הלקוח תלוי במשרד:</b> כל בקשה לעותק תעודה או לתיאום כיול עוברת דרך הצוות - עומס שוטף על המשרד.</li>
+    <li><b>הידע מפוזר:</b> תעודות, כתובות מייל ותאריכי תוקף שמורים בתיקיות ובקבצים נפרדים, ללא מערכת אחת מרכזית.</li>
+  </ul>
+  <div class="callout co-info"><span class="t">הבסיס קיים ומוכח</span>פלטפורמה דומה שפיתחנו פועלת בהצלחה בסביבת ייצור עבור מעבדת כיולים מובילה (חברת סקאלר) - כולל תזכורות אוטומטיות, פורטל לקוחות וארכיון תעודות בענן. הפרויקט הנוכחי נבנה מחדש בכלים המתקדמים של היום, בהתאמה מלאה למיתוג ולתהליכי העבודה של מאזני שביט.</div>
+</div>
+
+<!-- ================= 2 ================= -->
+<div class="sheet" id="s2">
+  <h2 class="sec"><span class="num">2</span>מטרות ועקרונות מנחים</h2>
+  <h3>מטרות עסקיות</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><b>אפס פספוסים</b><span>כל לקוח מקבל תזכורת במועד - אוטומטית, בלי תלות באדם</span></div>
+    <div class="kpi"><b>שחרור המשרד</b><span>פחות טלפונים, פחות חיפוש בתיקיות, פחות מיילים ידניים</span></div>
+    <div class="kpi"><b>שירות עצמי ללקוח</b><span>אזור אישי: צפייה בתעודות, הורדה והזמנת כיול</span></div>
+    <div class="kpi"><b>מקור אמת אחד</b><span>כל התעודות, הלקוחות והתזכורות במערכת אחת מאובטחת</span></div>
+    <div class="kpi"><b>בידול שיווקי</b><span>פורטל ממותג שמחזק את חוויית השירות מול המתחרים</span></div>
+    <div class="kpi"><b>תשתית לצמיחה</b><span>בסיס מודולרי להרחבות: שטח, ווטסאפ, דוחות ועוד</span></div>
+  </div>
+  <h3>עקרונות מנחים</h3>
+  <ul class="clean">
+    <li><b>מודולריות תחילה:</b> כל מודול עומד בפני עצמו וניתן להרחבה עצמאית. מתחילים - כפי שסוכם - "רזה ופשוט", והמערכת גדלה בהדרגה בלי לבנות מחדש.</li>
+    <li><b>פרואקטיביות:</b> המערכת יוזמת - היא לא מחכה שיפעילו אותה. מנוע רקע רץ מדי יום ומטפל בתזכורות ובעדכונים.</li>
+    <li><b>הלקוח במרכז:</b> ברירת המחדל היא שהלקוח רואה, מוריד ומזמין בעצמו - והמשרד רק מאשר ומפקח.</li>
+    <li><b>שינוי מינימלי להרגלי העבודה:</b> תעודת הכיול ממשיכה להיות מופקת באקסל הקיים והמוכר. הפלטפורמה קולטת, מתייקת, מפיצה ומזכירה - בלי לשבור תהליך שעובד.</li>
+    <li><b>מיתוג מלא:</b> לוגו מאזני שביט, צבעי המותג (שפה גרפית כהה + כתום, בהתאם לאתר החברה) וקישור לאתר - בפורטל ובכל מייל יוצא. כוונון גוונים סופי לפי קובץ הלוגו הרשמי.</li>
+  </ul>
+</div>
+
+<!-- ================= 3 ================= -->
+<div class="sheet" id="s3">
+  <h2 class="sec"><span class="num">3</span>תמצית הפתרון</h2>
+  <p class="lead">פורטל ווב מאובטח בעברית מלאה (RTL), רספונסיבי למחשב, טאבלט ונייד. כל גולש שאינו מחובר מופנה למסך כניסה ממותג; לאחר הכניסה נפתחת <b>רשימת הכיולים</b> - מסך הבית וברירת המחדל של המערכת (או היעד המקורי אליו ניווט המשתמש). המשרד מעלה תעודות בהעלאה מרוכזת ישירות לענן AWS, המערכת מזהה ומשייכת אותן ללקוחות, והמנוע הפרואקטיבי דואג שכל לקוח יקבל תזכורת בזמן - כולל אפשרות לאשר תיאום או לפתוח קריאת כיול בלחיצה אחת מתוך המייל.</p>
+  <div class="callout co-ok"><span class="t">שלושת מוקדי הערך</span>① ארכיון תעודות מרכזי ומאובטח בענן, משויך לפי לקוח · ② אזור אישי לכל לקוח - צפייה, הורדה והזמנה · ③ מנוע תזכורות אוטומטי שרץ מדי יום ב־11:00 ולא מפספס אף אחד.</div>
+</div>
+
+<!-- ================= 4 ================= -->
+<div class="sheet" id="s4">
+  <h2 class="sec"><span class="num">4</span>משתמשים ותפקידים</h2>
+  <div class="roles">
+    <div class="role">
+      <b>מנהל / משרד</b><span class="tag">שליטה מלאה</span>
+      <ul><li>כל הכיולים והלקוחות</li><li>העלאה מרוכזת וקליטה</li><li>תזכורות, מעקב ודוחות</li><li>ניהול משתמשים והגדרות</li></ul>
+    </div>
+    <div class="role c2">
+      <b>לקוח</b><span class="tag">אזור אישי - רואה רק את שלו</span>
+      <ul><li>התעודות והכיולים שלו בלבד</li><li>צפייה והורדת PDF</li><li>פתיחת קריאת כיול</li><li>אישור תיאום מתוך המייל</li></ul>
+    </div>
+    <div class="role c3">
+      <b>מכייל שטח</b><span class="tag">תצוגה בסיסית</span>
+      <ul><li>רשימת כיולים קרובים</li><li>פרטי לקוח ומכשירים</li><li>בסיס להרחבה עתידית (הזנה מהשטח)</li></ul>
+    </div>
+    <div class="role c4">
+      <b>המנוע הפרואקטיבי</b><span class="tag">"העובד הרביעי" - אוטומטי</span>
+      <ul><li>רץ כל יום ב־11:00</li><li>שולח תזכורות ועדכונים</li><li>רושם הכל ביומן מעקב</li><li>לא שולח פעמיים לאותו לקוח</li></ul>
+    </div>
+  </div>
+  <div class="callout co-info"><span class="t">הפרדת נתונים מובנית</span>ההרשאות נאכפות בשכבת ה־API של השרת (ולא רק בתצוגה): משתמש מסוג "לקוח" מקבל מהשרת אך ורק רשומות המשויכות אליו. פירוט מלא - באפיון המפורט, פרק ההרשאות.</div>
+</div>
+
+<!-- ================= 5 ================= -->
+<div class="sheet" id="s5">
+  <h2 class="sec"><span class="num">5</span>מודולי המערכת</h2>
+  <div class="cards">
+    <div class="card"><span class="badge">מסך ראשי</span><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div><b class="t">כיולים</b><p>רשימת כל תעודות הכיול - ברירת המחדל בכניסה. חיפוש וסינון לפי לקוח, מכשיר, סטטוס ותוקף; מדדי מצב (בתוקף / לקראת תפוגה / פג); צפייה בתעודת ה־PDF ובקובץ העבודה הפנימי (אקסל, למשרד בלבד).</p></div>
+    <div class="card"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><b class="t">לקוחות</b><p>כרטיס לקוח מלא: אנשי קשר, אימיילים, מכשירים, היסטוריית כיולים ותזכורות. לקוח חדש מוקם ידנית או אוטומטית בקליטה מרוכזת. התראה על לקוח ללא כתובת מייל.</p></div>
+    <div class="card"><span class="badge gold">ליבת הערך</span><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><b class="t">תזכורות ומעקב</b><p>מנוע פרואקטיבי יומי (11:00): מייל מרוכז לכל לקוח עם המכשירים שתוקפם קרב, במדרגות מוגדרות (30 יום, 14 יום - ניתן לשינוי). אישור תיאום בלחיצה מעדכן את המערכת ועוצר תזכורות כפולות. יומן מלא + דוחות מי אישר / לא אישר / לא ביצע.</p></div>
+    <div class="card"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 16l-4-4-4 4"/><path d="M12 12v9"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg></div><b class="t">העלאה מרוכזת (Bulk)</b><p>גרירת תיקיות שלמות של PDF - עשרות ומאות קבצים בבת אחת. בדיקה מוקדמת מול רשימת הלקוחות, העלאה ישירה מהדפדפן ל־AWS S3 עם מעקב קובץ־קובץ, קליטה ושיוך אוטומטיים ודוח סיכום מלא.</p></div>
+    <div class="card"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div><b class="t">אזור לקוח</b><p>הלקוח נכנס פעם אחת (החיבור נשמר) ורואה רק את שלו: תעודות, תוקפים והורדות. פותח קריאת כיול בטופס קצר - והקריאה מופיעה מיד אצל המשרד. תשתית ה"קריאות" גנרית (לפי סוג) - מוכנה להוספת קריאת שירות בעתיד.</p></div>
+    <div class="card"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><b class="t">משתמשים, הגדרות ומיתוג</b><p>ניהול משתמשים לפי תפקיד; הגדרת מדרגות תזכורת ושעת ריצה; עריכת תבניות המייל; לוגו, צבעי מותג וקישור לאתר מאזני שביט.</p></div>
+  </div>
+</div>
+
+<!-- ================= 6 ================= -->
+<div class="sheet" id="s6">
+  <h2 class="sec"><span class="num">6</span>תהליכים מרכזיים</h2>
+
+  <div class="flow-title"><span class="fl">א</span>קליטה מרוכזת של תעודות</div>
+  <div class="flow">
+    <div class="fstep"><b>1 · בחירה</b><span class="s">גרירת תיקיות לקוחות עם קובצי PDF (ואקסל פנימי - רשות)</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>2 · בדיקה מוקדמת</b><span class="s">הצלבה מול רשימת הלקוחות: קיים / חדש / לא מזוהה + סיבה</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>3 · העלאה לענן</b><span class="s">ישירות מהדפדפן ל־S3, מעקב חי קובץ־קובץ (עלה / נכשל)</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>4 · קליטה ושיוך</b><span class="s">יצירת לקוח אם חסר; כיול קיים באותו חודש - מוחלף; הכל מקושר</span></div>
+    <div class="farr">←</div>
+    <div class="fstep okk"><b>5 · דוח סיכום</b><span class="s">כמה עלו, כמה הוחלפו, כמה נכשלו - ולמה</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted)">ברירת מחדל: ממשיכים עם הקבצים התקינים בלבד; ניתן לעצור הכל אם ההתאמה חלקית. בקליטת ההיסטוריה (שנה אחורה) לא נשלחים עדכונים ללקוחות.</p>
+
+  <div class="flow-title"><span class="fl">ב</span>מנוע התזכורות - כל יום ב־11:00</div>
+  <div class="flow">
+    <div class="fstep"><b>1 · סריקה</b><span class="s">איתור תעודות שמתקרבות לתפוגה לפי המדרגות שהוגדרו (30 / 14 יום)</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>2 · מייל מרוכז</b><span class="s">הודעה ממותגת אחת לכל לקוח: המכשירים, התוקף והזמן שנותר</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>3 · הלקוח פועל</b><span class="s">מאשר תיאום בלחיצה או פותח קריאת כיול - ישירות מהמייל</span></div>
+    <div class="farr">←</div>
+    <div class="fstep okk"><b>4 · המערכת מתעדכנת</b><span class="s">האישור נרשם, תזכורות כפולות נעצרות, המשרד רואה הכל ביומן</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted)">לקוח שלא הגיב - יקבל את המדרגה הבאה אוטומטית. תיאום שנעשה בטלפון מסומן ידנית בלחיצה, והמערכת מפסיקה להזכיר.</p>
+
+  <div class="flow-title"><span class="fl">ג</span>תעודה חדשה - עדכון מיידי ללקוח</div>
+  <div class="flow">
+    <div class="fstep"><b>1 · המשרד מעלה תעודה</b><span class="s">שוטף - תעודה בודדת או כמה יחד</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>2 · מייל אוטומטי</b><span class="s">"עלתה תעודת כיול חדשה - לצפייה לחץ כאן"</span></div>
+    <div class="farr">←</div>
+    <div class="fstep okk"><b>3 · הלקוח צופה ומוריד</b><span class="s">באזור האישי, בכל זמן - בלי לפנות למשרד</span></div>
+  </div>
+
+  <div class="flow-title"><span class="fl">ד</span>קריאת כיול מהאזור האישי</div>
+  <div class="flow">
+    <div class="fstep"><b>1 · הלקוח פותח קריאה</b><span class="s">טופס קצר: מועד מועדף והערות</span></div>
+    <div class="farr">←</div>
+    <div class="fstep"><b>2 · הקריאה נרשמת</b><span class="s">מופיעה למשרד עם פרטי הלקוח</span></div>
+    <div class="farr">←</div>
+    <div class="fstep okk"><b>3 · המשרד מתאם</b><span class="s">סטטוס הקריאה מתעדכן עד לביצוע</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted)">תשתית הקריאות נבנית גנרית - "קריאה" עם סוג (כיול / שירות / …). בשלב זה פעילה קריאת כיול בלבד; קריאת שירות (תקלות ותיקונים, בדומה לטופס הקיים באתר) תתווסף בעתיד כהרחבה של אותה תשתית, בלי פיתוח מחדש.</p>
+</div>
+
+<!-- ================= 7 ================= -->
+<div class="sheet" id="s7">
+  <h2 class="sec"><span class="num">7</span>טכנולוגיה ואבטחה</h2>
+  <div class="cards">
+    <div class="card"><b class="t">צד לקוח - Angular</b><p>אפליקציית ווב מודרנית, עברית RTL מלאה, רספונסיבית למחשב, טאבלט ונייד. רכיבי UI משותפים לכל המודולים.</p></div>
+    <div class="card"><b class="t">שרת - Node.js + Remult</b><p>שכבת API מאוחדת: ישויות, ולידציות והרשאות מוגדרות פעם אחת ונאכפות בשרת ובלקוח כאחד - פחות קוד, פחות באגים, פיתוח מהיר.</p></div>
+    <div class="card"><b class="t">בסיס נתונים - PostgreSQL</b><p>בסיס נתונים יציב ומוכח לניהול לקוחות, כיולים, יומני תזכורות ובקשות.</p></div>
+    <div class="card"><b class="t">אחסון קבצים - AWS S3</b><p>התעודות נשמרות בענן אמזון, משויכות לפי לקוח. העלאה ישירה מהדפדפן בקישורים חתומים - מהיר ובטוח גם במאות קבצים.</p></div>
+    <div class="card"><b class="t">דיוור - SMTP / Amazon SES</b><p>מיילים ממותגים (לוגו, צבעים, קישור לאתר) עם כפתורי פעולה. נשלחים מכתובת רשמית של מאזני שביט.</p></div>
+    <div class="card"><b class="t">תזמון - מנוע רקע</b><p>משימת Cron יומית (11:00, שעון ישראל) המפעילה את מנוע התזכורות, עם יומן ריצות מלא והתאוששות מכשלים.</p></div>
+  </div>
+  <h3>אבטחת מידע</h3>
+  <ul class="clean">
+    <li>הזדהות מאובטחת (JWT) עם הצפנת סיסמאות; החיבור נשמר - הלקוח מתחבר פעם אחת בלבד.</li>
+    <li>הפרדת נתונים בשכבת ה־API: לקוח מקבל מהשרת אך ורק את הרשומות שלו - לא ניתן לעקוף מהדפדפן.</li>
+    <li>תעבורה מוצפנת (HTTPS) מקצה לקצה; קישורי הורדת תעודות זמניים וחתומים.</li>
+    <li>גיבוי יומי אוטומטי לבסיס הנתונים; הקבצים שמורים ב־S3 בעמידות של 99.999999999%.</li>
+  </ul>
+</div>
+
+<!-- ================= 8 ================= -->
+<div class="sheet" id="s8">
+  <h2 class="sec"><span class="num">8</span>תכולה, גבולות והרחבות עתידיות</h2>
+  <div class="scope">
+    <div class="box in">
+      <b class="h">✔ בתכולת הפרויקט</b>
+      <ul>
+        <li>פורטל ממותג: לוגו, צבעים, קישור לאתר</li>
+        <li>מסך כניסה + ניהול הרשאות לפי תפקיד</li>
+        <li>מודול כיולים (מסך ראשי) + תיק כיול מלא</li>
+        <li>מודול לקוחות + הקמה אוטומטית בקליטה</li>
+        <li>העלאה מרוכזת ל־S3 + קליטה חכמה ודוח</li>
+        <li>קליטת היסטוריה - שנה אחורה</li>
+        <li>מנוע תזכורות + אישור תיאום מהמייל</li>
+        <li>עדכון אוטומטי על תעודה חדשה</li>
+        <li>אזור לקוח + קריאת כיול (תשתית קריאות גנרית)</li>
+        <li>מעקב ודוחות: אישרו / לא אישרו / לא ביצעו</li>
+        <li>מסך הגדרות: מדרגות, תבניות, מיתוג</li>
+        <li>הדרכת צוות + מדריך מקוצר + פיילוט מלווה</li>
+      </ul>
+    </div>
+    <div class="box out">
+      <b class="h">✖ מחוץ לתכולה (שלב זה)</b>
+      <ul>
+        <li>הפקת תעודת הכיול עצמה - נשארת באקסל הקיים</li>
+        <li>שליחת ווטסאפ / SMS (תשתית מוכנה להרחבה)</li>
+        <li>מודול חשבוניות (הוחרג בפגישה)</li>
+        <li>אפליקציית מכייל שטח מלאה (הזנת כיול בשטח)</li>
+        <li>קריאות שירות - תקלות ותיקונים (הטופס באתר ממשיך לשרת; ייתמך בעתיד על תשתית הקריאות)</li>
+        <li>טופס מצבת ציוד למילוי עצמי של הלקוח</li>
+        <li>אינטגרציה למערכות ERP / הנה״ח</li>
+      </ul>
+    </div>
+  </div>
+  <h3>מפת הרחבות עתידיות (מודולים נפרדים, בתמחור נפרד)</h3>
+  <div class="chips">
+    <span class="chip">🛠 קריאות שירות - תקלות ותיקונים, על אותה תשתית קריאות</span>
+    <span class="chip">📱 תזכורות ווטסאפ / SMS</span>
+    <span class="chip">🧰 אפליקציית מכייל שטח - הזנת כיול מהטאבלט</span>
+    <span class="chip">📋 מצבת ציוד ללקוח + עדכון עצמי לפני כיול</span>
+    <span class="chip">📊 דשבורד ניהולי מורחב</span>
+    <span class="chip">🧾 חשבוניות ומעקב תשלומים</span>
+    <span class="chip">🔗 חיבור לאתר החברה - הזמנת כיול לידים</span>
+  </div>
+  <div class="callout co-info"><span class="t">הארכיטקטורה כבר ערוכה לזה</span>כל הרחבה עתידית מתחברת כמודול עצמאי לאותן ישויות ליבה (לקוח, כיול, תעודה, קריאה) - בלי לפרק את הקיים ובלי לבנות מחדש. דוגמה: קריאת שירות תיתמך על אותה תשתית "קריאות" שעליה נבנית קריאת הכיול - הוספת סוג וטופס ייעודי (סוג משקל, דגם, תיאור תקלה, קובץ מצורף, עדיפות - כמו בטופס האתר), לא מערכת חדשה.</div>
+</div>
+
+<!-- ================= 9 ================= -->
+<div class="sheet" id="s9">
+  <h2 class="sec"><span class="num">9</span>לוח זמנים ואבני דרך</h2>
+  <div class="phases">
+    <div class="phase ph1"><div class="d">ימי עבודה 1–10</div><b>פיתוח</b><p>הקמת הפלטפורמה, כל המודולים, קליטת נתוני האמת והרצת בדיקות</p></div>
+    <div class="phase ph2"><div class="d">סוף יום 10</div><b>מסירה + הדרכה</b><p>הדרכת צוות המשרד על מערכת חיה עם הנתונים האמיתיים · אבן דרך לתשלום השני</p></div>
+    <div class="phase ph3"><div class="d">ימי עבודה 11–15</div><b>פיילוט מלווה</b><p>עבודה אמיתית בליווי צמוד, כוונון ותיקונים - עד עלייה מלאה לאוויר</p></div>
+  </div>
+  <div class="gantt">
+    <div class="g-head"><div class="lbl">שלב \ יום</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div></div>
+    <div class="g-row"><div class="lbl">תשתית, מיתוג וכניסה</div><div class="g-cell"><div class="bar b1" style="inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b1" style="inset-inline-start:-98%"></div></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="lbl">לקוחות ומשתמשים</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"><div class="bar b1" style="inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b1" style="inset-inline-start:-98%"></div></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="lbl">העלאה מרוכזת + ענן</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"><div class="bar b1" style="inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b1" style="inset-inline-start:-98%"></div></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="lbl">מנוע תזכורות ומיילים</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"><div class="bar b1" style="inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b1" style="inset-inline-start:-98%"></div></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="lbl">אזור לקוח + דוחות</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"><div class="bar b1"></div></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="lbl">הקשחה, הדרכה ומסירה</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"><div class="bar b2"></div></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="lbl">פיילוט מלווה</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"><div class="bar b3" style="inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b3" style="inset-inline-start:-98%;inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b3" style="inset-inline-start:-98%;inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b3" style="inset-inline-start:-98%;inset-inline-end:-98%"></div></div><div class="g-cell"><div class="bar b3" style="inset-inline-start:-98%"></div></div></div>
+  </div>
+  <ul class="clean">
+    <li><b>נקודת פתיחה:</b> חתימה על ההצעה + קבלת חומרי הבסיס (רשימת לקוחות, תעודות, לוגו). עיכוב בחומרים מזיז את הלו״ז בהתאמה.</li>
+    <li><b>מסירה (סוף יום 10):</b> מערכת מלאה על נתוני אמת + הדרכת צוות - תנאי לתחילת הפיילוט.</li>
+    <li><b>פיילוט (ימים 11–15):</b> עבודה שוטפת אמיתית בליווי צמוד; בסיומו - עלייה מלאה לאוויר ותחילת תקופת אחריות.</li>
+  </ul>
+</div>
+
+<!-- ================= 10 ================= -->
+<div class="sheet" id="s10">
+  <h2 class="sec"><span class="num">10</span>מדדי הצלחה</h2>
+  <table class="tbl">
+    <tr><th style="width:42%">מדד</th><th>יעד</th></tr>
+    <tr><td>שליחת תזכורות במועד</td><td>100% מהתזכורות נשלחות אוטומטית, ללא התערבות ידנית - אפס לקוחות שנשכחו</td></tr>
+    <tr><td>קליטת ההיסטוריה</td><td>כל תעודות השנה האחרונה זמינות בפורטל, משויכות ללקוח הנכון</td></tr>
+    <tr><td>קליטת תעודה שוטפת</td><td>מהעלאה ועד מייל עדכון ללקוח - בתוך דקות, בפעולה אחת של המשרד</td></tr>
+    <tr><td>שירות עצמי</td><td>לקוחות הפיילוט נכנסים לאזור האישי ומורידים תעודות בעצמם</td></tr>
+    <tr><td>שקיפות ניהולית</td><td>דוח "מי לא אישר / מי לא ביצע" מופק בלחיצה אחת</td></tr>
+    <tr><td>אימוץ בצוות</td><td>צוות המשרד עובד עצמאית במערכת בתום ההדרכה והפיילוט</td></tr>
+  </table>
+</div>
+
+<!-- ================= 11 ================= -->
+<div class="sheet" id="s11">
+  <h2 class="sec"><span class="num">11</span>נדרש מהלקוח (מאזני שביט)</h2>
+  <table class="tbl">
+    <tr><th style="width:34%">פריט</th><th>פירוט</th><th style="width:20%">מועד</th></tr>
+    <tr><td>רשימת לקוחות</td><td>קובץ אקסל: שם לקוח, איש קשר, כתובות מייל (ניתן כמה נמענים ללקוח), טלפון</td><td>עם החתימה</td></tr>
+    <tr><td>תעודות שנה אחורה</td><td>תיקיות לפי שם לקוח עם קובצי ה־PDF (ובאופן רשות - גם קובצי האקסל הפנימיים)</td><td>עם החתימה</td></tr>
+    <tr><td>כלל תוקף</td><td>ברירת מחדל מוצעת: 12 חודשים ממועד הכיול; חריגים יוגדרו פר לקוח/תעודה</td><td>עם החתימה</td></tr>
+    <tr><td>מיתוג</td><td>קובץ לוגו באיכות מלאה, צבעי מותג, קישור לאתר: shavit-scales.co.il</td><td>עם החתימה</td></tr>
+    <tr><td>כתובת דיוור</td><td>כתובת מייל רשמית לשליחת התזכורות (למשל calibration@shavit-scales.co.il) + גישה להגדרות הדומיין</td><td>עד יום 5</td></tr>
+    <tr><td>לקוחות פיילוט</td><td>בחירת 2–3 לקוחות אמת שיפעילו את האזור האישי בתקופת הפיילוט</td><td>עד יום 8</td></tr>
+    <tr><td>איש קשר מטעם הלקוח</td><td>גורם מוסמך להחלטות שוטפות (מומלץ: מנהלת המשרד) וזמינות להדרכה</td><td>לאורך הפרויקט</td></tr>
+  </table>
+</div>
+
+<div class="doc-footer">
+  <b>BizTechoff™</b> · התאמת העסק לעידן הדיגיטלי · biztechoff@gmail.com<br>
+  הופק עבור מאזני שביט בע״מ · 23.07.2026 · גרסה 1.0 · המסמך סודי ומיועד לנמען בלבד
+</div>
+</div>
+</body>
+</html>
