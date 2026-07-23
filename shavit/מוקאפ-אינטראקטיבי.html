@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1366">
+<title>מוקאפ · פורטל הכיולים · מאזני שביט</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-950:#101318; --ink-900:#181C22; --ink-800:#20252D; --ink-700:#2B323C; --ink-600:#3A424E;
+  --ink-500:#4A5462; --ink-400:#77828F; --ink-200:#D4DAE2; --ink-100:#E9EDF2; --ink-50:#F5F7F9;
+  --orange:#E8821E; --orange-h:#D2720F; --orange-soft:#FDEBD7; --gold:#F2A93B;
+  --txt:#1B222B; --muted:#5B6674; --line:#DFE4EA; --bg:#F3F5F7;
+  --ok:#178A50; --ok-bg:#E4F5EC; --warn:#B96A0B; --warn-bg:#FCF0DC; --bad:#C0392B; --bad-bg:#FBE7E4;
+  --r:12px; --shadow:0 8px 24px rgba(16,19,24,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Heebo',-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.6}
+button{font-family:inherit;cursor:pointer;border:none;background:none;font-size:inherit}
+input,select,textarea{font-family:inherit;font-size:13.5px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;color:var(--txt)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(232,130,30,.35);border-color:var(--orange)}
+::placeholder{color:#98A2AE}
+/* ========== buttons ========== */
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:99px;padding:8px 20px;font-weight:700;font-size:13.5px;transition:.15s}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:var(--orange-h)}
+.btn-ghost{background:#fff;color:var(--ink-700);border:1.5px solid var(--ink-200)}
+.btn-ghost:hover{border-color:var(--ink-400)}
+.btn-dark{background:var(--ink-800);color:#fff}
+.btn-sm{padding:5px 14px;font-size:12.5px}
+.btn-danger{background:var(--bad-bg);color:var(--bad);border:1px solid #F0C4BC}
+/* ========== login ========== */
+#loginView{position:fixed;inset:0;background:radial-gradient(1100px 600px at 82% -10%,rgba(232,130,30,.22),transparent 55%),linear-gradient(150deg,var(--ink-950),var(--ink-800) 70%,#33261a);display:flex;align-items:center;justify-content:center;z-index:50}
+.login-card{width:400px;background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.45);padding:36px 34px 26px;text-align:center}
+.login-card .lg{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:4px}
+.login-card h1{font-size:21px;font-weight:900;color:var(--ink-900)}
+.login-card .sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
+.login-card .fld{text-align:right;margin-bottom:12px}
+.login-card label{display:block;font-size:12px;font-weight:600;color:var(--ink-600);margin-bottom:4px}
+.login-card input{width:100%}
+.login-card .row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin:6px 0 16px}
+.login-card .btn{width:100%;justify-content:center;font-size:15px;padding:11px}
+.demo-roles{margin-top:18px;border-top:1px dashed var(--line);padding-top:14px;font-size:11.5px;color:var(--muted)}
+.demo-roles .rr{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.demo-roles button{font-size:12px;font-weight:700;color:var(--ink-700);background:var(--ink-100);border-radius:99px;padding:5px 14px}
+.demo-roles button:hover{background:var(--orange-soft);color:var(--orange-h)}
+.site-link{margin-top:14px;font-size:12px}
+.site-link a{color:var(--orange-h);text-decoration:none;font-weight:600}
+/* ========== shell ========== */
+#app{display:none;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:20;background:var(--ink-900);color:#fff;display:flex;align-items:center;gap:18px;padding:0 22px;height:58px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .bmk{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--orange),#F5A85A);display:flex;align-items:center;justify-content:center;flex:none}
+.brand b{font-size:15.5px;font-weight:800}
+.brand span{font-size:11px;color:#AEB6C0;display:block;margin-top:-3px}
+.top-actions{margin-inline-start:auto;display:flex;align-items:center;gap:14px}
+.top-link{color:#C8CFD8;font-size:12.5px;text-decoration:none;display:flex;align-items:center;gap:5px}
+.top-link:hover{color:#fff}
+.bell{position:relative;color:#C8CFD8;display:flex}
+.bell .bdg{position:absolute;top:-6px;inset-inline-end:-7px;background:var(--orange);color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:0 5px;line-height:15px}
+.role-switch{display:flex;align-items:center;gap:7px;background:var(--ink-700);border-radius:99px;padding:4px 6px 4px 12px;font-size:11.5px;color:#C8CFD8}
+.role-switch select{background:var(--ink-800);color:#fff;border:none;border-radius:99px;font-size:12px;font-weight:700;padding:4px 10px}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+.layout{display:flex;min-height:calc(100vh - 58px)}
+.side{width:224px;flex:none;background:var(--ink-950);color:#B9C1CB;padding:16px 12px;display:flex;flex-direction:column;gap:3px}
+.nav-title{font-size:10.5px;font-weight:700;color:#6B7684;letter-spacing:.6px;padding:10px 12px 4px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;font-size:13.5px;font-weight:600;color:#B9C1CB;width:100%;text-align:right;transition:.14s}
+.nav-item svg{flex:none;opacity:.85}
+.nav-item:hover{background:var(--ink-800);color:#fff}
+.nav-item.active{background:linear-gradient(90deg,rgba(232,130,30,.22),rgba(232,130,30,.08));color:#fff;box-shadow:inset 3px 0 0 var(--orange)}
+.nav-item .cnt{margin-inline-start:auto;background:var(--orange);color:#fff;font-size:10.5px;font-weight:800;border-radius:99px;padding:0 7px;line-height:16px}
+.side .foot{margin-top:auto;font-size:10.5px;color:#5E6874;padding:12px;line-height:1.5;border-top:1px solid var(--ink-800)}
+.main{flex:1;padding:24px 28px 90px;min-width:0}
+.view{display:none}
+.view.on{display:block;animation:fadeIn .22s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1}}
+.page-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.page-head h2{font-size:21px;font-weight:900;color:var(--ink-900)}
+.page-head .crumb{font-size:12px;color:var(--muted)}
+.page-head .acts{margin-inline-start:auto;display:flex;gap:8px}
+/* ========== kpi tiles ========== */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:13px 16px;box-shadow:var(--shadow)}
+.kpi .lb{font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:6px}
+.kpi .vl{font-size:26px;font-weight:900;color:var(--ink-900);line-height:1.25}
+.kpi .sb{font-size:11px;color:var(--muted)}
+.kpi.warn .vl{color:var(--warn)} .kpi.bad .vl{color:var(--bad)} .kpi.orange .vl{color:var(--orange-h)}
+/* ========== cards & tables ========== */
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
+.panel .ph{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.panel .ph b{font-size:15px;color:var(--ink-900)}
+.panel .ph .acts{margin-inline-start:auto;display:flex;gap:8px;align-items:center}
+.toolbar{display:flex;gap:9px;padding:12px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap;align-items:center;background:var(--ink-50)}
+.search{position:relative}
+.search input{padding-inline-start:34px;width:250px}
+.search svg{position:absolute;inset-inline-start:10px;top:9px;color:#98A2AE}
+table.grid{width:100%;border-collapse:collapse;font-size:13px}
+.grid th{background:var(--ink-100);color:var(--ink-700);font-weight:700;text-align:right;padding:8px 10px;white-space:nowrap;font-size:12px}
+.grid td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:middle;white-space:nowrap}
+.grid tr:hover td{background:var(--ink-50)}
+.grid .cust{font-weight:700;color:var(--ink-900)}
+.grid .dim{color:var(--muted);font-size:12px}
+.tfoot{display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.tfoot .pg{margin-inline-start:auto;display:flex;gap:5px}
+.tfoot .pg button{border:1px solid var(--line);border-radius:8px;padding:2px 10px;font-size:12px;color:var(--ink-700);background:#fff}
+.tfoot .pg button.cur{background:var(--ink-800);color:#fff;border-color:var(--ink-800)}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:99px;padding:2px 11px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.c-ok{background:var(--ok-bg);color:var(--ok)}
+.c-warn{background:var(--warn-bg);color:var(--warn)}
+.c-bad{background:var(--bad-bg);color:var(--bad)}
+.c-info{background:#E7EEF7;color:#2B5B8F}
+.c-gray{background:var(--ink-100);color:var(--ink-600)}
+.c-orange{background:var(--orange-soft);color:var(--orange-h)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.icon-btn{display:inline-flex;align-items:center;gap:5px;color:var(--ink-600);font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:8px;padding:4px 10px;background:#fff}
+.icon-btn:hover{border-color:var(--orange);color:var(--orange-h)}
+/* tabs */
+.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--line);background:#fff}
+.tab{padding:8px 16px;font-size:13px;font-weight:700;color:var(--muted);border-radius:10px 10px 0 0;border-bottom:2.5px solid transparent}
+.tab.on{color:var(--orange-h);border-bottom-color:var(--orange);background:var(--orange-soft)}
+.tabpanel{display:none}
+.tabpanel.on{display:block}
+/* wizard */
+.wiz-steps{display:flex;gap:0;padding:16px 20px;background:#fff;border-bottom:1px solid var(--line);counter-reset:st}
+.wstep{flex:1;display:flex;align-items:center;gap:9px;position:relative;font-size:12.5px;color:var(--muted);font-weight:600}
+.wstep .n{width:28px;height:28px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex:none}
+.wstep.done .n{background:var(--ok);color:#fff}
+.wstep.cur .n{background:var(--orange);color:#fff;box-shadow:0 0 0 4px var(--orange-soft)}
+.wstep.cur{color:var(--ink-900)}
+.wstep::after{content:"";flex:1;height:2px;background:var(--ink-200);margin:0 10px}
+.wstep:last-child::after{display:none}
+.wstep.done::after{background:var(--ok)}
+.wbody{padding:20px;display:none}
+.wbody.on{display:block}
+.dropzone{border:2px dashed var(--ink-200);border-radius:14px;padding:30px;text-align:center;color:var(--muted);background:var(--ink-50);margin-bottom:14px}
+.dropzone b{color:var(--ink-800)}
+.folder-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px;max-height:180px;overflow:auto;padding:2px}
+.folder{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:12.5px}
+.folder .fc{margin-inline-start:auto;font-size:11px;color:var(--muted)}
+.sumline{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.sumchip{background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 14px;font-size:12.5px}
+.sumchip b{font-size:15px;display:block;line-height:1.2}
+.sumchip.g b{color:var(--ok)} .sumchip.w b{color:var(--warn)} .sumchip.b b{color:var(--bad)} .sumchip.o b{color:var(--orange-h)}
+.progress-wrap{margin:6px 0 14px}
+.pbar{height:14px;border-radius:99px;background:var(--ink-100);overflow:hidden}
+.pbar .fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--gold));transition:width .18s}
+.pline{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px}
+.uprow{display:flex;align-items:center;gap:10px;padding:6px 4px;font-size:12.5px;border-bottom:1px dashed var(--line)}
+.uprow .nm{flex:1;direction:ltr;text-align:right;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis}
+.mini-bar{width:130px;height:7px;background:var(--ink-100);border-radius:99px;overflow:hidden;flex:none}
+.mini-bar i{display:block;height:100%;width:0%;background:var(--orange);border-radius:99px;transition:width .2s}
+.wfoot{display:flex;gap:8px;justify-content:flex-start;padding:14px 20px;border-top:1px solid var(--line);background:var(--ink-50)}
+.wfoot .spacer{flex:1}
+/* settings */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+.offsets{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0}
+.off-chip{background:var(--ink-800);color:#fff;border-radius:99px;padding:5px 15px;font-weight:800;font-size:13px;display:flex;gap:7px;align-items:center}
+.off-chip small{font-weight:400;color:#C8CFD8}
+.off-add{border:1.5px dashed var(--ink-300,#A7B2BF);color:var(--muted);border-radius:99px;padding:5px 14px;font-size:12.5px}
+.switch{position:relative;width:40px;height:22px;background:var(--ok);border-radius:99px;flex:none}
+.switch::after{content:"";position:absolute;top:3px;inset-inline-start:20px;width:16px;height:16px;background:#fff;border-radius:50%}
+.switch.off{background:var(--ink-200)}
+.switch.off::after{inset-inline-start:4px}
+.set-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.set-row:last-child{border-bottom:none}
+.set-row .lbl{color:var(--ink-700);font-weight:600;flex:1}
+.swatches{display:flex;gap:7px}
+.sw{width:26px;height:26px;border-radius:8px;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+/* feed */
+.feed{padding:6px 18px 12px}
+.feed-item{display:flex;gap:11px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+.feed-item:last-child{border:none}
+.feed-item .ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
+.fi-new{background:var(--ok-bg);color:var(--ok)}
+.fi-rem{background:var(--warn-bg);color:var(--warn)}
+.fi-req{background:var(--orange-soft);color:var(--orange-h)}
+.feed-item .tm{margin-inline-start:auto;color:#98A2AE;font-size:11px;flex:none}
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(16,19,24,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
+.overlay.on{display:flex}
+.modal{background:#fff;border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,.4);width:640px;max-width:96vw;max-height:92vh;overflow:auto;animation:pop .18s ease}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+.modal .mh{display:flex;align-items:center;gap:10px;padding:15px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
+.modal .mh b{font-size:15.5px;color:var(--ink-900)}
+.modal .mh .x{margin-inline-start:auto;color:var(--muted);font-size:18px;font-weight:700;padding:2px 8px;border-radius:8px}
+.modal .mh .x:hover{background:var(--ink-100)}
+.modal .mb{padding:18px 20px}
+.modal .mf{display:flex;gap:8px;padding:13px 20px;border-top:1px solid var(--line);background:var(--ink-50)}
+.fld2{margin-bottom:12px}
+.fld2 label{display:block;font-size:12px;font-weight:700;color:var(--ink-600);margin-bottom:4px}
+.fld2 input,.fld2 textarea,.fld2 select{width:100%}
+/* certificate mock */
+.cert{border:1px solid var(--line);border-radius:12px;padding:22px 26px;position:relative;background:repeating-linear-gradient(-45deg,#fff,#fff 60px,#FBFCFD 60px,#FBFCFD 120px)}
+.cert::after{content:"דוגמה להמחשה";position:absolute;top:42%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:44px;font-weight:900;color:rgba(192,57,43,.08);white-space:nowrap}
+.cert .ch{display:flex;justify-content:space-between;align-items:center;border-bottom:2.5px solid var(--ink-800);padding-bottom:10px;margin-bottom:12px}
+.cert .ch .t b{font-size:17px;color:var(--ink-900);display:block}
+.cert .ch .t span{font-size:11px;color:var(--muted)}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 22px;font-size:12.5px;margin-bottom:10px}
+.cert-grid div{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3px 0}
+.cert-grid span{color:var(--muted)}
+.cert table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+.cert th{background:var(--ink-100);padding:5px 8px;text-align:right}
+.cert td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.cert .sig{display:flex;justify-content:space-between;margin-top:14px;font-size:11.5px;color:var(--muted)}
+.cert .sig .bx{border-top:1px solid var(--ink-400);padding-top:4px;width:150px;text-align:center}
+/* email mock */
+.email-p{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.email-p .eh{background:var(--ink-950);color:#fff;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.email-p .es{background:var(--ink-50);border-bottom:1px solid var(--line);padding:8px 18px;font-size:12.5px}
+.email-p .eb{padding:16px 18px;font-size:13px}
+.email-p table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+.email-p th{background:var(--ink-100);padding:5px 8px;text-align:right}
+.email-p td{padding:5px 8px;border-bottom:1px solid var(--line)}
+/* toast */
+#toast{position:fixed;bottom:64px;right:50%;transform:translate(50%,20px);background:var(--ink-900);color:#fff;border-radius:99px;padding:10px 24px;font-size:13.5px;font-weight:600;box-shadow:0 12px 40px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.25s;z-index:80;display:flex;gap:9px;align-items:center}
+#toast.on{opacity:1;transform:translate(50%,0)}
+#toast .tk{color:#5BD495}
+/* demo ribbon */
+.demo-bar{position:fixed;bottom:0;inset-inline:0;background:var(--ink-950);color:#8E97A3;font-size:11.5px;display:flex;gap:14px;align-items:center;justify-content:center;padding:7px 10px;z-index:40}
+.demo-bar b{color:var(--gold)}
+.hint{font-size:11px;color:var(--muted)}
+a{color:var(--orange-h)}
+</style>
+</head>
+<body data-role="ADMIN">
+
+<!-- ============ LOGIN ============ -->
+<div id="loginView">
+  <div class="login-card">
+    <div class="lg">
+      <div class="brand" style="justify-content:center">
+        <div class="bmk"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 6a3.5 3.5 0 0 0 7 0L6 7"/><path d="M19 7l-3 6a3.5 3.5 0 0 0 7 0l-3-6"/><path d="M8 21h8"/></svg></div>
+      </div>
+    </div>
+    <h1>מאזני שביט · פורטל הכיולים</h1>
+    <div class="sub">מעבדת כיול מוסמכת ISO/IEC 17025:2017<br>(כאן ישולב הלוגו הרשמי של מאזני שביט)</div>
+    <div class="fld"><label>דוא"ל</label><input type="email" value="daniel@shavit-scales.co.il"></div>
+    <div class="fld"><label>סיסמה</label><input type="password" value="••••••••"></div>
+    <div class="row"><label style="display:flex;gap:6px;align-items:center;font-size:12px"><input type="checkbox" checked style="width:auto"> זכור אותי</label><a href="#" style="font-size:12px" onclick="toast('קישור איפוס סיסמה יישלח למייל (דמו)');return false">שכחתי סיסמה</a></div>
+    <button class="btn btn-primary" onclick="doLogin('ADMIN')">כניסה</button>
+    <div class="demo-roles">
+      כניסה מהירה לדמו - בחרו תפקיד:
+      <div class="rr">
+        <button onclick="doLogin('ADMIN')">👔 מנהל / משרד</button>
+        <button onclick="doLogin('CUSTOMER')">🏭 לקוח</button>
+        <button onclick="doLogin('TECH')">🧰 מכייל שטח</button>
+      </div>
+    </div>
+    <div class="site-link">↗ <a href="https://www.shavit-scales.co.il" target="_blank">לאתר מאזני שביט</a></div>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="bmk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 6a3.5 3.5 0 0 0 7 0L6 7"/><path d="M19 7l-3 6a3.5 3.5 0 0 0 7 0l-3-6"/><path d="M8 21h8"/></svg></div>
+      <div><b>מאזני שביט</b><span>פורטל כיולים · מעבדה מוסמכת ISO/IEC 17025</span></div>
+    </div>
+    <div class="top-actions">
+      <a class="top-link" href="https://www.shavit-scales.co.il" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg> אתר החברה</a>
+      <button class="bell" onclick="toast('3 התראות חדשות: 2 קריאות · 1 כשל שליחה (דמו)')"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bdg">3</span></button>
+      <div class="role-switch">תצוגת דמו:
+        <select id="roleSel" onchange="setRole(this.value)">
+          <option value="ADMIN">מנהל / משרד</option>
+          <option value="CUSTOMER">לקוח</option>
+          <option value="TECH">מכייל שטח</option>
+        </select>
+      </div>
+      <div class="avatar" id="avatarCh">ד</div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- ============ SIDEBAR ============ -->
+    <nav class="side" id="sideNav">
+      <!-- items injected by JS per role -->
+      <div class="foot" id="sideFoot">פורטל הכיולים v1.0<br>מופעל ע"י BizTechoff™</div>
+    </nav>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main" id="mainArea">
+<!-- ======== VIEW: CALIBRATIONS (default admin) ======== -->
+<section class="view" id="view-calibrations">
+  <div class="page-head">
+    <div><h2>כיולים</h2><div class="crumb">המסך הראשי · כל תעודות הכיול במערכת</div></div>
+    <div class="acts">
+      <button class="btn btn-ghost btn-sm" onclick="toast('הקובץ יורד: calibrations-2026.xlsx (דמו)')">⬇ ייצוא</button>
+      <button class="btn btn-primary btn-sm" onclick="toast('טופס כיול ידני חדש (דמו)')">+ כיול חדש</button>
+    </div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="lb">תעודות בתוקף</div><div class="vl">214</div><div class="sb">מתוך 239 פעילות</div></div>
+    <div class="kpi warn"><div class="lb">לקראת תפוגה</div><div class="vl">18</div><div class="sb">בתוך 30 הימים הקרובים</div></div>
+    <div class="kpi bad"><div class="lb">פגי תוקף</div><div class="vl">7</div><div class="sb">טרם בוצע כיול חוזר</div></div>
+    <div class="kpi orange"><div class="lb">קריאות חדשות</div><div class="vl">3</div><div class="sb">ממתינות לתיאום</div></div>
+    <div class="kpi"><div class="lb">לקוחות פעילים</div><div class="vl">86</div><div class="sb">מקבלי תזכורות: 84</div></div>
+  </div>
+  <div class="panel">
+    <div class="toolbar">
+      <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input id="calSearch" placeholder="חיפוש לקוח, מכשיר או מס' תעודה..." oninput="filterCal(this.value)"></div>
+      <select><option>כל הלקוחות</option><option>מחלבת גליל עליון</option><option>תבליני השרון</option></select>
+      <select><option>כל הסטטוסים</option><option>בתוקף</option><option>לקראת תפוגה</option><option>פג תוקף</option></select>
+      <select><option>12 חודשים אחרונים</option><option>2026</option><option>2025</option></select>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="grid" id="calTable">
+      <tr><th>לקוח</th><th>מכשיר</th><th>מס"ד</th><th>מס' תעודה</th><th>תאריך כיול</th><th>בתוקף עד</th><th>נותרו</th><th>סטטוס</th><th>תעודה</th><th></th></tr>
+      <tr><td class="cust">תבליני השרון</td><td>משקל אנליטי 220 גר'<div class="dim">Precisa · XB-220A</div></td><td class="dim">40221187</td><td>SH-2508-0147</td><td>21.08.2025</td><td>21.08.2026</td><td><b style="color:var(--warn)">29 ימים</b></td><td><span class="chip c-warn"><span class="dot"></span>לקראת תפוגה</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">כימופלסט תעשיות</td><td>גשר שקילה 60 טון<div class="dim">Shavit · SB-60T</div></td><td class="dim">88113402</td><td>SH-2508-0151</td><td>28.08.2025</td><td>28.08.2026</td><td><b style="color:var(--warn)">36 ימים</b></td><td><span class="chip c-ok"><span class="dot"></span>אושר תיאום</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">לוגיסטיקה א.א. בע"מ</td><td>משקל רצפה 300 ק"ג<div class="dim">CAS · DB-II</div></td><td class="dim">51530077</td><td>SH-2506-0122</td><td>15.06.2025</td><td>15.06.2026</td><td><b style="color:var(--bad)">פג לפני 38 ימים</b></td><td><span class="chip c-bad"><span class="dot"></span>פג תוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">קונדיטוריית שקד</td><td>משקל שולחני 6 ק"ג<div class="dim">CAS · SW-1S</div></td><td class="dim">33019845</td><td>SH-2507-0130</td><td>20.07.2025</td><td>20.07.2026</td><td><b style="color:var(--bad)">פג לפני 3 ימים</b></td><td><span class="chip c-bad"><span class="dot"></span>פג תוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">מחלבת גליל עליון</td><td>משקל פלטפורמה 1.5 טון<div class="dim">Shavit · SP-1500</div></td><td class="dim">77120933</td><td>SH-2607-0142</td><td>12.07.2026</td><td>12.07.2027</td><td>354 ימים</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">מאפיית הזהב בע"מ</td><td>משקל שולחני 30 ק"ג<div class="dim">CAS · SW-30</div></td><td class="dim">33562211</td><td>SH-2607-0139</td><td>05.07.2026</td><td>05.07.2027</td><td>347 ימים</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">מעבדות ביו-טק</td><td>סט משקולות E2<div class="dim">1 מ"ג - 200 גר'</div></td><td class="dim">E2-4471</td><td>SH-2604-0098</td><td>02.04.2026</td><td>02.04.2027</td><td>253 ימים</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">בית מטבחיים הצפון</td><td>משקל תלייה 500 ק"ג<div class="dim">Dini Argeo · MCW</div></td><td class="dim">61008452</td><td>SH-2603-0071</td><td>10.03.2026</td><td>10.03.2027</td><td>230 ימים</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+      <tr><td class="cust">חקלאות שדות נגב</td><td>משקל פלטפורמה 3 טון<div class="dim">Shavit · SP-3000</div></td><td class="dim">77200118</td><td>SH-2602-0059</td><td>18.02.2026</td><td>18.02.2027</td><td>210 ימים</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button></td><td><button class="icon-btn" onclick="openModal('mCalCard')">פרטים</button></td></tr>
+    </table>
+    </div>
+    <div class="tfoot"><span>מציג 9 מתוך 246 תעודות</span><div class="pg"><button class="cur">1</button><button>2</button><button>3</button><button>…</button><button>28</button></div></div>
+  </div>
+</section>
+
+<!-- ======== VIEW: CUSTOMERS ======== -->
+<section class="view" id="view-customers">
+  <div class="page-head">
+    <div><h2>לקוחות</h2><div class="crumb">86 לקוחות פעילים · 2 ללא כתובת מייל</div></div>
+    <div class="acts"><button class="btn btn-primary btn-sm" onclick="openModal('mNewCust')">+ לקוח חדש</button></div>
+  </div>
+  <div class="panel">
+    <div class="toolbar">
+      <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="חיפוש לקוח..."></div>
+      <select><option>כולם</option><option>עם תזכורת פתוחה</option><option>ללא מייל</option></select>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="grid">
+      <tr><th>לקוח</th><th>איש קשר</th><th>אימייל</th><th>מכשירים</th><th>כיול אחרון</th><th>הקרוב לפוג</th><th>סטטוס תזכורת</th><th></th></tr>
+      <tr><td class="cust">מחלבת גליל עליון</td><td>ישראל כהן</td><td class="dim">israel@galil-dairy.co.il</td><td>4</td><td>12.07.2026</td><td>21.11.2026</td><td><span class="chip c-gray">אין פתוחה</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">תבליני השרון</td><td>מירב לוי</td><td class="dim">merav@sharon-spices.co.il</td><td>3</td><td>21.08.2025</td><td>21.08.2026</td><td><span class="chip c-warn"><span class="dot"></span>נשלחה 30 יום</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">כימופלסט תעשיות</td><td>אורי שגב</td><td class="dim">uri@chemoplast.co.il</td><td>6</td><td>28.08.2025</td><td>28.08.2026</td><td><span class="chip c-ok"><span class="dot"></span>אושר תיאום</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">לוגיסטיקה א.א. בע"מ</td><td>אבי אזולאי</td><td class="dim">avi@aa-logistics.co.il</td><td>2</td><td>15.06.2025</td><td>פג 15.06.2026</td><td><span class="chip c-bad"><span class="dot"></span>לא הגיב (2 תזכורות)</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">מאפיית הזהב בע"מ</td><td>שרה גולן</td><td class="dim">sara@gold-bakery.co.il</td><td>5</td><td>05.07.2026</td><td>05.07.2027</td><td><span class="chip c-gray">אין פתוחה</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">מעבדות ביו-טק</td><td>ד"ר רון פלד</td><td class="dim">ron@biotech-labs.co.il</td><td>8</td><td>02.04.2026</td><td>02.04.2027</td><td><span class="chip c-gray">אין פתוחה</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">בית מטבחיים הצפון ⚠</td><td>יעקב מזרחי</td><td><span class="chip c-bad">חסר אימייל</span></td><td>3</td><td>10.03.2026</td><td>10.03.2027</td><td><span class="chip c-gray">לא ניתן לשלוח</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+      <tr><td class="cust">חקלאות שדות נגב</td><td>נועה ברק</td><td class="dim">noa@sdot-negev.co.il</td><td>2</td><td>18.02.2026</td><td>18.02.2027</td><td><span class="chip c-gray">אין פתוחה</span></td><td><button class="icon-btn" onclick="openModal('mCustCard')">כרטיס לקוח</button></td></tr>
+    </table>
+    </div>
+    <div class="tfoot"><span>מציג 8 מתוך 86 לקוחות</span><div class="pg"><button class="cur">1</button><button>2</button><button>…</button><button>11</button></div></div>
+  </div>
+</section>
+
+<!-- ======== VIEW: REMINDERS ======== -->
+<section class="view" id="view-reminders">
+  <div class="page-head">
+    <div><h2>תזכורות ומעקב</h2><div class="crumb">המנוע הפרואקטיבי · רץ כל יום ב-11:00</div></div>
+    <div class="acts">
+      <button class="btn btn-ghost btn-sm" onclick="toast('תצוגה מקדימה: 4 לקוחות יקבלו תזכורת בריצה הבאה (דמו)')">👁 הרצת בדיקה</button>
+      <button class="btn btn-primary btn-sm" onclick="toast('המנוע הופעל ידנית - 2 תזכורות נשלחו (דמו)')">▶ הרץ עכשיו</button>
+    </div>
+  </div>
+  <div class="panel" style="padding:12px 18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <b style="font-size:13px;color:var(--ink-700)">מדיניות פעילה:</b>
+    <span class="chip c-orange">מדרגה 1 · 30 יום לפני</span>
+    <span class="chip c-orange">מדרגה 2 · 14 יום לפני (למי שלא אישר)</span>
+    <span class="chip c-gray">שעת ריצה · 11:00</span>
+    <span class="chip c-gray">ערוץ · אימייל בלבד</span>
+    <button class="icon-btn" onclick="showView('view-settings')">✎ עריכה בהגדרות</button>
+    <span class="hint" style="margin-inline-start:auto">ריצה אחרונה: היום 11:00 · נשלחו 3 · נכשלה 1 (חסר אימייל)</span>
+  </div>
+  <div class="panel">
+    <div class="tabs">
+      <button class="tab on" onclick="remTab(this,'rt1')">קרובות</button>
+      <button class="tab" onclick="remTab(this,'rt2')">יומן שליחה</button>
+      <button class="tab" onclick="remTab(this,'rt3')">מעקב אישורים וביצוע</button>
+    </div>
+    <div class="tabpanel on" id="rt1">
+      <div style="overflow-x:auto"><table class="grid">
+        <tr><th>מועד משוער</th><th>לקוח</th><th>מכשירים</th><th>תפוגה</th><th>מדרגה</th><th>מצב</th></tr>
+        <tr><td>01.08.2026</td><td class="cust">מעדני העמק</td><td>משקל שולחני 15 ק"ג</td><td>31.08.2026</td><td><span class="chip c-orange">30 יום</span></td><td><span class="chip c-gray">מתוכננת</span></td></tr>
+        <tr><td>07.08.2026</td><td class="cust">תבליני השרון</td><td>משקל אנליטי + 2 נוספים</td><td>21.08.2026</td><td><span class="chip c-orange">14 יום</span></td><td><span class="chip c-warn"><span class="dot"></span>אם לא יאשר עד אז</td></tr>
+        <tr><td>-</td><td class="cust">כימופלסט תעשיות</td><td>גשר שקילה 60 טון</td><td>28.08.2026</td><td><span class="chip c-gray">14 יום</span></td><td><span class="chip c-ok"><span class="dot"></span>נעצרה - אושר תיאום</span></td></tr>
+        <tr><td>13.08.2026</td><td class="cust">מוסך הרים בע"מ</td><td>משקל עגלה 2 טון</td><td>12.09.2026</td><td><span class="chip c-orange">30 יום</span></td><td><span class="chip c-gray">מתוכננת</span></td></tr>
+      </table></div>
+    </div>
+    <div class="tabpanel" id="rt2">
+      <div style="overflow-x:auto"><table class="grid">
+        <tr><th>נשלח</th><th>לקוח</th><th>סוג</th><th>נמען</th><th>סטטוס</th><th>תגובה</th><th></th></tr>
+        <tr><td>23.07.2026 11:00</td><td class="cust">תבליני השרון</td><td><span class="chip c-orange">תזכורת 30 יום</span></td><td class="dim">merav@sharon-spices.co.il</td><td><span class="chip c-ok"><span class="dot"></span>נשלח</span></td><td><span class="chip c-gray">ממתין</span></td><td><button class="icon-btn" onclick="openModal('mEmailRem')">👁 מייל</button></td></tr>
+        <tr><td>21.07.2026 11:00</td><td class="cust">כימופלסט תעשיות</td><td><span class="chip c-orange">תזכורת 30 יום</span></td><td class="dim">uri@chemoplast.co.il</td><td><span class="chip c-ok"><span class="dot"></span>נשלח</span></td><td><span class="chip c-ok"><span class="dot"></span>אישר 22.07</span></td><td><button class="icon-btn" onclick="openModal('mEmailRem')">👁 מייל</button></td></tr>
+        <tr><td>20.07.2026 11:00</td><td class="cust">לוגיסטיקה א.א. בע"מ</td><td><span class="chip c-orange">תזכורת 14 יום</span></td><td class="dim">avi@aa-logistics.co.il</td><td><span class="chip c-ok"><span class="dot"></span>נשלח</span></td><td><span class="chip c-warn"><span class="dot"></span>ללא מענה</span></td><td><button class="icon-btn" onclick="openModal('mEmailRem')">👁 מייל</button></td></tr>
+        <tr><td>18.07.2026 14:22</td><td class="cust">מאפיית הזהב בע"מ</td><td><span class="chip c-info">תעודה חדשה</span></td><td class="dim">sara@gold-bakery.co.il</td><td><span class="chip c-ok"><span class="dot"></span>נשלח</span></td><td><span class="chip c-gray">-</span></td><td><button class="icon-btn" onclick="openModal('mEmailNew')">👁 מייל</button></td></tr>
+        <tr><td>15.07.2026 11:00</td><td class="cust">בית מטבחיים הצפון</td><td><span class="chip c-orange">תזכורת 30 יום</span></td><td class="dim">-</td><td><span class="chip c-bad"><span class="dot"></span>נכשל - חסר אימייל</span></td><td><span class="chip c-gray">-</span></td><td><button class="icon-btn" onclick="showView('view-customers')">→ ללקוח</button></td></tr>
+      </table></div>
+    </div>
+    <div class="tabpanel" id="rt3">
+      <div style="padding:13px 18px;display:flex;gap:10px;flex-wrap:wrap">
+        <span class="chip c-ok" style="font-size:12.5px;padding:6px 14px">אישרו תיאום · 12</span>
+        <span class="chip c-warn" style="font-size:12.5px;padding:6px 14px">לא הגיבו · 5</span>
+        <span class="chip c-info" style="font-size:12.5px;padding:6px 14px">תואמו ידנית · 3</span>
+        <span class="chip c-bad" style="font-size:12.5px;padding:6px 14px">פג תוקף ולא ביצעו · 7</span>
+        <button class="icon-btn" style="margin-inline-start:auto" onclick="toast('הקובץ יורד: follow-up-2026.xlsx (דמו)')">⬇ ייצוא החתך</button>
+      </div>
+      <div style="overflow-x:auto"><table class="grid">
+        <tr><th>לקוח</th><th>מכשירים</th><th>תפוגה</th><th>תזכורות שנשלחו</th><th>מצב</th><th>פעולה</th></tr>
+        <tr><td class="cust">לוגיסטיקה א.א. בע"מ</td><td>משקל רצפה 300 ק"ג</td><td class="dim">פג 15.06.2026</td><td>30 יום · 14 יום</td><td><span class="chip c-bad"><span class="dot"></span>לא ביצע</span></td><td><button class="icon-btn" onclick="toast('סומן: תואם טלפונית - התזכורות נעצרו (דמו)')">✓ סמן תואם ידנית</button></td></tr>
+        <tr><td class="cust">קונדיטוריית שקד</td><td>משקל שולחני 6 ק"ג</td><td class="dim">פג 20.07.2026</td><td>30 יום · 14 יום</td><td><span class="chip c-warn"><span class="dot"></span>לא הגיב</span></td><td><button class="icon-btn" onclick="toast('סומן: תואם טלפונית - התזכורות נעצרו (דמו)')">✓ סמן תואם ידנית</button></td></tr>
+        <tr><td class="cust">כימופלסט תעשיות</td><td>גשר שקילה 60 טון</td><td class="dim">28.08.2026</td><td>30 יום</td><td><span class="chip c-ok"><span class="dot"></span>אישר · נפתחה קריאה</span></td><td><button class="icon-btn" onclick="showView('view-requests')">→ לקריאה</button></td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VIEW: UPLOAD WIZARD ======== -->
+<section class="view" id="view-upload">
+  <div class="page-head">
+    <div><h2>העלאה מרוכזת</h2><div class="crumb">קליטת תעודות בכמויות - ישירות לענן AWS S3</div></div>
+    <div class="acts"><span class="chip c-gray">מצב: קליטת היסטוריה (ללא מיילים ללקוחות)</span></div>
+  </div>
+  <div class="panel">
+    <div class="wiz-steps">
+      <div class="wstep cur" id="ws1"><span class="n">1</span>בחירת תיקיות</div>
+      <div class="wstep" id="ws2"><span class="n">2</span>בדיקה מוקדמת</div>
+      <div class="wstep" id="ws3"><span class="n">3</span>העלאה לענן</div>
+      <div class="wstep" id="ws4"><span class="n">4</span>קליטה ודוח</div>
+    </div>
+
+    <!-- step 1 -->
+    <div class="wbody on" id="wb1">
+      <div class="dropzone">☁ גררו לכאן תיקיות שלמות (תיקייה = לקוח)<br><b>או לחצו לבחירה מהמחשב</b><div class="hint" style="margin-top:6px">PDF לתעודות · XLSX (רשות) לקובצי עבודה פנימיים - זוגות באותו שם מקושרים אוטומטית</div></div>
+      <b style="font-size:13px;color:var(--ink-700)">נבחרו 42 תיקיות · 137 קבצים (121 PDF · 16 XLSX) · 68MB</b>
+      <div class="folder-list" style="margin-top:9px">
+        <div class="folder">📁 מחלבת גליל עליון <span class="fc">4 קבצים</span></div>
+        <div class="folder">📁 תבליני השרון <span class="fc">3 קבצים</span></div>
+        <div class="folder">📁 כימופלסט תעשיות <span class="fc">7 קבצים</span></div>
+        <div class="folder">📁 מאפיית הזהב בעמ <span class="fc">5 קבצים</span></div>
+        <div class="folder">📁 מעבדות ביו-טק <span class="fc">9 קבצים</span></div>
+        <div class="folder">📁 אחים ברקוביץ סחר <span class="fc">2 קבצים</span></div>
+        <div class="folder">📁 גרין-פארם צפון <span class="fc">3 קבצים</span></div>
+        <div class="folder">📁 מוסך הרים בעמ <span class="fc">2 קבצים</span></div>
+        <div class="folder">📁 metal-works-ltd <span class="fc">1 קובץ</span></div>
+        <div class="folder" style="opacity:.6">+ עוד 33 תיקיות...</div>
+      </div>
+      <div class="wfoot" style="margin:16px -20px -20px;border-radius:0 0 12px 12px"><span class="spacer"></span><button class="btn btn-primary" onclick="wizGo(2)">בדיקה מוקדמת ←</button></div>
+    </div>
+
+    <!-- step 2 -->
+    <div class="wbody" id="wb2">
+      <div class="sumline">
+        <div class="sumchip g"><b>39</b>לקוחות מזוהים</div>
+        <div class="sumchip o"><b>2</b>לקוחות חדשים - ייווצרו</div>
+        <div class="sumchip b"><b>1</b>תיקייה לא מזוהה</div>
+        <div class="sumchip w"><b>6</b>תעודות יחליפו קיימות</div>
+        <div class="sumchip"><b>134</b>קבצים יעלו · 3 ידולגו</div>
+      </div>
+      <div style="overflow-x:auto"><table class="grid">
+        <tr><th>תיקייה</th><th>התאמה</th><th>קבצים</th><th>הערה</th></tr>
+        <tr><td class="cust">מחלבת גליל עליון</td><td><span class="chip c-ok"><span class="dot"></span>לקוח קיים</span></td><td>4</td><td class="dim">תקין</td></tr>
+        <tr><td class="cust">תבליני השרון</td><td><span class="chip c-ok"><span class="dot"></span>לקוח קיים</span></td><td>3</td><td class="dim">תעודת 08/2025 קיימת - תוחלף (תישמר כגרסה)</td></tr>
+        <tr><td class="cust">אחים ברקוביץ סחר</td><td><span class="chip c-orange"><span class="dot"></span>חדש - ייווצר</span></td><td>2</td><td class="dim">ללא אימייל - יסומן להשלמה</td></tr>
+        <tr><td class="cust">גרין-פארם צפון</td><td><span class="chip c-orange"><span class="dot"></span>חדש - ייווצר</span></td><td>3</td><td class="dim">ללא אימייל - יסומן להשלמה</td></tr>
+        <tr><td class="cust">metal-works-ltd</td><td><span class="chip c-bad"><span class="dot"></span>לא מזוהה</span></td><td>1</td><td class="dim">אין התאמה ברשימת הלקוחות - 1 קובץ ידולג</td></tr>
+        <tr><td class="cust">כימופלסט תעשיות</td><td><span class="chip c-ok"><span class="dot"></span>לקוח קיים</span></td><td>7</td><td class="dim">2 קבצים כפולים בשם - ידולגו</td></tr>
+      </table></div>
+      <label style="display:flex;gap:8px;align-items:center;margin:12px 2px;font-size:13px"><input type="checkbox" checked style="width:auto"> צור אוטומטית לקוחות חדשים מתיקיות שלא זוהו ברשימה</label>
+      <div class="wfoot" style="margin:8px -20px -20px;border-radius:0 0 12px 12px">
+        <button class="btn btn-ghost" onclick="wizGo(1)">→ חזרה</button>
+        <button class="btn btn-danger" onclick="toast('הסבב בוטל - שום קובץ לא הועלה (דמו)');wizGo(1)">ביטול הסבב כולו</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="wizGo(3);startUpload()">המשך עם 134 התקינים ←</button>
+      </div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="wbody" id="wb3">
+      <b style="font-size:14px;color:var(--ink-800)">מעלה ישירות ל-AWS S3 - הדפדפן מדבר עם הענן, קובץ אחר קובץ</b>
+      <div class="progress-wrap">
+        <div class="pbar"><div class="fill" id="upFill"></div></div>
+        <div class="pline"><span id="upCount">0 / 134 קבצים</span><span id="upPct">0%</span></div>
+      </div>
+      <div id="upRows">
+        <div class="uprow"><span>📁 מחלבת גליל עליון</span><span class="nm">SH-2607-0142.pdf</span><div class="mini-bar"><i id="mb1"></i></div><span class="upst" id="st1">⏳</span></div>
+        <div class="uprow"><span>📁 תבליני השרון</span><span class="nm">SH-2508-0147.pdf</span><div class="mini-bar"><i id="mb2"></i></div><span class="upst" id="st2">⏳</span></div>
+        <div class="uprow"><span>📁 תבליני השרון</span><span class="nm">SH-2508-0147.xlsx</span><div class="mini-bar"><i id="mb3"></i></div><span class="upst" id="st3">⏳</span></div>
+        <div class="uprow"><span>📁 כימופלסט תעשיות</span><span class="nm">SH-2508-0151.pdf</span><div class="mini-bar"><i id="mb4"></i></div><span class="upst" id="st4">⏳</span></div>
+        <div class="uprow"><span>📁 מעבדות ביו-טק</span><span class="nm">SH-2604-0098.pdf</span><div class="mini-bar"><i id="mb5"></i></div><span class="upst" id="st5">⏳</span></div>
+        <div class="uprow" style="border:none"><span class="dim">... יתר הקבצים בתור, מקביליות מבוקרת ...</span></div>
+      </div>
+      <div class="wfoot" style="margin:14px -20px -20px;border-radius:0 0 12px 12px"><span class="hint">אפשר להשאיר את החלון פתוח ברקע - ההעלאה ממשיכה</span><span class="spacer"></span><button class="btn btn-primary" id="toStep4" disabled style="opacity:.45" onclick="wizGo(4)">לסיכום הקליטה ←</button></div>
+    </div>
+
+    <!-- step 4 -->
+    <div class="wbody" id="wb4">
+      <div class="sumline">
+        <div class="sumchip g"><b>132</b>קבצים הועלו</div>
+        <div class="sumchip b"><b>2</b>נכשלו - לניסיון חוזר</div>
+        <div class="sumchip"><b>112</b>תעודות חדשות נקלטו</div>
+        <div class="sumchip w"><b>6</b>הוחלפו (שנה+חודש)</div>
+        <div class="sumchip"><b>14</b>קובצי עבודה קושרו</div>
+        <div class="sumchip o"><b>2</b>לקוחות חדשים נוצרו</div>
+      </div>
+      <div style="overflow-x:auto"><table class="grid">
+        <tr><th>קובץ</th><th>לקוח</th><th>תוצאה</th><th>נתיב בענן</th></tr>
+        <tr><td class="dim" style="direction:ltr;text-align:right">SH-2508-0147.pdf</td><td>תבליני השרון</td><td><span class="chip c-warn"><span class="dot"></span>החליף תעודת 08/2025</span></td><td class="dim" style="direction:ltr;text-align:right">customers/1042/certificates/2025/...</td></tr>
+        <tr><td class="dim" style="direction:ltr;text-align:right">SH-2604-0098.pdf</td><td>מעבדות ביו-טק</td><td><span class="chip c-ok"><span class="dot"></span>נקלט</span></td><td class="dim" style="direction:ltr;text-align:right">customers/1057/certificates/2026/...</td></tr>
+        <tr><td class="dim" style="direction:ltr;text-align:right">SH-2601-0021.pdf</td><td>אחים ברקוביץ סחר</td><td><span class="chip c-orange"><span class="dot"></span>נקלט + לקוח חדש</span></td><td class="dim" style="direction:ltr;text-align:right">customers/1088/certificates/2026/...</td></tr>
+        <tr><td class="dim" style="direction:ltr;text-align:right">SH-2603-0064.xlsx</td><td>מוסך הרים בע"מ</td><td><span class="chip c-bad"><span class="dot"></span>נכשל - תקלת רשת</span></td><td><button class="icon-btn" onclick="toast('הקובץ הועלה בהצלחה בניסיון חוזר (דמו)')">↻ נסה שוב</button></td></tr>
+      </table></div>
+      <div class="wfoot" style="margin:14px -20px -20px;border-radius:0 0 12px 12px">
+        <button class="btn btn-ghost" onclick="toast('הקובץ יורד: batch-report-42.csv (דמו)')">⬇ הורדת דוח קליטה</button>
+        <span class="hint">מצב היסטוריה: לא נשלחו מיילים ללקוחות · 5 תעודות ממתינות להשלמת פרטים</span>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="wizGo(1);toast('הסבב נסגר - התעודות זמינות במסך הכיולים')">סיום</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VIEW: REQUESTS ======== -->
+<section class="view" id="view-requests">
+  <div class="page-head">
+    <div><h2>קריאות</h2><div class="crumb">תשתית גנרית לפי סוג · פעיל כעת: קריאות כיול · עתידי: קריאות שירות</div></div>
+  </div>
+  <div class="panel">
+    <div class="toolbar">
+      <select><option>סוג: קריאת כיול</option><option disabled>קריאת שירות (עתידי)</option></select>
+      <select><option>כל הסטטוסים</option><option>חדשה</option><option>בטיפול</option><option>תואמה</option></select>
+    </div>
+    <div style="overflow-x:auto"><table class="grid">
+      <tr><th>נפתחה</th><th>לקוח</th><th>סוג</th><th>מקור</th><th>מועד מועדף</th><th>הערות</th><th>סטטוס</th><th></th></tr>
+      <tr><td>22.07.2026</td><td class="cust">כימופלסט תעשיות</td><td><span class="chip c-orange">כיול</span></td><td class="dim">אישור מהמייל</td><td>עד 20.08.2026</td><td class="dim">גשר 60 טון - לתאם עם אחזקה</td><td><span class="chip c-warn"><span class="dot"></span>חדשה</span></td><td><button class="icon-btn" onclick="toast('סטטוס עודכן: בטיפול (דמו)')">קדם סטטוס</button></td></tr>
+      <tr><td>21.07.2026</td><td class="cust">מעבדות ביו-טק</td><td><span class="chip c-orange">כיול</span></td><td class="dim">אזור הלקוח</td><td>10.08.2026</td><td class="dim">סט משקולות E2 + משקל אנליטי</td><td><span class="chip c-info"><span class="dot"></span>בטיפול</span></td><td><button class="icon-btn" onclick="toast('סטטוס עודכן: תואמה (דמו)')">קדם סטטוס</button></td></tr>
+      <tr><td>19.07.2026</td><td class="cust">קונדיטוריית שקד</td><td><span class="chip c-orange">כיול</span></td><td class="dim">הוזן ע"י המשרד</td><td>27.07.2026</td><td class="dim">תואם טלפונית</td><td><span class="chip c-ok"><span class="dot"></span>תואמה</span></td><td><button class="icon-btn" onclick="toast('סטטוס עודכן: בוצעה (דמו)')">קדם סטטוס</button></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ======== VIEW: USERS ======== -->
+<section class="view" id="view-users">
+  <div class="page-head">
+    <div><h2>משתמשים</h2><div class="crumb">הרשאות לפי תפקיד</div></div>
+    <div class="acts"><button class="btn btn-primary btn-sm" onclick="toast('נשלח קישור הזמנה לקביעת סיסמה (דמו)')">+ משתמש חדש</button></div>
+  </div>
+  <div class="panel">
+    <div style="overflow-x:auto"><table class="grid">
+      <tr><th>שם</th><th>אימייל</th><th>תפקיד</th><th>לקוח מקושר</th><th>כניסה אחרונה</th><th>מצב</th><th></th></tr>
+      <tr><td class="cust">רני שביט</td><td class="dim">rani@shavit-scales.co.il</td><td><span class="chip c-gray">מנהל</span></td><td>-</td><td>היום 09:12</td><td><span class="chip c-ok"><span class="dot"></span>פעיל</span></td><td><button class="icon-btn">עריכה</button></td></tr>
+      <tr><td class="cust">דניאל לוי</td><td class="dim">daniel@shavit-scales.co.il</td><td><span class="chip c-gray">משרד</span></td><td>-</td><td>היום 08:47</td><td><span class="chip c-ok"><span class="dot"></span>פעיל</span></td><td><button class="icon-btn">עריכה</button></td></tr>
+      <tr><td class="cust">אבי מור</td><td class="dim">avi.m@shavit-scales.co.il</td><td><span class="chip c-orange">מכייל שטח</span></td><td>-</td><td>אתמול 16:03</td><td><span class="chip c-ok"><span class="dot"></span>פעיל</span></td><td><button class="icon-btn">עריכה</button></td></tr>
+      <tr><td class="cust">ישראל כהן</td><td class="dim">israel@galil-dairy.co.il</td><td><span class="chip c-info">לקוח</span></td><td>מחלבת גליל עליון</td><td>20.07.2026</td><td><span class="chip c-ok"><span class="dot"></span>פעיל</span></td><td><button class="icon-btn">עריכה</button></td></tr>
+      <tr><td class="cust">מירב לוי</td><td class="dim">merav@sharon-spices.co.il</td><td><span class="chip c-info">לקוח</span></td><td>תבליני השרון</td><td>טרם נכנסה</td><td><span class="chip c-warn"><span class="dot"></span>הזמנה נשלחה</span></td><td><button class="icon-btn" onclick="toast('הזמנה נשלחה שוב (דמו)')">שלח שוב</button></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ======== VIEW: SETTINGS ======== -->
+<section class="view" id="view-settings">
+  <div class="page-head"><div><h2>הגדרות</h2><div class="crumb">מנהל בלבד · השינויים חלים מיידית</div></div></div>
+  <div class="set-grid">
+    <div class="panel" style="margin:0"><div class="ph"><b>🔔 מדיניות תזכורות</b></div>
+      <div style="padding:14px 18px">
+        <div class="set-row"><span class="lbl">מדרגות לפני תפוגה</span></div>
+        <div class="offsets">
+          <span class="off-chip">30 יום <small>מדרגה 1</small> <button style="color:#F5C58A" onclick="toast('המדרגה הוסרה (דמו)')">✕</button></span>
+          <span class="off-chip">14 יום <small>מדרגה 2</small> <button style="color:#F5C58A" onclick="toast('המדרגה הוסרה (דמו)')">✕</button></span>
+          <button class="off-add" onclick="toast('נוספה מדרגה: 7 ימים (דמו)')">+ הוסף מדרגה</button>
+        </div>
+        <div class="set-row"><span class="lbl">שעת ריצה יומית</span><select style="width:110px"><option>11:00</option><option>09:00</option><option>13:00</option></select></div>
+        <div class="set-row"><span class="lbl">עדכון מייל ללקוח על תעודה חדשה</span><div class="switch" onclick="this.classList.toggle('off');toast('ההגדרה נשמרה (דמו)')"></div></div>
+        <div class="set-row"><span class="lbl">תזכורת נעצרת לאחר אישור תיאום</span><div class="switch" onclick="this.classList.toggle('off');toast('ההגדרה נשמרה (דמו)')"></div></div>
+      </div>
+    </div>
+    <div class="panel" style="margin:0"><div class="ph"><b>✉ תבניות מייל</b></div>
+      <div style="padding:14px 18px">
+        <div class="set-row"><span class="lbl">תזכורת תוקף (מרוכזת)</span><button class="icon-btn" onclick="openModal('mEmailRem')">👁 תצוגה מקדימה</button></div>
+        <div class="set-row"><span class="lbl">תעודת כיול חדשה</span><button class="icon-btn" onclick="openModal('mEmailNew')">👁 תצוגה מקדימה</button></div>
+        <div class="set-row"><span class="lbl">הזמנת משתמש לפורטל</span><button class="icon-btn" onclick="toast('תצוגה מקדימה (דמו)')">👁 תצוגה מקדימה</button></div>
+        <div class="set-row"><span class="lbl">שליחת מייל ניסיון אליי</span><button class="icon-btn" onclick="toast('מייל ניסיון נשלח ל-rani@shavit-scales.co.il (דמו)')">✈ שלח ניסיון</button></div>
+      </div>
+    </div>
+    <div class="panel" style="margin:0"><div class="ph"><b>🎨 מיתוג</b></div>
+      <div style="padding:14px 18px">
+        <div class="set-row"><span class="lbl">לוגו</span><span class="chip c-gray">logo.png · [ישולב הקובץ הרשמי]</span><button class="icon-btn">החלף</button></div>
+        <div class="set-row"><span class="lbl">צבעי מותג</span><div class="swatches"><span class="sw" style="background:#181C22"></span><span class="sw" style="background:#E8821E"></span><span class="sw" style="background:#F2A93B"></span><span class="sw" style="background:#F5F7F9"></span></div></div>
+        <div class="set-row"><span class="lbl">קישור לאתר החברה</span><input style="width:210px;direction:ltr" value="https://www.shavit-scales.co.il"></div>
+      </div>
+    </div>
+    <div class="panel" style="margin:0"><div class="ph"><b>📮 דיוור</b></div>
+      <div style="padding:14px 18px">
+        <div class="set-row"><span class="lbl">שם השולח</span><input style="width:200px" value="מאזני שביט - מעבדת כיול"></div>
+        <div class="set-row"><span class="lbl">כתובת השולח</span><input style="width:230px;direction:ltr" value="calibration@shavit-scales.co.il"></div>
+        <div class="set-row"><span class="lbl">אימות דומיין</span><span class="chip c-ok"><span class="dot"></span>SPF + DKIM תקינים</span></div>
+        <div class="set-row"><span class="lbl">מכסת שליחה (Resend Free)</span><span class="chip c-gray">עד 100 ביום · נוצלו היום: 4</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VIEW: CUSTOMER AREA ======== -->
+<section class="view" id="view-my">
+  <div class="page-head">
+    <div><h2>שלום, ישראל 👋</h2><div class="crumb">מחלבת גליל עליון · האזור האישי שלך במעבדת הכיול של מאזני שביט</div></div>
+    <div class="acts"><button class="btn btn-primary" onclick="openModal('mNewReq')">+ קריאת כיול חדשה</button></div>
+  </div>
+  <div class="kpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));max-width:640px">
+    <div class="kpi"><div class="lb">המכשירים שלי</div><div class="vl">4</div></div>
+    <div class="kpi"><div class="lb">בתוקף</div><div class="vl" style="color:var(--ok)">3</div></div>
+    <div class="kpi warn"><div class="lb">לקראת תפוגה</div><div class="vl">1</div><div class="sb">מומלץ לתאם כיול</div></div>
+  </div>
+  <div class="panel">
+    <div class="ph"><b>תעודות הכיול שלי</b><div class="acts"><span class="hint">מציג שנה אחורה</span></div></div>
+    <div style="overflow-x:auto"><table class="grid">
+      <tr><th>מכשיר</th><th>מס' תעודה</th><th>תאריך כיול</th><th>בתוקף עד</th><th>סטטוס</th><th>תעודה</th></tr>
+      <tr><td class="cust">משקל פלטפורמה 1.5 טון</td><td>SH-2607-0142</td><td>12.07.2026</td><td>12.07.2027</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button> <button class="icon-btn" onclick="toast('התעודה יורדת: SH-2607-0142.pdf (דמו)')">⬇</button></td></tr>
+      <tr><td class="cust">משקל שולחני 30 ק"ג</td><td>SH-2606-0118</td><td>03.06.2026</td><td>03.06.2027</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button> <button class="icon-btn" onclick="toast('התעודה יורדת (דמו)')">⬇</button></td></tr>
+      <tr><td class="cust">משקל אנליטי 220 גר'</td><td>SH-2511-0203</td><td>21.11.2025</td><td>21.11.2026</td><td><span class="chip c-warn"><span class="dot"></span>121 ימים לתפוגה</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button> <button class="icon-btn" onclick="toast('התעודה יורדת (דמו)')">⬇</button></td></tr>
+      <tr><td class="cust">משקולת ייחוס M1 · 20 ק"ג</td><td>SH-2604-0091</td><td>14.04.2026</td><td>14.04.2027</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td><td><button class="icon-btn" onclick="openModal('mCert')">👁 צפייה</button> <button class="icon-btn" onclick="toast('התעודה יורדת (דמו)')">⬇</button></td></tr>
+    </table></div>
+  </div>
+  <div class="set-grid">
+    <div class="panel" style="margin:0">
+      <div class="ph"><b>הקריאות שלי</b></div>
+      <div style="overflow-x:auto"><table class="grid">
+        <tr><th>נפתחה</th><th>סוג</th><th>מועד מועדף</th><th>סטטוס</th></tr>
+        <tr><td>21.07.2026</td><td><span class="chip c-orange">כיול</span></td><td>10.08.2026</td><td><span class="chip c-info"><span class="dot"></span>בטיפול</span></td></tr>
+      </table></div>
+    </div>
+    <div class="panel" style="margin:0">
+      <div class="ph"><b>עדכונים אחרונים</b></div>
+      <div class="feed">
+        <div class="feed-item"><div class="ic fi-new">📄</div><div><b>תעודה חדשה זמינה</b><div class="dim">משקל פלטפורמה 1.5 טון · SH-2607-0142</div></div><span class="tm">12.07</span></div>
+        <div class="feed-item"><div class="ic fi-req">🛠</div><div><b>קריאת הכיול שלך בטיפול</b><div class="dim">ניצור קשר לתיאום מועד</div></div><span class="tm">21.07</span></div>
+        <div class="feed-item"><div class="ic fi-rem">🔔</div><div><b>תזכורת: משקל אנליטי</b><div class="dim">התוקף יפוג ב-21.11.2026</div></div><span class="tm">לפני שבוע</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VIEW: TECH ======== -->
+<section class="view" id="view-tech">
+  <div class="page-head">
+    <div><h2>רשימת עבודה · אבי מור</h2><div class="crumb">מכייל שטח · תצוגה בסיסית (בסיס להרחבה עתידית: הזנת כיול מהשטח)</div></div>
+  </div>
+  <div class="panel">
+    <div style="overflow-x:auto"><table class="grid">
+      <tr><th>תאריך</th><th>לקוח</th><th>כתובת</th><th>מכשירים לכיול</th><th>הערה</th><th>מצב</th></tr>
+      <tr><td><b>מחר · 26.07</b></td><td class="cust">קונדיטוריית שקד</td><td class="dim">רח' התעשייה 12, עפולה</td><td>משקל שולחני 6 ק"ג</td><td class="dim">לקחת משקולות F1 עד 10 ק"ג</td><td><span class="chip c-ok"><span class="dot"></span>תואם</span></td></tr>
+      <tr><td>28.07</td><td class="cust">מעבדות ביו-טק</td><td class="dim">פארק מדע, נס ציונה</td><td>סט E2 + משקל אנליטי</td><td class="dim">דורש תנאי מעבדה</td><td><span class="chip c-info"><span class="dot"></span>בתיאום</span></td></tr>
+      <tr><td>03.08</td><td class="cust">כימופלסט תעשיות</td><td class="dim">אזה"ת צפוני, אשדוד</td><td>גשר שקילה 60 טון</td><td class="dim">לתאם עם מחלקת אחזקה</td><td><span class="chip c-info"><span class="dot"></span>בתיאום</span></td></tr>
+    </table></div>
+  </div>
+  <div class="hint" style="margin-top:10px">🔒 גישת מכייל: צפייה ברשימת העבודה בלבד - ללא גישה לניהול לקוחות, העלאות או הגדרות.</div>
+</section>
+
+    </main>
+  </div>
+</div>
+
+<div id="toast"><span class="tk">✔</span><span id="toastMsg"></span></div>
+<div class="demo-bar"><b>מוקאפ אינטראקטיבי להמחשה</b> · הנתונים לדוגמה בלבד · העיצוב הסופי ייצבע לפי קובץ הלוגו הרשמי · מוגש ע"י BizTechoff™ למאזני שביט בע"מ</div>
+
+<!-- ============ MODALS ============ -->
+
+<!-- certificate preview -->
+<div class="overlay" id="mCert" onclick="if(event.target===this)closeModal('mCert')">
+  <div class="modal" style="width:680px">
+    <div class="mh"><b>תעודת כיול · SH-2508-0147</b><span class="chip c-warn"><span class="dot"></span>29 ימים לתפוגה</span><button class="x" onclick="closeModal('mCert')">✕</button></div>
+    <div class="mb">
+      <div class="cert">
+        <div class="ch">
+          <div class="t"><b>תעודת כיול · Calibration Certificate</b><span>מאזני שביט בע"מ · מעבדה מוסמכת ISO/IEC 17025:2017 · [לוגו]</span></div>
+          <div style="text-align:left;font-size:11.5px;color:var(--muted)">תעודה מס'<br><b style="font-size:15px;color:var(--ink-900)">SH-2508-0147</b></div>
+        </div>
+        <div class="cert-grid">
+          <div><span>לקוח</span><b>תבליני השרון</b></div>
+          <div><span>מיקום הכיול</span><b>אצל הלקוח - כפר סבא</b></div>
+          <div><span>מכשיר</span><b>משקל אנליטי</b></div>
+          <div><span>יצרן / דגם</span><b>Precisa / XB-220A</b></div>
+          <div><span>מס' סידורי</span><b>40221187</b></div>
+          <div><span>מס' פנימי</span><b>LAB-004</b></div>
+          <div><span>טווח</span><b>0 - 220 גר'</b></div>
+          <div><span>חלוקה</span><b>0.1 מ"ג</b></div>
+          <div><span>תאריך כיול</span><b>21.08.2025</b></div>
+          <div><span>בתוקף עד</span><b>21.08.2026</b></div>
+        </div>
+        <table>
+          <tr><th>עומס נומינלי</th><th>קריאה</th><th>סטייה</th><th>גבול מותר</th><th>תוצאה</th></tr>
+          <tr><td>50 גר'</td><td>50.0002 גר'</td><td>+0.2 מ"ג</td><td>±0.5 מ"ג</td><td style="color:var(--ok);font-weight:700">עומד</td></tr>
+          <tr><td>100 גר'</td><td>100.0003 גר'</td><td>+0.3 מ"ג</td><td>±0.5 מ"ג</td><td style="color:var(--ok);font-weight:700">עומד</td></tr>
+          <tr><td>200 גר'</td><td>200.0004 גר'</td><td>+0.4 מ"ג</td><td>±1.0 מ"ג</td><td style="color:var(--ok);font-weight:700">עומד</td></tr>
+        </table>
+        <div class="cert-grid">
+          <div><span>מכשיר ייחוס</span><b>סט משקולות E2 מס' 4471</b></div>
+          <div><span>מסקנה</span><b style="color:var(--ok)">תקין ✓</b></div>
+        </div>
+        <div class="sig"><div class="bx">המכייל: אבי מור</div><div class="bx">מנהל המעבדה</div><div class="bx">חותמת המעבדה</div></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-primary btn-sm" onclick="toast('התעודה יורדת: SH-2508-0147.pdf (דמו)')">⬇ הורדת PDF</button>
+      <button class="btn btn-ghost btn-sm admin-only" onclick="toast('קובץ העבודה נפתח: SH-2508-0147.xlsx - פנימי, למשרד בלבד (דמו)')">📊 קובץ עבודה (פנימי)</button>
+      <span class="hint" style="margin-inline-start:auto;align-self:center">הקישור מאובטח וזמני - מונפק רק למורשים</span>
+    </div>
+  </div>
+</div>
+
+<!-- calibration card -->
+<div class="overlay" id="mCalCard" onclick="if(event.target===this)closeModal('mCalCard')">
+  <div class="modal">
+    <div class="mh"><b>כרטיס כיול · תבליני השרון · משקל אנליטי</b><button class="x" onclick="closeModal('mCalCard')">✕</button></div>
+    <div class="mb">
+      <div class="cert-grid" style="grid-template-columns:1fr 1fr 1fr">
+        <div><span>מס' תעודה</span><b>SH-2508-0147</b></div>
+        <div><span>תאריך כיול</span><b>21.08.2025</b></div>
+        <div><span>תוקף</span><b>12 חודשים</b></div>
+        <div><span>בתוקף עד</span><b>21.08.2026</b></div>
+        <div><span>מפתח תקופה</span><b>2025-08</b></div>
+        <div><span>גרסה</span><b>2 (החליפה את 08/2024)</b></div>
+      </div>
+      <h4 style="margin:12px 0 6px;font-size:13.5px;color:var(--ink-700)">קבצים</h4>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="icon-btn" onclick="openModal('mCert')">📄 תעודה SH-2508-0147.pdf</button>
+        <button class="icon-btn admin-only" onclick="toast('קובץ פנימי - נפתח לעריכה (דמו)')">📊 קובץ עבודה .xlsx · פנימי</button>
+      </div>
+      <h4 style="margin:14px 0 6px;font-size:13.5px;color:var(--ink-700)">תזכורות למחזור הנוכחי</h4>
+      <div class="feed" style="padding:0">
+        <div class="feed-item"><div class="ic fi-rem">🔔</div><div><b>תזכורת 30 יום נשלחה</b><div class="dim">אל merav@sharon-spices.co.il · טרם אושר</div></div><span class="tm">23.07 11:00</span></div>
+        <div class="feed-item"><div class="ic fi-rem">⏭</div><div><b>מדרגה הבאה: 14 יום</b><div class="dim">תישלח ב-07.08.2026 אם לא יאושר תיאום</div></div><span class="tm">מתוכנן</span></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost btn-sm" onclick="toast('סומן: תואם ידנית - התזכורות נעצרו (דמו)')">✓ סמן תואם ידנית</button>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('mCalCard');showView('view-customers')">→ לכרטיס הלקוח</button>
+    </div>
+  </div>
+</div>
+
+<!-- customer card -->
+<div class="overlay" id="mCustCard" onclick="if(event.target===this)closeModal('mCustCard')">
+  <div class="modal">
+    <div class="mh"><b>כרטיס לקוח · תבליני השרון</b><span class="chip c-warn"><span class="dot"></span>תזכורת פתוחה</span><button class="x" onclick="closeModal('mCustCard')">✕</button></div>
+    <div class="mb">
+      <div class="cert-grid" style="grid-template-columns:1fr 1fr">
+        <div><span>איש קשר</span><b>מירב לוי</b></div>
+        <div><span>טלפון</span><b>09-7665412</b></div>
+        <div><span>אימייל ראשי</span><b style="direction:ltr">merav@sharon-spices.co.il</b></div>
+        <div><span>נמענים נוספים</span><b style="direction:ltr">lab@sharon-spices.co.il</b></div>
+        <div><span>כתובת</span><b>אזה"ת כפר סבא</b></div>
+        <div><span>משתמש פורטל</span><b>הוזמנה · טרם נכנסה</b></div>
+      </div>
+      <h4 style="margin:12px 0 6px;font-size:13.5px;color:var(--ink-700)">מכשירים ותוקפים (3)</h4>
+      <table class="grid">
+        <tr><th>מכשיר</th><th>תעודה</th><th>בתוקף עד</th><th>סטטוס</th></tr>
+        <tr><td>משקל אנליטי 220 גר'</td><td>SH-2508-0147</td><td>21.08.2026</td><td><span class="chip c-warn"><span class="dot"></span>29 ימים</span></td></tr>
+        <tr><td>משקל שולחני 15 ק"ג</td><td>SH-2510-0181</td><td>12.10.2026</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td></tr>
+        <tr><td>משקל רצפה 150 ק"ג</td><td>SH-2602-0048</td><td>08.02.2027</td><td><span class="chip c-ok"><span class="dot"></span>בתוקף</span></td></tr>
+      </table>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost btn-sm" onclick="toast('הזמנת פורטל נשלחה שוב (דמו)')">✈ שלח הזמנת פורטל</button>
+      <button class="btn btn-ghost btn-sm" onclick="toast('נפתחה קריאת כיול בשם הלקוח (דמו)')">+ קריאת כיול בשמו</button>
+      <button class="btn btn-primary btn-sm" onclick="toast('נשמר (דמו)')">שמירה</button>
+    </div>
+  </div>
+</div>
+
+<!-- new customer -->
+<div class="overlay" id="mNewCust" onclick="if(event.target===this)closeModal('mNewCust')">
+  <div class="modal" style="width:480px">
+    <div class="mh"><b>לקוח חדש</b><button class="x" onclick="closeModal('mNewCust')">✕</button></div>
+    <div class="mb">
+      <div class="fld2"><label>שם החברה *</label><input placeholder="לדוגמה: מפעלי מזון הגליל בע&quot;מ"></div>
+      <div class="fld2"><label>איש קשר</label><input placeholder="שם מלא"></div>
+      <div class="fld2"><label>אימייל ראשי (לתזכורות) *</label><input style="direction:ltr" placeholder="name@company.co.il"></div>
+      <div class="fld2"><label>נמענים נוספים (מופרדים בפסיק)</label><input style="direction:ltr" placeholder="lab@company.co.il, qa@company.co.il"></div>
+      <div class="fld2"><label>טלפון</label><input placeholder="0X-XXXXXXX"></div>
+      <label style="display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--muted)"><input type="checkbox" checked style="width:auto"> שלח הזמנת גישה לאזור האישי עם ההקמה</label>
+    </div>
+    <div class="mf"><button class="btn btn-primary" onclick="closeModal('mNewCust');toast('הלקוח נוצר ונשלחה הזמנת פורטל (דמו)')">צור לקוח</button><button class="btn btn-ghost" onclick="closeModal('mNewCust')">ביטול</button></div>
+  </div>
+</div>
+
+<!-- new calibration request (customer) -->
+<div class="overlay" id="mNewReq" onclick="if(event.target===this)closeModal('mNewReq')">
+  <div class="modal" style="width:480px">
+    <div class="mh"><b>קריאת כיול חדשה</b><span class="chip c-orange">כיול</span><button class="x" onclick="closeModal('mNewReq')">✕</button></div>
+    <div class="mb">
+      <p class="hint" style="margin-bottom:10px">מחלבת גליל עליון · הקריאה תגיע ישירות למעבדת הכיול של מאזני שביט</p>
+      <div class="fld2"><label>אילו מכשירים?</label>
+        <div style="display:flex;flex-direction:column;gap:5px;font-size:13px">
+          <label style="display:flex;gap:8px"><input type="checkbox" checked style="width:auto"> משקל אנליטי 220 גר' (תוקף עד 21.11.2026)</label>
+          <label style="display:flex;gap:8px"><input type="checkbox" style="width:auto"> משקל פלטפורמה 1.5 טון</label>
+          <label style="display:flex;gap:8px"><input type="checkbox" style="width:auto"> משקל שולחני 30 ק"ג</label>
+          <label style="display:flex;gap:8px"><input type="checkbox" style="width:auto"> משקולת ייחוס M1 · 20 ק"ג</label>
+        </div>
+      </div>
+      <div class="fld2"><label>מועד מועדף</label><input type="text" value="10.08.2026"></div>
+      <div class="fld2"><label>הערות</label><textarea rows="3" placeholder="שעות נוחות, איש קשר בשטח, דגשים..."></textarea></div>
+    </div>
+    <div class="mf"><button class="btn btn-primary" onclick="closeModal('mNewReq');toast('הקריאה נקלטה! ניצור קשר לתיאום מועד')">פתח קריאה</button><button class="btn btn-ghost" onclick="closeModal('mNewReq')">ביטול</button></div>
+  </div>
+</div>
+
+<!-- reminder email preview -->
+<div class="overlay" id="mEmailRem" onclick="if(event.target===this)closeModal('mEmailRem')">
+  <div class="modal" style="width:600px">
+    <div class="mh"><b>תצוגה מקדימה · מייל תזכורת</b><button class="x" onclick="closeModal('mEmailRem')">✕</button></div>
+    <div class="mb">
+      <div class="email-p">
+        <div class="eh"><b>⚖ מאזני שביט · מעבדת כיול מוסמכת · [לוגו]</b><span style="color:#8E97A3;font-size:11px;direction:ltr">calibration@shavit-scales.co.il</span></div>
+        <div class="es"><b>אל:</b> merav@sharon-spices.co.il · <b>נושא:</b> תזכורת: תוקף כיול עומד לפוג - תבליני השרון</div>
+        <div class="eb">
+          <p>שלום מירב,</p>
+          <p>ברצוננו להזכיר כי תוקף הכיול של המכשירים הבאים עומד לפוג:</p>
+          <table>
+            <tr><th>מכשיר</th><th>מס' תעודה</th><th>בתוקף עד</th><th>נותרו</th></tr>
+            <tr><td>משקל אנליטי 220 גר'</td><td>SH-2508-0147</td><td>21.08.2026</td><td style="color:var(--bad);font-weight:700">29 ימים</td></tr>
+          </table>
+          <p style="margin:10px 0 6px">לשמירה על רציפות ההסמכה, מומלץ לתאם כיול מראש:</p>
+          <button class="btn btn-primary btn-sm" onclick="closeModal('mEmailRem');openModal('mConfirm')">אישור תיאום כיול</button>
+          <button class="btn btn-ghost btn-sm" onclick="toast('מעבר לאזור האישי (דמו)')">כניסה לאזור האישי</button>
+          <p class="hint" style="margin-top:10px">האישור בלחיצה אחת - ללא צורך בסיסמה. כל התעודות שלך זמינות באזור האישי בפורטל · <a href="#">shavit-scales.co.il</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- new cert email preview -->
+<div class="overlay" id="mEmailNew" onclick="if(event.target===this)closeModal('mEmailNew')">
+  <div class="modal" style="width:600px">
+    <div class="mh"><b>תצוגה מקדימה · מייל תעודה חדשה</b><button class="x" onclick="closeModal('mEmailNew')">✕</button></div>
+    <div class="mb">
+      <div class="email-p">
+        <div class="eh"><b>⚖ מאזני שביט · מעבדת כיול מוסמכת · [לוגו]</b><span style="color:#8E97A3;font-size:11px;direction:ltr">calibration@shavit-scales.co.il</span></div>
+        <div class="es"><b>אל:</b> sara@gold-bakery.co.il · <b>נושא:</b> תעודת כיול חדשה זמינה עבורך בפורטל</div>
+        <div class="eb">
+          <p>שלום שרה,</p>
+          <p>הועלתה זה עתה תעודת כיול חדשה עבור <b>משקל שולחני 30 ק"ג</b> (תעודה מס' SH-2607-0139).</p>
+          <button class="btn btn-primary btn-sm" onclick="toast('נפתחת התעודה באזור האישי (דמו)')">צפייה בתעודה</button>
+          <p class="hint" style="margin-top:10px">כל תעודות הכיול שלך - כולל שנה אחורה - זמינות תמיד באזור האישי.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- public confirm page mock -->
+<div class="overlay" id="mConfirm" onclick="if(event.target===this)closeModal('mConfirm')">
+  <div class="modal" style="width:460px">
+    <div class="mh"><b>אישור תיאום כיול</b><span class="chip c-gray">עמוד ציבורי - נפתח מהמייל, ללא סיסמה</span><button class="x" onclick="closeModal('mConfirm')">✕</button></div>
+    <div class="mb" id="confirmBody">
+      <p style="font-size:14px"><b>תבליני השרון</b> - אישור תיאום כיול עבור:</p>
+      <table class="grid" style="margin:8px 0">
+        <tr><th>מכשיר</th><th>בתוקף עד</th></tr>
+        <tr><td>משקל אנליטי 220 גר'</td><td>21.08.2026</td></tr>
+      </table>
+      <div class="fld2"><label>מועד מועדף (רשות)</label><input placeholder="לדוגמה: השבוע השלישי של אוגוסט"></div>
+      <div class="fld2"><label>הערה (רשות)</label><input placeholder="הערות לתיאום"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="confirmDone()">✓ אני מאשר/ת תיאום כיול</button>
+    </div>
+    <div class="mb" id="confirmDoneMsg" style="display:none;text-align:center;padding:30px 20px">
+      <div style="font-size:44px;margin-bottom:8px">✅</div>
+      <b style="font-size:17px;color:var(--ink-900)">האישור נקלט - תודה!</b>
+      <p class="hint" style="margin-top:8px">נפתחה קריאת כיול במעבדה וניצור קשר לתיאום סופי.<br>התזכורות עבור מחזור זה נעצרו אוטומטית.</p>
+    </div>
+  </div>
+</div>
+
+
+<style>
+body[data-role="CUSTOMER"] .admin-only{display:none!important}
+body[data-role="TECH"] .admin-only{display:none!important}
+</style>
+<script>
+/* ---------- icons ---------- */
+const IC = {
+  list:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  users:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  bell:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
+  cloud:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 16l-4-4-4 4"/><path d="M12 12v9"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>',
+  inbox:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>',
+  cog:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>',
+  ucog:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>',
+  home:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>',
+  wrench:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'
+};
+
+/* ---------- nav per role ---------- */
+const NAVS = {
+  ADMIN: [
+    {t:'ניהול', title:true},
+    {id:'view-calibrations', ic:IC.list,  lb:'כיולים'},
+    {id:'view-customers',    ic:IC.users, lb:'לקוחות'},
+    {id:'view-reminders',    ic:IC.bell,  lb:'תזכורות ומעקב'},
+    {id:'view-requests',     ic:IC.inbox, lb:'קריאות', cnt:3},
+    {id:'view-upload',       ic:IC.cloud, lb:'העלאה מרוכזת'},
+    {t:'מערכת', title:true},
+    {id:'view-users',        ic:IC.ucog,  lb:'משתמשים'},
+    {id:'view-settings',     ic:IC.cog,   lb:'הגדרות'}
+  ],
+  CUSTOMER: [
+    {t:'שלום, ישראל', title:true},
+    {id:'view-my', ic:IC.home, lb:'האזור האישי'}
+  ],
+  TECH: [
+    {t:'שטח', title:true},
+    {id:'view-tech', ic:IC.wrench, lb:'רשימת העבודה שלי'}
+  ]
+};
+const DEFAULTS = {ADMIN:'view-calibrations', CUSTOMER:'view-my', TECH:'view-tech'};
+const AVATARS  = {ADMIN:'ד', CUSTOMER:'י', TECH:'א'};
+
+function buildNav(role){
+  const nav = document.getElementById('sideNav');
+  const foot = document.getElementById('sideFoot');
+  nav.querySelectorAll('.nav-item,.nav-title').forEach(e=>e.remove());
+  NAVS[role].forEach(item=>{
+    if(item.title){
+      const d=document.createElement('div'); d.className='nav-title'; d.textContent=item.t;
+      nav.insertBefore(d,foot); return;
+    }
+    const b=document.createElement('button'); b.className='nav-item'; b.dataset.view=item.id;
+    b.innerHTML=item.ic+'<span>'+item.lb+'</span>'+(item.cnt?'<span class="cnt">'+item.cnt+'</span>':'');
+    b.onclick=()=>showView(item.id);
+    nav.insertBefore(b,foot);
+  });
+}
+
+/* ---------- core ---------- */
+function doLogin(role){
+  document.getElementById('loginView').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('roleSel').value=role;
+  setRole(role);
+  toast(role==='ADMIN'?'ברוכה הבאה, דניאל! נכנסת כמשרד':role==='CUSTOMER'?'ברוך הבא, ישראל! (מחלבת גליל עליון)':'ברוך הבא, אבי! (מכייל שטח)');
+}
+function setRole(role){
+  document.body.dataset.role=role;
+  document.getElementById('avatarCh').textContent=AVATARS[role];
+  document.getElementById('roleSel').value=role;
+  buildNav(role);
+  showView(DEFAULTS[role]);
+}
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  const el=document.getElementById(id); if(el) el.classList.add('on');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.view===id));
+  document.getElementById('mainArea').scrollTop=0; window.scrollTo(0,0);
+}
+
+/* ---------- modals & toast ---------- */
+function openModal(id){document.getElementById(id).classList.add('on')}
+function closeModal(id){document.getElementById(id).classList.remove('on')}
+let toastT;
+function toast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('on'); clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('on'),3200);
+}
+function confirmDone(){
+  document.getElementById('confirmBody').style.display='none';
+  document.getElementById('confirmDoneMsg').style.display='block';
+  toast('האישור נרשם במערכת - נפתחה קריאת כיול');
+}
+
+/* ---------- reminders tabs ---------- */
+function remTab(btn,id){
+  btn.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  ['rt1','rt2','rt3'].forEach(p=>document.getElementById(p).classList.toggle('on',p===id));
+}
+
+/* ---------- calibrations filter ---------- */
+function filterCal(q){
+  q=q.trim();
+  document.querySelectorAll('#calTable tr').forEach((tr,i)=>{
+    if(i===0)return;
+    tr.style.display = tr.textContent.includes(q)?'':'none';
+  });
+}
+
+/* ---------- upload wizard ---------- */
+function wizGo(n){
+  for(let i=1;i<=4;i++){
+    const s=document.getElementById('ws'+i), b=document.getElementById('wb'+i);
+    s.classList.toggle('cur',i===n);
+    s.classList.toggle('done',i<n);
+    b.classList.toggle('on',i===n);
+  }
+}
+let upTimer;
+function startUpload(){
+  let done=0; const total=134;
+  const fill=document.getElementById('upFill'), cnt=document.getElementById('upCount'), pct=document.getElementById('upPct');
+  const minis=['mb1','mb2','mb3','mb4','mb5'].map(id=>document.getElementById(id));
+  const sts=['st1','st2','st3','st4','st5'].map(id=>document.getElementById(id));
+  minis.forEach(m=>m.style.width='0%'); sts.forEach(s=>s.textContent='⏳');
+  const btn=document.getElementById('toStep4'); btn.disabled=true; btn.style.opacity=.45;
+  clearInterval(upTimer);
+  upTimer=setInterval(()=>{
+    done=Math.min(total,done+Math.ceil(Math.random()*7));
+    const p=Math.round(done/total*100);
+    fill.style.width=p+'%'; cnt.textContent=done+' / '+total+' קבצים'; pct.textContent=p+'%';
+    minis.forEach((m,i)=>{
+      const mp=Math.min(100,Math.max(0,(p-i*12)*1.7));
+      m.style.width=mp+'%';
+      if(mp>=100) sts[i].textContent='✅';
+    });
+    if(done>=total){
+      clearInterval(upTimer);
+      sts.forEach(s=>s.textContent='✅');
+      btn.disabled=false; btn.style.opacity=1;
+      toast('ההעלאה הושלמה: 132 הצליחו, 2 נכשלו - ממשיכים לקליטה');
+    }
+  },140);
+}
+
+/* ---------- boot ---------- */
+buildNav('ADMIN');
+</script>
+</body>
+</html>
