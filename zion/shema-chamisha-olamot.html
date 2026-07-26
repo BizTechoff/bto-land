@@ -124,9 +124,9 @@
 
   .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
   .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
-  .related-link{display:block; text-align:center; font-size:16px; color:var(--crimson); text-decoration:none; padding:7px 0; border-bottom:1px solid rgba(184,138,44,0.14); transition:color .2s;}
-  .related-link:last-child{border-bottom:none;}
-  .related-link:hover{color:var(--gold-deep); text-decoration:underline;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
 
   .attribution{margin-top:40px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
   .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
@@ -256,16 +256,18 @@
       חלוקת שמות הוי״ה ואלוקים לעולמות, נרנח״י והבחינות — כמסורת הקבלה. הלימוד למעשה — בהדרכת רב.
     </p>
 
-    <div class="related">
-      <div class="related-title">דפים קשורים</div>
-      <a class="related-link" href="/zion/ad-matai">עד מתי, עד מתי — הצעקה הכפולה עד הכתר</a>
-      <a class="related-link" href="/zion/veshachanti-betocham">ושכנתי בתוכם — להרחיב את המקדש שבך</a>
-      <a class="related-link" href="/zion/bris-halev">ברית הלב — קריאת שמע ו״והגית בו יומם ולילה״</a>
-      <a class="related-link" href="/zion/mishor-vahar">מישור והר — שלוש קדושות</a>
-    </div>
-
     <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות והסוד</div></div>
     <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/ad-matai">עד מתי, עד מתי</a>
+        <a class="related-link" href="/zion/veshachanti-betocham">ושכנתי בתוכם</a>
+        <a class="related-link" href="/zion/bris-halev">ברית הלב</a>
+        <a class="related-link" href="/zion/mishor-vahar">מישור והר</a>
+      </div>
+    </div>
 
   </div>
 </body>
