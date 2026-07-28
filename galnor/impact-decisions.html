@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מסמך ההשפעה — החלטות המדיניות והשפעתן על החישוב | קבוצת גלנור</title>
+<style>
+:root{
+  --slate:#464950; --slate-2:#5F6268; --slate-3:#87898D; --line:#E3E4E6;
+  --copper:#BF733E; --copper-d:#8C4A22; --copper-l:#C6874F;
+  --soft:#FAF9F8; --soft-2:#F4F2F0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEDEE;color:var(--slate);
+  font-family:"Segoe UI","Assistant","Rubik",Arial,sans-serif;font-size:16px;line-height:1.7}
+.page{max-width:980px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(0,0,0,.08)}
+header{padding:34px 52px 26px;border-bottom:3px solid var(--copper);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+header img{height:60px}
+.vendor{text-align:left;font-size:13px;color:var(--slate-3);line-height:1.6}
+.vendor b{display:block;font-size:17px;color:var(--slate);letter-spacing:.4px}
+.intro{padding:30px 52px 8px}
+h1{font-size:29px;margin:0 0 8px;letter-spacing:-.3px}
+.lead{font-size:16px;color:var(--slate-2);max-width:70ch;margin:0 0 18px}
+.legend{display:flex;gap:26px;flex-wrap:wrap;background:var(--soft-2);padding:16px 20px;
+  font-size:14px;color:var(--slate-2);margin:0 0 10px}
+.legend b{color:var(--slate)}
+.sec{padding:0 52px}
+.sec-head{display:flex;align-items:center;gap:16px;margin:44px 0 18px;
+  border-bottom:1px solid var(--line);padding-bottom:12px}
+.sec-l{background:var(--slate);color:#fff;inline-size:38px;block-size:38px;flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700}
+.sec-head h2{margin:0;font-size:21px}
+.sec-sub{margin:2px 0 0;font-size:14px;color:var(--slate-3)}
+.sec-count{margin-inline-start:auto;font-size:13px;color:var(--slate-3);white-space:nowrap}
+.item{border:1px solid var(--line);border-inline-start:3px solid var(--copper-l);
+  padding:20px 24px;margin:0 0 16px;background:#fff}
+.q{font-size:17px;font-weight:600;line-height:1.55;margin-bottom:16px}
+.qid{display:inline-block;background:var(--soft-2);color:var(--copper-d);font-size:13px;
+  font-weight:700;padding:2px 9px;margin-inline-end:10px;vertical-align:2px}
+.blk{margin-bottom:14px}
+.lbl{font-size:13.5px;font-weight:700;letter-spacing:.6px;color:var(--copper-d);margin-bottom:6px}
+.now{margin-inline-start:26px;padding-inline-start:14px;border-inline-start:2px solid var(--line);
+  color:var(--slate-2);font-size:15.5px}
+.row{display:flex;gap:9px;margin-inline-start:26px;margin-bottom:9px;font-size:15.5px;
+  color:var(--slate-2);line-height:1.65}
+.bullet{color:var(--copper);flex:none;font-size:15px;line-height:1.7}
+.cond{color:var(--slate);font-weight:600}
+.disp{color:var(--slate)}
+.code{display:inline-block;margin-top:4px;font-size:12.5px;color:var(--slate-3);
+  text-decoration:none;border-bottom:1px dotted var(--slate-3);
+  font-family:Consolas,"Courier New",monospace;direction:ltr}
+.code:hover{color:var(--copper-d);border-color:var(--copper-d)}
+footer{padding:26px 52px 36px;border-top:1px solid var(--line);margin-top:40px;
+  font-size:13px;color:var(--slate-3);text-align:center}
+@media print{
+  body{background:#fff} .page{box-shadow:none;max-width:none}
+  .item{page-break-inside:avoid} .sec-head{page-break-after:avoid}
+  header,.sec-l{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:680px){
+  header,.intro,.sec,footer{padding-left:20px;padding-right:20px}
+  h1{font-size:23px} .now,.row{margin-inline-start:10px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <a href="https://www.galnor.co.il/" target="_blank" rel="noopener" title="לאתר קבוצת גלנור" style="display:inline-flex"><img src="../image/logo.png" alt="קבוצת גלנור"
+       onerror="this.onerror=null;this.src='/image/logo.png'"></a>
+  <div class="vendor">
+    <b><i>Biz</i>Techoff™&lrm;</b>
+    מנגנון תגמול ובונוסים<br>
+    28 ביולי 2026
+  </div>
+</header>
+
+<div class="intro">
+  <h1>מסמך ההשפעה</h1>
+  <p class="lead">
+    37 החלטות מדיניות שהמנגנון נשען עליהן. לכל אחת רשומה כאן ההחלטה שמוטמעת היום במערכת,
+    ולצידה מה בדיוק ישתנה בחישוב אם תוכרע אחרת. הכוונה שההנהלה תוכל להכריע מתוך ידיעה מה
+    המחיר של כל הכרעה — ולא לגלות זאת אחרי שהמספרים כבר הוצגו לעובדים.
+  </p>
+  <div class="legend">
+    <div><b>ההחלטה שמוטמעת היום</b> — מה שהמערכת עושה בפועל, כרגע.</div>
+    <div><b>השפעה על החישוב</b> — מה קורה למספר בכל אחת מהאפשרויות.</div>
+    <div><b>&lt;/&gt;</b> — הפניה לקובץ הקוד שבו ההתנהגות מוגדרת.</div>
+  </div>
+</div>
+
+
+<section class="sec">
+  <div class="sec-head">
+    <span class="sec-l">א</span>
+    <div>
+      <h2>שבע השאלות החוסמות</h2>
+      <p class="sec-sub">אי אפשר להפעיל את המנגנון בלי תשובה לכל אחת מהן</p>
+    </div>
+    <span class="sec-count">7 החלטות</span>
+  </div>
+
+  <article class="item" id="א1">
+    <div class="q"><span class="qid">א1</span>האם חל הסכם קיבוצי, צו הרחבה ענפי או הסדר קיבוצי כלשהו על חלק מהעובדים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המודל מניח יחסי עבודה אישיים בלבד. אין בקוד שדה שמסמן עובד ככפוף להסכם קיבוצי ואין מסלול חישוב חלופי — כל 60 העובדים עוברים באותו מנוע, ונבדלים זה מזה רק בתבנית (BonusPlan) של משפחת התפקידים.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> לא חל הסכם קיבוצי או צו הרחבה על אף עובד — אזי המבנה הקיים נשאר כמות שהוא: השער התאגידי companyThresholdPct רשאי לאפס את כולם, ומקדם factorAttendance רשאי להפחית בגין היעדרות בלתי מוצדקת. לא נדרש שינוי בקוד ולא בנתונים.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> חל הסכם קיבוצי או צו הרחבה על חלק מהעובדים — אזי אותם עובדים יידרשו לתבנית BonusPlan נפרדת, ורכיבים שההסכם אינו מתיר יינטרלו בנתונים — למשל אפס ימי היעדרות בלתי מוצדקת כדי ש-factorAttendance יישאר 1. אם ההסכם מחייב רצפת תגמול, אין לה כיום מימוש: calculateBonus מחזיר אפס בשער התאגידי ללא יוצא מן הכלל, ויידרש רכיב חדש במנוע.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-plan.entity.ts">&lt;/&gt; bonus-plan.entity.ts · תבנית תגמול נפרדת לכל משפחת תפקידים</a>
+  </article>
+
+  <article class="item" id="א2">
+    <div class="q"><span class="qid">א2</span>האם תוכנת הנוכחות מסווגת סוגי היעדרות, ומהי רשימת הסיווגים המדויקת?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המנוע מפריד את ימי ההיעדרות לשני דליים לפי הדגל isProtected שמגיע מהסיווג: ימים מוגנים נספרים לתצוגה בלבד, ורק ימים בלתי מוצדקים נכנסים ל-factorAttendance. ההפרדה נאכפת בקוד ואינה ניתנת לעקיפה דרך הגדרות מדיניות.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> תוכנת הנוכחות מחזירה סיווג מלא לכל יום היעדרות — אזי כל סיווג ממופה לסוג המתאים, unexcusedDays כולל רק היעדרות ללא אישור, ועובד עם 30 ימי מילואים וללא ימים בלתי מוצדקים מקבל factorAttendance = 1 — הבונוס אינו נפגע כלל.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> המערכת מחזירה "נעדר" בלבד, ללא סיווג — אזי כל יום נכנס ל-unexcusedDays. 30 ימי היעדרות מכל סוג מורידים את factorAttendance ל-0.8636, כלומר הפחתה של 13.6% מהבונוס; 60 ימים מורידים ל-0.7273, הפחתה של 27%. זו בדיוק החשיפה שהמנגנון נבנה למנוע, ואי אפשר לתקן אותה בקוד — הנתון חסר במקור.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> סיווג חלקי — חלק מהקודים ברורים וחלק לא — אזי נדרש שלב מיפוי מפורש לכל קוד. קוד שלא ימופה ייפול לברירת המחדל של רשומת ההיעדרות, שהיא "היעדרות ללא אישור", ויפחית את הבונוס בשקט וללא התראה.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/controller/bonus-engine.ts">&lt;/&gt; bonus-engine.ts · סינון ימים מוגנים וחישוב factorAttendance</a>
+  </article>
+
+  <article class="item" id="א3">
+    <div class="q"><span class="qid">א3</span>איך מוגדר "רווח החברה" — רווח נקי לפני מס? EBITDA? רווח תפעולי? מאוחד או פר־חברה?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">במחזור נשמרים יעד הרווח והרווח בפועל כסכומים בשקלים, ומהם נגזר companyAchievedPct שהמנוע מקבל. ההגדרה החשבונאית של "רווח" עצמה חיצונית למערכת — המנוע מקבל אחוז מוכן ואינו יודע מה נספר בתוכו.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> רווח נקי לפני מס, מאוחד לקבוצה — אזי companyAchievedPct נמוך ותנודתי יותר, והמרחק מהסף companyThresholdPct = 85% קטן. בטווח שבין הסף ליעד כל 3 נקודות אחוז שוות כ-0.10 ב-factorCompany, ולהנהלה הבכירה (60% משקל חברה) זה כ-0.06 במקדם הביצוע.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> EBITDA או רווח גולמי — אזי אותה שנה עצמה תניב companyAchievedPct גבוה יותר, ומעל 100% המקדם עולה בשיפוע של 0.01 לכל נקודת אחוז עד לתקרה 1.5. ההבדל בין שתי ההגדרות עלול להיות ההבדל בין תשלום לכולם לבין אפס לכולם, מפני שמתחת ל-85% calculateBonus מחזיר אפס לכל עובד ללא יוצא מן הכלל.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/controller/bonus-engine.ts">&lt;/&gt; bonus-engine.ts · השער התאגידי וחישוב factorCompany</a>
+  </article>
+
+  <article class="item" id="א4">
+    <div class="q"><span class="qid">א4</span>האם התגמול חוצה את 12 החברות בקבוצה, או שכל חברה עומדת בפני עצמה?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">כיום מחזור אחד, יעד רווח אחד וסף אחד לכל הקבוצה. שדה companyId קיים בישות העובד אך אינו נקרא כלל במנוע, ולישות Company אין שדות רווח — כל 60 העובדים מקבלים את אותו factorCompany בדיוק.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> מדידה מצרפית ברמת הקבוצה (המצב הקיים) — אזי הסף התאגידי companyThresholdPct מוחל על רווח מאוחד אחד: שנה חלשה באחת מ-12 החברות נבלעת במספר הכולל ואינה מאפסת את האחרות, ובאותה מידה חברה חזקה מסבסדת את החלשות. גם computeBudget ו-budgetFactor מחושבים על מאגר אחד לכל הקבוצה.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> כל חברה עומדת בפני עצמה — אזי יידרשו יעד רווח, רווח בפועל וסף לכל חברה — שדות שאינם קיימים היום בישות Company — והמנוע ירוץ עם companyAchievedPct שונה לכל עובד לפי companyId. עובד בחברה שעמדה ב-80% יקבל אפס גם אם הקבוצה כולה עמדה ב-110%, והתקציב יפוצל כך ש-budgetFactor יהיה שונה בין חברות.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-cycle.entity.ts">&lt;/&gt; bonus-cycle.entity.ts · יעד רווח, רווח בפועל וסף — ברמת מחזור אחד</a>
+  </article>
+
+  <article class="item" id="א5">
+    <div class="q"><span class="qid">א5</span>עובד שסיים העסקה לפני מועד התשלום — זכאי, זכאי יחסית, או מחולט? ומה ההבחנה בין פיטורים, התפטרות וסיום בהסכמה?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת אינה מיישמת שום כלל בעניין. calculateBonus אינו קורא כלל את השדה active שבישות העובד, אין שדה למועד או לסיבת סיום העסקה, והיתרה שנצברה בספר ההחזקות נשארת בסטטוס "נצבר" ללא כלל שחרור או חילוט אוטומטי.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> זכאות יחסית לתקופת העבודה בפועל — אזי הכלל מיושם דרך השדה employedMonths: עובד שסיים ביוני מקבל factorProrata = 6/12 = 0.5, כלומר מחצית מהברוטו. אין צורך בשינוי במנוע — רק בנוהל שקובע מי מעדכן את השדה ומתי.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> חילוט מלא למתפטר — אזי יידרש שער חדש בדומה לשער האתיקה, שמחזיר תוצאת אפס ומאפס את הבונוס כולו. כיום אין שער כזה, והדרך היחידה להגיע לאפס היא הזנת employedMonths = 0 או התאמה ידנית ברשומת החישוב — שתיהן פעולות ידניות שאינן מתועדות ככלל מדיניות.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> זכאות מלאה ללא קשר למועד הסיום — אזי employedMonths נשאר 12, factorProrata = 1 והבונוס משולם במלואו. במקביל יש להכריע מה נעשה ביתרת ספר ההחזקות, שמשוחררת רק בחשבון הסופי של הפרויקט — לעיתים שנתיים אחרי שהעובד עזב.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/employee.entity.ts">&lt;/&gt; employee.entity.ts · employedMonths ו-active — אין שדה סיום העסקה</a>
+  </article>
+
+  <article class="item" id="א6">
+    <div class="q"><span class="qid">א6</span>מי מאשר את נתון הרווח בפועל, באיזה מועד, ומה קורה אם הוא מתעדכן אחרי החישוב?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">כל חישוב נשמר עם snapshot מלא של הקלטים ושל מסלול החישוב, כך שכל תוצאה ניתנת לשחזור מול עובד שמערער. אין מנגנון חישוב מחדש אוטומטי, ורווח שנמסר כזמני אינו מסמן את התוצאה כ-provisional — הדגל הזה נדלק רק ממדד שטרם נמדד, ממדד שממתין לחתימת חשב או מהערכת מנהל חסרה.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> הרווח ננעל במועד האישור ועדכון מאוחר אינו משנה תשלום — אזי ה-snapshot השמור הוא המספר הסופי, והעדכון ישפיע רק על יעד הרווח של המחזור הבא. אין שינוי במנוע ואין תשלומי הפרש.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> מחשבים מחדש ומשלמים הפרש — אזי יידרש תהליך שמריץ את calculateBonus שנית עם companyAchievedPct המעודכן ומשווה מול ה-snapshot. factorCompany משתנה לכל 60 העובדים בבת אחת, ועובד שהיה על גבול הסף 85% עלול לעבור מאפס לתשלום מלא — או להפך, מה שמחייב כלל כתוב לגבי החזר.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> מחשבים על נתון זמני ומסמנים זאת — אזי יידרשה תוספת: היום רווח זמני אינו מייצר חוסם, ולכן התוצאה נראית סופית לכל דבר. כדי שתסומן כזמנית יש להוסיף חוסם ייעודי, בדומה לחוסם של מדד שממתין לחתימת חשב.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-calculation.entity.ts">&lt;/&gt; bonus-calculation.entity.ts · snapshot הקלטים ומסלול החישוב</a>
+  </article>
+
+  <article class="item" id="א7">
+    <div class="q"><span class="qid">א7</span>מי בודק את הנוהל הכתוב, ומתי — לפני או אחרי ההצגה לעובדים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">הניתוח המשפטי שמלווה את המערכת הוא סקירה מקצועית המבוססת על חקיקה ופסיקה גלויות, ואינו ייעוץ משפטי. ההגנה עצמה — סינון ימי היעדרות מוגנת לפני החישוב — כתובה במנוע ואינה תלויה בחוות הדעת.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — זהות הבודק ומועד הבדיקה אינם משנים אף מקדם בחישוב. הם משפיעים על ניסוח הנוהל הכתוב, על מכתב הבונוס לעובד ועל מועד הפרסום. אם חוות הדעת תדרוש שינוי מהותי, הוא יגיע כשאלה נפרדת (א1, ב3 או ג10) עם השפעה מספרית משלה.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/enum/absence-type.ts">&lt;/&gt; absence-type.ts · דגל isProtected — ההגנה שנבדקת משפטית</a>
+  </article>
+</section>
+
+<section class="sec">
+  <div class="sec-head">
+    <span class="sec-l">ב</span>
+    <div>
+      <h2>הגדרות יסוד</h2>
+      <p class="sec-sub">מי, מה ומתי — הבסיס שכל השאר נשען עליו</p>
+    </div>
+    <span class="sec-count">12 החלטות</span>
+  </div>
+
+  <article class="item" id="ב1">
+    <div class="q"><span class="qid">ב1</span>האם שנת המחזור זהה לשנה הקלנדרית (1.1–31.12)?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">במחזור קיים שדה שנה בלבד — אין תאריכי פתיחה וסגירה. שיוך המדידות וההיעדרויות למחזור נעשה דרך מזהה המחזור ולא דרך טווח תאריכים.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> שנה קלנדרית (1.1–31.12) — אזי אין שינוי: employedMonths נספר מינואר עד דצמבר, והרווח בפועל נלקח לאותה תקופה בדיוק.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> שנת כספים שונה — אזי יידרשו שדות תאריך למחזור, וחתכי הצבירה של רשומות ההיעדרות והמדידות יזוזו. employedMonths של כל מי שנקלט או סיים באמצע התקופה משתנה ואיתו factorProrata, ויש לוודא שהרווח בפועל נמדד לאותה תקופה — אחרת companyAchievedPct משווה תקופות שונות.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-cycle.entity.ts">&lt;/&gt; bonus-cycle.entity.ts · שדה שנה — ללא תאריכי פתיחה וסגירה</a>
+  </article>
+
+  <article class="item" id="ב2">
+    <div class="q"><span class="qid">ב2</span>מהו מועד תשלום הבונוס בפועל — איזה חודש, ובאיזה תלוש?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">מועד התשלום אינו מוגדר במערכת. ברשומת החישוב קיימים תאריך חישוב ודגל אישור, אך אין שדה מועד תשלום, וההעברה לשכר ידנית.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — מועד התשלום אינו נכנס לאף מקדם. הוא משפיע על אופן המיסוי (תשלום נוסף), על התזרים ועל הניסוח במכתב הבונוס ובנוהל. מעקב אחרי מועד תשלום בפועל הוא תוספת שדה, לא שינוי בחישוב.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-calculation.entity.ts">&lt;/&gt; bonus-calculation.entity.ts · תאריך חישוב ואישור — אין שדה מועד תשלום</a>
+  </article>
+
+  <article class="item" id="ב3">
+    <div class="q"><span class="qid">ב3</span>כמה ימי עבודה בתקן שנתי — 220 נכון?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">220 ימים, כשדה ברמת המחזור — מספר אחד לכל 60 העובדים. זהו המכנה של factorAttendance = 1 פחות ימי היעדרות בלתי מוצדקת חלקי ימי התקן.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> 220 ימי תקן — אזי כל יום היעדרות בלתי מוצדקת מפחית 1/220 = 0.45% מהבונוס. 10 ימים נותנים factorAttendance = 0.9545, כלומר הפחתה של 4.5%.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> 250 ימי תקן — אזי כל יום מפחית 0.40% בלבד. אותם 10 ימים נותנים factorAttendance = 0.96, הפחתה של 4%. מכנה גדול יותר מרכך את ההפחתה בכ-12%.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> תקן שונה לעובדי שטח ולמטה — אזי יידרש שדה ימי תקן ברמת העובד או ברמת התבנית. היום ימי התקן יושבים על המחזור בלבד, ולכן אותו יום היעדרות מפחית אחוז זהה למנהל עבודה ולעובדת מטה במשרה חלקית.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-cycle.entity.ts">&lt;/&gt; bonus-cycle.entity.ts · ימי עבודה בתקן = 220</a>
+  </article>
+
+  <article class="item" id="ב4">
+    <div class="q"><span class="qid">ב4</span>האם קיימת רשימה מאושרת של "מנהל ישיר" לכל אחד מ־60 העובדים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">שדה המנהל הישיר קיים בישות העובד אך טרם אוכלס בנתוני אמת. המנוע עצמו אינו קורא אותו — הוא מקבל ratingMultiplier מוכן; עובד שאין לו מנהל מוגדר פשוט לא יקבל הערכה.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> רשימת מנהלים מאושרת ומלאה לפני פתיחת המחזור — אזי לכל עובד נוצרת הערכה עם דירוג, ו-factorPersonal מקבל ערך אמיתי מתוך הסולם 0 / 0.60 / 1.00 / 1.15 / 1.35.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> חלק מהעובדים נשארים ללא מנהל מוגדר — אזי ratingMultiplier נשאר ריק: המנוע לוקח מכפיל ניטרלי 1.00 לצורך הערכה בלבד, מוסיף חוסם "הערכת מנהל טרם הוגשה" ומסמן provisional — כלומר לא ניתן לאשר תשלום. במשפחה שמשקל הרכיב האישי בה 30%, הפער בין 1.00 הניטרלי ל-1.35 בפועל הוא 0.105 במקדם הביצוע, כ-10% מהבונוס.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/employee.entity.ts">&lt;/&gt; employee.entity.ts · שדה מנהל ישיר — קובע מי ממלא את ההערכה</a>
+  </article>
+
+  <article class="item" id="ב5">
+    <div class="q"><span class="qid">ב5</span>מי הם "תפקידי המפתח" שנספרים במדד התחלופה המצטערת?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המדד הוגדר כתחלופה ברשימה סגורה: מנהלי פרויקט, מנהלי עבודה, מהנדסים ורכש. הרשימה עצמה אינה ישות במערכת — היא מתבטאת בערך היעד ובערך בפועל של המדד, וכיוונו "נמוך = טוב", כלומר אחוז העמידה מחושב כיעד חלקי בפועל.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> רשימה צרה — כ-10 תפקידי מפתח — אזי כל עזיבה שווה 10% תחלופה. מול יעד של 8%, אחוז העמידה הוא 80% — מתחת לסף 85% — ולכן stepScore מחזיר 0 והמדד תורם אפס. עזיבה בודדת מוחקת את מלוא משקלו.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> רשימה רחבה — כ-25 תפקידים — אזי אותה עזיבה היא 4% תחלופה, אחוז העמידה מגיע ל-200%, והציון נחתך בתקרת המדרגות 1.5. המדד מפסיק להבחין בין ביצוע טוב למצוין ותורם ניקוד מלא כמעט תמיד.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/plan-kpi.entity.ts">&lt;/&gt; plan-kpi.entity.ts · ערך היעד ומשקל המדד בתבנית</a>
+  </article>
+
+  <article class="item" id="ב6">
+    <div class="q"><span class="qid">ב6</span>מי מעריך את הסמנכ"לים, ומי מעריך את המנכ"לית?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">הרכיב האישי מחושב לכולם, כולל ההנהלה הבכירה, אך אין במערכת מנגנון שקובע מי ממלא את ההערכה בדרג הבכיר. בישות ההערכה שדה המעריך הוא מחרוזת חופשית, וברמת הישויות המשותפות אין ולידציה שמונעת הערכה עצמית.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> מוגדר מעריך לכל סמנכ"ל ולמנכ"לית (בעלים או דירקטוריון) — אזי ratingMultiplier מתמלא ו-factorPersonal אמיתי. במשפחת ההנהלה הבכירה — 20% משקל אישי ויעד של עד 5 משכורות — הפער בין 1.00 ל-1.35 הוא 0.07 במקדם הביצוע, כלומר כשליש משכורת חודשית.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> לא מוגדר מעריך בדרג הבכיר — אזי הבונוסים הגדולים בחברה נשארים עם החוסם "הערכת מנהל טרם הוגשה", התוצאה שלהם זמנית ואינה ניתנת לאישור, והמחזור נתקע בדיוק בשורות שהמנכ"לית אמורה לאשר.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/manager-review.entity.ts">&lt;/&gt; manager-review.entity.ts · מעריך, הגשה ואישור דרג שני</a>
+  </article>
+
+  <article class="item" id="ב7">
+    <div class="q"><span class="qid">ב7</span>האם המנכ"לית עצמה נכללת בתוכנית הבונוסים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">כלולה. בנתוני הדמו משפחת ההנהלה הבכירה מונה 4 עובדים, והמנכ"לית מחושבת באותו מנוע ובאותה תבנית כמו כל השאר.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> המנכ"לית כלולה בתוכנית — אזי הבונוס שלה נכנס לסך הברוטו של המחזור. מכיוון ש-budgetFactor הוא המינימום בין 1 לבין התקציב חלקי סך הברוטו, פריט גדול (שכר בכיר כפול 3.5–5 משכורות יעד) מוריד את המקדם לכולם באותה מידה.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> המנכ"לית מחוץ לתוכנית — אזי היא אינה נכללת בהרצה, סך הברוטו קטן ו-budgetFactor עולה — כלומר כל שאר העובדים מקבלים יותר מאותו תקציב. מנגד, התגמול שלה נקבע מחוץ למערכת ולא יופיע בדוחות העלות ובהשוואה הבין-שנתית.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/controller/bonus-engine.ts">&lt;/&gt; bonus-engine.ts · budgetFactor — התאמת פרו-רטה לתקציב</a>
+  </article>
+
+  <article class="item" id="ב8">
+    <div class="q"><span class="qid">ב8</span>האם עובדי קבלן, יועצים חיצוניים או עובדי כוח אדם נכללים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת מנהלת עובדי חברה בלבד. בישות העובד אין שדה סוג העסקה, והמנוע מניח שכר חודשי ומשכורות יעד לכל רשומה.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> עובדי קבלן ויועצים אינם נכללים — אזי אין שינוי — הם אינם רשומים כעובדים, אינם נכנסים לחישוב ואינם משפיעים על סך הברוטו ועל budgetFactor.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> נכללים בתוכנית — אזי לכל אחד תידרש רשומת עובד עם שכר חודשי — ערך שאין לו מקבילה טבעית לחשבונית יועץ — וכל תוספת כזו מגדילה את סך הברוטו ומורידה את budgetFactor של כל השאר. במקביל, תשלום בונוס ישיר למי שאינו עובד החברה הוא סיכון לטענת יחסי עובד-מעביד.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/employee.entity.ts">&lt;/&gt; employee.entity.ts · הישות מנהלת עובדי חברה בלבד</a>
+  </article>
+
+  <article class="item" id="ב9">
+    <div class="q"><span class="qid">ב9</span>מהו בדיוק "שכר חודשי" לצורך החישוב — ברוטו בסיס? כולל תוספות קבועות? כולל רכב?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">"שכר חודשי" הוא שדה יחיד בישות העובד, ללא פירוט מרכיבים. הוא מוכפל ישירות במשכורות היעד ובכל המקדמים, ולכן הוא הבסיס הליניארי של כל הבונוס.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> ברוטו בסיס בלבד — אזי הבסיס הוא הנמוך ביותר ועלות התוכנית מינימלית. שינוי בתוספות הקבועות לא ישפיע על הבונוס.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> ברוטו כולל תוספות קבועות ורכב — אזי השדה עולה, וכל בונוס עולה באותו אחוז בדיוק: הרחבת ההגדרה ב-15% מעלה כל בונוס ב-15% ואת עלות התוכנית ב-15%. בתקציב קבוע זה מתקזז דרך budgetFactor שיורד — כלומר הרחבת ההגדרה בלי הגדלת התקציב אינה מוסיפה לאיש, רק מעוותת את היחס בין העובדים לפי הרכב השכר שלהם.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/employee.entity.ts">&lt;/&gt; employee.entity.ts · שכר חודשי — שדה יחיד ללא מרכיבים</a>
+  </article>
+
+  <article class="item" id="ב10">
+    <div class="q"><span class="qid">ב10</span>האם יש עובדים בשכר שעתי או יומי, ולא חודשי?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המודל מניח שכר חודשי לכל העובדים. משכורות היעד מבוטאות במשכורות חודשיות, ו-factorProrata מחושב בחודשים שלמים — חודשי ההעסקה הם שדה שלם.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> כל העובדים בשכר חודשי — אזי אין שינוי; הנוסחה עובדת כמתוכנן.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> קיימים עובדים בשכר שעתי או יומי — אזי נדרש כלל המרה מוסכם שיוזן לשדה השכר החודשי (למשל ממוצע חודשי בפועל בשנת המחזור). בנוסף factorAttendance הופך לניכוי כפול — לעובד שעתי ממילא לא שולם על יום ההיעדרות — ומכנה של 220 ימי תקן אינו מייצג עובד במשרה חלקית, כך שאותו יום היעדרות מפחית ממנו שיעור גבוה יותר מהבונוס.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-plan.entity.ts">&lt;/&gt; bonus-plan.entity.ts · משכורות יעד — הבונוס נמדד במשכורות חודשיות</a>
+  </article>
+
+  <article class="item" id="ב11">
+    <div class="q"><span class="qid">ב11</span>מהו מבנה 12 החברות, ומי משויך לכל אחת?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">ישות החברה קיימת עם שם, ח.פ. ודגל חברת אם, וכל עובד נושא מזהה חברה. בנתוני הדמו כל העובדים משויכים לחברת האם. מנוע החישוב אינו קורא את מזהה החברה כלל.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד במצב הקיים — השיוך לחברה משפיע על פילוחים בדוחות ועל הרשאות (משתמש של חברה אחת לא אמור לראות נתוני חברה אחרת), ולא על אף מקדם. הוא הופך לנתון חישובי רק אם תיבחר מדידה פר-חברה בשאלה א4.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/company.entity.ts">&lt;/&gt; company.entity.ts · ישות החברה — אינה נקראת במנוע</a>
+  </article>
+
+  <article class="item" id="ב12">
+    <div class="q"><span class="qid">ב12</span>השנה הראשונה — מדידה בלבד ללא תשלום, או תשלום מלא?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת תומכת בשני המצבים — ההבדל הוא מדיניות, לא טכנולוגיה. נקודה שחשוב לדעת: אי אפשר לבטא "מדידה בלי תשלום" על ידי הזנת תקציב אפס, מפני ש-budgetFactor מחזיר 1 כשהתקציב אפס או שלילי. שנת מדידה בלבד היא החלטת תהליך: מריצים את המחזור ולא מקדמים אותו לסטטוס "שולם".</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> שנה ראשונה כמדידה בלבד — אזי המספרים מחושבים ומוצגים לצורך כיול אך אינם משולמים. הערך העיקרי: רואים כמה עובדים היו נחתכים על ידי performanceCap = 1.5 וכמה היו נופלים מתחת ל-companyThresholdPct, לפני שהיעדים הופכים למחייבים.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> תשלום מלא כבר בשנה הראשונה — אזי יעדים שנקבעו על אומדן הופכים למחייבים. יעד רווח נמוך מדי מעלה את companyAchievedPct מעל 100% ומזיז את factorCompany כלפי התקרה 1.5 לכל 60 העובדים בבת אחת; יעד גבוה מדי מפעיל את השער התאגידי ומאפס את כולם — בשתי הקצוות המנגנון מאבד אמון בשנתו הראשונה.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/controller/bonus-engine.ts">&lt;/&gt; bonus-engine.ts · computeBudget ו-budgetFactor</a>
+  </article>
+</section>
+
+<section class="sec">
+  <div class="sec-head">
+    <span class="sec-l">ג</span>
+    <div>
+      <h2>מקורות הנתונים</h2>
+      <p class="sec-sub">מודל מצוין על נתונים גרועים מייצר מספרים גרועים בביטחון גבוה</p>
+    </div>
+    <span class="sec-count">18 החלטות</span>
+  </div>
+
+  <article class="item" id="ג1">
+    <div class="q"><span class="qid">ג1</span>איזו גרסת Priority מותקנת, ואילו מודולים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת מניחה נתונים מובנים מתוך Priority. המנוע עצמו אינו יודע מאיפה הגיע הנתון — הוא מקבל ערך בפועל לכל מדד, וערך ריק פירושו "טרם נמדד" ולא אפס.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> גרסה ומודולים שמכסים את המדדים הפיננסיים — אזי הערכים בפועל נשאבים אוטומטית, אף מדד אינו מוחרג, usableWeight נשאר 100 ו-factorUnit משקף בדיוק את המשקלים שנקבעו בתבנית.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> מודולים חסרים או נתונים שאינם זמינים — אזי אותם מדדים יישארו ללא ערך, יוחרגו מהחישוב, ומשקלם ינורמל מחדש בין הנותרים. התוצאה תסומן provisional ותיחסם לאישור עד שיוזן נתון או שהמדד יוסר מהתבנית.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/measurement.entity.ts">&lt;/&gt; measurement.entity.ts · ערך בפועל ריק = טרם נמדד</a>
+  </article>
+
+  <article class="item" id="ג2">
+    <div class="q"><span class="qid">ג2</span>האם מודול הקבלנים מותקן ומופעל?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת מניחה נתונים מובנים ממודול הקבלנים — חוזים, כתבי כמויות, חשבונות חלקיים, חריגים וערבויות. בלעדיו רוב המדדים הפיננסיים אינם זמינים אוטומטית ויידרשו הזנה ידנית.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> המודול מותקן ומופעל — אזי מדדי מנהל הפרויקט והכספים נשאבים ממקור מובנה, usableWeight נשאר 100, והמשקלים שנקבעו בתבנית הם המשקלים בפועל.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> המודול אינו מותקן — אזי המדד המרכזי של מנהל הפרויקט — רווח גולמי מול תקציב, במשקל 40% — יוזן ידנית או יוחרג. בהחרגה usableWeight יורד ל-60 ויתר המדדים מוכפלים ב-100/60: מדד איכות המסירה שמשקלו 10% הופך בפועל ל-16.7%, ומקדם היחידה נקבע כמעט כולו על ידי המדדים המשניים.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/kpi-definition.entity.ts">&lt;/&gt; kpi-definition.entity.ts · מקור הנתון לכל מדד</a>
+  </article>
+
+  <article class="item" id="ג3">
+    <div class="q"><span class="qid">ג3</span>איזה ממשק זמין — REST? OData? SDK? ייצוא קבצים מתוזמן?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">calculateBonus היא פונקציה טהורה: אין בה גישה למסד נתונים, אין קריאות רשת ואין תלות בשעון. אותו קוד בדיוק רץ בשרת ובסימולטור, ולכן אופן שאיבת הנתון אינו יכול לשנות את התוצאה.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — סוג הממשק אינו משנה אף מקדם. הוא קובע את עלות ההתממשקות, את לוח הזמנים ואת תדירות הרענון של הנתונים שהעובד רואה במסך היעדים שלו במהלך השנה.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/controller/bonus-engine.ts">&lt;/&gt; bonus-engine.ts · מנוע כפונקציה טהורה, ללא תלות במקור הנתון</a>
+  </article>
+
+  <article class="item" id="ג4">
+    <div class="q"><span class="qid">ג4</span>האם תקציב הפרויקט מנוהל בפריוריטי ברמת סעיף, או באקסלים חיצוניים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המדד מניח תקציב מובנה ונעול. בתבנית נשמר ערך יעד יחיד למדד, וברשומת המדידה נשמר הערך בפועל עם דגל חתימת חשב. אם התקציב מנוהל באקסל — שני הערכים מוזנים ידנית.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> תקציב מנוהל בפריוריטי ברמת סעיף — אזי ערך היעד נגזר ממקור נעול, וההשוואה מול הביצוע ניתנת לשחזור מול עובד שמערער.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> תקציב מנוהל באקסלים חיצוניים — אזי הנתון מוזן ידנית, והבקרה היחידה היא דרישת חתימת החשב — שחוסמת אישור אך אינה מוציאה את הנתון מהחישוב: הערך נספר במלואו גם ללא חתימה, וההגנה היא בעצירת התשלום בלבד. אם הנתון לא יוזן כלל, המדד יוחרג ו-40% ממשקל מנהל הפרויקט ינורמלו מחדש לשאר המדדים.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/plan-kpi.entity.ts">&lt;/&gt; plan-kpi.entity.ts · ערך היעד של המדד</a>
+  </article>
+
+  <article class="item" id="ג5">
+    <div class="q"><span class="qid">ג5</span>מתי תקציב הפרויקט ננעל, מי מאשר אותו, ומי רשאי לשנותו אחרי הנעילה?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת מניחה שתקציב שאושר ננעל לפני צו התחלת עבודה, אך אין לכך אכיפה בקוד: ערך היעד של המדד הוא שדה רגיל — ללא נעילה, ללא יומן שינויים, והרשאת העריכה נתונה לכל בעל תפקיד מנהל מערכת או משאבי אנוש, כולל מי שנמדדת בעצמה על אותה תבנית.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> נעילה לפני צו התחלת עבודה, בסמכות מי שאינו מתוגמל על המדד — אזי ערך היעד נקבע פעם אחת, וכל חיסכון או חריגה נמדדים מול בסיס יציב שניתן להציג לעובד.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> היעד ניתן לעדכון גם אחרי הנעילה — אזי ניפוח היעד ב-10% מעלה את אחוז העמידה ב-10 נקודות ומוסיף כ-0.10 לציון המדד בטווח שבין היעד למקסימום (שיפוע 0.01 לנקודה). במדד שמשקלו 40% זה כ-0.04 במקדם הביצוע — ואיש לא יראה שהיעד שונה, כי אין תיעוד שינוי.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> נעילה בתוספת תיעוד שינויים ושתי חתימות — אזי יידרשו שדה נעילה ויומן שינויים למדד בתבנית, שאינם קיימים היום. ההשפעה על המספר אינה מיידית, אך היא מה שמאפשר להגן על הציון מול ערעור.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/plan-kpi.entity.ts">&lt;/&gt; plan-kpi.entity.ts · ערך היעד — ללא נעילה וללא תיעוד שינוי</a>
+  </article>
+
+  <article class="item" id="ג6">
+    <div class="q"><span class="qid">ג6</span>איך מנוהלים ומתועדים חריגים היום, ומי מאשר?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">אין כיום מקור מובנה מוגדר. המדד אמור למדוד חריגים שאושרו ונחתמו ואת הזמן מזיהוי לאישור — שני נתונים שדורשים תאריכים ולא רק סכומים.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> חריגים מנוהלים בפריוריטי עם תאריכי זיהוי ואישור — אזי המדד מחושב, ומשקלו 15% אצל מנהל הפרויקט נשאר בתוקף — כולל הבלימה של אגירת חריגים, שנמדדת דרך משך הזמן לאישור.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> חריגים מנוהלים במיילים ובקבצים — אזי אין מה למדוד: הערך יישאר ריק, המדד יוחרג ומשקלו ינורמל מחדש — משקלו של מדד הרווח הגולמי יעלה מ-40% ל-47% בפועל, והתגמול יישען כמעט כולו על תוצאה שמנהל הפרויקט משפיע עליה גם דרך אותם חריגים שאינם נמדדים.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/measurement.entity.ts">&lt;/&gt; measurement.entity.ts · תאריך מדידה והערה</a>
+  </article>
+
+  <article class="item" id="ג7">
+    <div class="q"><span class="qid">ג7</span>האם נתוני החשבונות החלקיים — מועד הגשה מול מועד חוזי — זמינים כשדה?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">טרם אומת שהנתון זמין כשדה. המדד — אחוז חשבונות שהוגשו עד מועד החתך החוזי — דורש שני תאריכים לכל חשבון: מועד ההגשה בפועל והמועד החוזי.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> שני התאריכים זמינים כשדות — אזי המדד החזק ביותר של הנהלת החשבונות, במשקל 25%, נמדד אוטומטית ומדי חודש — ולא בזיכרון בסוף השנה.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> התאריכים אינם קיימים כשדה — אזי המדד יוזן ידנית או יוחרג. בהחרגה usableWeight יורד ל-75 ויתר מדדי הכספים מוכפלים ב-1.33 — משקל מדד הגבייה עולה בפועל מ-25% ל-33%, למרות שהוא נשלט פחות על ידי המחלקה.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/kpi-definition.entity.ts">&lt;/&gt; kpi-definition.entity.ts · אופן המדידה ומקור הנתון</a>
+  </article>
+
+  <article class="item" id="ג8">
+    <div class="q"><span class="qid">ג8</span>איזו מערכת נוכחות מותקנת — סינריון, חילן, TimeWatch או אחרת?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת אינה תלויה בזהות תוכנת הנוכחות. מה שהיא צורכת הן רשומות היעדרות עם סוג ומספר ימים, ושדה מקור ששומר מהיכן הגיעה הרשומה.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — זהות המערכת קובעת את אופן ההתממשקות ואת עלותה, לא מקדם. מה שכן משנה את המספר הוא רשימת סיווגי ההיעדרות שהיא מחזירה (ג9) והאופן שבו מסומנים בה ימי מילואים (ג10).</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/absence.entity.ts">&lt;/&gt; absence.entity.ts · רשומת היעדרות — סוג, ימים ומקור</a>
+  </article>
+
+  <article class="item" id="ג9">
+    <div class="q"><span class="qid">ג9</span>מהי רשימת סיווגי ההיעדרות המדויקת במערכת? (רשמו את כל הערכים)</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת מגדירה 7 סוגי היעדרות, 6 מהם מוגנים; היחיד שאינו מוגן הוא "היעדרות ללא אישור". שתי נקודות שחשוב לדעת: ברירת המחדל של שדה הסוג ברשומת היעדרות היא דווקא "ללא אישור", וסוגי ההיעדרות מוגדרים בקוד ולא כטבלת נתונים — הוספת סוג חדש היא שינוי קוד, בניגוד למדדים שהם נתון.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> כל סיווג במקור ממופה במפורש לסוג במערכת — אזי הדגל isProtected נקבע נכון לכל יום, וימים מוגנים מסוננים מספירת ההיעדרות לפני חישוב factorAttendance.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> נשאר סיווג אחד או יותר שאינו ממופה — אזי הוא ייפול לברירת המחדל "ללא אישור", ימיו ייכנסו לספירת ההיעדרות הבלתי מוצדקת, וכל יום כזה יפחית 0.45% מהבונוס. אין חוסם ואין התראה — התוצאה לא תסומן כזמנית, והטעות תתגלה רק במכתב הבונוס.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> במקור יש סוגים שאין להם מקבילה במערכת — אזי יידרשו הוספת סוגים בקוד והגדרת isProtected לכל אחד. עד שזה ייעשה — כל סוג כזה נופל לברירת המחדל ומפחית בונוס.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/enum/absence-type.ts">&lt;/&gt; absence-type.ts · 7 סוגים; ברירת המחדל אינה מוגנת</a>
+  </article>
+
+  <article class="item" id="ג10">
+    <div class="q"><span class="qid">ג10</span>איך בדיוק מסומנים ימי מילואים במערכת?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">ימי מילואים ממופים לסוג ייעודי עם isProtected = true, ולכן אינם נספרים כהיעדרות בלתי מוצדקת. חשוב לשים לב: היעדרות מוגנת ארוכה גם אינה מקטינה את חודשי ההעסקה, ולכן כיום 60 ימי מילואים אינם מפחיתים דבר — לא דרך factorAttendance ולא דרך factorProrata.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> ימי מילואים מסומנים בקוד ייעודי שממופה לסוג המוגן — אזי factorAttendance נשאר 1 והבונוס אינו נפגע כלל, גם ב-60 ימי שירות.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> ימי מילואים מגיעים תחת קוד כללי (חופשה או "נעדר") — אזי 60 ימים מורידים את factorAttendance ל-0.7273 — הפחתה של 27% מהבונוס. זו בדיוק החשיפה שסעיף 4.1 באפיון נבנה למנוע, ובה נטל ההוכחה מוטל על המעסיק.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> להחיל פרו-רטה גם על היעדרות מוגנת ארוכה — אזי יידרש כלל שמקטין את חודשי ההעסקה — למשל 6 חודשי מילואים שיביאו את factorProrata ל-0.5 ויחתכו מחצית מהבונוס. זהו שינוי מדיניות מהותי שאינו קיים היום, ומחייב חוות דעת משפטית לפני יישום.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/enum/absence-type.ts">&lt;/&gt; absence-type.ts · שירות מילואים — מוגן בקוד</a>
+  </article>
+
+  <article class="item" id="ג11">
+    <div class="q"><span class="qid">ג11</span>מי מאשר את סיווג ההיעדרויות לפני נעילת המחזור, ומהו תהליך התיקון?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המערכת סומכת על הסיווג שמגיע מהמקור. לרשומת ההיעדרות אין שדה אישור, אין מאשר ואין תאריך אימות, ורשומה שגויה אינה מייצרת חוסם — בניגוד למדד שטרם נמדד, שמסמן את התוצאה כזמנית ועוצר את האישור.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> שלב אישור אנושי לסיווגים לפני נעילת המחזור — אזי יידרשו שדות אישור לרשומת ההיעדרות, וטעות סיווג נתפסת לפני שהיא נכנסת ל-factorAttendance ומפחיתה כסף.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> ללא שלב אישור (המצב הקיים) — אזי כל יום שסווג בטעות כבלתי מוצדק מפחית 0.45% מהבונוס בשקט, בלי שהמערכת יודעת שמשהו שגוי, והעובד יגלה זאת רק במכתב הבונוס — כלומר אחרי האישור הסופי של המנכ"לית.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> אישור בדיעבד עם זכות ערעור מפורשת — אזי התיקון מחייב הרצה חוזרת של החישוב לאותו עובד; היום אין מנגנון חישוב מחדש אוטומטי, ולכן זו פעולה יזומה שיש להגדיר לה בעלים ומועד.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/absence.entity.ts">&lt;/&gt; absence.entity.ts · אין שדה אישור או אימות לרשומה</a>
+  </article>
+
+  <article class="item" id="ג12">
+    <div class="q"><span class="qid">ג12</span>באיזו תדירות ניתן לסנכרן נתוני נוכחות?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">המודל מניח סנכרון יומי. החישוב מתבצע על הימים שנצברו עד מועד ההרצה, ותדירות הסנכרון אינה משנה את הנוסחה ואף לא מקדם.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — התדירות משפיעה על עדכניות המידע שהעובד והמנהל רואים במהלך השנה, ולכן על אמון בתהליך. מה שקובע את המספר הוא מצב הנתונים ברגע ההרצה הסופית של המחזור.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/absence.entity.ts">&lt;/&gt; absence.entity.ts · ימים ומקור — צילום מצב במועד החישוב</a>
+  </article>
+
+  <article class="item" id="ג13">
+    <div class="q"><span class="qid">ג13</span>איזו מערכת שכר, ובאיזה פורמט היא קולטת קובץ תשלום?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">לא מיושם — ההתממשקות לשכר מתומחרת בנפרד. במערכת נשמרים לכל עובד הסכום הסופי והסכום שהוחזק, וההעברה לשכר ידנית.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — פורמט הקובץ אינו משנה סכום. הוא קובע אם 60 הסכומים עוברים בקובץ אחד או בהקלדה ידנית, ולכן משפיע על סיכון טעויות העתקה ועל עומס העבודה בסוף המחזור.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/bonus-calculation.entity.ts">&lt;/&gt; bonus-calculation.entity.ts · סכום סופי וסכום שהוחזק</a>
+  </article>
+
+  <article class="item" id="ג14">
+    <div class="q"><span class="qid">ג14</span>מי בחברה רשאי לראות נתוני שכר של אחרים?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">ההרשאות מוגדרות ברמת הישות. לדיוק: בישויות שנבדקו, קריאת נתוני העובדים (כולל השכר החודשי) וקריאת רשומות החישוב פתוחות לכל משתמש מאומת, והכתיבה בלבד מוגבלת לפי תפקיד. הפרדת התפקידים — איסור לצפות בחישוב של עצמך — אינה נאכפת ברמת הישויות המשותפות.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><b class="disp">תצוגתי בלבד.</b> תצוגתי בלבד — מדיניות ההרשאות אינה משנה אף מקדם. היא קובעת מי רואה מה, ולכן משפיעה על החשיפה לפי חוק הגנת הפרטיות ועל ניגוד העניינים המובנה (מי שמנהלת את המערכת נמדדת גם על ידה). ההידוק עצמו הוא עבודת פיתוח, לא החלטת נוסחה.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/employee.entity.ts">&lt;/&gt; employee.entity.ts · הרשאות קריאה וכתיבה ברמת הישות</a>
+  </article>
+
+  <article class="item" id="ג15">
+    <div class="q"><span class="qid">ג15</span>מי מזין את המדדים הידניים, באיזו תדירות, ומי אחראי אם לא הוזנו?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">כ-40% מהמדדים ידניים. נתון חסר אינו נופל לאפס: ערך ריק מוציא את המדד מהחישוב, מנרמל את משקלו מחדש בין השאר, מוסיף חוסם ומסמן את התוצאה כזמנית — כך שהבעיה מתפוצצת בזמן ואינה נבלעת בשקט.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> בעלים מוגדר לכל מדד ידני, בתדירות קבועה — אזי usableWeight נשאר 100, ומקדם היחידה משקף את המשקלים שתוכננו בתבנית.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> הזנה שנתית בדיעבד, ללא בעלים מוגדר — אזי חלק מהמדדים יגיעו לסוף השנה ריקים ויוחרגו, ומשקלם יעבור למדדים שכן הוזנו — כלומר המשקלים בפועל אינם המשקלים שהוצגו לעובד בתחילת השנה. אם כל מדדי העובד לא נמדדו, usableWeight = 0 ו-factorUnit = 0: למנהל עבודה, שמשקל היחידה שלו 60%, זה מוחק 60% ממקדם הביצוע.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/measurement.entity.ts">&lt;/&gt; measurement.entity.ts · ערך ריק — החרגה וחסימת אישור</a>
+  </article>
+
+  <article class="item" id="ג16">
+    <div class="q"><span class="qid">ג16</span>איפה מתועדים היום סיורי בטיחות, ליקויים ודיווחי "כמעט ונפגע"?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">אין כיום מקור תיעוד מוגדר. חשוב להפריד בין שניים: מדדי הבטיחות המובילים הם מדדי ביצוע רגילים שדורשים נתון, ואילו שער הבטיחות הבינארי (תאונה קטלנית או צו הפסקת עבודה) מגיע כדגל נפרד, אינו תלוי בתיעוד הזה, ומאפס את רכיב היחידה במלואו.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> סיורים, ליקויים ודיווחי "כמעט ונפגע" מתועדים במקום אחד — אזי המדדים נמדדים; אצל עוזר מנהל עבודה, שמשקל הבטיחות שלו 30% מרכיב היחידה, זהו הרכיב הגדול ביותר בציון שלו.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> אין תיעוד מסודר — אזי מדדי הבטיחות יוחרגו ומשקלם ינורמל מחדש לטובת מדדי התיעוד והביצוע — כלומר תפקיד שהוגדר סביב בטיחות מתוגמל בפועל על משהו אחר, וזה בדיוק ההפך מהמסר שהחברה רוצה להעביר.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/kpi-definition.entity.ts">&lt;/&gt; kpi-definition.entity.ts · מדדים ידניים ומקור הנתון</a>
+  </article>
+
+  <article class="item" id="ג17">
+    <div class="q"><span class="qid">ג17</span>האם קיימים סקרי שביעות רצון לקוח פנימי, ובאיזו תדירות?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">אין כיום סקר פעיל. במערכת מוגדר מקור נתון מסוג "סקר", אך ללא נתון בפועל המדד נשאר ריק ומוחרג מהחישוב.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> סקר בעיתוי קבוע ומוגדר מראש — אזי המדד נמדד ומשקלו — 10%–15% אצל הרכש ומשאבי האנוש — נשאר בתוקף, ומאזן את המשקל של מדדי החיסכון.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> אין סקר — אזי המדד יוחרג ומשקלו ינורמל מחדש: אצל הרכש משקל מדד החיסכון עולה בפועל מ-35% לכ-39%, כלומר המשקל עובר דווקא למדד שהכי קל לגיימינג.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/kpi-definition.entity.ts">&lt;/&gt; kpi-definition.entity.ts · מקור נתון מסוג סקר</a>
+  </article>
+
+  <article class="item" id="ג18">
+    <div class="q"><span class="qid">ג18</span>האם קיים מעקב אחר עיכבון וערבויות ברמת פרויקט?</div>
+
+    <div class="blk">
+      <div class="lbl">ההחלטה העסקית שמוטמעת היום:</div>
+      <div class="now">אין כיום מעקב מובנה. המדד — עיכבון וערבויות ברמת פרויקט, 20% ממשקל היחידה בכספים — דורש תאריכי טריגר ושחרור, ולא רק יתרות.</div>
+    </div>
+
+    <div class="blk">
+      <div class="lbl">השפעת ההחלטה על החישוב</div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> קיים מעקב ברמת פרויקט — אזי המדד נמדד, והמזומן הכלוא מקבל בעלים שמתוגמל על שחרורו.</div>
+      </div>
+      <div class="row">
+        <span class="bullet">•</span>
+        <div><span class="cond">אם נבחרה האפשרות:</span> אין מעקב — אזי המדד יוחרג ו-20% ממשקל היחידה ינורמלו מחדש בין הנותרים (מכפלה של 1.25): מדד הגשת החשבון במועד עולה בפועל מ-25% ל-31%, ומדד שאמור לייצג תזרים נעלם מהציון.</div>
+      </div>
+    </div>
+
+    <a class="code" href="../code/src/shared/entity/plan-kpi.entity.ts">&lt;/&gt; plan-kpi.entity.ts · משקל המדד בתבנית הכספים</a>
+  </article>
+</section>
+
+<footer>
+  <i>Biz</i>Techoff™&lrm; · moti@biztechoff.co.il · הוד השרון<br>
+  הניתוח המשפטי במסמך הוא סקירה מקצועית ואינו מהווה ייעוץ משפטי.
+</footer>
+
+</div>
+</body>
+</html>

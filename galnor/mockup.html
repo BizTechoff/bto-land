@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מוקאפ · מערכת בונוסים | BizTechoff™</title>
+<style>
+:root{
+  --navy:#0f3d5c; --navy2:#15618f; --navy3:#0a2740;
+  --bg:#f4f6f9; --card:#fff; --line:#e4e9f0; --line2:#cfd8e3;
+  --ink:#0f172a; --ink2:#334155; --muted:#7a8798;
+  --amber:#b45309; --amberbg:#fef3c7; --amberline:#f59e0b;
+  --green:#15803d; --greenbg:#dcfce7;
+  --red:#b91c1c; --redbg:#fee2e2;
+  --purple:#6d28d9; --purplebg:#f3e8ff;
+  --sky:#0284c7; --skybg:#e0f2fe;
+  --r:12px;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{font-family:'Segoe UI',Rubik,Heebo,Arial,sans-serif; background:#e9edf2; color:var(--ink); font-size:14px; line-height:1.6}
+button{font-family:inherit; cursor:pointer; border:none; background:none}
+input,select{font-family:inherit}
+
+/* ---------- device chrome ---------- */
+.frame{max-width:1440px; margin:24px auto; background:var(--bg); border-radius:16px; overflow:hidden; box-shadow:0 20px 60px -20px rgba(15,23,42,.35), 0 0 0 1px rgba(15,23,42,.08)}
+.browserbar{background:#dde3ea; padding:9px 14px; display:flex; align-items:center; gap:9px; border-bottom:1px solid #cbd5e1}
+.dot{width:11px; height:11px; border-radius:50%}
+.urlbar{flex:1; background:#fff; border-radius:7px; padding:4px 14px; font-size:12px; color:var(--muted); direction:ltr; text-align:left; margin-inline-start:8px}
+.mocklabel{position:fixed; top:12px; inset-inline-start:16px; z-index:200; background:var(--purple); color:#fff; font-size:11px; font-weight:800; padding:5px 13px; border-radius:999px; letter-spacing:.4px; box-shadow:0 4px 14px rgba(109,40,217,.4)}
+
+/* ---------- app shell ---------- */
+.topbar{background:var(--navy); color:#fff; display:flex; align-items:center; gap:16px; padding:0 20px; height:58px}
+.logo{font-weight:900; font-size:16px; letter-spacing:-.3px; display:flex; align-items:center; gap:9px}
+.logo .mark{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,#38bdf8,#0ea5e9); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:#04283d}
+.roleswitch{margin-inline-start:auto; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.09); padding:4px; border-radius:10px; border:1px solid rgba(255,255,255,.14)}
+.roleswitch .lbl{font-size:11px; color:#93c5e8; padding-inline-start:8px; font-weight:600}
+.roleswitch select{background:transparent; color:#fff; border:none; font-size:13.5px; font-weight:600; padding:5px 6px; outline:none}
+.roleswitch select option{background:var(--navy3); color:#fff}
+.tb-icon{width:34px; height:34px; border-radius:9px; background:rgba(255,255,255,.09); display:flex; align-items:center; justify-content:center; font-size:15px; position:relative}
+.tb-icon .dotb{position:absolute; top:6px; inset-inline-end:6px; width:7px; height:7px; background:#f87171; border-radius:50%}
+.avatar{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#f59e0b,#d97706); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#fff}
+
+.body{display:flex; min-height:720px}
+.sidebar{width:232px; background:#fff; border-inline-end:1px solid var(--line); padding:16px 12px; flex-shrink:0}
+.side-user{padding:10px 12px 14px; border-bottom:1px solid var(--line); margin-bottom:12px}
+.side-user .nm{font-weight:800; font-size:14.5px}
+.side-user .rl{font-size:12px; color:var(--muted)}
+.navitem{display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:9px; color:var(--ink2); font-weight:600; font-size:13.5px; width:100%; text-align:start; margin-bottom:2px}
+.navitem:hover{background:#f1f5f9}
+.navitem.on{background:var(--navy); color:#fff}
+.navitem .ic{width:20px; text-align:center; font-size:14px; opacity:.85}
+.navitem .bdg{margin-inline-start:auto; background:#ef4444; color:#fff; font-size:10.5px; font-weight:800; padding:1px 7px; border-radius:999px}
+.navitem.on .bdg{background:#fff; color:var(--navy)}
+.sidenote{margin-top:20px; padding:12px; background:#f8fafc; border:1px dashed var(--line2); border-radius:10px; font-size:11.5px; color:var(--muted); line-height:1.65}
+
+main{flex:1; padding:22px 26px 40px; overflow:hidden}
+.screen{display:none} .screen.on{display:block}
+
+.pgtitle{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap}
+.pgtitle h1{font-size:22px; font-weight:900; letter-spacing:-.4px}
+.pgtitle .sub{font-size:13px; color:var(--muted)}
+.btn{background:var(--navy); color:#fff; padding:8px 18px; border-radius:9px; font-weight:700; font-size:13.5px}
+.btn.ghost{background:#fff; color:var(--navy); border:1px solid var(--line2)}
+.btn.amber{background:var(--amberline); color:#3d2400}
+.btn.green{background:var(--green); color:#fff}
+.btn.sm{padding:5px 12px; font-size:12.5px; border-radius:7px}
+
+.card{background:#fff; border:1px solid var(--line); border-radius:var(--r); padding:18px}
+.card h3{font-size:15px; font-weight:800; margin-bottom:2px}
+.card .csub{font-size:12px; color:var(--muted); margin-bottom:14px}
+.g4{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+.g3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.g2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.g21{display:grid; grid-template-columns:1.7fr 1fr; gap:14px; align-items:start}
+.mt{margin-top:14px}
+
+/* stat tiles */
+.stat{background:#fff; border:1px solid var(--line); border-radius:var(--r); padding:15px 17px; position:relative; overflow:hidden}
+.stat::before{content:''; position:absolute; inset-block:0; inset-inline-start:0; width:4px; background:var(--navy2)}
+.stat.a::before{background:var(--amberline)} .stat.g::before{background:var(--green)} .stat.r::before{background:var(--red)}
+.stat .k{font-size:11.5px; color:var(--muted); font-weight:600}
+.stat .v{font-size:26px; font-weight:900; letter-spacing:-1px; font-variant-numeric:tabular-nums; line-height:1.25}
+.stat .d{font-size:11.5px; font-weight:700}
+.up{color:var(--green)} .dn{color:var(--red)}
+
+/* bars */
+.barrow{display:grid; grid-template-columns:118px 1fr 78px; align-items:center; gap:11px; margin-bottom:9px; font-size:12.5px}
+.bartrack{height:20px; background:#eef2f7; border-radius:6px; overflow:hidden}
+.barfill{height:100%; border-radius:6px; background:linear-gradient(90deg,#15618f,#38bdf8)}
+.barrow .amt{text-align:end; font-weight:800; font-variant-numeric:tabular-nums; font-size:12.5px}
+
+/* gauge */
+.gauge{height:26px; background:#eef2f7; border-radius:8px; overflow:hidden; position:relative; margin:8px 0 6px}
+.gauge .f{height:100%; background:linear-gradient(90deg,#0f3d5c,#15618f)}
+.gauge .mark{position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--red)}
+.gauge .mark span{position:absolute; top:-17px; inset-inline-start:-26px; font-size:10px; color:var(--red); font-weight:800; white-space:nowrap}
+
+table{width:100%; border-collapse:collapse; font-size:13px}
+th{text-align:start; padding:9px 11px; background:#f6f8fb; color:var(--ink2); font-weight:700; font-size:11.5px; border-bottom:1px solid var(--line); white-space:nowrap}
+td{padding:10px 11px; border-bottom:1px solid var(--line)}
+tbody tr:hover{background:#fafbfd}
+td.n,th.n{text-align:center; font-variant-numeric:tabular-nums; white-space:nowrap}
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:#fff}
+
+.chip{display:inline-flex; align-items:center; gap:5px; padding:2px 9px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap}
+.c-ok{background:var(--greenbg); color:var(--green)}
+.c-wait{background:var(--amberbg); color:var(--amber)}
+.c-no{background:var(--redbg); color:var(--red)}
+.c-info{background:var(--skybg); color:var(--sky)}
+.c-nu{background:#f1f5f9; color:var(--muted)}
+.c-pur{background:var(--purplebg); color:var(--purple)}
+
+.who{display:flex; align-items:center; gap:9px}
+.av{width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; color:#fff; flex-shrink:0}
+.who .nm{font-weight:700; font-size:13px; line-height:1.3}
+.who .rl{font-size:11px; color:var(--muted); line-height:1.3}
+
+.alert{border-radius:10px; padding:12px 15px; font-size:13px; display:flex; gap:10px; align-items:flex-start; border-inline-start:4px solid}
+.al-r{background:var(--redbg); border-color:var(--red); color:#7f1d1d}
+.al-a{background:var(--amberbg); border-color:var(--amberline); color:#78350f}
+.al-g{background:var(--greenbg); border-color:var(--green); color:#14532d}
+.al-b{background:var(--skybg); border-color:var(--sky); color:#075985}
+.alert b{display:block}
+
+/* sliders */
+.sl{display:grid; grid-template-columns:1fr 150px 54px; gap:10px; align-items:center; padding:7px 0; border-bottom:1px solid #f1f5f9; font-size:13px}
+.sl .t small{display:block; font-size:11px; color:var(--muted)}
+.sl .v{text-align:center; font-weight:800; font-variant-numeric:tabular-nums; background:#f1f5f9; border-radius:6px; padding:3px}
+input[type=range]{width:100%; accent-color:var(--navy2)}
+
+/* BARS */
+.comp{border:1px solid var(--line); border-radius:10px; padding:13px 15px; margin-bottom:10px}
+.comp .h{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px}
+.comp .nm{font-weight:800; font-size:13.5px}
+.comp .desc{font-size:11.5px; color:var(--muted); line-height:1.55; margin-bottom:9px}
+.scale{display:flex; gap:6px}
+.scale button{flex:1; padding:7px 4px; border:1px solid var(--line2); border-radius:8px; font-size:12px; font-weight:700; color:var(--ink2); background:#fff}
+.scale button:hover{border-color:var(--navy2)}
+.scale button.sel{background:var(--navy); color:#fff; border-color:var(--navy)}
+.evid{width:100%; margin-top:9px; border:1px solid var(--line2); border-radius:8px; padding:8px 10px; font-size:12.5px; resize:vertical; min-height:52px; font-family:inherit}
+
+/* phone */
+.phonewrap{display:flex; gap:26px; align-items:flex-start; justify-content:center; padding:8px 0}
+.phone{width:330px; background:#0f172a; border-radius:34px; padding:10px; box-shadow:0 22px 50px -14px rgba(15,23,42,.5); flex-shrink:0}
+.pscreen{background:var(--bg); border-radius:26px; overflow:hidden; height:640px; overflow-y:auto}
+.pscreen::-webkit-scrollbar{width:0}
+.ptop{background:var(--navy); color:#fff; padding:14px 16px 16px}
+.ptop .st{display:flex; justify-content:space-between; font-size:10.5px; opacity:.75; margin-bottom:10px}
+.pbody{padding:14px}
+.goalcard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:13px; margin-bottom:10px}
+.goalcard .gh{display:flex; justify-content:space-between; align-items:flex-start; gap:8px}
+.goalcard .gn{font-weight:800; font-size:13px; line-height:1.35}
+.mini{height:7px; background:#eef2f7; border-radius:99px; overflow:hidden; margin:9px 0 5px}
+.mini i{display:block; height:100%; border-radius:99px}
+.goalcard .gm{display:flex; justify-content:space-between; font-size:11px; color:var(--muted)}
+
+.ring{width:96px; height:96px; margin:6px auto 4px; position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .ctr{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center}
+.ring .ctr b{font-size:21px; font-weight:900; letter-spacing:-.5px}
+.ring .ctr span{font-size:9.5px; color:#93c5e8}
+
+.notecol{max-width:330px}
+.notecol .nb{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; font-size:12.5px; line-height:1.7}
+.notecol .nb b{color:var(--navy)}
+
+.split{display:grid; grid-template-columns:1fr 300px; gap:14px; align-items:start}
+.miniline{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid #f1f5f9; font-size:12.5px}
+.miniline b{font-variant-numeric:tabular-nums}
+
+.hist{display:flex; align-items:flex-end; gap:7px; height:120px; padding-top:8px}
+.hist .b{flex:1; background:linear-gradient(180deg,#38bdf8,#15618f); border-radius:5px 5px 0 0; position:relative; min-height:4px}
+.hist .b span{position:absolute; bottom:-19px; inset-inline:0; text-align:center; font-size:10.5px; color:var(--muted)}
+.hist .b em{position:absolute; top:-17px; inset-inline:0; text-align:center; font-size:10.5px; font-weight:800; font-style:normal}
+.hist .b.warn{background:linear-gradient(180deg,#fbbf24,#d97706)}
+
+.steps{display:flex; align-items:center; gap:0; margin-bottom:16px; overflow-x:auto; padding-bottom:4px}
+.step{display:flex; align-items:center; gap:8px; padding:6px 14px; background:#fff; border:1px solid var(--line); font-size:12px; font-weight:700; color:var(--muted); white-space:nowrap}
+.step:first-child{border-radius:0 9px 9px 0} .step:last-child{border-radius:9px 0 0 9px}
+.step .n{width:19px; height:19px; border-radius:50%; background:#e2e8f0; color:var(--muted); display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:800}
+.step.done{color:var(--green)} .step.done .n{background:var(--green); color:#fff}
+.step.now{background:var(--navy); color:#fff; border-color:var(--navy)} .step.now .n{background:#fff; color:var(--navy)}
+
+.kpirow{display:flex; align-items:center; gap:10px; padding:9px 11px; border:1px solid var(--line); border-radius:9px; margin-bottom:7px; background:#fff}
+.kpirow .grab{color:var(--line2); font-size:15px; cursor:grab}
+.kpirow .nm{flex:1; font-size:13px; font-weight:600}
+.kpirow input[type=number]{width:60px; padding:4px 7px; border:1px solid var(--line2); border-radius:6px; text-align:center; font-size:12.5px; font-variant-numeric:tabular-nums}
+.sumbadge{padding:5px 13px; border-radius:8px; font-weight:800; font-size:12.5px}
+.sum-ok{background:var(--greenbg); color:var(--green)} .sum-no{background:var(--redbg); color:var(--red)}
+
+@media(max-width:1100px){ .g4{grid-template-columns:1fr 1fr} .g3,.g2,.g21,.split{grid-template-columns:1fr} .sidebar{width:190px} }
+
+.topbar .brandlogo{background:#fff;padding:4px 9px;border-radius:7px;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+
+.stepshint{font-size:11px; color:var(--muted); margin:0 2px 5px}
+.step[data-go]{cursor:pointer; transition:background .12s, color .12s, box-shadow .12s}
+.step[data-go]:hover{background:var(--soft); color:var(--navy); box-shadow:0 1px 4px rgba(15,61,92,.14)}
+.step.soon{cursor:help; opacity:.62}
+.step.soon .n{opacity:.7}
+
+/* ═══ הסברי פרמטרים ═══ */
+.sl{position:relative}
+.hlp{display:inline-flex; align-items:center; justify-content:center; inline-size:16px; block-size:16px;
+  border-radius:50%; border:1px solid var(--line2); background:#fff; color:var(--navy2);
+  font-size:10.5px; font-weight:800; cursor:pointer; margin-inline-start:6px; vertical-align:1px; padding:0}
+.hlp:hover{background:var(--navy2); color:#fff; border-color:var(--navy2)}
+.hlp.on{background:var(--navy2); color:#fff; border-color:var(--navy2)}
+.hlpbox{display:none; grid-column:1 / -1; background:var(--soft); border-inline-start:3px solid var(--navy2);
+  border-radius:8px; padding:9px 12px; margin-top:7px; font-size:12px; line-height:1.65; color:var(--ink2)}
+.hlpbox.on{display:block}
+.hlpbox b{color:var(--navy)}
+.hlpbox .opt{margin-top:5px}
+.hlpbox .opt b{color:var(--navy2)}
+</style>
+<style>
+/* ── מיתוג קבוצת גלנור ─────────────────────────────────── */
+.topbar .logo{gap:12px}
+.topbar .brandlogo{height:30px;width:auto;display:block}
+.topbar .brandsep{width:1px;height:22px;background:#DCDFE4;display:inline-block;flex:none}
+.topbar .brandtxt{font-weight:700;font-size:15px;color:#fff;white-space:nowrap}
+@media (max-width:720px){.topbar .brandtxt{display:none}}
+</style>
+</head>
+<body>
+<div class="mocklabel">MOCKUP · נתונים לדוגמה</div>
+
+<div class="frame">
+<div class="browserbar">
+  <span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span>
+  <div class="urlbar">bonus.galnor.co.il/dashboard</div>
+</div>
+
+<div class="topbar">
+  <div class="logo"><a href="https://www.galnor.co.il/" target="_blank" rel="noopener" title="לאתר קבוצת גלנור" style="display:inline-flex"><img class="brandlogo" src="../image/logo.png" alt="קבוצת גלנור" onerror="this.onerror=null;this.src='/image/logo.png'"></a><span class="brandsep"></span><span class="brandtxt">מערכת תגמול ובונוסים</span></div>
+  <div class="roleswitch">
+    <span class="lbl">מחובר כ־</span>
+    <select id="roleSel">
+      <option value="ceo">רמה אורם — מנכ"לית</option>
+      <option value="mgr">אבי כהן — מנהל פרויקט</option>
+      <option value="emp">יוסי מזרחי — עוזר מנהל עבודה</option>
+      <option value="proc">רותם רוזנצוייג — רכש ומשאבי אנוש</option>
+      <option value="cfo">שרית שנסי — מנהלת כספים / חשב</option>
+      <option value="hr">רותם רוזנצוייג — מנהלת מחזור התגמול</option>
+    </select>
+  </div>
+  <div class="tb-icon">🔔<span class="dotb"></span></div>
+  <div class="avatar" id="tbAv">ש</div>
+</div>
+
+<div class="body">
+<aside class="sidebar">
+  <div class="side-user">
+    <div class="nm" id="sbName">רמה אורם</div>
+    <div class="rl" id="sbRole">מנכ"לית הקבוצה</div>
+  </div>
+  <div id="sbNav"></div>
+  <div class="sidenote">
+    <b style="color:var(--navy)">מוקאפ אינטראקטיבי</b><br>
+    החליפו שחקן בתפריט העליון כדי לראות את האזור המותאם לכל תפקיד. הסימולטור, ההערכה ובונה התבניות עובדים באמת.
+  </div>
+</aside>
+
+<main>
+
+<!-- ============================================================ CEO DASHBOARD -->
+<section class="screen" data-s="ceo-dash">
+  <div class="pgtitle">
+    <div><h1>לוח מחוונים — מחזור תגמול 2026</h1><div class="sub">קבוצת 12 חברות · 60 עובדים · עודכן היום 08:14 מ־Priority</div></div>
+    <div style="display:flex; gap:8px"><button class="btn ghost">ייצוא</button><button class="btn">פתיחת מחזור 2027</button></div>
+  </div>
+
+  <div class="stepshint">לחצו על שלב כדי לקפוץ למסך שמטפל בו</div>
+  <div class="steps">
+    <div class="step done" data-go="ceo:ceo-sim"     title="הגדרת התקציב נעשית בסימולטור What-If"><span class="n">✓</span> הגדרת תקציב</div>
+    <div class="step done" data-go="hr:hr-builder"   title="משקלים, מדרגות ושערים — נקבעים בבונה התבניות אצל מנהלת המחזור, לא בסימולטור"><span class="n">✓</span> הגדרת מדיניות</div>
+    <div class="step done" data-go="hr:hr-cycle"     title="מעקב אחר איסוף הנתונים — בקרת מחזור"><span class="n">✓</span> מדידה שוטפת</div>
+    <div class="step now"  data-go="mgr:mgr-eval"    title="הערכת תפקוד וכיול — אזור המנהל"><span class="n">4</span> הערכות וכיול</div>
+    <div class="step soon" title="סקירת דרג שני — מסך ייעודי, נבנה בחבילה 3"><span class="n">5</span> סקירת דרג שני</div>
+    <div class="step" data-go="ceo:ceo-approve"      title="מסך האישור הסופי של המנכ"לית"><span class="n">6</span> אישור סופי</div>
+    <div class="step soon" title="העברת קובץ תשלום לשכר — נבנה בחבילה 3"><span class="n">7</span> תשלום</div>
+  </div>
+
+  <div class="g4">
+    <div class="stat"><div class="k">רווח החברה מול יעד</div><div class="v">107%</div><div class="d up">▲ מעל היעד · מקדם חברה 1.07</div></div>
+    <div class="stat a"><div class="k">עלות בונוסים מחושבת</div><div class="v" id="dTotM">—</div><div class="d" style="color:var(--amber)" id="dTotD">—</div></div>
+    <div class="stat a"><div class="k">% מעלות השכר</div><div class="v" id="dPct">—</div><div class="d" style="color:var(--amber)">מעל תקרת ה־10%–12% המומלצת · מטופל במקדם ההתאמה</div></div>
+    <div class="stat r"><div class="k">ממתין לפעולה שלך</div><div class="v">23</div><div class="d dn">הערכות שטרם אושרו</div></div>
+  </div>
+
+  <div class="g21 mt">
+    <div class="card">
+      <h3>התפלגות התקציב לפי משפחת תפקידים</h3>
+      <div class="csub">בעמידה בביצוע בפועל · לפני מקדם התאמת תקציב</div>
+      <div class="barrow"><span>הנהלה בכירה</span><div class="bartrack"><div class="barfill" style="width:100%"></div></div><span class="amt">628,242</span></div>
+      <div class="barrow"><span>מנהלי פרויקט</span><div class="bartrack"><div class="barfill" style="width:64%"></div></div><span class="amt">400,924</span></div>
+      <div class="barrow"><span>מנהלי עבודה</span><div class="bartrack"><div class="barfill" style="width:50%"></div></div><span class="amt">313,245</span></div>
+      <div class="barrow"><span>מש"א ומטה</span><div class="bartrack"><div class="barfill" style="width:35%"></div></div><span class="amt">221,221</span></div>
+      <div class="barrow"><span>מהנדסי ביצוע</span><div class="bartrack"><div class="barfill" style="width:33%"></div></div><span class="amt">207,731</span></div>
+      <div class="barrow"><span>כספים והנה"ח</span><div class="bartrack"><div class="barfill" style="width:29%"></div></div><span class="amt">180,138</span></div>
+      <div class="barrow"><span>רכש</span><div class="bartrack"><div class="barfill" style="width:24%"></div></div><span class="amt">151,078</span></div>
+      <div class="barrow"><span>עוזרי מנהלי עבודה</span><div class="bartrack"><div class="barfill" style="width:22%"></div></div><span class="amt">138,488</span></div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>ניצול תקציב</h3>
+        <div class="csub">תקציב מאושר 2,100,000 ₪</div>
+        <div class="gauge"><div class="f" style="width:100%"></div><div class="mark" style="inset-inline-start:92%"><span>תקציב</span></div></div>
+        <div class="miniline"><span>מחושב לפני התאמה</span><b id="dCalc">—</b></div>
+        <div class="miniline"><span>מקדם התאמה פרו־רטה</span><b style="color:var(--amber)" id="dFac">—</b></div>
+        <div class="miniline" style="border:none"><span><b>לתשלום בפועל</b></span><b style="color:var(--navy)">2,100,000 ₪</b></div>
+        <div class="alert al-a mt" style="font-size:12px"><span>⚑</span><div><b>נדרשת החלטה</b><span id="dOver">—</span></div></div>
+      </div>
+      <div class="card mt">
+        <h3>סך בונוסים לפי שנה</h3>
+        <div class="csub">מיליוני ₪</div>
+        <div class="hist">
+          <div class="b" style="height:38%"><em>0.8</em><span>2023</span></div>
+          <div class="b" style="height:52%"><em>1.1</em><span>2024</span></div>
+          <div class="b" style="height:61%"><em>1.3</em><span>2025</span></div>
+          <div class="b warn" style="height:100%"><em>2.1</em><span>2026</span></div>
+        </div>
+        <div style="height:22px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt">
+    <h3>התראות מערכת</h3>
+    <div class="csub">בקרות אוטומטיות שרצו על מחזור 2026</div>
+    <div style="display:flex; flex-direction:column; gap:9px">
+      <div class="alert al-r"><span>⛔</span><div><b>שער בטיחות הופעל — פרויקט אולפנת בנות רמות</b>צו הפסקת עבודה 12.03.2026. רכיב הפרויקט אופס ל־6 עובדים. השפעה: −168,400 ₪.</div></div>
+      <div class="alert al-a"><span>⚑</span><div><b>אינפלציית דירוגים — שמעון לוי (מנהל עבודה ראשי)</b>78% מהצוות שלו דורגו 4–5, מול ממוצע חברה 31%. נדרש כיול לפני אישור.</div></div>
+      <div class="alert al-b"><span>ℹ</span><div><b>4 חסכונות רכש ממתינים לחתימת חשב</b>סה"כ 214,000 ₪. ללא חתימת חשב הבונוסים המושפעים מסומנים כזמניים, והמחזור אינו ניתן לאישור.</div></div>
+      <div class="alert al-g"><span>✓</span><div><b>נתוני נוכחות נקלטו במלואם</b>60/60 עובדים · 3 עובדים עם ימי מילואים — נוטרלו אוטומטית מהחישוב.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CEO SIMULATOR -->
+<section class="screen" data-s="ceo-sim">
+  <div class="pgtitle">
+    <div><h1>סימולטור What-If</h1><div class="sub">בדיקת תרחישים על כל 60 העובדים · המדיניות עצמה נקבעת בבונה התבניות ואינה משתנה כאן</div></div>
+    <div style="display:flex; gap:8px"><button class="btn ghost" id="simReset">איפוס</button><button class="btn green">שמירה כתרחיש</button></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <h3>הגדרת תקציב המחזור</h3>
+      <div class="csub">כאן ההנהלה קובעת כמה יש לחלק — לפני שנוגעים בפרמטרים</div>
+
+      <div class="sl"><div class="t">מודל מימון<small>קבוע = סכום שההנהלה מכריזה · היברידי = נגזר מהרווח</small></div>
+        <select id="bmode" style="font:inherit; padding:5px 8px; border:1px solid var(--line2); border-radius:7px">
+          <option value="fixed" selected>קבוע</option><option value="hybrid">היברידי</option>
+        </select></div>
+
+      <div id="fixedRow"><div class="sl"><div class="t">סכום התקציב שההנהלה מכריזה (מיליוני ₪)<small>זהו הסכום שיחולק. ההכרזה נעשית כאן ומתקבעת בנעילה.</small></div><input type="range" id="w7" min="0.5" max="3.5" step="0.05" value="2.1"><div class="v" id="v7">2.10</div></div></div>
+
+      <div class="sl"><div class="t">יעד רווח שנתי (מיליוני ₪)</div>
+        <input type="number" id="bTarget" value="14.00" step="0.1" style="width:88px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
+      <div class="sl"><div class="t">רווח בפועל (מיליוני ₪)</div>
+        <input type="number" id="bActual" value="14.98" step="0.1" style="width:88px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
+
+      <div id="hybridRows" style="display:none">
+        <div class="sl"><div class="t">רצפה — % מעלות השכר</div>
+          <input type="number" id="bFloor" value="11" step="0.5" style="width:70px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
+        <div class="sl"><div class="t">השתתפות — % מהרווח שמעל היעד</div>
+          <input type="number" id="bShare" value="20" step="1" style="width:70px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
+        <div class="sl"><div class="t">תקרה — % מעלות השכר</div>
+          <input type="number" id="bCap" value="15" step="0.5" style="width:70px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
+      </div>
+
+      <div class="alert al-b mt" style="font-size:12px"><span>₪</span><div><b id="bResult">—</b><span id="bExplain"></span></div></div>
+      <button class="btn" style="width:100%; margin-top:8px">נעילת תקציב המחזור</button>
+    </div>
+
+    <div class="card mt">
+      <h3>פרמטרים לתרחיש</h3>
+      <div class="csub">גררו כדי לראות השפעה מיידית. שינוי כאן <b>אינו משנה את המדיניות</b> — הוא רק מריץ תרחיש.</div>
+      <div class="sl"><div class="t">משכורות יעד — מנהל פרויקט</div><input type="range" id="w1" min="1" max="4" step="0.25" value="2.5"><div class="v" id="v1">2.5</div></div>
+      <div class="sl"><div class="t">משכורות יעד — הנהלה בכירה</div><input type="range" id="w2" min="2" max="6" step="0.25" value="3.25"><div class="v" id="v2">3.5</div></div>
+      <div class="sl"><div class="t">משכורות יעד — שטח<small>מנהלי עבודה, מהנדסים, עוזרים</small></div><input type="range" id="w3" min="0.5" max="3" step="0.05" value="1.4"><div class="v" id="v3">1.4</div></div>
+      <div class="sl"><div class="t">משכורות יעד — מטה<small>רכש, כספים, מש"א</small></div><input type="range" id="w4" min="0.5" max="3" step="0.05" value="1.55"><div class="v" id="v4">1.55</div></div>
+      <div class="sl"><div class="t">סף כניסה — רווח החברה<small>מתחת לסף: אפס לכולם</small></div><input type="range" id="w5" min="70" max="100" step="1" value="85"><div class="v" id="v5">85%</div></div>
+      <div class="sl"><div class="t">תקרת מקדם ביצוע</div><input type="range" id="w6" min="1" max="2" step="0.05" value="1.5"><div class="v" id="v6">1.50</div></div>
+      
+    </div>
+
+    <div>
+      <div class="card" style="background:var(--navy); color:#fff; border:none">
+        <div style="font-size:11.5px; color:#93c5e8; font-weight:600">עלות כוללת בתרחיש</div>
+        <div style="font-size:40px; font-weight:900; letter-spacing:-1.5px; font-variant-numeric:tabular-nums" id="simTotal">2,240,917 ₪</div>
+        <div style="font-size:12.5px; color:#cbd5e1" id="simSub">חריגה של 140,917 ₪ מהתקציב · מקדם התאמה 0.937</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-top:15px">
+          <div style="background:rgba(255,255,255,.08); padding:10px; border-radius:9px"><div style="font-size:10.5px; color:#93c5e8">% מעלות שכר</div><div style="font-size:19px; font-weight:900" id="simPay">15.7%</div></div>
+          <div style="background:rgba(255,255,255,.08); padding:10px; border-radius:9px"><div style="font-size:10.5px; color:#93c5e8">בונוס ממוצע</div><div style="font-size:19px; font-weight:900" id="simAvg">35.0K</div></div>
+          <div style="background:rgba(255,255,255,.08); padding:10px; border-radius:9px"><div style="font-size:10.5px; color:#93c5e8">זכאים</div><div style="font-size:19px; font-weight:900" id="simElig">60</div></div>
+        </div>
+        <div style="font-size:11.5px; color:#93c5e8; margin-top:10px; line-height:1.6">תקרת המאגר המומלצת באפיון היא 10%–12% מעלות השכר. תרחיש שחורג ממנה אינו נחסם — הוא מטופל דרך מקדם ההתאמה הפרו־רטה, שמוכרז מראש וחל על כולם באופן אחיד.</div>
+      </div>
+
+      <div class="card mt">
+        <h3>השפעה על עובדי מפתח</h3>
+        <div class="csub">שינוי מול התרחיש הנוכחי</div>
+        <div class="tbl-wrap" style="border:none">
+        <table><tbody id="simRows"></tbody></table>
+        </div>
+      </div>
+
+      <div class="alert al-b mt" id="simNote"><span>ℹ</span><div><b>תרחיש בתוך התקציב</b>אין צורך במקדם התאמה.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CEO APPROVE -->
+<section class="screen" data-s="ceo-approve">
+  <div class="pgtitle">
+    <div><h1>אישור סופי — מחזור 2026</h1><div class="sub">23 מתוך 60 ממתינים לאישורך · כל התאמה ידנית מחייבת נימוק ונרשמת ביומן</div></div>
+    <div style="display:flex; gap:8px"><button class="btn ghost">החזרה לכיול</button><button class="btn green">אישור וחתימה על 23 הרשומות</button></div>
+  </div>
+
+  <div class="alert al-a" style="margin-bottom:14px"><span>⚑</span><div><b>לפני האישור — 2 חריגות פתוחות</b>שמעון לוי: 78% מהצוות שלו דורג 4–5 (ממוצע חברה 31%). · אולפנת רמות: שער בטיחות הופעל, 6 עובדים.</div></div>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr>
+      <th>עובד</th><th>משפחה</th><th class="n">חברה</th><th class="n">יחידה</th><th class="n">אישי</th>
+      <th class="n">מקדם</th><th class="n">מחושב</th><th class="n">התאמה</th><th class="n">לתשלום</th><th>סטטוס</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><div class="who"><div class="av" style="background:#0369a1">א</div><div><div class="nm">אבי כהן</div><div class="rl">בי"ס גבעת שאול · קרית משה</div></div></div></td>
+        <td>מנהל פרויקט</td><td class="n">1.07</td><td class="n">1.11</td><td class="n">1.15</td><td class="n"><b>1.115</b></td><td class="n">83,625</td><td class="n">—</td><td class="n"><b>78,357</b></td><td><span class="chip c-wait">ממתין לך</span></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#047857">ד</div><div><div class="nm">דוד אזולאי</div><div class="rl">מהנדס ביצוע</div></div></div></td>
+        <td>מהנדס ביצוע</td><td class="n">1.07</td><td class="n">1.04</td><td class="n">1.00</td><td class="n"><b>1.033</b></td><td class="n">34,089</td><td class="n">—</td><td class="n"><b>31,941</b></td><td><span class="chip c-wait">ממתין לך</span></td></tr>
+      <tr style="background:#fffbeb"><td><div class="who"><div class="av" style="background:#b45309">ש</div><div><div class="nm">שמעון לוי</div><div class="rl">מנהל עבודה ראשי</div></div></div></td>
+        <td>מנהל עבודה</td><td class="n">1.07</td><td class="n">1.09</td><td class="n">1.35</td><td class="n"><b>1.166</b></td><td class="n">34,980</td><td class="n" style="color:var(--red); font-weight:800">−4,200</td><td class="n"><b>28,576</b></td><td><span class="chip c-no">כיול נדרש</span></td></tr>
+      <tr style="background:#fef2f2"><td><div class="who"><div class="av" style="background:#b91c1c">נ</div><div><div class="nm">נתן שטרן</div><div class="rl">אולפנת בנות רמות</div></div></div></td>
+        <td>מנהל עבודה</td><td class="n">1.07</td><td class="n" style="color:var(--red); font-weight:800">0.00</td><td class="n">1.00</td><td class="n"><b>0.407</b></td><td class="n">12,210</td><td class="n">—</td><td class="n"><b>11,441</b></td><td><span class="chip c-no">⛔ שער בטיחות</span></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#10b981">י</div><div><div class="nm">יוסי מזרחי</div><div class="rl">עוזר מנהל עבודה</div></div></div></td>
+        <td>עוזר מנהל עבודה</td><td class="n">1.07</td><td class="n">1.12</td><td class="n" style="color:var(--muted)">—</td><td class="n"><b>1.079</b></td><td class="n">11,925</td><td class="n">—</td><td class="n" style="color:var(--muted)">—</td><td><span class="chip c-wait">⏳ הערכה חסרה — חסום</span></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#6d28d9">ר</div><div><div class="nm">רותם רוזנצוייג</div><div class="rl">רכש ומשאבי אנוש</div></div></div></td>
+        <td>רכש</td><td class="n">1.07</td><td class="n">1.19</td><td class="n">1.15</td><td class="n"><b>1.150</b></td><td class="n">41,400</td><td class="n">—</td><td class="n"><b>38,792</b></td><td><span class="chip c-pur">🔒 נעול — ניגוד עניינים</span></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#0284c7">מ</div><div><div class="nm">מיכל ברקוביץ'</div><div class="rl">הנהלת חשבונות · גבייה</div></div></div></td>
+        <td>כספים והנה"ח</td><td class="n">1.07</td><td class="n">1.22</td><td class="n">1.15</td><td class="n"><b>1.160</b></td><td class="n">29,580</td><td class="n">—</td><td class="n"><b>27,717</b></td><td><span class="chip c-ok">אושר</span></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#64748b">ח</div><div><div class="nm">חיים פרידמן</div><div class="rl">עוזר מנהל עבודה · אלעד</div></div></div></td>
+        <td>עוזר מנהל עבודה</td><td class="n">1.07</td><td class="n">0.88</td><td class="n">0.60</td><td class="n"><b>0.796</b></td><td class="n">8,796</td><td class="n">—</td><td class="n"><b>8,242</b></td><td><span class="chip c-nu">מתחת לציפייה</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="g3 mt">
+    <div class="card"><h3>סיכום לתשלום</h3><div class="csub" id="aSub">—</div>
+      <div class="miniline"><span>סה"כ מחושב</span><b id="aCalc">—</b></div>
+      <div class="miniline"><span>התאמות ידניות</span><b style="color:var(--red)">−4,200 ₪</b></div>
+      <div class="miniline"><span>מקדם תקציב</span><b id="aFac">—</b></div>
+      <div class="miniline" style="border:none"><span><b>לתשלום</b></span><b style="color:var(--navy); font-size:15px" id="aPay">—</b></div>
+    </div>
+    <div class="card"><h3>מנגנון הגנה פעיל</h3><div class="csub">אכיפה ברמת המנוע</div>
+      <div class="miniline"><span>🔒 רותם רוזנצוייג — חישוב עצמי</span><span class="chip c-pur">חסום</span></div>
+      <div class="miniline"><span>✓ 3 עובדים · 47 ימי מילואים</span><span class="chip c-ok">לא הופחת</span></div>
+      <div class="miniline"><span>✓ 2 עובדות · חופשת לידה</span><span class="chip c-ok">פרו־רטה</span></div>
+      <div class="miniline" style="border:none"><span>⛔ 6 עובדים · שער בטיחות</span><span class="chip c-no">רכיב אופס</span></div>
+    </div>
+    <div class="card"><h3>יומן ביקורת</h3><div class="csub">כל שינוי מתועד</div>
+      <div style="font-size:12px; color:var(--ink2); line-height:1.9">
+        <div>14:22 · <b>רותם</b> נעלה יעדי רכש</div>
+        <div>11:08 · <b>אבי כהן</b> הגיש 4 הערכות</div>
+        <div>09:51 · <b>חשב</b> חתם על חיסכון #218</div>
+        <div>09:04 · <b>מערכת</b> שאבה נתוני Priority</div>
+        <div>08:14 · <b>מערכת</b> חישבה מחדש 60 רשומות</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ MGR TEAM -->
+<section class="screen" data-s="mgr-team">
+  <div class="pgtitle">
+    <div><h1>הצוות שלי</h1><div class="sub">7 עובדים · בי"ס ממ"ד גבעת שאול + שדרוג תשתיות קרית משה · מוריה</div></div>
+    <button class="btn">שליחת כל ההערכות</button>
+  </div>
+
+  <div class="g4">
+    <div class="stat"><div class="k">הערכות שהושלמו</div><div class="v">3<span style="font-size:16px; color:var(--muted)">/7</span></div><div class="d" style="color:var(--amber)">עד 15.12 · נותרו 9 ימים</div></div>
+    <div class="stat g"><div class="k">רווח גולמי — גבעת שאול</div><div class="v">18.4%</div><div class="d up">▲ מול תקציב 16.0%</div></div>
+    <div class="stat a"><div class="k">אבני דרך במועד</div><div class="v">83%</div><div class="d" style="color:var(--amber)">1 איחור · EOT מאושר</div></div>
+    <div class="stat"><div class="k">מאגר שהוקצה לי</div><div class="v">145K</div><div class="d">חולקו 142K · נותרו 3K</div></div>
+  </div>
+
+  <div class="tbl-wrap mt">
+  <table>
+    <thead><tr><th>עובד</th><th>תפקיד</th><th class="n">נוכחות</th><th class="n">מדדי יחידה</th><th class="n">דירוג כולל</th><th class="n">בונוס משוער</th><th>סטטוס הערכה</th><th></th></tr></thead>
+    <tbody>
+      <tr><td><div class="who"><div class="av" style="background:#047857">ד</div><div><div class="nm">דוד אזולאי</div><div class="rl">3 שנים</div></div></div></td><td>מהנדס ביצוע</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.04</td><td class="n"><b>3</b></td><td class="n">34,089 ₪</td><td><span class="chip c-ok">הושלם</span></td><td><button class="btn ghost sm">צפייה</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#10b981">י</div><div><div class="nm">יוסי מזרחי</div><div class="rl">6 שנים</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.12</td><td class="n">—</td><td class="n" style="color:var(--muted)">11,925 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm" onclick="show('mgr-eval')">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#b45309">מ</div><div><div class="nm">משה דהן</div><div class="rl">11 שנים</div></div></div></td><td>מנהל עבודה</td><td class="n"><span class="chip c-info">47 ימי מילואים</span></td><td class="n">0.98</td><td class="n"><b>4</b></td><td class="n">29,750 ₪</td><td><span class="chip c-ok">הושלם</span></td><td><button class="btn ghost sm">צפייה</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#64748b">ח</div><div><div class="nm">חיים פרידמן</div><div class="rl">1 שנה</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-no">11 ימי חיסור</span></td><td class="n">0.88</td><td class="n"><b>2</b></td><td class="n">8,796 ₪</td><td><span class="chip c-ok">הושלם</span></td><td><button class="btn ghost sm">צפייה</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#0284c7">ע</div><div><div class="nm">עמית רוזן</div><div class="rl">2 שנים</div></div></div></td><td>מהנדס ביצוע</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.09</td><td class="n">—</td><td class="n" style="color:var(--muted)">31,240 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#8b5cf6">ט</div><div><div class="nm">טל בן־חמו</div><div class="rl">4 חודשים</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-info">פרו־רטה 4/12</span></td><td class="n">1.01</td><td class="n">—</td><td class="n" style="color:var(--muted)">3,970 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#e11d48">ל</div><div><div class="nm">ליאת אשכנזי</div><div class="rl">5 שנים</div></div></div></td><td>מהנדסת ביצוע</td><td class="n"><span class="chip c-info">חופשת לידה</span></td><td class="n">1.06</td><td class="n">—</td><td class="n" style="color:var(--muted)">21,900 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="alert al-b mt"><span>ℹ</span><div><b>למה ל־משה דהן ול־ליאת אשכנזי אין הפחתה</b>47 ימי מילואים ו־חופשת לידה מסווגים במערכת כהיעדרות מוגנת ואינם מפחיתים את הבונוס. חיים פרידמן — 11 ימי היעדרות ללא אישור — מקדם 0.950. ההבחנה אכופה במנוע ולא ניתנת לעקיפה בהגדרות.</div></div>
+</section>
+
+<!-- ============================================================ MGR EVAL -->
+<section class="screen" data-s="mgr-eval">
+  <div class="pgtitle">
+    <div><h1>הערכת תפקוד — יוסי מזרחי</h1><div class="sub">עוזר מנהל עבודה · בי"ס ממ"ד גבעת שאול · שיחת משוב 08.12.2026</div></div>
+    <div style="display:flex; gap:8px"><button class="btn ghost">שמירה כטיוטה</button><button class="btn green">הגשה לסקירת דרג שני</button></div>
+  </div>
+
+  <div class="split">
+    <div>
+      <div class="card">
+        <h3>כשירויות — סולם מעוגן התנהגות</h3>
+        <div class="csub">רכיב אישי = 30% מהבונוס · אין כאן שני ציונים: ממוצע הכשירויות <b>הוא</b> המכפיל, בטווח 0–1.35 בלבד</div>
+        <div id="compBox"></div>
+      </div>
+
+      <div class="card mt">
+        <h3>ראיות מהשנה</h3>
+        <div class="csub">דירוג 4 ומעלה מחייב 2 דוגמאות מתועדות</div>
+        <textarea class="evid" placeholder="לדוגמה: 'הגיש יומן עבודה מלא ב־94% מימי העבודה ללא תזכורת. איתר ליקוי בטיחות בפיגום בבניין ב' ב־03.09 ודיווח באותו יום.'">הגיש יומן עבודה מלא ב־94% מימי העבודה ללא תזכורת (ממוצע חברה 71%). ב־03.09 איתר ליקוי בפיגום מזרחי ודיווח באותו יום — נמנעה עבודה בגובה לא בטוחה.</textarea>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="background:var(--navy); color:#fff; border:none">
+        <div style="font-size:11.5px; color:#93c5e8">בונוס משוער לאחר ההערכה</div>
+        <div style="font-size:31px; font-weight:900; letter-spacing:-1px" id="evalAmt">12,400 ₪</div>
+        <div style="font-size:11.5px; color:#cbd5e1" id="evalSub">מכפיל אישי 1.15 · 0.95 משכורות</div>
+      </div>
+
+      <div class="card mt" id="evalPoolCard">
+        <h3>המאגר שלי</h3>
+        <div class="csub">כל שינוי בכשירויות זז כאן מיד</div>
+        <div class="miniline"><span>הוקצה לצוות (7 עובדים)</span><b>145,000 ₪</b></div>
+        <div class="miniline"><span>משוריין לשאר הצוות</span><b id="evalOthers">—</b></div>
+        <div class="miniline"><span>נותר לעובד זה</span><b id="evalLeft">—</b></div>
+        <div class="miniline" style="border:none"><span><b>הבונוס לפי ההערכה</b></span><b id="evalNow">—</b></div>
+        <div class="alert mt" id="evalPoolNote" style="font-size:11.5px"><span id="evalPoolIcon">✓</span><div id="evalPoolMsg"></div></div>
+      </div>
+
+      <div class="card mt">
+        <h3>נקודות המדידה של השנה</h3>
+        <div class="csub" style="color:var(--amber)">⚑ נתוני מדידה מהמערכות — לא שאלות. מוצגים כדי שהדירוג ייקבע מעובדות ולא מהזיכרון</div>
+        <div id="evalPoints"></div>
+      </div>
+
+      <div class="card mt">
+        <h3>ההתפלגות שלך</h3>
+        <div class="csub">מול ממוצע החברה</div>
+        <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>5</span><div class="bartrack"><div class="barfill" style="width:14%"></div></div><span class="amt">14%</span></div>
+        <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>4</span><div class="bartrack"><div class="barfill" style="width:29%"></div></div><span class="amt">29%</span></div>
+        <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>3</span><div class="bartrack"><div class="barfill" style="width:43%"></div></div><span class="amt">43%</span></div>
+        <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>2</span><div class="bartrack"><div class="barfill" style="width:14%"></div></div><span class="amt">14%</span></div>
+        <div class="alert al-g" style="font-size:11.5px; margin-top:6px"><span>✓</span><div><b>נתת דירוג 5 ל־14% מהצוות</b> — בתוך הסף המונחה, שהוא עד 30% ונמדד ברמת החברה ולא ברמת הצוות. בדרגות 4–5 יחד נתת 43%, מול ממוצע חברה של 31%.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ MGR POOL -->
+<section class="screen" data-s="mgr-pool">
+  <div class="pgtitle"><div><h1>המאגר שלי</h1><div class="sub">חלוקה בשקלים — כל שקל לעובד אחד בא על חשבון אחר</div></div>
+    <div style="display:flex; gap:8px"><button class="btn">הגשה לדרג שני</button></div></div>
+
+  <div class="g3">
+    <div class="stat"><div class="k">הוקצה לצוות שלי</div><div class="v">145,000</div><div class="d">7 עובדים</div></div>
+    <div class="stat a"><div class="k">חולק לפי הדירוגים</div><div class="v" id="poolUsed">—</div><div class="d" id="poolUsedD">—</div></div>
+    <div class="stat g" id="poolLeftCard"><div class="k">נותר לחלוקה</div><div class="v" id="poolLeft">—</div><div class="d" id="poolLeftD">—</div></div>
+  </div>
+
+  <div class="card mt">
+    <h3>חלוקת המאגר</h3>
+    <div class="csub">הדירוג נקבע רק במסך ההערכה, מממוצע הכשירויות — ולכן הוא לקריאה בלבד כאן. לשינוי: "הערכה מלאה" בשורה.</div>
+    <table>
+      <thead><tr><th>עובד</th><th>תפקיד</th><th class="n">בונוס בדירוג 3</th><th class="n">דירוג כולל</th><th class="n">מכפיל אישי</th><th class="n">בונוס בפועל</th><th class="n">הפרש</th><th></th></tr></thead>
+      <tbody id="poolRows"></tbody>
+    </table>
+    <div class="alert mt" id="poolNote"><span id="poolIcon">ℹ</span><div id="poolMsg"></div></div>
+  </div>
+
+  <div class="alert al-b mt"><span>ℹ</span><div><b>זה המנגנון שעוצר אינפלציית דירוגים</b>המערכת לא נותנת למנהל סולם ציונים פתוח — היא נותנת לו עוגה. דירוג גבוה לעובד אחד מקטין את מה שנשאר לאחרים, ולכן מנהלים מכיילים את עצמם בלי שמישהו יבקש מהם. הרכיב האישי חסום ב־0–1.35, כך שגם מנהל נדיב מזיז לכל היותר כ־9% מסך הבונוס.</div></div>
+</section>
+
+
+<!-- ============================================================ CFO SIGN-OFF -->
+<section class="screen" data-s="cfo-sign">
+  <div class="pgtitle"><div><h1>ממתין לחתימתי</h1><div class="sub">נתון פיננסי אינו נכנס לחישוב הבונוס לפני אימות של הכספים</div></div>
+    <div style="display:flex; gap:8px"><button class="btn ghost" id="cfoReset">איפוס</button></div></div>
+
+  <div class="g3">
+    <div class="stat a"><div class="k">ממתין לחתימה</div><div class="v" id="cfoCount">4</div><div class="d" id="cfoSum">214,000 ₪</div></div>
+    <div class="stat"><div class="k">נחתם החודש</div><div class="v">7</div><div class="d">סה"כ 418,000 ₪</div></div>
+    <div class="stat g"><div class="k">חסם אישור מחזור</div><div class="v" id="cfoBlock">כן</div><div class="d" id="cfoBlockD">כל עוד נותרו רשומות ללא חתימה</div></div>
+  </div>
+
+  <div class="card mt">
+    <h3>רשומות הממתינות לאימות</h3>
+    <div class="csub">חתימה = הצהרה שהבסיס נכון ושהחיסכון אמיתי. היא נרשמת ביומן הביקורת עם שמכם והשעה.</div>
+    <table>
+      <thead><tr><th>#</th><th>נושא / ספק</th><th>פרויקט</th><th class="n">בסיס</th><th class="n">נסגר</th><th class="n">סכום</th><th>הזין</th><th class="n">פעולה</th></tr></thead>
+      <tbody id="cfoRows"></tbody>
+    </table>
+    <div class="alert mt" id="cfoNote"><span id="cfoIcon">⚑</span><div id="cfoMsg"></div></div>
+  </div>
+
+  <div class="alert al-b mt"><span>ℹ</span><div><b>למה החתימה חוסמת ולא מחריגה</b>נתון שלא נחתם עדיין נספר בחישוב, אבל התוצאה מסומנת זמנית והמחזור אינו ניתן לאישור. אילו היינו מחריגים מדד לא חתום, מדד חלש היה מעלה את הציון — כלומר היינו מתגמלים על היעדר חתימה.</div></div>
+</section>
+
+<!-- ============================================================ EMPLOYEE MOBILE -->
+<section class="screen" data-s="emp-mobile">
+  <div class="pgtitle"><div><h1>אזור העובד</h1><div class="sub">מובייל־first — מנהלי עבודה ועוזרים לא יושבים מול מחשב</div></div></div>
+  <div class="phonewrap">
+    <div class="phone"><div class="pscreen">
+      <div class="ptop">
+        <div class="st"><span>9:41</span><span>▮▮▮ 🔋</span></div>
+        <div style="font-size:12px; color:#93c5e8">שלום יוסי 👋</div>
+        <div style="font-weight:800; font-size:16px; margin-bottom:2px">היעדים שלי · 2026</div>
+        <div class="ring">
+          <svg width="96" height="96"><circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,.16)" stroke-width="9" fill="none"/>
+          <circle cx="48" cy="48" r="40" stroke="#38bdf8" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="30"/></svg>
+          <div class="ctr"><b>112%</b><span>ממוצע יעדים</span></div>
+        </div>
+        <div style="text-align:center; font-size:11px; color:#93c5e8">התקדמות טובה · נותרו 3 שבועות למדידה</div>
+      </div>
+      <div class="pbody">
+        <div class="goalcard">
+          <div class="gh"><div class="gn">דיווח ותיעוד מלא ובזמן</div><span class="chip c-ok">125%</span></div>
+          <div class="mini"><i style="width:100%; background:linear-gradient(90deg,#15803d,#22c55e)"></i></div>
+          <div class="gm"><span>יעד 80% · בפועל 94%</span><span>משקל 25%</span></div>
+        </div>
+        <div class="goalcard">
+          <div class="gh"><div class="gn">מדדי בטיחות מובילים</div><span class="chip c-ok">110%</span></div>
+          <div class="mini"><i style="width:92%; background:linear-gradient(90deg,#15803d,#22c55e)"></i></div>
+          <div class="gm"><span>44 סיורים · 7 דיווחי כמעט־ונפגע</span><span>משקל 30%</span></div>
+        </div>
+        <div class="goalcard">
+          <div class="gh"><div class="gn">שעות מול תקציב</div><span class="chip c-wait">97%</span></div>
+          <div class="mini"><i style="width:78%; background:linear-gradient(90deg,#d97706,#fbbf24)"></i></div>
+          <div class="gm"><span>יעד 4,200 · בפועל 4,330</span><span>משקל 15%</span></div>
+        </div>
+        <div class="goalcard">
+          <div class="gh"><div class="gn">קצב ביצוע מול תכנון</div><span class="chip c-ok">104%</span></div>
+          <div class="mini"><i style="width:87%; background:linear-gradient(90deg,#15803d,#22c55e)"></i></div>
+          <div class="gm"><span>מ"ק יציקה שבועי</span><span>משקל 15%</span></div>
+        </div>
+        <div class="goalcard">
+          <div class="gh"><div class="gn">ניהול האתר וקבלני משנה</div><span class="chip c-nu">טרם נמדד</span></div>
+          <div class="mini"><i style="width:0%"></i></div>
+          <div class="gm"><span>ציון ביקורת אתר · דצמבר</span><span>משקל 15%</span></div>
+        </div>
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:12px; padding:13px; font-size:12px; color:#1e3a5f; line-height:1.65">
+          <b>טווח משוער לסוף שנה</b><br>
+          <span style="font-size:19px; font-weight:900; color:var(--navy)">10,800 – 13,600 ₪</span><br>
+          <span style="font-size:11px; color:var(--muted)">כפוף לעמידת החברה ביעד הרווח ולאישור סופי</span>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="notecol">
+      <div class="nb"><b>מה העובד רואה</b><br>הפרמטרים שלו, היעד המספרי, איפה הוא עומד עכשיו, ומשקל כל מדד. הכל בגובה העיניים.</div>
+      <div class="nb"><b>מה הוא לא רואה</b><br>נוסחת הקצאת המאגר, האחוז שהחברה לוקחת, ונתונים של עמיתים. בדיוק כפי שרותם ביקשה: <em>"הם לא ידעו כמה אחוזים אנחנו לוקחים, אבל הם ידעו את הפרמטרים."</em></div>
+      <div class="nb"><b>למה טווח ולא מספר</b><br>הצגת מספר סופי לפני אישור המנכ"לית יוצרת ציפייה משפטית מחייבת. טווח משוער עם הסתייגות מפורשת שומר על שקיפות בלי ליצור התחייבות.</div>
+      <div class="nb" style="background:#f0fdf4; border-color:#86efac"><b style="color:var(--green)">זה מה שמחליף את "מי שצועק מקבל"</b><br>העובד לא צריך לבקש בונוס — הוא רואה כל השנה בדיוק מה נמדד ואיפה הוא עומד.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PROCUREMENT -->
+<section class="screen" data-s="proc-sav">
+  <div class="pgtitle">
+    <div><h1>תיק החסכונות — 2026</h1><div class="sub">רק חיסכון חתום ע"י חשב נכנס לחישוב הבונוס</div></div>
+    <button class="btn">רישום חיסכון חדש</button>
+  </div>
+
+  <div class="g4">
+    <div class="stat g"><div class="k">חיסכון קשה מאומת</div><div class="v">1.42M</div><div class="d up">▲ מול יעד 1.20M</div></div>
+    <div class="stat"><div class="k">מניעת עלות</div><div class="v">680K</div><div class="d">נספר במשקל 30% בלבד</div></div>
+    <div class="stat a"><div class="k">ממתין לחתימת חשב</div><div class="v">214K</div><div class="d" style="color:var(--amber)">4 רשומות · לא בחישוב</div></div>
+    <div class="stat r"><div class="k">קוזז ב־Claw-back</div><div class="v">−96K</div><div class="d dn">תוספות מאותו ספק</div></div>
+  </div>
+
+  <div class="tbl-wrap mt">
+  <table>
+    <thead><tr><th>#</th><th>קטגוריה / ספק</th><th>פרויקט</th><th class="n">בסיס (מוצמד)</th><th class="n">נסגר</th><th class="n">חיסכון</th><th>סוג</th><th>Claw-back</th><th>סטטוס</th></tr></thead>
+    <tbody>
+      <tr><td class="n">218</td><td><b>בטון מובא</b><div style="font-size:11px;color:var(--muted)">רדימיקס ירושלים</div></td><td>בי"ס גבעת שאול</td><td class="n">1,840,000</td><td class="n">1,682,000</td><td class="n"><b style="color:var(--green)">158,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-ok">✓ חתום 09:51</span></td></tr>
+      <tr><td class="n">217</td><td><b>ברזל זיון</b><div style="font-size:11px;color:var(--muted)">פלדות המרכז</div></td><td>קרית משה</td><td class="n">920,000</td><td class="n">861,000</td><td class="n"><b style="color:var(--green)">59,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-ok">✓ חתום</span></td></tr>
+      <tr style="background:#fffbeb"><td class="n">221</td><td><b>עבודות אלומיניום</b><div style="font-size:11px;color:var(--muted)">א.ד. מסגרות</div></td><td>מרלוג מודיעין</td><td class="n">1,310,000</td><td class="n">1,196,000</td><td class="n"><b>114,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-wait">ממתין לחשב</span></td></tr>
+      <tr style="background:#fef2f2"><td class="n">203</td><td><b>איטום גגות</b><div style="font-size:11px;color:var(--muted)">גל־סיל בע"מ</div></td><td>אולפנת רמות</td><td class="n">440,000</td><td class="n">368,000</td><td class="n"><b style="color:var(--red)">72,000 → 0</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-no">−96,000 ₪</span></td><td><span class="chip c-no">⛔ קוזז במלואו</span></td></tr>
+      <tr><td class="n">209</td><td><b>שכירות ציוד מכני</b><div style="font-size:11px;color:var(--muted)">מ.ע. ציוד</div></td><td>חוצה־פרויקטים</td><td class="n">760,000</td><td class="n">712,000</td><td class="n"><b>48,000</b></td><td><span class="chip c-info">מניעת עלות</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-ok">✓ חתום</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="g2 mt">
+    <div class="alert al-r"><span>⛔</span><div><b>רשומה 203 — למה החיסכון אופס</b>גל־סיל נסגר 16% מתחת לאומדן, אבל הגיש תוספות ב־96,000 ₪ בתוך 12 חודשים ונדרשו עבודות חוזרות. סעיף ה־Claw-back קיזז את מלוא החיסכון. <b style="display:inline">זהו הכלל שמונע "חסכתי בזול ושילמנו בתוספות".</b></div></div>
+    <div class="alert al-b"><span>🔒</span><div><b>הפרדת תפקידים</b>רותם מזינה חסכונות ורואה את הביצועים שלה — אבל <b style="display:inline">אינה יכולה לראות או לאשר את חישוב הבונוס של עצמה</b>, גם עם הרשאת מש"א. חסימה ברמת ה־API, לא ברמת המסך.</div></div>
+  </div>
+</section>
+
+<!-- ============================================================ HR TEMPLATE BUILDER -->
+<section class="screen" data-s="hr-builder">
+  <div class="pgtitle">
+    <div><h1>בונה התבניות</h1><div class="sub">כאן נקבעת המדיניות בפועל · הנוסחה היא דאטה — שינוי הוא פעולת משתמש, לא גרסת תוכנה</div></div>
+    <div style="display:flex; gap:8px"><button class="btn ghost">שכפול לתבנית חדשה</button><button class="btn green">שמירה והרצה מחדש</button></div>
+  </div>
+
+  <div class="g2">
+    <div>
+      <div class="card">
+        <h3>משפחת תפקידים</h3>
+        <div class="csub">כל משפחה = תבנית עצמאית</div>
+        <select id="famPick" style="width:100%; padding:9px 11px; border:1px solid var(--line2); border-radius:9px; font-size:14px; font-weight:600">
+          <option value="pm">מנהל פרויקט</option>
+          <option value="eng">מהנדס ביצוע</option>
+          <option value="fore">מנהל עבודה</option>
+          <option value="asst">עוזר מנהל עבודה</option>
+          <option value="proc">רכש</option>
+          <option value="fin">כספים והנהלת חשבונות</option>
+          <option value="hr">משאבי אנוש ומטה</option>
+          <option value="exec">הנהלה בכירה</option>
+        </select>
+
+        <h3 style="margin-top:18px">משקלי שלוש השכבות</h3>
+        <div class="csub">חייב להסתכם ב־100</div>
+        <div class="sl"><div class="t">רכיב חברה</div><input type="range" id="L1" min="0" max="100" step="5" value="15"><div class="v" id="LV1">15</div></div>
+        <div class="sl"><div class="t">רכיב פרויקט / פונקציה</div><input type="range" id="L2" min="0" max="100" step="5" value="60"><div class="v" id="LV2">60</div></div>
+        <div class="sl" style="border:none"><div class="t">רכיב אישי (הערכת מנהל)</div><input type="range" id="L3" min="0" max="100" step="5" value="25"><div class="v" id="LV3">25</div></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px"><span style="font-size:12.5px; color:var(--muted)">סה"כ</span><span class="sumbadge" id="layerSum">100</span></div>
+      </div>
+
+      <div class="card mt">
+        <h3>שערים (Gates)</h3>
+        <div class="csub">בינאריים — לא הדרגתיים</div>
+        <label class="miniline" style="cursor:pointer"><span>⛔ רווח חברה מתחת ל־85%</span><input type="checkbox" checked></label>
+        <label class="miniline" style="cursor:pointer"><span>⛔ תאונה קטלנית / צו הפסקת עבודה</span><input type="checkbox" checked></label>
+        <label class="miniline" style="cursor:pointer"><span>⛔ הפרת אתיקה / משמעת חמורה</span><input type="checkbox" checked></label>
+        <label class="miniline" style="cursor:pointer; border:none"><span>⛔ אי־השלמת הדרכות בטיחות</span><input type="checkbox" checked></label>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h3>פרמטרי היחידה</h3>
+        <div class="csub" id="kpiSub">משקלים בתוך רכיב הפרויקט · חייב להסתכם ב־100</div>
+        <div id="kpiList"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px">
+          <button class="btn ghost sm">+ הוספת פרמטר מהקטלוג</button>
+          <span class="sumbadge" id="kpiSum">100</span>
+        </div>
+      </div>
+
+      <div class="card mt">
+        <h3>מדרגות</h3>
+        <div class="csub">אותה פונקציה מוחלת על כל מדד</div>
+        <div class="miniline"><span>סף כניסה</span><b>85% → מקדם 0.50</b></div>
+        <div class="miniline"><span>יעד</span><b>100% → מקדם 1.00</b></div>
+        <div class="miniline"><span>מקסימום</span><b>150% → מקדם 1.50</b></div>
+        <div class="miniline" style="border:none"><span>מתחת לסף</span><b style="color:var(--red)">0</b></div>
+      </div>
+
+      <div class="alert al-g mt"><span>✓</span><div><b>למה זה קריטי</b>הוספת משפחה תשיעית, שינוי משקל או הוספת מדרגה — כולן פעולות במסך הזה. אין פריסת גרסה, אין פרויקט פיתוח, והמערכת לא מתיישנת בשנה השנייה.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ HR CYCLE -->
+<section class="screen" data-s="hr-cycle">
+  <div class="pgtitle"><div><h1>בקרת מחזור 2026</h1><div class="sub">מי טרם מילא · מה תקוע · איזה נתון חסר חתימה</div></div><button class="btn amber">שליחת תזכורות ל־6 מנהלים</button></div>
+
+  <div class="g4">
+    <div class="stat a"><div class="k">הערכות שהושלמו</div><div class="v">37<span style="font-size:16px;color:var(--muted)">/60</span></div><div class="d" style="color:var(--amber)">דדליין 15.12</div></div>
+    <div class="stat r"><div class="k">נתונים ללא חתימת חשב</div><div class="v">4</div><div class="d dn">214K ₪ — חוסמים אישור מחזור</div></div>
+    <div class="stat"><div class="k">ישיבות כיול</div><div class="v">2<span style="font-size:16px;color:var(--muted)">/3</span></div><div class="d">נותרה: מטה</div></div>
+    <div class="stat g"><div class="k">אינטגרציות</div><div class="v">✓</div><div class="d up">Priority + נוכחות · 08:14</div></div>
+  </div>
+
+  <div class="g2 mt">
+    <div class="card">
+      <h3>מנהלים שטרם השלימו</h3>
+      <div class="csub">לחיצה שולחת תזכורת ממוקדת</div>
+      <table><tbody>
+        <tr><td><b>אבי כהן</b><div style="font-size:11px;color:var(--muted)">מנהל פרויקט</div></td><td class="n">3/7</td><td class="n"><span class="chip c-wait">4 חסרות</span></td><td class="n"><button class="btn ghost sm">תזכורת</button></td></tr>
+        <tr><td><b>שמעון לוי</b><div style="font-size:11px;color:var(--muted)">מנהל עבודה ראשי</div></td><td class="n">9/9</td><td class="n"><span class="chip c-no">כיול נדרש</span></td><td class="n"><button class="btn ghost sm">זימון</button></td></tr>
+        <tr><td><b>נתן שטרן</b><div style="font-size:11px;color:var(--muted)">אולפנת רמות</div></td><td class="n">0/6</td><td class="n"><span class="chip c-no">6 חסרות</span></td><td class="n"><button class="btn ghost sm">תזכורת</button></td></tr>
+        <tr><td><b>מנהלת כספים</b><div style="font-size:11px;color:var(--muted)">כספים והנה"ח</div></td><td class="n">5/7</td><td class="n"><span class="chip c-wait">2 חסרות</span></td><td class="n"><button class="btn ghost sm">תזכורת</button></td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="card">
+      <h3>בקרת אינטגרציות</h3>
+      <div class="csub">מקורות נתונים — סנכרון אחרון</div>
+      <div class="miniline"><span><b>Priority</b> · תקציב מול ביצוע</span><span class="chip c-ok">✓ 08:14</span></div>
+      <div class="miniline"><span><b>Priority</b> · חשבונות וחריגים</span><span class="chip c-ok">✓ 08:14</span></div>
+      <div class="miniline"><span><b>Priority</b> · הזמנות רכש</span><span class="chip c-ok">✓ 08:14</span></div>
+      <div class="miniline"><span><b>נוכחות</b> · ימים וסיווג היעדרות</span><span class="chip c-ok">✓ 06:00</span></div>
+      <div class="miniline"><span><b>שכר</b> · קובץ תשלום</span><span class="chip c-nu">ממתין לאישור</span></div>
+      <div class="miniline" style="border:none"><span><b>מדדי שטח</b> · הזנה ידנית</span><span class="chip c-wait">11 חסרים</span></div>
+      <div class="alert al-a mt" style="font-size:12px"><span>⚑</span><div>סיווג ההיעדרות מגיע ממערכת הנוכחות. 3 עובדים עם ימי מילואים סווגו כ־<b style="display:inline">מוגן</b> ולא הופחתו.</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+
+<script>
+const NAV = {
+  ceo:{name:'רמה אורם', role:'מנכ"לית הקבוצה', ini:'ר', col:'linear-gradient(135deg,#f59e0b,#d97706)', items:[
+    {s:'ceo-dash', t:'לוח מחוונים', i:'▤'},
+    {s:'ceo-sim',  t:'סימולטור What-If', i:'◈'},
+    {s:'ceo-approve', t:'אישור סופי', i:'✓', b:'23'}]},
+  mgr:{name:'אבי כהן', role:'מנהל פרויקט · 2 אתרים', ini:'א', col:'linear-gradient(135deg,#0ea5e9,#0369a1)', items:[
+    {s:'mgr-team', t:'הצוות שלי', i:'▤', b:'4'},
+    {s:'mgr-eval', t:'מילוי הערכה', i:'✎'},
+    {s:'mgr-pool', t:'המאגר שלי', i:'₪'}]},
+  emp:{name:'יוסי מזרחי', role:'עוזר מנהל עבודה · גבעת שאול', ini:'י', col:'linear-gradient(135deg,#10b981,#047857)', items:[
+    {s:'emp-mobile', t:'היעדים שלי', i:'◎'}]},
+  proc:{name:'רותם רוזנצוייג', role:'מנהלת רכש', ini:'ר', col:'linear-gradient(135deg,#8b5cf6,#6d28d9)', items:[
+    {s:'proc-sav', t:'תיק החסכונות', i:'₪', b:'4'}]},
+  cfo:{name:'שרית שנסי', role:'מנהלת כספים · חשב', ini:'ש', col:'linear-gradient(135deg,#0f766e,#115e59)', items:[
+    {s:'cfo-sign', t:'ממתין לחתימתי', i:'✎', b:'4'}]},
+  hr:{name:'רותם רוזנצוייג', role:'מנהלת מחזור התגמול', ini:'ר', col:'linear-gradient(135deg,#8b5cf6,#6d28d9)', items:[
+    {s:'hr-builder', t:'בונה התבניות', i:'⚙'},
+    {s:'hr-cycle', t:'בקרת מחזור', i:'▤'}]}
+};
+const $ = id => document.getElementById(id);
+
+function show(s){
+  document.querySelectorAll('.screen').forEach(e => e.classList.toggle('on', e.dataset.s === s));
+  document.querySelectorAll('.navitem').forEach(e => e.classList.toggle('on', e.dataset.s === s));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function setRole(r){
+  const c = NAV[r];
+  $('sbName').textContent = c.name; $('sbRole').textContent = c.role;
+  $('tbAv').textContent = c.ini; $('tbAv').style.background = c.col;
+  $('sbNav').innerHTML = c.items.map(it =>
+    `<button class="navitem" data-s="${it.s}"><span class="ic">${it.i}</span>${it.t}${it.b?`<span class="bdg">${it.b}</span>`:''}</button>`).join('');
+  $('sbNav').querySelectorAll('.navitem').forEach(b => b.onclick = () => show(b.dataset.s));
+  show(c.items[0].s);
+  if (r === 'cfo' && typeof cfoRender === 'function') cfoRender();
+}
+$('roleSel').onchange = e => setRole(e.target.value);
+
+/* ---------- סרגל שלבי המחזור → ניווט ---------- */
+document.querySelectorAll('.step[data-go]').forEach(el => {
+  el.onclick = () => {
+    const [role, screen] = el.dataset.go.split(':');
+    $('roleSel').value = role;
+    setRole(role);
+    show(screen);
+  };
+});
+
+/* ---------- CEO simulator ---------- */
+const HEADCOUNT = { pm:5, exec:4, field:28, staff:23 };
+const SAL       = { pm:30000, exec:42000, field:17500, staff:16500 };
+const PERF      = { pm:1.03, exec:1.09, field:0.97, staff:1.01 };
+const KEY = [
+  {n:'אבי כהן', r:'מנהל פרויקט', g:'pm',    p:1.08},
+  {n:'ד. לוינגר', r:'מנכ"לית', g:'exec',  p:1.12},
+  {n:'שמעון לוי', r:'מנהל עבודה', g:'field', p:1.02},
+  {n:'יוסי מזרחי', r:'עוזר מנהל עבודה', g:'field', p:0.94},
+  {n:'מ. ברק', r:'רכש ומש"א', g:'staff',   p:1.06}
+];
+const nf  = n => new Intl.NumberFormat('he-IL',{maximumFractionDigits:0}).format(Math.round(n));
+let BASE = null;
+
+function simCalc(){
+  const t = { pm:+$('w1').value, exec:+$('w2').value, field:+$('w3').value, staff:+$('w4').value };
+  const cap = +$('w6').value;
+  ['w1','w2','w3','w4'].forEach((w,i) => $('v'+(i+1)).textContent = (+$(w).value).toFixed(2).replace(/\.?0+$/,''));
+  $('v5').textContent = $('w5').value + '%';
+  $('v6').textContent = (+$('w6').value).toFixed(2);
+  $('v7').textContent = (+$('w7').value).toFixed(2);
+
+  let total = 0;
+  for (const g in HEADCOUNT) total += HEADCOUNT[g] * SAL[g] * t[g] * Math.min(PERF[g], cap);
+  const payroll = Object.keys(HEADCOUNT).reduce((a,g) => a + HEADCOUNT[g]*SAL[g]*12, 0);
+  const budget = cycleBudget(payroll);
+  const factor  = Math.min(1, budget / total);
+  const paid    = Math.min(total, budget);
+
+  $('simTotal').textContent = nf(total) + ' ₪';
+  $('simPay').textContent   = (total/payroll*100).toFixed(1) + '%';
+  $('simAvg').textContent   = (paid/60/1000).toFixed(1) + 'K';
+  $('simElig').textContent  = 60;
+  $('simSub').textContent   = total > budget
+    ? `חריגה של ${nf(total-budget)} ₪ מהתקציב · מקדם התאמה ${factor.toFixed(3)}`
+    : `בתוך התקציב · עודף ${nf(budget-total)} ₪`;
+
+  const set=(id,v)=>{const e=$(id); if(e) e.textContent=v;};
+  set('dTotM', (total/1e6).toFixed(2)+'M');
+  set('dTotD', total>budget?`מול תקציב ${(budget/1e6).toFixed(2)}M — חריגה ${((total/budget-1)*100).toFixed(1)}%`:`בתוך תקציב ${(budget/1e6).toFixed(2)}M`);
+  set('dPct',  (total/payroll*100).toFixed(1)+'%');
+  set('dCalc', nf(total)+' ₪');   set('aCalc', nf(total)+' ₪');
+  set('dFac',  factor.toFixed(3)); set('aFac', '×'+factor.toFixed(3));
+  const MANUAL = 4200;                                   // התאמות ידניות מאושרות
+  set('aSub', factor < 1 ? `לאחר מקדם התאמה ${factor.toFixed(3)}` : 'המודל בתוך התקציב — ללא מקדם התאמה');
+  set('aPay', nf(Math.max(0, total * factor - MANUAL)) + ' ₪');
+  set('dOver', total>budget?`המודל חורג ב־${nf(total-budget)} ₪. אפשר לאשר מקדם ${factor.toFixed(3)} לכולם, או להעלות את התקציב.`:'המודל בתוך התקציב המאושר.');
+
+  $('simNote').className = 'alert mt ' + (total > budget ? 'al-a' : 'al-g');
+  $('simNote').innerHTML = total > budget
+    ? `<span>⚑</span><div><b>חריגה מהתקציב</b>יופעל מקדם אחיד ${factor.toFixed(3)} — כל עובד יקבל ${(factor*100).toFixed(1)}% מהמחושב. הכלל חייב להיות מוכרז מראש.</div>`
+    : `<span>✓</span><div><b>תרחיש בתוך התקציב</b>אין צורך במקדם התאמה. עודף ${nf(budget-total)} ₪.</div>`;
+
+  const rows = KEY.map(k => {
+    const val  = SAL[k.g] * t[k.g] * Math.min(k.p, cap) * factor;
+    if (!BASE) return {k, val, d:0};
+    return {k, val, d: val - BASE[k.n]};
+  });
+  if (!BASE){ BASE = {}; rows.forEach(r => BASE[r.k.n] = r.val); }
+
+  $('simRows').innerHTML = rows.map(r => `
+    <tr><td><div style="font-weight:700">${r.k.n}</div><div style="font-size:11px;color:var(--muted)">${r.k.r}</div></td>
+    <td class="n" style="font-weight:800">${nf(r.val)} ₪</td>
+    <td class="n" style="font-size:12px; font-weight:800; color:${r.d>1?'var(--green)':r.d<-1?'var(--red)':'var(--muted)'}">
+      ${Math.abs(r.d)<1?'—':(r.d>0?'▲ ':'▼ ')+nf(Math.abs(r.d))}</td></tr>`).join('');
+}
+['w1','w2','w3','w4','w5','w6','w7'].forEach(id => $(id).addEventListener('input', simCalc));
+
+/* ---------- BARS evaluation ---------- */
+const COMPS = [
+  {n:'משמעת תיעוד ודיווח', d:'5 — יומן מלא ומדויק ללא תזכורת ב־95%+ מהימים · 3 — מדווח באופן סדיר, נדרשת תזכורת מדי פעם · 1 — דיווח חלקי או בדיעבד', sel:5},
+  {n:'בטיחות וציות', d:'5 — יוזם דיווח על ליקויים ועוצר עבודה לא בטוחה · 3 — מקיים נהלים ומשתתף בתדריכים · 1 — נדרשת אכיפה חוזרת', sel:5},
+  {n:'ביצוע מקצועי', d:'5 — עומד ביעדי הקצב באופן עקבי וללא ליווי · 3 — עומד ביעדים ברוב המקרים · 1 — נדרש פיקוח צמוד', sel:4},
+  {n:'שירות פנימי ושיתוף פעולה', d:'5 — משמש כתובת לצוותים אחרים ופותר ממשקים ביוזמתו · 3 — משתף פעולה כנדרש · 1 — מייצר חיכוך', sel:3},
+  {n:'תודעה עלותית', d:'5 — מזהה בזבוז ומציע חלופות מתומחרות · 3 — מודע לתקציב · 1 — אינו לוקח עלות בחשבון', sel:3}
+];
+const MULT = {1:0, 2:0.60, 3:1.00, 4:1.15, 5:1.35};
+function drawComps(){
+  $('compBox').innerHTML = COMPS.map((c,i) => `
+    <div class="comp">
+      <div class="h"><div class="nm">${c.n}</div><div class="chip c-info" id="cm${i}">×${MULT[c.sel].toFixed(2)}</div></div>
+      <div class="desc">${c.d}</div>
+      <div class="scale">${[1,2,3,4,5].map(v =>
+        `<button data-c="${i}" data-v="${v}" class="${v===c.sel?'sel':''}">${v}</button>`).join('')}</div>
+    </div>`).join('');
+  $('compBox').querySelectorAll('button').forEach(b => b.onclick = () => {
+    COMPS[+b.dataset.c].sel = +b.dataset.v; drawComps();
+  });
+  /* ממוצע ציוני הכשירויות מעוגל לדרגה שלמה — הדירוג הכולל.
+     המכפיל נגזר מהדרגה, לא מהממוצע, כדי שהעובד יקבל דירוג ולא מספר עשרוני. */
+  const avgScore = COMPS.reduce((a,c) => a + c.sel, 0) / COMPS.length;
+  const overall  = Math.min(5, Math.max(1, Math.round(avgScore)));
+  const avg      = MULT[overall];
+  const base = 13000 * 0.85;                       // שכר × משכורות יעד
+  const unit = 1.12, comp = 1.07;                  // מקדמי חברה ויחידה
+  const perf = 0.10*comp + 0.60*unit + 0.30*avg;
+  $('evalAmt').textContent = nf(base * perf) + ' ₪';
+  $('evalSub').textContent = `דירוג כולל ${overall} · ${RATE_TXT[overall]} — ממוצע ${avgScore.toFixed(1)} מ-${COMPS.length} כשירויות · מכפיל ${avg.toFixed(2)}`;
+  /* השפעה על המאגר של המנהל — יוסי הוא אחד מ-7 */
+  const POOL = 145000;
+  const others = TEAM.filter(e => e.n !== LIVE).reduce((a,e) => a + e.b * factorOf(e), 0);
+  const mine = base * perf, left = POOL - others;
+  const set2 = (id,v) => { const el = $(id); if (el) el.textContent = v; };
+  set2('evalOthers', nf(others) + ' ₪');
+  set2('evalLeft',   nf(left) + ' ₪');
+  set2('evalNow',    nf(mine) + ' ₪');
+  if (typeof poolRender === 'function') poolRender();
+  const box = $('evalPoolNote');
+  if (box) {
+    const over = mine > left;
+    box.className = 'alert mt ' + (over ? 'al-r' : 'al-g');
+    $('evalPoolIcon').textContent = over ? '⛔' : '✓';
+    $('evalPoolMsg').innerHTML = over
+      ? `<b>חריגה של ${nf(mine-left)} ₪</b>כדי לתת את הדירוג הזה תצטרך להוריד לעובד אחר.`
+      : `<b>נשארו ${nf(left-mine)} ₪ פנויים</b>העלאת דירוג כאן מקטינה את מה שנשאר לשאר הצוות.`;
+  }
+}
+
+/* ---------- HR template builder ---------- */
+const TPL = {
+  pm:{w:[15,60,25], k:[['רווח גולמי בפועל מול תקציב',40],['עמידה באבני דרך חוזיות',20],['חריגים מאושרים ותביעות שהושבו',15],['תזרים: חשבונות בזמן ו-DSO',15],['איכות מסירה ועלות בדק',10]]},
+  eng:{w:[15,55,30], k:[['דיוק כמויות וסגירת חשבונות קב"מ',25],['צריכת חומרים מול תיאורטי',20],['תיאום תכנון (RFI, התנגשויות)',20],['בקרת איכות ועלות rework',20],['הנדסת ערך (VE) מאומתת',15]]},
+  fore:{w:[10,60,30], k:[['שעות עבודה מול תקציב שעות',30],['מדדי בטיחות מובילים',25],['קצב ביצוע מול תכנון',20],['ניהול האתר וקבלני המשנה',15],['דיווח ותיעוד בזמן',10]]},
+  asst:{w:[10,60,30], k:[['מדדי בטיחות מובילים',30],['דיווח ותיעוד מלא ובזמן',25],['שעות עבודה מול תקציב',15],['קצב ביצוע מול תכנון',15],['ניהול האתר וקבלני המשנה',15]]},
+  proc:{w:[25,50,25], k:[['חיסכון קשה מאומת (Hard)',35],['ביצועי ספקים (OTD, פסילות)',20],['משמעת תהליך (תחרותיות, maverick)',20],['סגירת רכש לפני צו התחלת עבודה',15],['שביעות רצון לקוח פנימי',10]]},
+  fin:{w:[30,45,25], k:[['הגשת חשבון חלקי במועד',25],['אפקטיביות גבייה (CEI)',25],['עיכבון וערבויות',20],['אישור בסבב ראשון',15],['ימים מאישור לתשלום ודיוק סגירה',15]]},
+  hr:{w:[40,30,30], k:[['תחלופה מצטערת בתפקידי מפתח',30],['הסמכות והיתרים בתוקף',20],['זמן איוש משרה קריטית',20],['ניהול מחזור התגמול',15],['שביעות רצון לקוח פנימי',15]]},
+  exec:{w:[60,20,20], k:[['רווחיות משוקללת של התיק',35],['שחיקת מרווח (Margin Fade)',25],['תזרים וצבר הזמנות',15],['דיוק אומדנים',15],['בטיחות תאגידית ודור המשך',10]]}
+};
+let curTpl = 'pm';
+function drawTpl(){
+  const t = TPL[curTpl];
+  [1,2,3].forEach(i => { $('L'+i).value = t.w[i-1]; $('LV'+i).textContent = t.w[i-1]; });
+  $('kpiList').innerHTML = t.k.map((k,i) => `
+    <div class="kpirow"><span class="grab">⠿</span><span class="nm">${k[0]}</span>
+    <input type="number" data-i="${i}" value="${k[1]}" min="0" max="100" step="5"><span style="font-size:12px;color:var(--muted)">%</span></div>`).join('');
+  $('kpiList').querySelectorAll('input').forEach(inp => inp.oninput = () => {
+    t.k[+inp.dataset.i][1] = +inp.value || 0; sums();
+  });
+  sums();
+}
+function sums(){
+  const ls = [1,2,3].reduce((a,i) => a + (+$('L'+i).value), 0);
+  const ks = TPL[curTpl].k.reduce((a,k) => a + k[1], 0);
+  $('layerSum').textContent = ls; $('layerSum').className = 'sumbadge ' + (ls===100?'sum-ok':'sum-no');
+  $('kpiSum').textContent   = ks; $('kpiSum').className   = 'sumbadge ' + (ks===100?'sum-ok':'sum-no');
+}
+$('famPick').onchange = e => { curTpl = e.target.value; drawTpl(); };
+[1,2,3].forEach(i => $('L'+i).addEventListener('input', () => {
+  TPL[curTpl].w[i-1] = +$('L'+i).value; $('LV'+i).textContent = $('L'+i).value; sums();
+}));
+
+/* ---------- init ---------- */
+simCalc(); drawTpl(); setRole('ceo');
+
+/* ---------- המאגר שלי — חלוקה חיה ---------- */
+const POOL_TOTAL = 145000, W_PERSONAL = 0.30;
+const RATE = {1:0, 2:0.6, 3:1, 4:1.15, 5:1.35};
+const RATE_TXT = {1:'לא מספק', 2:'מתחת לציפייה', 3:'עומד בציפייה', 4:'מעל הציפייה', 5:'יוצא דופן'};
+const TEAM = [
+  {n:'דוד אזולאי',   r:'מהנדס ביצוע',       b:34089, d:3},
+  {n:'משה דהן',      r:'מנהל עבודה',        b:28469, d:4},
+  {n:'חיים פרידמן',  r:'עוזר מנהל עבודה',   b:9995,  d:2},
+  {n:'יוסי מזרחי',   r:'עוזר מנהל עבודה',   b:11925, d:3},
+  {n:'עמית רוזן',    r:'מהנדס ביצוע',       b:31240, d:3},
+  {n:'טל בן־חמו',    r:'עוזר מנהל עבודה',   b:3970,  d:3},
+  {n:'ליאת אשכנזי',  r:'מהנדסת ביצוע',      b:21900, d:3},
+];
+const START = TEAM.map(e => e.d);
+const factor = d => 1 + W_PERSONAL * (RATE[d] - 1);
+/* יוסי מזרחי הוא העובד שההערכה שלו פתוחה במסך "מילוי הערכה" —
+   המכפיל שלו נגזר חי מממוצע הכשירויות, ולא מדירוג שנשמר.        */
+const LIVE = 'יוסי מזרחי';
+function liveRating(){
+  const avgScore = COMPS.reduce((a,c) => a + c.sel, 0) / COMPS.length;
+  return Math.min(5, Math.max(1, Math.round(avgScore)));
+}
+function ratingOf(e){ return e.n === LIVE ? liveRating() : e.d; }
+function multOf(e){ return RATE[ratingOf(e)]; }
+const factorOf = e => 1 + W_PERSONAL * (multOf(e) - 1);
+
+function poolRender(){
+  const rows = $('poolRows'); if(!rows) return;
+  rows.innerHTML = TEAM.map((e,ix) => {
+    const d = ratingOf(e), m = multOf(e), f = factorOf(e), v = e.b * f, diff = v - e.b;
+
+    return `<tr><td><b>${e.n}</b></td><td>${e.r}</td><td class="n">${nf(e.b)} ₪</td>
+      <td class="n"><b>${d}</b> <span style="color:${e.n===LIVE?'var(--navy2)':'var(--muted)'}; font-size:11.5px">${RATE_TXT[d]}${e.n===LIVE?' · מהשאלון':''}</span></td>
+      <td class="n">${m.toFixed(2)}</td>
+      <td class="n"><b>${nf(v)} ₪</b></td>
+      <td class="n" style="color:${diff>0?'var(--green)':diff<0?'var(--red)':'var(--muted)'}">${diff===0?'—':(diff>0?'+':'−')+nf(Math.abs(diff))}</td>
+      <td class="n"><button class="btn ghost gotoeval" style="padding:3px 9px; font-size:11.5px">הערכה מלאה</button></td></tr>`;
+  }).join('');
+  rows.querySelectorAll('.gotoeval').forEach(b => b.onclick = () => show('mgr-eval'));
+
+
+  const used = TEAM.reduce((a,e) => a + e.b * factorOf(e), 0);
+  const left = POOL_TOTAL - used;
+  $('poolUsed').textContent  = nf(used) + ' ₪';
+  $('poolUsedD').textContent = (used / POOL_TOTAL * 100).toFixed(1) + '% מהמאגר · 7 עובדים';
+  $('poolLeft').textContent  = (left < 0 ? '−' : '') + nf(Math.abs(left)) + ' ₪';
+  $('poolLeftCard').className = 'stat ' + (left < 0 ? 'r' : 'g');
+  $('poolLeftD').textContent = left < 0 ? 'חריגה מהמאגר' : 'בתוך המאגר';
+  $('poolNote').className = 'alert mt ' + (left < 0 ? 'al-r' : 'al-g');
+  $('poolIcon').textContent = left < 0 ? '⛔' : '✓';
+  $('poolMsg').innerHTML = left < 0
+    ? `<b>חריגה של ${nf(-left)} ₪</b>לא ניתן להגיש לדרג שני. הורידו דירוג לעובד אחר, או בקשו הגדלת מאגר בנימוק בכתב.`
+    : `<b>בתוך המאגר</b>נותרו ${nf(left)} ₪. העלאת דירוג לעובד אחד מקטינה את מה שנשאר לשאר.`;
+}
+
+poolRender();
+
+/* ---------- נקודות המדידה של השנה — לעריכה במקום אחד ---------- */
+const EVAL_POINTS = [
+  ['Q1 · דיווח ותיעוד', '91%'],
+  ['Q2 · דיווח ותיעוד', '96%'],
+  ['Q3 · דיווח ותיעוד', '89%'],
+  ['Q4 · דיווח ותיעוד', '98%'],
+  ['סיורי בטיחות מתועדים', '44 / 40'],
+  ['סגירת ליקויים ב־SLA', '92%'],
+  ['דיווחי "כמעט ונפגע"', '7 ▲', 'var(--green)'],
+];
+(() => {
+  const el = $('evalPoints'); if (!el) return;
+  el.innerHTML = EVAL_POINTS.map(([k, v, c], i) =>
+    `<div class="miniline"${i === EVAL_POINTS.length - 1 ? ' style="border:none"' : ''}>` +
+    `<span>${k}</span><b${c ? ` style="color:${c}"` : ''}>${v}</b></div>`).join('');
+})();
+
+/* ---------- הגדרת תקציב המחזור ---------- */
+function cycleBudget(payroll){
+  const mode = $('bmode').value;
+  const target = (+$('bTarget').value || 0) * 1e6;
+  const actual = (+$('bActual').value || 0) * 1e6;
+  $('hybridRows').style.display = mode === 'hybrid' ? '' : 'none';
+  const fr = $('fixedRow'); if (fr) fr.style.display = mode === 'fixed' ? '' : 'none';
+
+  if (mode === 'fixed') {
+    const b = +$('w7').value * 1e6;
+    $('bResult').textContent = `תקציב המחזור: ${nf(b)} ₪`;
+    $('bExplain').textContent = `הסכום שהוגדר למעלה, ומתקבע בלחיצה על נעילת התקציב. עמידה ביעד הרווח: ${(actual/target*100).toFixed(0)}% — משפיעה על מקדם החברה של כל עובד, לא על גודל המאגר.`;
+    return b;
+  }
+  const floor = (+$('bFloor').value/100) * payroll;
+  const excess = Math.max(0, actual - target);
+  const share = (+$('bShare').value/100) * excess;
+  const cap = (+$('bCap').value/100) * payroll;
+  const b = Math.min(floor + share, cap);
+  $('bResult').textContent = `תקציב המחזור: ${nf(b)} ₪`;
+  $('bExplain').textContent = `רצפה ${$('bFloor').value}% מעלות השכר (${nf(floor)}) + ${$('bShare').value}% מהרווח שמעל היעד (${nf(share)})`
+    + (floor + share > cap ? ` — נחתך ע"י תקרת ${$('bCap').value}% (${nf(cap)})` : '') + '.';
+  return b;
+}
+['bmode','bTarget','bActual','bFloor','bShare','bCap'].forEach(id => {
+  const el = $(id); if (el) el.addEventListener('input', simCalc);
+});
+
+/* ---------- הסבר לכל פרמטר ---------- */
+const HELP = {
+  bmode:{t:'מודל מימון המאגר', d:'קובע מאיפה מגיע הכסף שמחולק — ולא איך הוא מחולק.',
+    o:[['קבוע','ההנהלה מכריזה על סכום. פשוט להסבר וודאי תקציבית, אבל מנותק מהתוצאה: גם בשנה חלשה משלמים את אותו סכום, וזה בדיוק מה שמחליש את הטענה שהבונוס הוא תוספת מותנית.'],
+       ['היברידי','רצפה כאחוז מעלות השכר, ועוד נתח מהרווח שמעל היעד, עד תקרה. המאגר גדל וקטן עם הרווח. זו ההמלצה באפיון.']]},
+  bTarget:{t:'יעד הרווח השנתי', d:'הרווח שההנהלה הציבה לשנה. הוא המכנה של מקדם החברה — הרכיב היחיד שמשותף לכל 60 העובדים. ההגדרה עצמה (נקי לפני מס? EBITDA? מאוחד או פר־חברה?) היא החלטה חוסמת שחייבת להיסגר מול הכספים.'},
+  bActual:{t:'הרווח בפועל', d:'מה שהושג בסוף השנה. היחס בין הבפועל ליעד הוא אחוז העמידה: 14.98 מול 14.00 = 107%. מתחת לסף הכניסה — אפס לכולם, ללא יוצא מן הכלל.'},
+  bFloor:{t:'רצפת המאגר', d:'אחוז מעלות השכר השנתית שמחולק גם אם הרווח רק עבר את הסף. הרצפה קיימת כדי שהמנגנון לא ייעלם בשנה בינונית — עובד שנמדד כל השנה ומקבל אפס מפסיק להאמין למדידה.'},
+  bShare:{t:'השתתפות ברווח העודף', d:'אחוז מהרווח שמעל היעד שנכנס למאגר. הבנצ׳מרק הענפי הוא 15%–20%. זה החלק שהופך את התגמול לשותפות אמיתית ולא למענק.'},
+  bCap:{t:'תקרת המאגר', d:'חסם עליון כאחוז מעלות השכר — הגנת תזרים לשנה חריגה. באפיון מומלץ 10%–12%. חריגה ממנו אינה נחסמת, אלא מטופלת במקדם ההתאמה.'},
+  w1:{t:'משכורות יעד — מנהל פרויקט', d:'כמה משכורות חודשיות מקבל מנהל פרויקט בעמידה מלאה ביעדים, כלומר במקדם 1.00. זהו הבסיס: שכר חודשי × משכורות יעד × מקדם ביצוע. הטווח המקובל בענף למנהל פרויקט הוא 2–3.'},
+  w2:{t:'משכורות יעד — הנהלה בכירה', d:'הטווח המקובל 3.5–5.0. אצל ההנהלה 60% מהמשקל הוא רכיב החברה, ולכן הסכום נראה גדול אך גם תנודתי הרבה יותר.'},
+  w3:{t:'משכורות יעד — שטח', d:'מנהלי עבודה, מהנדסים ועוזרים. הטווח 0.75–1.75. אצלם 60% מהמשקל הוא רכיב הפרויקט — מה שהם באמת שולטים בו.'},
+  w4:{t:'משכורות יעד — מטה', d:'רכש, כספים ומשאבי אנוש. הטווח 1.0–2.5, לפי מידת ההשפעה הישירה על התוצאה.'},
+  w5:{t:'סף הכניסה התאגידי', d:'מתחת לאחוז הזה מיעד הרווח לא משולם בונוס לאיש — גם לא לעובד מצטיין. <b>זה השער המשפטי:</b> בלעדיו הבונוס עלול להיחשב "תוספת פיקטיבית" ולהיכנס רטרואקטיבית לבסיס פיצויי הפיטורים וההפרשות הפנסיוניות. 85% הוא הסף המומלץ.'},
+  w6:{t:'תקרת מקדם הביצוע', d:'החסם העליון על מקדם הביצוע הכולל. בשוק מקובל 1.5–2.0. מומלץ להתחיל שמרני ב־1.50 בשנה הראשונה — קל להעלות תקרה, קשה מאוד להוריד אותה אחרי שהעובדים כבר ראו אותה.'},
+  w7:{t:'התקציב המאושר', d:'הסכום שההנהלה מכריזה כאן במודל הקבוע. אם סך החישוב עולה עליו, המערכת מחילה מקדם התאמה אחיד על כולם — לא חותכת למי שפחות חשוב.'},
+};
+function attachHelp(scope){
+  document.querySelectorAll(`${scope} .sl`).forEach(row => {
+    const ctl = row.querySelector('input, select'); if (!ctl || !HELP[ctl.id] || row.querySelector('.hlp')) return;
+    const h = HELP[ctl.id];
+    const t = row.querySelector('.t'); if (!t) return;
+    const btn = document.createElement('button');
+    btn.className = 'hlp'; btn.type = 'button'; btn.textContent = 'i'; btn.title = 'הסבר';
+    t.appendChild(btn);
+    const box = document.createElement('div');
+    box.className = 'hlpbox';
+    box.innerHTML = `<b>${h.t}</b> — ${h.d}` +
+      (h.o ? h.o.map(([n, d]) => `<div class="opt"><b>${n}:</b> ${d}</div>`).join('') : '');
+    row.appendChild(box);
+    btn.onclick = () => { box.classList.toggle('on'); btn.classList.toggle('on'); };
+  });
+}
+attachHelp('.screen[data-s="ceo-sim"]');
+
+/* ---------- איפוס הסימולטור לערכי הפתיחה ---------- */
+const SIM_IDS = ['w1','w2','w3','w4','w5','w6','w7','bmode','bTarget','bActual','bFloor','bShare','bCap'];
+const SIM_DEFAULTS = {};
+SIM_IDS.forEach(id => { const el = $(id); if (el) SIM_DEFAULTS[id] = el.value; });
+const simResetBtn = $('simReset');
+if (simResetBtn) simResetBtn.onclick = () => {
+  SIM_IDS.forEach(id => { const el = $(id); if (el) el.value = SIM_DEFAULTS[id]; });
+  document.querySelectorAll('.screen[data-s="ceo-sim"] .hlpbox.on').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.screen[data-s="ceo-sim"] .hlp.on').forEach(b => b.classList.remove('on'));
+  simCalc();
+};
+
+/* ---------- חתימת חשב ---------- */
+const CFO = [
+  {id:221, nm:'אלומיניום ומסגרות', sup:'א.ד. מסגרות', prj:'מרלוג מודיעין',  base:1310000, fin:1196000, by:'רותם רוזנצוייג', signed:false},
+  {id:224, nm:'עבודות עפר',        sup:'ג.מ. תשתיות', prj:'קרית משה',        base:  620000, fin: 579000, by:'רותם רוזנצוייג', signed:false},
+  {id:226, nm:'חשמל ותקשורת',      sup:'אלקטרה שירותים', prj:'בי"ס גבעת שאול', base: 480000, fin: 446000, by:'רותם רוזנצוייג', signed:false},
+  {id:229, nm:'מעליות',            sup:'מעליות נחשון', prj:'מרלוג מודיעין',   base:  310000, fin: 285000, by:'רותם רוזנצוייג', signed:false},
+];
+function cfoRender(){
+  const rows = $('cfoRows'); if (!rows) return;
+  rows.innerHTML = CFO.map((r,i) => {
+    const amt = r.base - r.fin;
+    return `<tr${r.signed?' style="opacity:.55"':''}>
+      <td class="n">${r.id}</td>
+      <td><b>${r.nm}</b><div style="font-size:11px;color:var(--muted)">${r.sup}</div></td>
+      <td>${r.prj}</td><td class="n">${nf(r.base)}</td><td class="n">${nf(r.fin)}</td>
+      <td class="n"><b style="color:var(--green)">${nf(amt)}</b></td>
+      <td style="font-size:12px">${r.by}</td>
+      <td class="n">${r.signed
+        ? '<span class="chip c-ok">✓ נחתם</span>'
+        : `<button class="btn cfosign" data-i="${i}" style="padding:4px 12px; font-size:12px">חתימה</button>`}</td></tr>`;
+  }).join('');
+  rows.querySelectorAll('.cfosign').forEach(b => b.onclick = () => { CFO[+b.dataset.i].signed = true; cfoRender(); });
+
+  const open = CFO.filter(r => !r.signed);
+  const sum  = open.reduce((a,r) => a + (r.base - r.fin), 0);
+  $('cfoCount').textContent = open.length;
+  $('cfoSum').textContent   = nf(sum) + ' ₪';
+  $('cfoBlock').textContent = open.length ? 'כן' : 'לא';
+  $('cfoBlockD').textContent = open.length ? 'כל עוד נותרו רשומות ללא חתימה' : 'כל הנתונים אומתו — המחזור ניתן לאישור';
+  $('cfoBlock').parentElement.className = 'stat ' + (open.length ? 'r' : 'g');
+  $('cfoNote').className = 'alert mt ' + (open.length ? 'al-a' : 'al-g');
+  $('cfoIcon').textContent = open.length ? '⚑' : '✓';
+  $('cfoMsg').innerHTML = open.length
+    ? `<b>${open.length} רשומות · ${nf(sum)} ₪ ללא אימות</b>הבונוסים המושפעים מסומנים כזמניים, ומסך האישור הסופי חסום.`
+    : '<b>הכל אומת</b>החסימה הוסרה. המנכ"לית יכולה לאשר את המחזור.';
+  const badge = document.querySelector('.navitem[data-s="cfo-sign"] .bdg');
+  if (badge) { badge.textContent = open.length; badge.style.display = open.length ? '' : 'none'; }
+}
+const cfoResetBtn = $('cfoReset');
+if (cfoResetBtn) cfoResetBtn.onclick = () => { CFO.forEach(r => r.signed = false); cfoRender(); };
+cfoRender();
+
+/* drawComps רץ בסוף — הוא נשען על TEAM שמוגדר במסך המאגר */
+drawComps();
+</script>
+</body>
+</html>

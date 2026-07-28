@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הצעת מחיר — מנגנון תגמול ובונוסים | קבוצת גלנור × BizTechoff™</title>
+<style>
+:root{
+  --slate:#464950; --slate-2:#5F6268; --slate-3:#87898D; --line:#E3E4E6;
+  --copper:#BF733E; --copper-d:#8C4A22; --copper-l:#C6874F;
+  --bg:#FFFFFF; --soft:#FAF9F8; --soft-2:#F4F2F0;
+  --ok:#2F6F44;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEDEE;color:var(--slate);
+  font-family:"Segoe UI","Assistant","Rubik",Arial,sans-serif;font-size:16px;line-height:1.75;}
+.page{max-width:900px;margin:0 auto;background:var(--bg);
+  box-shadow:0 2px 24px rgba(0,0,0,.08);}
+.pad{padding:0 56px}
+header{padding:34px 56px 26px;border-bottom:3px solid var(--copper);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+header img{height:62px;width:auto}
+.vendor{text-align:left;font-size:13px;color:var(--slate-3);line-height:1.6}
+.vendor b{display:block;font-size:17px;color:var(--slate);letter-spacing:.4px}
+.meta{background:var(--soft-2);padding:14px 56px;display:flex;gap:28px;flex-wrap:wrap;
+  font-size:14px;color:var(--slate-2);border-bottom:1px solid var(--line)}
+.meta b{color:var(--slate)}
+h1{font-size:31px;margin:34px 0 6px;line-height:1.3;letter-spacing:-.3px}
+.sub{font-size:17px;color:var(--slate-2);margin:0 0 4px}
+.tagline{margin:26px 0 0;padding:20px 24px;background:var(--soft);
+  border-right:4px solid var(--copper);font-size:17px;line-height:1.8}
+.tagline .q{color:var(--copper-d);font-weight:700}
+h2{font-size:13px;letter-spacing:2.4px;color:var(--copper-d);margin:44px 0 14px;
+  text-transform:none;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:26px 0 8px}
+p{margin:0 0 14px}
+ul{margin:0 0 14px;padding-inline-start:22px}
+li{margin-bottom:7px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{background:var(--soft);padding:20px 22px;border:1px solid var(--line)}
+.card h4{margin:0 0 8px;font-size:16px;color:var(--slate)}
+.card p{font-size:15px;color:var(--slate-2);margin:0}
+.exist{border:1px solid var(--copper-l);background:#FCF7F2;padding:22px 24px;margin:16px 0}
+.exist h3{margin-top:0;color:var(--copper-d)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:#fff;border:1px solid var(--copper-l);color:var(--copper-d);
+  font-size:13px;padding:5px 11px;border-radius:2px;white-space:nowrap}
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:15px}
+th{background:var(--slate);color:#fff;text-align:right;padding:11px 14px;font-weight:600;font-size:14px}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--soft)}
+td.num,th.num{text-align:left;direction:ltr;white-space:nowrap;font-variant-numeric:tabular-nums}
+.wp{border:1px solid var(--line);margin:14px 0;display:flex;align-items:stretch}
+.wp .n{background:var(--slate);color:#fff;min-width:74px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:14px 8px;text-align:center}
+.wp .n b{font-size:24px;line-height:1}
+.wp .n span{font-size:11px;letter-spacing:1px;opacity:.75;margin-top:3px}
+.wp .body{padding:16px 20px;flex:1}
+.wp .body h4{margin:0 0 4px;font-size:17px}
+.wp .body .days{float:left;font-size:13px;color:var(--copper-d);font-weight:700}
+.wp .body ul{margin:8px 0 0;font-size:15px;color:var(--slate-2)}
+.timeline{border-inline-start:2px solid var(--copper-l);margin:18px 0 18px 0;padding-inline-start:22px}
+.tl{margin-bottom:16px;position:relative}
+.tl::before{content:"";position:absolute;inline-size:9px;block-size:9px;background:var(--copper);
+  border-radius:50%;inset-inline-start:-27px;inset-block-start:9px}
+.tl b{display:block;font-size:15px}
+.tl span{font-size:14px;color:var(--slate-2)}
+.price{background:var(--slate);color:#fff;padding:28px 56px;margin-top:34px}
+.price h2{color:var(--copper-l);border-color:rgba(255,255,255,.18);margin-top:0}
+.price table th{background:rgba(255,255,255,.09)}
+.price table td{border-bottom:1px solid rgba(255,255,255,.13);color:#EDEDEE}
+.price table tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+.total{display:flex;justify-content:space-between;align-items:baseline;
+  border-top:2px solid var(--copper);margin-top:14px;padding-top:16px}
+.total .lbl{font-size:16px}
+.total .amt{font-size:36px;font-weight:700;letter-spacing:-1px;color:#fff}
+.total .amt small{font-size:14px;font-weight:400;opacity:.7;margin-inline-start:8px}
+.total .was{font-size:23px;font-weight:400;opacity:.5;letter-spacing:0;text-decoration:line-through}
+.total .gap{display:inline-block;width:26px}
+.total .disc{font-size:13px;color:var(--copper-l);margin-top:2px}
+.strike{opacity:.55;text-decoration:line-through}
+.note{font-size:14px;color:var(--slate-2);background:var(--soft);padding:14px 18px;
+  border-right:3px solid var(--slate-3);margin:14px 0}
+.sign{border:1px solid var(--line);padding:24px;margin:22px 0 0}
+.boxes{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 22px;font-size:15px}
+.boxes span{border:1px solid var(--line);padding:8px 14px}
+.lines{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:26px;font-size:15px}
+.lines div{border-bottom:1px solid var(--slate-3);padding-bottom:6px}
+footer{padding:22px 56px 34px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--slate-3);text-align:center;margin-top:34px}
+.legal{font-size:13px;color:var(--slate-3);line-height:1.7;margin-top:18px}
+@media print{
+  body{background:#fff} .page{box-shadow:none;max-width:none}
+  h2{page-break-after:avoid} .wp,.card,table{page-break-inside:avoid}
+  .price{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:680px){
+  .pad,header,.meta,.price,footer{padding-left:22px;padding-right:22px}
+  .grid2,.lines{grid-template-columns:1fr} h1{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <a href="https://www.galnor.co.il/" target="_blank" rel="noopener" title="לאתר קבוצת גלנור" style="display:inline-flex"><img src="../image/logo.png" alt="קבוצת גלנור"
+       onerror="this.onerror=null;this.src='/image/logo.png'"></a>
+  <div class="vendor">
+    <b><i>Biz</i>Techoff™&lrm;</b>
+    מוטי דרוקמן · הוד השרון<br>
+    moti@biztechoff.co.il
+  </div>
+</header>
+
+<div class="meta">
+  <div>הצעת מחיר <b>2026‑072</b></div>
+  <div>תאריך: <b>28 ביולי 2026</b></div>
+  <div>בתוקף עד: <b>27 באוגוסט 2026</b></div>
+  <div>לידי: <b>רותם רוזנצוייג — מנהלת רכש ומשאבי אנוש, קבוצת גלנור</b></div>
+</div>
+
+<div class="pad">
+  <h1>מנגנון תגמול ובונוסים — מתודולוגיה ומערכת</h1>
+  <p class="sub">פרמטרי מדידה לפי משפחת תפקידים · מנוע חישוב · סימולטור למנכ"לית · הטמעה וליווי המחזור הראשון</p>
+
+  <div class="tagline">
+    <span class="q">"הכל מתחיל באנשים"</span> — זו הכותרת של גלנור, וזו בדיוק הנקודה.
+    מנגנון תגמול הוא הדרך שבה משפט כזה מפסיק להיות סלוגן והופך לכלל שאפשר להראות לעובד על המסך.
+    ההצעה הזו נכתבה כדי לעשות בדיוק את זה — ולא כדי לספק עוד טבלה.
+  </div>
+
+  <h2>1 · הבנת הצורך</h2>
+  <p>
+    בשיחת האפיון תיארת מצב שבו מנגנון הבונוסים אינו מוסדר: <b>"מי שהיה דורש היה מקבל"</b>, ואילו העובדים
+    שאינם דורשים — בלשונך, "השקופים" — נשארים מאחור. ההחלטה של המנכ"לית היא לעבור למנגנון
+    <b>אחיד אך לא זהה</b>: אותם כללי משחק לכולם, פרמטרים שונים לכל משפחת תפקידים.
+    לרכש — חסכונות. להנהלת חשבונות — גבייה. למנהל העבודה — שעות מול תקציב ובטיחות.
+  </p>
+  <p>
+    אמרת גם מה <b>לא</b> נדרש: לא נוסחת אקסל, ולא מודול אחד לכולם. ואמרת מה כן —
+    <b>"אני צריכה שתיתן לי את המכלול"</b>: שיטה שמישהו עומד מאחוריה, מסביר אותה, ומאפשר להציג אותה
+    לעובדים בגובה העיניים. ההצעה הזו בנויה סביב המשפט הזה.
+  </p>
+
+  <h2>2 · נקודת הפתיחה — מה כבר קיים</h2>
+  <div class="exist">
+    <h3>המנוע כבר נכתב, רץ, ונבדק.</h3>
+    <p>
+      בעקבות שיחת האפיון נבנתה גרסת עבודה של המערכת — לא מצגת ולא אב־טיפוס מצויר, אלא קוד שרץ:
+      מנוע חישוב מלא, בונה תבניות, סימולטור What‑If וניהול עובדים, עם נתוני הדגמה של 60 עובדים.
+      המשמעות המסחרית פשוטה: אנחנו לא מתחילים מאפס, ולכן לוח הזמנים והמחיר שבהמשך ריאליים.
+      את מוזמנת לראות את המערכת פועלת עוד לפני החתימה.
+    </p>
+    <div class="chips">
+      <span class="chip">מנוע חישוב — 49 בדיקות יחידה עוברות</span>
+      <span class="chip">8 תבניות תגמול · 35 מדדים</span>
+      <span class="chip">סימולטור על 60 עובדים</span>
+      <span class="chip">שערים, מדרגות ותקרות</span>
+      <span class="chip">הרשאות לפי תפקיד</span>
+      <span class="chip">מסלול חישוב מלא לכל עובד</span>
+    </div>
+  </div>
+
+  <h2>3 · מה מייחד את ההצעה</h2>
+
+  <h3>א. ידע ספציפי לענף הבנייה — לא ייעוץ תגמול כללי</h3>
+  <p>
+    שלושה דברים שמשפיעים ישירות על תכנון המנגנון אצלכם, וכבר מופיעים באפיון שהוגש:
+    <b>(1)</b> הוראת השעה לחובת עוזרי הבטיחות פקעה ב‑28.5.2026, ותקנות הבטיחות בעבודה החדשות
+    נכנסות לתוקף באוקטובר 2026 עם התפקידים "בקר בטיחות" ו"מנהל אתר" — משפיע על מבנה כוח האדם
+    ועל הגדרת המדדים כבר במחזור הראשון.
+    <b>(2)</b> מדידת רווחיות בקבלנות מסגרת מול מוריה מחייבת הבחנה בין גידול בהיקף ההכנסה
+    (חריגים ותוספות) לבין רווח אמיתי, ונטרול שחיקת מדד תשומות הבנייה בחוזים שאינם צמודים.
+    <b>(3)</b> ניהול חריגים ותביעות הוא רכיב מדיד בפני עצמו, ולא רעש רקע.
+  </p>
+
+  <h3>ב. ההגנה המשפטית אכופה בקוד — לא הערה בנוהל</h3>
+  <p>
+    שתי חשיפות מהותיות זוהו וקיבלו פתרון מובנה. <b>הראשונה:</b> דרישת נוכחות מלאה כתנאי לבונוס.
+    שלילת תגמול בגין ימי מילואים חושפת את החברה לפי חוק שוויון ההזדמנויות בעבודה ותיקון 19
+    לחוק חיילים משוחררים, כולל היפוך נטל הראיה על המעסיק. המנגנון משיג את אותה תוצאה כלכלית
+    בדרך חוקית — הפרדה בין היעדרות בלתי מוצדקת לבין מקדם היקף העסקה. במערכת זה נאכף ברמת
+    מנוע החישוב, ואי אפשר לעקוף זאת דרך מסך הגדרות.
+    <b>השנייה:</b> בונוס שהופך בשקט ל"שכר קובע" ונכנס רטרואקטיבית לבסיס פיצויי הפיטורים
+    וההפרשות הפנסיוניות — עבור 60 עובדים לאורך שנים זו חשיפה מהותית. המבנה כולל תנאי סף
+    תאגידי אמיתי שמונע זאת.
+  </p>
+
+  <h3>ג. הנוסחה היא נתון — לא קוד</h3>
+  <p>
+    משקלים, מדרגות, תנאי סף, תקרות ופרמטרים מוגדרים כנתונים הניתנים לעריכה בממשק.
+    הוספת משפחת תפקידים, שינוי משקל או עדכון מדרגה — כולן פעולות משתמש, ללא פנייה אלינו
+    וללא עלות נוספת. זה ההבדל בין מסמך שמתיישן בשנה השנייה לבין מערכת שממשיכה לשרת את החברה.
+  </p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>מה שהעובד יראה</h4>
+      <p>את הפרמטרים שלו, את ההתקדמות שלו, וטווח משוער — לא את נוסחת ההקצאה ולא נתוני עמיתים.
+         זה מה שמחליף את "מי שצועק מקבל".</p>
+    </div>
+    <div class="card">
+      <h4>מה שהמנכ"לית תראה</h4>
+      <p>מסך אחד: עלות מול תקציב, התפלגות לפי משפחה ולפי חברה, וסימולטור שמריץ כל שינוי מדיניות
+         על כל 60 העובדים לפני שהוכרז דבר.</p>
+    </div>
+  </div>
+
+  <h2>4 · חבילות העבודה — 30 ימי עבודה</h2>
+  <p>
+    ההערכה שלהלן היא <b>30 ימי עבודה</b> מהתכנון ועד העלייה לאוויר, בחלוקה לארבע חבילות.
+    החבילות רצות ברצף, וכל אחת מסתיימת בתוצר שאפשר להצביע עליו.
+  </p>
+
+  <div class="wp">
+    <div class="n"><b>1</b><span>חבילה</span></div>
+    <div class="body">
+      <div class="days">6 ימי עבודה</div>
+      <h4>מתודולוגיה, נתונים והכרעות מדיניות</h4>
+      <ul>
+        <li>אבחון מצב קיים: מבנה תפקידים, מבנה שכר ומקורות נתונים</li>
+        <li>ראיונות עם 4–5 בעלי תפקידים מהשטח ומהמטה</li>
+        <li>מטריצות פרמטרים לכל משפחת תפקידים, כולל משקלים, מדרגות, תנאי סף ותקרות</li>
+        <li>מודל תקציב ומנגנון התאמה פרו־רטה · פתרון לפרויקט רב־שנתי (מקדמה, החזקה, מאלוס)</li>
+        <li>סגירת 7 ההכרעות החוסמות מול ההנהלה — מסמך ההשפעה המצורף</li>
+        <li><b>תוצר:</b> נוהל בונוסים כתוב, מוכן לאישור ולהפצה</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wp">
+    <div class="n"><b>2</b><span>חבילה</span></div>
+    <div class="body">
+      <div class="days">8 ימי עבודה</div>
+      <h4>התאמת המנוע והתבניות לגלנור</h4>
+      <ul>
+        <li>הזנת מבנה החברות, העובדים, התפקידים והשיוך לפרויקטים</li>
+        <li>בניית התבניות בפועל — משקלים, מדרגות ושערים לפי המתודולוגיה שאושרה</li>
+        <li>ייבוא נתוני בסיס וכיול המודל על נתוני אמת</li>
+        <li>סימולטור What‑If למנכ"לית על כלל העובדים</li>
+        <li><b>תוצר:</b> סימולציה חיה מול ההנהלה — המשמעות הכספית לפני שהוכרז משהו לעובדים</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wp">
+    <div class="n"><b>3</b><span>חבילה</span></div>
+    <div class="body">
+      <div class="days">11 ימי עבודה</div>
+      <h4>אזורי העבודה ושרשרת האישורים</h4>
+      <ul>
+        <li>אזור עובד מותאם למובייל — לעבודה מהשטח</li>
+        <li>אזור מנהל: הצוות שלי, מאגר בשקלים, הערכת תפקוד ותהליך כיול</li>
+        <li>אזורי רכש, כספים ומשאבי אנוש · הפרדת תפקידים ומניעת ניגוד עניינים</li>
+        <li>שרשרת אישורים עד המנכ"לית, כולל סקירת דרג שני</li>
+        <li>מכתבי בונוס אישיים, התראות ויומן ביקורת</li>
+        <li><b>תוצר:</b> מערכת מלאה בסביבת ייצור, מאובטחת ומורשית</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wp">
+    <div class="n"><b>4</b><span>חבילה</span></div>
+    <div class="body">
+      <div class="days">5 ימי עבודה</div>
+      <h4>הטמעה, פיילוט ועלייה לאוויר</h4>
+      <ul>
+        <li>ערכת תקשורת למנהלים ולעובדים — איך מציגים את זה, ובאילו מילים</li>
+        <li>הדרכות: מנהלים, מטה, ועובדי שטח</li>
+        <li>פיילוט על 2 פרויקטים לפני הרחבה לכלל החברה</li>
+        <li>ליווי ישיבת הכיול הראשונה</li>
+        <li><b>תוצר:</b> המערכת באוויר, והמחזור הראשון פועל</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>5 · מהחתימה לאוויר</h2>
+  <p>
+    30 ימי עבודה, חמישה ימים בשבוע — כלומר <b>6 שבועות קלנדריים</b>,
+    בהנחת זמינות של איש קשר מרכזי מטעם החברה.
+  </p>
+  <div class="timeline">
+    <div class="tl"><b>שבוע 1 · חבילה 1</b><span>פגישת פתיחה, איסוף נתונים וראיונות שטח. שבע ההכרעות החוסמות מוגשות להנהלה.</span></div>
+    <div class="tl"><b>שבוע 2 · סיום חבילה 1</b><span>מטריצות הפרמטרים, מודל התקציב והנוהל הכתוב מוגשים לאישור. תחילת חבילה 2.</span></div>
+    <div class="tl"><b>שבוע 3 · חבילה 2</b><span>התאמת המנוע והתבניות, הזנת נתוני אמת, וסימולציה חיה מול המנכ"לית והסמנכ"לים.</span></div>
+    <div class="tl"><b>שבועות 4–5 · חבילה 3</b><span>אזורי העבודה, שרשרת האישורים, הערכת התפקוד, הרשאות ובדיקות קבלה.</span></div>
+    <div class="tl"><b>שבוע 6 · חבילה 4</b><span>הדרכות, ערכת תקשורת, פתיחת הפיילוט על 2 פרויקטים — ועלייה לאוויר.</span></div>
+  </div>
+  </div>
+  <div class="note">
+    <b>הערה על תזמון:</b> אם היעד הוא שהמחזור של 2026 ימדד לפי המנגנון החדש, כדאי שהפרמטרים
+    יוכרזו לעובדים מוקדם ככל האפשר — מדידה למפרע מחלישה את התמריץ ומקשה על ההסבר לעובד.
+  </div>
+
+</div><!-- /pad -->
+
+<div class="price">
+  <h2>6 · תמורה</h2>
+  <table>
+    <tr><th>מרכיב</th><th class="num">ימי עבודה</th><th class="num">₪</th></tr>
+    <tr><td>חבילה 1 · מתודולוגיה, נתונים והכרעות מדיניות</td><td class="num">6</td><td class="num">15,000</td></tr>
+    <tr><td>חבילה 2 · התאמת המנוע והתבניות</td><td class="num">8</td><td class="num">20,000</td></tr>
+    <tr><td>חבילה 3 · אזורי העבודה ושרשרת האישורים</td><td class="num">11</td><td class="num">27,500</td></tr>
+    <tr><td>חבילה 4 · הטמעה, פיילוט ועלייה לאוויר</td><td class="num">5</td><td class="num">12,500</td></tr>
+    <tr><td><b>סה"כ</b></td><td class="num"><b>30</b></td><td class="num"><b class="strike">75,000</b></td></tr>
+    <tr><td>הטבת לקוח חדש — 20%</td><td class="num">—</td><td class="num">− 15,000</td></tr>
+  </table>
+  <div class="total">
+    <div>
+      <div class="lbl">סה"כ לתשלום — מהתכנון ועד העלייה לאוויר</div>
+      <div class="disc">לאחר הטבת לקוח חדש — 20%</div>
+    </div>
+    <div class="amt"><span class="was">75,000</span><span class="gap"></span><span class="now">60,000 ₪</span></div>
+  </div>
+</div>
+
+<div class="pad">
+  <h2>7 · תנאי תשלום</h2>
+  <table>
+    <tr><th>אבן דרך</th><th class="num">שיעור</th><th class="num">₪</th></tr>
+    <tr><td>במעמד החתימה</td><td class="num">50%</td><td class="num">30,000</td></tr>
+    <tr><td>במסירה — לפני תחילת הפיילוט</td><td class="num">50%</td><td class="num">30,000</td></tr>
+  </table>
+  <p style="font-size:15px;color:var(--slate-2)">
+    שוטף + 30. חשבוניות מס יופקו במועד כל אבן דרך.
+    לוחות הזמנים מותנים בזמינות אנשי הקשר מטעם החברה ובאספקת הנתונים במועד.
+  </p>
+
+  <h2>8 · הרחבות אופציונליות</h2>
+  <table>
+    <tr><th>הרחבה</th><th>תיאור</th><th class="num">₪</th></tr>
+    <tr>
+      <td>אינטגרציית Priority</td>
+      <td>שאיבה אוטומטית של תקציב מול ביצוע, חשבונות חלקיים, חריגים והזמנות רכש.
+          ההיקף כפוף לבדיקת הממשקים הזמינים בגרסה המותקנת.</td>
+      <td class="num">12,000</td>
+    </tr>
+    <tr>
+      <td>אינטגרציית מערכת נוכחות</td>
+      <td>שאיבת ימי עבודה והיעדרויות מסווגות לפי סוג. נדרש שהמערכת מבחינה בין מילואים,
+          מחלה, חופשה והיעדרות ללא אישור.</td>
+      <td class="num">6,000</td>
+    </tr>
+    <tr>
+      <td>ממשק העברה לשכר</td>
+      <td>הפקת קובץ תשלום מובנה למערכת השכר.</td>
+      <td class="num">4,000</td>
+    </tr>
+    <tr>
+      <td>בדיקה משפטית של הנוהל</td>
+      <td>בדיקת הנוהל הכתוב ע"י עו"ד דיני עבודה — מומלץ בחום לפני הפצה לעובדים.
+          מתומחר ישירות מול עורך הדין.</td>
+      <td class="num">לפי הצעה</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>אחריות ותמיכה.</b> המחיר כולל 3 חודשי אחריות לתיקון תקלות ממועד המסירה.
+    לאחר מכן — לאחסון, גיבויים, תמיכה שוטפת ועדכוני מדיניות — מוצע הסכם שירות שנתי
+    בעלות 1,400 ₪ לחודש. ההסכם אופציונלי ואינו תנאי להתקשרות.
+  </div>
+
+  <h2>9 · מה כלול ומה אינו כלול</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>כלול</h4>
+      <p>
+        אפיון, פיתוח ובדיקות · עיצוב ממשק מלא בעברית ו‑RTL · אחסון וסביבת בדיקות בתקופת
+        הפרויקט · עד 2 סבבי תיקונים לכל חבילה · הדרכה ותיעוד למשתמש · 3 חודשי אחריות.
+      </p>
+    </div>
+    <div class="card">
+      <h4>אינו כלול</h4>
+      <p>
+        רישוי צד ג' ככל שיידרש · ממשקים לצד שלישי — Priority, שעון נוכחות, יומן עבודה, גאנט ביצוע וכיו"ב (סעיף 8) · ייעוץ משפטי וביקורת
+        חשבונאית · הזנת נתונים היסטוריים מעבר לשנה אחת · שינויי היקף מהותיים לאחר אישור האפיון.
+      </p>
+    </div>
+  </div>
+
+  <h2>10 · הנחות יסוד</h2>
+  <ul>
+    <li>איש קשר מרכזי אחד מטעם החברה, בזמינות של עד 4 שעות שבועיות.</li>
+    <li>גישה לנתוני הבסיס: מבנה תפקידים, שכר, תקציבי פרויקטים ונתוני נוכחות.</li>
+    <li>שבע ההכרעות החוסמות — לרבות הגדרת "רווח החברה", מדיניות כלפי עובד שסיים העסקה,
+        וסיווג ההיעדרויות במערכת הנוכחות — יתקבלו על ידי ההנהלה בתוך לוחות הזמנים המוסכמים.
+        פירוט מלא של כל הכרעה והשפעתה על החישוב מצורף במסמך נפרד.</li>
+    <li>המערכת מיועדת לכ‑60 עובדים ולעד 12 חברות בקבוצה. הרחבה מהותית מעבר לכך תתומחר בנפרד.</li>
+  </ul>
+
+  <h2>11 · תוקף וקבלת ההצעה</h2>
+  <p>הצעה זו בתוקף 30 יום ממועד הוצאתה. אישור בחתימה להלן מהווה הזמנת עבודה מחייבת.</p>
+  <div class="boxes">
+    <span>☐ המסלול המלא — 60,000 ₪</span>
+    <span>☐ אינטגרציית Priority</span>
+    <span>☐ אינטגרציית נוכחות</span>
+    <span>☐ ממשק שכר</span>
+    <span>☐ הסכם שירות שנתי</span>
+  </div>
+  <div class="sign">
+    <div class="lines">
+      <div>שם וחתימה · קבוצת גלנור</div>
+      <div>תאריך</div>
+      <div>מוטי דרוקמן · <i>Biz</i>Techoff™&lrm;</div>
+      <div>28.07.2026</div>
+    </div>
+  </div>
+
+  <p class="legal">
+    המידע המשפטי בהצעה ובמסמכים הנלווים הוא סקירה מקצועית המבוססת על חקיקה ופסיקה גלויות,
+    ואינו מהווה ייעוץ משפטי. מומלץ שהנוהל הסופי ייבדק על ידי עורך דין דיני עבודה לפני פרסומו לעובדים.
+  </p>
+</div>
+
+<footer>
+  <i>Biz</i>Techoff™&lrm; · פלטפורמות מקצה לקצה, אוטומציות והתאמת עסקים לעידן הדיגיטלי<br>
+  moti@biztechoff.co.il · הוד השרון
+</footer>
+
+</div>
+</body>
+</html>

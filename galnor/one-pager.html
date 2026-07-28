@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מנגנון תגמול ובונוסים — דף אחד | קבוצת גלנור × BizTechoff™</title>
+<style>
+:root{
+  --slate:#464950; --slate-2:#5F6268; --slate-3:#87898D; --line:#E3E4E6;
+  --copper:#BF733E; --copper-d:#8C4A22; --copper-l:#C6874F;
+  --soft:#FAF9F8; --soft-2:#F4F2F0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEDEE;color:var(--slate);
+  font-family:"Segoe UI","Assistant","Rubik",Arial,sans-serif;font-size:14.5px;line-height:1.6}
+.page{max-width:860px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(0,0,0,.08);padding:0 0 22px}
+header{padding:22px 40px 16px;border-bottom:3px solid var(--copper);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+header img{height:52px}
+.vendor{text-align:left;font-size:12px;color:var(--slate-3);line-height:1.5}
+.vendor b{display:block;font-size:15px;color:var(--slate);letter-spacing:.4px}
+.pad{padding:0 40px}
+h1{font-size:24px;margin:20px 0 4px;letter-spacing:-.3px}
+.sub{font-size:14px;color:var(--slate-2);margin:0 0 14px}
+.hook{background:var(--soft);border-right:4px solid var(--copper);padding:12px 16px;
+  font-size:15px;margin:0 0 18px}
+.hook b{color:var(--copper-d)}
+h2{font-size:11.5px;letter-spacing:2px;color:var(--copper-d);font-weight:700;
+  border-bottom:1px solid var(--line);padding-bottom:6px;margin:20px 0 10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.card{background:var(--soft);border:1px solid var(--line);padding:13px 15px}
+.card h3{margin:0 0 5px;font-size:14.5px}
+.card p{margin:0;font-size:13.5px;color:var(--slate-2);line-height:1.55}
+.layers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);margin:8px 0}
+.layer{padding:12px 14px;border-inline-start:1px solid var(--line)}
+.layer:first-child{border-inline-start:none}
+.layer .t{font-size:11px;letter-spacing:1.4px;color:var(--copper-d);font-weight:700}
+.layer .n{font-size:15px;font-weight:600;margin:2px 0 3px}
+.layer .d{font-size:13px;color:var(--slate-2);line-height:1.5}
+ul{margin:6px 0 0;padding-inline-start:20px}
+li{margin-bottom:5px;font-size:13.8px;color:var(--slate-2)}
+li b{color:var(--slate)}
+.strip{display:flex;background:var(--slate);color:#fff;margin:18px 0 0}
+.strip div{flex:1;padding:14px 16px;border-inline-start:1px solid rgba(255,255,255,.14)}
+.strip div:first-child{border:none}
+.strip .k{font-size:11px;letter-spacing:1.4px;color:var(--copper-l)}
+.strip .v{font-size:22px;font-weight:700;line-height:1.2;margin-top:2px}
+.strip .s{font-size:12px;opacity:.75}
+.strip .was{font-size:14px;font-weight:400;opacity:.5;text-decoration:line-through}
+.strip .gap{display:inline-block;width:18px}
+.excl{font-size:12.5px;color:var(--slate-2);background:var(--soft);border-inline-start:3px solid var(--copper-l);
+  padding:9px 13px;margin-top:10px;line-height:1.55}
+.excl b{color:var(--slate)}
+.gates{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.gate{border:1px solid var(--copper-l);color:var(--copper-d);font-size:12.5px;padding:4px 10px;background:#FCF7F2}
+.next{border:1px solid var(--line);padding:12px 16px;margin-top:16px;font-size:13.8px;background:var(--soft-2)}
+footer{padding:14px 40px 0;font-size:11.5px;color:var(--slate-3);text-align:center}
+@media print{
+  body{background:#fff;font-size:11px;line-height:1.45} .page{box-shadow:none;max-width:none;padding-bottom:0}
+  @page{size:A4;margin:7mm}
+  header,.strip,.layer,.gate{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  header{padding:10px 24px 8px} header img{height:38px} .pad{padding:0 24px}
+  h1{font-size:17px;margin:9px 0 2px} .sub{font-size:11px;margin-bottom:7px}
+  h2{margin:11px 0 5px;padding-bottom:3px}
+  .hook{padding:7px 11px;font-size:11.5px;margin-bottom:9px}
+  .card{padding:8px 10px} .card p{font-size:10.5px;line-height:1.42}
+  .layer{padding:7px 9px} .layer .d{font-size:10.5px;line-height:1.4}
+  ul{margin-top:3px} li{margin-bottom:2px;font-size:10.8px}
+  .strip div{padding:9px 11px} .strip .v{font-size:16px} .strip .s{font-size:10px}
+  .strip .was{font-size:11px}
+  .excl{padding:6px 10px;font-size:10.5px;margin-top:7px}
+  .gates{gap:5px;margin-top:5px} .gate{font-size:10.5px;padding:3px 7px}
+  .next{padding:8px 11px;font-size:10.8px;margin-top:9px}
+  footer{padding-top:8px;font-size:9.5px}
+}
+@media (max-width:680px){
+  .two,.three,.layers,.strip{grid-template-columns:1fr;display:block}
+  .layer,.strip div{border-inline-start:none;border-top:1px solid var(--line)}
+  header,.pad,footer{padding-left:18px;padding-right:18px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <a href="https://www.galnor.co.il/" target="_blank" rel="noopener" title="לאתר קבוצת גלנור" style="display:inline-flex"><img src="../image/logo.png" alt="קבוצת גלנור"
+       onerror="this.onerror=null;this.src='/image/logo.png'"></a>
+  <div class="vendor"><b><i>Biz</i>Techoff™&lrm;</b>מוטי דרוקמן · moti@biztechoff.co.il</div>
+</header>
+
+<div class="pad">
+  <h1>מנגנון תגמול ובונוסים — קבוצת גלנור</h1>
+  <p class="sub">מתודולוגיה, פרמטרי מדידה לפי תפקיד, ומערכת שמריצה אותם · 28 ביולי 2026</p>
+
+  <div class="hook">
+    <b>"הכל מתחיל באנשים"</b> — המנגנון הזה הוא הדרך שבה המשפט הזה מפסיק להיות סלוגן
+    והופך לכלל שאפשר להראות לעובד על המסך.
+  </div>
+
+  <h2>הנקודה</h2>
+  <div class="two">
+    <div class="card">
+      <h3>מה קורה היום</h3>
+      <p>"מי שדרש קיבל". העובדים שאינם דורשים נשארים מאחור. אין קריטריונים כתובים,
+         אין עקביות בין שנים, ואי אפשר להסביר לעובד למה קיבל את מה שקיבל.</p>
+    </div>
+    <div class="card">
+      <h3>לאן עוברים</h3>
+      <p>מנגנון אחיד אך לא זהה: אותם כללי משחק לכולם, פרמטרים שונים לכל משפחת תפקידים.
+         לרכש חסכונות, להנהלת חשבונות גבייה, למנהל העבודה שעות מול תקציב ובטיחות.</p>
+    </div>
+  </div>
+
+  <h2>המבנה — שלוש שכבות</h2>
+  <div class="layers">
+    <div class="layer">
+      <div class="t">שכבה א'</div>
+      <div class="n">רכיב חברה</div>
+      <div class="d">רווח הקבוצה מול היעד השנתי. אותו מקדם לכולם — מה שהופך את הבונוס לשותפות אמיתית.</div>
+    </div>
+    <div class="layer">
+      <div class="t">שכבה ב'</div>
+      <div class="n">פרויקט / פונקציה</div>
+      <div class="d">3–5 מדדים שהתפקיד באמת שולט בהם. זה החלק שמבדיל בין מנהל עבודה לרכש.</div>
+    </div>
+    <div class="layer">
+      <div class="t">שכבה ג'</div>
+      <div class="n">הערכה אישית</div>
+      <div class="d">הערכת המנהל הישיר — מוגבלת ל‑20%–30% ומכוילת, כדי שלא תבלע את השאר.</div>
+    </div>
+  </div>
+
+  <h2>שלוש נקודות שכדאי להכיר לפני שמכריזים משהו לעובדים</h2>
+  <div class="three">
+    <div class="card">
+      <h3>נוכחות ומילואים</h3>
+      <p>התניית בונוס בנוכחות מלאה חושפת את החברה לפי חוק שוויון ההזדמנויות ותיקון 19,
+         עם היפוך נטל הראיה. המנגנון משיג את אותה תוצאה כלכלית בדרך חוקית — ואוכף אותה בקוד.</p>
+    </div>
+    <div class="card">
+      <h3>"שכר קובע"</h3>
+      <p>בונוס שמשולם קבוע וללא תנאי אמיתי עלול להיכלל רטרואקטיבית בבסיס פיצויי הפיטורים
+         והפנסיה. תנאי סף תאגידי אמיתי הוא מה שמונע את זה.</p>
+    </div>
+    <div class="card">
+      <h3>בטיחות</h3>
+      <p>מדד בטיחות מנוקד מייצר תת־דיווח. לכן מודדים מדדים מובילים — סיורים, סגירת ליקויים,
+         דיווחי "כמעט ונפגע" — ואירוע חמור מטופל כשער בינארי.</p>
+    </div>
+  </div>
+
+  <h2>מה כבר קיים — לא הבטחה, קוד שרץ</h2>
+  <ul>
+    <li><b>מנוע חישוב מלא</b> עם 49 בדיקות עוברות — אותו קוד רץ בסימולטור ובתשלום בפועל, ולכן אין פער בין מה שרואים למה שמשולם.</li>
+    <li><b>סימולטור What‑If</b> שמריץ כל שינוי מדיניות על כל 60 העובדים לפני שהוכרז דבר.</li>
+    <li><b>8 תבניות תגמול · 35 מדדים</b> — נערכים בממשק, לא בקוד. שינוי משקל הוא פעולת משתמש.</li>
+    <li><b>אזור עובד</b> שמראה פרמטרים והתקדמות — וטווח משוער בלבד, בלי לחשוף את נוסחת ההקצאה.</li>
+  </ul>
+
+  <div class="strip">
+    <div><div class="k">היקף</div><div class="v">30 ימי עבודה</div><div class="s">מהתכנון ועד העלייה לאוויר</div></div>
+    <div><div class="k">לוח זמנים</div><div class="v">6 שבועות</div><div class="s">כולל פיילוט על 2 פרויקטים</div></div>
+    <div><div class="k">תמורה</div><div class="v"><span class="was">75,000</span><span class="gap"></span><span class="now">60,000 ₪</span></div><div class="s">לאחר הטבת לקוח חדש 20%</div>
+      <div class="s" style="margin-top:3px">תנאי תשלום · 50% / 50%</div></div>
+  </div>
+  <div class="excl"><b>* אינו כולל ממשקים לצד שלישי</b> — Priority, שעון נוכחות, יומן עבודה,
+    גאנט ביצוע וכיו"ב.</div>
+
+  <h2>מה צריך להכריע כדי להתחיל — 7 החלטות</h2>
+  <div class="gates">
+    <span class="gate">הסכם קיבוצי — חל או לא</span>
+    <span class="gate">סיווג היעדרויות בתוכנת הנוכחות</span>
+    <span class="gate">הגדרת "רווח החברה"</span>
+    <span class="gate">מאגר אחד ל‑12 החברות או נפרד</span>
+    <span class="gate">עובד שסיים העסקה</span>
+    <span class="gate">מי מאשר את הרווח בפועל</span>
+    <span class="gate">בדיקת הנוהל ע"י עו"ד</span>
+  </div>
+  <div class="next">
+    <b>הצעד הבא:</b> מסמך נפרד מפרט את 37 ההחלטות — מה מוטמע היום ומה בדיוק ישתנה בחישוב בכל אפשרות.
+    שבע ההחלטות שלמעלה הן החוסמות, והן הנושא לפגישה עם המנכ"לית והסמנכ"לים.
+  </div>
+</div>
+
+<footer>
+  <i>Biz</i>Techoff™&lrm; · פלטפורמות מקצה לקצה, אוטומציות והתאמת עסקים לעידן הדיגיטלי · moti@biztechoff.co.il
+</footer>
+
+</div>
+</body>
+</html>
