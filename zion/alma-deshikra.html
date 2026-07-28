@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עלמא דשיקרא — שני מוחין, שני שעירים</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="מוחין דקטנות ומוחין דגדלות — שתי דעות שלובשות אותה תורה: לוי מגולח (דין) וכהן בעל זקן (רחמים), שני השעירים שנראים זהים. ולמה האמת נעדרת בעולם">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/alma-deshikra">
+<meta property="og:title" content="עלמא דשיקרא — שני מוחין, שני שעירים">
+<meta property="og:description" content="מוחין דקטנות ומוחין דגדלות — שתי דעות שלובשות אותה תורה: לוי מגולח (דין) וכהן בעל זקן (רחמים), שני השעירים שנראים זהים. ולמה האמת נעדרת בעולם">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="עלמא דשיקרא — שני מוחין, שני שעירים">
+<meta name="twitter:description" content="מוחין דקטנות ומוחין דגדלות — שתי דעות שלובשות אותה תורה: לוי מגולח (דין) וכהן בעל זקן (רחמים). ולמה האמת נעדרת">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 56px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(36px,6vw,56px); text-align:center; color:var(--ink); line-height:1.13; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .opening-quote{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:24px 30px; margin-bottom:38px; border-radius:3px; text-align:center;}
+  .opening-quote p{font-family:'David Libre',serif; font-size:19px; color:var(--ink); line-height:1.7; margin:0;}
+  .opening-quote-source{display:block; margin-top:10px; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic;}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:40px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* two mochin */
+  .mochin{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .mo{padding:24px 22px; border-radius:8px;}
+  .mo .lbl{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; margin-bottom:8px;}
+  .mo h4{font-size:20px; margin-bottom:8px;}
+  .mo .d{font-size:14.5px; line-height:1.6;}
+  .mo-katnut{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.28);}
+  .mo-katnut .lbl{color:var(--gold-deep);} .mo-katnut h4{color:var(--crimson);} .mo-katnut .d{color:var(--ink-soft);}
+  .mo-gadlut{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .mo-gadlut .lbl{color:var(--gold-light);} .mo-gadlut h4{color:var(--gold);} .mo-gadlut .d{color:rgba(245,236,217,0.82);}
+
+  /* comparison table */
+  .compare{margin:28px 0; border-radius:10px; overflow:hidden; border:1px solid rgba(184,138,44,0.30);}
+  .crow{display:grid; grid-template-columns:0.85fr 1fr 1fr;}
+  .crow>div{padding:13px 12px; text-align:center; font-size:14.5px; border-bottom:1px solid rgba(184,138,44,0.16);}
+  .crow>div:not(:last-child){border-left:1px solid rgba(184,138,44,0.16);}
+  .crow:last-child>div{border-bottom:none;}
+  .chead>div{font-family:'Bellefair',serif; font-size:13px; letter-spacing:1px; font-weight:700;}
+  .chead .lbl0{background:rgba(184,138,44,0.10); color:var(--gold-deep);}
+  .chead .c1{background:rgba(140,42,30,0.12); color:var(--crimson); font-size:17px;}
+  .chead .c2{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--gold); font-size:17px;}
+  .crow .lbl0{background:rgba(184,138,44,0.06); color:var(--gold-deep); font-family:'Bellefair',serif; font-size:12.5px; letter-spacing:1px; display:flex; align-items:center; justify-content:center;}
+  .crow .c1{color:var(--ink);}
+  .crow .c2{background:rgba(43,29,16,0.05); color:var(--ink); font-weight:600;}
+
+  /* two se'irim */
+  .seirim{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .seir{padding:22px 20px; border-radius:8px; text-align:center;}
+  .seir .icon{font-size:30px; margin-bottom:6px;}
+  .seir h4{font-size:18px; margin-bottom:4px;}
+  .seir .d{font-size:13.5px;}
+  .seir-hashem{background:linear-gradient(135deg, rgba(184,138,44,0.13), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32);}
+  .seir-hashem h4{color:var(--crimson);} .seir-hashem .d{color:var(--ink-soft);}
+  .seir-azazel{background:rgba(43,29,16,0.06); border:1px solid rgba(140,42,30,0.28);}
+  .seir-azazel h4{color:var(--crimson);} .seir-azazel .d{color:var(--ink-soft);}
+  .seirim-note{text-align:center; font-size:14px; color:var(--gold-deep); font-style:italic; margin-top:-6px;}
+
+  /* emet highlight */
+  .emet{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:10px; padding:28px 26px; margin:30px 0; text-align:center;}
+  .emet .big{font-family:'David Libre',serif; font-size:26px; font-weight:900; color:var(--gold); margin-bottom:12px;}
+  .emet p{font-size:16px; color:rgba(245,236,217,0.9); margin:0; line-height:1.75;}
+  .emet strong{color:var(--gold-light);}
+  .emet .src{display:block; margin-top:10px; font-size:12px; color:rgba(232,201,138,0.6); letter-spacing:2px;}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+
+  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+
+  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
+    .mochin{grid-template-columns:1fr;} .seirim{grid-template-columns:1fr;}
+    .crow{grid-template-columns:0.8fr 1fr 1fr; font-size:12.5px;}
+    .opening-quote p{font-size:17px;} p{font-size:17px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · דעת</div>
+    <h1>עָלְמָא דְּשִׁקְרָא</h1>
+    <p class="subtitle">שני מוחין, שני שעירים — ולמה האמת נעדרת מן העולם</p>
+
+    <div class="opening-quote">
+      <p>לַתּוֹרָה שְׁנֵי רְבָדִים: רֹבֶד תַּחְתּוֹן גַּשְׁמִי, וְרֹבֶד עֶלְיוֹן רוּחָנִי</p>
+      <span class="opening-quote-source">מוחין דקטנות · מוחין דגדלות</span>
+    </div>
+
+    <div class="mochin">
+      <div class="mo mo-katnut">
+        <div class="lbl">הרובד התחתון</div>
+        <h4>מוֹחִין דְּקַטְנוּת</h4>
+        <div class="d">בא מ<strong>רב לא כשר</strong> (רב של בבל · סטרא אחרא). חכמת אנוש הרואה טוב ורע — ומנסה להמליך את הטוב על הרע בכוח הזרוע והשכל, באלימות מילולית, כאילו אין דין ואין דיין.</div>
+      </div>
+      <div class="mo mo-gadlut">
+        <div class="lbl">הרובד העליון</div>
+        <h4>מוֹחִין דְּגַדְלוּת · דַּעַת</h4>
+        <div class="d">בא מ<strong style="color:var(--gold-light)">רב כשר למהדרין</strong> (רבי של ארץ ישראל) — בחינת <em style="color:var(--gold-light)">משה רבנו</em>. דעת עם השגחה עליונה, מעל הטבע.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        מאז חורבן בית שני פסקה הנבואה, ועם ישראל זוכה ל<strong>רובד הראשון בלבד</strong>.
+        ויש לציין: <strong>שני המוחין מכילים את אותה תורה</strong> — שניהם יודעים גמרא,
+        הלכה, משנה וקבלה. אלא שהראשונה ברובד הגשמי, <em>ללא השגחת ענני הכבוד</em>;
+        והשנייה ברובד הרוחני, עם <em>השגחה עליונה מעל הטבע</em>. הראשונה ב<strong>דין</strong>,
+        השנייה ב<strong>חסד</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">שְׁנֵי הַשְּׂעִירִים</h2>
+      <p>
+        ואלו הם שני ה<strong>שעירים</strong> ביום הכיפורים — אחד להשם ואחד לעזאזל —
+        ש<strong>נראים בדיוק אותו דבר</strong>, שניהם דומים לגמרי.
+      </p>
+    </div>
+
+    <div class="seirim">
+      <div class="seir seir-hashem"><div class="icon">🐐</div><h4>שָׂעִיר לַהּ׳</h4><div class="d">הדעת הפנימית · חסד</div></div>
+      <div class="seir seir-azazel"><div class="icon">🐐</div><h4>שָׂעִיר לַעֲזָאזֵל</h4><div class="d">החכמה החיצונית · דין</div></div>
+    </div>
+    <p class="seirim-note">— זהים למראה, והגורל לבדו מבחין ביניהם (יומא)</p>
+
+    <div class="section">
+      <h2 class="section-title">כֹּהֵן וְלֵוִי — נוֹשֵׂא הֲפָכִים</h2>
+      <p>
+        הדעת הראשונה נקראת <strong>לוי</strong>, והשנייה נקראת <strong>כהן</strong>.
+        לוי <em>אינו נושא הפכים</em>, וכהן <em>נושא הפכים</em> — ולכן כהן משרת בבית המקדש ולוי לא.
+      </p>
+    </div>
+
+    <div class="compare">
+      <div class="crow chead"><div class="lbl0">הבחינה</div><div class="c1">לֵוִי</div><div class="c2">כֹּהֵן</div></div>
+      <div class="crow"><div class="lbl0">הרובד</div><div class="c1">מוחין דקטנות</div><div class="c2">מוחין דגדלות · דעת</div></div>
+      <div class="crow"><div class="lbl0">המקור</div><div class="c1">רב לא כשר · בבל</div><div class="c2">רבי כשר · ארץ ישראל</div></div>
+      <div class="crow"><div class="lbl0">המידה</div><div class="c1">דין</div><div class="c2">חסד · רחמים</div></div>
+      <div class="crow"><div class="lbl0">הפנים</div><div class="c1">מגולח</div><div class="c2">בעל זקן</div></div>
+      <div class="crow"><div class="lbl0">הפכים</div><div class="c1">אינו נושא הפכים</div><div class="c2">נושא הפכים</div></div>
+      <div class="crow"><div class="lbl0">השירות</div><div class="c1">לא משרת במקדש</div><div class="c2">משרת בבית המקדש</div></div>
+    </div>
+
+    <div class="section">
+      <p>
+        הכהן בעל ה<strong>זקן</strong> — רמז ל<em>מידת הרחמים</em>; והלוי ה<strong>מגולח</strong> —
+        עניין <em>מידת הדין</em>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הָאֱמֶת נֶעְדֶּרֶת</h2>
+      <p>
+        במרוצת השנים <strong>אנשי האמת אבדו</strong>, ונשארנו רק עם החכמה החיצונית —
+        בלי התורה העליונה שמביאה ל<strong>תיקון המידות</strong>. ואף <em>גדולי הרבנים
+        וראשי הישיבות</em> שם (על פי רבי חיים ויטל בהקדמת עץ החיים) — ואינם יודעים.
+        ולכן הדעת של האמת כלל אינה ״משווקת״:
+      </p>
+      <div class="emet">
+        <div class="big">הָאֱמֶת נֶעְדֶּרֶת</div>
+        <p>
+          האמת, אצל אנשי החומר והגשם, <strong>אינה מתקבלת כלל</strong> — אדרבה, היא <strong>שנואה</strong> עליהם.
+          כי רוב המצטרפים <em>אין תוכם כברם</em>, וקשה לנטרל את הרצון העצמי בעולם
+          שכל כך קשה לשרוד בו באופן טבעי.
+        </p>
+        <span class="src">— ישעיהו נט · סוטה מט (בעקבתא דמשיחא)</span>
+      </div>
+      <p>
+        ולכן נשאר רק ה<strong>כתר של ה״נשמע״</strong> — חכמה, וחכמה, וחכמה —
+        וה<strong>מעשה לשם שמים נעלם</strong> מן העולם. ומשום כך הגאולה מתעכבת,
+        ואין מבינים למה.
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">לְהִתְנַהֵג בְּקוֹדִים שֶׁל עֶבֶד — לֹא שֶׁל מֶלֶךְ</p>
+      <p class="final-explanation">
+        העולם הזה אינו שלנו — הוא עולמו של מלך מלכי המלכים.<br>
+        באנו רק להמליך אותו על העולם ולשרת אותו.<br>
+        וכל עוד אנו חושבים כמלכים — כולנו תועים; וצריך אומץ רב להבין,
+        ולהתנהג כעבד.
+      </p>
+    </div>
+
+    <p class="note">
+      * דברי פנימיות. מקורות: יומא לט–מ (שני השעירים · הגורל) · ישעיהו נט, טו וסוטה מט ע"ב
+      (״האמת נעדרת״, בעקבתא דמשיחא) · רבי חיים ויטל, הקדמת עץ החיים · מוחין דקטנות ודגדלות,
+      כהן ולוי כבחינות דין וחסד — על דרך הקבלה. דברי הכנעה וביקורת על הדור בכללו — לא פסק על יחיד.
+      הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/stira-lepartzuf">סתירה לפרצוף</a>
+        <a class="related-link" href="/zion/hakod-haishi">הקוד האישי</a>
+        <a class="related-link" href="/zion/ben-yosef-ben-david">בן יוסף ובן דוד</a>
+        <a class="related-link" href="/zion/melech-neelav">מלך נעלב</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
