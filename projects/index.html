@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>תיק עבודות · BizTechoff - מוטי דרוקמן</title>
+<meta name="description" content="מערכות ופלטפורמות שנבנו ורצות אצל לקוחות - Node.js · Angular · Remult. ארכיטקטורה, פיתוח מקצה לקצה, ותחזוקה שוטפת.">
+<style>
+  :root{
+    --ink:#12181f; --ink-2:#3d4a58; --ink-3:#6b7885;
+    --line:#e3e8ee; --bg:#fbfcfd; --card:#ffffff;
+    --accent:#0f5c8f; --accent-soft:#eaf3f9; --live:#0a7d4f; --live-soft:#e7f5ee;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",Rubik,Arial,system-ui,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  header{background:var(--card);border-bottom:1px solid var(--line);padding:64px 0 52px}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.86rem;letter-spacing:.14em;margin-bottom:14px}
+  h1{font-size:2.45rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin-bottom:18px}
+  .lede{font-size:1.09rem;color:var(--ink-2);max-width:62ch}
+
+  .stats{display:flex;flex-wrap:wrap;gap:44px;margin-top:38px;padding-top:32px;border-top:1px solid var(--line)}
+  .stat-n{font-size:1.8rem;font-weight:700;color:var(--accent);line-height:1.2}
+  .stat-l{font-size:.85rem;color:var(--ink-3)}
+
+  main{padding:64px 0 40px}
+  .section-head{margin-bottom:34px}
+  h2{font-size:1.32rem;font-weight:700;margin-bottom:8px}
+  .section-head p{color:var(--ink-3);font-size:.95rem}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;
+    transition:box-shadow .18s ease, transform .18s ease;
+  }
+  .card:hover{box-shadow:0 6px 24px rgba(18,24,31,.07);transform:translateY(-2px)}
+  .tag{
+    display:inline-block;background:var(--accent-soft);color:var(--accent);
+    font-size:.74rem;font-weight:600;padding:4px 11px;border-radius:20px;margin-bottom:14px;align-self:flex-start;
+  }
+  .card h3{font-size:1.12rem;font-weight:700;margin-bottom:10px;letter-spacing:-.01em}
+  .card p{color:var(--ink-2);font-size:.94rem;flex-grow:1}
+  .meta{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .live{
+    display:inline-flex;align-items:center;gap:7px;background:var(--live-soft);color:var(--live);
+    font-size:.76rem;font-weight:600;padding:4px 11px;border-radius:20px;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--live);display:inline-block}
+  .link{color:var(--accent);text-decoration:none;font-size:.86rem;font-weight:600;direction:ltr}
+  .link:hover{text-decoration:underline}
+  .stack{font-size:.78rem;color:var(--ink-3);direction:ltr;text-align:left}
+
+  .band{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:60px;padding:52px 0}
+  .band h2{margin-bottom:14px}
+  .band p{color:var(--ink-2);max-width:66ch}
+  .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:32px}
+  .how h4{font-size:.98rem;margin-bottom:7px}
+  .how p{font-size:.92rem;color:var(--ink-3)}
+
+  footer{padding:44px 0 56px;color:var(--ink-3);font-size:.9rem}
+  footer a{color:var(--accent);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .fname{color:var(--ink);font-weight:600;font-size:1rem}
+
+  @media (max-width:640px){
+    header{padding:44px 0 36px}
+    h1{font-size:1.85rem}
+    .stats{gap:28px}
+    main{padding:44px 0 28px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">BIZTECHOFF · תיק עבודות</div>
+    <h1>מערכות שרצות בפרודקשן,<br>אצל לקוחות משלמים.</h1>
+    <p class="lede">
+      אני מוטי דרוקמן - ארכיטקט ומפתח פלטפורמות web. למעלה מעשרים שנה בתחום, כולל הובלת צוות פיתוח בפינטק.
+      מה שמופיע כאן אינו הדגמות ואינו אבות-טיפוס: אלה מערכות חיות, בשימוש יומיומי, שאני בניתי מקצה לקצה
+      ורובן עדיין בתחזוקה שוטפת אצלי.
+    </p>
+    <div class="stats">
+      <div><div class="stat-n">20+</div><div class="stat-l">שנות פיתוח</div></div>
+      <div><div class="stat-n">7</div><div class="stat-l">מערכות שנמסרו ללקוחות</div></div>
+      <div><div class="stat-n">5</div><div class="stat-l">שנים - הוותיקה שבהן</div></div>
+      <div><div class="stat-n">Node · Angular</div><div class="stat-l">הסטאק המרכזי</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>פרויקטים נבחרים</h2>
+      <p>מותגים ציבוריים מופיעים בשמם. לקוחות פרטיים מתוארים לפי תחום ותפקוד בלבד.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <span class="tag">משפטי · לוגיסטיקה</span>
+        <h3>Legal Taxi - פלטפורמת מסירות משפטיות</h3>
+        <p>
+          מערכת מקצה לקצה לניהול הזמנות מסירה, תצהירי מסירה, אגרות והליכי הוצאה לפועל.
+          כוללת הקמת הזמנה מלאה עם כל פרטי השירות, מעקב סטטוסים בזמן אמת, שליחת תשלום בלינק,
+          וטפסים ייעודיים המותאמים לדרישות הוצאה לפועל.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>באוויר</span>
+          <a class="link" href="https://app.legaltaxi.co.il" target="_blank" rel="noopener">app.legaltaxi.co.il</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">קהילה · נוער</span>
+        <h3>C-Teen - מערכת ניהול קהילת נוער</h3>
+        <p>
+          פלטפורמה לניהול פעילות של ארגון נוער: רישום חברים, אירועים ומפגשים, מעקב השתתפות
+          וניהול הצוות המלווה. נבנתה כמערכת רב-משתמשים עם הרשאות מדורגות.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>נמסר · בתחזוקה</span>
+          <span class="stack">Node · Angular · PostgreSQL</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">חינוך · ניהול מוסדי</span>
+        <h3>מערכת ניהול כולל</h3>
+        <p>
+          מערכת לניהול מוסד לימודי - רישום ונוכחות לומדים, מלגות ותשלומים, סדרי לימוד
+          ודוחות הנהלה. בנויה סביב לוח בקרה אחד שמרכז את התמונה התפעולית המלאה.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>נמסר · בתחזוקה</span>
+          <span class="stack">Node · Angular · PostgreSQL</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">מעבדות · תקינה</span>
+        <h3>פורטל ניהול כיולים - מעבדה מוסמכת ISO 17025</h3>
+        <p>
+          פורטל לניהול צי מכשירים ותעודות כיול, עם מנוע תוקפים שמתריע לפני שתעודה פגה,
+          מעקב מצב מכשיר במעבדה, והפקת תעודות. כולל אזור לקוח נפרד שבו כל לקוח רואה את
+          המכשירים שלו ואת מועדי החידוש. אינטגרציית API והרחבות מדידה בהמשך הדרך.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>באוויר · בתחזוקה</span>
+          <span class="stack">Node · Angular · REST API</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">מלכ״ר · גיוס משאבים</span>
+        <h3>פלטפורמת גיוס תרומות</h3>
+        <p>
+          מערכת קמפיינים לגיוס תרומות: ניהול קמפיינים, דשבורד תורמים, הוראות קבע,
+          הפקת קבלות מס אוטומטית ודיווח למנהלים. עמדה בעומס של אירוע גיוס גדול,
+          ופועלת ברציפות למעלה משנה.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>באוויר · בתחזוקה</span>
+          <span class="stack">Node · Angular</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">משפטי · פיננסי</span>
+        <h3>מודול שכר טרחה למשרד עורכי דין</h3>
+        <p>
+          כלי חישוב והכנה של טבלאות שכר טרחה, אגרות והוצאות עבור משרד עורכי דין.
+          שואב ערכים מתוכנת הניהול של המשרד ומייצר את קובץ העבודה המוכן, כולל טיפול
+          נכון בתאריכי העברה לטיפול משפטי ובתאריך תשלום אחרון - הנקודה שבה החישוב הידני נשבר.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>בשימוש</span>
+          <span class="stack">Automation · Excel Engine</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">התנדבות · קהילה</span>
+        <h3>אפליקציית ניהול מפגשי התנדבות</h3>
+        <p>
+          מערכת לשיבוץ וניהול מפגשי התנדבות - התאמה בין מתנדבים למפגשים, מעקב נוכחות
+          ודיווח. הלקוח הוותיק ביותר בתיק: המערכת רצה ברציפות מאז 2021 ומתוחזקת אצלי עד היום.
+        </p>
+        <div class="meta">
+          <span class="live"><span class="dot"></span>באוויר מאז 2021</span>
+          <span class="stack">Node · Angular</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>איך אני עובד</h2>
+      <p>
+        אני עובד לבד, ישירות מול הלקוח, ולוקח אחריות על כל השרשרת - מהאפיון ועד השרת בפרודקשן.
+        זה אומר שאין שכבת ניהול באמצע, ושאותו אדם שהבין את הבעיה הוא זה שכותב את הקוד.
+      </p>
+      <div class="how">
+        <div>
+          <h4>אפיון לפני שורת קוד</h4>
+          <p>קודם מבינים את התהליך העסקי כפי שהוא באמת עובד היום - ורק אז מחליטים מה המערכת צריכה לעשות.</p>
+        </div>
+        <div>
+          <h4>מודל נתונים שמחזיק שינוי</h4>
+          <p>כללים יושבים על הכלל, לא על הפריט. שינוי רגולציה או מדיניות צריך להיות שורה אחת, לא ארבעת אלפים.</p>
+        </div>
+        <div>
+          <h4>אחריות אחרי העלייה לאוויר</h4>
+          <p>רוב המערכות כאן עדיין בתחזוקה שוטפת אצלי, חלקן שנים. אני לא נעלם אחרי המסירה.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fname">מוטי דרוקמן · BizTechoff</div>
+    <div>ארכיטקטורה ופיתוח פלטפורמות · Node.js · Angular · Remult</div>
+    <div style="margin-top:10px">
+      <a href="https://biztechoff.co.il">biztechoff.co.il</a> ·
+      <a href="mailto:moti@biztechoff.co.il">moti@biztechoff.co.il</a> ·
+      <a href="tel:0526526063">052-652-6063</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
