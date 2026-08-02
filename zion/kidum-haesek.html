@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לקדם את העסק — ולא את העובד</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="המלצר שנעשה שותף בחצי שנה — כי חשב על טובת העסק ולא על טובת עצמו. וכך גם בעבודת השם: ״העוסק בתורה לשמה״ ולא ״הלומד״">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/kidum-haesek">
+<meta property="og:title" content="לקדם את העסק — ולא את העובד">
+<meta property="og:description" content="המלצר שנעשה שותף בחצי שנה — כי חשב על טובת העסק ולא על טובת עצמו. וכך גם בעבודת השם: ״העוסק בתורה לשמה״ ולא ״הלומד״">
+<meta property="og:image" content="https://biztechoff.co.il/zion/images/kidum-haesek.jpeg">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="לקדם את העסק — ולא את העובד">
+<meta name="twitter:description" content="המלצר שנעשה שותף בחצי שנה — כי חשב על טובת העסק ולא על טובת עצמו. וכך גם בעבודת השם">
+<meta name="twitter:image" content="https://biztechoff.co.il/zion/images/kidum-haesek.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 56px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .cover{margin:-30px -18px 34px; text-align:center;}
+  .cover img{max-width:100%; border-radius:8px; box-shadow:0 16px 44px -14px rgba(43,29,16,0.45); border:1px solid rgba(184,138,44,0.35);}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(36px,6vw,56px); text-align:center; color:var(--ink); line-height:1.13; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .opening-quote{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:24px 30px; margin-bottom:34px; border-radius:3px;}
+  .opening-quote p{font-family:'David Libre',serif; font-size:18.5px; color:var(--ink); line-height:1.75; margin:0;}
+  .opening-quote strong{color:var(--crimson);}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:38px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* story */
+  .story{background:linear-gradient(180deg, rgba(91,58,120,0.07), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.22); border-radius:10px; padding:26px 28px; margin:28px 0;}
+  .story .tag{display:inline-block; font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--royal); text-transform:uppercase; margin-bottom:14px; border-bottom:1px solid rgba(91,58,120,0.3); padding-bottom:4px;}
+  .story p{font-size:17px; margin-bottom:12px;} .story p:last-child{margin-bottom:0;}
+
+  /* worker behaviors */
+  .behaviors{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:22px 0;}
+  .bh{background:rgba(255,250,235,0.65); border:1px solid rgba(184,138,44,0.26); border-radius:8px; padding:15px 16px; font-size:14.5px; color:var(--ink-soft); line-height:1.55;}
+  .bh b{display:block; color:var(--crimson); font-size:15.5px; margin-bottom:3px;}
+
+  /* promotion ladder */
+  .ladder{margin:26px 0; border-radius:10px; overflow:hidden; border:1px solid rgba(184,138,44,0.30);}
+  .lr{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:12px; flex-wrap:wrap;}
+  .lr .n{font-size:18px; font-weight:900;}
+  .lr .t{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px;}
+  .l4{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment);}
+  .l4 .n{color:var(--gold);} .l4 .t{color:var(--gold-light);}
+  .l3{background:rgba(184,138,44,0.16);} .l2{background:rgba(184,138,44,0.10);} .l1{background:rgba(184,138,44,0.05);}
+  .l3 .n,.l2 .n,.l1 .n{color:var(--crimson);} .l3 .t,.l2 .t,.l1 .t{color:var(--gold-deep);}
+
+  .contrast{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:24px 0;}
+  .ct{padding:22px 20px; border-radius:8px; text-align:center;}
+  .ct .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:8px;}
+  .ct .big{font-size:26px; font-weight:900; margin-bottom:4px;}
+  .ct .d{font-size:14px; color:var(--ink-soft);}
+  .ct-old{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.24);}
+  .ct-old .big{color:var(--ink-soft);}
+  .ct-new{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);}
+  .ct-new .big{color:var(--crimson);}
+
+  /* nimshal */
+  .nimshal{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .nm{padding:24px 22px; border-radius:8px;}
+  .nm .lbl{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; margin-bottom:8px;}
+  .nm h4{font-size:19px; margin-bottom:8px;}
+  .nm .d{font-size:14.5px; line-height:1.65;}
+  .nm-self{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .nm-self .lbl{color:var(--gold-deep);} .nm-self h4{color:var(--crimson);} .nm-self .d{color:var(--ink-soft);}
+  .nm-esek{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .nm-esek .lbl{color:var(--gold-light);} .nm-esek h4{color:var(--gold);} .nm-esek .d{color:rgba(245,236,217,0.85);}
+
+  /* wordplay */
+  .word{background:linear-gradient(135deg, rgba(184,138,44,0.13), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32); border-radius:10px; padding:26px 24px; margin:28px 0; text-align:center;}
+  .word .pair{display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:12px;}
+  .word .w{font-family:'David Libre',serif; font-size:30px; font-weight:900; padding:8px 20px; border-radius:8px;}
+  .word .w1{color:var(--ink-soft); background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.2); text-decoration:line-through; text-decoration-color:rgba(140,42,30,0.55);}
+  .word .w2{color:var(--crimson); background:rgba(184,138,44,0.14); border:1px solid rgba(184,138,44,0.35);}
+  .word .arw{color:var(--gold); font-size:22px;}
+  .word .d{font-size:15.5px; color:var(--ink-soft); font-style:italic;}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+  .final-seal{margin-top:22px; padding-top:18px; border-top:1px solid rgba(184,138,44,0.35);}
+  .seal-quote{font-family:'David Libre',serif; font-size:20px; font-weight:700; color:var(--crimson); margin:0 0 6px; line-height:1.6;}
+  .seal-source{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px; color:var(--gold-deep);}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+
+  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+
+  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
+    .cover{margin:-14px -6px 26px;}
+    .behaviors{grid-template-columns:1fr;} .nimshal{grid-template-columns:1fr;} .contrast{grid-template-columns:1fr;}
+    .ladder .lr{flex-direction:column; text-align:center; gap:3px;}
+    .word .w{font-size:24px;} p{font-size:17px;} .story p{font-size:16px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="cover">
+      <img src="images/kidum-haesek.jpeg"
+           alt="הדרך לפעול בעולם — לקדם את העסק ולא את העובד"
+           onerror="this.closest('.cover').style.display='none'">
+    </div>
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">עסק ופרנסה · עבודת השם</div>
+    <h1>לְקַדֵּם אֶת הָעֵסֶק</h1>
+    <p class="subtitle">ולא לקדם את העובד — הדרך לפעול בעולם</p>
+
+    <div class="opening-quote">
+      <p>
+        כאשר אדם בא לעסק ומתעסק ב<strong>קידום האישי שלו</strong> ולא בקידום העסק —
+        הוא לא יתקדם לעולם. כי הבעל־בית רואה <strong>מי חושב עסק</strong>
+        ומי חושב <strong>אינטרס</strong>.
+      </p>
+    </div>
+
+    <div class="story">
+      <span class="tag">מעשה שהיה · חוף פולג, נתניה</span>
+      <p>
+        לפני שש שנים מסרתי שיעור במסעדת חוף ״במבו וילג׳״ בחוף פולג בנתניה, לבעלים.
+        ישבנו בחדר ולמדנו תורה כל יום שישי. ביקשתי ממנו לסגור ולנעול את החדר שלא יהיו
+        הפרעות, ולכבות את הטלפון.
+      </p>
+      <p>
+        מה שלא ידעתי — שכל החדר מלא <strong>טלוויזיות במעגל סגור</strong>, שדרכן הוא רואה
+        את העסק מן המשרד. ונמצא שכל השיעור הוא היה מסתכל על המסכים לראות מה קורה בחוץ.
+        וזה היה לא נעים.
+      </p>
+      <p>
+        אחרי כמה שיעורים אמרתי לעצמי: הכל בהשגחה פרטית — אולי <em>אני</em> אסתכל;
+        אולי <strong>אני</strong> באתי לשיעור, ולא הוא. התחלתי להסתכל על המצלמות —
+        וראיתי <strong>עובד חדש</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">מָה עָשָׂה הָעוֹבֵד הֶחָדָשׁ</h2>
+    </div>
+
+    <div class="behaviors">
+      <div class="bh"><b>בא לפני המשמרת</b>עוזר בכל מה שצריך, ורק בשעתו נכנס למשמרת — כשעה בלי לקבל שכר.</div>
+      <div class="bh"><b>נשאר אחרי המשמרת</b>יוצא בכרטיס העובד — וממשיך להישאר ולעזור.</div>
+      <div class="bh"><b>עוזר באזור שאינו שלו</b>אף שהטיפים שם שייכים למלצר אחר, לא לו.</div>
+      <div class="bh"><b>חשב על העסק</b>לא על טובת עצמו — וזה נראה במצלמות, יום אחר יום.</div>
+    </div>
+
+    <div class="section">
+      <p>
+        הבעל־בית ראה את זה — <strong>וקידם אותו</strong>:
+      </p>
+    </div>
+
+    <div class="ladder">
+      <div class="lr l4"><span class="n">שׁוּתָף שֶׁל הַבַּעַל־בַּיִת</span><span class="t">ולבסוף</span></div>
+      <div class="lr l3"><span class="n">מנהל המסעדה</span><span class="t">תוך חצי שנה</span></div>
+      <div class="lr l2"><span class="n">מנהל משמרת</span><span class="t">הקידום הראשון</span></div>
+      <div class="lr l1"><span class="n">מלצר חדש</span><span class="t">ההתחלה</span></div>
+    </div>
+
+    <div class="contrast">
+      <div class="ct ct-old"><div class="k">מלצרים ותיקים</div><div class="big">10 שנים</div><div class="d">ונשארו בשכר מינימום</div></div>
+      <div class="ct ct-new"><div class="k">העובד החדש</div><div class="big">חצי שנה</div><div class="d">ונעשה שותף</div></div>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">❖</span></div>
+
+    <div class="section">
+      <h2 class="section-title">הַנִּמְשָׁל</h2>
+      <p>
+        אותו דבר בדיוק עם הקדוש ברוך הוא. אם אתה חושב על <strong>טובת העסק שלו</strong> —
+        מה רצון השם — ומתעסק ברצונו, ממילא הוא <strong>מקדם אותך</strong> לאן שלעולם
+        לא היית מגיע בכוחות עצמך.
+      </p>
+    </div>
+
+    <div class="nimshal">
+      <div class="nm nm-self">
+        <div class="lbl">מי שחושב על עצמו</div>
+        <h4>הַקִּדּוּם שֶׁלִּי</h4>
+        <div class="d">הרצון שלי, החכמה שלי, המצוות שלי, המדרגות שלי — ואינו עוזר לעסק.</div>
+      </div>
+      <div class="nm nm-esek">
+        <div class="lbl">מי שחושב על העסק</div>
+        <h4>רְצוֹן הַשֵּׁם</h4>
+        <div class="d">עוסק בעסק של הבורא — וממילא מקודם למקום שלא היה מגיע אליו לבדו.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הָעוֹסֵק — וְלֹא הַלּוֹמֵד</h2>
+      <p>ולכן דקדקו חכמים בלשונם:</p>
+      <div class="pasuk">
+        כָּל הָעוֹסֵק בַּתּוֹרָה לִשְׁמָהּ — זוֹכֶה לִדְבָרִים הַרְבֵּה
+        <span class="pasuk-source">— אבות ו, א · רבי מאיר בעל הנס</span>
+      </div>
+    </div>
+
+    <div class="word">
+      <div class="pair">
+        <span class="w w1">הַלּוֹמֵד</span>
+        <span class="arw">⟸</span>
+        <span class="w w2">הָעוֹסֵק</span>
+      </div>
+      <div class="d">
+        לא נאמר ״הלומד תורה לשמה״ — אלא <strong>״העוסק״</strong>.
+        מי ש<em>עוסק</em> בעסק, לא מי שלומד עליו.
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">הַבַּעַל־בַּיִת רוֹאֶה מִי חוֹשֵׁב עֵסֶק — וּמִי חוֹשֵׁב אִינְטֶרֶס</p>
+      <p class="final-explanation">
+        המלצר לא ביקש קידום — הוא נתן לעסק.<br>
+        ובחצי שנה קיבל מה שאחרים לא קיבלו בעשר שנים.<br>
+        כך גם למעלה: תדאג לעסק שלו — והוא כבר ידאג לך.
+      </p>
+      <div class="final-seal">
+        <p class="seal-quote">״כָּל הָעוֹסֵק בַּתּוֹרָה לִשְׁמָהּ — זוֹכֶה לִדְבָרִים הַרְבֵּה״</p>
+        <span class="seal-source">— אבות ו, א</span>
+      </div>
+    </div>
+
+    <p class="note">
+      * דברי עבודת השם, מתוך מעשה שהיה. מקור: אבות ו, א (פרק קניין תורה) — ״כל העוסק בתורה
+      לשמה זוכה לדברים הרבה״, רבי מאיר. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · עסק ועבודת השם</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/hanochiyut">הנוחיות</a>
+        <a class="related-link" href="/zion/banu-latet">באנו לתת</a>
+        <a class="related-link" href="/zion/mah-retzon-hashem">מה רצון השם?</a>
+        <a class="related-link" href="/zion/hamishvaa-haamitit">המשוואה האמיתית</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
