@@ -211,6 +211,20 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 .hlpbox b{color:var(--navy)}
 .hlpbox .opt{margin-top:5px}
 .hlpbox .opt b{color:var(--navy2)}
+
+.gategrid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px}
+.gate{position:relative; display:flex; flex-direction:column; gap:2px; cursor:pointer;
+  border:1px solid var(--line); border-radius:9px; padding:9px 34px 9px 11px; background:#fff}
+.gate .gt{font-size:12.5px; font-weight:700; color:var(--ink)}
+.gate .gs{font-size:11px; line-height:1.45}
+.gate.g-full{border-inline-start:3px solid var(--red)}
+.gate.g-full .gs{color:var(--red)}
+.gate.g-part{border-inline-start:3px solid var(--amber)}
+.gate.g-part .gs{color:var(--amber)}
+.gate input[type=checkbox]{position:absolute; inset-inline-end:10px; inset-block-start:10px}
+.gate .hlp{position:absolute; inset-inline-end:10px; inset-block-end:9px}
+.kpirow .hlp{margin-inline-start:4px}
+@media (max-width:760px){.gategrid{grid-template-columns:1fr}}
 </style>
 <style>
 /* ── מיתוג קבוצת גלנור ─────────────────────────────────── */
@@ -235,12 +249,12 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
   <div class="roleswitch">
     <span class="lbl">מחובר כ־</span>
     <select id="roleSel">
-      <option value="ceo">רמה אורם — מנכ"לית</option>
-      <option value="mgr">אבי כהן — מנהל פרויקט</option>
-      <option value="emp">יוסי מזרחי — עוזר מנהל עבודה</option>
-      <option value="proc">רותם רוזנצוייג — רכש ומשאבי אנוש</option>
-      <option value="cfo">שרית שנסי — מנהלת כספים / חשב</option>
-      <option value="hr">רותם רוזנצוייג — מנהלת מחזור התגמול</option>
+      <option value="ceo">רמה אורם - מנכ"לית</option>
+      <option value="mgr">אבי כהן - מנהל פרויקט</option>
+      <option value="emp">יוסי מזרחי - עוזר מנהל עבודה</option>
+      <option value="proc">רותם רוזנצוייג - רכש ומשאבי אנוש</option>
+      <option value="cfo">שרית שנסי - מנהלת כספים / חשב</option>
+      <option value="hr">רותם רוזנצוייג - מנהלת מחזור התגמול</option>
     </select>
   </div>
   <div class="tb-icon">🔔<span class="dotb"></span></div>
@@ -265,25 +279,25 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 <!-- ============================================================ CEO DASHBOARD -->
 <section class="screen" data-s="ceo-dash">
   <div class="pgtitle">
-    <div><h1>לוח מחוונים — מחזור תגמול 2026</h1><div class="sub">קבוצת 12 חברות · 60 עובדים · עודכן היום 08:14 מ־Priority</div></div>
+    <div><h1>לוח מחוונים - מחזור תגמול 2026</h1><div class="sub">קבוצת 12 חברות · 60 עובדים · עודכן היום 08:14 מ־Priority</div></div>
     <div style="display:flex; gap:8px"><button class="btn ghost">ייצוא</button><button class="btn">פתיחת מחזור 2027</button></div>
   </div>
 
   <div class="stepshint">לחצו על שלב כדי לקפוץ למסך שמטפל בו</div>
   <div class="steps">
     <div class="step done" data-go="ceo:ceo-sim"     title="הגדרת התקציב נעשית בסימולטור What-If"><span class="n">✓</span> הגדרת תקציב</div>
-    <div class="step done" data-go="hr:hr-builder"   title="משקלים, מדרגות ושערים — נקבעים בבונה התבניות אצל מנהלת המחזור, לא בסימולטור"><span class="n">✓</span> הגדרת מדיניות</div>
-    <div class="step done" data-go="hr:hr-cycle"     title="מעקב אחר איסוף הנתונים — בקרת מחזור"><span class="n">✓</span> מדידה שוטפת</div>
-    <div class="step now"  data-go="mgr:mgr-eval"    title="הערכת תפקוד וכיול — אזור המנהל"><span class="n">4</span> הערכות וכיול</div>
-    <div class="step soon" title="סקירת דרג שני — מסך ייעודי, נבנה בחבילה 3"><span class="n">5</span> סקירת דרג שני</div>
+    <div class="step done" data-go="hr:hr-builder"   title="משקלים, מדרגות ושערים - נקבעים בבונה התבניות אצל מנהלת המחזור, לא בסימולטור"><span class="n">✓</span> הגדרת מדיניות</div>
+    <div class="step done" data-go="hr:hr-cycle"     title="מעקב אחר איסוף הנתונים - בקרת מחזור"><span class="n">✓</span> מדידה שוטפת</div>
+    <div class="step now"  data-go="mgr:mgr-eval"    title="הערכת תפקוד וכיול - אזור המנהל"><span class="n">4</span> הערכות וכיול</div>
+    <div class="step soon" title="סקירת דרג שני - מסך ייעודי, נבנה בחבילה 3"><span class="n">5</span> סקירת דרג שני</div>
     <div class="step" data-go="ceo:ceo-approve"      title="מסך האישור הסופי של המנכ"לית"><span class="n">6</span> אישור סופי</div>
-    <div class="step soon" title="העברת קובץ תשלום לשכר — נבנה בחבילה 3"><span class="n">7</span> תשלום</div>
+    <div class="step soon" title="העברת קובץ תשלום לשכר - נבנה בחבילה 3"><span class="n">7</span> תשלום</div>
   </div>
 
   <div class="g4">
     <div class="stat"><div class="k">רווח החברה מול יעד</div><div class="v">107%</div><div class="d up">▲ מעל היעד · מקדם חברה 1.07</div></div>
-    <div class="stat a"><div class="k">עלות בונוסים מחושבת</div><div class="v" id="dTotM">—</div><div class="d" style="color:var(--amber)" id="dTotD">—</div></div>
-    <div class="stat a"><div class="k">% מעלות השכר</div><div class="v" id="dPct">—</div><div class="d" style="color:var(--amber)">מעל תקרת ה־10%–12% המומלצת · מטופל במקדם ההתאמה</div></div>
+    <div class="stat a"><div class="k">עלות בונוסים מחושבת</div><div class="v" id="dTotM">-</div><div class="d" style="color:var(--amber)" id="dTotD">-</div></div>
+    <div class="stat a"><div class="k">% מעלות השכר</div><div class="v" id="dPct">-</div><div class="d" style="color:var(--amber)">מעל תקרת ה־10%–12% המומלצת · מטופל במקדם ההתאמה</div></div>
     <div class="stat r"><div class="k">ממתין לפעולה שלך</div><div class="v">23</div><div class="d dn">הערכות שטרם אושרו</div></div>
   </div>
 
@@ -305,10 +319,10 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
         <h3>ניצול תקציב</h3>
         <div class="csub">תקציב מאושר 2,100,000 ₪</div>
         <div class="gauge"><div class="f" style="width:100%"></div><div class="mark" style="inset-inline-start:92%"><span>תקציב</span></div></div>
-        <div class="miniline"><span>מחושב לפני התאמה</span><b id="dCalc">—</b></div>
-        <div class="miniline"><span>מקדם התאמה פרו־רטה</span><b style="color:var(--amber)" id="dFac">—</b></div>
+        <div class="miniline"><span>מחושב לפני התאמה</span><b id="dCalc">-</b></div>
+        <div class="miniline"><span>מקדם התאמה פרו־רטה</span><b style="color:var(--amber)" id="dFac">-</b></div>
         <div class="miniline" style="border:none"><span><b>לתשלום בפועל</b></span><b style="color:var(--navy)">2,100,000 ₪</b></div>
-        <div class="alert al-a mt" style="font-size:12px"><span>⚑</span><div><b>נדרשת החלטה</b><span id="dOver">—</span></div></div>
+        <div class="alert al-a mt" style="font-size:12px"><span>⚑</span><div><b>נדרשת החלטה</b><span id="dOver">-</span></div></div>
       </div>
       <div class="card mt">
         <h3>סך בונוסים לפי שנה</h3>
@@ -328,10 +342,10 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
     <h3>התראות מערכת</h3>
     <div class="csub">בקרות אוטומטיות שרצו על מחזור 2026</div>
     <div style="display:flex; flex-direction:column; gap:9px">
-      <div class="alert al-r"><span>⛔</span><div><b>שער בטיחות הופעל — פרויקט אולפנת בנות רמות</b>צו הפסקת עבודה 12.03.2026. רכיב הפרויקט אופס ל־6 עובדים. השפעה: −168,400 ₪.</div></div>
-      <div class="alert al-a"><span>⚑</span><div><b>אינפלציית דירוגים — שמעון לוי (מנהל עבודה ראשי)</b>78% מהצוות שלו דורגו 4–5, מול ממוצע חברה 31%. נדרש כיול לפני אישור.</div></div>
+      <div class="alert al-r"><span>⛔</span><div><b>שער בטיחות הופעל - פרויקט אולפנת בנות רמות</b>צו הפסקת עבודה 12.03.2026. רכיב הפרויקט אופס ל־6 עובדים. השפעה: −168,400 ₪.</div></div>
+      <div class="alert al-a"><span>⚑</span><div><b>אינפלציית דירוגים - שמעון לוי (מנהל עבודה ראשי)</b>78% מהצוות שלו דורגו 4–5, מול ממוצע חברה 31%. נדרש כיול לפני אישור.</div></div>
       <div class="alert al-b"><span>ℹ</span><div><b>4 חסכונות רכש ממתינים לחתימת חשב</b>סה"כ 214,000 ₪. ללא חתימת חשב הבונוסים המושפעים מסומנים כזמניים, והמחזור אינו ניתן לאישור.</div></div>
-      <div class="alert al-g"><span>✓</span><div><b>נתוני נוכחות נקלטו במלואם</b>60/60 עובדים · 3 עובדים עם ימי מילואים — נוטרלו אוטומטית מהחישוב.</div></div>
+      <div class="alert al-g"><span>✓</span><div><b>נתוני נוכחות נקלטו במלואם</b>60/60 עובדים · 3 עובדים עם ימי מילואים - נוטרלו אוטומטית מהחישוב.</div></div>
     </div>
   </div>
 </section>
@@ -346,7 +360,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
   <div class="g2">
     <div class="card">
       <h3>הגדרת תקציב המחזור</h3>
-      <div class="csub">כאן ההנהלה קובעת כמה יש לחלק — לפני שנוגעים בפרמטרים</div>
+      <div class="csub">כאן ההנהלה קובעת כמה יש לחלק - לפני שנוגעים בפרמטרים</div>
 
       <div class="sl"><div class="t">מודל מימון<small>קבוע = סכום שההנהלה מכריזה · היברידי = נגזר מהרווח</small></div>
         <select id="bmode" style="font:inherit; padding:5px 8px; border:1px solid var(--line2); border-radius:7px">
@@ -361,26 +375,26 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
         <input type="number" id="bActual" value="14.98" step="0.1" style="width:88px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
 
       <div id="hybridRows" style="display:none">
-        <div class="sl"><div class="t">רצפה — % מעלות השכר</div>
+        <div class="sl"><div class="t">רצפה - % מעלות השכר</div>
           <input type="number" id="bFloor" value="11" step="0.5" style="width:70px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
-        <div class="sl"><div class="t">השתתפות — % מהרווח שמעל היעד</div>
+        <div class="sl"><div class="t">השתתפות - % מהרווח שמעל היעד</div>
           <input type="number" id="bShare" value="20" step="1" style="width:70px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
-        <div class="sl"><div class="t">תקרה — % מעלות השכר</div>
+        <div class="sl"><div class="t">תקרה - % מעלות השכר</div>
           <input type="number" id="bCap" value="15" step="0.5" style="width:70px; font:inherit; text-align:left; padding:4px 7px; border:1px solid var(--line2); border-radius:7px"></div>
       </div>
 
-      <div class="alert al-b mt" style="font-size:12px"><span>₪</span><div><b id="bResult">—</b><span id="bExplain"></span></div></div>
+      <div class="alert al-b mt" style="font-size:12px"><span>₪</span><div><b id="bResult">-</b><span id="bExplain"></span></div></div>
       <button class="btn" style="width:100%; margin-top:8px">נעילת תקציב המחזור</button>
     </div>
 
     <div class="card mt">
       <h3>פרמטרים לתרחיש</h3>
-      <div class="csub">גררו כדי לראות השפעה מיידית. שינוי כאן <b>אינו משנה את המדיניות</b> — הוא רק מריץ תרחיש.</div>
-      <div class="sl"><div class="t">משכורות יעד — מנהל פרויקט</div><input type="range" id="w1" min="1" max="4" step="0.25" value="2.5"><div class="v" id="v1">2.5</div></div>
-      <div class="sl"><div class="t">משכורות יעד — הנהלה בכירה</div><input type="range" id="w2" min="2" max="6" step="0.25" value="3.25"><div class="v" id="v2">3.5</div></div>
-      <div class="sl"><div class="t">משכורות יעד — שטח<small>מנהלי עבודה, מהנדסים, עוזרים</small></div><input type="range" id="w3" min="0.5" max="3" step="0.05" value="1.4"><div class="v" id="v3">1.4</div></div>
-      <div class="sl"><div class="t">משכורות יעד — מטה<small>רכש, כספים, מש"א</small></div><input type="range" id="w4" min="0.5" max="3" step="0.05" value="1.55"><div class="v" id="v4">1.55</div></div>
-      <div class="sl"><div class="t">סף כניסה — רווח החברה<small>מתחת לסף: אפס לכולם</small></div><input type="range" id="w5" min="70" max="100" step="1" value="85"><div class="v" id="v5">85%</div></div>
+      <div class="csub">גררו כדי לראות השפעה מיידית. שינוי כאן <b>אינו משנה את המדיניות</b> - הוא רק מריץ תרחיש.</div>
+      <div class="sl"><div class="t">משכורות יעד - מנהל פרויקט</div><input type="range" id="w1" min="1" max="4" step="0.25" value="2.5"><div class="v" id="v1">2.5</div></div>
+      <div class="sl"><div class="t">משכורות יעד - הנהלה בכירה</div><input type="range" id="w2" min="2" max="6" step="0.25" value="3.25"><div class="v" id="v2">3.5</div></div>
+      <div class="sl"><div class="t">משכורות יעד - שטח<small>מנהלי עבודה, מהנדסים, עוזרים</small></div><input type="range" id="w3" min="0.5" max="3" step="0.05" value="1.4"><div class="v" id="v3">1.4</div></div>
+      <div class="sl"><div class="t">משכורות יעד - מטה<small>רכש, כספים, מש"א</small></div><input type="range" id="w4" min="0.5" max="3" step="0.05" value="1.55"><div class="v" id="v4">1.55</div></div>
+      <div class="sl"><div class="t">סף כניסה - רווח החברה<small>מתחת לסף: אפס לכולם</small></div><input type="range" id="w5" min="70" max="100" step="1" value="85"><div class="v" id="v5">85%</div></div>
       <div class="sl"><div class="t">תקרת מקדם ביצוע</div><input type="range" id="w6" min="1" max="2" step="0.05" value="1.5"><div class="v" id="v6">1.50</div></div>
       
     </div>
@@ -395,7 +409,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
           <div style="background:rgba(255,255,255,.08); padding:10px; border-radius:9px"><div style="font-size:10.5px; color:#93c5e8">בונוס ממוצע</div><div style="font-size:19px; font-weight:900" id="simAvg">35.0K</div></div>
           <div style="background:rgba(255,255,255,.08); padding:10px; border-radius:9px"><div style="font-size:10.5px; color:#93c5e8">זכאים</div><div style="font-size:19px; font-weight:900" id="simElig">60</div></div>
         </div>
-        <div style="font-size:11.5px; color:#93c5e8; margin-top:10px; line-height:1.6">תקרת המאגר המומלצת באפיון היא 10%–12% מעלות השכר. תרחיש שחורג ממנה אינו נחסם — הוא מטופל דרך מקדם ההתאמה הפרו־רטה, שמוכרז מראש וחל על כולם באופן אחיד.</div>
+        <div style="font-size:11.5px; color:#93c5e8; margin-top:10px; line-height:1.6">תקרת המאגר המומלצת באפיון היא 10%–12% מעלות השכר. תרחיש שחורג ממנה אינו נחסם - הוא מטופל דרך מקדם ההתאמה הפרו־רטה, שמוכרז מראש וחל על כולם באופן אחיד.</div>
       </div>
 
       <div class="card mt">
@@ -414,11 +428,11 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 <!-- ============================================================ CEO APPROVE -->
 <section class="screen" data-s="ceo-approve">
   <div class="pgtitle">
-    <div><h1>אישור סופי — מחזור 2026</h1><div class="sub">23 מתוך 60 ממתינים לאישורך · כל התאמה ידנית מחייבת נימוק ונרשמת ביומן</div></div>
+    <div><h1>אישור סופי - מחזור 2026</h1><div class="sub">23 מתוך 60 ממתינים לאישורך · כל התאמה ידנית מחייבת נימוק ונרשמת ביומן</div></div>
     <div style="display:flex; gap:8px"><button class="btn ghost">החזרה לכיול</button><button class="btn green">אישור וחתימה על 23 הרשומות</button></div>
   </div>
 
-  <div class="alert al-a" style="margin-bottom:14px"><span>⚑</span><div><b>לפני האישור — 2 חריגות פתוחות</b>שמעון לוי: 78% מהצוות שלו דורג 4–5 (ממוצע חברה 31%). · אולפנת רמות: שער בטיחות הופעל, 6 עובדים.</div></div>
+  <div class="alert al-a" style="margin-bottom:14px"><span>⚑</span><div><b>לפני האישור - 2 חריגות פתוחות</b>שמעון לוי: 78% מהצוות שלו דורג 4–5 (ממוצע חברה 31%). · אולפנת רמות: שער בטיחות הופעל, 6 עובדים.</div></div>
 
   <div class="tbl-wrap">
   <table>
@@ -428,34 +442,34 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
     </tr></thead>
     <tbody>
       <tr><td><div class="who"><div class="av" style="background:#0369a1">א</div><div><div class="nm">אבי כהן</div><div class="rl">בי"ס גבעת שאול · קרית משה</div></div></div></td>
-        <td>מנהל פרויקט</td><td class="n">1.07</td><td class="n">1.11</td><td class="n">1.15</td><td class="n"><b>1.115</b></td><td class="n">83,625</td><td class="n">—</td><td class="n"><b>78,357</b></td><td><span class="chip c-wait">ממתין לך</span></td></tr>
+        <td>מנהל פרויקט</td><td class="n">1.07</td><td class="n">1.11</td><td class="n">1.15</td><td class="n"><b>1.115</b></td><td class="n">83,625</td><td class="n">-</td><td class="n"><b>78,357</b></td><td><span class="chip c-wait">ממתין לך</span></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#047857">ד</div><div><div class="nm">דוד אזולאי</div><div class="rl">מהנדס ביצוע</div></div></div></td>
-        <td>מהנדס ביצוע</td><td class="n">1.07</td><td class="n">1.04</td><td class="n">1.00</td><td class="n"><b>1.033</b></td><td class="n">34,089</td><td class="n">—</td><td class="n"><b>31,941</b></td><td><span class="chip c-wait">ממתין לך</span></td></tr>
+        <td>מהנדס ביצוע</td><td class="n">1.07</td><td class="n">1.04</td><td class="n">1.00</td><td class="n"><b>1.033</b></td><td class="n">34,089</td><td class="n">-</td><td class="n"><b>31,941</b></td><td><span class="chip c-wait">ממתין לך</span></td></tr>
       <tr style="background:#fffbeb"><td><div class="who"><div class="av" style="background:#b45309">ש</div><div><div class="nm">שמעון לוי</div><div class="rl">מנהל עבודה ראשי</div></div></div></td>
         <td>מנהל עבודה</td><td class="n">1.07</td><td class="n">1.09</td><td class="n">1.35</td><td class="n"><b>1.166</b></td><td class="n">34,980</td><td class="n" style="color:var(--red); font-weight:800">−4,200</td><td class="n"><b>28,576</b></td><td><span class="chip c-no">כיול נדרש</span></td></tr>
       <tr style="background:#fef2f2"><td><div class="who"><div class="av" style="background:#b91c1c">נ</div><div><div class="nm">נתן שטרן</div><div class="rl">אולפנת בנות רמות</div></div></div></td>
-        <td>מנהל עבודה</td><td class="n">1.07</td><td class="n" style="color:var(--red); font-weight:800">0.00</td><td class="n">1.00</td><td class="n"><b>0.407</b></td><td class="n">12,210</td><td class="n">—</td><td class="n"><b>11,441</b></td><td><span class="chip c-no">⛔ שער בטיחות</span></td></tr>
+        <td>מנהל עבודה</td><td class="n">1.07</td><td class="n" style="color:var(--red); font-weight:800">0.00</td><td class="n">1.00</td><td class="n"><b>0.407</b></td><td class="n">12,210</td><td class="n">-</td><td class="n"><b>11,441</b></td><td><span class="chip c-no">⛔ שער בטיחות</span></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#10b981">י</div><div><div class="nm">יוסי מזרחי</div><div class="rl">עוזר מנהל עבודה</div></div></div></td>
-        <td>עוזר מנהל עבודה</td><td class="n">1.07</td><td class="n">1.12</td><td class="n" style="color:var(--muted)">—</td><td class="n"><b>1.079</b></td><td class="n">11,925</td><td class="n">—</td><td class="n" style="color:var(--muted)">—</td><td><span class="chip c-wait">⏳ הערכה חסרה — חסום</span></td></tr>
+        <td>עוזר מנהל עבודה</td><td class="n">1.07</td><td class="n">1.12</td><td class="n" style="color:var(--muted)">-</td><td class="n"><b>1.079</b></td><td class="n">11,925</td><td class="n">-</td><td class="n" style="color:var(--muted)">-</td><td><span class="chip c-wait">⏳ הערכה חסרה - חסום</span></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#6d28d9">ר</div><div><div class="nm">רותם רוזנצוייג</div><div class="rl">רכש ומשאבי אנוש</div></div></div></td>
-        <td>רכש</td><td class="n">1.07</td><td class="n">1.19</td><td class="n">1.15</td><td class="n"><b>1.150</b></td><td class="n">41,400</td><td class="n">—</td><td class="n"><b>38,792</b></td><td><span class="chip c-pur">🔒 נעול — ניגוד עניינים</span></td></tr>
+        <td>רכש</td><td class="n">1.07</td><td class="n">1.19</td><td class="n">1.15</td><td class="n"><b>1.150</b></td><td class="n">41,400</td><td class="n">-</td><td class="n"><b>38,792</b></td><td><span class="chip c-pur">🔒 נעול - ניגוד עניינים</span></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#0284c7">מ</div><div><div class="nm">מיכל ברקוביץ'</div><div class="rl">הנהלת חשבונות · גבייה</div></div></div></td>
-        <td>כספים והנה"ח</td><td class="n">1.07</td><td class="n">1.22</td><td class="n">1.15</td><td class="n"><b>1.160</b></td><td class="n">29,580</td><td class="n">—</td><td class="n"><b>27,717</b></td><td><span class="chip c-ok">אושר</span></td></tr>
+        <td>כספים והנה"ח</td><td class="n">1.07</td><td class="n">1.22</td><td class="n">1.15</td><td class="n"><b>1.160</b></td><td class="n">29,580</td><td class="n">-</td><td class="n"><b>27,717</b></td><td><span class="chip c-ok">אושר</span></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#64748b">ח</div><div><div class="nm">חיים פרידמן</div><div class="rl">עוזר מנהל עבודה · אלעד</div></div></div></td>
-        <td>עוזר מנהל עבודה</td><td class="n">1.07</td><td class="n">0.88</td><td class="n">0.60</td><td class="n"><b>0.796</b></td><td class="n">8,796</td><td class="n">—</td><td class="n"><b>8,242</b></td><td><span class="chip c-nu">מתחת לציפייה</span></td></tr>
+        <td>עוזר מנהל עבודה</td><td class="n">1.07</td><td class="n">0.88</td><td class="n">0.60</td><td class="n"><b>0.796</b></td><td class="n">8,796</td><td class="n">-</td><td class="n"><b>8,242</b></td><td><span class="chip c-nu">מתחת לציפייה</span></td></tr>
     </tbody>
   </table>
   </div>
 
   <div class="g3 mt">
-    <div class="card"><h3>סיכום לתשלום</h3><div class="csub" id="aSub">—</div>
-      <div class="miniline"><span>סה"כ מחושב</span><b id="aCalc">—</b></div>
+    <div class="card"><h3>סיכום לתשלום</h3><div class="csub" id="aSub">-</div>
+      <div class="miniline"><span>סה"כ מחושב</span><b id="aCalc">-</b></div>
       <div class="miniline"><span>התאמות ידניות</span><b style="color:var(--red)">−4,200 ₪</b></div>
-      <div class="miniline"><span>מקדם תקציב</span><b id="aFac">—</b></div>
-      <div class="miniline" style="border:none"><span><b>לתשלום</b></span><b style="color:var(--navy); font-size:15px" id="aPay">—</b></div>
+      <div class="miniline"><span>מקדם תקציב</span><b id="aFac">-</b></div>
+      <div class="miniline" style="border:none"><span><b>לתשלום</b></span><b style="color:var(--navy); font-size:15px" id="aPay">-</b></div>
     </div>
     <div class="card"><h3>מנגנון הגנה פעיל</h3><div class="csub">אכיפה ברמת המנוע</div>
-      <div class="miniline"><span>🔒 רותם רוזנצוייג — חישוב עצמי</span><span class="chip c-pur">חסום</span></div>
+      <div class="miniline"><span>🔒 רותם רוזנצוייג - חישוב עצמי</span><span class="chip c-pur">חסום</span></div>
       <div class="miniline"><span>✓ 3 עובדים · 47 ימי מילואים</span><span class="chip c-ok">לא הופחת</span></div>
       <div class="miniline"><span>✓ 2 עובדות · חופשת לידה</span><span class="chip c-ok">פרו־רטה</span></div>
       <div class="miniline" style="border:none"><span>⛔ 6 עובדים · שער בטיחות</span><span class="chip c-no">רכיב אופס</span></div>
@@ -481,7 +495,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 
   <div class="g4">
     <div class="stat"><div class="k">הערכות שהושלמו</div><div class="v">3<span style="font-size:16px; color:var(--muted)">/7</span></div><div class="d" style="color:var(--amber)">עד 15.12 · נותרו 9 ימים</div></div>
-    <div class="stat g"><div class="k">רווח גולמי — גבעת שאול</div><div class="v">18.4%</div><div class="d up">▲ מול תקציב 16.0%</div></div>
+    <div class="stat g"><div class="k">רווח גולמי - גבעת שאול</div><div class="v">18.4%</div><div class="d up">▲ מול תקציב 16.0%</div></div>
     <div class="stat a"><div class="k">אבני דרך במועד</div><div class="v">83%</div><div class="d" style="color:var(--amber)">1 איחור · EOT מאושר</div></div>
     <div class="stat"><div class="k">מאגר שהוקצה לי</div><div class="v">145K</div><div class="d">חולקו 142K · נותרו 3K</div></div>
   </div>
@@ -491,30 +505,30 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
     <thead><tr><th>עובד</th><th>תפקיד</th><th class="n">נוכחות</th><th class="n">מדדי יחידה</th><th class="n">דירוג כולל</th><th class="n">בונוס משוער</th><th>סטטוס הערכה</th><th></th></tr></thead>
     <tbody>
       <tr><td><div class="who"><div class="av" style="background:#047857">ד</div><div><div class="nm">דוד אזולאי</div><div class="rl">3 שנים</div></div></div></td><td>מהנדס ביצוע</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.04</td><td class="n"><b>3</b></td><td class="n">34,089 ₪</td><td><span class="chip c-ok">הושלם</span></td><td><button class="btn ghost sm">צפייה</button></td></tr>
-      <tr><td><div class="who"><div class="av" style="background:#10b981">י</div><div><div class="nm">יוסי מזרחי</div><div class="rl">6 שנים</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.12</td><td class="n">—</td><td class="n" style="color:var(--muted)">11,925 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm" onclick="show('mgr-eval')">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#10b981">י</div><div><div class="nm">יוסי מזרחי</div><div class="rl">6 שנים</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.12</td><td class="n">-</td><td class="n" style="color:var(--muted)">11,925 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm" onclick="show('mgr-eval')">מילוי</button></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#b45309">מ</div><div><div class="nm">משה דהן</div><div class="rl">11 שנים</div></div></div></td><td>מנהל עבודה</td><td class="n"><span class="chip c-info">47 ימי מילואים</span></td><td class="n">0.98</td><td class="n"><b>4</b></td><td class="n">29,750 ₪</td><td><span class="chip c-ok">הושלם</span></td><td><button class="btn ghost sm">צפייה</button></td></tr>
       <tr><td><div class="who"><div class="av" style="background:#64748b">ח</div><div><div class="nm">חיים פרידמן</div><div class="rl">1 שנה</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-no">11 ימי חיסור</span></td><td class="n">0.88</td><td class="n"><b>2</b></td><td class="n">8,796 ₪</td><td><span class="chip c-ok">הושלם</span></td><td><button class="btn ghost sm">צפייה</button></td></tr>
-      <tr><td><div class="who"><div class="av" style="background:#0284c7">ע</div><div><div class="nm">עמית רוזן</div><div class="rl">2 שנים</div></div></div></td><td>מהנדס ביצוע</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.09</td><td class="n">—</td><td class="n" style="color:var(--muted)">31,240 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
-      <tr><td><div class="who"><div class="av" style="background:#8b5cf6">ט</div><div><div class="nm">טל בן־חמו</div><div class="rl">4 חודשים</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-info">פרו־רטה 4/12</span></td><td class="n">1.01</td><td class="n">—</td><td class="n" style="color:var(--muted)">3,970 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
-      <tr><td><div class="who"><div class="av" style="background:#e11d48">ל</div><div><div class="nm">ליאת אשכנזי</div><div class="rl">5 שנים</div></div></div></td><td>מהנדסת ביצוע</td><td class="n"><span class="chip c-info">חופשת לידה</span></td><td class="n">1.06</td><td class="n">—</td><td class="n" style="color:var(--muted)">21,900 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#0284c7">ע</div><div><div class="nm">עמית רוזן</div><div class="rl">2 שנים</div></div></div></td><td>מהנדס ביצוע</td><td class="n"><span class="chip c-ok">מלאה</span></td><td class="n">1.09</td><td class="n">-</td><td class="n" style="color:var(--muted)">31,240 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#8b5cf6">ט</div><div><div class="nm">טל בן־חמו</div><div class="rl">4 חודשים</div></div></div></td><td>עוזר מנהל עבודה</td><td class="n"><span class="chip c-info">פרו־רטה 4/12</span></td><td class="n">1.01</td><td class="n">-</td><td class="n" style="color:var(--muted)">3,970 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
+      <tr><td><div class="who"><div class="av" style="background:#e11d48">ל</div><div><div class="nm">ליאת אשכנזי</div><div class="rl">5 שנים</div></div></div></td><td>מהנדסת ביצוע</td><td class="n"><span class="chip c-info">חופשת לידה</span></td><td class="n">1.06</td><td class="n">-</td><td class="n" style="color:var(--muted)">21,900 ₪</td><td><span class="chip c-wait">ממתין למילוי</span></td><td><button class="btn sm">מילוי</button></td></tr>
     </tbody>
   </table>
   </div>
 
-  <div class="alert al-b mt"><span>ℹ</span><div><b>למה ל־משה דהן ול־ליאת אשכנזי אין הפחתה</b>47 ימי מילואים ו־חופשת לידה מסווגים במערכת כהיעדרות מוגנת ואינם מפחיתים את הבונוס. חיים פרידמן — 11 ימי היעדרות ללא אישור — מקדם 0.950. ההבחנה אכופה במנוע ולא ניתנת לעקיפה בהגדרות.</div></div>
+  <div class="alert al-b mt"><span>ℹ</span><div><b>למה ל־משה דהן ול־ליאת אשכנזי אין הפחתה</b>47 ימי מילואים ו־חופשת לידה מסווגים במערכת כהיעדרות מוגנת ואינם מפחיתים את הבונוס. חיים פרידמן - 11 ימי היעדרות ללא אישור - מקדם 0.950. ההבחנה אכופה במנוע ולא ניתנת לעקיפה בהגדרות.</div></div>
 </section>
 
 <!-- ============================================================ MGR EVAL -->
 <section class="screen" data-s="mgr-eval">
   <div class="pgtitle">
-    <div><h1>הערכת תפקוד — יוסי מזרחי</h1><div class="sub">עוזר מנהל עבודה · בי"ס ממ"ד גבעת שאול · שיחת משוב 08.12.2026</div></div>
+    <div><h1>הערכת תפקוד - יוסי מזרחי</h1><div class="sub">עוזר מנהל עבודה · בי"ס ממ"ד גבעת שאול · שיחת משוב 08.12.2026</div></div>
     <div style="display:flex; gap:8px"><button class="btn ghost">שמירה כטיוטה</button><button class="btn green">הגשה לסקירת דרג שני</button></div>
   </div>
 
   <div class="split">
     <div>
       <div class="card">
-        <h3>כשירויות — סולם מעוגן התנהגות</h3>
+        <h3>כשירויות - סולם מעוגן התנהגות</h3>
         <div class="csub">רכיב אישי = 30% מהבונוס · אין כאן שני ציונים: ממוצע הכשירויות <b>הוא</b> המכפיל, בטווח 0–1.35 בלבד</div>
         <div id="compBox"></div>
       </div>
@@ -522,7 +536,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
       <div class="card mt">
         <h3>ראיות מהשנה</h3>
         <div class="csub">דירוג 4 ומעלה מחייב 2 דוגמאות מתועדות</div>
-        <textarea class="evid" placeholder="לדוגמה: 'הגיש יומן עבודה מלא ב־94% מימי העבודה ללא תזכורת. איתר ליקוי בטיחות בפיגום בבניין ב' ב־03.09 ודיווח באותו יום.'">הגיש יומן עבודה מלא ב־94% מימי העבודה ללא תזכורת (ממוצע חברה 71%). ב־03.09 איתר ליקוי בפיגום מזרחי ודיווח באותו יום — נמנעה עבודה בגובה לא בטוחה.</textarea>
+        <textarea class="evid" placeholder="לדוגמה: 'הגיש יומן עבודה מלא ב־94% מימי העבודה ללא תזכורת. איתר ליקוי בטיחות בפיגום בבניין ב' ב־03.09 ודיווח באותו יום.'">הגיש יומן עבודה מלא ב־94% מימי העבודה ללא תזכורת (ממוצע חברה 71%). ב־03.09 איתר ליקוי בפיגום מזרחי ודיווח באותו יום - נמנעה עבודה בגובה לא בטוחה.</textarea>
       </div>
     </div>
 
@@ -537,15 +551,15 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
         <h3>המאגר שלי</h3>
         <div class="csub">כל שינוי בכשירויות זז כאן מיד</div>
         <div class="miniline"><span>הוקצה לצוות (7 עובדים)</span><b>145,000 ₪</b></div>
-        <div class="miniline"><span>משוריין לשאר הצוות</span><b id="evalOthers">—</b></div>
-        <div class="miniline"><span>נותר לעובד זה</span><b id="evalLeft">—</b></div>
-        <div class="miniline" style="border:none"><span><b>הבונוס לפי ההערכה</b></span><b id="evalNow">—</b></div>
+        <div class="miniline"><span>משוריין לשאר הצוות</span><b id="evalOthers">-</b></div>
+        <div class="miniline"><span>נותר לעובד זה</span><b id="evalLeft">-</b></div>
+        <div class="miniline" style="border:none"><span><b>הבונוס לפי ההערכה</b></span><b id="evalNow">-</b></div>
         <div class="alert mt" id="evalPoolNote" style="font-size:11.5px"><span id="evalPoolIcon">✓</span><div id="evalPoolMsg"></div></div>
       </div>
 
       <div class="card mt">
         <h3>נקודות המדידה של השנה</h3>
-        <div class="csub" style="color:var(--amber)">⚑ נתוני מדידה מהמערכות — לא שאלות. מוצגים כדי שהדירוג ייקבע מעובדות ולא מהזיכרון</div>
+        <div class="csub" style="color:var(--amber)">⚑ נתוני מדידה מהמערכות - לא שאלות. מוצגים כדי שהדירוג ייקבע מעובדות ולא מהזיכרון</div>
         <div id="evalPoints"></div>
       </div>
 
@@ -556,7 +570,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
         <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>4</span><div class="bartrack"><div class="barfill" style="width:29%"></div></div><span class="amt">29%</span></div>
         <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>3</span><div class="bartrack"><div class="barfill" style="width:43%"></div></div><span class="amt">43%</span></div>
         <div class="barrow" style="grid-template-columns:44px 1fr 40px"><span>2</span><div class="bartrack"><div class="barfill" style="width:14%"></div></div><span class="amt">14%</span></div>
-        <div class="alert al-g" style="font-size:11.5px; margin-top:6px"><span>✓</span><div><b>נתת דירוג 5 ל־14% מהצוות</b> — בתוך הסף המונחה, שהוא עד 30% ונמדד ברמת החברה ולא ברמת הצוות. בדרגות 4–5 יחד נתת 43%, מול ממוצע חברה של 31%.</div></div>
+        <div class="alert al-g" style="font-size:11.5px; margin-top:6px"><span>✓</span><div><b>נתת דירוג 5 ל־14% מהצוות</b> - בתוך הסף המונחה, שהוא עד 30% ונמדד ברמת החברה ולא ברמת הצוות. בדרגות 4–5 יחד נתת 43%, מול ממוצע חברה של 31%.</div></div>
       </div>
     </div>
   </div>
@@ -564,18 +578,18 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 
 <!-- ============================================================ MGR POOL -->
 <section class="screen" data-s="mgr-pool">
-  <div class="pgtitle"><div><h1>המאגר שלי</h1><div class="sub">חלוקה בשקלים — כל שקל לעובד אחד בא על חשבון אחר</div></div>
+  <div class="pgtitle"><div><h1>המאגר שלי</h1><div class="sub">חלוקה בשקלים - כל שקל לעובד אחד בא על חשבון אחר</div></div>
     <div style="display:flex; gap:8px"><button class="btn">הגשה לדרג שני</button></div></div>
 
   <div class="g3">
     <div class="stat"><div class="k">הוקצה לצוות שלי</div><div class="v">145,000</div><div class="d">7 עובדים</div></div>
-    <div class="stat a"><div class="k">חולק לפי הדירוגים</div><div class="v" id="poolUsed">—</div><div class="d" id="poolUsedD">—</div></div>
-    <div class="stat g" id="poolLeftCard"><div class="k">נותר לחלוקה</div><div class="v" id="poolLeft">—</div><div class="d" id="poolLeftD">—</div></div>
+    <div class="stat a"><div class="k">חולק לפי הדירוגים</div><div class="v" id="poolUsed">-</div><div class="d" id="poolUsedD">-</div></div>
+    <div class="stat g" id="poolLeftCard"><div class="k">נותר לחלוקה</div><div class="v" id="poolLeft">-</div><div class="d" id="poolLeftD">-</div></div>
   </div>
 
   <div class="card mt">
     <h3>חלוקת המאגר</h3>
-    <div class="csub">הדירוג נקבע רק במסך ההערכה, מממוצע הכשירויות — ולכן הוא לקריאה בלבד כאן. לשינוי: "הערכה מלאה" בשורה.</div>
+    <div class="csub">הדירוג נקבע רק במסך ההערכה, מממוצע הכשירויות - ולכן הוא לקריאה בלבד כאן. לשינוי: "הערכה מלאה" בשורה.</div>
     <table>
       <thead><tr><th>עובד</th><th>תפקיד</th><th class="n">בונוס בדירוג 3</th><th class="n">דירוג כולל</th><th class="n">מכפיל אישי</th><th class="n">בונוס בפועל</th><th class="n">הפרש</th><th></th></tr></thead>
       <tbody id="poolRows"></tbody>
@@ -583,7 +597,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
     <div class="alert mt" id="poolNote"><span id="poolIcon">ℹ</span><div id="poolMsg"></div></div>
   </div>
 
-  <div class="alert al-b mt"><span>ℹ</span><div><b>זה המנגנון שעוצר אינפלציית דירוגים</b>המערכת לא נותנת למנהל סולם ציונים פתוח — היא נותנת לו עוגה. דירוג גבוה לעובד אחד מקטין את מה שנשאר לאחרים, ולכן מנהלים מכיילים את עצמם בלי שמישהו יבקש מהם. הרכיב האישי חסום ב־0–1.35, כך שגם מנהל נדיב מזיז לכל היותר כ־9% מסך הבונוס.</div></div>
+  <div class="alert al-b mt"><span>ℹ</span><div><b>זה המנגנון שעוצר אינפלציית דירוגים</b>המערכת לא נותנת למנהל סולם ציונים פתוח - היא נותנת לו עוגה. דירוג גבוה לעובד אחד מקטין את מה שנשאר לאחרים, ולכן מנהלים מכיילים את עצמם בלי שמישהו יבקש מהם. הרכיב האישי חסום ב־0–1.35, כך שגם מנהל נדיב מזיז לכל היותר כ־9% מסך הבונוס.</div></div>
 </section>
 
 
@@ -608,12 +622,12 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
     <div class="alert mt" id="cfoNote"><span id="cfoIcon">⚑</span><div id="cfoMsg"></div></div>
   </div>
 
-  <div class="alert al-b mt"><span>ℹ</span><div><b>למה החתימה חוסמת ולא מחריגה</b>נתון שלא נחתם עדיין נספר בחישוב, אבל התוצאה מסומנת זמנית והמחזור אינו ניתן לאישור. אילו היינו מחריגים מדד לא חתום, מדד חלש היה מעלה את הציון — כלומר היינו מתגמלים על היעדר חתימה.</div></div>
+  <div class="alert al-b mt"><span>ℹ</span><div><b>למה החתימה חוסמת ולא מחריגה</b>נתון שלא נחתם עדיין נספר בחישוב, אבל התוצאה מסומנת זמנית והמחזור אינו ניתן לאישור. אילו היינו מחריגים מדד לא חתום, מדד חלש היה מעלה את הציון - כלומר היינו מתגמלים על היעדר חתימה.</div></div>
 </section>
 
 <!-- ============================================================ EMPLOYEE MOBILE -->
 <section class="screen" data-s="emp-mobile">
-  <div class="pgtitle"><div><h1>אזור העובד</h1><div class="sub">מובייל־first — מנהלי עבודה ועוזרים לא יושבים מול מחשב</div></div></div>
+  <div class="pgtitle"><div><h1>אזור העובד</h1><div class="sub">מובייל־first - מנהלי עבודה ועוזרים לא יושבים מול מחשב</div></div></div>
   <div class="phonewrap">
     <div class="phone"><div class="pscreen">
       <div class="ptop">
@@ -665,7 +679,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
       <div class="nb"><b>מה העובד רואה</b><br>הפרמטרים שלו, היעד המספרי, איפה הוא עומד עכשיו, ומשקל כל מדד. הכל בגובה העיניים.</div>
       <div class="nb"><b>מה הוא לא רואה</b><br>נוסחת הקצאת המאגר, האחוז שהחברה לוקחת, ונתונים של עמיתים. בדיוק כפי שרותם ביקשה: <em>"הם לא ידעו כמה אחוזים אנחנו לוקחים, אבל הם ידעו את הפרמטרים."</em></div>
       <div class="nb"><b>למה טווח ולא מספר</b><br>הצגת מספר סופי לפני אישור המנכ"לית יוצרת ציפייה משפטית מחייבת. טווח משוער עם הסתייגות מפורשת שומר על שקיפות בלי ליצור התחייבות.</div>
-      <div class="nb" style="background:#f0fdf4; border-color:#86efac"><b style="color:var(--green)">זה מה שמחליף את "מי שצועק מקבל"</b><br>העובד לא צריך לבקש בונוס — הוא רואה כל השנה בדיוק מה נמדד ואיפה הוא עומד.</div>
+      <div class="nb" style="background:#f0fdf4; border-color:#86efac"><b style="color:var(--green)">זה מה שמחליף את "מי שצועק מקבל"</b><br>העובד לא צריך לבקש בונוס - הוא רואה כל השנה בדיוק מה נמדד ואיפה הוא עומד.</div>
     </div>
   </div>
 </section>
@@ -673,7 +687,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 <!-- ============================================================ PROCUREMENT -->
 <section class="screen" data-s="proc-sav">
   <div class="pgtitle">
-    <div><h1>תיק החסכונות — 2026</h1><div class="sub">רק חיסכון חתום ע"י חשב נכנס לחישוב הבונוס</div></div>
+    <div><h1>תיק החסכונות - 2026</h1><div class="sub">רק חיסכון חתום ע"י חשב נכנס לחישוב הבונוס</div></div>
     <button class="btn">רישום חיסכון חדש</button>
   </div>
 
@@ -688,25 +702,25 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
   <table>
     <thead><tr><th>#</th><th>קטגוריה / ספק</th><th>פרויקט</th><th class="n">בסיס (מוצמד)</th><th class="n">נסגר</th><th class="n">חיסכון</th><th>סוג</th><th>Claw-back</th><th>סטטוס</th></tr></thead>
     <tbody>
-      <tr><td class="n">218</td><td><b>בטון מובא</b><div style="font-size:11px;color:var(--muted)">רדימיקס ירושלים</div></td><td>בי"ס גבעת שאול</td><td class="n">1,840,000</td><td class="n">1,682,000</td><td class="n"><b style="color:var(--green)">158,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-ok">✓ חתום 09:51</span></td></tr>
-      <tr><td class="n">217</td><td><b>ברזל זיון</b><div style="font-size:11px;color:var(--muted)">פלדות המרכז</div></td><td>קרית משה</td><td class="n">920,000</td><td class="n">861,000</td><td class="n"><b style="color:var(--green)">59,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-ok">✓ חתום</span></td></tr>
-      <tr style="background:#fffbeb"><td class="n">221</td><td><b>עבודות אלומיניום</b><div style="font-size:11px;color:var(--muted)">א.ד. מסגרות</div></td><td>מרלוג מודיעין</td><td class="n">1,310,000</td><td class="n">1,196,000</td><td class="n"><b>114,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-wait">ממתין לחשב</span></td></tr>
-      <tr style="background:#fef2f2"><td class="n">203</td><td><b>איטום גגות</b><div style="font-size:11px;color:var(--muted)">גל־סיל בע"מ</div></td><td>אולפנת רמות</td><td class="n">440,000</td><td class="n">368,000</td><td class="n"><b style="color:var(--red)">72,000 → 0</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-no">−96,000 ₪</span></td><td><span class="chip c-no">⛔ קוזז במלואו</span></td></tr>
-      <tr><td class="n">209</td><td><b>שכירות ציוד מכני</b><div style="font-size:11px;color:var(--muted)">מ.ע. ציוד</div></td><td>חוצה־פרויקטים</td><td class="n">760,000</td><td class="n">712,000</td><td class="n"><b>48,000</b></td><td><span class="chip c-info">מניעת עלות</span></td><td><span class="chip c-nu">—</span></td><td><span class="chip c-ok">✓ חתום</span></td></tr>
+      <tr><td class="n">218</td><td><b>בטון מובא</b><div style="font-size:11px;color:var(--muted)">רדימיקס ירושלים</div></td><td>בי"ס גבעת שאול</td><td class="n">1,840,000</td><td class="n">1,682,000</td><td class="n"><b style="color:var(--green)">158,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">-</span></td><td><span class="chip c-ok">✓ חתום 09:51</span></td></tr>
+      <tr><td class="n">217</td><td><b>ברזל זיון</b><div style="font-size:11px;color:var(--muted)">פלדות המרכז</div></td><td>קרית משה</td><td class="n">920,000</td><td class="n">861,000</td><td class="n"><b style="color:var(--green)">59,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">-</span></td><td><span class="chip c-ok">✓ חתום</span></td></tr>
+      <tr style="background:#fffbeb"><td class="n">221</td><td><b>עבודות אלומיניום</b><div style="font-size:11px;color:var(--muted)">א.ד. מסגרות</div></td><td>מרלוג מודיעין</td><td class="n">1,310,000</td><td class="n">1,196,000</td><td class="n"><b>114,000</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-nu">-</span></td><td><span class="chip c-wait">ממתין לחשב</span></td></tr>
+      <tr style="background:#fef2f2"><td class="n">203</td><td><b>איטום גגות</b><div style="font-size:11px;color:var(--muted)">גל־סיל בע"מ</div></td><td>אולפנת רמות</td><td class="n">440,000</td><td class="n">368,000</td><td class="n"><b style="color:var(--red)">72,000 ← 0</b></td><td><span class="chip c-ok">Hard</span></td><td><span class="chip c-no">−96,000 ₪</span></td><td><span class="chip c-no">⛔ קוזז במלואו</span></td></tr>
+      <tr><td class="n">209</td><td><b>שכירות ציוד מכני</b><div style="font-size:11px;color:var(--muted)">מ.ע. ציוד</div></td><td>חוצה־פרויקטים</td><td class="n">760,000</td><td class="n">712,000</td><td class="n"><b>48,000</b></td><td><span class="chip c-info">מניעת עלות</span></td><td><span class="chip c-nu">-</span></td><td><span class="chip c-ok">✓ חתום</span></td></tr>
     </tbody>
   </table>
   </div>
 
   <div class="g2 mt">
-    <div class="alert al-r"><span>⛔</span><div><b>רשומה 203 — למה החיסכון אופס</b>גל־סיל נסגר 16% מתחת לאומדן, אבל הגיש תוספות ב־96,000 ₪ בתוך 12 חודשים ונדרשו עבודות חוזרות. סעיף ה־Claw-back קיזז את מלוא החיסכון. <b style="display:inline">זהו הכלל שמונע "חסכתי בזול ושילמנו בתוספות".</b></div></div>
-    <div class="alert al-b"><span>🔒</span><div><b>הפרדת תפקידים</b>רותם מזינה חסכונות ורואה את הביצועים שלה — אבל <b style="display:inline">אינה יכולה לראות או לאשר את חישוב הבונוס של עצמה</b>, גם עם הרשאת מש"א. חסימה ברמת ה־API, לא ברמת המסך.</div></div>
+    <div class="alert al-r"><span>⛔</span><div><b>רשומה 203 - למה החיסכון אופס</b>גל־סיל נסגר 16% מתחת לאומדן, אבל הגיש תוספות ב־96,000 ₪ בתוך 12 חודשים ונדרשו עבודות חוזרות. סעיף ה־Claw-back קיזז את מלוא החיסכון. <b style="display:inline">זהו הכלל שמונע "חסכתי בזול ושילמנו בתוספות".</b></div></div>
+    <div class="alert al-b"><span>🔒</span><div><b>הפרדת תפקידים</b>רותם מזינה חסכונות ורואה את הביצועים שלה - אבל <b style="display:inline">אינה יכולה לראות או לאשר את חישוב הבונוס של עצמה</b>, גם עם הרשאת מש"א. חסימה ברמת ה־API, לא ברמת המסך.</div></div>
   </div>
 </section>
 
 <!-- ============================================================ HR TEMPLATE BUILDER -->
 <section class="screen" data-s="hr-builder">
   <div class="pgtitle">
-    <div><h1>בונה התבניות</h1><div class="sub">כאן נקבעת המדיניות בפועל · הנוסחה היא דאטה — שינוי הוא פעולת משתמש, לא גרסת תוכנה</div></div>
+    <div><h1>בונה התבניות</h1><div class="sub">כאן נקבעת המדיניות בפועל · הנוסחה היא דאטה - שינוי הוא פעולת משתמש, לא גרסת תוכנה</div></div>
     <div style="display:flex; gap:8px"><button class="btn ghost">שכפול לתבנית חדשה</button><button class="btn green">שמירה והרצה מחדש</button></div>
   </div>
 
@@ -714,7 +728,8 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
     <div>
       <div class="card">
         <h3>משפחת תפקידים</h3>
-        <div class="csub">כל משפחה = תבנית עצמאית</div>
+        <div class="csub">כל משפחה = תבנית עצמאית <button class="hlp" type="button" data-h="fam">i</button></div>
+        <div class="hlpbox" id="hb-fam"></div>
         <select id="famPick" style="width:100%; padding:9px 11px; border:1px solid var(--line2); border-radius:9px; font-size:14px; font-weight:600">
           <option value="pm">מנהל פרויקט</option>
           <option value="eng">מהנדס ביצוע</option>
@@ -728,19 +743,31 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 
         <h3 style="margin-top:18px">משקלי שלוש השכבות</h3>
         <div class="csub">חייב להסתכם ב־100</div>
-        <div class="sl"><div class="t">רכיב חברה</div><input type="range" id="L1" min="0" max="100" step="5" value="15"><div class="v" id="LV1">15</div></div>
-        <div class="sl"><div class="t">רכיב פרויקט / פונקציה</div><input type="range" id="L2" min="0" max="100" step="5" value="60"><div class="v" id="LV2">60</div></div>
-        <div class="sl" style="border:none"><div class="t">רכיב אישי (הערכת מנהל)</div><input type="range" id="L3" min="0" max="100" step="5" value="25"><div class="v" id="LV3">25</div></div>
+        <div class="sl"><div class="t">רכיב חברה <button class="hlp" type="button" data-h="L1">i</button></div><input type="range" id="L1" min="0" max="100" step="5" value="15"><div class="v" id="LV1">15</div></div>
+        <div class="sl"><div class="t">רכיב פרויקט / פונקציה <button class="hlp" type="button" data-h="L2">i</button></div><input type="range" id="L2" min="0" max="100" step="5" value="60"><div class="v" id="LV2">60</div></div>
+        <div class="sl" style="border:none"><div class="t">רכיב אישי (הערכת מנהל) <button class="hlp" type="button" data-h="L3">i</button></div><input type="range" id="L3" min="0" max="100" step="5" value="25"><div class="v" id="LV3">25</div></div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px"><span style="font-size:12.5px; color:var(--muted)">סה"כ</span><span class="sumbadge" id="layerSum">100</span></div>
       </div>
 
       <div class="card mt">
         <h3>שערים (Gates)</h3>
-        <div class="csub">בינאריים — לא הדרגתיים</div>
-        <label class="miniline" style="cursor:pointer"><span>⛔ רווח חברה מתחת ל־85%</span><input type="checkbox" checked></label>
-        <label class="miniline" style="cursor:pointer"><span>⛔ תאונה קטלנית / צו הפסקת עבודה</span><input type="checkbox" checked></label>
-        <label class="miniline" style="cursor:pointer"><span>⛔ הפרת אתיקה / משמעת חמורה</span><input type="checkbox" checked></label>
-        <label class="miniline" style="cursor:pointer; border:none"><span>⛔ אי־השלמת הדרכות בטיחות</span><input type="checkbox" checked></label>
+        <div class="csub">בינאריים - לא הדרגתיים. שימו לב <b>מה</b> כל שער מאפס.</div>
+        <div class="gategrid">
+          <label class="gate g-full"><span class="gt">1 · רווח חברה מתחת ל־85%</span>
+            <span class="gs">מאפס את הבונוס כולו · לכל 60 העובדים</span>
+            <input type="checkbox" checked><button class="hlp" type="button" data-h="g1">i</button></label>
+          <label class="gate g-full"><span class="gt">2 · הפרת אתיקה / משמעת חמורה</span>
+            <span class="gs">מאפס את הבונוס כולו · לעובד שבו מדובר</span>
+            <input type="checkbox" checked><button class="hlp" type="button" data-h="g2">i</button></label>
+          <label class="gate g-part"><span class="gt">3 · תאונה קטלנית / צו הפסקת עבודה</span>
+            <span class="gs">מאפס את רכיב הפרויקט · לכל צוות הפרויקט</span>
+            <input type="checkbox" checked><button class="hlp" type="button" data-h="g3">i</button></label>
+          <label class="gate g-part"><span class="gt">4 · אי־השלמת הדרכות בטיחות</span>
+            <span class="gs">מאפס את הרכיב האישי בלבד</span>
+            <input type="checkbox" checked><button class="hlp" type="button" data-h="g4">i</button></label>
+        </div>
+        <div class="hlpbox" id="hb-g1"></div><div class="hlpbox" id="hb-g2"></div>
+        <div class="hlpbox" id="hb-g3"></div><div class="hlpbox" id="hb-g4"></div>
       </div>
     </div>
 
@@ -757,14 +784,15 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 
       <div class="card mt">
         <h3>מדרגות</h3>
-        <div class="csub">אותה פונקציה מוחלת על כל מדד</div>
-        <div class="miniline"><span>סף כניסה</span><b>85% → מקדם 0.50</b></div>
-        <div class="miniline"><span>יעד</span><b>100% → מקדם 1.00</b></div>
-        <div class="miniline"><span>מקסימום</span><b>150% → מקדם 1.50</b></div>
+        <div class="csub">אותה פונקציה מוחלת על כל מדד <button class="hlp" type="button" data-h="st">i</button></div>
+        <div class="hlpbox" id="hb-st"></div>
+        <div class="miniline"><span>סף כניסה</span><b>85% ← מקדם 0.50</b></div>
+        <div class="miniline"><span>יעד</span><b>100% ← מקדם 1.00</b></div>
+        <div class="miniline"><span>מקסימום</span><b>150% ← מקדם 1.50</b></div>
         <div class="miniline" style="border:none"><span>מתחת לסף</span><b style="color:var(--red)">0</b></div>
       </div>
 
-      <div class="alert al-g mt"><span>✓</span><div><b>למה זה קריטי</b>הוספת משפחה תשיעית, שינוי משקל או הוספת מדרגה — כולן פעולות במסך הזה. אין פריסת גרסה, אין פרויקט פיתוח, והמערכת לא מתיישנת בשנה השנייה.</div></div>
+      <div class="alert al-g mt"><span>✓</span><div><b>למה זה קריטי</b>הוספת משפחה תשיעית, שינוי משקל או הוספת מדרגה - כולן פעולות במסך הזה. אין פריסת גרסה, אין פרויקט פיתוח, והמערכת לא מתיישנת בשנה השנייה.</div></div>
     </div>
   </div>
 </section>
@@ -775,7 +803,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 
   <div class="g4">
     <div class="stat a"><div class="k">הערכות שהושלמו</div><div class="v">37<span style="font-size:16px;color:var(--muted)">/60</span></div><div class="d" style="color:var(--amber)">דדליין 15.12</div></div>
-    <div class="stat r"><div class="k">נתונים ללא חתימת חשב</div><div class="v">4</div><div class="d dn">214K ₪ — חוסמים אישור מחזור</div></div>
+    <div class="stat r"><div class="k">נתונים ללא חתימת חשב</div><div class="v">4</div><div class="d dn">214K ₪ - חוסמים אישור מחזור</div></div>
     <div class="stat"><div class="k">ישיבות כיול</div><div class="v">2<span style="font-size:16px;color:var(--muted)">/3</span></div><div class="d">נותרה: מטה</div></div>
     <div class="stat g"><div class="k">אינטגרציות</div><div class="v">✓</div><div class="d up">Priority + נוכחות · 08:14</div></div>
   </div>
@@ -794,7 +822,7 @@ input[type=range]{width:100%; accent-color:var(--navy2)}
 
     <div class="card">
       <h3>בקרת אינטגרציות</h3>
-      <div class="csub">מקורות נתונים — סנכרון אחרון</div>
+      <div class="csub">מקורות נתונים - סנכרון אחרון</div>
       <div class="miniline"><span><b>Priority</b> · תקציב מול ביצוע</span><span class="chip c-ok">✓ 08:14</span></div>
       <div class="miniline"><span><b>Priority</b> · חשבונות וחריגים</span><span class="chip c-ok">✓ 08:14</span></div>
       <div class="miniline"><span><b>Priority</b> · הזמנות רכש</span><span class="chip c-ok">✓ 08:14</span></div>
@@ -849,7 +877,7 @@ function setRole(r){
 }
 $('roleSel').onchange = e => setRole(e.target.value);
 
-/* ---------- סרגל שלבי המחזור → ניווט ---------- */
+/* ---------- סרגל שלבי המחזור ← ניווט ---------- */
 document.querySelectorAll('.step[data-go]').forEach(el => {
   el.onclick = () => {
     const [role, screen] = el.dataset.go.split(':');
@@ -898,18 +926,18 @@ function simCalc(){
 
   const set=(id,v)=>{const e=$(id); if(e) e.textContent=v;};
   set('dTotM', (total/1e6).toFixed(2)+'M');
-  set('dTotD', total>budget?`מול תקציב ${(budget/1e6).toFixed(2)}M — חריגה ${((total/budget-1)*100).toFixed(1)}%`:`בתוך תקציב ${(budget/1e6).toFixed(2)}M`);
+  set('dTotD', total>budget?`מול תקציב ${(budget/1e6).toFixed(2)}M - חריגה ${((total/budget-1)*100).toFixed(1)}%`:`בתוך תקציב ${(budget/1e6).toFixed(2)}M`);
   set('dPct',  (total/payroll*100).toFixed(1)+'%');
   set('dCalc', nf(total)+' ₪');   set('aCalc', nf(total)+' ₪');
   set('dFac',  factor.toFixed(3)); set('aFac', '×'+factor.toFixed(3));
   const MANUAL = 4200;                                   // התאמות ידניות מאושרות
-  set('aSub', factor < 1 ? `לאחר מקדם התאמה ${factor.toFixed(3)}` : 'המודל בתוך התקציב — ללא מקדם התאמה');
+  set('aSub', factor < 1 ? `לאחר מקדם התאמה ${factor.toFixed(3)}` : 'המודל בתוך התקציב - ללא מקדם התאמה');
   set('aPay', nf(Math.max(0, total * factor - MANUAL)) + ' ₪');
   set('dOver', total>budget?`המודל חורג ב־${nf(total-budget)} ₪. אפשר לאשר מקדם ${factor.toFixed(3)} לכולם, או להעלות את התקציב.`:'המודל בתוך התקציב המאושר.');
 
   $('simNote').className = 'alert mt ' + (total > budget ? 'al-a' : 'al-g');
   $('simNote').innerHTML = total > budget
-    ? `<span>⚑</span><div><b>חריגה מהתקציב</b>יופעל מקדם אחיד ${factor.toFixed(3)} — כל עובד יקבל ${(factor*100).toFixed(1)}% מהמחושב. הכלל חייב להיות מוכרז מראש.</div>`
+    ? `<span>⚑</span><div><b>חריגה מהתקציב</b>יופעל מקדם אחיד ${factor.toFixed(3)} - כל עובד יקבל ${(factor*100).toFixed(1)}% מהמחושב. הכלל חייב להיות מוכרז מראש.</div>`
     : `<span>✓</span><div><b>תרחיש בתוך התקציב</b>אין צורך במקדם התאמה. עודף ${nf(budget-total)} ₪.</div>`;
 
   const rows = KEY.map(k => {
@@ -923,17 +951,17 @@ function simCalc(){
     <tr><td><div style="font-weight:700">${r.k.n}</div><div style="font-size:11px;color:var(--muted)">${r.k.r}</div></td>
     <td class="n" style="font-weight:800">${nf(r.val)} ₪</td>
     <td class="n" style="font-size:12px; font-weight:800; color:${r.d>1?'var(--green)':r.d<-1?'var(--red)':'var(--muted)'}">
-      ${Math.abs(r.d)<1?'—':(r.d>0?'▲ ':'▼ ')+nf(Math.abs(r.d))}</td></tr>`).join('');
+      ${Math.abs(r.d)<1?'-':(r.d>0?'▲ ':'▼ ')+nf(Math.abs(r.d))}</td></tr>`).join('');
 }
 ['w1','w2','w3','w4','w5','w6','w7'].forEach(id => $(id).addEventListener('input', simCalc));
 
 /* ---------- BARS evaluation ---------- */
 const COMPS = [
-  {n:'משמעת תיעוד ודיווח', d:'5 — יומן מלא ומדויק ללא תזכורת ב־95%+ מהימים · 3 — מדווח באופן סדיר, נדרשת תזכורת מדי פעם · 1 — דיווח חלקי או בדיעבד', sel:5},
-  {n:'בטיחות וציות', d:'5 — יוזם דיווח על ליקויים ועוצר עבודה לא בטוחה · 3 — מקיים נהלים ומשתתף בתדריכים · 1 — נדרשת אכיפה חוזרת', sel:5},
-  {n:'ביצוע מקצועי', d:'5 — עומד ביעדי הקצב באופן עקבי וללא ליווי · 3 — עומד ביעדים ברוב המקרים · 1 — נדרש פיקוח צמוד', sel:4},
-  {n:'שירות פנימי ושיתוף פעולה', d:'5 — משמש כתובת לצוותים אחרים ופותר ממשקים ביוזמתו · 3 — משתף פעולה כנדרש · 1 — מייצר חיכוך', sel:3},
-  {n:'תודעה עלותית', d:'5 — מזהה בזבוז ומציע חלופות מתומחרות · 3 — מודע לתקציב · 1 — אינו לוקח עלות בחשבון', sel:3}
+  {n:'משמעת תיעוד ודיווח', d:'5 - יומן מלא ומדויק ללא תזכורת ב־95%+ מהימים · 3 - מדווח באופן סדיר, נדרשת תזכורת מדי פעם · 1 - דיווח חלקי או בדיעבד', sel:5},
+  {n:'בטיחות וציות', d:'5 - יוזם דיווח על ליקויים ועוצר עבודה לא בטוחה · 3 - מקיים נהלים ומשתתף בתדריכים · 1 - נדרשת אכיפה חוזרת', sel:5},
+  {n:'ביצוע מקצועי', d:'5 - עומד ביעדי הקצב באופן עקבי וללא ליווי · 3 - עומד ביעדים ברוב המקרים · 1 - נדרש פיקוח צמוד', sel:4},
+  {n:'שירות פנימי ושיתוף פעולה', d:'5 - משמש כתובת לצוותים אחרים ופותר ממשקים ביוזמתו · 3 - משתף פעולה כנדרש · 1 - מייצר חיכוך', sel:3},
+  {n:'תודעה עלותית', d:'5 - מזהה בזבוז ומציע חלופות מתומחרות · 3 - מודע לתקציב · 1 - אינו לוקח עלות בחשבון', sel:3}
 ];
 const MULT = {1:0, 2:0.60, 3:1.00, 4:1.15, 5:1.35};
 function drawComps(){
@@ -947,7 +975,7 @@ function drawComps(){
   $('compBox').querySelectorAll('button').forEach(b => b.onclick = () => {
     COMPS[+b.dataset.c].sel = +b.dataset.v; drawComps();
   });
-  /* ממוצע ציוני הכשירויות מעוגל לדרגה שלמה — הדירוג הכולל.
+  /* ממוצע ציוני הכשירויות מעוגל לדרגה שלמה - הדירוג הכולל.
      המכפיל נגזר מהדרגה, לא מהממוצע, כדי שהעובד יקבל דירוג ולא מספר עשרוני. */
   const avgScore = COMPS.reduce((a,c) => a + c.sel, 0) / COMPS.length;
   const overall  = Math.min(5, Math.max(1, Math.round(avgScore)));
@@ -956,8 +984,8 @@ function drawComps(){
   const unit = 1.12, comp = 1.07;                  // מקדמי חברה ויחידה
   const perf = 0.10*comp + 0.60*unit + 0.30*avg;
   $('evalAmt').textContent = nf(base * perf) + ' ₪';
-  $('evalSub').textContent = `דירוג כולל ${overall} · ${RATE_TXT[overall]} — ממוצע ${avgScore.toFixed(1)} מ-${COMPS.length} כשירויות · מכפיל ${avg.toFixed(2)}`;
-  /* השפעה על המאגר של המנהל — יוסי הוא אחד מ-7 */
+  $('evalSub').textContent = `דירוג כולל ${overall} · ${RATE_TXT[overall]} - ממוצע ${avgScore.toFixed(1)} מ-${COMPS.length} כשירויות · מכפיל ${avg.toFixed(2)}`;
+  /* השפעה על המאגר של המנהל - יוסי הוא אחד מ-7 */
   const POOL = 145000;
   const others = TEAM.filter(e => e.n !== LIVE).reduce((a,e) => a + e.b * factorOf(e), 0);
   const mine = base * perf, left = POOL - others;
@@ -985,7 +1013,7 @@ const TPL = {
   asst:{w:[10,60,30], k:[['מדדי בטיחות מובילים',30],['דיווח ותיעוד מלא ובזמן',25],['שעות עבודה מול תקציב',15],['קצב ביצוע מול תכנון',15],['ניהול האתר וקבלני המשנה',15]]},
   proc:{w:[25,50,25], k:[['חיסכון קשה מאומת (Hard)',35],['ביצועי ספקים (OTD, פסילות)',20],['משמעת תהליך (תחרותיות, maverick)',20],['סגירת רכש לפני צו התחלת עבודה',15],['שביעות רצון לקוח פנימי',10]]},
   fin:{w:[30,45,25], k:[['הגשת חשבון חלקי במועד',25],['אפקטיביות גבייה (CEI)',25],['עיכבון וערבויות',20],['אישור בסבב ראשון',15],['ימים מאישור לתשלום ודיוק סגירה',15]]},
-  hr:{w:[40,30,30], k:[['תחלופה מצטערת בתפקידי מפתח',30],['הסמכות והיתרים בתוקף',20],['זמן איוש משרה קריטית',20],['ניהול מחזור התגמול',15],['שביעות רצון לקוח פנימי',15]]},
+  hr:{w:[40,30,30], k:[['תחלופה מצערת בתפקידי מפתח',30],['הסמכות והיתרים בתוקף',20],['זמן איוש משרה קריטית',20],['ניהול מחזור התגמול',15],['שביעות רצון לקוח פנימי',15]]},
   exec:{w:[60,20,20], k:[['רווחיות משוקללת של התיק',35],['שחיקת מרווח (Margin Fade)',25],['תזרים וצבר הזמנות',15],['דיוק אומדנים',15],['בטיחות תאגידית ודור המשך',10]]}
 };
 let curTpl = 'pm';
@@ -993,11 +1021,12 @@ function drawTpl(){
   const t = TPL[curTpl];
   [1,2,3].forEach(i => { $('L'+i).value = t.w[i-1]; $('LV'+i).textContent = t.w[i-1]; });
   $('kpiList').innerHTML = t.k.map((k,i) => `
-    <div class="kpirow"><span class="grab">⠿</span><span class="nm">${k[0]}</span>
+    <div class="kpirow"><span class="grab">⠿</span><span class="nm">${k[0]}${KPI_HELP[k[0]] ? ` <button class="hlp" type="button" data-h="${k[0].replace(/"/g,'&quot;')}">i</button>` : ''}</span>
     <input type="number" data-i="${i}" value="${k[1]}" min="0" max="100" step="5"><span style="font-size:12px;color:var(--muted)">%</span></div>`).join('');
   $('kpiList').querySelectorAll('input').forEach(inp => inp.oninput = () => {
     t.k[+inp.dataset.i][1] = +inp.value || 0; sums();
   });
+  if (typeof wireHelp === 'function') wireHelp('.screen[data-s="hr-builder"]');
   sums();
 }
 function sums(){
@@ -1012,9 +1041,9 @@ $('famPick').onchange = e => { curTpl = e.target.value; drawTpl(); };
 }));
 
 /* ---------- init ---------- */
-simCalc(); drawTpl(); setRole('ceo');
+simCalc(); setRole('ceo');
 
-/* ---------- המאגר שלי — חלוקה חיה ---------- */
+/* ---------- המאגר שלי - חלוקה חיה ---------- */
 const POOL_TOTAL = 145000, W_PERSONAL = 0.30;
 const RATE = {1:0, 2:0.6, 3:1, 4:1.15, 5:1.35};
 const RATE_TXT = {1:'לא מספק', 2:'מתחת לציפייה', 3:'עומד בציפייה', 4:'מעל הציפייה', 5:'יוצא דופן'};
@@ -1029,7 +1058,7 @@ const TEAM = [
 ];
 const START = TEAM.map(e => e.d);
 const factor = d => 1 + W_PERSONAL * (RATE[d] - 1);
-/* יוסי מזרחי הוא העובד שההערכה שלו פתוחה במסך "מילוי הערכה" —
+/* יוסי מזרחי הוא העובד שההערכה שלו פתוחה במסך "מילוי הערכה" -
    המכפיל שלו נגזר חי מממוצע הכשירויות, ולא מדירוג שנשמר.        */
 const LIVE = 'יוסי מזרחי';
 function liveRating(){
@@ -1049,7 +1078,7 @@ function poolRender(){
       <td class="n"><b>${d}</b> <span style="color:${e.n===LIVE?'var(--navy2)':'var(--muted)'}; font-size:11.5px">${RATE_TXT[d]}${e.n===LIVE?' · מהשאלון':''}</span></td>
       <td class="n">${m.toFixed(2)}</td>
       <td class="n"><b>${nf(v)} ₪</b></td>
-      <td class="n" style="color:${diff>0?'var(--green)':diff<0?'var(--red)':'var(--muted)'}">${diff===0?'—':(diff>0?'+':'−')+nf(Math.abs(diff))}</td>
+      <td class="n" style="color:${diff>0?'var(--green)':diff<0?'var(--red)':'var(--muted)'}">${diff===0?'-':(diff>0?'+':'−')+nf(Math.abs(diff))}</td>
       <td class="n"><button class="btn ghost gotoeval" style="padding:3px 9px; font-size:11.5px">הערכה מלאה</button></td></tr>`;
   }).join('');
   rows.querySelectorAll('.gotoeval').forEach(b => b.onclick = () => show('mgr-eval'));
@@ -1071,7 +1100,7 @@ function poolRender(){
 
 poolRender();
 
-/* ---------- נקודות המדידה של השנה — לעריכה במקום אחד ---------- */
+/* ---------- נקודות המדידה של השנה - לעריכה במקום אחד ---------- */
 const EVAL_POINTS = [
   ['Q1 · דיווח ותיעוד', '91%'],
   ['Q2 · דיווח ותיעוד', '96%'],
@@ -1099,7 +1128,7 @@ function cycleBudget(payroll){
   if (mode === 'fixed') {
     const b = +$('w7').value * 1e6;
     $('bResult').textContent = `תקציב המחזור: ${nf(b)} ₪`;
-    $('bExplain').textContent = `הסכום שהוגדר למעלה, ומתקבע בלחיצה על נעילת התקציב. עמידה ביעד הרווח: ${(actual/target*100).toFixed(0)}% — משפיעה על מקדם החברה של כל עובד, לא על גודל המאגר.`;
+    $('bExplain').textContent = `הסכום שהוגדר למעלה, ומתקבע בלחיצה על נעילת התקציב. עמידה ביעד הרווח: ${(actual/target*100).toFixed(0)}% - משפיעה על מקדם החברה של כל עובד, לא על גודל המאגר.`;
     return b;
   }
   const floor = (+$('bFloor').value/100) * payroll;
@@ -1109,7 +1138,7 @@ function cycleBudget(payroll){
   const b = Math.min(floor + share, cap);
   $('bResult').textContent = `תקציב המחזור: ${nf(b)} ₪`;
   $('bExplain').textContent = `רצפה ${$('bFloor').value}% מעלות השכר (${nf(floor)}) + ${$('bShare').value}% מהרווח שמעל היעד (${nf(share)})`
-    + (floor + share > cap ? ` — נחתך ע"י תקרת ${$('bCap').value}% (${nf(cap)})` : '') + '.';
+    + (floor + share > cap ? ` - נחתך ע"י תקרת ${$('bCap').value}% (${nf(cap)})` : '') + '.';
   return b;
 }
 ['bmode','bTarget','bActual','bFloor','bShare','bCap'].forEach(id => {
@@ -1118,21 +1147,21 @@ function cycleBudget(payroll){
 
 /* ---------- הסבר לכל פרמטר ---------- */
 const HELP = {
-  bmode:{t:'מודל מימון המאגר', d:'קובע מאיפה מגיע הכסף שמחולק — ולא איך הוא מחולק.',
+  bmode:{t:'מודל מימון המאגר', d:'קובע מאיפה מגיע הכסף שמחולק - ולא איך הוא מחולק.',
     o:[['קבוע','ההנהלה מכריזה על סכום. פשוט להסבר וודאי תקציבית, אבל מנותק מהתוצאה: גם בשנה חלשה משלמים את אותו סכום, וזה בדיוק מה שמחליש את הטענה שהבונוס הוא תוספת מותנית.'],
        ['היברידי','רצפה כאחוז מעלות השכר, ועוד נתח מהרווח שמעל היעד, עד תקרה. המאגר גדל וקטן עם הרווח. זו ההמלצה באפיון.']]},
-  bTarget:{t:'יעד הרווח השנתי', d:'הרווח שההנהלה הציבה לשנה. הוא המכנה של מקדם החברה — הרכיב היחיד שמשותף לכל 60 העובדים. ההגדרה עצמה (נקי לפני מס? EBITDA? מאוחד או פר־חברה?) היא החלטה חוסמת שחייבת להיסגר מול הכספים.'},
-  bActual:{t:'הרווח בפועל', d:'מה שהושג בסוף השנה. היחס בין הבפועל ליעד הוא אחוז העמידה: 14.98 מול 14.00 = 107%. מתחת לסף הכניסה — אפס לכולם, ללא יוצא מן הכלל.'},
-  bFloor:{t:'רצפת המאגר', d:'אחוז מעלות השכר השנתית שמחולק גם אם הרווח רק עבר את הסף. הרצפה קיימת כדי שהמנגנון לא ייעלם בשנה בינונית — עובד שנמדד כל השנה ומקבל אפס מפסיק להאמין למדידה.'},
+  bTarget:{t:'יעד הרווח השנתי', d:'הרווח שההנהלה הציבה לשנה. הוא המכנה של מקדם החברה - הרכיב היחיד שמשותף לכל 60 העובדים. ההגדרה עצמה (נקי לפני מס? EBITDA? מאוחד או פר־חברה?) היא החלטה חוסמת שחייבת להיסגר מול הכספים.'},
+  bActual:{t:'הרווח בפועל', d:'מה שהושג בסוף השנה. היחס בין הבפועל ליעד הוא אחוז העמידה: 14.98 מול 14.00 = 107%. מתחת לסף הכניסה - אפס לכולם, ללא יוצא מן הכלל.'},
+  bFloor:{t:'רצפת המאגר', d:'אחוז מעלות השכר השנתית שמחולק גם אם הרווח רק עבר את הסף. הרצפה קיימת כדי שהמנגנון לא ייעלם בשנה בינונית - עובד שנמדד כל השנה ומקבל אפס מפסיק להאמין למדידה.'},
   bShare:{t:'השתתפות ברווח העודף', d:'אחוז מהרווח שמעל היעד שנכנס למאגר. הבנצ׳מרק הענפי הוא 15%–20%. זה החלק שהופך את התגמול לשותפות אמיתית ולא למענק.'},
-  bCap:{t:'תקרת המאגר', d:'חסם עליון כאחוז מעלות השכר — הגנת תזרים לשנה חריגה. באפיון מומלץ 10%–12%. חריגה ממנו אינה נחסמת, אלא מטופלת במקדם ההתאמה.'},
-  w1:{t:'משכורות יעד — מנהל פרויקט', d:'כמה משכורות חודשיות מקבל מנהל פרויקט בעמידה מלאה ביעדים, כלומר במקדם 1.00. זהו הבסיס: שכר חודשי × משכורות יעד × מקדם ביצוע. הטווח המקובל בענף למנהל פרויקט הוא 2–3.'},
-  w2:{t:'משכורות יעד — הנהלה בכירה', d:'הטווח המקובל 3.5–5.0. אצל ההנהלה 60% מהמשקל הוא רכיב החברה, ולכן הסכום נראה גדול אך גם תנודתי הרבה יותר.'},
-  w3:{t:'משכורות יעד — שטח', d:'מנהלי עבודה, מהנדסים ועוזרים. הטווח 0.75–1.75. אצלם 60% מהמשקל הוא רכיב הפרויקט — מה שהם באמת שולטים בו.'},
-  w4:{t:'משכורות יעד — מטה', d:'רכש, כספים ומשאבי אנוש. הטווח 1.0–2.5, לפי מידת ההשפעה הישירה על התוצאה.'},
-  w5:{t:'סף הכניסה התאגידי', d:'מתחת לאחוז הזה מיעד הרווח לא משולם בונוס לאיש — גם לא לעובד מצטיין. <b>זה השער המשפטי:</b> בלעדיו הבונוס עלול להיחשב "תוספת פיקטיבית" ולהיכנס רטרואקטיבית לבסיס פיצויי הפיטורים וההפרשות הפנסיוניות. 85% הוא הסף המומלץ.'},
-  w6:{t:'תקרת מקדם הביצוע', d:'החסם העליון על מקדם הביצוע הכולל. בשוק מקובל 1.5–2.0. מומלץ להתחיל שמרני ב־1.50 בשנה הראשונה — קל להעלות תקרה, קשה מאוד להוריד אותה אחרי שהעובדים כבר ראו אותה.'},
-  w7:{t:'התקציב המאושר', d:'הסכום שההנהלה מכריזה כאן במודל הקבוע. אם סך החישוב עולה עליו, המערכת מחילה מקדם התאמה אחיד על כולם — לא חותכת למי שפחות חשוב.'},
+  bCap:{t:'תקרת המאגר', d:'חסם עליון כאחוז מעלות השכר - הגנת תזרים לשנה חריגה. באפיון מומלץ 10%–12%. חריגה ממנו אינה נחסמת, אלא מטופלת במקדם ההתאמה.'},
+  w1:{t:'משכורות יעד - מנהל פרויקט', d:'כמה משכורות חודשיות מקבל מנהל פרויקט בעמידה מלאה ביעדים, כלומר במקדם 1.00. זהו הבסיס: שכר חודשי × משכורות יעד × מקדם ביצוע. הטווח המקובל בענף למנהל פרויקט הוא 2–3.'},
+  w2:{t:'משכורות יעד - הנהלה בכירה', d:'הטווח המקובל 3.5–5.0. אצל ההנהלה 60% מהמשקל הוא רכיב החברה, ולכן הסכום נראה גדול אך גם תנודתי הרבה יותר.'},
+  w3:{t:'משכורות יעד - שטח', d:'מנהלי עבודה, מהנדסים ועוזרים. הטווח 0.75–1.75. אצלם 60% מהמשקל הוא רכיב הפרויקט - מה שהם באמת שולטים בו.'},
+  w4:{t:'משכורות יעד - מטה', d:'רכש, כספים ומשאבי אנוש. הטווח 1.0–2.5, לפי מידת ההשפעה הישירה על התוצאה.'},
+  w5:{t:'סף הכניסה התאגידי', d:'מתחת לאחוז הזה מיעד הרווח לא משולם בונוס לאיש - גם לא לעובד מצטיין. <b>זה השער המשפטי:</b> בלעדיו הבונוס עלול להיחשב "תוספת פיקטיבית" ולהיכנס רטרואקטיבית לבסיס פיצויי הפיטורים וההפרשות הפנסיוניות. 85% הוא הסף המומלץ.'},
+  w6:{t:'תקרת מקדם הביצוע', d:'החסם העליון על מקדם הביצוע הכולל. בשוק מקובל 1.5–2.0. מומלץ להתחיל שמרני ב־1.50 בשנה הראשונה - קל להעלות תקרה, קשה מאוד להוריד אותה אחרי שהעובדים כבר ראו אותה.'},
+  w7:{t:'התקציב המאושר', d:'הסכום שההנהלה מכריזה כאן במודל הקבוע. אם סך החישוב עולה עליו, המערכת מחילה מקדם התאמה אחיד על כולם - לא חותכת למי שפחות חשוב.'},
 };
 function attachHelp(scope){
   document.querySelectorAll(`${scope} .sl`).forEach(row => {
@@ -1144,7 +1173,7 @@ function attachHelp(scope){
     t.appendChild(btn);
     const box = document.createElement('div');
     box.className = 'hlpbox';
-    box.innerHTML = `<b>${h.t}</b> — ${h.d}` +
+    box.innerHTML = `<b>${h.t}</b> - ${h.d}` +
       (h.o ? h.o.map(([n, d]) => `<div class="opt"><b>${n}:</b> ${d}</div>`).join('') : '');
     row.appendChild(box);
     btn.onclick = () => { box.classList.toggle('on'); btn.classList.toggle('on'); };
@@ -1192,7 +1221,7 @@ function cfoRender(){
   $('cfoCount').textContent = open.length;
   $('cfoSum').textContent   = nf(sum) + ' ₪';
   $('cfoBlock').textContent = open.length ? 'כן' : 'לא';
-  $('cfoBlockD').textContent = open.length ? 'כל עוד נותרו רשומות ללא חתימה' : 'כל הנתונים אומתו — המחזור ניתן לאישור';
+  $('cfoBlockD').textContent = open.length ? 'כל עוד נותרו רשומות ללא חתימה' : 'כל הנתונים אומתו - המחזור ניתן לאישור';
   $('cfoBlock').parentElement.className = 'stat ' + (open.length ? 'r' : 'g');
   $('cfoNote').className = 'alert mt ' + (open.length ? 'al-a' : 'al-g');
   $('cfoIcon').textContent = open.length ? '⚑' : '✓';
@@ -1206,8 +1235,52 @@ const cfoResetBtn = $('cfoReset');
 if (cfoResetBtn) cfoResetBtn.onclick = () => { CFO.forEach(r => r.signed = false); cfoRender(); };
 cfoRender();
 
-/* drawComps רץ בסוף — הוא נשען על TEAM שמוגדר במסך המאגר */
+/* drawComps רץ בסוף - הוא נשען על TEAM שמוגדר במסך המאגר */
 drawComps();
+
+/* ---------- הסברים בבונה התבניות ---------- */
+const KPI_HELP = {"רווח גולמי בפועל מול תקציב": {"d": "הפער בין הרווח הגולמי בפועל לרווח הגולמי שתוקצב, על תקציב שאושר ונעל לפני תחילת הביצוע. נשאב מ-Priority.", "i": "משקל 40% אצל מנהל פרויקט אומר שרווחיות הפרויקט לבדה קובעת כמעט מחצית מהבונוס שלו; הורדה לאפס הופכת אותו למנהל לוח זמנים בלבד."}, "עמידה באבני דרך חוזיות": {"d": "אחוז אבני הדרך שהושלמו במועד. איחור בגין הארכת ביצוע מאושרת מנוטרל, ופיצוי מוסכם שנוכה בפועל מקטין ישירות. הזנה ידנית מול Priority.", "i": "במשקל 20% זהו הבלם מול לוח הזמנים החוזי; באפס מנהל הפרויקט יכול לדחות אבני דרך כדי לייפות רווח בלי להיפגע."}, "חריגים מאושרים ותביעות שהושבו": {"d": "ערך החריגים שאושרו ונחתמו מתוך ערך החוזה, ועוד הזמן הממוצע מזיהוי חריג ועד אישורו. נמדד על מאושר בלבד, מ-Priority.", "i": "משקל 15% דוחף לסגור חריגים מהר במקום לאגור אותם לשנה חלשה; באפס עבודה שבוצעה בלי אישור חוזי נשארת על חשבון החברה."}, "תזרים: חשבונות בזמן ו-DSO": {"d": "אחוז החשבונות החלקיים שהוגשו עד מועד החתך החוזי, ימי האשראי של הלקוח בפרויקט, והיקף עבודה שבוצעה ולא חויבה. נשאב מ-Priority.", "i": "משקל 15% מחבר את מנהל הפרויקט לתזרים ולא רק לרווח על הנייר; באפס הוא מרוויח יפה בזמן שהכסף לא נכנס."}, "איכות מסירה ועלות בדק": {"d": "מספר הליקויים בפרוטוקול המסירה ועלות תיקוני שנת הבדק בפועל, כאחוז מהיקף החוזה. הזנה ידנית.", "i": "משקל 10% הוא מה שמונע רווח שנקנה בקיצוץ באיכות; באפס עלות התיקונים אחרי המסירה כבר לא נוגעת למי שיצר אותה."}, "דיוק כמויות וסגירת חשבונות קב\"מ": {"d": "הסטייה בין החשבון הסופי של קבלן המשנה להסכם המקורי, ואחוז חשבונות קבלני המשנה שנסגרו תוך 60 יום ממסירה. נשאב מ-Priority.", "i": "משקל 25% אצל מהנדס ביצוע הופך את סגירת החשבונות למשימה שלו; באפס חשבונות נגררים שנה, מתנפחים, ואין להם בעלים."}, "צריכת חומרים מול תיאורטי": {"d": "בטון, ברזל וטפסנות: הכמות שסופקה בפועל מול הכמות המחושבת מהתוכניות. הבזבוז הטיפוסי בענף הוא 5%-10%. נשאב מ-Priority.", "i": "במשקל 20% כל נקודת בזבוז שנחסכת היא רווח ישיר; באפס אין לאיש תמריץ לשמור על חומר שנשפך או הוזמן ביתר."}, "תיאום תכנון (RFI, התנגשויות)": {"d": "מספר השאילתות הפתוחות מעל זמן התגובה שנקבע, ומספר התנגשויות המערכות שנתפסו לפני יציקה. מדד מנע, בהזנה ידנית.", "i": "משקל 20% מתגמל תפיסת בעיה לפני היציקה ולא אחריה; באפס המהנדס מתוגמל רק על תיקון תקלות שאפשר היה למנוע."}, "בקרת איכות ועלות rework": {"d": "מספר אי ההתאמות החוזרות, כלומר אותו ליקוי פעמיים, ועלות העבודות החוזרות בשקלים כאחוז מהיקף העבודה שבאחריותו. הזנה ידנית.", "i": "משקל 20% שם מחיר על עבודה שנעשית פעמיים; באפס עלות התיקון נבלעת בתקציב הפרויקט ואיש לא נמדד עליה."}, "הנדסת ערך (VE) מאומתת": {"d": "חיסכון מוכח משינוי פתרון הנדסי, מאומת מול התקציב המקורי וחתום על ידי החשב. ערך מחושב.", "i": "משקל 15% מתגמל מהנדס שמציע פתרון זול יותר; באפס אין תמריץ לחשוב מעבר לתכנון שהתקבל, גם כשיש חיסכון אמיתי."}, "שעות עבודה מול תקציב שעות": {"d": "השעות שנצרכו בפועל מול תקציב השעות שהוגדר לפעילות. הנתון מגיע ממערכת הנוכחות. המדד הקלאסי והחזק ביותר בשטח.", "i": "משקל 30% למנהל עבודה, עם תגמול על 10%-25% מהשעות שנחסכו; הורדה לאפס משאירה אותו עם לוח זמנים בלי שליטת עלות."}, "שעות עבודה מול תקציב": {"d": "אותו מדד בגרסה המקוצרת שהעובד רואה במסך שלו: שעות בפועל מול תקציב השעות ליחידת העבודה. מערכת נוכחות.", "i": "משקל 15% אצל עוזר מנהל עבודה מחבר גם אותו לעלות העבודה; באפס הוא נמדד רק על תיעוד ובטיחות."}, "קצב ביצוע מול תכנון": {"d": "יחידות ביצוע ליום מול התכנון השבועי: מ״ק יציקה, מ״ר טפסנות, מ״א צנרת. הזנה ידנית מהשטח.", "i": "משקל 20% שומר שקצב האתר יימדד ולא רק העלות; באפס אפשר להיראות חסכן בשעות פשוט על ידי ביצוע איטי יותר."}, "מדדי בטיחות מובילים": {"d": "סיורי בטיחות מתועדים, אחוז סגירת ליקויים בזמן, השתתפות בתדריכים, ציון ביקורת אתר, וקצב דיווחי כמעט ונפגע שבו עלייה היא ציון חיובי. הזנה ידנית.", "i": "משקל 30% אצל עוזר מנהל עבודה; מדידה מובילה במקום ספירת תאונות היא מה שמונע תת-דיווח, והורדה לאפס מחזירה את התמריץ להסתיר."}, "ניהול האתר וקבלני המשנה": {"d": "סדר וניקיון לפי ציון ביקורת, נוכחות צוותים וקבלני משנה מול ההתחייבות, ותיאום ממשקים באתר. הזנה ידנית.", "i": "משקל 15% מתמחר את הניהול היומיומי של האתר; באפס אף אחד לא נמדד על כך שקבלן משנה פשוט לא הגיע."}, "דיווח ותיעוד מלא ובזמן": {"d": "יומן עבודה יומי, דיווח כמויות מבוצעות ותיעוד צילומי. נמדד מהמערכת עצמה, לפי מה שהוזן בפועל ובמועד.", "i": "משקל 25% אצל עוזר מנהל עבודה, כי הוא מזין את הדאטה שכל השאר נשען עליה; באפס אין במה להוכיח חריג או תביעה."}, "דיווח ותיעוד בזמן": {"d": "הגרסה המקוצרת של אותו מדד: אחוז הימים שבהם היומן והכמויות דווחו במועד וללא תזכורת. נמדד מהמערכת.", "i": "משקל 10% אצל מנהל עבודה שומר על רצף התיעוד; באפס הדיווח נדחק לסוף החודש והנתונים מאבדים אמינות ושימוש."}, "חיסכון קשה מאומת (Hard)": {"d": "מחיר הבסיס פחות המחיר שנסגר, כפול הכמות שסופקה וחויבה בפועל. הבסיס נעול לפני המשא ומתן וחתום על ידי החשב. מחושב.", "i": "משקל 35% הוא לב תפקיד הרכש; באפס הפונקציה שמונתה כדי להוכיח ערך מדיד נשארת בלי המדד היחיד שמצדיק אותה."}, "ביצועי ספקים (OTD, פסילות)": {"d": "אספקה בזמן של ספקים אסטרטגיים, שיעור פסילות ופגמים, ומספר המחלוקות והתביעות מול ספקים. נשאב מ-Priority.", "i": "משקל 20% הוא המשקל הנגדי לחיסכון, ומתחת ל-90% OTD רכיב החיסכון מתאפס לגמרי; באפס משתלם לקנות זול ולשלם בתוספות."}, "משמעת תהליך (תחרותיות, maverick)": {"d": "אחוז ההוצאה שעברה הליך תחרותי עם שלוש הצעות ומעלה, רכש מחוץ לחוזה ביעד מתחת ל-5%, זמן מחזור הזמנה ושיעור רכש חירום. Priority.", "i": "משקל 20% הופך את הרכש למסודר ולא רק לזול; באפס אפשר להציג חיסכון יפה תוך עקיפת כל הליך תחרותי."}, "סגירת רכש לפני צו התחלת עבודה": {"d": "אחוז מהיקף הרכש בפרויקט שנסגר לפני תחילת הביצוע בפועל. נשאב מ-Priority.", "i": "משקל 15% הוא המדד שמונע רכש חירום במחירי שוק גבוהים; באפס הרכש נגרר לאמצע הביצוע וכל עיכוב נפדה במחיר."}, "שביעות רצון לקוח פנימי": {"d": "סקר קצר ובעיתוי קבוע שבו מנהלי הפרויקטים מדרגים את הרכש, ובמקביל סקר על שירות המטה. דו-כיווני, כדי שלא יהפוך לכלי האשמה.", "i": "משקל 10% ברכש ו-15% במשאבי אנוש, מוגבל בכוונה כי סקר קל להטות; באפס פונקציית המטה נמדדת במספרים בלבד ולא בשירות."}, "הגשת חשבון חלקי במועד": {"d": "אחוז החשבונות שהוגשו עד מועד החתך החוזי, יעד 100%. נשלט כמעט לחלוטין על ידי הנהלת החשבונות. נשאב מ-Priority.", "i": "משקל 25% על המדד החזק ביותר בסעיף, כי כל יום איחור הוא יום תזרים אבוד; באפס אין דדליין אמיתי להגשה."}, "אפקטיביות גבייה (CEI)": {"d": "מדד שמנטרל חוב שטרם הגיע מועד פירעונו, יעד 80% ומעלה טוב ו-95% מצוין, יחד עם הפער מה-DSO הטוב האפשרי. ערך מחושב.", "i": "משקל 25% מודד גבייה רק במקטע שבאמת בשליטת הצוות; באפס נשארת מדידה על הגשה בלבד, בלי אחריות לכסף שנכנס."}, "עיכבון וערבויות": {"d": "אחוז העיכבון ששוחרר בזמן מאירוע הטריגר, גיל העיכבון הפתוח, אחוז הערבויות ששוחררו בזמן, והעמלות הבנקאיות כאחוז מהמחזור. Priority.", "i": "משקל 20% נותן בעלים למזומן כלוא שהיום אין לו בעלים; באפס כספי עיכבון וערבויות ממשיכים לשבת בבנק בלי שאיש עוקב."}, "אישור בסבב ראשון": {"d": "אחוז החשבונות שאושרו ללא הפחתה כבר בסבב הראשון, יעד 90% ומעלה. מודד את איכות חבילת החשבון. הזנה ידנית.", "i": "משקל 15% מתגמל חשבון מוכן היטב עם מדידות ותיעוד צילומי; באפס חשבונות חוזרים לסבבים נוספים והתזרים נדחה בכל פעם."}, "ימים מאישור לתשלום ודיוק סגירה": {"d": "מספר הימים מאישור החשבון ועד קבלת התשלום, ולצידם מספר הימים לסגירה החודשית ודיוק הדיווח. נשלט במלואו. Priority.", "i": "משקל 15% סוגר את הקצה האחרון של מחזור הכסף; באפס אפשר להגיש בזמן ולגבות יפה, ועדיין לסגור חודש באיחור."}, "תחלופה מצערת בתפקידי מפתח": {"d": "עזיבה של עובדים שרצינו לשמור, מרשימה סגורה בלבד: מנהלי פרויקט, מנהלי עבודה, מהנדסים ורכש. לא תחלופה כוללת. ערך מחושב.", "i": "משקל 30% משקף עלות החלפת מנהל פרויקט של כ-45,000 דולר ו-16 עד 20 שבועות עד תפוקה מלאה; באפס השימור לא נמדד."}, "הסמכות והיתרים בתוקף": {"d": "אחוז העובדים עם הסמכה בתוקף: מנהלי עבודה במרשם החדש עם חידוש כל 5 שנים, מפעילי ציוד וממוני בטיחות. נמדד מהמערכת.", "i": "משקל 20% מחזיק את החברה בתאימות לתקנות הבנייה שנכנסות ב-2026; באפס תוקף שפג מתגלה רק בביקורת או אחרי אירוע."}, "זמן איוש משרה קריטית": {"d": "ימים מפתיחת דרישה ועד חתימת חוזה, נורמה 30 עד 45 יום, ולצידם אחוז המשרות שאוישו פנימית ביעד 30%-50%. נמדד מהמערכת.", "i": "משקל 20% הופך גיוס איטי לעלות מדידה; באפס משרה קריטית יכולה לעמוד פתוחה חודשים בלי שזה יופיע בשום מקום."}, "ניהול מחזור התגמול": {"d": "אחוז ההערכות שהושלמו במועד, קיום ישיבות הכיול ושיעור הערעורים. מדדי תהליך שנמדדים מהמערכת, והכי קשים לזייף.", "i": "משקל 15% מבטיח שהמנגנון עצמו ירוץ בזמן; באפס מחזור התגמול נגרר, מנהלים לא ממלאים, והמערכת מאבדת אמינות כבר בשנה הראשונה."}, "רווחיות משוקללת של התיק": {"d": "ממוצע משוקלל של הרווחיות הגולמית בכל הפרויקטים הפעילים יחד, ולא פרויקט בודד. נשאב מ-Priority.", "i": "משקל 35% אצל הנהלה בכירה מונע התמקדות בפרויקט דגל אחד; באפס אפשר להציג הצלחה נקודתית בזמן שהתיק כולו נשחק."}, "שחיקת מרווח (Margin Fade)": {"d": "הפער המצטבר בין המרווח שהוצג בהצעה למרווח שהתקבל בפועל במסירה. קבלן בינוני מאבד כ-4 נקודות אחוז בשנה, והיעד לצמצם לנקודה אחת. מחושב.", "i": "משקל 25% מחייב את ההנהלה לסגור את הפער בין ההבטחה לתוצאה; באפס אפשר לתמחר יפה ולהסביר את השחיקה בדיעבד."}, "תזרים וצבר הזמנות": {"d": "תזרים תפעולי מול תקציב, ולצידו היקף הצבר החתום לשנה הבאה. קריטי בקבלנות מסגרת שבה אין התחייבות להיקף. נשאב מ-Priority.", "i": "משקל 15% מכריח את ההנהלה להסתכל גם על השנה הבאה; באפס נמדדת רק השנה הנוכחית, וצבר ריק מתגלה מאוחר מדי."}, "דיוק אומדנים": {"d": "סטיית אומדן ההצעה מהעלות בפועל, נמדדת לפי אחוזון ולא לפי ממוצע. ערך מחושב.", "i": "משקל 15% הוא המדד שמונע לזכות בכל מכרז ולהפסיד בכל פרויקט; באפס אין מחיר פנימי לתמחור אגרסיבי מדי."}, "בטיחות תאגידית ודור המשך": {"d": "מדדי בטיחות מובילים ברמת החברה כולה, יחד עם שרידות ומוכנות של תפקידי מפתח לתפקידי המשך. הזנה ידנית.", "i": "משקל 10% מחבר את ההנהלה הבכירה לבטיחות ולהמשכיות ולא רק לרווח; באפס שני אלה נשארים באחריות השטח בלבד."}};
+const BUILD_HELP = {
+  fam:{t:'משפחת תפקידים', d:'כל משפחה היא תבנית תגמול עצמאית - משקלים, מדדים ומדרגות משלה. בחירה כאן פותחת את התבנית לעריכה; היא אינה משנה שום עובד אחר.',
+    i:'8 משפחות היום. הוספת תשיעית היא רשומה חדשה, לא גרסת תוכנה.'},
+  L1:{t:'רכיב חברה', d:'המשקל שניתן לרווח הקבוצה מול היעד - הרכיב היחיד שמשותף לכל 60 העובדים.',
+    i:'העלאה הופכת את הבונוס לתלוי בתוצאה הכללית: אצל ההנהלה 60%, אצל מנהל עבודה 10% בלבד. הורדה לאפס מנתקת את העובד מהצלחת החברה.'},
+  L2:{t:'רכיב פרויקט / פונקציה', d:'המשקל שניתן למדדי התפקיד עצמו - מה שהעובד באמת שולט בו.',
+    i:'זהו עקרון השליטה. אצל מנהל עבודה 60%, אצל מטה 30%. הורדה מחלישה את הקשר בין מאמץ אישי לתגמול.'},
+  L3:{t:'רכיב אישי', d:'המשקל שניתן להערכת המנהל הישיר, שנגזרת מממוצע הכשירויות.',
+    i:'מוגבל בכוונה ל־20%–30%: מכפיל של 0–1.35 על רכיב של 25% מזיז לכל היותר כ־9% מסך הבונוס. העלאה מעל 30% הופכת את המנגנון לסובייקטיבי.'},
+  st:{t:'מדרגות', d:'הפונקציה שממירה אחוז עמידה ביעד לניקוד, ומוחלת באופן זהה על כל מדד: מתחת לסף אפס, בין סף ליעד לינארי, בין יעד למקסימום לינארי, ומעל - תקרה.',
+    i:'הורדת הסף מתחת ל־85% מרככת את הדרישה; העלאת המקסימום מעל 150% מייקרת מאוד שנה חזקה.'},
+  g1:{t:'שער הרווח התאגידי', d:'אם רווח החברה נמוך מ־85% מהיעד - לא משולם בונוס לאיש, כולל לעובד מצטיין.',
+    i:'<b>זהו השער המשפטי.</b> בלעדיו הבונוס עלול להיחשב תוספת פיקטיבית ולהיכנס רטרואקטיבית לבסיס פיצויי הפיטורים וההפרשות הפנסיוניות. ביטולו הוא החשיפה הגדולה במסמך.'},
+  g2:{t:'שער האתיקה', d:'הפרת אתיקה או משמעת חמורה מחלטת את מלוא הבונוס של אותו עובד.',
+    i:'חל על העובד בלבד ולא על הצוות. ביטולו משאיר את החברה לשלם בונוס למי שהפר את כלליה.'},
+  g3:{t:'שער הבטיחות', d:'תאונה קטלנית או צו הפסקת עבודה מאפסים את רכיב הפרויקט לכל המשויכים לאותו אתר. רכיב החברה והרכיב האישי נשארים.',
+    i:'בינארי בכוונה - ניקוד הדרגתי של בטיחות מייצר תת־דיווח. איפוס מלא של הבונוס היה ענישה קולקטיבית שקשה להגן עליה.'},
+  g4:{t:'שער ההדרכות', d:'עובד שלא השלים הדרכות בטיחות חובה מאבד את הרכיב האישי.',
+    i:'בשטח זו הדרישה הרגולטורית הבסיסית. ביטולו מסיר את התמריץ היחיד להשלים הדרכות בזמן.'},
+};
+function hbHtml(h){ return `<b>${h.t}</b> - ${h.d}${h.i ? `<div class="opt"><b>השפעה:</b> ${h.i}</div>` : ''}`; }
+function wireHelp(scope){
+  document.querySelectorAll(`${scope} .hlp[data-h]`).forEach(btn => {
+    if (btn.dataset.wired) return; btn.dataset.wired = '1';
+    btn.onclick = (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      const key = btn.dataset.h;
+      let box = document.getElementById('hb-' + key);
+      const h = BUILD_HELP[key] || (KPI_HELP[key] ? {t:key, d:KPI_HELP[key].d, i:KPI_HELP[key].i} : null);
+      if (!h) return;
+      if (!box) { box = document.createElement('div'); box.className = 'hlpbox'; box.id = 'hb-' + key;
+                  btn.closest('.kpirow, .sl, .miniline, .card').after(box); }
+      if (!box.innerHTML) box.innerHTML = hbHtml(h);
+      box.classList.toggle('on'); btn.classList.toggle('on');
+    };
+  });
+}
+wireHelp('.screen[data-s="hr-builder"]');
+
+/* drawTpl רץ בסוף - הוא נשען על KPI_HELP */
+drawTpl();
 </script>
 </body>
 </html>
