@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המלך שביטל את בית המשפט — אנחנו שופטים את עצמנו</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="משל הממלכה שבה סירבו העדים להעיד — והמלך ביטל את בית הדין: הבורא בחר שנשפוט את עצמנו. עוונותינו מוסתרים מאיתנו, והמעיד על חברו — שופט את עצמו">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/lishpot-et-atzmenu">
+<meta property="og:title" content="המלך שביטל את בית המשפט — אנחנו שופטים את עצמנו">
+<meta property="og:description" content="משל הממלכה שבה סירבו העדים להעיד — והמלך ביטל את בית הדין: הבורא בחר שנשפוט את עצמנו. עוונותינו מוסתרים מאיתנו, והמעיד על חברו — שופט את עצמו">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="המלך שביטל את בית המשפט — אנחנו שופטים את עצמנו">
+<meta name="twitter:description" content="משל הממלכה שבה סירבו העדים להעיד: הבורא בחר שנשפוט את עצמנו — והמעיד על חברו שופט את עצמו">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 56px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(32px,5.2vw,50px); text-align:center; color:var(--ink); line-height:1.16; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:38px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* mashal story */
+  .story{background:linear-gradient(180deg, rgba(91,58,120,0.07), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.22); border-radius:10px; padding:26px 28px; margin:26px 0;}
+  .story .tag{display:inline-block; font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--royal); text-transform:uppercase; margin-bottom:14px; border-bottom:1px solid rgba(91,58,120,0.3); padding-bottom:4px;}
+  .story p{font-size:17px; margin-bottom:12px;} .story p:last-child{margin-bottom:0;}
+
+  /* chillul wordplay */
+  .word{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep); border-radius:10px; padding:26px 24px; margin:26px 0; text-align:center;}
+  .word .pair{display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:10px;}
+  .word .w{font-family:'David Libre',serif; font-size:28px; font-weight:900; color:var(--gold);}
+  .word .eq{color:var(--gold-light); font-size:18px; font-family:'Bellefair',serif;}
+  .word p{font-size:15px; color:rgba(245,236,217,0.85); margin:0; line-height:1.7;}
+  .word strong{color:var(--gold-light);}
+
+  /* hidden avonot proof */
+  .proof{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:22px 28px; margin:26px 0; border-radius:3px;}
+  .proof .lbl{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:10px;}
+  .proof p{font-size:17px; margin-bottom:10px; line-height:1.75;} .proof p:last-child{margin-bottom:0;}
+  .proof .chain{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:12px;}
+  .proof .c{background:rgba(255,250,235,0.55); border:1px solid rgba(140,42,30,0.25); border-radius:8px; padding:10px 16px; font-size:14px; color:var(--ink-soft); text-align:center;}
+  .proof .arw{color:var(--crimson); font-size:18px;}
+
+  /* the choice */
+  .choice{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .ch{padding:24px 22px; border-radius:8px;}
+  .ch .lbl{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; margin-bottom:8px;}
+  .ch h4{font-size:19px; margin-bottom:8px;}
+  .ch .d{font-size:14.5px; line-height:1.65;}
+  .ch-meid{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .ch-meid .lbl{color:var(--gold-deep);} .ch-meid h4{color:var(--crimson);} .ch-meid .d{color:var(--ink-soft);}
+  .ch-shotek{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .ch-shotek .lbl{color:var(--gold-light);} .ch-shotek h4{color:var(--gold);} .ch-shotek .d{color:rgba(245,236,217,0.85);}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+  .final-seal{margin-top:22px; padding-top:18px; border-top:1px solid rgba(184,138,44,0.35);}
+  .seal-quote{font-family:'David Libre',serif; font-size:20px; font-weight:700; color:var(--crimson); margin:0 0 6px; line-height:1.6;}
+  .seal-source{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px; color:var(--gold-deep);}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+
+  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+
+  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
+    .choice{grid-template-columns:1fr;} .word .w{font-size:22px;}
+    p{font-size:17px;} .story p{font-size:16px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">משל ונמשל · דין ומשפט</div>
+    <h1>הַמֶּלֶךְ שֶׁבִּטֵּל אֶת בֵּית הַמִּשְׁפָּט</h1>
+    <p class="subtitle">המלך בחר — שאנחנו נשפוט את עצמנו</p>
+
+    <div class="story">
+      <span class="tag">המשל · הממלכה והעדים</span>
+      <p>
+        היתה ממלכה אחת ובה <strong>בית דין</strong> שהיה שופט בענייני ממונות ונפשות.
+        והיה מנהג בעיר: כל מי שהיה לו משפט, והיו עדים למה שקרה —
+        <strong>העדים היו מסרבים להעיד</strong> נגד האשם. וכך היו פוטרים את הנאשם
+        בחוסר ראיות — <strong>וכולם יצאו זכאים בדין</strong>.
+      </p>
+      <p>
+        כשראה זאת המלך — שאנשים אינם מוכנים להעיד בדין אחד על השני —
+        <strong>ביטל את בית המשפט לתמיד</strong>, ופיטר את השופטים והשוטרים לאלתר.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הַנִּמְשָׁל — אָנוּ הַשּׁוֹפְטִים</h2>
+      <p>
+        המלך בחר <strong>שאנחנו נשפוט את עצמנו</strong>. אדם חוטא בסתר — ונפרעין ממנו בגלוי:
+      </p>
+      <div class="pasuk">
+        כָּל הַמְחַלֵּל שֵׁם שָׁמַיִם בַּסֵּתֶר — נִפְרָעִין מִמֶּנּוּ בַּגָּלוּי
+        <span class="pasuk-source">— אבות ד, ד</span>
+      </div>
+    </div>
+
+    <div class="word">
+      <div class="pair">
+        <span class="w">מְחַלֵּל</span>
+        <span class="eq">מלשון</span>
+        <span class="w">חֻלִּין</span>
+      </div>
+      <p>
+        הפירוש הפנימי: המחלל — מי שמתעסק ב<strong>חולין ובקדושה יחד</strong>,
+        ולא רק בקדושה. ואז הוא עושה עבירות <strong>בסתר</strong> — והכוונה:
+        העבירות <strong>מוסתרות ממנו עצמו</strong>.
+      </p>
+    </div>
+
+    <div class="proof">
+      <div class="lbl">ההוכחה — עוונותינו מוסתרים מאיתנו</div>
+      <p>
+        שאמרו חז״ל: רוב בגזל, מיעוט בעריות, והכל באבק לשון הרע — והאדם אינו מרגיש.
+        ועוד: <em>״אין יסורין בלא עוון״</em>, ו<em>״בְּחֵטְא יֶחֱמַתְנִי אִמִּי״</em>.
+      </p>
+      <div class="chain">
+        <span class="c">עוון = מזיד</span>
+        <span class="arw">⟸</span>
+        <span class="c">וכי יש יהודי שעובר בכוונה תחילה? ודאי שלא</span>
+        <span class="arw">⟸</span>
+        <span class="c">ולכולנו יסורים</span>
+        <span class="arw">⟸</span>
+        <span class="c">מכאן: עוונותינו מוסתרים מאיתנו</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הַמִּשְׁפָּט הָאֲמִתִּי</h2>
+      <p>
+        אז הוא עובר בסתר — ואז <strong>מגלגלים לו את עוונותיו על חברו</strong>:
+        מראים לו בחברו את חטאו שלו. ועכשיו הבחירה בידו —
+      </p>
+    </div>
+
+    <div class="choice">
+      <div class="ch ch-meid">
+        <div class="lbl">אם מעיד</div>
+        <h4>הֵעִיד עַל חֲבֵרוֹ כְּחוֹטֵא</h4>
+        <div class="d">שפט את <strong>עצמו</strong> על חטאו מן העבר — שהרי מה שרואה בחברו, שלו הוא.</div>
+      </div>
+      <div class="ch ch-shotek">
+        <div class="lbl">אם שותק</div>
+        <h4>סֵרֵב לְהָעִיד עַל חֲבֵרוֹ</h4>
+        <div class="d"><b style="color:var(--gold-light)">פטר את עצמו</b> — ובהעדר הקטגור מתבטל המשפט, וכולם זכאין.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        ונמצא שכל מציאות הרע בעולם היא <strong>מאדם לחברו</strong> — שהרי
+        <em>״אין רע יורד מלמעלה כלל״</em>.
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">בְּהֶעְדֵּר הַקָּטֵגוֹר — מִתְבַּטֵּל הַמִּשְׁפָּט</p>
+      <p class="final-explanation">
+        המלך ביטל את בית הדין ומסר את השיפוט לנו:<br>
+        המעיד על חברו — חורץ את דין עצמו;<br>
+        והמלמד זכות ושותק — פוטר את עצמו ואת כל העולם.
+      </p>
+      <div class="final-seal">
+        <p class="seal-quote">אֵין רַע יוֹרֵד מִלְּמַעְלָה כְּלָל</p>
+        <span class="seal-source">— מדרש בראשית רבה נא · ועל דרך התניא</span>
+      </div>
+    </div>
+
+    <p class="note">
+      * משל ונמשל. מקורות: אבות ד, ד (המחלל שם שמים בסתר) · בבא בתרא קסה ע"א (רוב בגזל,
+      מיעוט בעריות, והכל באבק לשון הרע) · שבת נה ע"א (אין יסורין בלא עוון) · תהלים נא, ז ·
+      ״אין רע יורד מלמעלה״ (בראשית רבה נא, ג; ועל דרך החסידות). הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · משל ונמשל</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/aron-hamet">ארון המת שהוציא את המלך</a>
+        <a class="related-link" href="/zion/hasatan-ze-ani">השטן זה אני</a>
+        <a class="related-link" href="/zion/shalosh-yirot">שלוש יראות</a>
+        <a class="related-link" href="/zion/oyvei-ish-anshei-beito">אויבי איש אנשי ביתו</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
