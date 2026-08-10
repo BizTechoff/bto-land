@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הסוס המשוגע — ארבע דרכים ליצר, ורק אחת עובדת</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="משל הסוס המשוגע של רבי נחמן — האגרוף, הרצועה, החבל והאילן, וכדור בראש: ארבע דרכים להתמודד עם היצר, ומדוע רק האחרונה עובדת">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/hasus-hameshuga">
+<meta property="og:title" content="הסוס המשוגע — ארבע דרכים ליצר, ורק אחת עובדת">
+<meta property="og:description" content="משל הסוס המשוגע של רבי נחמן — האגרוף, הרצועה, החבל והאילן, וכדור בראש: ארבע דרכים להתמודד עם היצר, ומדוע רק האחרונה עובדת">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="הסוס המשוגע — ארבע דרכים ליצר, ורק אחת עובדת">
+<meta name="twitter:description" content="משל הסוס המשוגע של רבי נחמן — האגרוף, הרצועה, החבל והאילן, וכדור בראש">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 56px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(36px,6vw,56px); text-align:center; color:var(--ink); line-height:1.13; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:38px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* mashal text */
+  .mashal{background:linear-gradient(180deg, rgba(91,58,120,0.07), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.22); border-radius:10px; padding:28px 30px; margin:26px 0;}
+  .mashal .tag{display:inline-block; font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--royal); text-transform:uppercase; margin-bottom:14px; border-bottom:1px solid rgba(91,58,120,0.3); padding-bottom:4px;}
+  .mashal p{font-family:'David Libre',serif; font-size:16.5px; line-height:1.9; margin-bottom:12px; color:var(--ink);}
+  .mashal p:last-child{margin-bottom:0;}
+  .mashal .src{display:block; text-align:center; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic; margin-top:10px;}
+  .mashal .hl{color:var(--crimson); font-weight:700;}
+
+  /* keys */
+  .keys{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:26px 0;}
+  .key{padding:20px 16px; border-radius:8px; text-align:center; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.28);}
+  .key .w{font-size:20px; font-weight:900; color:var(--crimson); margin-bottom:6px;}
+  .key .d{font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+
+  /* four stages */
+  .stage{display:flex; gap:18px; margin:18px 0; align-items:flex-start; padding:22px 24px; border-radius:10px;}
+  .stage .num{flex:0 0 auto; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Bellefair',serif; font-size:20px; font-weight:700;}
+  .stage .body{flex:1;}
+  .stage h4{font-size:20px; margin-bottom:6px;}
+  .stage .tool{font-family:'Bellefair',serif; font-size:12px; letter-spacing:2px; margin-bottom:8px;}
+  .stage .body p{font-size:16px; margin:0 0 10px; line-height:1.7;}
+  .stage .body p:last-child{margin-bottom:0;}
+  .stage .verdict{margin-top:10px; padding-top:10px; border-top:1px solid rgba(184,138,44,0.25); font-size:14.5px; font-style:italic;}
+  .s1{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.24);}
+  .s1 .num{background:rgba(140,42,30,0.12); color:var(--crimson); border:1px solid rgba(140,42,30,0.3);}
+  .s1 h4{color:var(--crimson);} .s1 .tool{color:var(--gold-deep);} .s1 .body p{color:var(--ink-soft);} .s1 .verdict{color:var(--crimson);}
+  .s2{background:rgba(184,138,44,0.08); border:1px solid rgba(184,138,44,0.26);}
+  .s2 .num{background:rgba(184,138,44,0.16); color:var(--gold-deep); border:1px solid rgba(184,138,44,0.36);}
+  .s2 h4{color:var(--crimson);} .s2 .tool{color:var(--gold-deep);} .s2 .body p{color:var(--ink-soft);} .s2 .verdict{color:var(--crimson);}
+  .s3{background:rgba(184,138,44,0.13); border:1px solid rgba(184,138,44,0.3);}
+  .s3 .num{background:rgba(184,138,44,0.2); color:var(--gold-deep); border:1px solid rgba(184,138,44,0.4);}
+  .s3 h4{color:var(--crimson);} .s3 .tool{color:var(--gold-deep);} .s3 .body p{color:var(--ink-soft);} .s3 .verdict{color:var(--crimson);}
+  .s4{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .s4 .num{background:rgba(184,138,44,0.2); color:var(--gold); border:1px solid var(--gold-deep);}
+  .s4 h4{color:var(--gold);} .s4 .tool{color:var(--gold-light);} .s4 .body p{color:rgba(245,236,217,0.88);} .s4 .verdict{color:var(--gold-light); border-top-color:rgba(184,138,44,0.4);}
+  .s4 strong{color:var(--gold-light);} .s4 em{color:var(--gold-light);}
+
+  /* chushim */
+  .chushim{background:linear-gradient(180deg, rgba(91,58,120,0.10), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.28); border-radius:8px; padding:26px 28px; margin:28px 0;}
+  .chushim .k{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--royal); text-transform:uppercase; margin-bottom:12px; text-align:center;}
+  .chushim p{font-size:17px; margin-bottom:10px;} .chushim p:last-child{margin-bottom:0;}
+
+  /* moshe method */
+  .method{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .mt{padding:24px 20px; border-radius:8px;}
+  .mt .lbl{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; margin-bottom:8px; color:var(--gold-deep);}
+  .mt h4{font-size:18px; color:var(--crimson); margin-bottom:8px;}
+  .mt .d{font-size:14.5px; color:var(--ink-soft); line-height:1.6;}
+  .mt .items{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+  .mt .items span{background:rgba(184,138,44,0.12); border:1px solid rgba(184,138,44,0.26); border-radius:14px; padding:3px 11px; font-size:13px; color:var(--ink-soft);}
+  .mt-prishut{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.24);}
+  .mt-taava{background:linear-gradient(135deg, rgba(184,138,44,0.14), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32);}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.6; margin-bottom:12px; font-weight:500;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+  .final-seal{margin-top:22px; padding-top:18px; border-top:1px solid rgba(184,138,44,0.35);}
+  .seal-quote{font-family:'David Libre',serif; font-size:20px; font-weight:700; color:var(--crimson); margin:0 0 6px; line-height:1.6;}
+  .seal-source{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px; color:var(--gold-deep);}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+
+  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+
+  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
+    .keys{grid-template-columns:1fr;} .method{grid-template-columns:1fr;}
+    .stage{gap:12px; padding:18px 16px;} .stage .num{width:42px; height:42px; font-size:17px;}
+    p{font-size:17px;} .mashal p{font-size:15.5px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">משל ונמשל · רבי נחמן מברסלב</div>
+    <h1>הַסּוּס הַמְשֻׁגָּע</h1>
+    <p class="subtitle">ארבע דרכים ליצר — ורק האחרונה עובדת</p>
+
+    <div class="mashal">
+      <span class="tag">המשל · ליקוטי מוהר״ן תנינא, סו</span>
+      <p>
+        מָשָׁל, שֶׁפַּעַם אֶחָד נָסְעוּ שְׁנֵי בְּנֵי אָדָם עִם <span class="hl">סוּס מְבֹהָל וּמְשֻׁגָּע</span>,
+        וְנָשָׂא אוֹתָם הַסּוּס וְהִשְׁלִיכָם מִן הָעֲגָלָה. וְעָמַד אֶחָד וְהִתְחִיל לְהַכּוֹת אֶת הַסּוּס
+        <span class="hl">בְּאֶגְרוֹף</span>, וְהִכָּה אוֹתוֹ הַרְבֵּה. וְשָׂחַק מִמֶּנּוּ הַשֵּׁנִי וְאָמַר לוֹ:
+        הֲלֹא אַתָּה מַכֶּה אֶת יָדְךָ — וּמַה תּוֹעִיל לְהַסּוּס הַכָּאָה זוֹ?
+      </p>
+      <p>
+        רַק אַתָּה צָרִיךְ לִקַּח <span class="hl">רְצוּעָה</span> שֶׁמַּכִּין בָּהּ הַסּוּסִים. וְהָלַךְ וְעָשָׂה כֵּן,
+        וְהִתְחִיל לְהַכּוֹת אֶת הַסּוּס — וְעָמַד הַסּוּס וְרָץ בְּבֶהָלָה גְּדוֹלָה וּבָרַח, וְנָשָׂא אוֹתָם
+        וְהִשְׁלִיךְ אוֹתָם לְתוֹךְ רֶפֶשׁ וָטִיט, וְהַסּוּס בָּרַח לוֹ לְהַלָּן. נִמְצָא שֶׁגַּם זֶה אֵינוֹ עֵצָה טוֹבָה.
+      </p>
+      <p>
+        וְיָעֲצוּ אוֹתוֹ שֶׁיִּקַּח <span class="hl">חֶבֶל יָפֶה וְיִקְשֹׁר אֶת הַסּוּס לְאֵיזֶה אִילָן</span>
+        וְיַכֶּה אוֹתוֹ הַרְבֵּה, וּבָזֶה יְלַמְּדוֹ לְהֵיטִיב. וְעָשָׂה כָּךְ וְהִכָּה הַסּוּס הַרְבֵּה וְנִתְיַגַּע —
+        וְרָאָה שֶׁגַּם זֶה אֵינוֹ עֵצָה טוֹבָה, כִּי אֵינוֹ כְּדַאי הַסּוּס כֻּלּוֹ בְּעַד הַיְגִיעָה וְהַקֹּצֶר רוּחַ.
+      </p>
+      <p>
+        <span class="hl">וְאֵין תַּקָּנָה לְסוּס כָּזֶה — רַק לִירוֹת אוֹתוֹ עַל יְדֵי קְנֵי שְׂרֵפָה.
+        וְזֶה צַר לוֹ כָּךְ.</span>
+      </p>
+      <span class="src">— רבי נחמן מברסלב</span>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">❖</span></div>
+
+    <div class="section">
+      <h2 class="section-title">הַנִּמְשָׁל — עַל פִּי מַעֲשֵׂה מֶרְכָּבָה</h2>
+    </div>
+
+    <div class="keys">
+      <div class="key"><div class="w">שני בני אדם</div><div class="d">שתי הנפשות שבגוף — הבהמית והאלוקית</div></div>
+      <div class="key"><div class="w">העגלה</div><div class="d">חיי האדם — מרכבה לשתי הנפשות</div></div>
+      <div class="key"><div class="w">הסוס</div><div class="d">היצר הרע — השולט ברוכבים ובעגלה</div></div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">אַרְבַּע דְּרָכִים בַּעֲבוֹדָה</h2>
+    </div>
+
+    <div class="stage s1">
+      <div class="num">א׳</div>
+      <div class="body">
+        <div class="tool">האגרוף</div>
+        <h4>מִלְחָמָה בְּכֹחַ עַצְמוֹ</h4>
+        <p>
+          כשהסוס מבוהל ומשוגע — זה אדם שאינו לומד תורה ואינו עושה מצוות, וחי בעולם
+          רק כדי ליהנות. אז הסוס בועט אותו מן העגלה, שהרי הוא עובר על מצוות התורה —
+          וזהו <em>״אוי לי מיצרי״</em>. ואז הוא יוצא למלחמת צדק נגד גלי החיים,
+          מרביץ ליצרו בעצות ובחכמה.
+        </p>
+        <div class="verdict">✗ מכה את ידו שלו — ומוסיף עוון על חטא.</div>
+      </div>
+    </div>
+
+    <div class="stage s2">
+      <div class="num">ב׳</div>
+      <div class="body">
+        <div class="tool">הרצועה</div>
+        <h4>גִּדְרֵי הַתּוֹרָה</h4>
+        <p>
+          לוקחים רצועה — אלו <strong>גדרי התורה</strong>, שאדם נזהר במצוות לא תעשה.
+          אבל עדיין הסוס בועט, כי לא <em>תיקן</em> את נפשו הבהמית — רק גדר אותה ופרש ממנה.
+          וככל שירעיבו אותו יותר — כך ישתולל יותר, וישליך את הרוכבים לרפש וטיט.
+        </p>
+        <div class="verdict">✗ ראה רבי חייא בר אשי (קידושין פא) — שגדר גדרים ונכשל.</div>
+      </div>
+    </div>
+
+    <div class="stage s3">
+      <div class="num">ג׳</div>
+      <div class="body">
+        <div class="tool">החבל והאילן</div>
+        <h4>לְקַשְׁרוֹ לְבֵית הַמִּדְרָשׁ</h4>
+        <p>
+          ״חבל״ — שקשר את נפשו ל<strong>בית המדרש</strong>, הנקרא <em>אילן</em> או
+          <em>״עץ חיים היא למחזיקים בה״</em>, ואינו יוצא משם. שהרי
+          <em>״אם פגע בך מנוול זה — משכהו לבית המדרש״</em>.
+        </p>
+        <p>
+          וגם זו אינה עצה מספקת: כמה שילמד וילמד — מיד שיצא החוצה, יצרו יחטיאו.
+          ראה רב הונא (ברכות ה) שהחמיצו לו ארבע מאות חביות יין, ובאו והוכיחוהו —
+          שאם זו היתה הדרך השלמה, למה נגרם לו נזק כה גדול?
+        </p>
+        <div class="verdict">✗ הלימוד לבדו — בלי מעשה בגוף — אינו מאלף את הסוס.</div>
+      </div>
+    </div>
+
+    <div class="stage s4">
+      <div class="num">ד׳</div>
+      <div class="body">
+        <div class="tool">קְנֵי שְׂרֵפָה</div>
+        <h4>לַהֲרֹג אֶת הַסּוּס</h4>
+        <p>
+          הדרך האחרונה — <strong>לירות לו כדור בראש</strong>. אבל שם האדם
+          <strong>מרחם על נפשו הבהמית</strong> ומפחד לעשות כן. ״וזה צר לו כך״.
+        </p>
+        <div class="verdict">✓ וזו הדרך היחידה — אלא שצריך לדעת כיצד הורגים אותו.</div>
+      </div>
+    </div>
+
+    <div class="chushim">
+      <div class="k">עֲרִיפַת רֹאשׁוֹ שֶׁל עֵשָׂו</div>
+      <p>
+        וראינו שדווקא <strong>חושים בן דן</strong> ערף את ראשו של עשו — ורק אז הותר ליעקב
+        להיכנס ל<strong>מערת המכפלה</strong> (כנגד <em>האהבה המסותרת</em> של התניא).
+        ואם אין עורפים את ראש עשו — יעקב אינו נכנס, וגם ראשו של עשו אינו נכנס.
+      </p>
+      <p>
+        ולכן על דרך זו: אדם חייב <strong>לא להקשיב לעצמו</strong> — ובכך להרוג את
+        <strong>השכל של עשו</strong>, העוסק כל היום בעצמו. או אז יזכה להיכנס אל הקודש.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">כֵּיצַד הוֹרְגִים אֶת הַסּוּס?</h2>
+      <p>
+        אבל אדם שמרחם על גופו — עדיין אינו מוכן להרוג את כל תאוותיו לאוכל, לממון ולנשים.
+        והתשובה: <strong>לא על ידי פרישות</strong> — אלא על ידי <strong>תאווה למצוות</strong>,
+        כמשה רבנו:
+      </p>
+      <div class="pasuk">
+        אֹהֵב כֶּסֶף — לֹא יִשְׂבַּע כֶּסֶף
+        <span class="pasuk-source">— קהלת ה, ט</span>
+      </div>
+    </div>
+
+    <div class="method">
+      <div class="mt mt-prishut">
+        <div class="lbl">מה שלא עובד</div>
+        <h4>פְּרִישׁוּת</h4>
+        <div class="d">להרעיב את הסוס, לגדור ולברוח — והוא רק משתולל יותר.</div>
+      </div>
+      <div class="mt mt-taava">
+        <div class="lbl">מה שכן עובד</div>
+        <h4>תַּאֲוָה לַמִּצְווֹת</h4>
+        <div class="d">לקחת את עוצמת התאווה עצמה — בדיוק כפי שהיא — ולהפנותה לעבודת השם.</div>
+        <div class="items"><span>ממון</span><span>אוכל</span><span>מכוניות</span><span>בגדים</span><span>מסעדות</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        כשם שאוהב כסף תאב לכסף — כך משה רבנו <strong>תאב למצוות</strong>.
+        ולכן מקום קבורתו <em>מול בית פעור</em> — מול מקום התאווה עצמו:
+        שכל תאוותיו הופנו למצוות. <strong>וכך הורגים את הסוס.</strong>
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">לֹא לְהַרְעִיב אֶת הַסּוּס — לְהַפְנוֹת אוֹתוֹ</p>
+      <p class="final-explanation">
+        האגרוף מכה את ידך; הרצועה משליכה לרפש;<br>
+        והחבל לאילן מייגע ואינו מאלף.<br>
+        רק מי שממית את השכל שעוסק בעצמו,<br>
+        ולוקח את כל עוצמת התאווה אל המצוות — נכנס אל הקודש.
+      </p>
+      <div class="final-seal">
+        <p class="seal-quote">״וְאֵין תַּקָּנָה לְסוּס כָּזֶה — רַק לִירוֹת אוֹתוֹ״</p>
+        <span class="seal-source">— ליקוטי מוהר״ן תנינא, סו</span>
+      </div>
+    </div>
+
+    <p class="note">
+      * משל ונמשל. מקורות: ליקוטי מוהר״ן תנינא, תורה סו (משל הסוס) · קידושין פא ע"א (רבי חייא בר אשי) ·
+      ברכות ה ע"ב (רב הונא וארבע מאות חביות) · קידושין ל ע"ב (אם פגע בך מנוול זה) · משלי ג, יח (עץ חיים) ·
+      סוטה יג ע"א (חושים בן דן וראש עשו) · קהלת ה, ט · תניא פי״ח–י״ט (אהבה מסותרת).
+      מקום קבורת משה — ״מול בית פעור״ (דברים לד, ו); ״קברות התאווה״ (במדבר יא) הוא מקום אחר,
+      ובא כאן על דרך הרמז לעניין התאווה. ״הריגת הסוס״ — ביטול הישות בלשון רמז, לא סיגוף.
+      הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · משל ונמשל</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/peter-chamor">פטר חמור</a>
+        <a class="related-link" href="/zion/mul-beit-peor">מול בית פעור</a>
+        <a class="related-link" href="/zion/shalosh-yirot">שלוש יראות</a>
+        <a class="related-link" href="/zion/sechel-nolad">שכל נולד לשרת</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
