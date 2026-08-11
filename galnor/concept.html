@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שני האספקטים - התפיסה במבט אחד | קבוצת גלנור × BizTechoff™‎</title>
+<style>
+:root{--slate:#464950;--s2:#5F6268;--s3:#87898D;--line:#E3E4E6;--copper:#BF733E;--cd:#8C4A22;
+ --cl:#C6874F;--soft:#FAF9F8;--soft2:#F4F2F0}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEDEE;color:var(--slate);font-family:"Segoe UI","Assistant",Arial,sans-serif;font-size:15px;line-height:1.6}
+.page{max-width:1120px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(0,0,0,.08);padding-bottom:28px}
+header{padding:16px 44px;border-bottom:3px solid var(--copper);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+h1{font-size:24px;margin:0}
+.sub{font-size:13.5px;color:var(--s3);margin-top:2px}
+.vendor{text-align:left;font-size:12px;color:var(--s3)}
+.vendor b{display:block;font-size:15px;color:var(--slate)}
+.pad{padding:0 44px}
+.lead{background:var(--soft);border-right:4px solid var(--copper);padding:13px 18px;margin:18px 0 6px;font-size:15.5px}
+.lead b{color:var(--cd)}
+h2{font-size:11.5px;letter-spacing:2.2px;color:var(--cd);margin:24px 0 8px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:6px}
+
+/* ── שלושת הפסים ── */
+.band{border:1px solid var(--line);padding:16px 20px;position:relative}
+.band .tag{position:absolute;top:-10px;right:18px;background:#fff;padding:0 9px;font-size:10.5px;letter-spacing:2px;color:var(--cd);font-weight:700}
+.band h3{margin:2px 0 3px;font-size:19px}
+.band .d{font-size:13.5px;color:var(--s2);margin:0 0 12px}
+.tiers{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;align-items:stretch;gap:0}
+.tier{background:var(--soft);border:1px solid var(--line);padding:11px 14px}
+.tier .who{font-size:15px;font-weight:700;color:var(--cd)}
+.tier .role{font-size:11.5px;color:var(--s3);margin:1px 0 6px}
+.tier ul{margin:0;padding-inline-start:16px}
+.tier li{font-size:12.6px;color:var(--s2);margin-bottom:3px;line-height:1.45}
+.arw{display:flex;align-items:center;justify-content:center;color:var(--cl);font-size:19px;font-weight:700}
+
+.mid{background:var(--copper);color:#fff;border:0;margin:12px 0}
+.mid .tag{background:var(--copper);color:#fff}
+.mid h3{color:#fff}
+.mid .d{color:#F6E7DC}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{background:rgba(255,255,255,.13);padding:10px 12px;border-radius:2px}
+.step b{display:block;font-size:13.5px;margin-bottom:2px}
+.step span{font-size:12.2px;color:#F6E7DC;line-height:1.45}
+
+.plat{background:var(--slate);color:#fff;border:0}
+.plat .tag{background:var(--slate);color:var(--cl)}
+.plat h3{color:#fff}
+.plat .d{color:#D6D7D8}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pcell{background:rgba(255,255,255,.08);padding:10px 12px}
+.pcell b{display:block;font-size:13.5px;margin-bottom:2px}
+.pcell span{font-size:12.2px;color:#D6D7D8;line-height:1.45}
+
+/* ── מפת ההשפעה ── */
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.4px}
+th{background:var(--slate);color:#fff;padding:8px 11px;font-size:12.3px;font-weight:600;text-align:right}
+th.a{background:var(--cd)}
+td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--soft)}
+td.r{width:19%;font-weight:700;color:var(--cd)}
+td.r span{display:block;font-weight:400;font-size:11.6px;color:var(--s3)}
+td.r{line-height:1.45}
+td small{color:var(--s3);font-size:11.8px}
+.note{font-size:13.2px;color:var(--s2);background:var(--soft);border-right:3px solid var(--s3);padding:10px 14px;margin:12px 0 0}
+.note b{color:var(--cd)}
+.out{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.card{border:1px solid var(--line);padding:12px 15px;background:var(--soft)}
+.card h4{margin:0 0 4px;font-size:14.5px}
+.card p{margin:0;font-size:13px;color:var(--s2);line-height:1.55}
+footer{padding:14px 44px 0;border-top:1px solid var(--line);font-size:12px;color:var(--s3);text-align:center;margin-top:22px}
+@media print{body{background:#fff}.page{box-shadow:none;max-width:none}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ @page{size:A4;margin:8mm} .band,table,.out{page-break-inside:avoid}}
+@media (max-width:820px){.tiers,.steps,.pgrid,.out{grid-template-columns:1fr}.arw{transform:rotate(90deg);padding:4px 0}
+ .pad,header,footer{padding-left:18px;padding-right:18px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div><h1>שני אספקטים, ומנגנון שמחבר ביניהם</h1>
+    <div class="sub">מנגנון תגמול ובונוסים · קבוצת גלנור · התפיסה במבט אחד</div></div>
+  <div class="vendor"><b><i>Biz</i>Techoff™&lrm;</b>מוטי דרוקמן · 052-6526063</div>
+</header>
+
+<div class="pad">
+  <div class="lead">
+    הפרויקט מתחלק לשניים. <b>הראשון הוא הלוגיקה העסקית</b> - מי משפיע על מה, ובאיזה משקל.
+    <b>השני הוא הפלטפורמה</b> שמריצה אותה על כל עובד ועובד.
+    <b>וביניהם מנגנון התרגום</b> - זה שהופך החלטה של הנהלה לנוסחה שאפשר להריץ, ולהסביר לעובד.
+    רוב המנגנונים נכשלים בדיוק שם: יש כוונה, ואין תרגום.
+  </div>
+
+  <div class="band">
+    <span class="tag">אספקט ראשון</span>
+    <h3>הלוגיקה העסקית</h3>
+    <p class="d">מי קובע, מי מזין, ומי נמדד - שלושה דרגים, ומפל יעדים אחד שעובר ביניהם.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="who">מנכ"לית</div><div class="role">רמה</div>
+        <ul><li>קובעת את תקציב הבונוס ואת סף הכניסה</li>
+            <li>מגדירה את יעד הרווח השנתי</li>
+            <li>מאשרת את היעדים לפני תחילת המחזור</li>
+            <li>רואה את העלות הכוללת לפני שהוכרז דבר</li></ul>
+      </div>
+      <div class="arw">←</div>
+      <div class="tier">
+        <div class="who">מנהלי מחלקות</div><div class="role">סמנכ"לים ומטה</div>
+        <ul><li>מתרגמים את יעד החברה ליעד תחומי</li>
+            <li>קובעים מה נמדד בכל תפקיד אצלם</li>
+            <li>מנקדים את הצוות שלהם</li>
+            <li>נמדדים בעצמם על תוצאות התחום</li></ul>
+      </div>
+      <div class="arw">←</div>
+      <div class="tier">
+        <div class="who">מנהלי עבודה</div><div class="role">והשטח</div>
+        <ul><li>מזינים את נתוני הביצוע מהאתר</li>
+            <li>נמדדים על שעות, בטיחות וקצב</li>
+            <li>מנקדים את הצוות שתחתיהם</li>
+            <li>רואים את התמונה שלהם בזמן אמת</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="band mid">
+    <span class="tag">החלק המחבר</span>
+    <h3>מנגנון התרגום וההתאמה</h3>
+    <p class="d">כאן הכוונה הופכת לכלל. זו העבודה שנעשית איתכם בפגישות, והיא מה שאי אפשר לקנות מהמדף.</p>
+    <div class="steps">
+      <div class="step"><b>1 · מיפוי תפקידים</b><span>כל תפקיד בחברה משויך למשפחת תגמול. אחיד אך לא זהה.</span></div>
+      <div class="step"><b>2 · השפעה</b><span>אילו פרמטרים קובעים את הבונוס של התפקיד הזה, ומאיפה מגיע כל מספר.</span></div>
+      <div class="step"><b>3 · מושפע</b><span>כיצד תוצאות של תפקידים אחרים - ושל החברה כולה - נכנסות לחישוב שלו.</span></div>
+      <div class="step"><b>4 · משקלים וכללים</b><span>כמה שווה כל פרמטר, מה קורה כשנתון חסר, ומה עוצר את החישוב.</span></div>
+    </div>
+  </div>
+
+  <div class="band plat">
+    <span class="tag">אספקט שני</span>
+    <h3>הפלטפורמה בענן</h3>
+    <p class="d">מריצה את הלוגיקה על כל עובד ובכל מחזור - <b style="color:#fff">בנוסחה שמתאימה את עצמה לתפקיד ולמשקלים שהוגדרו</b>, ובאותו מנוע בדיוק בסימולציה ובתשלום בפועל.</p>
+    <div class="pgrid">
+      <div class="pcell"><b>חישוב לכל עובד</b><span>מסלול חישוב מלא ושמור, שאפשר להציג שנים אחר כך</span></div>
+      <div class="pcell"><b>סימולטור למנכ"לית</b><span>כל שינוי מדיניות נבדק על כלל העובדים לפני שמכריזים</span></div>
+      <div class="pcell"><b>שרשרת אישורים</b><span>מהמנהל הישיר ועד המנכ"לית, עם יומן ביקורת</span></div>
+      <div class="pcell"><b>אזור העובד</b><span>הפרמטרים שלו וההתקדמות שלו, במובייל</span></div>
+    </div>
+  </div>
+
+  <h2>מפת ההשפעה - שתי שאלות לכל תפקיד</h2>
+  <table>
+    <tr><th style="width:21%">התפקיד<br><span style="font-weight:400;font-size:10.8px;color:#C6874F">חברה / יחידה / אישי</span></th><th class="a" style="width:39%">משפיע - על מה הוא נמדד</th><th style="width:40%">מושפע - מה נכנס אליו מבחוץ</th></tr>
+    <tr><td class="r">מנכ"לית<span>רמה</span><span style="color:#8C4A22;font-weight:700;font-size:13px;margin-top:3px">60 / 20 / 20</span></td>
+      <td>רווחיות משוקללת של התיק · שחיקת מרווח · תזרים וצבר הזמנות · דיוק אומדנים · בטיחות תאגידית<br><small>רכיב חברה 60% מהבונוס שלה</small></td>
+      <td>סכום התוצאות של כל החטיבות. היא קובעת את המאגר, ולכן היא גם היחידה שרואה את העלות הכוללת לפני ההכרזה.<br><b>רכיב אישי 20%</b> - מי מעריך את המנכ"לית היא הכרעה שטרם נקבעה.</td></tr>
+    <tr><td class="r">מנהלת רכש<span>רותם</span><span style="color:#8C4A22;font-weight:700;font-size:13px;margin-top:3px">25 / 50 / 25</span></td>
+      <td>חיסכון מאומת · ביצועי ספקים · משמעת תהליך · סגירת רכש לפני צו התחלה · שביעות רצון לקוח פנימי<br><small>רכיב יחידה 50%</small></td>
+      <td><b>רכיב חברה 25%</b> - רווחיות הקבוצה משפיעה עליה ישירות · <b>רכיב אישי 25%</b> - הערכת המנכ"לית · <b>שביעות רצון</b> מנוקדת בידי מנהלי הפרויקטים · חתימת מנהלת הכספים נדרשת לאימות החיסכון</td></tr>
+    <tr><td class="r">מנהל פרויקט<span style="color:#8C4A22;font-weight:700;font-size:13px;margin-top:3px">15 / 60 / 25</span></td>
+      <td>רווח גולמי מול תקציב · אבני דרך חוזיות · חריגים ותביעות · תזרים הפרויקט · איכות המסירה<br><small>רכיב יחידה 60%</small></td>
+      <td><b>רכיב חברה 15%</b> · <b>רכיב אישי 25%</b> - הערכת הסמנכ"ל · מושפע מהרכש (סגירת מחירים לפני ביצוע), מההנדסה (שינויי תכנון) ומהאתר (קצב ובטיחות). הוא גם <b>מנקד</b> את מנהלי העבודה שתחתיו.</td></tr>
+    <tr><td class="r">מנהל עבודה<span style="color:#8C4A22;font-weight:700;font-size:13px;margin-top:3px">10 / 60 / 30</span></td>
+      <td>שעות מול תקציב · בטיחות · קצב ביצוע · ניהול האתר וקבלני המשנה · דיווח בזמן<br><small>רכיב יחידה 60%</small></td>
+      <td><b>רכיב חברה 10%</b> - הכי פחות, כי הוא הכי רחוק מהשפעה עליה · <b>רכיב אישי 30% - הגבוה ביותר</b>, הערכת מנהל הפרויקט · תלוי בזמינות חומרים וכוח אדם שאינם בשליטתו</td></tr>
+  </table>
+  <div class="note">
+    <b>שלוש השכבות, וכל אחת אומרת דבר אחר.</b> <b>רכיב החברה</b> קטן ככל שהתפקיד רחוק יותר מהשפעה על הרווח -
+    מנכ"לית 60%, מנהל עבודה 10%. <b>רכיב היחידה</b> הוא מה שהתפקיד באמת שולט בו.
+    <b>והרכיב האישי דווקא גדל כלפי מטה</b> - 20% בהנהלה, 30% אצל מנהל העבודה.
+    כלומר ככל שיורדים בארגון, כך משקל שיקול הדעת של המנהל הישיר גדול יותר -
+    <b>וזו בדיוק הנקודה שבה מנגנון עלול לשחזר את הבעיה שהוא בא לפתור.</b>
+    לכן הרכיב האישי מוגבל בתקרה ועובר ישיבת כיול, ואינו נשאר שיקול דעת חופשי.
+    <b>שלושת המספרים האלה הם הכרעת מדיניות</b> - והיא נעשית איתכם, לא עבורכם.
+  </div>
+
+  <h2>ומה העובד רואה בסוף</h2>
+  <div class="out">
+    <div class="card"><h4>מכתב הבונוס</h4>
+      <p>לאחר אישור המנכ"לית, כל עובד מקבל מסמך אישי: מה קיבל, לפי אילו רכיבים, ומה היה נדרש כדי לקבל יותר. נבנה מעל מסלול החישוב שהמערכת שומרת ממילא, ולכן ניתן להפיק אותו מחדש בכל רגע - גם מול עובד שמערער, וגם שנים אחר כך.</p></div>
+    <div class="card"><h4>אזור העובד במובייל</h4>
+      <p>הפרמטרים שלו, ההתקדמות שלו וטווח משוער - לא נוסחת ההקצאה ולא נתוני עמיתים. כך התגמול נשען על נתונים גלויים ולא על מי שיודע לדרוש.</p></div>
+  </div>
+</div>
+
+<footer><i>Biz</i>Techoff™&lrm; · פלטפורמות מקצה לקצה, אוטומציות והתאמת עסקים לעידן הדיגיטלי</footer>
+</div>
+</body>
+</html>
