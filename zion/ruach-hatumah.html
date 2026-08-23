@@ -48,7 +48,7 @@
   .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
 
   .cover{margin:-30px -18px 34px; text-align:center;}
-  .cover img{width:75%; max-width:75%; border-radius:8px; box-shadow:0 16px 44px -14px rgba(43,29,16,0.45); border:1px solid rgba(184,138,44,0.35);}
+  .cover img{width:75%; max-width:75%; max-height:340px; object-fit:cover; object-position:center 30%; border-radius:8px; box-shadow:0 16px 44px -14px rgba(43,29,16,0.45); border:1px solid rgba(184,138,44,0.35);}
 
   .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
   .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
@@ -135,7 +135,7 @@
 
   @media (max-width:640px){
     body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
-    .cover{margin:-14px -6px 26px;} .cover img{width:90%; max-width:90%;}
+    .cover{margin:-14px -6px 26px;} .cover img{width:90%; max-width:90%; max-height:200px;}
     .see{grid-template-columns:1fr;} .react{grid-template-columns:1fr;}
     p{font-size:17px;} .prophecies .pr p{font-size:15.5px;}
   }
