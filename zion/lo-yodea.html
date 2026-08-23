@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לא יודע — לחתוך את הקרניים</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="מי שיודע כופה את רצונו על המציאות; מי שלא יודע מובל על ידי מלאך. לא על צדקותינו — אלא על רחמיך הרבים, ולדפוק על הדלת בתחנונים">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/lo-yodea">
+<meta property="og:title" content="לא יודע — לחתוך את הקרניים">
+<meta property="og:description" content="מי שיודע כופה את רצונו על המציאות; מי שלא יודע מובל על ידי מלאך. לא על צדקותינו — אלא על רחמיך הרבים">
+<meta property="og:image" content="https://biztechoff.co.il/zion/images/lo-yodea.jpeg">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="לא יודע — לחתוך את הקרניים">
+<meta name="twitter:description" content="מי שיודע כופה את רצונו על המציאות; מי שלא יודע מובל על ידי מלאך">
+<meta name="twitter:image" content="https://biztechoff.co.il/zion/images/lo-yodea.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:790px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 58px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .cover{margin:-30px -18px 34px; text-align:center;}
+  .cover img{width:75%; max-width:75%; border-radius:8px; box-shadow:0 16px 44px -14px rgba(43,29,16,0.45); border:1px solid rgba(184,138,44,0.35);}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(38px,6.2vw,58px); text-align:center; color:var(--ink); line-height:1.12; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:38px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:28px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* two travelers */
+  .travelers{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .tv{padding:26px 22px; border-radius:8px;}
+  .tv .lbl{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; margin-bottom:8px;}
+  .tv h4{font-size:21px; margin-bottom:10px;}
+  .tv .d{font-size:15px; line-height:1.7;}
+  .tv-yodea{background:rgba(43,29,16,0.06); border:1px solid rgba(140,42,30,0.28);}
+  .tv-yodea .lbl{color:var(--gold-deep);} .tv-yodea h4{color:var(--crimson);} .tv-yodea .d{color:var(--ink-soft);}
+  .tv-lo{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .tv-lo .lbl{color:var(--gold-light);} .tv-lo h4{color:var(--gold);} .tv-lo .d{color:rgba(245,236,217,0.87);}
+
+  /* tachanun quote */
+  .tachanun{background:linear-gradient(135deg, rgba(184,138,44,0.14), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32); border-radius:10px; padding:28px 26px; margin:28px 0; text-align:center;}
+  .tachanun .q{font-family:'David Libre',serif; font-size:21px; font-weight:700; color:var(--crimson); line-height:1.65; margin-bottom:10px;}
+  .tachanun .src{font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic;}
+
+  /* kal vachomer */
+  .kv{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:22px 28px; margin:26px 0; border-radius:3px;}
+  .kv .lbl{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:10px;}
+  .kv p{font-size:17px; margin:0; line-height:1.78;}
+
+  /* mercy vs righteousness */
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .tw{padding:22px 20px; border-radius:8px; text-align:center;}
+  .tw .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:6px;}
+  .tw .t{font-size:19px; font-weight:900; margin-bottom:6px;}
+  .tw .d{font-size:14px; color:var(--ink-soft);}
+  .tw-tzedek{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .tw-tzedek .t{color:var(--crimson);}
+  .tw-rachamim{background:linear-gradient(135deg, rgba(184,138,44,0.14), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32);}
+  .tw-rachamim .t{color:var(--gold-deep);}
+
+  /* cracks */
+  .cracks{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:10px; padding:28px 26px; margin:28px 0;}
+  .cracks .k{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-light); text-transform:uppercase; margin-bottom:12px; text-align:center;}
+  .cracks p{font-size:16.5px; color:rgba(245,236,217,0.9); margin:0 0 12px; line-height:1.8;}
+  .cracks p:last-child{margin-bottom:0;}
+  .cracks strong{color:var(--gold-light);}
+  .cracks .flow{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:14px 0;}
+  .cracks .fl{background:rgba(184,138,44,0.16); border:1px solid rgba(232,201,138,0.32); border-radius:16px; padding:8px 18px; font-size:14.5px; color:var(--gold-light);}
+  .cracks .arw{color:var(--gold); font-size:18px;}
+
+  /* keys vs knocking */
+  .doors{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0;}
+  .dr{padding:26px 22px; border-radius:8px; text-align:center;}
+  .dr .icon{font-size:30px; margin-bottom:8px;}
+  .dr h4{font-size:19px; margin-bottom:8px;}
+  .dr .d{font-size:14.5px; line-height:1.6;}
+  .dr-keys{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .dr-keys h4{color:var(--crimson);} .dr-keys .d{color:var(--ink-soft);}
+  .dr-knock{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);}
+  .dr-knock h4{color:var(--crimson);} .dr-knock .d{color:var(--ink-soft);}
+
+  .final-message{margin-top:44px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.65; margin-bottom:12px; font-weight:700;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+  .final-seal{margin-top:22px; padding-top:18px; border-top:1px solid rgba(184,138,44,0.35);}
+  .seal-quote{font-family:'David Libre',serif; font-size:20px; font-weight:700; color:var(--crimson); margin:0 0 6px; line-height:1.6;}
+  .seal-source{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px; color:var(--gold-deep);}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+
+  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+
+  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 22px;} .container::before{inset:8px;}
+    .cover{margin:-14px -6px 26px;} .cover img{width:90%; max-width:90%;}
+    .travelers{grid-template-columns:1fr;} .two{grid-template-columns:1fr;} .doors{grid-template-columns:1fr;}
+    p{font-size:17px;} .tachanun .q{font-size:18px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="cover">
+      <img src="images/lo-yodea.jpeg"
+           alt="לא יודע — לחתוך את הקרניים"
+           onerror="this.closest('.cover').style.display='none'">
+    </div>
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">פנימיות התורה · ענווה ותחנונים</div>
+    <h1>לֹא יוֹדֵעַ</h1>
+    <p class="subtitle">לחתוך את הקרניים — ולהיות מובל</p>
+
+    <div class="section">
+      <p>
+        אדם ש<strong>לא יודע</strong> — לעולם לא יתנגד למציאות שאינה מובנת לו,
+        וכך ינצל מן ה<strong>הפכים</strong>, ששם המלכודת של הסטרא אחרא.
+        ואדם שמרגיש ש<strong>יודע</strong> — לעולם ירצה <strong>לכפות על המציאות את רצונו</strong>.
+      </p>
+    </div>
+
+    <div class="travelers">
+      <div class="tv tv-yodea">
+        <div class="lbl">מרגיש שיודע</div>
+        <h4>מְפַלֵּס דֶּרֶךְ</h4>
+        <div class="d">
+          מחפש שביל ופועל לפלס דרכו ביער הסבוך — <strong>עם קרניים גדולות</strong>,
+          שנתפסות בכל ענף.
+        </div>
+      </div>
+      <div class="tv tv-lo">
+        <div class="lbl">יודע שאינו יודע</div>
+        <h4>חוֹתֵךְ אֶת קַרְנָיו</h4>
+        <div class="d">
+          מתבטל, <strong style="color:var(--gold-light)">חותך את קרניו</strong> —
+          ומוּבל על ידי מלאך.
+        </div>
+      </div>
+    </div>
+
+    <div class="tachanun">
+      <div class="q">״לֹא עַל צִדְקוֹתֵינוּ אֲנַחְנוּ מַפִּילִים תַּחֲנוּנֵינוּ לְפָנֶיךָ —<br>כִּי עַל רַחֲמֶיךָ הָרַבִּים״</div>
+      <div class="src">— דניאל ט, יח · ובנוסח התחנון</div>
+    </div>
+
+    <div class="kv">
+      <div class="lbl">בעולם של שקר</div>
+      <p>
+        אין אדם <strong>צודק</strong> — יש אדם <strong>תועה</strong>. שאם דוד מלכא משיחא אמר
+        <em>״תָּעִיתִי כְּשֶׂה אֹבֵד״</em> — קל וחומר כולנו. ומי לנו כדוד,
+        אהובו של הקדוש ברוך הוא.
+      </p>
+    </div>
+
+    <div class="pasuk">
+      תָּעִיתִי כְּשֶׂה אֹבֵד — בַּקֵּשׁ עַבְדֶּךָ, כִּי מִצְוֺתֶיךָ לֹא שָׁכָחְתִּי
+      <span class="pasuk-source">— תהלים קיט, קעו</span>
+    </div>
+
+    <div class="section">
+      <p>
+        ונמצא שכל מה שאדם זוכה בעולם הזה — <strong>מצד הרחמים</strong> הוא:
+        כל השגה, כל הבנה, כל השגחה.
+      </p>
+    </div>
+
+    <div class="two">
+      <div class="tw tw-tzedek"><div class="k">מי שנלחם על</div><div class="t">צֶדֶק</div><div class="d">מתרחק מן השלום — והוא ״איש דעות״</div></div>
+      <div class="tw tw-rachamim"><div class="k">מי שמעורר</div><div class="t">רַחֲמִים</div><div class="d">זוכה לכל — כי הכל מתנת חינם</div></div>
+    </div>
+
+    <div class="section">
+      <p>
+        ומי שאינו מצליח לעורר עליו רחמי שמים — כנראה שהוא <strong>לוחם צדק</strong>,
+        ומתרחק מן השלום. אבל <strong>אנשי אמונה באים בכוח מעשיהם</strong> —
+        שעל ידי המעשים הם <strong>סודקים הרים</strong>, ומן הסדקים זוכים להארה:
+      </p>
+      <div class="pasuk">
+        מַשְׁגִּיחַ מִן הַחַלֹּנוֹת — מֵצִיץ מִן הַחֲרַכִּים
+        <span class="pasuk-source">— שיר השירים ב, ט</span>
+      </div>
+    </div>
+
+    <div class="cracks">
+      <div class="k">מה סודקים התחנונים</div>
+      <p>
+        כאשר אדם פועל ב<strong>תחנונים</strong>, הוא סודק את <strong>האבן המפרידה</strong> —
+        בין הבל לקין, בין הנפש האלוקית לנפש הבהמית.
+      </p>
+      <div class="flow">
+        <span class="fl">תַּחֲנוּנִים</span>
+        <span class="arw">⟸</span>
+        <span class="fl">סֶדֶק בָּאֶבֶן</span>
+        <span class="arw">⟸</span>
+        <span class="fl">אוֹר מִיָּמִין לִשְׂמֹאל</span>
+      </div>
+      <p>
+        ולזה זוכים <strong>רק אנשים שיודעים שהם לא יודעים</strong> — ושאין מה לדעת.
+      </p>
+    </div>
+
+    <div class="doors">
+      <div class="dr dr-keys">
+        <div class="icon">🗝️</div>
+        <h4>צְרוֹר מַפְתְּחוֹת</h4>
+        <div class="d">משחקים במנעול בתקווה שאחד יתאים — זו דרכו של מי שיודע.</div>
+      </div>
+      <div class="dr dr-knock">
+        <div class="icon">✊</div>
+        <h4>דְּפִיקָה בַּדֶּלֶת</h4>
+        <div class="d">דופקים בתחנונים — ומחכים שבעל הבית יפתח מבפנים.</div>
+      </div>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">דּוֹפְקִים עַל הַדֶּלֶת בְּתַחֲנוּנִים —<br>וְלֹא מְשַׂחֲקִים עִם צְרוֹר מַפְתְּחוֹת</p>
+      <p class="final-explanation">
+        בעולם השקר אין צודקים — יש תועים.<br>
+        מי שחותך את קרניו עובר ביער שאין בו שביל,<br>
+        ומי שמכיר שאין לו מפתח — נפתחת לו הדלת.
+      </p>
+      <div class="final-seal">
+        <p class="seal-quote">״כִּי עַל רַחֲמֶיךָ הָרַבִּים״</p>
+        <span class="seal-source">— דניאל ט, יח</span>
+      </div>
+    </div>
+
+    <p class="note">
+      * דברי פנימיות ומוסר. מקורות: דניאל ט, יח (ובנוסח התחנון) · תהלים קיט, קעו ·
+      שיר השירים ב, ט · ״אנשי אמונה אבדו... באים בכח מעשיהם״ (מן הסליחות) ·
+      הבל וקין, האבן המפרידה והאור מימין לשמאל — על דרך הקבלה. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/temimut">תמימות</a>
+        <a class="related-link" href="/zion/haaryeh-vehashual">האריה שבחר להיות שועל</a>
+        <a class="related-link" href="/zion/hapachad-lihyot-amiti">הפחד להיות אמיתי</a>
+        <a class="related-link" href="/zion/alma-deshikra">עלמא דשיקרא</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
