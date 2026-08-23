@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בין בורות לחסידות — שלושה יחסים אל ההפכים</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="הבור מחפש את הסיבה בתוך התוצאה, הלומד נכשל ושגגתו עולה זדון, והחסיד אינו מבין — ואינו נופל. ״ומודה ועוזב ירוחם״">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/bein-borut-lachassidut">
+<meta property="og:title" content="בין בורות לחסידות — שלושה יחסים אל ההפכים">
+<meta property="og:description" content="הבור מחפש את הסיבה בתוך התוצאה, הלומד נכשל ושגגתו עולה זדון, והחסיד אינו מבין — ואינו נופל. ״ומודה ועוזב ירוחם״">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="בין בורות לחסידות — שלושה יחסים אל ההפכים">
+<meta name="twitter:description" content="החסיד אינו מבין — ואינו נופל. ״ומודה ועוזב ירוחם״">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.9; padding:60px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:800px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:70px 56px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
+  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-weight:900; font-size:clamp(34px,5.5vw,52px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:14px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+
+  .lead{text-align:center; font-size:18.5px; color:var(--ink); margin-bottom:30px; line-height:1.75;}
+  .lead strong{color:var(--crimson);}
+
+  .divider{display:flex; align-items:center; justify-content:center; margin:36px 0; gap:20px;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
+  .divider-symbol{color:var(--gold); font-size:18px;}
+
+  .section{margin-bottom:26px;}
+  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
+  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:16px 22px; margin:16px 0; font-family:'David Libre',serif; font-size:17px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
+  .pasuk-source{display:block; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:1px;}
+
+  /* three levels */
+  .levels{display:flex; flex-direction:column; gap:12px; margin:26px 0;}
+  .lv{display:flex; gap:18px; align-items:flex-start; padding:22px 24px; border-radius:10px;}
+  .lv .rank{flex:0 0 auto; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Bellefair',serif; font-size:20px; font-weight:700;}
+  .lv .body{flex:1;}
+  .lv h4{font-size:20px; margin-bottom:6px;}
+  .lv .body p{font-size:16px; margin:0; line-height:1.7;}
+  .lv .tag{display:inline-block; margin-top:9px; font-size:13.5px; font-style:italic; padding-top:8px; border-top:1px solid rgba(184,138,44,0.25);}
+  .l1{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.24);}
+  .l1 .rank{background:rgba(140,42,30,0.12); color:var(--crimson); border:1px solid rgba(140,42,30,0.3);}
+  .l1 h4{color:var(--crimson);} .l1 .body p{color:var(--ink-soft);} .l1 .tag{color:var(--crimson);}
+  .l2{background:rgba(184,138,44,0.10); border:1px solid rgba(184,138,44,0.28);}
+  .l2 .rank{background:rgba(184,138,44,0.18); color:var(--gold-deep); border:1px solid rgba(184,138,44,0.38);}
+  .l2 h4{color:var(--crimson);} .l2 .body p{color:var(--ink-soft);} .l2 .tag{color:var(--crimson);}
+  .l3{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep);}
+  .l3 .rank{background:rgba(184,138,44,0.2); color:var(--gold); border:1px solid var(--gold-deep);}
+  .l3 h4{color:var(--gold);} .l3 .body p{color:rgba(245,236,217,0.87);} .l3 .tag{color:var(--gold-light); border-top-color:rgba(184,138,44,0.35);}
+  .l3 strong{color:var(--gold-light);} .l3 em{color:var(--gold-light);}
+
+  /* question */
+  .question{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.22); border-right:4px solid var(--crimson); padding:22px 28px; margin:26px 0; border-radius:3px;}
+  .question .lbl{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:10px;}
+  .question p{font-size:17.5px; margin:0; line-height:1.75;}
+
+  /* answer two-card */
+  .answer{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:24px 0;}
+  .an{padding:22px 20px; border-radius:8px;}
+  .an .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:8px;}
+  .an h5{font-size:17.5px; color:var(--crimson); margin-bottom:8px;}
+  .an .d{font-size:14.5px; color:var(--ink-soft); line-height:1.6;}
+  .an-nigle{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .an-chas{background:linear-gradient(135deg, rgba(184,138,44,0.14), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32);}
+
+  /* modeh ve'ozev */
+  .modeh{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:10px; padding:26px; margin:26px 0;}
+  .modeh .k{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-light); text-transform:uppercase; margin-bottom:12px; text-align:center;}
+  .modeh p{font-size:16.5px; color:rgba(245,236,217,0.9); margin:0; line-height:1.8; text-align:center;}
+  .modeh strong{color:var(--gold-light);}
+  .modeh .row{display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px;}
+  .modeh .c{background:rgba(184,138,44,0.16); border:1px solid rgba(232,201,138,0.32); border-radius:16px; padding:8px 20px; font-size:15px; color:var(--gold-light);}
+  .modeh .arw{color:var(--gold); font-size:18px;}
+
+  /* two questions */
+  .qs{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:24px 0;}
+  .q{padding:22px 20px; border-radius:8px; text-align:center;}
+  .q .t{font-size:17px; font-weight:900; margin-bottom:6px;}
+  .q .d{font-size:14px; color:var(--ink-soft); line-height:1.6;}
+  .q-stuck{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .q-stuck .t{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:rgba(140,42,30,0.5);}
+  .q-right{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);}
+  .q-right .t{color:var(--crimson);}
+
+  .final-message{margin-top:42px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
+  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.65; margin-bottom:12px; font-weight:700;}
+  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
+  .final-seal{margin-top:22px; padding-top:18px; border-top:1px solid rgba(184,138,44,0.35);}
+  .seal-quote{font-family:'David Libre',serif; font-size:20px; font-weight:700; color:var(--crimson); margin:0 0 6px; line-height:1.6;}
+  .seal-source{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px; color:var(--gold-deep);}
+
+  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+
+  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
+  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+
+  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+
+  @media (max-width:640px){
+    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
+    .answer{grid-template-columns:1fr;} .qs{grid-template-columns:1fr;}
+    .lv{gap:12px; padding:18px 16px;} .lv .rank{width:40px; height:40px; font-size:17px;}
+    p{font-size:17px;} .lead{font-size:17px;}
+  }
+  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
+  .container{ animation:fadeUp 1s ease-out; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="ornament">✦ ❖ ✦</div>
+    <div class="eyebrow">מוסר · קבלת הדין</div>
+    <h1>בֵּין בּוּרוּת לַחֲסִידוּת</h1>
+    <p class="subtitle">שלושה יחסים אל ה״הפכים״</p>
+
+    <p class="lead">
+      שלושה עומדים מול אותו קושי עצמו — מול מה שנראה רע והיפך הטוב.<br>
+      <strong>ושלושתם שונים זה מזה בשורש.</strong>
+    </p>
+
+    <div class="levels">
+      <div class="lv l1">
+        <div class="rank">א׳</div>
+        <div class="body">
+          <h4>הַבּוּר</h4>
+          <p>
+            אינו יודע תורה, ועובר עבירות מבלי דעת. נענש — ומחפש את הסיבה
+            <strong>בתוך התוצאה עצמה</strong>: מנסה להבין את הצער מתוך הצער.
+          </p>
+          <span class="tag">✗ הסיבה לא טופלה — והתוצאה חוזרת.</span>
+        </div>
+      </div>
+
+      <div class="lv l2">
+        <div class="rank">ב׳</div>
+        <div class="body">
+          <h4>הַלּוֹמֵד שֶׁנִּכְשָׁל</h4>
+          <p>
+            עונשו חמור משל הבור — <em>״שגגת תלמוד עולה זדון״</em>. ככל שהוא יודע יותר,
+            שגגתו חמורה יותר: היו בידו האמצעים למנוע.
+          </p>
+          <span class="tag">✗ ידיעה שאינה נעשית זהירות — נעשית חיוב.</span>
+        </div>
+      </div>
+
+      <div class="lv l3">
+        <div class="rank">ג׳</div>
+        <div class="body">
+          <h4>הַחָסִיד — לֹא מֵבִין, וְלֹא נוֹפֵל</h4>
+          <p>
+            גם הוא עשוי שלא להבין — אבל <strong>אינו נופל אל תוך אי־ההבנה</strong>
+            ואינו נשבר מול ההפכים. אדרבה: מודה שהרע לטובה, ולומד אף
+            <strong>לברך עליו</strong>.
+          </p>
+          <span class="tag">✓ ״כל דעביד רחמנא — לטב עביד״.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>
+        וזה יסוד בתורת הבעש״ט: אין ״רע״ ו״טוב״ כשני כוחות נפרדים — הכל התלבשות
+        של אותו טוב עליון, הנראה לעין הבשר כהיפוכו. זו דרגת <strong>נחום איש גם־זו</strong>
+        ו<strong>רבי עקיבא</strong>, שאמרו על כל דבר <em>״גם זו לטובה״</em> —
+        לא כנחמה בדיעבד, אלא כידיעה פנימית.
+      </p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">❖</span></div>
+
+    <div class="question">
+      <div class="lbl">קושיה</div>
+      <p>
+        והלא גם לומד החסידות <strong>לא הבין</strong> — מדוע אין שגגתו עולה זדון,
+        כלומד הנגלה?
+      </p>
+    </div>
+
+    <div class="section">
+      <p>ההבדל אינו ב<strong>כמות</strong> הידיעה — אלא ב<strong>איכות היחס</strong>:</p>
+    </div>
+
+    <div class="answer">
+      <div class="an an-nigle">
+        <div class="k">לומד הנגלה</div>
+        <h5>כִּשָּׁלוֹן בַּמַּעֲשֶׂה</h5>
+        <div class="d">ידע את ההלכה ולא שמר עליה — ולכן שגגתו קרובה לזדון.</div>
+      </div>
+      <div class="an an-chas">
+        <div class="k">לומד החסידות</div>
+        <h5>הוֹדָאָה בִּגְבוּל הַשֵּׂכֶל</h5>
+        <div class="d">אינו מורד בידיעה, אלא עומד בענווה מול מה שלמעלה מהבנתו — בחינת עבד ה׳ שאינו תובע חשבונות.</div>
+      </div>
+    </div>
+
+    <div class="modeh">
+      <div class="k">״וְעוֹזֵב דַּרְכּוֹ״ — הפעולה שמביאה רחמים</div>
+      <p>
+        אך אין די בהודאה שכלית. מי שמברך על הקושי <strong>ואינו זז ממקומו</strong> —
+        טרם הגיע לתיקון. הרחמים באים כשהאדם <strong>יוצא מן המעגל הישן</strong>,
+        ולא רק מרגיע את עצמו בתוכו.
+      </p>
+      <div class="row">
+        <span class="c">מוֹדֶה</span>
+        <span class="arw">+</span>
+        <span class="c">וְעוֹזֵב</span>
+        <span class="arw">⟸</span>
+        <span class="c">יְרֻחָם</span>
+      </div>
+    </div>
+
+    <div class="pasuk">
+      מְכַסֶּה פְשָׁעָיו לֹא יַצְלִיחַ — וּמוֹדֶה וְעֹזֵב יְרֻחָם
+      <span class="pasuk-source">— משלי כח, יג</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">הֲלָכָה לְמַעֲשֶׂה</h2>
+      <p>כשמתעורר קושי — קודם כל לבדוק את המדרגה:</p>
+    </div>
+
+    <div class="qs">
+      <div class="q q-stuck"><div class="t">הַסִּבָּה בַּתּוֹצָאָה</div><div class="d">נשאר תקוע בכאב ומנסה להבינו מתוכו</div></div>
+      <div class="q q-right"><div class="t">הַתּוֹצָאָה בַּסִּבָּה</div><div class="d">שואל: <strong>מה עליי לתקן?</strong></div></div>
+    </div>
+
+    <div class="section">
+      <p>
+        ואחר כך — לעבור מהודאה שכלית (״זה בוודאי לטובה״) ל<strong>מעשה בפועל</strong>:
+        לברך על המצב, ומיד לשאול <strong>איזו דרך עליי לעזוב</strong>.
+      </p>
+    </div>
+
+    <div class="final-message">
+      <div class="final-message-label">סוף דבר</div>
+      <p class="final-pasuk">הוֹדָאָה פְּנִימִית וַעֲזִיבַת דֶּרֶךְ בְּפֹעַל</p>
+      <p class="final-explanation">
+        הבור מחפש את הסיבה בכאב; הלומד יודע ואינו שומר;<br>
+        והחסיד אינו מבין — ואינו נשבר.<br>
+        אבל רק מי שמודה <em>וגם עוזב</em> — נפתחים לו שערי הרחמים.
+      </p>
+      <div class="final-seal">
+        <p class="seal-quote">״וּמוֹדֶה וְעֹזֵב — יְרֻחָם״</p>
+        <span class="seal-source">— משלי כח, יג</span>
+      </div>
+    </div>
+
+    <p class="note">
+      * דברי מוסר ופנימיות. מקורות: אבות ד, יג (שגגת תלמוד עולה זדון) · ברכות ס ע"ב
+      (כל דעביד רחמנא לטב עביד — רבי עקיבא) · תענית כא ע"א (נחום איש גם־זו) ·
+      ברכות נד ע"א (חייב לברך על הרעה) · משלי כח, יג. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · מוסר ופנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/ruach-hatumah">ואת רוח הטומאה אעביר</a>
+        <a class="related-link" href="/zion/lo-yodea">לא יודע</a>
+        <a class="related-link" href="/zion/oyvei-ish-anshei-beito">אויבי איש אנשי ביתו</a>
+        <a class="related-link" href="/zion/alma-deshikra">עלמא דשיקרא</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
