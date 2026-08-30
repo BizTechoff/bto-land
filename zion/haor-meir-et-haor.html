@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>האור מאיר את האור — ולמה שכל אינו דעת</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="אור חדש מאיר את האור הקיים ומגלה את החמץ. שכל קונים בלימוד, מידות במעשה — ודעת מגיעה ממידותיו של השם, לא מחכמתו">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/haor-meir-et-haor">
+<meta property="og:title" content="האור מאיר את האור — ולמה שכל אינו דעת">
+<meta property="og:description" content="אור חדש מאיר את האור הקיים ומגלה את החמץ. שכל קונים בלימוד, מידות במעשה — ודעת מגיעה ממידותיו של השם">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="האור מאיר את האור — ולמה שכל אינו דעת">
+<meta name="twitter:description" content="שכל קונים בלימוד, מידות במעשה — ודעת מגיעה ממידותיו של השם, לא מחכמתו">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(28px,4.4vw,42px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:20px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .lead{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.28); border-right:4px solid var(--gold); padding:15px 20px; margin-bottom:14px; border-radius:3px;}
+  .lead p{font-size:16px; margin:0;}
+
+  .dimmer{background:linear-gradient(180deg, rgba(91,58,120,0.08), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.24); border-radius:8px; padding:18px 22px; margin:14px 0;}
+  .dimmer .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--royal); text-transform:uppercase; margin-bottom:9px; text-align:center;}
+  .dimmer p{font-size:15.5px; margin-bottom:9px;} .dimmer p:last-child{margin-bottom:0;}
+  .dimmer .scale{display:flex; align-items:center; justify-content:center; gap:9px; flex-wrap:wrap; margin:12px 0;}
+  .dimmer .lvl{border-radius:8px; padding:11px 16px; text-align:center; font-size:13.5px; min-width:120px;}
+  .l-dim{background:rgba(43,29,16,0.08); border:1px solid rgba(140,42,30,0.22); color:var(--ink-soft);}
+  .l-mid{background:rgba(184,138,44,0.13); border:1px solid rgba(184,138,44,0.3); color:var(--ink-soft);}
+  .l-bright{background:linear-gradient(135deg, rgba(184,138,44,0.25), rgba(184,138,44,0.08)); border:1px solid rgba(184,138,44,0.45); color:var(--crimson); font-weight:700;}
+  .dimmer .arw{color:var(--gold); font-size:18px;}
+
+  /* three acquisitions */
+  .acq{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0;}
+  .ac{padding:18px 14px; border-radius:8px; text-align:center;}
+  .ac .t{font-size:19px; font-weight:900; margin-bottom:5px;}
+  .ac .how{font-family:'Bellefair',serif; font-size:11px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:6px;}
+  .ac .d{font-size:13px; line-height:1.5;}
+  .ac-sechel{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.24);}
+  .ac-sechel .t{color:var(--crimson);} .ac-sechel .d{color:var(--ink-soft);}
+  .ac-midot{background:rgba(184,138,44,0.12); border:1px solid rgba(184,138,44,0.3);}
+  .ac-midot .t{color:var(--crimson);} .ac-midot .d{color:var(--ink-soft);}
+  .ac-daat{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep); color:var(--parchment);}
+  .ac-daat .t{color:var(--gold);} .ac-daat .how{color:var(--gold-light);} .ac-daat .d{color:rgba(245,236,217,0.85);}
+
+  .warn{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:16px 20px; margin:14px 0; border-radius:3px;}
+  .warn p{font-size:16px; margin:0;}
+
+  /* zeir anpin */
+  .za{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:8px; padding:20px 22px; margin:16px 0;}
+  .za .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; margin-bottom:10px; text-align:center;}
+  .za p{font-size:15px; color:rgba(245,236,217,0.9); margin:0 0 10px;} .za p:last-child{margin-bottom:0;}
+  .za strong{color:var(--gold-light);}
+  .za .sef{display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin:12px 0;}
+  .za .sef span{background:rgba(184,138,44,0.14); border:1px solid rgba(232,201,138,0.28); border-radius:12px; padding:4px 12px; font-size:13px; color:rgba(245,236,217,0.88);}
+  .za .sef span.hl{background:rgba(184,138,44,0.32); border-color:var(--gold-light); color:#fbeec4; font-weight:700;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:12px 18px; margin:12px 0; font-family:'David Libre',serif; font-size:15.5px; color:var(--ink-soft); border-radius:2px; text-align:center;}
+  .pasuk .src{display:block; font-size:11.5px; color:var(--gold-deep); margin-top:5px; letter-spacing:1px;}
+
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .acq{grid-template-columns:1fr;} .dimmer .scale{flex-direction:column;} .dimmer .arw{transform:rotate(90deg);}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">פנימיות התורה · דעת</div>
+    <h1>הָאוֹר מֵאִיר אֶת הָאוֹר</h1>
+    <p class="subtitle">ולמה שכל לעולם אינו דעת</p>
+
+    <div class="lead">
+      <p>
+        כשאור גדול נברא — הוא מאיר את <strong>האור הקיים</strong> באור חדש,
+        ורואים דברים שלא ראו קודם. נמצא שהאור מאיר <strong>לא רק את החושך —
+        אלא את האור עצמו</strong>.
+      </p>
+    </div>
+
+    <div class="dimmer">
+      <div class="k">משל הדימר</div>
+      <p>
+        מתג שמגביר את האור בחדר: ככל שנגביר — נראה שהקיר אינו ישר, ושיש קורי עכבישים
+        בפינות. הם היו שם כל הזמן; פשוט <strong>לא ראינו אותם באור הקודם</strong>.
+      </p>
+      <div class="scale">
+        <div class="lvl l-dim">אור עמום — הכל נראה תקין</div>
+        <div class="arw">⟸</div>
+        <div class="lvl l-mid">אור חזק יותר — הקיר עקום</div>
+        <div class="arw">⟸</div>
+        <div class="lvl l-bright">אור מלא — הקורים מתגלים</div>
+      </div>
+      <p>
+        וכך כשנדלק ה<strong>נר בלב האדם</strong>: פתאום כל ה<strong>חמץ</strong> מתגלה לאור הנר —
+        ואז יש עניין <strong>לשרוף אותו</strong> באש של אהבת ישראל, אהבת התורה ואהבת השם.
+      </p>
+    </div>
+
+    <h2>שָׁלֹשׁ קְנִיּוֹת — וְאֵיךְ קוֹנִים כָּל אַחַת</h2>
+
+    <div class="acq">
+      <div class="ac ac-sechel"><div class="t">שֵׂכֶל</div><div class="how">נקנה ב</div><div class="d">לִימּוּד</div></div>
+      <div class="ac ac-midot"><div class="t">מִדּוֹת</div><div class="how">נקנות ב</div><div class="d">מַעֲשֶׂה</div></div>
+      <div class="ac ac-daat"><div class="t">דַּעַת</div><div class="how">מגיעה מ</div><div class="d">מִדּוֹתָיו שֶׁל הַשֵּׁם — לֹא מֵחָכְמָתוֹ</div></div>
+    </div>
+
+    <div class="warn">
+      <p>
+        נמצא ש<strong>מי שרודף לימוד ולא מעשה — לא יזכה לעולם לדעת</strong>.
+        וזהו <strong>תלמיד חכם בלי דעת</strong>: חושב שמפני שהוא יודע את כל התורה
+        הוא עושה רצון השם — והוא רחוק כמרחק שמים מארץ.
+      </p>
+    </div>
+
+    <div class="za">
+      <div class="k">היכן נמצאות מידותיו של השם</div>
+      <p>
+        מידות השם נמצאות ב<strong>עולם האצילות</strong>, בפרצוף הנקרא
+        <strong>״זעיר אנפין״</strong>, ובו שבע הספירות:
+      </p>
+      <div class="sef">
+        <span>חסד</span><span>גבורה</span><span class="hl">תפארת</span>
+        <span>נצח</span><span>הוד</span><span>יסוד</span><span>מלכות</span>
+      </div>
+      <p>
+        וב<strong>תפארת</strong> שם נמצאת <strong>תורתו של השם</strong> — המוסתרת מעיני
+        השכל האנושי, ונגלית ב<strong>דעת</strong>, ששם ה<em>שכל הנעלם</em>.
+        ומי שלא זכה — כלל אינו יודע שהדבר קיים.
+      </p>
+    </div>
+
+    <p>
+      והוא נשאר ברובד הנמוך של ידיעת הש״ס — במבחן סיכה ובגאונות. וכמה חבל,
+      שהיו ויש אין־סוף תלמידי חכמים שאינם מבינים שיש בתורה <strong>משהו נוסף</strong>
+      מלבד ידיעה ושכל — והוא <strong>דעת השם</strong>.
+    </p>
+
+    <div class="pasuk">
+      דַּעַת קָנִיתָ — מֶה חָסַרְתָּ?
+      <span class="src">— ויקרא רבה א, ו · נדרים מא ע"א</span>
+    </div>
+
+    <div class="pasuk">
+      כָּל אָדָם שֶׁאֵין בּוֹ דֵּעָה — אָסוּר לְרַחֵם עָלָיו
+      <span class="src">— סנהדרין צב ע"א · ומי שיש בו דעת, מרחמים עליו מן השמים</span>
+    </div>
+
+    <div class="final">
+      <div class="t">אֵין הַשֵּׂכֶל מוֹלִיד דַּעַת — הַמַּעֲשֶׂה מוֹלִיד</div>
+      <p class="d">
+        אור חדש אינו רק מגרש חושך — הוא מגלה את מה שהאור הישן החמיץ.<br>
+        וכשנדלק הנר ומתגלה החמץ, שורפים אותו באש האהבה;<br>
+        ומשם, ממידותיו של השם ולא מחכמתו, נולדת הדעת.
+      </p>
+      <div class="seal">״דַּעַת קָנִיתָ — מֶה חָסַרְתָּ?״<small>ויקרא רבה א</small></div>
+    </div>
+
+    <p class="note">
+      * מקורות: ויקרא רבה א, ו ונדרים מא ע"א (דעת קנית מה חסרת) · סנהדרין צב ע"א
+      (אין בו דעה — אסור לרחם עליו) · זעיר אנפין, שבע הספירות והתפארת — על דרך הקבלה ·
+      ״שכל נעלם״ — בשם האור החיים הקדוש. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/klipa-ufri">קליפה ופרי</a>
+        <a class="related-link" href="/zion/alma-deshikra">עלמא דשיקרא</a>
+        <a class="related-link" href="/zion/mishor-vahar">מישור והר</a>
+        <a class="related-link" href="/zion/maasim-merubin">מעשים מרובין מחכמה</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
