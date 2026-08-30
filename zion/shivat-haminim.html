@@ -27,278 +27,189 @@
     --shadow:rgba(43,29,16,0.12);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
   body{
     font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
-    min-height:100vh; line-height:1.9; padding:60px 20px;
+    min-height:100vh; line-height:1.75; padding:44px 20px;
     background-image:
       radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
       radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
       url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   .container{
-    max-width:810px; margin:0 auto;
+    max-width:860px; margin:0 auto;
     background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
-    padding:70px 56px; border-radius:4px;
+    padding:44px 44px 38px; border-radius:4px;
     box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
     position:relative;
   }
-  .container::before{content:""; position:absolute; inset:12px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
 
-  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:14px; letter-spacing:8px; color:var(--gold-deep); margin-bottom:36px; opacity:0.85;}
-  .ornament{text-align:center; color:var(--gold); font-size:24px; letter-spacing:8px; margin-bottom:26px; opacity:0.7;}
-  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:6px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;}
-  h1{font-weight:900; font-size:clamp(36px,6vw,56px); text-align:center; color:var(--ink); line-height:1.13; margin-bottom:14px; letter-spacing:-0.5px;}
-  .subtitle{text-align:center; font-size:18px; color:var(--ink-soft); font-style:italic; margin-bottom:38px;}
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(28px,4.4vw,40px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
 
-  .opening-quote{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.25); border-right:4px solid var(--gold); padding:24px 30px; margin-bottom:28px; border-radius:3px; text-align:center;}
-  .opening-quote p{font-family:'David Libre',serif; font-size:20px; color:var(--ink); line-height:1.7; margin:0;}
-  .opening-quote-source{display:block; margin-top:10px; font-size:13px; color:var(--gold-deep); letter-spacing:1px; font-style:italic;}
+  .opening{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.28); border-right:4px solid var(--gold); padding:14px 20px; margin-bottom:14px; border-radius:3px; text-align:center;}
+  .opening p{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); margin:0; line-height:1.5;}
+  .opening .src{display:block; margin-top:5px; font-size:11.5px; color:var(--gold-deep); letter-spacing:1px; font-style:italic;}
 
-  .question{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.22); border-right:4px solid var(--crimson); padding:20px 28px; margin:24px 0 30px; border-radius:3px;}
-  .question .lbl{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--crimson); text-transform:uppercase; margin-bottom:10px;}
-  .question p{font-size:17px; margin:0; line-height:1.75;}
-
-  .divider{display:flex; align-items:center; justify-content:center; margin:36px 0; gap:20px;}
-  .divider::before,.divider::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:200px;}
-  .divider-symbol{color:var(--gold); font-size:18px;}
-
-  .section{margin-bottom:26px;}
-  .section-title{font-weight:700; font-size:22px; color:var(--crimson); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
-  .section-title::before{content:"❖"; color:var(--gold); font-size:13px;}
-  p{font-size:18px; color:var(--ink); margin-bottom:14px;}
-  strong{color:var(--crimson); font-weight:700;}
-  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
-
-  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:15px 20px; margin:14px 0; font-family:'David Libre',serif; font-size:16px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.8;}
-  .pasuk-source{display:block; font-size:12.5px; color:var(--gold-deep); margin-top:7px; letter-spacing:1px;}
+  .q{font-size:15.5px; color:var(--ink-soft); text-align:center; margin-bottom:16px; line-height:1.65;}
+  .q strong{color:var(--crimson);}
 
   /* three keys */
-  .keys{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:26px 0;}
-  .key{padding:20px 16px; border-radius:8px; text-align:center; background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.03)); border:1px solid rgba(184,138,44,0.3);}
-  .key .w{font-size:17px; font-weight:900; color:var(--crimson); margin-bottom:6px;}
-  .key .d{font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+  .keys{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:14px;}
+  .key{padding:13px 12px; border-radius:7px; text-align:center; background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.03)); border:1px solid rgba(184,138,44,0.3);}
+  .key .w{font-size:15.5px; font-weight:900; color:var(--crimson); margin-bottom:3px;}
+  .key .d{font-size:12.5px; color:var(--ink-soft); line-height:1.45;}
 
-  /* seven midot chips */
-  .midot{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:20px 0;}
-  .midot span{background:rgba(184,138,44,0.10); border:1px solid rgba(184,138,44,0.28); border-radius:15px; padding:6px 15px; font-size:14.5px; color:var(--gold-deep);}
+  .midot{display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin-bottom:16px;}
+  .midot span{background:rgba(184,138,44,0.10); border:1px solid rgba(184,138,44,0.28); border-radius:12px; padding:3px 11px; font-size:12.5px; color:var(--gold-deep);}
 
-  /* species cards */
-  .species{margin:28px 0;}
-  .sp{border-radius:10px; padding:24px 26px; margin-bottom:14px; border:1px solid rgba(184,138,44,0.28); background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.25));}
-  .sp .head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:10px;}
-  .sp .name{font-family:'David Libre',serif; font-size:30px; font-weight:900; color:var(--crimson);}
-  .sp .tag{font-family:'Bellefair',serif; font-size:12px; letter-spacing:3px; color:var(--gold-deep);}
-  .sp p{font-size:16.5px; margin-bottom:10px; line-height:1.75;}
-  .sp p:last-child{margin-bottom:0;}
-  .sp.dark{background:linear-gradient(135deg,#2b1d10,#1a1108); border-color:var(--gold-deep); color:var(--parchment);}
-  .sp.dark .name{color:var(--gold);} .sp.dark .tag{color:var(--gold-light);} .sp.dark p{color:rgba(245,236,217,0.88);}
-  .sp.dark strong{color:var(--gold-light);} .sp.dark em{color:var(--gold-light);}
+  .rule{display:flex; align-items:center; justify-content:center; margin:16px 0 14px; gap:14px;}
+  .rule::before,.rule::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); max-width:180px;}
+  .rule span{color:var(--gold); font-size:14px;}
+
+  /* species grid */
+  .species{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
+  .sp{border-radius:8px; padding:14px 16px; border:1px solid rgba(184,138,44,0.28); background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.25));}
+  .sp .head{display:flex; align-items:baseline; gap:9px; margin-bottom:5px; flex-wrap:wrap;}
+  .sp .name{font-family:'David Libre',serif; font-size:22px; font-weight:900; color:var(--crimson); line-height:1;}
+  .sp .tag{font-family:'Bellefair',serif; font-size:11px; letter-spacing:1.5px; color:var(--gold-deep);}
+  .sp p{font-size:14.5px; margin:0; line-height:1.6; color:var(--ink);}
+  .sp .cite{display:block; margin-top:5px; font-size:12px; color:var(--gold-deep); font-style:italic; line-height:1.45;}
+  .sp strong{color:var(--crimson); font-weight:700;}
+  .sp.wide{grid-column:1 / -1;}
+  .sp.dark{background:linear-gradient(135deg,#2b1d10,#1a1108); border-color:var(--gold-deep);}
+  .sp.dark .name{color:var(--gold);} .sp.dark .tag{color:var(--gold-light);}
+  .sp.dark p{color:rgba(245,236,217,0.9);} .sp.dark strong{color:var(--gold-light);} .sp.dark .cite{color:var(--gold-light);}
   .sp.royal{background:linear-gradient(135deg, rgba(91,58,120,0.13), rgba(91,58,120,0.03)); border-color:rgba(91,58,120,0.3);}
   .sp.royal .name{color:var(--royal);}
 
-  .final-message{margin-top:42px; padding:30px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
-  .final-message-label{font-family:'Bellefair',serif; font-size:12px; letter-spacing:5px; color:var(--crimson); text-transform:uppercase; margin-bottom:14px;}
-  .final-pasuk{font-family:'David Libre',serif; font-size:21px; color:var(--ink); line-height:1.65; margin-bottom:12px; font-weight:700;}
-  .final-explanation{font-size:17px; color:var(--ink-soft); font-style:italic; line-height:1.7; margin:0;}
-  .final-seal{margin-top:22px; padding-top:18px; border-top:1px solid rgba(184,138,44,0.35);}
-  .seal-quote{font-family:'David Libre',serif; font-size:19px; font-weight:700; color:var(--crimson); margin:0 0 6px; line-height:1.6;}
-  .seal-source{font-family:'Bellefair',serif; font-size:13px; letter-spacing:2px; color:var(--gold-deep);}
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
 
-  .note{margin-top:26px; font-size:13.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.6;}
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
 
-  .related{margin-top:34px; padding:22px 24px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
-  .related-title{font-family:'Bellefair',serif; font-size:12px; letter-spacing:4px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:14px;}
-  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:10px 8px;}
-  .related-link{font-size:15px; line-height:1.4; color:var(--crimson); text-decoration:none; padding:6px 14px; border-radius:16px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22); transition:all .2s;}
-  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16); border-color:rgba(184,138,44,0.4);}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
 
-  .attribution{margin-top:34px; text-align:center; padding-top:28px; border-top:1px solid rgba(184,138,44,0.3);}
-  .attribution-line{font-size:16px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
-  .footer-ornament{text-align:center; margin-top:28px; color:var(--gold); font-size:18px; letter-spacing:12px; opacity:0.5;}
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:7px;}
+  .related-link{font-size:13.5px; line-height:1.35; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
 
   @media (max-width:640px){
-    body{padding:20px 10px;} .container{padding:40px 20px;} .container::before{inset:8px;}
-    .keys{grid-template-columns:1fr;} .sp{padding:20px 18px;} .sp .name{font-size:24px;}
-    .opening-quote p{font-size:17px;} p{font-size:17px;} .sp p{font-size:16px;}
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .keys{grid-template-columns:1fr;} .species{grid-template-columns:1fr;}
   }
-  @media print{ body{background:#fff; padding:0;} .container{box-shadow:none;} }
-  .container{ animation:fadeUp 1s ease-out; }
-  @keyframes fadeUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+  @media print{
+    body{background:#fff; padding:0; font-size:12pt;}
+    .container{box-shadow:none; max-width:100%; padding:14px;}
+    .related{display:none;}
+  }
 </style>
 </head>
 <body>
   <div class="container">
 
     <div class="bezras">בס״ד</div>
-    <div class="ornament">✦ ❖ ✦</div>
     <div class="eyebrow">פנימיות התורה · ביכורים</div>
     <h1>שִׁבְעַת הַמִּינִים</h1>
     <p class="subtitle">שבע תורות — ומדוע רק בארץ ישראל, ורק מחג השבועות</p>
 
-    <div class="opening-quote">
+    <div class="opening">
       <p>אֶרֶץ חִטָּה וּשְׂעֹרָה וְגֶפֶן וּתְאֵנָה וְרִמּוֹן — אֶרֶץ זֵית שֶׁמֶן וּדְבָשׁ</p>
-      <span class="opening-quote-source">— דברים ח, ח</span>
+      <span class="src">— דברים ח, ח</span>
     </div>
 
-    <div class="question">
-      <div class="lbl">נשאלת השאלה</div>
-      <p>
-        ביכורים מביאים <strong>רק בארץ ישראל</strong>, <strong>רק משבעת המינים</strong>,
-        את הפירות הראשונים שהבשילו — <strong>אל הכהן</strong> בבית המקדש,
-        והחל <strong>מחג השבועות</strong>. מה עניינם בפנימיות?
-      </p>
-    </div>
+    <p class="q">
+      ביכורים מביאים <strong>רק בארץ ישראל</strong>, <strong>רק משבעת המינים</strong>,
+      <strong>רק מחג השבועות</strong> — ומביאים אותם <strong>אל הכהן</strong>. ובפנימיות:
+    </p>
 
     <div class="keys">
-      <div class="key"><div class="w">כֹּהֵן גָּדוֹל</div><div class="d">הכוונה לקדוש ברוך הוא</div></div>
-      <div class="key"><div class="w">אֶרֶץ יִשְׂרָאֵל</div><div class="d">פנימיות עתיק שבכתר — היחידה; ״ארץ״ מלשון רצון, ורצון השם בכתר</div></div>
-      <div class="key"><div class="w">חַג הַשָּׁבוּעוֹת</div><div class="d">קבלת התורה — תורת הכתר, ״תורה חדשה מאיתי תצא״</div></div>
+      <div class="key"><div class="w">כֹּהֵן גָּדוֹל</div><div class="d">הקדוש ברוך הוא</div></div>
+      <div class="key"><div class="w">אֶרֶץ יִשְׂרָאֵל</div><div class="d">פנימיות עתיק שבכתר — ״ארץ״ מלשון רצון, ורצון השם בכתר</div></div>
+      <div class="key"><div class="w">חַג הַשָּׁבוּעוֹת</div><div class="d">תורת הכתר — ״תורה חדשה מאיתי תצא״</div></div>
     </div>
 
-    <div class="section">
-      <p>
-        ו<strong>שבעת המינים</strong> — כנגד <strong>מעשי האדם</strong>, כשהוא מתוקן בשבע המידות:
-      </p>
-      <div class="midot">
-        <span>חסד</span><span>גבורה</span><span>תפארת</span><span>נצח</span><span>הוד</span><span>יסוד</span><span>מלכות</span>
-      </div>
-      <p>
-        ומי שזוכה לתורה מפי המלך — אין תורה אחרת, אלא <strong>הסבר חדש, השגחה חדשה, לב חדש</strong>.
-        כשהאדם עושה רצון קונו, כל ההשגחה עמו משתנה:
-      </p>
-      <div class="pasuk">
-        לֵךְ אֱכֹל בְּשִׂמְחָה לַחְמֶךָ וּשְׁתֵה בְלֶב טוֹב יֵינֶךָ — כִּי כְבָר רָצָה הָאֱלֹהִים אֶת מַעֲשֶׂיךָ
-        <span class="pasuk-source">— קהלת ט, ז</span>
-      </div>
+    <p class="q">
+      ושבעת המינים — כנגד <strong>מעשי האדם</strong> כשהוא מתוקן בשבע המידות:
+    </p>
+    <div class="midot">
+      <span>חסד</span><span>גבורה</span><span>תפארת</span><span>נצח</span><span>הוד</span><span>יסוד</span><span>מלכות</span>
     </div>
 
-    <div class="divider"><span class="divider-symbol">❖</span></div>
+    <div class="rule"><span>❖</span></div>
 
     <div class="species">
 
-      <div class="sp">
+      <div class="sp wide">
         <div class="head"><span class="name">אֶרֶץ</span><span class="tag">הרצון העליון</span></div>
-        <p>
-          שאדם זוכה ל<strong>רצון העליון</strong> — בחינת <em>צדיק גוזר והקדוש ברוך הוא מקיים</em>,
-          ושולט בטבע: השם גוזר בצורת, והאדם גוזר גשם — כרבי שמעון.
-        </p>
+        <p>שזוכה לרצון העליון — בחינת <strong>צדיק גוזר והקדוש ברוך הוא מקיים</strong>: השם גוזר בצורת, והאדם גוזר גשם — כרשב״י.</p>
       </div>
 
       <div class="sp dark">
         <div class="head"><span class="name">חִטָּה</span><span class="tag">תורת הנפש האלוקית</span></div>
-        <p>
-          תורה מפי הנפש האלוקית — בחינת <strong>משה</strong>, שבירך
-          <em>״המוציא לחם מן השמים״</em>. שם זוכים לשלום, ו<strong>התורה מחזרת אחרי האדם</strong>:
-          אין עוד צורך בי״א הפעולות שבלחם (חרישה, זריעה, קצירה...) — כל היגיעה שבתורה;
-          אלא <strong>חידושי התורה גדלים על העצים</strong>.
-        </p>
-        <div class="pasuk" style="background:rgba(184,138,44,0.16); border-color:var(--gold-light); color:rgba(245,236,217,0.9);">
-          עֲתִידָה אֶרֶץ יִשְׂרָאֵל שֶׁתּוֹצִיא גְּלוּסְקָאוֹת וּכְלֵי מֵילָת
-          <span class="pasuk-source" style="color:var(--gold-light);">— שבת ל ע"ב · ״הַשָּׂם גְּבוּלֵךְ שָׁלוֹם, חֵלֶב חִטִּים יַשְׂבִּיעֵךְ״ (תהלים קמז)</span>
-        </div>
+        <p>בחינת <strong>משה</strong> — ״המוציא לחם מן השמים״. <strong>התורה מחזרת אחרי האדם</strong>: אין עוד י״א הפעולות שבלחם, וחידושי התורה גדלים על העצים.</p>
+        <span class="cite">״עתידה ארץ ישראל שתוציא גלוסקאות״ (שבת ל) · ״חֵלֶב חִטִּים יַשְׂבִּיעֵךְ״ (תהלים קמז)</span>
       </div>
 
       <div class="sp">
         <div class="head"><span class="name">וּשְׂעֹרָה</span><span class="tag">תורת הנפש הבהמית</span></div>
-        <p>
-          שעורה היא <strong>מזון הבהמה</strong> — כנגד תורה הבאה מן ה<strong>נפש הבהמית שחזרה בתשובה</strong>.
-          כנגד כל בני הגרים ותורתם: אונקלוס, רבי מאיר, רבי עקיבא, שמעיה ואבטליון.
-          הנפש הבהמית המתגיירת נעשית <strong>כתינוק שנולד</strong> — והנבואה ניתנה לתינוקות.
-          וזו תורה נוספת שהשם נותן לאדם.
-        </p>
+        <p>מזון הבהמה — תורת <strong>הנפש הבהמית שחזרה בתשובה</strong>. כתורת הגרים: אונקלוס, ר׳ מאיר, ר׳ עקיבא, שמעיה ואבטליון — <strong>כתינוק שנולד</strong>, והנבואה ניתנה לתינוקות.</p>
       </div>
 
       <div class="sp royal">
-        <div class="head"><span class="name">וְגֶפֶן</span><span class="tag">התורה שהאדם מייצר</span></div>
-        <p>
-          כנגד התורה שהאדם <strong>מייצר מעצמו</strong> לאחר שקיבל דעת מן הבורא —
-          בחינת <em>״בורא פרי הגפן״</em>, שמשבחים בה מ״פרי העץ״ ל״פרי הגפן״:
-          שהוציא ממנה את הרע, ועכשיו כולה <strong>חידושי תורה בחסד</strong>.
-        </p>
-        <div class="pasuk">
-          פִּיהָ פָּתְחָה בְחׇכְמָה — וְתוֹרַת חֶסֶד עַל לְשׁוֹנָהּ
-          <span class="pasuk-source">— משלי לא, כו</span>
-        </div>
+        <div class="head"><span class="name">וְגֶפֶן</span><span class="tag">תורה שהאדם מחדש</span></div>
+        <p>מה שהאדם מייצר מעצמו אחרי שקיבל דעת — מ״פרי העץ״ ל<strong>״פרי הגפן״</strong>: שהוציא ממנה את הרע, וכולה חידושים בחסד.</p>
+        <span class="cite">״פִּיהָ פָּתְחָה בְחׇכְמָה וְתוֹרַת חֶסֶד עַל לְשׁוֹנָהּ״ (משלי לא)</span>
       </div>
 
       <div class="sp">
-        <div class="head"><span class="name">וּתְאֵנָה</span><span class="tag">המעשים היומיומיים</span></div>
-        <p>
-          כנגד <strong>המצוות שבכל יום</strong> — שעץ התאנה נותן פרי בכל יום,
-          ואם אין קוטפים — הפרי מתליע. וכך תורה ומצוות:
-        </p>
-        <div class="pasuk">
-          נֹצֵר תְּאֵנָה — יֹאכַל פִּרְיָהּ
-          <span class="pasuk-source">— משלי כז, יח · ״אם תעזבני יום — יומיים אעזבך״ (ירושלמי ברכות ט, ה)</span>
-        </div>
+        <div class="head"><span class="name">וּתְאֵנָה</span><span class="tag">מצוות שבכל יום</span></div>
+        <p>התאנה נותנת פרי בכל יום — ואם אין קוטפים, <strong>הפרי מתליע</strong>. וכך תורה ומצוות.</p>
+        <span class="cite">״נֹצֵר תְּאֵנָה יֹאכַל פִּרְיָהּ״ (משלי כז) · ״אם תעזבני יום — יומיים אעזבך״ (ירושלמי ברכות ט)</span>
       </div>
 
       <div class="sp">
-        <div class="head"><span class="name">וְרִמּוֹן</span><span class="tag">הזדונות שנעשו זכויות</span></div>
-        <p>
-          עניין <em>״אפילו ריקנין שבך מלאים מצוות כרימון״</em> — כאשר כל הזדונות של האדם
-          נהפכים לו לזכויות. זה עניין הרימון: שהרשעים חוזרים בתשובה <strong>מאהבה</strong> —
-          וכן <strong>הרשע שבתוך כל אדם</strong>.
-        </p>
-        <div class="pasuk">
-          אֲפִילּוּ רֵיקָנִין שֶׁבָּךְ — מְלֵאִים מִצְווֹת כְּרִמּוֹן
-          <span class="pasuk-source">— סנהדרין לז ע"א</span>
-        </div>
+        <div class="head"><span class="name">וְרִמּוֹן</span><span class="tag">זדונות שנעשו זכויות</span></div>
+        <p>הרשעים חוזרים <strong>בתשובה מאהבה</strong> — וכן הרשע שבתוך כל אדם — וכל זדונותיו נהפכים לזכויות.</p>
+        <span class="cite">״אפילו ריקנין שבך מלאים מצוות כרימון״ (סנהדרין לז)</span>
       </div>
 
       <div class="sp dark">
         <div class="head"><span class="name">אֶרֶץ זֵית</span><span class="tag">עמל התורה</span></div>
-        <p>
-          זית הוא <strong>עמל התורה</strong> — ששמן זית בא מ<strong>כתישת</strong> הזיתים.
-          כשאדם כותש את עצמו בתורה ובמצוות, זוכה לשמן זית — ואז <strong>לא ישכח תורה</strong>:
-          שאכילת זיתים גורמת שכחה, ואכילת זיתים <em>בשמן</em> גורמת זיכרון (הוריות יג ע"ב).
-        </p>
-        <p>
-          ועץ הזית <strong>אינו מקבל כלאיים</strong> — והכוונה: מי שזוכה לתורה מפי השם,
-          <strong style="color:var(--gold-light)">היצר הרע אינו יכול עוד להתערבב בחכמתו</strong>.
-        </p>
+        <p>שמן בא מ<strong>כתישה</strong> — וכשאדם כותש עצמו בתורה, לא ישכח. ועץ הזית <strong>אינו מקבל כלאיים</strong>: היצר אינו יכול עוד להתערבב בחכמתו.</p>
+        <span class="cite">זיתים משכחים, וזיתים בשמן מזכירים (הוריות יג)</span>
       </div>
 
       <div class="sp royal">
-        <div class="head"><span class="name">וּדְבָשׁ</span><span class="tag">התורה שיורדת מלמעלה</span></div>
-        <p>
-          דבש תמרים — והתמרים משולים לתורה, הנוזלים מן העץ ונעשים דבש.
-          כאן הכוונה ש<strong>התורה מחזרת אחרי האדם</strong> ונוזלת מן הלבנון —
-          בחינת <em>מים חיים</em>, מי מעיין המטהרים אף בזוחלין.
-        </p>
-        <p>
-          זו תורה ה<strong>יורדת על האדם משמים</strong> — בחינת בית המקדש השלישי,
-          שיורד משוכלל מלמעלה, כטל המחייה מתים.
-        </p>
-        <div class="pasuk">
-          מַעְיַן גַּנִּים בְּאֵר מַיִם חַיִּים — וְנֹזְלִים מִן לְבָנוֹן
-          <span class="pasuk-source">— שיר השירים ד, טו</span>
-        </div>
+        <div class="head"><span class="name">וּדְבָשׁ</span><span class="tag">תורה היורדת מלמעלה</span></div>
+        <p>דבש תמרים הנוזל מן העץ — <strong>התורה מחזרת אחרי האדם</strong> ונוזלת עליו כמים חיים, בחינת בית המקדש השלישי היורד בנוי מלמעלה, כטל המחייה מתים.</p>
+        <span class="cite">״מַעְיַן גַּנִּים בְּאֵר מַיִם חַיִּים וְנֹזְלִים מִן לְבָנוֹן״ (שיר השירים ד)</span>
       </div>
 
     </div>
 
-    <div class="final-message">
-      <div class="final-message-label">סוף דבר</div>
-      <p class="final-pasuk">הַבִּיכּוּרִים — הַפְּרִי הָרִאשׁוֹן שֶׁל שֶׁבַע הַמִּידּוֹת</p>
-      <p class="final-explanation">
+    <div class="final">
+      <div class="t">הַבִּיכּוּרִים — הַפְּרִי הָרִאשׁוֹן שֶׁל שֶׁבַע הַמִּידּוֹת</div>
+      <p class="d">
         רק בארץ — ברצון העליון; רק משבעת המינים — משבע המידות המתוקנות;<br>
-        ורק מחג השבועות — משזכה לתורה מפי המלך.<br>
-        ואת הראשית שבכל אלה מביאים אל הכהן: אל הקדוש ברוך הוא בעצמו.
+        ורק מחג השבועות — משזכה לתורה מפי המלך. ואת הראשית מביאים אל הכהן עצמו.
       </p>
-      <div class="final-seal">
-        <p class="seal-quote">״כִּי כְבָר רָצָה הָאֱלֹהִים אֶת מַעֲשֶׂיךָ״</p>
-        <span class="seal-source">— קהלת ט, ז</span>
-      </div>
+      <div class="seal">״כִּי כְבָר רָצָה הָאֱלֹהִים אֶת מַעֲשֶׂיךָ״<small>קהלת ט, ז</small></div>
     </div>
 
     <p class="note">
-      * דברי פנימיות. מקורות: דברים ח, ח · ביכורים פ״א (רק מז׳ המינים, מחג השבועות) ·
-      קהלת ט, ז · שבת ל ע"ב (גלוסקאות וכלי מילת) · תהלים קמז, יד · משלי לא, כו ·
-      משלי כז, יח · ירושלמי ברכות ט, ה · סנהדרין לז ע"א (ריקנין כרימון) · הוריות יג ע"ב (זיתים ושמן) ·
-      שיר השירים ד, טו · סוכה מא ע"א (מקדש שלישי יורד בנוי מלמעלה) · ״תורה חדשה מאיתי תצא״
-      (ויקרא רבה יג). כתר, עתיק ושבע המידות — על דרך הקבלה. הלימוד למעשה — בהדרכת רב.
+      * מקורות: דברים ח, ח · ביכורים פ״א · קהלת ט, ז · שבת ל ע"ב · תהלים קמז · משלי לא, כז ·
+      ירושלמי ברכות ט, ה · סנהדרין לז ע"א · הוריות יג ע"ב · שיר השירים ד, טו · סוכה מא ע"א ·
+      ויקרא רבה יג. כתר, עתיק ושבע המידות — על דרך הקבלה. הלימוד למעשה — בהדרכת רב.
     </p>
 
     <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
