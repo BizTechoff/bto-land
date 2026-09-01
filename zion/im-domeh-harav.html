@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אם דומה הרב למלאך — לדבר מחוסר ידיעה</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="השקר הוא מעט אמת מעורבת בהרבה שקר — תובנות שכולן שכל בלי מידות. ומי שזוכה לאצילות מדבר לא מידיעה אלא מחוסר ידיעה, כמלאך ה׳ צבאות">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/im-domeh-harav">
+<meta property="og:title" content="אם דומה הרב למלאך — לדבר מחוסר ידיעה">
+<meta property="og:description" content="השקר הוא מעט אמת מעורבת בהרבה שקר — תובנות שכולן שכל בלי מידות. ומי שזוכה לאצילות מדבר לא מידיעה אלא מחוסר ידיעה">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="אם דומה הרב למלאך — לדבר מחוסר ידיעה">
+<meta name="twitter:description" content="מעט אמת מעורבת בהרבה שקר — ומי שזוכה לאצילות מדבר לא מידיעה אלא מחוסר ידיעה">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(27px,4.2vw,40px); text-align:center; color:var(--ink); line-height:1.16; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:20px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  /* mixture bar */
+  .mix{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:17px 20px; margin-bottom:14px; border-radius:3px;}
+  .mix p{font-size:16px; margin:0 0 11px;}
+  .mix .bar{display:flex; height:34px; border-radius:6px; overflow:hidden; border:1px solid rgba(184,138,44,0.3);}
+  .mix .emet{flex:0 0 22%; background:linear-gradient(135deg, rgba(184,138,44,0.35), rgba(184,138,44,0.15)); display:flex; align-items:center; justify-content:center; font-size:13.5px; font-weight:700; color:var(--gold-deep);}
+  .mix .sheker{flex:1; background:rgba(43,29,16,0.10); display:flex; align-items:center; justify-content:center; font-size:13.5px; color:var(--ink-soft);}
+
+  .lacks{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin:13px 0;}
+  .lacks span{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.22); border-radius:13px; padding:5px 14px; font-size:13.5px; color:var(--ink-soft);}
+
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .c{padding:18px 17px; border-radius:8px;}
+  .c .k{font-family:'Bellefair',serif; font-size:10.5px; letter-spacing:2px; margin-bottom:6px;}
+  .c .t{font-size:17px; font-weight:900; margin-bottom:6px;}
+  .c .d{font-size:13.5px; line-height:1.6;}
+  .c-sechel{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .c-sechel .k{color:var(--gold-deep);} .c-sechel .t{color:var(--crimson);} .c-sechel .d{color:var(--ink-soft);}
+  .c-malach{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep); color:var(--parchment);}
+  .c-malach .k{color:var(--gold-light);} .c-malach .t{color:var(--gold);} .c-malach .d{color:rgba(245,236,217,0.87);}
+  .c-malach strong{color:var(--gold-light);}
+
+  .path{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:8px; padding:20px 22px; margin:15px 0;}
+  .path .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; margin-bottom:11px; text-align:center;}
+  .path .row{display:flex; align-items:center; justify-content:center; gap:9px; flex-wrap:wrap;}
+  .path .b{background:rgba(184,138,44,0.16); border:1px solid rgba(232,201,138,0.3); border-radius:9px; padding:11px 16px; text-align:center; min-width:118px;}
+  .path .b .t{font-size:14.5px; font-weight:700; color:var(--gold); display:block;}
+  .path .b .d{font-size:12px; color:rgba(245,236,217,0.78);}
+  .path .arw{color:var(--gold-light); font-size:17px;}
+  .path p{font-size:15px; color:rgba(245,236,217,0.9); margin:12px 0 0; text-align:center;}
+  .path strong{color:var(--gold-light);}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:14px 20px; margin:13px 0; font-family:'David Libre',serif; font-size:15.5px; color:var(--ink-soft); border-radius:2px; text-align:center; line-height:1.75;}
+  .pasuk .src{display:block; font-size:11.5px; color:var(--gold-deep); margin-top:6px; letter-spacing:1px;}
+  .pasuk strong{color:var(--crimson);}
+
+  .test{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .ts{padding:17px 16px; border-radius:8px; text-align:center;}
+  .ts .t{font-size:16px; font-weight:900; margin-bottom:5px;}
+  .ts .d{font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+  .ts-yes{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);}
+  .ts-yes .t{color:var(--gold-deep);}
+  .ts-no{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .ts-no .t{color:var(--crimson);}
+
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .two,.test{grid-template-columns:1fr;} .path .row{flex-direction:column;} .path .arw{transform:rotate(90deg);}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">פנימיות התורה · אמת ושקר</div>
+    <h1>אִם דּוֹמֶה הָרַב לְמַלְאָךְ</h1>
+    <p class="subtitle">לדבר לא מידיעה — אלא מחוסר ידיעה</p>
+
+    <div class="mix">
+      <p>
+        השקר אינו היפוכה של האמת — אלא <strong>מעט אמת מעורבת בהרבה שקר</strong>.
+        אדם זוכה לקצת אמת, מערבב, ומגיע ל<em>תובנות</em>.
+      </p>
+      <div class="bar">
+        <div class="emet">קצת אמת</div>
+        <div class="sheker">והרבה שקר — ומהתערובת: ״תובנות״</div>
+      </div>
+    </div>
+
+    <p>אבל כולו שכל, ואין בו מידות. ומה חסר לו?</p>
+    <div class="lacks">
+      <span>לא גילה את צדיק האמת שבליבו</span>
+      <span>לא זכה לזעיר אנפין ונוקבא</span>
+      <span>אינו מכיר את נפש בהמתו</span>
+    </div>
+    <p>
+      ולכן הוא <strong>מדבר רק ממה שקרא, למד או הבין</strong>.
+    </p>
+
+    <div class="two">
+      <div class="c c-sechel">
+        <div class="k">מדבר מן השכל</div>
+        <div class="t">מִידִיעָה</div>
+        <div class="d">חוזר על מה שקרא ולמד. הכל נכון — ואין בו חיים, כי לא עבר דרך המידות והמעשה.</div>
+      </div>
+      <div class="c c-malach">
+        <div class="k">מדבר מן האצילות</div>
+        <div class="t">מֵחֹסֶר יְדִיעָה</div>
+        <div class="d">מתקשרים עמו משמים בצורת <strong>בת קול</strong> — והמלאך לוחש לו את מה שהוא אומר.</div>
+      </div>
+    </div>
+
+    <div class="path">
+      <div class="k">איך מגיעים לשם</div>
+      <div class="row">
+        <div class="b"><span class="t">מַעֲשִׂים</span><span class="d">בפועל</span></div>
+        <div class="arw">+</div>
+        <div class="b"><span class="t">תְּפִילּוֹת</span><span class="d">מן הלב</span></div>
+        <div class="arw">⟸</div>
+        <div class="b"><span class="t">עוֹלַם הָאֲצִילוּת</span><span class="d">ושם — מלאך מגיד</span></div>
+      </div>
+      <p>
+        ברגע שאדם זוכה להגיע לעולם האצילות <strong>מכוח מעשיו ותפילותיו</strong> —
+        הוא זוכה למלאך מגיד.
+      </p>
+    </div>
+
+    <div class="pasuk">
+      ״כִּי שִׂפְתֵי כֹהֵן יִשְׁמְרוּ דַעַת וְתוֹרָה יְבַקְשׁוּ מִפִּיהוּ —
+      <strong>כִּי מַלְאַךְ ה׳ צְבָאוֹת הוּא</strong>״:<br>
+      אִם דּוֹמֶה הָרַב לְמַלְאַךְ ה׳ צְבָאוֹת — יְבַקְּשׁוּ תּוֹרָה מִפִּיו;
+      וְאִם לָאו — אַל יְבַקְּשׁוּ תּוֹרָה מִפִּיו
+      <span class="src">— מועד קטן יז ע"א (הפסוק: מלאכי ב, ז)</span>
+    </div>
+
+    <div class="test">
+      <div class="ts ts-yes"><div class="t">דּוֹמֶה לְמַלְאָךְ</div><div class="d">אינו מקור הדברים — הוא שליח שמעביר אותם. יבקשו תורה מפיו.</div></div>
+      <div class="ts ts-no"><div class="t">אֵינוֹ דּוֹמֶה</div><div class="d">מדבר מעצמו ומידיעתו — ואפילו הכל נכון, אל יבקשו תורה מפיו.</div></div>
+    </div>
+
+    <div class="final">
+      <div class="t">הַמִּבְחָן אֵינוֹ כַּמָּה הוּא יוֹדֵעַ — אֶלָּא מִמִּי הוּא מְדַבֵּר</div>
+      <p class="d">
+        מי שמדבר מידיעתו — מערבב קצת אמת בהרבה שקר, ואפילו אינו מרגיש.<br>
+        ומי שזכה, מדבר מחוסר ידיעה: לא ממה שאסף, אלא ממה שנלחש לו.
+      </p>
+      <div class="seal">״אִם דּוֹמֶה הָרַב לְמַלְאַךְ ה׳ צְבָאוֹת — יְבַקְּשׁוּ תּוֹרָה מִפִּיו״<small>מועד קטן יז ע"א</small></div>
+    </div>
+
+    <p class="note">
+      * מקורות: מועד קטן יז ע"א (רבה בר בר חנה בשם רבי יוחנן, על מלאכי ב, ז) ·
+      זעיר אנפין ונוקבא, עולם האצילות ומלאך מגיד — על דרך הקבלה. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/haor-meir-et-haor">האור מאיר את האור</a>
+        <a class="related-link" href="/zion/alma-deshikra">עלמא דשיקרא</a>
+        <a class="related-link" href="/zion/hakod-haishi">הקוד האישי</a>
+        <a class="related-link" href="/zion/lo-yodea">לא יודע</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
