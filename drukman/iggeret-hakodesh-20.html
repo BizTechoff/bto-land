@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>איהו וחיוהי חד</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@300;400;600;700&family=David+Libre:wght@400;500;700&display=swap">
+<meta name="description" content="ביאור מלא ומאויר לאגרת הקודש סימן כ בתניא - בשפה פשוטה, שלב אחר שלב, עם תרשימים.">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  @media print{
+    :root{
+      --ground:#ffffff; --surface:#ffffff; --surface-2:#f2f1ec;
+      --ink:#000000; --ink-soft:#333333; --ink-faint:#666666;
+      --rule:#bbbbbb; --rule-soft:#dddddd; --shadow:none;
+    }
+    body{background:#fff;font-size:11.5pt;line-height:1.65}
+    .wrap{max-width:none;padding-block:0}
+    nav.mafteach{display:none}
+    header.shaar{padding-block:0 24px}
+    h1{font-size:34pt}
+    .kotert{break-after:avoid}
+    section.shalav{padding-block:22px}
+    figure,.makor,.nekuda,.mashal,.azhara,.tbl-wrap,footer.siyum{break-inside:avoid;box-shadow:none}
+    figure svg{min-width:0}
+    a{color:inherit;text-decoration:none}
+  }
+  @page{margin:16mm}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#f3f2ee;
+    --surface:#ffffff;
+    --surface-2:#ebe9e3;
+    --ink:#15171c;
+    --ink-soft:#4d535c;
+    --ink-faint:#7e848d;
+    --rule:#d9d6ce;
+    --rule-soft:#e6e3dc;
+    --tekhelet:#23557f;
+    --tekhelet-soft:#e4edf5;
+    --or:#b0802f;
+    --or-soft:#f6ecd7;
+    --kli:#3a6f8a;
+    --warn:#8d3f3f;
+    --shadow:0 1px 2px rgba(20,25,35,.06), 0 8px 24px -18px rgba(20,25,35,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#121418;
+      --surface:#1a1d23;
+      --surface-2:#22262d;
+      --ink:#e9e7e1;
+      --ink-soft:#b0b5bd;
+      --ink-faint:#848a93;
+      --rule:#2f343c;
+      --rule-soft:#272b32;
+      --tekhelet:#84b6e0;
+      --tekhelet-soft:#1c2a38;
+      --or:#d7a955;
+      --or-soft:#2e2618;
+      --kli:#7fb0c9;
+      --warn:#d68a8a;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#121418;
+    --surface:#1a1d23;
+    --surface-2:#22262d;
+    --ink:#e9e7e1;
+    --ink-soft:#b0b5bd;
+    --ink-faint:#848a93;
+    --rule:#2f343c;
+    --rule-soft:#272b32;
+    --tekhelet:#84b6e0;
+    --tekhelet-soft:#1c2a38;
+    --or:#d7a955;
+    --or-soft:#2e2618;
+    --kli:#7fb0c9;
+    --warn:#d68a8a;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    direction:rtl;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Assistant","Segoe UI",system-ui,sans-serif;
+    font-weight:400;
+    font-size:17px;
+    line-height:1.85;
+    margin:0;
+  }
+  .wrap{
+    max-width:820px;
+    margin:0 auto;
+    padding-inline:20px;
+    padding-block:0 72px;
+  }
+  h1,h2,h3{font-family:"Frank Ruhl Libre",Georgia,serif;text-wrap:balance;margin:0;line-height:1.3}
+
+  /* ---------- שער ---------- */
+  header.shaar{
+    padding-block:56px 40px;
+    border-bottom:1px solid var(--rule);
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .eyebrow{
+    font-size:13px;letter-spacing:.16em;font-weight:600;
+    color:var(--ink-faint);
+  }
+  h1{font-size:clamp(38px,8vw,62px);font-weight:900;letter-spacing:-.01em}
+  .shaar .sub{
+    font-family:"David Libre",Georgia,serif;
+    font-size:19px;color:var(--ink-soft);max-width:34em;
+  }
+  .shaar .meta{
+    display:flex;flex-wrap:wrap;gap:8px 10px;
+    font-size:13.5px;color:var(--ink-faint);
+  }
+  .meta span{
+    border:1px solid var(--rule);border-radius:2px;
+    padding:3px 9px;background:var(--surface);
+  }
+
+  /* ---------- מפתח ---------- */
+  nav.mafteach{
+    margin-block:36px;
+    border-inline-start:2px solid var(--tekhelet);
+    padding-inline-start:16px;
+    display:flex;flex-direction:column;gap:2px;
+  }
+  nav.mafteach b{font-size:13px;letter-spacing:.14em;color:var(--ink-faint);font-weight:600;margin-bottom:6px}
+  nav.mafteach a{
+    color:var(--ink);text-decoration:none;font-size:16px;
+    display:flex;gap:10px;padding-block:2px;
+  }
+  nav.mafteach a:hover{color:var(--tekhelet)}
+  nav.mafteach a i{
+    font-style:normal;color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;min-width:1.6em;
+  }
+
+  /* ---------- שלבים ---------- */
+  section.shalav{
+    margin-block:0;
+    padding-block:44px;
+    border-bottom:1px solid var(--rule-soft);
+    display:flex;flex-direction:column;gap:20px;
+  }
+  .kotert{display:flex;align-items:baseline;gap:12px}
+  .num{
+    font-family:"Frank Ruhl Libre",serif;
+    font-size:15px;font-weight:700;color:var(--tekhelet);
+    border:1px solid var(--tekhelet);border-radius:50%;
+    width:30px;height:30px;flex:0 0 30px;
+    display:grid;place-items:center;
+    font-variant-numeric:tabular-nums;
+    align-self:center;
+  }
+  h2{font-size:clamp(25px,4.6vw,33px);font-weight:700}
+  h3{font-size:20px;font-weight:700;margin-top:8px}
+  p{margin:0}
+  .lead{font-size:18.5px;color:var(--ink-soft)}
+  strong{font-weight:700;color:var(--ink)}
+
+  /* ---------- ציטוט מקור ---------- */
+  .makor{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-top:3px solid var(--tekhelet);
+    box-shadow:var(--shadow);
+    padding:20px 22px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .makor .tag{font-size:12px;letter-spacing:.14em;color:var(--ink-faint);font-weight:600}
+  .makor q{
+    font-family:"David Libre",Georgia,serif;
+    font-size:21px;line-height:1.7;quotes:none;display:block;
+  }
+  .makor cite{font-style:normal;font-size:13.5px;color:var(--ink-faint)}
+
+  /* ---------- משל ---------- */
+  .mashal{
+    background:var(--or-soft);
+    border-inline-start:3px solid var(--or);
+    padding:16px 18px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .mashal b{
+    font-size:12.5px;letter-spacing:.14em;color:var(--or);
+    font-weight:700;
+  }
+
+  /* ---------- הנקודה ---------- */
+  .nekuda{
+    background:var(--tekhelet-soft);
+    padding:16px 18px;
+    display:flex;flex-direction:column;gap:6px;
+    border-radius:0;
+  }
+  .nekuda b{font-size:12.5px;letter-spacing:.14em;color:var(--tekhelet);font-weight:700}
+
+  /* ---------- אזהרה ---------- */
+  .azhara{
+    border:1px dashed var(--warn);
+    padding:16px 18px;color:var(--ink);
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .azhara b{font-size:12.5px;letter-spacing:.14em;color:var(--warn);font-weight:700}
+
+  /* ---------- תרשים ---------- */
+  figure{
+    margin:8px 0;
+    background:var(--surface);
+    border:1px solid var(--rule);
+    box-shadow:var(--shadow);
+    padding:18px;
+    display:flex;flex-direction:column;gap:12px;
+    overflow-x:auto;
+  }
+  figure svg{display:block;width:100%;height:auto;max-width:100%;min-width:300px}
+  figcaption{font-size:14px;color:var(--ink-faint);line-height:1.6}
+  .svg-t{font-family:"Assistant",sans-serif;font-weight:600}
+  .svg-s{font-family:"Assistant",sans-serif;font-weight:400}
+
+  /* ---------- טבלה ---------- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--rule);background:var(--surface);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:460px;font-size:16px}
+  th,td{text-align:right;padding:12px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+  thead th{
+    background:var(--surface-2);font-size:13px;letter-spacing:.1em;
+    color:var(--ink-soft);font-weight:700;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:600;width:30%}
+
+  /* ---------- רשימות ---------- */
+  ul.clean{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:8px}
+  ul.clean li::marker{color:var(--tekhelet)}
+
+  /* ---------- סיום ---------- */
+  footer.siyum{
+    margin-top:48px;padding-top:28px;border-top:2px solid var(--ink);
+    display:flex;flex-direction:column;gap:14px;
+  }
+  footer.siyum p{font-size:15.5px;color:var(--ink-soft)}
+  a{color:var(--tekhelet)}
+  :focus-visible{outline:2px solid var(--tekhelet);outline-offset:3px}
+  @media (prefers-reduced-motion:no-preference){
+    nav.mafteach a{transition:color .15s ease}
+  }
+  @media (max-width:520px){
+    body{font-size:16.5px}
+    .makor q{font-size:19px}
+    figure{padding:12px}
+  }
+</style>
+
+<div class="wrap">
+
+<header class="shaar">
+  <div class="eyebrow">תניא · אגרת הקודש · סימן כ</div>
+  <h1>אִיהוּ וְחַיּוֹהִי חַד</h1>
+  <p class="sub">האגרת שמסבירה איך יכול להיות שהעולם קיים - ובאותה נשימה שאין שום דבר מלבדו. ביאור מלא, שלב אחר שלב, בלי ידע מוקדם.</p>
+  <div class="meta">
+    <span>מאת אדמו"ר הזקן, רבי שניאור זלמן מליאדי</span>
+    <span>ביאור להדיוט</span>
+    <span>עם תרשימים</span>
+  </div>
+</header>
+
+<nav class="mafteach">
+  <b>מפת הדרך של האגרת</b>
+  <a href="#s1"><i>1.</i> מאיפה האגרת מתחילה - המשפט של אליהו הנביא</a>
+  <a href="#s2"><i>2.</i> מה זה "אורות" ו"כלים"</a>
+  <a href="#s3"><i>3.</i> משל הנשמה והגוף - ואיפה הוא נשבר</a>
+  <a href="#s4"><i>4.</i> יש מיש מול יש מאין - ההבדל היחיד שמשנה</a>
+  <a href="#s5"><i>5.</i> זיו השמש - המשל המרכזי של האגרת</a>
+  <a href="#s6"><i>6.</i> "בדבר ה' שמים נעשו" - הבריאה קורית עכשיו</a>
+  <a href="#s7"><i>7.</i> למה דווקא "דיבור"? הצמצום כמסתיר</a>
+  <a href="#s8"><i>8.</i> האותיות והצירופים - איך מ-22 אותיות יוצא הכל</a>
+  <a href="#s9"><i>9.</i> הטעות הגדולה שהאגרת באה לתקן</a>
+  <a href="#s10"><i>10.</i> "הוא היודע והוא הידוע" - ידיעתו היא הוא</a>
+  <a href="#s11"><i>11.</i> מה יוצא מזה בפועל</a>
+</nav>
+
+<!-- ============ 1 ============ -->
+<section class="shalav" id="s1">
+  <div class="kotert"><div class="num">1</div><h2>מאיפה האגרת מתחילה</h2></div>
+
+  <p class="lead">בפתיחת ספר "תיקוני זהר" יש תפילה קצרה שאומרים אותה בכל בוקר בהרבה קהילות - "פתח אליהו". בתוכה מופיע משפט בארמית, ואדמו"ר הזקן מקדיש את כל האגרת הזאת להסביר אותו.</p>
+
+  <div class="makor">
+    <div class="tag">לשון המקור</div>
+    <q>אִיהוּ וְחַיּוֹהִי חַד בְּהוֹן, אִיהוּ וְגַרְמוֹהִי חַד בְּהוֹן</q>
+    <cite>תיקוני זהר, הקדמה - "פתח אליהו"</cite>
+  </div>
+
+  <p>מילה במילה: <strong>איהו</strong> = הוא (הקב"ה). <strong>חיוהי</strong> = "חַיָּיו", כוחות החיים שלו. <strong>גרמוהי</strong> = "עצמותיו", האיברים שלו. <strong>חד בהון</strong> = אחד בהם.</p>
+
+  <p>כלומר: הוא וכוחות החיים שלו - דבר אחד. הוא וה"איברים" שלו - דבר אחד. הביטויים "חיים" ו"איברים" הם כמובן משל; אין לו גוף. השאלה שהאגרת פותרת היא: <strong>למה צריך לומר את זה פעמיים?</strong> ומה בכלל ההבדל בין ה"חיים" ל"איברים" כשמדובר בבורא?</p>
+
+  <div class="nekuda">
+    <b>הנקודה</b>
+    <p>אליהו הנביא לא מתאר כאן "חלקים" בבורא. הוא אומר את ההיפך: כל מה שנראה לנו כמו מנגנון נפרד שדרכו העולם מתנהל - אינו נפרד ממנו כלל.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="shalav" id="s2">
+  <div class="kotert"><div class="num">2</div><h2>מה זה "אורות" ו"כלים"</h2></div>
+
+  <p>בלשון הקבלה, ההנהגה האלוקית מתוארת בעשר "ספירות" - עשרה סוגי התנהגות שבהם העולם מתנהל: חסד, גבורה, חכמה וכן הלאה. בכל ספירה יש שני רבדים:</p>
+
+  <ul class="clean">
+    <li><strong>אור</strong> - החיוּת עצמה. ה"זרם". זה ה<em>חיוהי</em> שבמשפט.</li>
+    <li><strong>כלי</strong> - המסגרת שמכילה את האור ונותנת לו אופי מסוים. זה ה<em>גרמוהי</em>.</li>
+  </ul>
+
+  <p>אותו אור בדיוק, כשהוא נכנס לכלי של חסד - מתנהג כנתינה. כשהוא נכנס לכלי של גבורה - מתנהג כצמצום ודין. הכלי לא מייצר את האור; הוא מגדיר את צורת ההופעה שלו.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 240" role="img" aria-label="תרשים: אותו אור בשני כלים שונים מייצר שתי הנהגות שונות">
+      <defs>
+        <radialGradient id="g-or" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="var(--or)" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="var(--or)" stop-opacity="0.18"/>
+        </radialGradient>
+      </defs>
+      <!-- מקור אור -->
+      <circle cx="540" cy="120" r="40" fill="url(#g-or)"/>
+      <circle cx="540" cy="120" r="13" fill="var(--or)"/>
+      <text x="540" y="190" text-anchor="middle" class="svg-t" font-size="15" fill="var(--ink)">אור אחד</text>
+      <text x="540" y="210" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-faint)">החיוּת עצמה</text>
+
+      <!-- חצים -->
+      <path d="M498 100 L330 62" stroke="var(--or)" stroke-width="2.5" fill="none" marker-end="url(#ar)"/>
+      <path d="M498 140 L330 178" stroke="var(--or)" stroke-width="2.5" fill="none" marker-end="url(#ar)"/>
+      <defs>
+        <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="var(--or)"/>
+        </marker>
+      </defs>
+
+      <!-- כלי חסד -->
+      <rect x="120" y="26" width="200" height="72" rx="4" fill="none" stroke="var(--kli)" stroke-width="2.5"/>
+      <circle cx="270" cy="62" r="17" fill="var(--or)" opacity="0.55"/>
+      <text x="235" y="57" text-anchor="middle" class="svg-t" font-size="15" fill="var(--ink)">כלי של חסד</text>
+      <text x="235" y="79" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">אותו אור מופיע כנתינה</text>
+
+      <!-- כלי גבורה -->
+      <rect x="120" y="142" width="200" height="72" rx="4" fill="none" stroke="var(--kli)" stroke-width="2.5" stroke-dasharray="7 4"/>
+      <circle cx="270" cy="178" r="17" fill="var(--or)" opacity="0.55"/>
+      <text x="235" y="173" text-anchor="middle" class="svg-t" font-size="15" fill="var(--ink)">כלי של גבורה</text>
+      <text x="235" y="195" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">אותו אור מופיע כצמצום</text>
+    </svg>
+    <figcaption>האור לא משתנה. הכלי הוא שקובע באיזו צורה הוא מתגלה - ומכאן ההבדל בין הנהגה של רחמים להנהגה של דין, בלי שום שינוי בבורא עצמו ("אני ה' לא שניתי").</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="shalav" id="s3">
+  <div class="kotert"><div class="num">3</div><h2>משל הנשמה והגוף - ואיפה הוא נשבר</h2></div>
+
+  <p>המשל המתבקש לאור-וכלי הוא נשמה וגוף. הנשמה היא ה"אור", האיברים הם ה"כלים". כוח הראייה מתגלה דרך העין, כוח השמיעה דרך האוזן - אותה נשמה אחת, מופיעה אחרת בכל איבר, בדיוק לפי הכלי.</p>
+
+  <p>ואדמו"ר הזקן אומר: המשל הזה טוב - ומטעה. הוא טוב כדי להבין את המנגנון, והוא מטעה אם חושבים שהאיחוד למעלה דומה לאיחוד הזה. כי בנשמה וגוף יש <strong>שני דברים</strong> שנפגשו:</p>
+
+  <ul class="clean">
+    <li>הגוף היה קיים לפני שהנשמה נכנסה בו.</li>
+    <li>הנשמה לא בראה את הגוף - היא נכנסה למשהו מוכן.</li>
+    <li>שניהם נבראים. שניהם קיימים בזכות מישהו שלישי.</li>
+    <li>ולכן הם יכולים גם להיפרד - וזה בדיוק מה שקורה בסוף.</li>
+  </ul>
+
+  <p>למעלה זה אחרת לגמרי. שם <strong>האור הוא זה שמהווה את הכלי</strong>. הכלי לא "היה שם" וקיבל אור; הוא נוצר מאין על ידי אותו אור ממש, ומתקיים כל רגע רק ממנו. לכן לא מדובר בשני דברים שהתאחדו, אלא בדבר אחד - "איהו וגרמוהי חד".</p>
+
+  <figure>
+    <svg viewBox="0 0 620 250" role="img" aria-label="תרשים השוואה: נשמה וגוף כשני דברים, לעומת אור וכלי כדבר אחד">
+      <line x1="310" y1="18" x2="310" y2="232" stroke="var(--rule)" stroke-width="1"/>
+
+      <!-- ימין: נשמה וגוף -->
+      <text x="470" y="34" text-anchor="middle" class="svg-t" font-size="16" fill="var(--ink)">נשמה וגוף - שני דברים</text>
+      <circle cx="530" cy="110" r="34" fill="var(--or)" opacity="0.5"/>
+      <text x="530" y="116" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">נשמה</text>
+      <rect x="376" y="76" width="68" height="68" rx="4" fill="var(--surface-2)" stroke="var(--kli)" stroke-width="2.5"/>
+      <text x="410" y="116" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">גוף</text>
+      <path d="M492 110 L452 110" stroke="var(--ink-faint)" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="470" y="176" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">שניהם נבראו בנפרד</text>
+      <text x="470" y="196" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">הנשמה נכנסה לגוף מוכן</text>
+      <text x="470" y="216" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">ולכן הם גם נפרדים בסוף</text>
+
+      <!-- שמאל: אור וכלי -->
+      <text x="155" y="34" text-anchor="middle" class="svg-t" font-size="16" fill="var(--ink)">אור וכלי - דבר אחד</text>
+      <rect x="98" y="70" width="116" height="80" rx="4" fill="var(--or-soft)" stroke="var(--kli)" stroke-width="2.5"/>
+      <circle cx="156" cy="110" r="27" fill="var(--or)" opacity="0.6"/>
+      <text x="156" y="115" text-anchor="middle" class="svg-t" font-size="13" fill="var(--ink)">אור</text>
+      <path d="M156 70 L156 46" stroke="var(--or)" stroke-width="2" marker-end="url(#ar2)"/>
+      <defs>
+        <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="var(--or)"/>
+        </marker>
+      </defs>
+      <text x="155" y="176" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">האור עצמו מהווה את הכלי</text>
+      <text x="155" y="196" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">הכלי לא היה קיים קודם</text>
+      <text x="155" y="216" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">ואין לו רגע אחד בלעדיו</text>
+    </svg>
+    <figcaption>זה ההבדל שכל האגרת עומדת עליו. איחוד של שניים הוא תמיד איחוד חלקי. כאן אין שניים.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="shalav" id="s4">
+  <div class="kotert"><div class="num">4</div><h2>יש מיש מול יש מאין</h2></div>
+
+  <p class="lead">כאן נמצא הציר של האגרת כולה, והוא רעיון פשוט להפליא.</p>
+
+  <p>כל "יצירה" שאנחנו מכירים היא <strong>שינוי צורה</strong>. הנגר לא ברא את הכיסא - הוא לקח עץ שכבר קיים וסידר אותו מחדש. האופה לא ברא את הלחם - הוא צירף חומרים קיימים. אפילו אבא ואמא לא בראו את הילד יש מאין. כל אומן בעולם עובד עם חומר שהוא קיבל.</p>
+
+  <p>ולכן, ברגע שהנגר הולך הביתה - <strong>הכיסא נשאר</strong>. אין לו יותר צורך בו. וזה מדויק: הנגר מעולם לא היה מקור הקיום של העץ, רק מקור הצורה.</p>
+
+  <p>בריאה יש מאין היא דבר אחר לגמרי. אין חומר גלם. יש אין - ואז יש. ובזה יש כלל ברזל: <strong>מה שקיים רק בגלל מישהו, לא יכול להתנתק ממנו לרגע.</strong> אם הכוח שמהווה אותו יסתלק, הוא לא "יישאר בלי תמיכה" - הוא פשוט לא יהיה, כאילו לא היה מעולם.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 210" role="img" aria-label="תרשים: נגר שעוזב והכיסא נשאר, לעומת בורא שאם יסתלק הנברא נעלם">
+      <!-- שורה עליונה: יש מיש -->
+      <text x="600" y="26" text-anchor="end" class="svg-t" font-size="15" fill="var(--ink)">יש מיש · הנגר</text>
+      <rect x="440" y="40" width="80" height="46" rx="3" fill="var(--surface-2)" stroke="var(--ink-faint)" stroke-width="2"/>
+      <text x="480" y="69" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink)">עץ</text>
+      <path d="M428 63 L360 63" stroke="var(--ink-faint)" stroke-width="2" marker-end="url(#ar3)"/>
+      <rect x="270" y="40" width="80" height="46" rx="3" fill="var(--surface-2)" stroke="var(--ink-faint)" stroke-width="2"/>
+      <text x="310" y="69" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink)">כיסא</text>
+      <path d="M258 63 L190 63" stroke="var(--ink-faint)" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar3)"/>
+      <rect x="100" y="40" width="80" height="46" rx="3" fill="var(--surface-2)" stroke="var(--ink-faint)" stroke-width="2"/>
+      <text x="140" y="62" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink)">כיסא</text>
+      <text x="140" y="79" text-anchor="middle" class="svg-s" font-size="11.5" fill="var(--ink-faint)">הנגר הלך</text>
+      <defs>
+        <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <line x1="30" y1="108" x2="600" y2="108" stroke="var(--rule)" stroke-width="1"/>
+
+      <!-- שורה תחתונה: יש מאין -->
+      <text x="600" y="134" text-anchor="end" class="svg-t" font-size="15" fill="var(--ink)">יש מאין · הבורא</text>
+      <text x="480" y="177" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-faint)">אין</text>
+      <circle cx="480" cy="171" r="23" fill="none" stroke="var(--rule)" stroke-width="2" stroke-dasharray="3 5"/>
+      <path d="M448 171 L372 171" stroke="var(--or)" stroke-width="2.5" marker-end="url(#ar4)"/>
+      <text x="410" y="162" text-anchor="middle" class="svg-s" font-size="11.5" fill="var(--or)">דבר ה'</text>
+      <rect x="282" y="148" width="80" height="46" rx="3" fill="var(--or-soft)" stroke="var(--or)" stroke-width="2"/>
+      <text x="322" y="177" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink)">נברא</text>
+      <path d="M270 171 L196 171" stroke="var(--warn)" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar5)"/>
+      <text x="233" y="162" text-anchor="middle" class="svg-s" font-size="11.5" fill="var(--warn)">יסתלק</text>
+      <circle cx="146" cy="171" r="23" fill="none" stroke="var(--rule)" stroke-width="2" stroke-dasharray="3 5"/>
+      <text x="146" y="177" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-faint)">אין</text>
+      <defs>
+        <marker id="ar4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="var(--or)"/>
+        </marker>
+        <marker id="ar5" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="var(--warn)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>הנגר יכול ללכת. הבורא - אם ייפסק לרגע, אין ממה לחזור. וזו בדיוק הסיבה שהנברא אינו "עומד מול" בוראו כמציאות בפני עצמה.</figcaption>
+  </figure>
+
+  <div class="nekuda">
+    <b>הנקודה</b>
+    <p>מכאן ואילך כל השאלה היא לא "איפה אלוקים נמצא בעולם", אלא "במה בכלל העולם קיים". התשובה: רק בכוח שמהווה אותו כרגע. ואם כך - עד כמה הוא באמת "יש"?</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="shalav" id="s5">
+  <div class="kotert"><div class="num">5</div><h2>זיו השמש - המשל המרכזי</h2></div>
+
+  <p>זהו המשל שאדמו"ר הזקן חוזר אליו שוב ושוב, וכדאי להשקיע בו רגע.</p>
+
+  <p>קח את אור השמש כפי שהוא <strong>כאן</strong>, בחדר. הוא מציאות. אפשר למדוד אותו, הוא מאיר, הוא מחמם, אפשר לדבר עליו כדבר בפני עצמו - "יש כאן אור".</p>
+
+  <p>עכשיו קח את אותו אור בדיוק כפי שהוא <strong>בתוך גוף כדור השמש</strong>. האם הוא שם? ודאי - הוא שם באינסוף מונים יותר מאשר כאן. והאם אפשר לקרוא לו שם "אור"? לא. אין שם שום דבר שאפשר להצביע עליו ולומר "הנה, זה האור". הוא לגמרי בטל במקורו. לא בגלל שהוא חלש - אלא בגלל שהוא חזק מדי מכדי להיות נפרד.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 260" role="img" aria-label="תרשים: זיו השמש בחלל העולם נחשב מציאות, ובתוך גוף השמש אין לו מציאות נפרדת">
+      <defs>
+        <radialGradient id="g-sun" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="var(--or)" stop-opacity="1"/>
+          <stop offset="72%" stop-color="var(--or)" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="var(--or)" stop-opacity="0.35"/>
+        </radialGradient>
+      </defs>
+
+      <!-- השמש -->
+      <circle cx="480" cy="128" r="78" fill="url(#g-sun)"/>
+      <text x="480" y="122" text-anchor="middle" class="svg-t" font-size="15" fill="#1b1408">בתוך גוף השמש</text>
+      <text x="480" y="144" text-anchor="middle" class="svg-s" font-size="12.5" fill="#1b1408">האור קיים - ואין לו שֵם</text>
+
+      <!-- קרניים -->
+      <g stroke="var(--or)" stroke-width="2" opacity="0.55">
+        <path d="M396 92 L230 62"/>
+        <path d="M392 128 L226 128"/>
+        <path d="M396 164 L230 194"/>
+      </g>
+
+      <!-- החדר -->
+      <rect x="60" y="60" width="160" height="136" rx="3" fill="var(--or-soft)" stroke="var(--kli)" stroke-width="2.5"/>
+      <text x="140" y="112" text-anchor="middle" class="svg-t" font-size="15" fill="var(--ink)">כאן, בחלל העולם</text>
+      <text x="140" y="136" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-soft)">"יש אור בחדר"</text>
+      <text x="140" y="156" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-soft)">מציאות שאפשר להצביע עליה</text>
+
+      <text x="310" y="238" text-anchor="middle" class="svg-s" font-size="13.5" fill="var(--ink-faint)">אותו אור בדיוק - ההבדל הוא רק כמה הוא קרוב למקורו</text>
+    </svg>
+    <figcaption>אותו זיו. בחדר הוא "דבר"; בשמש הוא לא דבר, גם שהוא שם הרבה יותר. מה שקובע אינו הכמות אלא המרחק מהמקור.</figcaption>
+  </figure>
+
+  <div class="mashal">
+    <b>הנמשל</b>
+    <p>כל העולמות, מהמלאך הגבוה ביותר ועד האבן - ביחס לאור אין סוף הם כמו הזיו בתוך השמש. לא קטנים. לא חלשים. פשוט אין להם מציאות נפרדת. וזה פירוש "כולא קמיה כלא חשיב" - לא "הכל קטן לפניו", אלא "הכל לפניו נחשב כלא".</p>
+  </div>
+
+  <p>אם כך נשאלת שאלה מתבקשת: אם כך - למה אני כן רואה עולם? למה זה מרגיש כמו מציאות גמורה? על זה עונה החלק הבא.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="shalav" id="s6">
+  <div class="kotert"><div class="num">6</div><h2>"בדבר ה' שמים נעשו" - הבריאה קורית עכשיו</h2></div>
+
+  <div class="makor">
+    <div class="tag">הפסוק שמאחורי הכל</div>
+    <q>בִּדְבַר ה' שָׁמַיִם נַעֲשׂוּ, וּבְרוּחַ פִּיו כָּל צְבָאָם</q>
+    <cite>תהלים לג, ו</cite>
+  </div>
+
+  <p>הבנה רווחת אומרת: פעם, לפני הרבה זמן, אלוקים אמר "יהי אור" והעולם נוצר. מאז הוא קיים. זו בדיוק ההבנה שהאגרת שוללת.</p>
+
+  <p>עשרה מאמרות נאמרו - ו<strong>הם עדיין נאמרים</strong>. "לעולם ה' דברך נצב בשמים": הדיבור הזה לא נגמר, הוא ניצב שם תמיד ומהווה את השמים בכל רגע ממש. מה שאנחנו אומרים בכל בוקר, "המחדש בטובו בכל יום תמיד מעשה בראשית" - הוא לא לשון פיוטית. הוא תיאור מדויק.</p>
+
+  <p>אפשר לתאר זאת כך: הבריאה אינה אירוע שקרה. היא <strong>מצב שמתקיים</strong>. יותר כמו קול שנשמע כל עוד מנגנים, ופחות כמו פסל שנוצר ונשאר.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 200" role="img" aria-label="תרשים השוואה בין תפיסת בריאה חד פעמית לתפיסת בריאה מתמדת">
+      <!-- טעות -->
+      <text x="600" y="28" text-anchor="end" class="svg-t" font-size="15" fill="var(--ink-faint)">התפיסה הרווחת</text>
+      <line x1="140" y1="58" x2="590" y2="58" stroke="var(--rule)" stroke-width="2"/>
+      <circle cx="560" cy="58" r="8" fill="var(--ink-faint)"/>
+      <text x="560" y="82" text-anchor="middle" class="svg-s" font-size="12" fill="var(--ink-faint)">"יהי"</text>
+      <text x="350" y="48" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-faint)">מאז - קיים מעצמו</text>
+
+      <line x1="30" y1="112" x2="600" y2="112" stroke="var(--rule)" stroke-width="1"/>
+
+      <!-- אמת -->
+      <text x="600" y="142" text-anchor="end" class="svg-t" font-size="15" fill="var(--tekhelet)">לפי האגרת</text>
+      <g fill="var(--or)">
+        <circle cx="560" cy="172" r="7"/><circle cx="520" cy="172" r="7"/><circle cx="480" cy="172" r="7"/>
+        <circle cx="440" cy="172" r="7"/><circle cx="400" cy="172" r="7"/><circle cx="360" cy="172" r="7"/>
+        <circle cx="320" cy="172" r="7"/><circle cx="280" cy="172" r="7"/><circle cx="240" cy="172" r="7"/>
+        <circle cx="200" cy="172" r="7"/><circle cx="160" cy="172" r="7"/>
+      </g>
+      <text x="350" y="152" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-soft)">כל רגע - התהוות מחודשת מאין</text>
+      <text x="100" y="177" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-faint)">עכשיו</text>
+    </svg>
+    <figcaption>אין "רצף" עצמאי של קיום. יש שרשרת של רגעי התהוות, שכל אחד מהם תלוי לגמרי במהווה.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="shalav" id="s7">
+  <div class="kotert"><div class="num">7</div><h2>למה דווקא "דיבור"?</h2></div>
+
+  <p>התורה בוחרת דווקא בלשון דיבור - "ויאמר אלוקים". למה? כי דיבור, אצל אדם, עושה בדיוק את שני הדברים שצריכים כאן: הוא <em>מגלה</em> משהו החוצה, ובאותה נשימה הוא <em>מצמצם</em> אותו.</p>
+
+  <p>כשאדם חושב מחשבה, היא מאוחדת איתו לגמרי - היא הוא. כשהוא מוציא אותה בדיבור, קרה משהו כפול: מצד אחד עכשיו מישהו אחר יכול לשמוע אותה. מצד שני - מה שיצא בפה הוא צל חיוור של מה שהיה בפנים. הדיבור <strong>מסתיר יותר משהוא מגלה</strong>, וזו בדיוק הסיבה שהוא מסוגל להגיע לזולת.</p>
+
+  <p>וזה בדיוק מה שהמילה "צמצום" באה לומר. לא שאלוקים "התרחק" או "פינה מקום" והסתלק משם - זו הבנה מוטעית שהאגרת נלחמת בה. אלא ש<strong>האור הועלם</strong>, הוסתר, עד שמה שנשאר מגולה הוא כה מועט עד שמתאפשר "יש" שמרגיש את עצמו קיים בפני עצמו.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>&nbsp;</th><th>דיבור של אדם</th><th>"דיבור" של הבורא</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>אל מי?</td><td>אל זולת שכבר קיים</td><td>אין זולת - הדיבור עצמו יוצר את השומע</td></tr>
+        <tr><td>מה הוא עושה?</td><td>מגלה לאחר מה שבמחשבה</td><td>מהווה יש מאין</td></tr>
+        <tr><td>הקשר למדבר</td><td>נפרד ממנו ברגע שיצא</td><td>אינו נפרד ממנו לעולם</td></tr>
+        <tr><td>מה קורה כשפוסקים</td><td>המילים שנאמרו נשארות בעולם</td><td>הנברא חוזר לאין</td></tr>
+        <tr><td>האפקט</td><td>גילוי</td><td>גילוי והעלם כאחד - וההעלם הוא העיקר</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nekuda">
+    <b>הנקודה</b>
+    <p>אנחנו לא רואים עולם כי אלוקים איננו. אנחנו רואים עולם כי הוא הסתיר את עצמו במידה מדויקת - וההסתר הזה הוא עצמו מעשה שלו, בכל רגע.</p>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="shalav" id="s8">
+  <div class="kotert"><div class="num">8</div><h2>האותיות והצירופים</h2></div>
+
+  <p>שאלה הגיונית: אם הכל מתהווה מ"דיבור", ובעשרת המאמרות יש מספר מצומצם של מילים - איך יוצאים מזה מיליארדי סוגי נבראים, כל אחד שונה?</p>
+
+  <p>התשובה היא עיקרון האותיות. כמו שמ-22 אותיות אפשר לבנות כל ספר שנכתב וכל ספר שייכתב, כך גם למעלה: המאמר האלוקי מתפרק ומצטרף לצירופים, חילופים ותמורות - והריבוי האינסופי של הבריאה נולד מהקומבינטוריקה הזאת. כל נברא הוא, כביכול, "צירוף" מסוים.</p>
+
+  <p>מכאן מובן גם למה שֵם הדבר בלשון הקודש אינו מקרי: השם הוא האותיות שמהוות אותו כרגע. אין לזה קשר להסכמה אנושית - זו אינה תווית, אלא הכוח עצמו.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 250" role="img" aria-label="תרשים סולם ההשתלשלות מרצון וחכמה דרך אותיות וצמצומים אל הנברא">
+      <!-- שלבים מלמעלה (ימין) לנברא (שמאל) -->
+      <g>
+        <rect x="452" y="30" width="146" height="50" rx="3" fill="var(--or-soft)" stroke="var(--or)" stroke-width="2"/>
+        <text x="525" y="52" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">אור אין סוף</text>
+        <text x="525" y="70" text-anchor="middle" class="svg-s" font-size="12" fill="var(--ink-soft)">בלי גבול, בלי תפיסה</text>
+
+        <rect x="452" y="100" width="146" height="50" rx="3" fill="var(--surface-2)" stroke="var(--rule)" stroke-width="2"/>
+        <text x="525" y="122" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">רצון וחכמה</text>
+        <text x="525" y="140" text-anchor="middle" class="svg-s" font-size="12" fill="var(--ink-soft)">"שיהיה עולם, וכזה"</text>
+
+        <rect x="452" y="170" width="146" height="50" rx="3" fill="var(--surface-2)" stroke="var(--rule)" stroke-width="2"/>
+        <text x="525" y="192" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">אותיות המאמר</text>
+        <text x="525" y="210" text-anchor="middle" class="svg-s" font-size="12" fill="var(--ink-soft)">"יהי רקיע"</text>
+      </g>
+
+      <!-- מסנני צמצום -->
+      <g>
+        <path d="M440 125 L330 125" stroke="var(--tekhelet)" stroke-width="2.5" marker-end="url(#ar6)"/>
+        <defs>
+          <marker id="ar6" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="var(--tekhelet)"/>
+          </marker>
+        </defs>
+        <text x="385" y="114" text-anchor="middle" class="svg-s" font-size="12" fill="var(--tekhelet)">צמצום</text>
+        <text x="385" y="148" text-anchor="middle" class="svg-s" font-size="11.5" fill="var(--ink-faint)">העלם, לא הסתלקות</text>
+      </g>
+
+      <!-- צירופים -->
+      <g>
+        <rect x="150" y="40" width="168" height="170" rx="3" fill="none" stroke="var(--kli)" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="234" y="64" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">צירופים ותמורות</text>
+        <g class="svg-s" font-size="13" fill="var(--ink-soft)" text-anchor="middle">
+          <text x="234" y="92">רקיע · קרעי · עקרי</text>
+          <text x="234" y="116">אבן · בנא · נבא</text>
+          <text x="234" y="140">חילוף · תמורה · אתב"ש</text>
+        </g>
+        <text x="234" y="172" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-faint)">22 אותיות</text>
+        <text x="234" y="192" text-anchor="middle" class="svg-s" font-size="12.5" fill="var(--ink-faint)">ריבוי בלי סוף</text>
+      </g>
+
+      <path d="M140 125 L70 125" stroke="var(--or)" stroke-width="2.5" marker-end="url(#ar7)"/>
+      <defs>
+        <marker id="ar7" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="var(--or)"/>
+        </marker>
+      </defs>
+      <text x="40" y="118" text-anchor="middle" class="svg-t" font-size="14" fill="var(--ink)">נברא</text>
+      <text x="40" y="138" text-anchor="middle" class="svg-s" font-size="12" fill="var(--ink-faint)">מסוים</text>
+    </svg>
+    <figcaption>הדוגמאות כאן להמחשת העיקרון בלבד. הרעיון: ריבוי אינסופי של נבראים נולד מצירופי אותיות של מאמר אחד, אחרי שרשרת של העלמות.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="shalav" id="s9">
+  <div class="kotert"><div class="num">9</div><h2>הטעות הגדולה שהאגרת באה לתקן</h2></div>
+
+  <p>עד כאן היה בניין. עכשיו מגיע הצד השני, וזה אחד הקטעים החריפים בתניא. אדמו"ר הזקן מתייחס לאנשים ש<strong>שמעו את התורות האלה והבינו אותן הפוך</strong>.</p>
+
+  <p>הטעות: לקחת את "מלא כל הארץ כבודו" ו"לית אתר פנוי מיניה" ולהסיק שעצמותו יתברך מלובשת בתוך כל נברא ממש - כנשמה בתוך גוף. כאילו יש "חתיכה" ממנו באבן, וחתיכה אחרת בעץ, וחתיכה שלישית בבהמה.</p>
+
+  <div class="azhara">
+    <b>למה זה חמור</b>
+    <p>כי זה מכניס <strong>התחלקות</strong> בבורא. אם יש ממנו כאן וממנו שם - הרי שהוא מורכב מחלקים, ומשתנה לפי המקום, ומוגבל למידת הכלי. זה מבטל את עיקר האחדות. ובנוסף: זה הופך את כל הנבראים, על כל שפלותם, למשהו שהוא "נמצא בתוכו" - וזו שפלות כלפי הבורא.</p>
+  </div>
+
+  <p>התיקון שהאגרת מציעה נשען על כל מה שבנינו למעלה, והוא מדויק בשני כיוונים בבת אחת:</p>
+
+  <ul class="clean">
+    <li><strong>מה שמתלבש בנבראים ומחיה אותם הוא "דבר ה'"</strong> - אור וחיות ממנו, לא עצמותו. ולאור הזה יש דרגות, והוא מצטמצם לפי הכלי, ולכן אין כאן התחלקות בו יתברך.</li>
+    <li><strong>ובכל זאת האור הזה אינו נפרד ממנו כלל</strong> - "איהו וחיוהי חד". זה לא "שליח" ולא "כוח שנשלח והתנתק", כמו זיו שאינו נפרד מן השמש.</li>
+    <li><strong>ועצמותו יתברך - "לית מחשבה תפיסא ביה כלל"</strong>, ואינה מתחלקת, ואינה שוכנת "בתוך" שום דבר, כי כל התפיסה של "בתוך" שייכת רק לנברא.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 620 235" role="img" aria-label="תרשים: הטעות של חלוקת העצמות לנבראים לעומת האמת של אור אחד שאינו מתחלק">
+      <line x1="310" y1="14" x2="310" y2="221" stroke="var(--rule)" stroke-width="1"/>
+
+      <!-- ימין: הטעות -->
+      <text x="470" y="30" text-anchor="middle" class="svg-t" font-size="15" fill="var(--warn)">הטעות</text>
+      <g>
+        <circle cx="410" cy="86" r="26" fill="var(--surface-2)" stroke="var(--warn)" stroke-width="2"/>
+        <circle cx="410" cy="86" r="9" fill="var(--warn)" opacity="0.55"/>
+        <circle cx="470" cy="86" r="26" fill="var(--surface-2)" stroke="var(--warn)" stroke-width="2"/>
+        <circle cx="470" cy="86" r="9" fill="var(--warn)" opacity="0.55"/>
+        <circle cx="530" cy="86" r="26" fill="var(--surface-2)" stroke="var(--warn)" stroke-width="2"/>
+        <circle cx="530" cy="86" r="9" fill="var(--warn)" opacity="0.55"/>
+      </g>
+      <text x="470" y="146" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">"חתיכה ממנו" בכל נברא</text>
+      <text x="470" y="168" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">כנשמה בתוך גוף</text>
+      <text x="470" y="196" text-anchor="middle" class="svg-t" font-size="13.5" fill="var(--warn)">יוצא מזה: הוא מתחלק</text>
+
+      <!-- שמאל: האמת -->
+      <text x="155" y="30" text-anchor="middle" class="svg-t" font-size="15" fill="var(--tekhelet)">האמת</text>
+      <path d="M292 40 L292 124" stroke="var(--or)" stroke-width="3" fill="none"/>
+      <path d="M292 86 L278 86 M214 86 L196 86 M122 86 L104 86" stroke="var(--or)" stroke-width="2.5"/>
+      <g>
+        <rect x="222" y="60" width="52" height="52" rx="3" fill="var(--or-soft)" stroke="var(--kli)" stroke-width="2"/>
+        <rect x="130" y="60" width="52" height="52" rx="3" fill="var(--or-soft)" stroke="var(--kli)" stroke-width="2"/>
+        <rect x="38" y="60" width="52" height="52" rx="3" fill="var(--or-soft)" stroke="var(--kli)" stroke-width="2"/>
+      </g>
+      <text x="155" y="146" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">אור אחד מהווה את כולם</text>
+      <text x="155" y="168" text-anchor="middle" class="svg-s" font-size="13" fill="var(--ink-soft)">כל אחד מקבל לפי כלִיוֹ</text>
+      <text x="155" y="196" text-anchor="middle" class="svg-t" font-size="13.5" fill="var(--tekhelet)">האור אינו מתחלק ואינו נפרד</text>
+    </svg>
+    <figcaption>ההבדל אינו סמנטי. בצד אחד הבורא מתחלק ומוגבל; בצד השני האור הוא אחד, הנבראים שונים רק בכמה הם מסוגלים לקלוט - והבורא עצמו אינו נוגע בשינוי כלל.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="shalav" id="s10">
+  <div class="kotert"><div class="num">10</div><h2>"הוא היודע והוא הידוע"</h2></div>
+
+  <p>עוד שאלה שמתעוררת: אם הקב"ה יודע את כל הנבראים - האם לא נכנסת בו בכך "ידיעה" של דברים נמוכים? האם הידיעה שלו לא מרכיבה אותו משני דברים, יודע וידוע?</p>
+
+  <p>כאן מביא אדמו"ר הזקן את לשון הרמב"ם: אצל אדם, יש את האדם, יש את הידיעה, ויש את הנושא שהוא יודע - שלושה דברים. אצל הקב"ה - <strong>"הוא היודע והוא הידוע והוא הדעה עצמה"</strong>. ידיעתו אינה כלי שבו הוא קולט מציאות חיצונית; ידיעתו היא הוא.</p>
+
+  <p>ומכאן, המסקנה שמחברת הכל: הוא יודע את הנבראים <strong>בידיעת עצמו</strong>. הוא לא "מסתכל החוצה" ורואה עולם, כי אין חוץ. הוא יודע את עצמו - ובידיעה הזאת כלול הכל, כי הכל אינו אלא הוא כפי שהוא מהווה.</p>
+
+  <div class="mashal">
+    <b>למה זה חוזר לתחילת האגרת</b>
+    <p>"איהו וחיוהי חד" נאמר בדיוק על זה. חכמתו אינה תוספת עליו, בדיוק כמו שהאור אינו תוספת על הכלי. וזו תשובה גם לשאלה הישנה - ידיעה אינה מחייבת שינוי, כי אין בה קליטה של חוץ.</p>
+  </div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="shalav" id="s11">
+  <div class="kotert"><div class="num">11</div><h2>מה יוצא מזה בפועל</h2></div>
+
+  <p>אגרת הקודש נכתבה לחסידים, לא לפילוסופים. כל הבניין הזה מוביל לכמה נקודות שנוגעות ליום-יום:</p>
+
+  <ul class="clean">
+    <li><strong>שום דבר אינו "מחוץ להשגחה".</strong> לא כי יש עין שמשגיחה מרחוק, אלא כי אין רגע אחד שבו משהו מתקיים בלי שיהוו אותו עכשיו.</li>
+    <li><strong>אין "אלוקים והעולם" כשני שחקנים.</strong> העולם אינו מתחרה, ואינו מסתיר באמת - ההסתר הוא עצמו מעשה שלו, במידה שנקבעה בכוונה.</li>
+    <li><strong>הביטול אינו הכחשה.</strong> אף אחד לא מבקש להתעלם מהמציאות. מבקשים לזכור מה היא - זיו, לא מקור.</li>
+    <li><strong>לימוד תורה מחבר באופן אחר מכל דבר אחר.</strong> אם חכמתו היא הוא ממש, אז כשאדם תופס בשכלו סוגיה בתורה, הוא מחזיק בחכמה שאינה נפרדת ממנו יתברך - "אורייתא וקודשא בריך הוא כולא חד".</li>
+    <li><strong>ודווקא במעשה הגשמי.</strong> הכוח לברוא יש מאין הוא הכוח הגבוה מכל, ולכן דווקא בעולם הגשמי - שנראה הכי רחוק - מונח הגילוי העמוק ביותר. וזה גם ההסבר למה המצוות נעשות בחפצים גשמיים ולא במחשבה בלבד.</li>
+  </ul>
+</section>
+
+<footer class="siyum">
+  <h3>הערה על הביאור הזה</h3>
+  <p>אגרת הקודש סימן כ' היא מהארוכות והעמוקות בתניא, ומה שלמעלה הוא <strong>מפה</strong> - סדר הטענות והרעיונות המרכזיים בשפה פשוטה, לא תרגום ולא תחליף. הלשון בפנים מדויקת ושקולה, ובכל שורה בה יש עוד רבדים; המשלים כאן נועדו לפתוח את השער, וכל משל - כפי שהאגרת עצמה מדגישה - נשבר במקום מסוים.</p>
+  <p>הדרך הנכונה: לקרוא כאן שלב, ואז לפתוח את האגרת באותו מקום. וכדאי בחברותא.</p>
+</footer>
+
+</div>
+
+</body>
+</html>
