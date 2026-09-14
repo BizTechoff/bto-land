@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>כלי או צינור? — איך חומר נעשה רוח</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="כלי נשאר תמיד בגבולו; צינור מעביר. משל שני הפקידים — ולמה דווקא מי שמעביר הלאה, המלך בא לבקר אצלו ועושה שם בית">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/kli-o-tzinor">
+<meta property="og:title" content="כלי או צינור? — איך חומר נעשה רוח">
+<meta property="og:description" content="כלי נשאר תמיד בגבולו; צינור מעביר. משל שני הפקידים — ולמה דווקא מי שמעביר הלאה, המלך עושה אצלו בית">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="כלי או צינור? — איך חומר נעשה רוח">
+<meta name="twitter:description" content="השאלה אינה ״כמה אני צריך?״ אלא ״לאן זה הולך אחרי?״">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(28px,4.4vw,42px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .lead{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:16px 20px; margin-bottom:14px; border-radius:3px;}
+  .lead p{font-size:16px; margin:0 0 9px;} .lead p:last-child{margin-bottom:0;}
+
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .c{padding:19px 17px; border-radius:8px; text-align:center;}
+  .c .icon{font-size:26px; margin-bottom:5px;}
+  .c .t{font-size:20px; font-weight:900; margin-bottom:6px;}
+  .c .d{font-size:13.5px; line-height:1.6;}
+  .c-kli{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .c-kli .t{color:var(--crimson);} .c-kli .d{color:var(--ink-soft);}
+  .c-tzinor{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep); color:var(--parchment);}
+  .c-tzinor .t{color:var(--gold);} .c-tzinor .d{color:rgba(245,236,217,0.87);}
+  .c-tzinor strong{color:var(--gold-light);}
+
+  .story{background:linear-gradient(180deg, rgba(91,58,120,0.08), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.24); border-radius:8px; padding:18px 22px; margin:14px 0;}
+  .story .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--royal); text-transform:uppercase; margin-bottom:9px; text-align:center;}
+  .story p{font-size:15.5px; margin-bottom:10px;} .story p:last-child{margin-bottom:0;}
+
+  .clerks{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;}
+  .ck{padding:15px 14px; border-radius:8px;}
+  .ck .n{font-family:'Bellefair',serif; font-size:10.5px; letter-spacing:2px; color:var(--gold-deep); margin-bottom:5px;}
+  .ck .t{font-size:15px; font-weight:900; margin-bottom:5px;}
+  .ck .d{font-size:13px; line-height:1.55; color:var(--ink-soft);}
+  .ck-1{background:rgba(43,29,16,0.06); border:1px solid rgba(140,42,30,0.24);} .ck-1 .t{color:var(--crimson);}
+  .ck-2{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);} .ck-2 .t{color:var(--gold-deep);}
+
+  .tzadikim{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep); border-radius:8px; padding:19px 21px; margin:14px 0;}
+  .tzadikim .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; margin-bottom:9px; text-align:center;}
+  .tzadikim p{font-size:15px; color:rgba(245,236,217,0.9); margin:0 0 10px;} .tzadikim p:last-child{margin-bottom:0;}
+  .tzadikim strong{color:var(--gold-light);}
+  .tzadikim .arrow{display:flex; align-items:center; justify-content:center; gap:11px; flex-wrap:wrap; margin:11px 0;}
+  .tzadikim .b{background:rgba(184,138,44,0.16); border:1px solid rgba(232,201,138,0.3); border-radius:14px; padding:7px 16px; font-size:14px; color:var(--gold-light);}
+  .tzadikim .ar{color:var(--gold); font-size:16px;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:12px 18px; margin:12px 0; font-family:'David Libre',serif; font-size:15.5px; color:var(--ink-soft); border-radius:2px; text-align:center;}
+  .pasuk .src{display:block; font-size:11.5px; color:var(--gold-deep); margin-top:5px; letter-spacing:1px;}
+
+  .choice{background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.28); border-radius:8px; padding:17px 20px; margin:14px 0;}
+  .choice .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px; text-align:center;}
+  .choice p{font-size:15.5px; margin:0 0 10px;} .choice p:last-child{margin-bottom:0;}
+  .choice .steps{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:10px;}
+  .choice .s{background:rgba(255,250,235,0.65); border:1px solid rgba(184,138,44,0.3); border-radius:9px; padding:9px 15px; font-size:13.5px; color:var(--ink-soft); text-align:center;}
+  .choice .s b{display:block; color:var(--crimson);}
+  .choice .ar{color:var(--gold); font-size:16px;}
+
+  .qbox{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .qb{padding:17px 16px; border-radius:8px; text-align:center;}
+  .qb .q{font-family:'David Libre',serif; font-size:16.5px; font-weight:700; margin-bottom:5px;}
+  .qb .d{font-size:13.5px; color:var(--ink-soft);}
+  .qb-no{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);} .qb-no .q{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:rgba(140,42,30,0.45);}
+  .qb-yes{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);} .qb-yes .q{color:var(--crimson);}
+
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .two,.clerks,.qbox{grid-template-columns:1fr;}
+    .tzadikim .arrow,.choice .steps{flex-direction:column;} .tzadikim .ar,.choice .ar{transform:rotate(90deg);}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">עבודת השם · נתינה</div>
+    <h1>כְּלִי אוֹ צִנּוֹר?</h1>
+    <p class="subtitle">איך אותו חומר עצמו נעשה רוח</p>
+
+    <div class="lead">
+      <p>
+        כל עניינו של האדם בעולם הוא <strong>להפוך חומר לרוח</strong>. אבל יש כאן קושי:
+        הגוף חי מן החומר עצמו — הוא זקוק למזון, לכסף, לתענוגים — ולכן החומר תמיד
+        נשאר ״תפוס״ בגבול הצריכה שלו.
+      </p>
+      <p>כל עוד אדם רק <strong>מקבל</strong>, הוא נשאר כלי. וכלי נשאר תמיד בגבולו.</p>
+    </div>
+
+    <div class="two">
+      <div class="c c-kli">
+        <div class="icon">🏺</div>
+        <div class="t">כְּלִי</div>
+        <div class="d">קולט ועוצר. מה שנכנס — נשאר. המקום נשאר ״מקום שיש בו״, ולא יותר.</div>
+      </div>
+      <div class="c c-tzinor">
+        <div class="icon">⇄</div>
+        <div class="t">צִנּוֹר</div>
+        <div class="d">מוציא <strong>יותר ממה שהוא צורך לעצמו</strong> — ואז אותו חומר עצמו הופך לרוח.</div>
+      </div>
+    </div>
+
+    <p>
+      הוא לא הפסיק לאכול, לעבוד, להרוויח כסף — אבל עכשיו זה <strong>עובר דרכו
+      ולא נעצר בו</strong>.
+    </p>
+
+    <div class="story">
+      <div class="k">המשל · שני הפקידים</div>
+      <p>
+        מלך שולח כסף למקום רחוק:
+      </p>
+      <div class="clerks">
+        <div class="ck ck-1">
+          <div class="n">הפקיד הראשון</div>
+          <div class="t">שָׂם בַּכַּסֶּפֶת</div>
+          <div class="d">הכסף עוצר שם — והמקום נשאר ״מקום שיש בו כסף״, לא יותר.</div>
+        </div>
+        <div class="ck ck-2">
+          <div class="n">הפקיד השני</div>
+          <div class="t">מַעֲבִיר הַכֹּל הָלְאָה</div>
+          <div class="d">כפי שהמלך מבקש — ואצלו קורה דבר מפתיע.</div>
+        </div>
+      </div>
+      <p>
+        <strong>המלך עצמו מתחיל לבוא לבקר שם</strong> — כי יש לו שם עניין חי וממשי.
+        והמקום שהיה רק תחנת מעבר — נעשה <strong>בית של המלך ממש</strong>.
+      </p>
+    </div>
+
+    <div class="tzadikim">
+      <div class="k">הנמשל</div>
+      <p>
+        מי שהופך את גופו לצינור — עובד, אוכל, מרוויח, אבל הכל עובר הלאה לעבודת השם
+        ואינו נבלע בתאווה עצמה — הוא זה שעליו אמרו חז״ל
+        <strong>״עשרה צדיקים שנכנסו בחייהם לגן עדן״</strong>: הגיעו <strong>עם הגוף עצמו</strong>,
+        עם הדעת הגשמית שלהם, אל המקום שהנשמה שוכנת בו.
+      </p>
+      <div class="arrow">
+        <span class="b">נֶפֶשׁ בַּהֲמִית</span>
+        <span class="ar">⟸ לא בוטלה ⟸</span>
+        <span class="b">נֶפֶשׁ אֱלוֹקִית</span>
+      </div>
+      <p style="text-align:center;">
+        <strong>הגבול נעשה שער לאין־סוף.</strong>
+      </p>
+    </div>
+
+    <div class="pasuk">
+      נִתְאַוָּה הַקָּדוֹשׁ בָּרוּךְ הוּא — לִהְיוֹת לוֹ דִּירָה בַּתַּחְתּוֹנִים
+      <span class="src">— מדרש תנחומא, נשא טז · כי בנינו לו בית למטה, בגוף עצמו</span>
+    </div>
+
+    <div class="choice">
+      <div class="k">חשוב — יש בחירה</div>
+      <p>
+        השם <strong>אינו כופה</strong> את זה. יש בחירה חופשית: להיכנס <em>לעצמנו</em> (להישאר כלי),
+        או להיכנס <em>למלך</em> (להיות צינור).
+      </p>
+      <p>אבל מי שמוכיח זאת <strong>במעשה</strong> — לא רק ברצון טוב או בחכמה — המלך מתגלה אליו:</p>
+      <div class="steps">
+        <div class="s"><b>תחילה</b>דרך שליחים — שרים ומלאכים</div>
+        <div class="ar">⟸</div>
+        <div class="s"><b>ואחר כך</b>בכבודו ובעצמו</div>
+      </div>
+    </div>
+
+    <h2>לְמַעֲשֶׂה</h2>
+    <p>השאלה בכל פעולה גשמית אינה:</p>
+    <div class="qbox">
+      <div class="qb qb-no"><div class="q">״כַּמָּה אֲנִי צָרִיךְ?״</div><div class="d">שאלה של כלי — המודד את גבולו</div></div>
+      <div class="qb qb-yes"><div class="q">״לְאָן זֶה הוֹלֵךְ אַחֲרֵי?״</div><div class="d">שאלה של צינור — המודד את הזרימה</div></div>
+    </div>
+
+    <div class="final">
+      <div class="t">אִם זֶה נֶעֱצָר בִּי — אֲנִי כְּלִי. אִם זֶה מַמְשִׁיךְ הָלְאָה — הַחֹמֶר עַצְמוֹ הָפַךְ לְרוּחַ</div>
+      <p class="d">
+        אין צורך להפסיק לאכול, לעבוד ולהרוויח —<br>
+        רק שלא ייעצר בך. ומי שנעשה מעבר, המלך קובע אצלו בית.
+      </p>
+      <div class="seal">״נִתְאַוָּה הַקָּדוֹשׁ בָּרוּךְ הוּא לִהְיוֹת לוֹ דִּירָה בַּתַּחְתּוֹנִים״<small>תנחומא, נשא טז</small></div>
+    </div>
+
+    <p class="note">
+      * משל ונמשל בעבודת השם. מקורות: מדרש תנחומא נשא טז · דרך ארץ זוטא פ״א (הנכנסים בחייהם לגן עדן) ·
+      תניא (שתי הנפשות והפיכת הבהמית לאלוקית). הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · עבודת השם</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/tzinor-hashefa">צינור השפע</a>
+        <a class="related-link" href="/zion/hachomer-hofech">החומר הופך לרוח</a>
+        <a class="related-link" href="/zion/milchemet-hareshut">מלחמת הרשות</a>
+        <a class="related-link" href="/zion/banu-latet">באנו לתת</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
