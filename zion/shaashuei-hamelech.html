@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שעשועי המלך — התמים שחשב שהבין</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="תורה ברובד השכלי אינה תפיסה אלא שעשוע — משחק שהמלך משחק עם בנו הקטן. ומי שחושב שהוא ״מבין תורה״, חושב שהוא תופס את הקב״ה עצמו">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/shaashuei-hamelech">
+<meta property="og:title" content="שעשועי המלך — התמים שחשב שהבין">
+<meta property="og:description" content="תורה ברובד השכלי אינה תפיסה אלא שעשוע. ומי שחושב שהוא ״מבין תורה״, חושב שהוא תופס את הקב״ה עצמו">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="שעשועי המלך — התמים שחשב שהבין">
+<meta name="twitter:description" content="שניהם משחקים — לא תופסים">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(28px,4.4vw,42px); text-align:center; color:var(--ink); line-height:1.15; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .story{background:linear-gradient(180deg, rgba(91,58,120,0.08), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.24); border-radius:8px; padding:19px 22px; margin:14px 0;}
+  .story .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--royal); text-transform:uppercase; margin-bottom:10px; text-align:center;}
+  .story p{font-size:15.5px; margin-bottom:10px;} .story p:last-child{margin-bottom:0;}
+  .story .q{font-family:'David Libre',serif; color:var(--crimson); font-weight:700;}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:12px 18px; margin:12px 0; font-family:'David Libre',serif; font-size:15.5px; color:var(--ink-soft); border-radius:2px; text-align:center;}
+  .pasuk .src{display:block; font-size:11.5px; color:var(--gold-deep); margin-top:5px; letter-spacing:1px;}
+
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:13px 0;}
+  .c{padding:18px 16px; border-radius:8px; text-align:center;}
+  .c .t{font-size:18px; font-weight:900; margin-bottom:5px;}
+  .c .d{font-size:13.5px; line-height:1.58;}
+  .c-tfisa{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .c-tfisa .t{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:rgba(140,42,30,0.45);} .c-tfisa .d{color:var(--ink-soft);}
+  .c-shaa{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);}
+  .c-shaa .t{color:var(--crimson);} .c-shaa .d{color:var(--ink-soft);}
+
+  .chain{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep); border-radius:8px; padding:19px 21px; margin:14px 0;}
+  .chain .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; margin-bottom:10px; text-align:center;}
+  .chain .row{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;}
+  .chain .b{background:rgba(184,138,44,0.16); border:1px solid rgba(232,201,138,0.3); border-radius:9px; padding:10px 15px; text-align:center; font-size:14px; color:rgba(245,236,217,0.9); max-width:200px;}
+  .chain .ar{color:var(--gold); font-size:17px;}
+  .chain p{font-size:15px; color:rgba(245,236,217,0.9); margin:0; text-align:center;}
+  .chain strong{color:var(--gold-light);}
+
+  .mashiach{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:17px 20px; margin:14px 0; border-radius:3px;}
+  .mashiach .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--crimson); text-transform:uppercase; margin-bottom:8px;}
+  .mashiach p{font-size:15.5px; margin:0 0 9px;} .mashiach p:last-child{margin-bottom:0;}
+
+  .halacha{background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.28); border-radius:8px; padding:17px 20px; margin:14px 0;}
+  .halacha .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px; text-align:center;}
+  .halacha p{font-size:15.5px; margin:0 0 10px;} .halacha p:last-child{margin-bottom:0;}
+
+  .line{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;}
+  .ln{padding:15px 15px; border-radius:8px; font-size:13.5px; line-height:1.58;}
+  .ln b{display:block; font-size:15px; margin-bottom:4px;}
+  .ln-ok{background:rgba(184,138,44,0.11); border:1px solid rgba(184,138,44,0.3); color:var(--ink-soft);} .ln-ok b{color:var(--gold-deep);}
+  .ln-risk{background:rgba(43,29,16,0.06); border:1px solid rgba(140,42,30,0.26); color:var(--ink-soft);} .ln-risk b{color:var(--crimson);}
+
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .two,.line{grid-template-columns:1fr;} .chain .row{flex-direction:column;} .chain .ar{transform:rotate(90deg);}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">משל ונמשל · ענווה</div>
+    <h1>שַׁעֲשׁוּעֵי הַמֶּלֶךְ</h1>
+    <p class="subtitle">התמים שחשב שהבין</p>
+
+    <div class="story">
+      <div class="k">המשל · חידות האב</div>
+      <p>
+        מלך היה משחק עם בנו הקטן משחקי מילים וחידות סוד, לשעשע אותו ולקרבו אליו.
+        הבן שמח מאוד במשחק, חש קרוב לאביו יותר מכל — אך <strong>לא הבין באמת דבר</strong>
+        מעומק כוונת אביו; הרי הוא ילד קטן, ואביו מלך גדול ונשגב.
+      </p>
+      <p>
+        יום אחד הלך הבן אל חבריו, סיפר להם את חידות אביו, והוסיף:
+        <span class="q">״עכשיו אני מבין את מחשבת אבא״.</span>
+        חבריו התפעלו — וגם הוא עצמו החל להתגאות שהוא ״יודע״ את המלך יותר
+        מילדים אחרים שקיבלו חידות אחרות.
+      </p>
+      <p>
+        עד שיום אחד גילה המלך לכל הילדים <strong>סוד עמוק חדש</strong>, שהתברר ממנו
+        שכל מה שסיפרו קודם על ״הבנתם״ היה <strong>משחק ילדים בלבד</strong> —
+        ואיש מהם לא קרב אף לא צעד אחד להבנת המלך עצמו.
+      </p>
+      <p>
+        או־אז התבייש הבן שהתגאה — <strong>לא כי טעה בחידה, אלא כי חשב שמשחק הוא הבנה</strong>.
+      </p>
+    </div>
+
+    <h2>הַנִּמְשָׁל</h2>
+    <p>
+      תורה ברובד השכלי־הנתפס אינה תוכן שהאדם מקבל מן המלך עצמו — אלא
+      <strong>שעשוע</strong> שהמלך משחק עם ילדו הקטן:
+    </p>
+    <div class="pasuk">
+      לוּלֵי תוֹרָתְךָ שַׁעֲשֻׁעָי — אָז אָבַדְתִּי בְעׇנְיִי
+      <span class="src">— תהלים קיט, צב</span>
+    </div>
+
+    <div class="two">
+      <div class="c c-tfisa"><div class="t">תְּפִיסָה</div><div class="d">להחזיק את הדבר עצמו — וזה בלתי אפשרי</div></div>
+      <div class="c c-shaa"><div class="t">שַׁעֲשׁוּעַ</div><div class="d">יַחַס וְקִרְבָה — לא תפיסה</div></div>
+    </div>
+
+    <div class="chain">
+      <div class="k">וכאן הטעות</div>
+      <div class="row">
+        <div class="b">״אורייתא וקודשא בריך הוא — חד״ (זוהר)</div>
+        <div class="ar">⟸</div>
+        <div class="b">מי שחושב שהוא ״מבין תורה״</div>
+        <div class="ar">⟸</div>
+        <div class="b">חושב שהוא תופס את <strong>הקדוש ברוך הוא עצמו</strong></div>
+      </div>
+      <p>
+        וזו טעות שמקורה ב<strong>גאווה</strong> — שהרי <em>״לֵית מַחֲשָׁבָה תְּפִיסָא בָּךְ כְּלָל״</em>
+        (פתח אליהו).
+      </p>
+    </div>
+
+    <p>
+      ואם התורה אינה נתפסת בשכל האנושי — <strong>על מה מתגאה אדם שיודע יותר מחברו?</strong>
+      ההתגאות מתבררת כילדותית: שני ילדים ששיחקו במשחקים שונים עם אותו אבא,
+      ואף אחד מהם לא קרב לתפיסת האב ולו כמלוא הנימה.
+    </p>
+
+    <div class="mashiach">
+      <div class="k">ליקוטי מוהר״ן תניינא</div>
+      <p>
+        משיח יגלה <strong>תורה חדשה</strong> שאיש לא הבין — כולל גדולי ישראל,
+        שתורתם תהיה <em>כהבל פה</em> לעומתה.
+      </p>
+      <p>
+        וזו אינה רק בשורה עתידית, אלא <strong>הוכחה למפרע</strong>: כשיתגלה שאף חכם לא
+        קרב לאמת, יתברר שמעולם לא היתה שם ״הבנה״ מדורגת — <strong>רק שעשוע מדורג</strong>.
+        ואז נחזור בתשובה מבושה: לא בושה על טעות בפרט הלכה,
+        אלא <strong>בושה על עצם ההנחה שהיה שם משהו לתפוס</strong>.
+      </p>
+    </div>
+
+    <div class="halacha">
+      <div class="k">להלכה למעשה</div>
+      <p>
+        ההנאה מלימוד תורה, ואפילו העמקה גדולה בסוד — <strong>כשרה וטובה מאוד</strong>:
+        היא עצם הקרבה לאבא.
+      </p>
+      <div class="line">
+        <div class="ln ln-ok"><b>מותר ורצוי</b>ללמוד, להעמיק, ליהנות, להתקרב — זה כל עניין השעשוע.</div>
+        <div class="ln ln-risk"><b>כאן מתחילה הסכנה</b>ברגע שאדם ״יוצא לחברים״ ומציג את שעשועו כהבנה, ובונה על כך מעמד וגאווה.</div>
+      </div>
+      <p>
+        מי שזוכר בכל רגע שכל תורתו היא <strong>שעשוע־ילד מול אין־סוף</strong> —
+        נשאר בענווה טבעית, ואינו יכול להתגאות על חברו.
+      </p>
+    </div>
+
+    <div class="final">
+      <div class="t">שְׁנֵיהֶם מְשַׂחֲקִים — לֹא תּוֹפְסִים</div>
+      <p class="d">
+        הבושה אינה על טעות בחידה,<br>
+        אלא על שחשבנו שמשחק הוא הבנה.
+      </p>
+      <div class="seal">״לֵית מַחֲשָׁבָה תְּפִיסָא בָּךְ כְּלָל״<small>פתח אליהו · תיקוני זוהר</small></div>
+    </div>
+
+    <p class="note">
+      * משל ונמשל, מלוקט מתורת רבי נחמן מברסלב (ליקוטי מוהר״ן תניינא). מקורות:
+      תהלים קיט, צב · זוהר (אורייתא וקוב״ה חד) · פתח אליהו, תיקוני זוהר.
+      הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · משל ונמשל</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/nichnas-beshalom">נכנס בשלום ויצא בשלום</a>
+        <a class="related-link" href="/zion/lo-yodea">לא יודע</a>
+        <a class="related-link" href="/zion/im-domeh-harav">אם דומה הרב למלאך</a>
+        <a class="related-link" href="/zion/anochi">אנוכי</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

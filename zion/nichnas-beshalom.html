@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>נכנס בשלום ויצא בשלום — פרדס והשלום ככלי</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="השלום של רבי עקיבא לא נוצר בפרדס — הוא היה לפני הכניסה. פשט־רמז־דרוש־סוד כנגד העולמות, והשלום שאינו משחק במשחק">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/nichnas-beshalom">
+<meta property="og:title" content="נכנס בשלום ויצא בשלום — פרדס והשלום ככלי">
+<meta property="og:description" content="השלום של רבי עקיבא לא נוצר בפרדס — הוא היה לפני הכניסה. השלום ככלי שאינו משחק במשחק">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="נכנס בשלום ויצא בשלום">
+<meta name="twitter:description" content="מי שנכנס עם חוסר — נבלע בחיפוש אחר המילוי; מי שנכנס שלם — יוצא בשלום">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(27px,4.2vw,40px); text-align:center; color:var(--ink); line-height:1.16; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  /* four */
+  .four{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:13px 0;}
+  .f{padding:14px 10px; border-radius:8px; text-align:center;}
+  .f .n{font-size:14.5px; font-weight:900; margin-bottom:4px;}
+  .f .d{font-size:12.5px; line-height:1.45;}
+  .f-out{background:rgba(43,29,16,0.06); border:1px solid rgba(140,42,30,0.26);}
+  .f-out .n{color:var(--crimson);} .f-out .d{color:var(--ink-soft);}
+  .f-ok{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep);}
+  .f-ok .n{color:var(--gold);} .f-ok .d{color:rgba(245,236,217,0.85);}
+
+  .obs{background:rgba(184,138,44,0.11); border:1px solid rgba(184,138,44,0.3); border-right:4px solid var(--gold); padding:15px 20px; margin:13px 0; border-radius:3px;}
+  .obs p{font-size:16px; margin:0;}
+
+  .story{background:linear-gradient(180deg, rgba(91,58,120,0.08), rgba(91,58,120,0.02)); border:1px solid rgba(91,58,120,0.24); border-radius:8px; padding:18px 22px; margin:14px 0;}
+  .story .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--royal); text-transform:uppercase; margin-bottom:9px; text-align:center;}
+  .story p{font-size:15.5px; margin-bottom:10px;} .story p:last-child{margin-bottom:0;}
+  .story .q{font-family:'David Libre',serif; color:var(--crimson); font-weight:700;}
+
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:13px 0;}
+  .c{padding:17px 16px; border-radius:8px;}
+  .c .k{font-family:'Bellefair',serif; font-size:10.5px; letter-spacing:2px; margin-bottom:6px;}
+  .c .t{font-size:16.5px; font-weight:900; margin-bottom:5px;}
+  .c .d{font-size:13.5px; line-height:1.58;}
+  .c-lack{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .c-lack .k{color:var(--gold-deep);} .c-lack .t{color:var(--crimson);} .c-lack .d{color:var(--ink-soft);}
+  .c-whole{background:linear-gradient(135deg, rgba(184,138,44,0.15), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.34);}
+  .c-whole .k{color:var(--gold-deep);} .c-whole .t{color:var(--gold-deep);} .c-whole .d{color:var(--ink-soft);}
+
+  .kli{background:linear-gradient(135deg,#2b1d10,#1a1108); color:var(--parchment); border:1px solid var(--gold-deep); border-radius:8px; padding:19px 21px; margin:14px 0;}
+  .kli .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; margin-bottom:9px; text-align:center;}
+  .kli .q{font-family:'David Libre',serif; font-size:16.5px; color:var(--gold); text-align:center; margin-bottom:8px; line-height:1.6;}
+  .kli p{font-size:15px; color:rgba(245,236,217,0.9); margin:0;}
+  .kli strong{color:var(--gold-light);}
+  .kli .src{display:block; text-align:center; font-size:11.5px; color:rgba(232,201,138,0.7); letter-spacing:1px; margin-top:5px;}
+
+  /* pardes table */
+  .pardes{margin:13px 0; border-radius:8px; overflow:hidden; border:1px solid rgba(184,138,44,0.3);}
+  .prow{display:grid; grid-template-columns:0.7fr 1fr 0.7fr 0.8fr;}
+  .prow>div{padding:11px 10px; text-align:center; border-bottom:1px solid rgba(184,138,44,0.16); font-size:14px;}
+  .prow>div:not(:last-child){border-left:1px solid rgba(184,138,44,0.16);}
+  .prow:last-child>div{border-bottom:none;}
+  .phead>div{background:rgba(184,138,44,0.14); font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:1px; color:var(--gold-deep); font-weight:700;}
+  .prow .lt{font-family:'David Libre',serif; font-size:19px; font-weight:900; color:var(--crimson);}
+  .p1{background:rgba(184,138,44,0.05);} .p2{background:rgba(184,138,44,0.09);} .p3{background:rgba(184,138,44,0.13);}
+  .p4{background:linear-gradient(135deg, rgba(91,58,120,0.16), rgba(91,58,120,0.05));} .p4 .lt{color:var(--royal);}
+
+  .gem{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:10px; padding:20px 22px; margin:14px 0; text-align:center;}
+  .gem .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; margin-bottom:10px;}
+  .gem .row{display:flex; justify-content:center; align-items:center; gap:11px; flex-wrap:wrap; margin-bottom:8px;}
+  .gem .w{background:rgba(184,138,44,0.16); border:1px solid rgba(232,201,138,0.3); border-radius:9px; padding:9px 15px;}
+  .gem .w .n{font-family:'David Libre',serif; font-size:19px; font-weight:900; color:var(--gold); display:block;}
+  .gem .w .v{font-family:'Bellefair',serif; font-size:13px; color:rgba(245,236,217,0.8);}
+  .gem .op{font-size:20px; color:var(--gold-light);}
+  .gem .res{font-family:'Bellefair',serif; font-size:22px; color:#fbeec4; letter-spacing:2px; margin-top:4px;}
+  .gem p{font-size:14px; color:rgba(245,236,217,0.85); margin:8px 0 0;}
+
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .four{grid-template-columns:1fr 1fr;} .two{grid-template-columns:1fr;}
+    .prow{grid-template-columns:0.7fr 1fr 0.8fr;} .prow .col4{display:none;}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">פנימיות התורה · פרדס</div>
+    <h1>נִכְנַס בְּשָׁלוֹם וְיָצָא בְּשָׁלוֹם</h1>
+    <p class="subtitle">השלום ככלי — שאינו משחק במשחק</p>
+
+    <p>
+      ארבעה נכנסו לפרדס. שלושה נבלעו — ורק אחד יצא:
+    </p>
+
+    <div class="four">
+      <div class="f f-out"><div class="n">בֶּן עַזַּאי</div><div class="d">הציץ ומת</div></div>
+      <div class="f f-out"><div class="n">בֶּן זוֹמָא</div><div class="d">הציץ ונפגע</div></div>
+      <div class="f f-out"><div class="n">אַחֵר</div><div class="d">קיצץ בנטיעות</div></div>
+      <div class="f f-ok"><div class="n">רַבִּי עֲקִיבָא</div><div class="d">נכנס בשלום ויצא בשלום</div></div>
+    </div>
+    <p style="text-align:center; font-size:12.5px; color:var(--gold-deep); font-style:italic; margin-bottom:13px;">— חגיגה יד ע"ב</p>
+
+    <div class="obs">
+      <p>
+        שים לב: <strong>השלום לא היה תוצאה של מה שקרה בפרדס</strong> — הוא היה קיים
+        כבר <strong>לפני הכניסה</strong>, ונשאר אתו בדיוק כפי שהיה.
+      </p>
+    </div>
+
+    <p>
+      וזה הרמז: פרדס אינו עוד חדר בארמון — הוא <strong>מערכת שלמה</strong> שכל תשובה בה
+      פותחת שאלה עמוקה יותר; מבוך בלי תחתית. ומי שנכנס אליו <em>כדי לדעת</em> —
+      נכנס למשחקי המבוך עצמו, ונבלע בו.
+    </p>
+
+    <div class="story">
+      <div class="k">המשל · חדר המשחק</div>
+      <p>
+        מלך שהיה לו אויב, שבנה בתוככי מדינתו <strong>חדר משחק נסתר</strong>:
+        הנכנס נדרש לפענח חידה, ומיד נפתחת דלת לחידה קשה ממנה, וכך בלי סוף —
+        וככל שהשתקע בפענוח, נשאב פנימה ולא יכול היה עוד לצאת.
+      </p>
+      <p>
+        שלושה מבני הארמון נכנסו <strong>כדי להוכיח את חוכמתם ולנצח את המשחק</strong> —
+        ונבלעו בו, איש איש כפי מידתו.
+      </p>
+      <p>
+        בן רביעי נכנס גם הוא, הביט בכל החדרים והחידות, <strong>לא נגע באף אחת מהן</strong>,
+        ופנה ויצא באותה דלת שנכנס בה. כששאלוהו איך יצא בשלום, ענה:
+        <span class="q">״לא הייתי צריך לנצח את המשחק הזה. אני כבר בן־בית אצל המלך — מה לי ולזה?״</span>
+      </p>
+    </div>
+
+    <h2>הַנִּמְשָׁל</h2>
+    <p>
+      הפרדס הוא היכולת להיכנס לעומק הסוד — לשכל שיכול לבנות עולמות בתוך עולמות של חכמה.
+      אבל כניסה כזו, כשהיא באה <strong>מתוך רצון לדעת</strong> — מתוך חוסר שמבקש להתמלא —
+      היא כבר בבחינת <strong>עלמא דפרודא</strong>: אשליה שיש שם ״מערכת״ שצריך לפרוץ,
+      וכל שכבת סוד מבטיחה עוד אחת מתחתיה.
+    </p>
+    <p>
+      זהו המטריקס: <strong>לא הסוד עצמו רע — אלא ההיתפסות במשחק שהוא מציע</strong>.
+    </p>
+
+    <div class="two">
+      <div class="c c-lack"><div class="k">נכנס עם חוסר</div><div class="t">נִבְלָע</div><div class="d">מחפש את המילוי — ולכן משחק במשחק שהמבוך מציע, ואין לו סוף.</div></div>
+      <div class="c c-whole"><div class="k">נכנס שלם</div><div class="t">יוֹצֵא בְּשָׁלוֹם</div><div class="d">שָׁלֵם מלשון שלמות: מי שאין לו חוסר — אין לו מה ״לנצח״.</div></div>
+    </div>
+
+    <p>
+      ולכן רבי עקיבא יכול היה להביט בשורשי הסוד ולא להיסחף — <strong>הוא לא חיפש שם דבר</strong>.
+    </p>
+
+    <div class="kli">
+      <div class="k">השלום — כלי, לא תוכן</div>
+      <div class="q">״לֹא מָצָא הַקָּדוֹשׁ בָּרוּךְ הוּא כְּלִי מַחֲזִיק בְּרָכָה לְיִשְׂרָאֵל אֶלָּא הַשָּׁלוֹם״</div>
+      <span class="src">— עוקצין ג, יב</span>
+      <p style="margin-top:9px;">
+        שלום נקרא <strong>כלי</strong> — לא תוכן. וכלי מכיל <strong>בלי להיבלע במה שבתוכו</strong>.
+        זו בדיוק המכניקה: השלום מחזיק את כל הפרדס — בלי להיכנס לגדריו.
+      </p>
+    </div>
+
+    <h2>פְּשָׁט · רֶמֶז · דְּרוּשׁ · סוֹד</h2>
+    <div class="pardes">
+      <div class="prow phead"><div>הרובד</div><div>העולם</div><div>הבחינה</div><div class="col4">הדעת</div></div>
+      <div class="prow p4"><div class="lt">ס</div><div>אֲצִילוּת</div><div>חַיָּה</div><div class="col4">דעת עליונה</div></div>
+      <div class="prow p3"><div class="lt">ד</div><div>בְּרִיאָה</div><div>נְשָׁמָה</div><div class="col4">דעת תחתונה</div></div>
+      <div class="prow p2"><div class="lt">ר</div><div>יְצִירָה</div><div>רוּחַ</div><div class="col4">דעת תחתונה</div></div>
+      <div class="prow p1"><div class="lt">פ</div><div>עֲשִׂיָּה</div><div>נֶפֶשׁ</div><div class="col4">דעת תחתונה</div></div>
+    </div>
+    <p>
+      בדעת התחתונה שלושה רבדים — <strong>פשט, רמז ודרוש</strong> כנגד בי״ע ונר״ן;
+      ואז <strong>סוד</strong> כנגד האצילות, בחינת <em>חיה</em>.
+      וכשמחברים את כל ארבעת הרבדים — זוכים ל<strong>תורה חדשה</strong> הנקראת
+      <strong>פַּרְדֵּ״ס</strong>: חיבור <em>דעת עליונה</em> עם <em>דעת תחתונה</em>.
+    </p>
+
+    <div class="gem">
+      <div class="k">וסימנך</div>
+      <div class="row">
+        <div class="w"><span class="n">הוי״ה</span><span class="v">26 · דעת עליונה</span></div>
+        <span class="op">+</span>
+        <div class="w"><span class="n">אֲדֹנָ־י</span><span class="v">65 · דעת תחתונה</span></div>
+      </div>
+      <div class="res">= 91 = סֻכָּה = אָמֵן</div>
+      <p>שני השמות כשהם מתייחדים — הם מניין אָמֵן, והם מניין סֻכָּה: הכלי המקיף.</p>
+    </div>
+
+    <h2>הֲלָכָה לְמַעֲשֶׂה</h2>
+    <p>
+      בכל פעם שאדם נכנס למבוך — מחלוקת, ספק באמונה, מערכת שנדמית בנויה לבלוע כל מי
+      שמנסה לפצח אותה — הדרך לצאת שלם <strong>אינה לנצח אותה בכליה</strong>
+      (להוכיח, לדעת בוודאות, לסגור כל שאלה), אלא <strong>להביא לתוכה שלמות שכבר יש לו
+      לפני שנכנס</strong>.
+    </p>
+
+    <div class="final">
+      <div class="t">לֹא יוֹדֵעַ — וְלֹא רוֹצֶה לָדַעַת</div>
+      <p class="d">
+        מי שנכנס עם חוסר — נבלע בחיפוש אחר המילוי.<br>
+        ומי שנכנס שלם — ״נכנס בשלום ויצא בשלום״.
+      </p>
+      <div class="seal">״כְּלִי מַחֲזִיק בְּרָכָה — אֶלָּא הַשָּׁלוֹם״<small>עוקצין ג, יב</small></div>
+    </div>
+
+    <p class="note">
+      * דברי פנימיות. מקורות: חגיגה יד ע"ב (ארבעה נכנסו לפרדס) · עוקצין ג, יב ·
+      הוי״ה 26 + אדנ־י 65 = 91 = אָמֵן = סֻכָּה (אומת) · פרד״ס והעולמות, עלמא דפרודא —
+      על דרך הקבלה. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/lo-yodea">לא יודע</a>
+        <a class="related-link" href="/zion/hakod-haishi">הקוד האישי</a>
+        <a class="related-link" href="/zion/shema-chamisha-olamot">סולם חמשת העולמות</a>
+        <a class="related-link" href="/zion/kaf-daled-elef">כ״ד אלף תלמידים</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
