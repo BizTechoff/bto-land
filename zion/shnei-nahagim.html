@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שני נהגים ברכב אחד — מי אוחז בהגה</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="משל: רכב אחד, שני נהגים, וג'י פי אס שאינו מתחבר. הנפש הבהמית נוהגת — לפעמים אפילו לכיוון קדוש — והנפש האלוקית נעולה בתא המטען. החיבור תלוי רק במי שאוחז בהגה בפועל">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/shnei-nahagim">
+<meta property="og:title" content="שני נהגים ברכב אחד — מי אוחז בהגה">
+<meta property="og:description" content="לא לאן פונים כעת — אלא מי אוחז בהגה">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="שני נהגים ברכב אחד — מי אוחז בהגה">
+<meta name="twitter:description" content="הג'י פי אס מאיר תמיד — אבל החיבור תלוי במי שנוהג">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(27px,4.2vw,40px); text-align:center; color:var(--ink); line-height:1.16; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .lead{background:linear-gradient(135deg, rgba(184,138,44,0.12), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.28); border-right:4px solid var(--gold); padding:16px 20px; margin-bottom:14px; border-radius:3px;}
+  .lead p{font-size:16px; margin:0;}
+
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .c{padding:18px 16px; border-radius:8px;}
+  .c .k{font-family:'Bellefair',serif; font-size:10.5px; letter-spacing:2px; margin-bottom:6px;}
+  .c .t{font-size:16.5px; font-weight:900; margin-bottom:6px;}
+  .c .d{font-size:13.5px; line-height:1.58;}
+  .c-light{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);}
+  .c-light .k{color:var(--gold-deep);} .c-light .t{color:var(--crimson);} .c-light .d{color:var(--ink-soft);}
+  .c-dark{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep); color:var(--parchment);}
+  .c-dark .k{color:var(--gold-light);} .c-dark .t{color:var(--gold);} .c-dark .d{color:rgba(245,236,217,0.87);}
+  .c-dark strong{color:var(--gold-light);}
+
+  .mashal{background:linear-gradient(180deg,#241a2e,#160f20); color:var(--parchment); border:1px solid var(--royal); border-radius:8px; padding:22px 24px; margin:14px 0;}
+  .mashal .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:4px; color:var(--gold-light); text-transform:uppercase; margin-bottom:12px; text-align:center;}
+  .mashal p{font-size:15.5px; color:rgba(245,236,217,0.92); margin:0 0 10px;} .mashal p:last-child{margin-bottom:0;}
+  .mashal strong{color:var(--gold-light);} .mashal em{color:var(--gold);}
+
+  .car{margin:16px 0; display:flex; justify-content:center;}
+  .car svg{width:100%; max-width:560px; height:auto;}
+
+  .drivers{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0 4px;}
+  .dr{border-radius:8px; padding:15px 14px; text-align:center;}
+  .dr .ic{font-size:22px; margin-bottom:4px;}
+  .dr .t{font-size:15.5px; font-weight:900; margin-bottom:4px;}
+  .dr .d{font-size:13px; line-height:1.55;}
+  .dr-wheel{background:rgba(245,236,217,0.08); border:1px solid rgba(232,201,138,0.35);} .dr-wheel .t{color:var(--gold);} .dr-wheel .d{color:rgba(245,236,217,0.85);}
+  .dr-trunk{background:rgba(0,0,0,0.25); border:1px dashed rgba(232,201,138,0.35);} .dr-trunk .t{color:rgba(245,236,217,0.75);} .dr-trunk .d{color:rgba(245,236,217,0.7);}
+
+  .map{margin:14px 0; border:1px solid rgba(184,138,44,0.3); border-radius:8px; overflow:hidden;}
+  .map .row{display:grid; grid-template-columns:120px 1fr; border-bottom:1px solid rgba(184,138,44,0.2);}
+  .map .row:last-child{border-bottom:none;}
+  .map .a{background:rgba(184,138,44,0.1); padding:11px 14px; font-weight:700; color:var(--gold-deep); font-size:14.5px; display:flex; align-items:center;}
+  .map .b{padding:11px 16px; font-size:14.5px; color:var(--ink); line-height:1.6;}
+
+  .warn{background:rgba(140,42,30,0.07); border:1px solid rgba(140,42,30,0.24); border-right:4px solid var(--crimson); padding:17px 20px; margin:14px 0; border-radius:3px;}
+  .warn .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--crimson); text-transform:uppercase; margin-bottom:8px;}
+  .warn p{font-size:15.5px; margin:0;}
+
+  .notby{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:12px 0;}
+  .notby span{border-radius:14px; padding:6px 14px; font-size:14px;}
+  .notby .no{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26); color:var(--ink-soft); text-decoration:line-through; text-decoration-color:rgba(140,42,30,0.5);}
+  .notby .yes{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep); color:var(--gold); font-weight:700;}
+
+  .test{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:11px 0;}
+  .test .x{padding:14px; border-radius:8px; text-align:center;}
+  .test .x .t{font-family:'David Libre',serif; font-size:16px; font-weight:700; margin-bottom:4px;}
+  .test .x .d{font-size:12.5px;}
+  .x-no{background:rgba(43,29,16,0.05); border:1px solid rgba(140,42,30,0.26);} .x-no .t{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:rgba(140,42,30,0.45);} .x-no .d{color:var(--ink-soft);}
+  .x-yes{background:linear-gradient(135deg,#2b1d10,#1a1108); border:1px solid var(--gold-deep);} .x-yes .t{color:var(--gold);} .x-yes .d{color:rgba(245,236,217,0.82);}
+
+  .pasuk{background:rgba(184,138,44,0.08); border-right:3px solid var(--gold); padding:12px 18px; margin:12px 0; font-family:'David Libre',serif; font-size:15.5px; color:var(--ink-soft); border-radius:2px; text-align:center;}
+  .pasuk .src{display:block; font-size:11.5px; color:var(--gold-deep); margin-top:5px; letter-spacing:1px;}
+  .halacha{background:linear-gradient(135deg, rgba(184,138,44,0.13), rgba(184,138,44,0.04)); border:1px solid rgba(184,138,44,0.32); border-radius:8px; padding:18px 20px; margin:15px 0;}
+  .halacha .k{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:9px; text-align:center;}
+  .halacha p{font-size:15.5px; margin:0 0 10px;} .halacha p:last-child{margin-bottom:0;}
+  .halacha .acts{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin:11px 0;}
+  .halacha .acts span{background:rgba(255,250,235,0.7); border:1px solid rgba(184,138,44,0.3); border-radius:14px; padding:6px 15px; font-size:14px; color:var(--crimson); font-weight:700;}
+
+  .final{margin-top:16px; padding:18px 20px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:17.5px; color:var(--ink); font-weight:700; margin-bottom:7px; line-height:1.5;}
+  .final .d{font-size:14.5px; color:var(--ink-soft); font-style:italic; line-height:1.6; margin:0;}
+  .final .seal{margin-top:11px; padding-top:9px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+
+  .note{margin-top:14px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:14px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+
+  .related{margin-top:16px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    .two,.test,.drivers{grid-template-columns:1fr;} .map .row{grid-template-columns:1fr;} .map .a{padding:8px 14px;}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">משלים · שתי הנפשות</div>
+    <h1>שְׁנֵי נַהָגִים בְּרֶכֶב אֶחָד</h1>
+    <p class="subtitle">החיבור אינו תלוי במהירות ולא בכיוון — אלא במי שאוחז בהגה</p>
+
+    <div class="car">
+      <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="רכב עם נהג בהגה, נהג נעול בתא המטען וג'י פי אס מנותק">
+        <defs>
+          <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3520"/><stop offset="1" stop-color="#2b1d10"/></linearGradient>
+        </defs>
+        <!-- road -->
+        <line x1="10" y1="178" x2="550" y2="178" stroke="#b88a2c" stroke-width="2" opacity="0.5"/>
+        <line x1="30" y1="190" x2="530" y2="190" stroke="#b88a2c" stroke-width="2" stroke-dasharray="18 14" opacity="0.35"/>
+        <!-- target pin (left = direction of travel in RTL) -->
+        <g transform="translate(40,70)">
+          <path d="M0,-30 C-16,-30 -22,-16 -22,-8 C-22,8 0,30 0,30 C0,30 22,8 22,-8 C22,-16 16,-30 0,-30 Z" fill="#8c2a1e" opacity="0.85"/>
+          <circle cx="0" cy="-9" r="7" fill="#fbf4e2"/>
+          <text x="0" y="52" text-anchor="middle" font-family="Frank Ruhl Libre,serif" font-size="14" fill="#8a6620" font-weight="700">הַיַּעַד</text>
+        </g>
+        <!-- car body -->
+        <path d="M130,150 L130,118 Q134,104 150,100 L210,96 L250,60 Q258,52 272,52 L390,52 Q404,52 412,62 L444,100 L500,106 Q520,110 522,128 L522,150 Z" fill="url(#body)" stroke="#8a6620" stroke-width="2"/>
+        <!-- windows -->
+        <path d="M262,64 L230,98 L322,98 L322,64 Z" fill="#e8c98a" opacity="0.35"/>
+        <path d="M334,64 L334,98 L432,98 L404,66 Q400,64 394,64 Z" fill="#e8c98a" opacity="0.35"/>
+        <!-- wheels -->
+        <circle cx="200" cy="152" r="24" fill="#1a1108" stroke="#b88a2c" stroke-width="3"/><circle cx="200" cy="152" r="8" fill="#b88a2c"/>
+        <circle cx="450" cy="152" r="24" fill="#1a1108" stroke="#b88a2c" stroke-width="3"/><circle cx="450" cy="152" r="8" fill="#b88a2c"/>
+        <!-- driver at wheel (front = left) -->
+        <circle cx="282" cy="80" r="9" fill="#8c2a1e"/>
+        <circle cx="258" cy="90" r="9" fill="none" stroke="#e8c98a" stroke-width="2.5"/>
+        <text x="280" y="124" text-anchor="middle" font-family="Frank Ruhl Libre,serif" font-size="12.5" fill="#e8c98a" font-weight="700">עֵשָׂו בַּהֶגֶה</text>
+        <!-- trunk (rear = right) -->
+        <rect x="462" y="112" width="52" height="30" rx="3" fill="#160f20" stroke="#e8c98a" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <circle cx="488" cy="127" r="7" fill="#b88a2c" opacity="0.8"/>
+        <text x="488" y="98" text-anchor="middle" font-family="Frank Ruhl Libre,serif" font-size="12.5" fill="#8a6620" font-weight="700">יַעֲקֹב — נָעוּל</text>
+        <!-- GPS -->
+        <g transform="translate(360,20)">
+          <rect x="-26" y="-14" width="52" height="28" rx="4" fill="#fbf4e2" stroke="#b88a2c" stroke-width="2"/>
+          <circle cx="-8" cy="0" r="4" fill="#8c2a1e"/>
+          <line x1="2" y1="-6" x2="16" y2="6" stroke="#8c2a1e" stroke-width="2.5"/><line x1="16" y1="-6" x2="2" y2="6" stroke="#8c2a1e" stroke-width="2.5"/>
+        </g>
+        <path d="M334,20 C240,10 140,20 70,36" fill="none" stroke="#b88a2c" stroke-width="1.8" stroke-dasharray="5 6" opacity="0.8"/>
+        <text x="200" y="12" text-anchor="middle" font-family="Frank Ruhl Libre,serif" font-size="12" fill="#8a6620">הַדַּעַת — מְאִירָה, אַךְ לֹא מְחֻבֶּרֶת</text>
+      </svg>
+    </div>
+
+    <div class="mashal">
+      <div class="k">הַמָּשָׁל</div>
+      <p>
+        רכב אחד, ובו <strong>שני נהגים</strong>. ברכב מותקן ג'י פי אס, והוא מראה תמיד נקודה אחת — <em>היעד</em>.
+        אבל בכל פעם שהרכב מגיע סמוך לנקודה — <strong>הוא תועה</strong>. נוסעים שוב, ושוב תועים.
+        הג'י פי אס פשוט אינו מחובר.
+      </p>
+      <div class="drivers">
+        <div class="dr dr-wheel">
+          <div class="ic">☸</div>
+          <div class="t">הַנַּהָג שֶׁבַּהֶגֶה</div>
+          <div class="d">רץ תמיד אחר <strong>רצונו שלו</strong>. לפעמים נוסע מהר מאוד לכיוון טוב, אפילו קדוש — ובדרך שוכח מי בכלל שלח אותו לשם.</div>
+        </div>
+        <div class="dr dr-trunk">
+          <div class="ic">🔒</div>
+          <div class="t">הַנַּהָג שֶׁבְּתָא הַמִּטְעָן</div>
+          <div class="d">רץ תמיד אחר <strong>שליחותו של בעל הרכב</strong>. יש לו עיניים, יש לו ידיעה נכונה — אבל אין לו הגה.</div>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:12px;">
+        וכך, כל עוד הנהגים <strong>לא מתחלפים</strong> — הג'י פי אס לא מתחבר, ואי אפשר להגיע ליעד האמיתי.
+      </p>
+    </div>
+
+    <h2>הַנִּמְשָׁל</h2>
+    <div class="map">
+      <div class="row"><div class="a">הָרֶכֶב</div><div class="b">הגוף.</div></div>
+      <div class="row"><div class="a">הַגִּ'י פִּי אֶס</div><div class="b"><strong>הדעת</strong> — נקודת החיבור לקדוש ברוך הוא, המאירה תמיד ומראה את היעד האמיתי. אלא שהחיבור בפועל תלוי במי שאוחז בהגה.</div></div>
+      <div class="row"><div class="a">הַנַּהָג בַּהֶגֶה</div><div class="b"><strong>הנפש הבהמית — עשו</strong>, הרודף תמיד אחר רצונו העצמי.</div></div>
+      <div class="row"><div class="a">הַנַּהָג בַּמִּטְעָן</div><div class="b"><strong>הנפש האלוקית — יעקב</strong>, הרודף אחר השם.</div></div>
+    </div>
+
+    <div class="warn">
+      <div class="k">הסכנה שלא רואים</div>
+      <p>
+        הנפש הבהמית יכולה לרדוף <strong>אפילו אחר התורה עצמה</strong> — ועם כל זאת לשכוח בדרך את
+        <strong>נותן התורה</strong>. הנסיעה מהירה, הכיוון קדוש, ובכל זאת — תועים סמוך ליעד.
+      </p>
+    </div>
+
+    <div class="two">
+      <div class="c c-light">
+        <div class="k">כל זמן ש…</div>
+        <div class="t">לֹא נִכְבְּשָׁה הַבַּהֲמִית</div>
+        <div class="d">הנפש האלוקית נשארת נעולה, <strong>בלי שליטה על ההגה</strong> — גם כשהיא רואה נכון.</div>
+      </div>
+      <div class="c c-dark">
+        <div class="k">ולכן</div>
+        <div class="t">הַחִבּוּר תָּלוּי בַּנַּהָג</div>
+        <div class="d">לא בנסיעה, לא בכיוון — <strong>רק במי שאוחז בהגה בפועל</strong>.</div>
+      </div>
+    </div>
+
+    <div class="notby">
+      <span class="no">מְהִירוּת הָעֲבוֹדָה</span>
+      <span class="no">קְדֻשַּׁת הַכִּוּוּן</span>
+      <span class="yes">מִי אוֹחֵז בַּהֶגֶה</span>
+    </div>
+
+    <div class="halacha">
+      <div class="k">הלכה למעשה</div>
+      <div class="test">
+        <div class="x x-no"><div class="t">״לְאָן אֲנִי פּוֹנֶה עַכְשָׁו?״</div><div class="d">שאלה שהנהג שבהגה יודע לענות עליה יפה</div></div>
+        <div class="x x-yes"><div class="t">״מִי אוֹחֵז בַּהֶגֶה?״</div><div class="d">השאלה שקובעת אם הדעת תתחבר</div></div>
+      </div>
+      <p>
+        וההחלפה עצמה <strong>אינה בידו של אדם</strong> — היא באה רק מלמעלה, ברגע שמגיעים באמת,
+        ולא רק נוסעים לעברה:
+      </p>
+      <div class="pasuk" style="margin:10px 0 0;">
+        הַבָּא לִטָּהֵר — מְסַיְּעִין אוֹתוֹ
+        <span class="src">— שבת קד ע״א</span>
+      </div>
+    </div>
+
+    <div class="final">
+      <div class="t">הַדַּעַת מְאִירָה תָּמִיד — הַשְּׁאֵלָה מִי נוֹהֵג</div>
+      <p class="d">
+        אפשר לנסוע מהר, ואפילו לכיוון קדוש — ולתעות סמוך ליעד.<br>
+        רק כשהנהגים מתחלפים — הג'י פי אס מתחבר.
+      </p>
+      <div class="seal">״הַבָּא לִטָּהֵר מְסַיְּעִין אוֹתוֹ״<small>שבת קד ע״א</small></div>
+    </div>
+
+    <p class="note">
+      * משל על דרך הפנימיות. מקורות: שבת קד ע״א (וכן יומא לח ע״ב) · שתי הנפשות — הבהמית והאלוקית (תניא, פרקים א–ב) ·
+      יעקב ועשו כנפש האלוקית והבהמית — על דרך החסידות. הלימוד למעשה — בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/esav-sone-leyaakov">עשו שונא ליעקב</a>
+        <a class="related-link" href="/zion/hasus-hameshuga">הסוס המשוגע</a>
+        <a class="related-link" href="/zion/daat-havaya-velokim">דעת הויה ודעת אלוקים</a>
+        <a class="related-link" href="/zion/ein-chavush-matir">אין חבוש מתיר עצמו</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
