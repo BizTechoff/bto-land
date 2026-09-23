@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מבצע הפקה סודי - משפחת דרוקמן</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* רקע סרט נע ואנימציות בצדדים */
+        .cinema-background {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            background: #111;
+            background-image: 
+                radial-gradient(circle, #fff 4px, transparent 5px),
+                radial-gradient(circle, #fff 4px, transparent 5px);
+            background-size: 20px 40px;
+            background-position: 10px 10px, 30px 30px;
+            opacity: 0.15;
+            z-index: 1;
+            animation: filmRoll 4s linear infinite;
+        }
+        .left-film { left: 0; }
+        .right-film { right: 0; }
+
+        @keyframes filmRoll {
+            0% { background-position: 10px 0px, 30px 20px; }
+            100% { background-position: 10px 400px, 30px 420px; }
+        }
+
+        /* קונטיינר מרכזי */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* כותרת ממתגת מוטה ומלהיבה */
+        .badge-flyer {
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            background: linear-gradient(45deg, #ff007f, #ffaa00);
+            color: white;
+            padding: 10px 25px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            transform: rotate(-5deg);
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+            letter-spacing: 1px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(-3deg) scale(1.05); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to left, #00f2fe, #4facfe, #ff0844);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .intro-text {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 20px;
+            border-right: 5px solid #00f2fe;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        /* גריד תפקידים מבוסס שמות */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 45px;
+        }
+
+        .role-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 60%, rgba(0, 242, 254, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 242, 254, 0.15);
+        }
+
+        .role-card:hover::before {
+            opacity: 1;
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .role-card:hover .role-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .name-highlight {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #00f2fe;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .role-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .role-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* דרכים לביצוע */
+        .methods-section {
+            margin-bottom: 40px;
+        }
+
+        .methods-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #f43f5e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .method-box {
+            background: rgba(244, 63, 94, 0.05);
+            border: 1px dashed rgba(244, 63, 94, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .method-box h4 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        /* חוקי המשחק */
+        .rules-section {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .rules-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #10b981;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* כפתור אקשן גדול ומלהיב בתחתית */
+        .action-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, #ff007f, #7928ca);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 0, 127, 0.5);
+            background: linear-gradient(90deg, #ff1a8c, #8a3cd9);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cinema-background left-film"></div>
+    <div class="cinema-background right-film"></div>
+
+    <div class="container">
+        <div class="badge-flyer">🎬 הפקה של משפחת דרוקמן</div>
+
+        <header>
+            <h1>מבצע סרט השנה! 🎥</h1>
+            <p class="subtitle">הגשר הגדול בין כיפור לסוכות</p>
+        </header>
+
+        <div class="intro-text">
+            צוות דרוקמן היקר! אבא עובד מהבית וחייב כמה שעות של שקט מוחלט לפגישות קריטיות. זה בדיוק הזמן שלכם להוכיח שאתם צוות ההפקה הכי חזק שיש. היעד שלכם: <strong>ליצור ולערוך סרט קצר ומטורף (של דקה לפחות)</strong>. ההקרנה החגיגית תתקיים בסלון כולל פופקורן חם! 🍿
+        </div>
+
+        <div class="roles-grid">
+            <!-- ניר -->
+            <div class="role-card">
+                <div class="role-icon">🎬</div>
+                <span class="name-highlight">ניר</span>
+                <div class="role-title">במאי ראשי ומאסטר אפקטים</div>
+                <div class="role-desc">מנהל את הסט, אחראי על העריכה הסופית באפליקציה ושם את האפקטים הכי מגניבים.</div>
+            </div>
+
+            <!-- נדב -->
+            <div class="role-card">
+                <div class="role-icon">📝</div>
+                <span class="name-highlight">נדב</span>
+                <div class="role-title">תסריטאי ומעצב תפאורה</div>
+                <div class="role-desc">ממציא את העלילה המשוגעת, כותב מה קורה בכל סצנה ואחראי שהסביבה תיראה כמו סט קולנוע אמיתי.</div>
+            </div>
+
+            <!-- שיר -->
+            <div class="role-card">
+                <div class="role-icon">📹</div>
+                <span class="name-highlight">שיר</span>
+                <div class="role-title">צלם ראשי ותאורן</div>
+                <div class="role-desc">אחראי על המצלמה (או הטאבלט), מוצא את זוויות הצילום הכי חדות ודואג שהתאורה בחדר תהיה מושלמת.</div>
+            </div>
+
+            <!-- שני -->
+            <div class="role-card">
+                <div class="role-icon">🌟</div>
+                <span class="name-highlight">שני</span>
+                <div class="role-title">כוכב קולנוע ראשי</div>
+                <div class="role-desc">השחקן המרכזי והפרצוף של הסרט! משחק בהצגה או מפעיל את הדמויות הראשיות בסטופ-מושן בכישרון ענק.</div>
+            </div>
+        </div>
+
+        <div class="methods-section">
+            <h3 class="methods-title">💡 שתי דרכים לבחירה - איך תרצו להפיק?</h3>
+            
+            <div class="method-box">
+                <h4>1. סרט סטופ-מושן (אנימציה)</h4>
+                <p>ניר מוריד לטלפון/טאבלט אפליקציית Stop Motion חינמית. נדב מעצב את תפאורת הלגו או הפלסטלינה, שיר מכוון את הזווית, ושני מזיז את הבובות מילימטר בכל פעם ומצלמים תמונה!</p>
+            </div>
+
+            <div class="method-box">
+                <h4>2. סרט קולנוע אמיתי (הצגה)</h4>
+                <p>נדב ממציא תסריט מצחיק (למשל: "ההרפתקה המטורפת בדרך לסוכה"). שני מתחבש ומשחק, שיר מצלם בתנועה, וניר מביים ועורך הכל עם מוזיקת רקע מטורפת.</p>
+            </div>
+        </div>
+
+        <div class="rules-section">
+            <h3 class="rules-title">🛡️ חוקי הברזל של הסט</h3>
+            <ul class="rules-list">
+                <li>🤫 <strong>שקט תעשייתי:</strong> עובדים בשקט, מתלחששים ומצלמים בכיף כדי שאבא יוכל להתרכז בעבודה.</li>
+                <li>🤝 <strong>עבודת צוות:</strong> ניר, נדב, שיר ושני משתפים פעולה! אם יש ויכוח - עושים הצבעה דמוקרטית.</li>
+                <li>🧹 <strong>קאט וניקיון:</strong> בסיום הצילומים, כל הבלגן, התחפושות והצעצועים חוזרים למקום תוך 5 דקות.</li>
+            </ul>
+        </div>
+
+        <button class="action-btn" onclick="alert('צוות דרוקמן, המשימה החלה! צאו לדרך ונתראה בהקרנת הבכורה! 🙌🎬')">3, 2, 1... אקשן! 🚀</button>
+
+        <footer>
+            מיוצר בגאווה על ידי מחלקת התרבות וההפקות של משפחת דרוקמן • סוכות תשפ"ז 🍁
+        </footer>
+    </div>
+
+</body>
+</html>
