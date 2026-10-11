@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>סקלר אופליין - היררכיית התיקיות</title>
+<style>
+:root{
+  --bg:#f4f6f9; --card:#fff; --ink:#15212e; --mut:#5b6b7c; --line:#dde5ee;
+  --acc:#1f4e79; --acc2:#2f7ab5; --ok:#1b7f4e; --warn:#b4600a; --bad:#a32020;
+  --code:#0f1a24; --codeink:#d7e3ee;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141b; --card:#151d26; --ink:#e7eef5; --mut:#9db0c2; --line:#25313d;
+    --acc:#7fb7e8; --acc2:#5d9fd4; --ok:#5fd39a; --warn:#e5a45c; --bad:#f08b8b;
+    --code:#0a1017; --codeink:#cfe0ef;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141b; --card:#151d26; --ink:#e7eef5; --mut:#9db0c2; --line:#25313d;
+  --acc:#7fb7e8; --acc2:#5d9fd4; --ok:#5fd39a; --warn:#e5a45c; --bad:#f08b8b;
+  --code:#0a1017; --codeink:#cfe0ef;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Segoe UI",Arial,Helvetica,sans-serif;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+header{margin-bottom:22px}
+h1{font-size:1.6rem;margin:0 0 6px;color:var(--acc)}
+.sub{color:var(--mut);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 18px 8px;margin:18px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+h2{font-size:1.1rem;margin:0 0 12px;color:var(--acc);
+  border-bottom:1px solid var(--line);padding-bottom:8px}
+pre.tree{background:var(--code);color:var(--codeink);border-radius:10px;
+  padding:16px;overflow-x:auto;direction:ltr;text-align:left;
+  font-family:Consolas,"Courier New",monospace;font-size:.86rem;line-height:1.75;margin:0 0 14px}
+pre.tree b{color:#7fd6ff;font-weight:600}
+pre.tree i{color:#8fa3b5;font-style:normal}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:right;vertical-align:top}
+th{color:var(--acc);font-weight:600;white-space:nowrap}
+td.n{font-family:Consolas,monospace;direction:ltr;unicode-bidi:isolate;
+  white-space:nowrap;color:var(--acc2);font-weight:600}
+ol.flow{margin:0;padding:0 20px 10px 0}
+ol.flow li{margin-bottom:8px}
+code{background:rgba(127,160,190,.16);border-radius:5px;padding:1px 6px;
+  font-family:Consolas,monospace;direction:ltr;unicode-bidi:isolate;
+  overflow-wrap:anywhere;font-size:.9em}
+.tag{display:inline-block;font-size:.74rem;padding:1px 8px;border-radius:999px;
+  border:1px solid var(--line);color:var(--mut);margin-inline-start:6px}
+.note{background:rgba(47,122,181,.08);border-right:3px solid var(--acc2);
+  border-radius:8px;padding:10px 14px;color:var(--mut);font-size:.92rem;margin:0 0 14px}
+footer{color:var(--mut);font-size:.82rem;text-align:center;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>סקלר אופליין - היררכיית התיקיות</h1>
+  <p class="sub">מבנה פיזי אחד, זהה בשרת ובלפטופ של הכייל. המבנה הזה הוא מה שמייצר את מנגנון הסנכרון.</p>
+</header>
+
+<section class="card">
+  <h2>העץ</h2>
+<pre class="tree">C:\Scalar\offline\
+│
+├─ <b>app\</b>            <i>exe, dll, קבצי תשתית, לוגים</i>
+├─ <b>config\</b>         <i>כתובת שרת, תפקיד המכונה, revisionMode</i>
+│
+├─ <b>formats\</b>        <i>46 תבניות האקסל - מקור בלבד</i>
+├─ <b>maps\</b>           <i>טבלת המיפוי המקומפלת</i>
+│
+├─ <b>customers\</b>      <i>תיקייה ללקוח - תעודות קודמות לטעינה ולהעתקה</i>
+│
+├─ <b>work\</b>           <i>התעודה שבעבודה כרגע</i>
+├─ <b>output\</b>         <i>הופק - ממתין לסנכרון</i>
+│
+└─ <b>sync\</b>
+   ├─ <b>incoming\</b>    <i>הכייל כותב לכאן. התיקייה היחידה שהוא כותב אליה</i>
+   ├─ <b>ready\</b>       <i>החבילה שלמה - מוכנה לעיבוד</i>
+   ├─ <b>processing\</b>  <i>הקולקטור מעבד כרגע</i>
+   ├─ <b>done\</b>        <i>נכנס לאקסס בהצלחה</i>
+   ├─ <b>failed\</b>      <i>גיבוב לא תאם או קובץ נעול</i>
+   ├─ <b>pending-map\</b> <i>פורמט לא מוכר - ממתין למיפוי</i>
+   └─ <b>receipts\</b>    <i>אישור חזרה לכייל</i>
+</pre>
+  <p class="note">מעבר בין שלבי <code>sync</code> הוא שינוי שם תיקייה בלבד - פעולה אטומית. אף שלב לא רואה חבילה חלקית.</p>
+</section>
+
+<section class="card">
+  <h2>תפקיד כל תיקייה</h2>
+  <table>
+    <tr><th>תיקייה</th><th>תפקיד בתהליך</th></tr>
+    <tr><td class="n">app</td><td>התוכנה עצמה. אותו exe בשני הצדדים, נבדל בפרמטר אתחול: כייל או קולקטור.</td></tr>
+    <tr><td class="n">config</td><td>מה המכונה הזו. כתובת השרת, תפקיד, ומדיניות גרסאות (שמירה או החלפה).</td></tr>
+    <tr><td class="n">formats</td><td>תבניות האקסל המקוריות. נקראות, אף פעם לא נכתבות.</td></tr>
+    <tr><td class="n">maps</td><td>איזה תא באקסל שייך לאיזה שדה בטבלה. הקולקטור טוען אותה לזיכרון בעלייה.</td></tr>
+    <tr><td class="n">customers</td><td>תעודות קודמות של הלקוח. מכאן נשאבים ערכי ההעתקה בתעודה חדשה.</td></tr>
+    <tr><td class="n">work</td><td>עותק חי של התעודה. הכייל יכול לסגור ולחזור אליה מחר.</td></tr>
+    <tr><td class="n">output</td><td>אקסל + PDF + manifest. ממתין לחלון סנכרון.</td></tr>
+    <tr><td class="n">sync\incoming</td><td>יעד ההעברה. הקבצים נכתבים כאן חלקית עד שההעברה מסתיימת.</td></tr>
+    <tr><td class="n">sync\ready</td><td>ה-manifest נכתב אחרון. ברגע שהוא שם, החבילה שלמה.</td></tr>
+    <tr><td class="n">sync\processing</td><td>הקולקטור תפס את החבילה. שום תהליך אחר לא ייגע בה.</td></tr>
+    <tr><td class="n">sync\done</td><td>הנתונים באקסס. נשמר להיסטוריה ותחקור.</td></tr>
+    <tr><td class="n">sync\failed</td><td>אי התאמת גיבוב או קובץ נעול. הכייל שולח מחדש בשם חבילה חדש.</td></tr>
+    <tr><td class="n">sync\pending-map</td><td>פורמט שאין לו מיפוי. לא נזרק - ממתין. מוסיפים מיפוי והוא נכנס.</td></tr>
+    <tr><td class="n">sync\receipts</td><td>קובץ JSON לכל חבילה: מה התקבל, איזה גיבוב, ומה הסטטוס. הכייל קורא ומגיב.</td></tr>
+  </table>
+</section>
+
+<section class="card">
+  <h2>הזרימה</h2>
+  <ol class="flow">
+    <li>הכייל פותח תעודה - עותק מ-<code>formats</code> נוצר ב-<code>work</code>, עם ערכי העתקה מ-<code>customers</code>.</li>
+    <li>בסיום - האקסל וה-PDF עוברים ל-<code>output</code> יחד עם <code>manifest.json</code> הכולל גיבוב SHA-256 לכל קובץ.</li>
+    <li>כשיש קישוריות - החבילה מועתקת ל-<code>sync\incoming</code> בשרת, ה-manifest נכתב אחרון, ואז שינוי שם ל-<code>ready</code>.</li>
+    <li>הקולקטור מעביר ל-<code>processing</code>, מחשב גיבוב מחדש ומשווה ל-manifest.</li>
+    <li>תואם - קורא את האקסל לפי <code>maps</code>, כותב לאקסס, מעביר ל-<code>done</code>. לא תואם - <code>failed</code>. אין מיפוי - <code>pending-map</code>.</li>
+    <li>בכל מקרה נכתב <code>receipts\&lt;חבילה&gt;.json</code>. הכייל קורא אותו ויודע אם להסיר מהתור או לשלוח מחדש.</li>
+  </ol>
+  <p class="note">הכייל אף פעם לא מוחק בשרת. הוא כותב ל-<code>incoming</code> וקורא מ-<code>receipts</code> - זה כל מה שמותר לו.</p>
+</section>
+
+<footer>סקלר מעבדות - מנגנון אופליין · ביזטקאוף</footer>
+</div>
+</body>
+</html>
