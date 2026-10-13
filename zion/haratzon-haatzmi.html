@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הרצון העצמי — העין היא מצלמה של המחשבות</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="הרצון העצמי יושב בלב, בלתי רצוני, ומעלה מחשבות נגועות לראש. מי שחושב על עצמו יראה תמיד היפך הטוב; ורק מי שמבטל רצונו רואה שיש מלך בבירה - ושם הדין נהפך לחסד">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/haratzon-haatzmi">
+<meta property="og:title" content="הרצון העצמי — העין היא מצלמה של המחשבות">
+<meta property="og:description" content="עד שאדם לא מבטל את רצונו - לא יראה את רצון השם">
+<meta property="og:image" content="https://biztechoff.co.il/zion/images/self.jpeg">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="הרצון העצמי — העין היא מצלמה של המחשבות">
+<meta name="twitter:description" content="יהי רצון שלא יהיה רצון עצמי - וממילא הכל רצון השם">
+<meta name="twitter:image" content="https://biztechoff.co.il/zion/images/self.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(27px,4.2vw,40px); text-align:center; color:var(--ink); line-height:1.16; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .cover{margin:-26px -22px 34px; text-align:center;}
+  .cover img{display:block; width:100%; border-radius:8px; box-shadow:0 16px 44px -14px rgba(43,29,16,0.45); border:1px solid rgba(184,138,44,0.35);}
+
+  .quote{margin:20px auto; max-width:620px; text-align:center; font-family:'David Libre',serif; font-size:17px; color:var(--crimson); line-height:1.7;}
+  .quote .src{display:block; font-size:12px; color:var(--gold-deep); letter-spacing:1px; margin-top:5px; font-family:'Frank Ruhl Libre',serif;}
+  .story-line{text-align:center; font-family:'David Libre',serif; font-size:17.5px; color:var(--gold-deep); margin:18px auto; max-width:640px; line-height:1.7;}
+  .divider{text-align:center; color:var(--gold); letter-spacing:9px; font-size:13px; opacity:0.55; margin:24px 0;}
+  .final{margin-top:26px; padding:20px 22px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:18px; color:var(--ink); font-weight:700; margin-bottom:8px; line-height:1.5;}
+  .final .d{font-size:15px; color:var(--ink-soft); font-style:italic; line-height:1.65; margin:0;}
+  .final .seal{margin-top:12px; padding-top:10px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+  .note{margin-top:18px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:16px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+  .related{margin-top:18px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+  p{font-size:16.5px; line-height:1.85; margin-bottom:14px;}
+  h2{font-weight:700; font-size:19px; color:var(--crimson); margin:24px 0 10px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    p{font-size:16px;} .cover{margin:-14px -6px 24px;}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="cover">
+      <img src="images/self.jpeg" alt="הרצון העצמי"
+           onerror="this.closest('.cover').style.display='none'">
+    </div>
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">פנימיות התורה · ביטול הרצון</div>
+    <h1>הָרָצוֹן הָעַצְמִי</h1>
+    <p class="subtitle">העין היא מצלמה של המחשבות</p>
+
+    <p>
+      הרצון העצמי יושב <strong>בלב</strong>, והוא בלתי רצוני: הוא מעלה לנו הרבה מחשבות לראש,
+      וכולן נגועות ברצון עצמי. וכאשר אדם מסתכל על עולם של שקר מתוך רצון עצמי -
+      הכל נראה לו הפוך ממה שהוא רוצה. וכך מתחילה <strong>מלחמת הצדק</strong>:
+      במחשבה, ומשם היא עוברת לדיבור. וזו המלכודת של היצר.
+    </p>
+    <p>
+      כי <strong>העין היא מצלמה של המחשבות</strong>. אדם שחושב על עצמו לעולם יראה היפך הטוב,
+      במציאות שכולה הפכים. ורק אדם שמבטל את רצונו יכול להתעלם מן הרע ולהפקיר את הכל בידי שמים -
+      ואז הוא רואה <strong>שיש מלך בבירה</strong>, והמלך יודע להביא מתוק ממר, טוב מרע, ואור מחושך.
+      נמצא שעד שאדם לא מבטל את רצונו - לא יראה את רצון השם.
+    </p>
+
+    <div class="divider">✦ ❖ ✦</div>
+
+    <h2>משמאל לימין</h2>
+    <p>
+      בגלות, הלב נתון ל<strong>צד שמאל</strong> שבלב - מקום הסטרא אחרא.
+      ועל ידי הליכה נגד הרצון למען השם, השליטה עוברת ל<strong>צד ימין</strong> שבלב,
+      ואז נגלה לנו עולם של חסד: שם השם מהווה מציאות ליראיו בכל רגע, תמיד.
+      ושם <strong>הדין הופך לחסד</strong> - כי המלכנו את החסד על הדין.
+    </p>
+
+    <div class="quote">
+      יְהִי רָצוֹן - שֶׁלֹּא יִהְיֶה רָצוֹן עַצְמִי,<br>
+      וְאָז מִמֵּילָא הַכֹּל רְצוֹן הַשֵּׁם
+    </div>
+
+    <div class="final">
+      <div class="t">מַה שֶּׁהַלֵּב רוֹצֶה - הָעַיִן מְצַלֶּמֶת</div>
+      <p class="d">
+        כל זמן שהרצון העצמי שולט, המציאות תיראה הפוכה ותתחיל מלחמת צדק.<br>
+        וכשהוא מתבטל - מתגלה שיש מלך בבירה, ושהכל חסד.
+      </p>
+      <div class="seal">עַד שֶׁאָדָם לֹא מְבַטֵּל רְצוֹנוֹ - לֹא יִרְאֶה רְצוֹן הַשֵּׁם</div>
+    </div>
+
+    <p class="note">
+      * דברי פנימיות. ״מלך בבירה״ - על פי מדרש בראשית רבה לט, א (אברהם אבינו והבירה הדולקת) ·
+      צד שמאל שבלב כמקום היצר - על פי ברכות סא ע״א ותניא פרק ט · מתוק ממר, אור מחושך -
+      על דרך הקבלה והחסידות. הלימוד למעשה - בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/hatikun-haklali">התיקון הכללי</a>
+        <a class="related-link" href="/zion/shalosh-yirot-elokim">שלוש יראות</a>
+        <a class="related-link" href="/zion/rak-bisod-harachamim">רק ביסוד הרחמים</a>
+        <a class="related-link" href="/zion/zechuchit-magdelet">הזכוכית המגדלת</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
