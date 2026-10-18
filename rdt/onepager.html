@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>פורטל השירות והכיולים · עמוד אחד · רדט ציוד ומערכות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-950:#101318;--ink-900:#181C22;--ink-800:#20252D;--ink-700:#2B323C;
+  --ink-500:#4A5462;--ink-400:#77828F;--ink-200:#D4DAE2;--ink-100:#E9EDF2;--ink-50:#F5F7F9;
+  --orange:#E8821E;--orange-h:#D2720F;--orange-soft:#FDEBD7;--gold:#F2A93B;
+  --txt:#1B222B;--muted:#5B6674;--line:#DFE4EA;--bg:#F3F5F7;
+  --ok:#178A50;--ok-bg:#E4F5EC;--bad:#C0392B;--bad-bg:#FBE7E4;
+  --r:14px;--shadow:0 8px 28px rgba(16,19,24,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--txt);
+     font-size:15px;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.wrap{max-width:920px;margin:0 auto;padding:22px 20px 50px}
+.bt{direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+.cover{background:linear-gradient(126deg,#0D1015 0%,#171C23 34%,#26211C 56%,#6B421A 82%,#B96B18 100%);
+       border-radius:18px;color:#fff;padding:12px 30px 28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.cover::before{content:"";position:absolute;inset-inline-end:-150px;top:-190px;width:460px;height:460px;border-radius:50%;
+       background:radial-gradient(circle,rgba(255,255,255,.09),transparent 62%)}
+.bsd{position:relative;z-index:1;text-align:right;font-size:11px;color:rgba(255,255,255,.7);letter-spacing:.5px;margin-bottom:10px}
+.cv{position:relative;z-index:1;text-align:center;padding:12px 0 0}
+.cv .eyebrow{display:block;font-size:11.5px;font-weight:700;letter-spacing:2.2px;color:var(--gold);margin-bottom:8px}
+.cv h1{font-size:31px;font-weight:900;line-height:1.22;letter-spacing:-.3px}
+.cv .rule{width:54px;height:3px;border-radius:2px;background:var(--orange);margin:13px auto 12px}
+.cv .sub{font-size:15px;color:#CDD5DE;max-width:620px;margin:0 auto;line-height:1.6}
+.cv .who{margin-top:16px;font-size:12.5px;color:#AEB8C3}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px 24px;margin-top:16px}
+h2{font-size:18px;font-weight:900;color:var(--ink-900);display:flex;align-items:center;gap:9px;margin-bottom:12px}
+h2 .n{background:var(--ink-800);color:#fff;width:25px;height:25px;border-radius:7px;flex:none;
+      display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+p{margin-bottom:10px}
+strong{font-weight:800;color:var(--ink-900)}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+.pain{background:var(--bad-bg);border:1px solid #F0C4BC;border-radius:11px;padding:13px 15px}
+.pain .t{font-weight:800;color:#8A281C;font-size:14.5px;margin-bottom:3px}
+.pain .d{font-size:13px;color:#6E2318;line-height:1.55}
+.gain{background:var(--ok-bg);border:1px solid #B9E2CC;border-radius:11px;padding:13px 15px}
+.gain .t{font-weight:800;color:#0D5A34;font-size:14.5px;margin-bottom:3px}
+.gain .d{font-size:13px;color:#0B4A2B;line-height:1.55}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cbox{border:1px solid var(--line);border-radius:12px;padding:15px 17px;background:var(--ink-50)}
+.cbox h3{font-size:15px;font-weight:800;color:var(--ink-900);margin-bottom:10px}
+.fld{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.fld label{font-size:13.5px;color:var(--ink-700);flex:1}
+.fld input{width:96px;text-align:center;font-family:inherit;font-size:15px;font-weight:700;
+           border:1.5px solid var(--ink-200);border-radius:9px;padding:6px 8px;background:#fff;color:var(--ink-900)}
+.fld input:focus{outline:2px solid rgba(232,130,30,.35);border-color:var(--orange)}
+.out{margin-top:12px;padding-top:12px;border-top:1.5px dashed var(--ink-200);text-align:center}
+.out .k{font-size:12.5px;font-weight:700;color:var(--muted)}
+.out .v{font-size:30px;font-weight:900;color:var(--orange-h);line-height:1.25;font-variant-numeric:tabular-nums}
+.out .v.empty{font-size:15px;color:var(--ink-400);font-weight:600}
+.out .n{font-size:11.5px;color:var(--muted);margin-top:2px}
+.calcnote{margin-top:12px;font-size:12.5px;color:var(--muted);text-align:center}
+
+/* price */
+.price{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:stretch}
+.phero{background:linear-gradient(140deg,var(--ink-900),var(--ink-700) 60%,#3a2a18);border-radius:12px;color:#fff;
+       padding:18px 20px;display:flex;flex-direction:column;justify-content:center}
+.phero .cap{font-size:12.5px;color:#C9D1DA;margin-bottom:4px}
+.phero .big{font-size:38px;font-weight:900;line-height:1.1}
+.phero .big small{font-size:18px;font-weight:700;margin-inline-start:4px}
+.phero .sub{font-size:12.5px;color:#AEB8C3;margin-top:5px}
+.plist{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.prow{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.prow:last-child{border-bottom:0}
+.prow b{white-space:nowrap}
+
+.keep{background:var(--ink-50);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:14px}
+.keep b{color:var(--ink-900)}
+
+.steps{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+.step{flex:1 1 150px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;min-width:150px}
+.step .i{font-size:11px;font-weight:900;color:var(--orange)}
+.step .t{font-size:13.5px;font-weight:800;color:var(--ink-900);line-height:1.35}
+.step .s{font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px}
+
+footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.9}
+
+
+
+@media (max-width:760px){.three,.calc,.price{grid-template-columns:1fr}}
+@page{size:A4;margin:10mm 9mm}
+@media print{
+  .three{grid-template-columns:1fr 1fr 1fr}
+  .calc{grid-template-columns:1fr 1fr}
+  .price{grid-template-columns:1.1fr 1fr}
+  .ph{width:72px;font-size:12px;padding:3px 5px;border-color:#aaa}
+  body{background:#fff;font-size:8.9pt;line-height:1.45}
+  .wrap{max-width:100%;padding:0}
+  .cover{border-radius:9px;padding:4px 18px 8px}
+  .cv h1{font-size:19px}.cv .sub{font-size:10.5px}.cv .rule{margin:8px auto 7px}
+  .cv .eyebrow{font-size:9.5px;margin-bottom:5px}.cv .who{margin-top:9px;font-size:10px}
+  .bsd{font-size:9.5px;margin-bottom:5px}
+  .card{box-shadow:none;break-inside:avoid;margin-top:4px;padding:6px 12px;border-radius:9px}
+  h2{font-size:13px;margin-bottom:5px}h2 .n{width:20px;height:20px;font-size:11px}
+  p{margin-bottom:5px}
+  .pain,.gain{padding:7px 10px}
+  .pain .t,.gain .t{font-size:12px}.pain .d,.gain .d{font-size:10.5px;line-height:1.4}
+  .cbox{padding:10px 12px}.cbox h3{font-size:12.5px;margin-bottom:6px}
+  .fld{margin-bottom:5px}.fld label{font-size:11px}
+  .fld input{width:72px;font-size:12px;padding:3px 5px;border-color:#aaa}
+  .out{margin-top:5px;padding-top:5px}.out .v{font-size:19px}.out .k{font-size:10.5px}.out .n{font-size:9.5px}
+  .calcnote{display:none}
+  .phero{padding:12px 15px}.phero .big{font-size:24px}.phero .cap,.phero .sub{font-size:10.5px}
+  .plist{padding:9px 12px}.prow{font-size:11px;padding:3.5px 0}
+  .keep{font-size:10.3px;padding:7px 11px;margin-top:7px;line-height:1.45}
+  .steps{gap:6px}.step{padding:5px 8px;min-width:0;flex:1 1 0}.step .i{font-size:9.5px}.step .t{font-size:10.5px}.step .s{font-size:9.3px;line-height:1.3}
+  footer{margin-top:5px;font-size:9.3px;line-height:1.45}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="cover">
+  <div class="bsd">בס"ד</div>
+  <div class="cv">
+    <span class="eyebrow">עמוד אחד להחלטה</span>
+    <h1>פורטל השירות והכיולים</h1>
+    <div class="rule"></div>
+    <div class="sub">הלקוחות של רדט רואים לבד את הכיולים, התעודות והתוקף, ומזמינים את הכיול הבא בלי להרים טלפון</div>
+    <div class="who">הוכן עבור הנהלת רדט ציוד ומערכות · <span class="bt">BizTechoff</span> · הצעה Q-2026-0813</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="n">1</span>מה קורה היום</h2>
+  <div class="three">
+    <div class="pain">
+      <div class="t">תעודות נשלחות ידנית</div>
+      <div class="d">לכל תעודה מאתרים את האימייל הנכון מההתכתבויות או מפריוריטי, ושולחים. בכל פעם מחדש.</div>
+    </div>
+    <div class="pain">
+      <div class="t">העלאה ידנית לענן הלקוח</div>
+      <div class="d">אצל לקוחות בהיקפים גדולים זו עבודה שנופלת ישירות על מנהלת המעבדה.</div>
+    </div>
+    <div class="pain">
+      <div class="t">אין התרעה על תוקף</div>
+      <div class="d">סינון ידני בלבד. תוקף שפג בלי שאיש שם לב הוא כיול שלא הוזמן.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="n">2</span>מה משתנה</h2>
+  <div class="three">
+    <div class="gain">
+      <div class="t">שליחה אוטומטית</div>
+      <div class="d">כל תעודה חדשה מגיעה ללקוח במייל מטעם רדט, עם קישור לצפייה ולהורדה.</div>
+    </div>
+    <div class="gain">
+      <div class="t">אזור לקוח</div>
+      <div class="d">הלקוח נכנס ומוריד בעצמו. אף אחד במעבדה לא מעלה לו קבצים.</div>
+    </div>
+    <div class="gain">
+      <div class="t">מנוע תזכורות</div>
+      <div class="d">המערכת מתריעה מראש ומאפשרת ללקוח לאשר את הכיול הבא בלחיצה, מתוך המייל או מהפורטל.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="n">3</span>מה זה שווה אצלכם</h2>
+  <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px">המספרים כאן הם שלכם, לא שלנו. מלאו שני שדות בכל צד ותקבלו את התמונה.</p>
+  <div class="calc">
+    <div class="cbox">
+      <h3>זמן שחוזר למעבדה</h3>
+      <div class="fld"><label>תעודות שמופקות בשנה</label><input id="a1" type="number" min="0" placeholder="?"></div>
+      <div class="fld"><label>דקות טיפול ידני לתעודה</label><input id="a2" type="number" min="0" step="0.5" value="4"></div>
+      <div class="out">
+        <div class="k">שעות עבודה בשנה</div>
+        <div class="v empty" id="r1">ממתין למספר</div>
+        <div class="n" id="r1b"></div>
+      </div>
+    </div>
+    <div class="cbox">
+      <h3>הכנסה שלא נכנסה</h3>
+      <div class="fld"><label>כיולים שפגו ולא חודשו בשנה</label><input id="b1" type="number" min="0" placeholder="?"></div>
+      <div class="fld"><label>מחיר כיול ממוצע, ₪</label><input id="b2" type="number" min="0" placeholder="?"></div>
+      <div class="out">
+        <div class="k">הכנסה שאבדה בשנה</div>
+        <div class="v empty" id="r2">ממתין למספרים</div>
+        <div class="n" id="r2b"></div>
+      </div>
+    </div>
+  </div>
+  <div class="calcnote">אין כאן תרחיש מנופח. שני חישובים ישירים על המספרים שתזינו.</div>
+</div>
+
+<div class="card">
+  <h2><span class="n">4</span>ההשקעה</h2>
+  <div class="price">
+    <div class="phero">
+      <div class="cap">ליבת הפורטל, עד עלייה לאוויר</div>
+      <div class="big">20,000<small>₪</small></div>
+      <div class="sub">אחרי הנחת לקוח חדש. מחיר סופי</div>
+    </div>
+    <div class="plist">
+      <div class="prow"><span>התממשקות לפריוריטי</span><b>4,000 ₪</b></div>
+      <div class="prow"><span>התממשקות ל-Zoho, אופציונלי</span><b>2,500 ₪</b></div>
+      <div class="prow"><span>מודול חשבוניות, אופציונלי</span><b>2,500 ₪</b></div>
+      <div class="prow"><span>תנאי תשלום</span><b>50% / 50%</b></div>
+      <div class="prow"><span>זמן עד עלייה לאוויר</span><b>12 ימי פיתוח + 5 פיילוט</b></div>
+    </div>
+  </div>
+  <div class="keep" style="margin-top:14px">
+    <b>מה לא משתנה אצלכם:</b> פריוריטי נשארת מערכת הליבה. המחברת וה-VBA ממשיכים לעבוד בדיוק כמו היום. הפורטל אינו מפיק תעודות ואינו מבצע חישובי כיול. הוא הפָּנים שפונות ללקוח, ואף לקוח אינו נוגע בפריוריטי.
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="n">5</span>איך מתחילים</h2>
+  <div class="steps">
+    <div class="step"><div class="i">שלב 1</div><div class="t">אפיון</div><div class="s">שעה אחת. סוגרים את טבלת השדות ואת מדיניות התזכורות</div></div>
+    <div class="step"><div class="i">שלב 2</div><div class="t">פיתוח</div><div class="s">12 ימי עבודה. מעורבות מכם נמוכה</div></div>
+    <div class="step"><div class="i">שלב 3</div><div class="t">מסירה והדרכה</div><div class="s">מערכת מלאה על נתוני אמת</div></div>
+    <div class="step"><div class="i">שלב 4</div><div class="t">פיילוט מלווה</div><div class="s">5 ימים בליווי צמוד עד עלייה מלאה</div></div>
+  </div>
+</div>
+
+<footer>
+  <b><span class="bt">BizTechoff™</span></b> · פיתוח פלטפורמות תוכנה חוצות ארגון · moti@biztechoff.co.il · 052-652-6063<br>
+  ההדגמה החיה, עם השם והלוגו של רדט: <span class="bt">biztechoff.co.il/rdt/mockup</span> · ט.ל.ח
+</footer>
+
+</div>
+
+<script>
+function fmt(n){return n.toLocaleString('he-IL',{maximumFractionDigits:0})}
+function fmt1(n){return n<10 ? n.toLocaleString('he-IL',{maximumFractionDigits:1}) : fmt(n)}
+function calc(){
+  var a1=parseFloat(document.getElementById('a1').value);
+  var a2=parseFloat(document.getElementById('a2').value);
+  var r1=document.getElementById('r1'), r1b=document.getElementById('r1b');
+  if(a1>0&&a2>0){
+    var hrs=a1*a2/60;
+    r1.className='v'; r1.textContent=fmt1(hrs)+' שעות';
+    var days=hrs/8;
+    r1b.textContent = days<1 ? 'פחות מיום עבודה אחד בשנה' : 'כ-'+fmt1(days)+' ימי עבודה מלאים בשנה';
+  }else{ r1.className='v empty'; r1.textContent='ממתין למספר'; r1b.textContent=''; }
+
+  var b1=parseFloat(document.getElementById('b1').value);
+  var b2=parseFloat(document.getElementById('b2').value);
+  var r2=document.getElementById('r2'), r2b=document.getElementById('r2b');
+  if(b1>0&&b2>0){
+    var loss=b1*b2;
+    r2.className='v'; r2.textContent=fmt(loss)+' ₪';
+    r2b.textContent='מול השקעה חד פעמית של 20,000 ₪';
+  }else{ r2.className='v empty'; r2.textContent='ממתין למספרים'; r2b.textContent=''; }
+}
+['a1','a2','b1','b2'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',calc);
+});
+calc();
+</script>
+</body>
+</html>
