@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המפה והחלון — יבוא יום שלא לדעת יהיה לימוד גדול</title>
+
+<!-- ===== Link-preview meta (Open Graph + Twitter) ===== -->
+<meta name="description" content="בן אחד נשאר מול המפה ונעשה מומחה; השני הבין שהקווים הם רמז, אמר ״איני יודע״ - והמלך לקח אותו אל החלון. החכמה ירדה לעולם כדי להכיר בגדלות השם, לא כדי להגדיל את החכמה">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="biztechoff.co.il">
+<meta property="og:url" content="https://biztechoff.co.il/zion/hamapa-vehachalon">
+<meta property="og:title" content="המפה והחלון — יבוא יום שלא לדעת יהיה לימוד גדול">
+<meta property="og:description" content="ידיעה היא גבול ואינה אוחזת הפכים; חוסר ידיעה פתוח לאין סוף">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="המפה והחלון — יבוא יום שלא לדעת יהיה לימוד גדול">
+<meta name="twitter:description" content="חכם גדול - ועיוור לממלכה עצמה">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=David+Libre:wght@400;500;700&family=Bellefair&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:#f5ecd9; --paper:#fbf4e2; --ink:#2b1d10; --ink-soft:#4a3520;
+    --gold:#b88a2c; --gold-deep:#8a6620; --gold-light:#e8c98a; --crimson:#8c2a1e; --royal:#5b3a78;
+    --shadow:rgba(43,29,16,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Frank Ruhl Libre','David Libre',serif; background:var(--parchment); color:var(--ink);
+    min-height:100vh; line-height:1.75; padding:44px 20px;
+    background-image:
+      radial-gradient(ellipse at top, rgba(184,138,44,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140,42,30,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{
+    max-width:860px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,250,235,0.6), rgba(245,236,217,0.3));
+    padding:44px 44px 38px; border-radius:4px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 80px -20px var(--shadow), 0 0 0 1px rgba(184,138,44,0.15);
+    position:relative;
+  }
+  .container::before{content:""; position:absolute; inset:9px; border:1px solid rgba(184,138,44,0.25); pointer-events:none; border-radius:2px;}
+
+  .bezras{text-align:center; font-family:'Bellefair',serif; font-size:12px; letter-spacing:7px; color:var(--gold-deep); margin-bottom:12px; opacity:0.85;}
+  .eyebrow{text-align:center; font-family:'Bellefair',serif; font-size:11px; letter-spacing:5px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:8px;}
+  h1{font-weight:900; font-size:clamp(27px,4.2vw,40px); text-align:center; color:var(--ink); line-height:1.16; margin-bottom:6px; letter-spacing:-0.5px;}
+  .subtitle{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-bottom:18px;}
+
+  h2{font-weight:700; font-size:18px; color:var(--crimson); margin:18px 0 9px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+  p{font-size:15.5px; color:var(--ink); margin-bottom:11px; line-height:1.72;}
+  strong{color:var(--crimson); font-weight:700;}
+  em{color:var(--gold-deep); font-style:italic; font-weight:500;}
+
+  .quote{margin:20px auto; max-width:620px; text-align:center; font-family:'David Libre',serif; font-size:17px; color:var(--crimson); line-height:1.7;}
+  .quote .src{display:block; font-size:12px; color:var(--gold-deep); letter-spacing:1px; margin-top:5px; font-family:'Frank Ruhl Libre',serif;}
+  .story-line{text-align:center; font-family:'David Libre',serif; font-size:17.5px; color:var(--gold-deep); margin:18px auto; max-width:640px; line-height:1.7;}
+  .divider{text-align:center; color:var(--gold); letter-spacing:9px; font-size:13px; opacity:0.55; margin:24px 0;}
+  .final{margin-top:26px; padding:20px 22px; background:rgba(140,42,30,0.05); border-top:2px solid var(--crimson); border-bottom:2px solid var(--crimson); text-align:center;}
+  .final .t{font-family:'David Libre',serif; font-size:18px; color:var(--ink); font-weight:700; margin-bottom:8px; line-height:1.5;}
+  .final .d{font-size:15px; color:var(--ink-soft); font-style:italic; line-height:1.65; margin:0;}
+  .final .seal{margin-top:12px; padding-top:10px; border-top:1px solid rgba(184,138,44,0.35); font-family:'David Libre',serif; font-size:16px; font-weight:700; color:var(--crimson);}
+  .final .seal small{display:block; font-family:'Bellefair',serif; font-size:11.5px; letter-spacing:2px; color:var(--gold-deep); font-weight:400; margin-top:3px;}
+  .note{margin-top:18px; font-size:11.5px; color:var(--ink-soft); font-style:italic; text-align:center; opacity:0.85; line-height:1.5;}
+  .attribution{margin-top:16px; text-align:center; padding-top:12px; border-top:1px solid rgba(184,138,44,0.3);}
+  .attribution-line{font-size:14px; color:var(--gold-deep); letter-spacing:2px; font-weight:500;}
+  .footer-ornament{text-align:center; margin-top:8px; color:var(--gold); font-size:14px; letter-spacing:10px; opacity:0.5;}
+  .related{margin-top:18px; padding:14px 18px; background:rgba(184,138,44,0.06); border:1px solid rgba(184,138,44,0.22); border-radius:8px;}
+  .related-title{font-family:'Bellefair',serif; font-size:11px; letter-spacing:3px; color:var(--gold-deep); text-transform:uppercase; text-align:center; margin-bottom:9px;}
+  .related-row{display:flex; flex-wrap:wrap; justify-content:center; gap:7px;}
+  .related-link{font-size:13.5px; color:var(--crimson); text-decoration:none; padding:5px 12px; border-radius:14px; background:rgba(184,138,44,0.09); border:1px solid rgba(184,138,44,0.22);}
+  .related-link:hover{color:var(--gold-deep); background:rgba(184,138,44,0.16);}
+  p{font-size:16.5px; line-height:1.85; margin-bottom:14px;}
+  h2{font-weight:700; font-size:19px; color:var(--crimson); margin:24px 0 10px; display:flex; align-items:center; gap:9px;}
+  h2::before{content:"❖"; color:var(--gold); font-size:11px;}
+
+  @media (max-width:640px){
+    body{padding:16px 8px;} .container{padding:26px 18px;} .container::before{inset:6px;}
+    p{font-size:16px;}
+  }
+  @media print{ body{background:#fff; padding:0; font-size:12pt;} .container{box-shadow:none; padding:14px;} .related{display:none;} }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="bezras">בס״ד</div>
+    <div class="eyebrow">משל · חכמה וביטול</div>
+    <h1>הַמַּפָּה וְהַחַלּוֹן</h1>
+    <p class="subtitle">יבוא יום שלא לדעת יהיה לימוד גדול</p>
+
+    <h2>המשל</h2>
+    <p>
+      מלך גדול תלה באולם ההיכל מפה עצומה של ממלכתו, ואמר לבניו:
+      ״למדו אותה, ותדעו כמה גדולה ממלכתי״.
+    </p>
+    <p>
+      הבן הראשון נשאר מול המפה שנים. הוא מדד, העתיק ושינן, ועד מהרה כבר היה
+      המומחה הגדול של ההיכל. אחיו התווכחו איתו על קני המידה ועל פירוש הסימנים,
+      והוא ניצח בכל ויכוח. הוא התגאה במפה שבידיו - <strong>ולא הרים עיניו אל החלון</strong>.
+    </p>
+    <p>
+      הבן השני התבונן במפה והבין שהיא מראה רק חלק זעיר מן הממלכה,
+      ושהקווים שעליה אינם אלא רמז. הוא השתתק, ואחר כך ניגש למלך ואמר:
+      <strong>״אבי, איני יודע. למדני״</strong>. והמלך לקח אותו אל החלון -
+      ושם נגלתה לו הממלכה עצמה.
+    </p>
+    <p>
+      ועל הבן הראשון נאמר שהמלך הניח לו להיות חכם גדול - אבל <strong>עיוור לממלכה עצמה</strong>.
+    </p>
+
+    <div class="divider">✦ ❖ ✦</div>
+
+    <h2>הנמשל</h2>
+    <p>
+      הרדיפה אחר הידיעה שורשה בקליפה, ומאחוריה מסתתר רצון פנימי לגדלות:
+      לדעת כדי לקבל פרס. וכך <strong>פרעה שבלב</strong> סבור שבמצרים החכם ביותר הוא השולט.
+      שם האויב הגדול הוא הגאווה, שם הדעות, שם המחלוקות בין הזרמים - ושם האמת נעדרת.
+      ו<strong>״דעות״ בגימטריה 480 - כמו ״לילית״</strong>.
+    </p>
+    <p>
+      החכמה ירדה לעולם כדי שנכיר בגדלות השם, ולא כדי שנגדיל את החכמה.
+      היא נבראה כדי שנדע עד כמה השם אינו מושג - עד שגם החכם באדם הודה:
+    </p>
+
+    <div class="quote">
+      ״כָּל זֹה נִסִּיתִי בַחָכְמָה, אָמַרְתִּי אֶחְכָּמָה - וְהִיא רְחוֹקָה מִמֶּנִּי״
+      <span class="src">קהלת ז, כג</span>
+    </div>
+
+    <p>
+      הוא חקר אחר חוקת הפרה - שעליה נאמר <strong>״זאת חוקת התורה״</strong> ולא ״זאת חוקת הפרה״
+      (במדבר יט, ב). ולכן האדם החוקר בחכמה, השם מניח לו להיות חכם גדול -
+      אך עיוור לדרכי השם.
+    </p>
+    <p>
+      ורק מי שמחזיק תמיד שאינו מבין ואינו יודע יכול להגיע לביטול ולדעת אמיתית.
+      <strong>חוסר ידיעה פתוח לאין סוף ואוחז הפכים; ידיעה היא גבול ואינה אוחזת הפכים</strong> -
+      שהרי האור האלוקי נמצא בחושך, בחינת ״יתרון האור מן החושך״ (קהלת ב, יג).
+      ואילו באור האנושי - שם שלטון פרעה.
+    </p>
+    <p>
+      וכשאדם נעשה תמים ומפקיר את הכל על השם, הוא רואה שהשם מנהל את העולם בטוב -
+      <strong>גם מן הרע, ולא רק מן הטוב</strong>. ואדם שאינו מבוטל, שיש בו רצון פנימי -
+      אינו זוכה לראות.
+    </p>
+
+    <div class="final">
+      <div class="t">הַמַּפָּה אֵינָהּ הַמַּמְלָכָה</div>
+      <p class="d">
+        אפשר לנצח בכל ויכוח על הקווים ולא לראות דבר מבעד לחלון.<br>
+        ומי שאומר ״איני יודע״ - נלקח אל החלון.
+      </p>
+      <div class="seal">״אָמַרְתִּי אֶחְכָּמָה - וְהִיא רְחוֹקָה מִמֶּנִּי״<small>קהלת ז, כג</small></div>
+    </div>
+
+    <p class="note">
+      * משל על דרך הפנימיות. מקורות: קהלת ז, כג · קהלת ב, יג · במדבר יט, ב (זאת חוקת התורה) ·
+      ״דעות״ = ״לילית״ = 480 · פרעה שבלב וקליפת החכמה - על דרך הקבלה והחסידות.
+      הלימוד למעשה - בהדרכת רב.
+    </p>
+
+    <div class="attribution"><div class="attribution-line">מדברי ציון אבירם הי״ו · על דרך הפנימיות</div></div>
+    <div class="footer-ornament">✦ ❖ ✦</div>
+
+    <div class="related">
+      <div class="related-title">דפים קשורים</div>
+      <div class="related-row">
+        <a class="related-link" href="/zion/keter-yitnu-lecha">כתר יתנו לך</a>
+        <a class="related-link" href="/zion/dor-ikesh">דור עקש ופתלתל</a>
+        <a class="related-link" href="/zion/lo-yadati-et-hashem">לא ידעתי את ה׳</a>
+        <a class="related-link" href="/zion/bemishkafayim">באילו משקפיים</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
