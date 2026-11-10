@@ -449,6 +449,14 @@ footer .bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;p
   .rv,.split .w>span,.hero h1 .l>span{opacity:1!important;transform:none!important}
 }
 </style>
+<style id="center-heads">
+/* center-heads: every section head centered (like v7) */
+.head{flex-direction:column;align-items:center;text-align:center}
+.head .sub{margin-inline:auto}
+section>.wrap:has(>h2.t):not([class*="grid"]){text-align:center}
+section>.wrap:has(>h2.t):not([class*="grid"])>:not(.kicker,h2,.sub){text-align:start}
+section>.wrap:has(>h2.t):not([class*="grid"])>.sub{margin-inline:auto}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">דילוג לתוכן</a>
