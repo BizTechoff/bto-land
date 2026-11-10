@@ -1,0 +1,9 @@
+/* Design tokens - "Precision" theme: Gefen logo blues on ice white, one amber action */
+:root{
+  --ink:#0b1638; --ink2:#1b2a55; --txt:#22293a; --muted:#5d6779;
+  --logo:#0d69ad; --blue:#1089d8; --sky:#4cc3ff; --ice:#e8f5fd; --mint:#14b886; --amber:#ffaa07;
+  --bg:#f6f9fc; --card:#fff; --line:#dfe7f0; --grid:rgba(16,137,216,.07);
+  --r:16px; --nav-h:72px;
+  --font:'Heebo',system-ui,'Segoe UI',Arial,sans-serif; --mono:'JetBrains Mono',Consolas,monospace;
+  --shadow:0 18px 44px rgba(11,22,56,.08);
+}

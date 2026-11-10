@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+
+<title>פרק 1: מהו כיול מכשירים? - מרכז הידע | קונספט v6</title>
+<link rel="stylesheet" href="assets/css/knowledge.css">
+</head>
+<body>
+<a class="skip" href="#main">דלג לתוכן</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="גפן שירותי אלקטרוניקה - דף הבית"><img src="assets/img/logo.png" alt="Gefen Electronic Services Ltd."></a>
+    <nav class="menu" aria-label="ניווט ראשי">
+      <a href="index.html#services">שירותים</a>
+      <a href="index.html#range">יכולות</a>
+      <a href="index.html#how">איך זה עובד</a>
+      <div class="dd">
+        <button type="button" aria-haspopup="true">מרכז הידע ▾</button>
+        <div class="panel">
+          <a href="knowledge.html#guide"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h7a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H4zM20 5h-4a3 3 0 0 0-3 3"/></svg></span><span><b>מדריך כיול מכשירי מדידה</b><small>5 פרקים - מהו כיול ועד ביצוע בפועל</small></span></a>
+          <a href="knowledge.html#faq"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/></svg></span><span><b>שאלות נפוצות</b><small>כל כמה זמן לכייל, ומה זה כיוונון</small></span></a>
+          <a href="knowledge.html#tools"><span class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span><span><b>מחשבון GES וטבלאות המרה</b><small>dBm, mW, W ועוד</small></span></a>
+          <a href="knowledge.html#articles"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span><span><b>מאמרים</b><small>מטרולוגיה, אי ודאות, תקנים</small></span></a>
+        </div>
+      </div>
+      <a href="index.html#about">אודות</a>
+      <a href="index.html#contact">צור קשר</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-line" href="https://gefen.biztechoff.co.il" target="_blank" rel="noopener">פורטל לקוחות</a>
+      <a class="btn btn-amber" href="index.html#contact">בקשת כיול <span class="arr">←</span></a>
+    </div>
+    <button class="burger" type="button" aria-label="תפריט">☰</button>
+  </div>
+</header>
+
+<div class="progress" id="progress"></div>
+<main id="main">
+<section class="k-hero gridbg" style="padding-bottom:30px">
+  <div class="wrap">
+    <a class="tag" href="knowledge.html#guide">← מדריך כיול מכשירי מדידה · פרק 1 מתוך 5</a>
+    <h1 style="margin-top:14px">מהו כיול מכשירים?</h1>
+  </div>
+</section>
+<div class="wrap art">
+  <aside class="toc" aria-label="תוכן הפרק">
+    <b>בפרק הזה</b>
+    <a href="#what">מהו כיול</a><a href="#standards">סטנדרטים בינלאומיים</a><a href="#si">מערכת היחידות SI</a><a href="#metric">השיטה המטרית</a><a href="#second">ההגדרה של שנייה</a>
+  </aside>
+  <article class="prose">
+    <h2 id="what" style="margin-top:0">מהו כיול</h2>
+    <p class="lead-p">כיול, המכונה גם קליברציה, הוא פעולה של הערכה וכיוונון של כלי מדידה במטרה שיהיה מדויק יותר.</p>
+    <p>בכל מדידה מתקיימת רמה מסוימת של אי ודאות לגבי הדיוק שלה, ולכן אי הוודאות נחשבת חלק בלתי נפרד מהמדידה עצמה. את כלי המדידה (DUT - ציוד תחת בדיקה) מכיילים כנגד אלמנט מדויק כלשהו.</p>
+    <div class="callout"><b>דוגמה:</b> אפשר לכייל מדחום במים בנקודת הרתיחה הידועה (100 מעלות צלזיוס) כדי לקבוע את היקף הטעות. מכיוון שזיהוי חזותי של רגע הרתיחה עלול להיות לא מדויק, עדיף להציב מדחום השוואה מכויל ולהשוות ביניהם.</div>
+    <p>הצעד הבא בתהליך הוא התאמת המכשיר הנבדק לפי גודל השגיאה שנמדדה מול המכשיר המכויל - כדי להפחית את שגיאת המדידה.</p>
+
+    <h2 id="standards">מכיילים על פי סטנדרטים בינלאומיים</h2>
+    <p>להגדרות המפורטות של כיול פונים ללשכה הבינלאומית למשקולות ומידות - BIPM, הממוקמת בצרפת. זהו אחד משלושת הגופים הבינלאומיים שאחראים על תקני יחידות המדידה. הלשכה מפיקה רשימת הגדרות למונחים טכניים במדידה ובכיול, המכונה VIM - אוצר המילים הבינלאומי של המטרולוגיה.</p>
+    <p>לפי ה-BIPM, לתקני המדידה המשמשים לכיול חייבת להיות רמת אי ודאות ידועה - כמות השגיאה האפשרית. כלומר, הערך המוכר צריך להיות ברמת אי ודאות מובנת, כדי שהמשתמש יוכל לקבוע אם היא מתאימה למדידה שלו.</p>
+
+    <h2 id="si">מהי מערכת היחידות הבינלאומית (SI)?</h2>
+    <p>מהם תקני המדידה של ערכים ידועים שכנגדם מכיילים? לשם כך פונים למערכת היחידות הבינלאומית SI - קיצור של "Le Système International d'Unités". היא מורכבת משבע יחידות בסיס:</p>
+    <div class="si"><div><b>m</b><small>מטר</small></div><div><b>kg</b><small>קילוגרם</small></div><div><b>s</b><small>שנייה</small></div><div><b>A</b><small>אמפר</small></div><div><b>K</b><small>קלווין</small></div><div><b>mol</b><small>מול</small></div><div><b>cd</b><small>קנדלה</small></div></div>
+    <p>יחידות ה-SI נגזרות בעיקר מכמויות בטבע שאינן משתנות, כמו מהירות האור.</p>
+
+    <h2 id="metric">מכיילים לפי השיטה המטרית</h2>
+    <p>כמעט כל מדינות העולם מחויבות לשיטת המדידה של SI. השיטה שמשמשת את ה-SI היא MKS - מטר, קילוגרם ושנייה - והיא מחליפה שיטות אחרות כמו CGS (סנטימטר, גרם, שנייה) ו-FPS (רגל, פאונד, שנייה). לכן גם יחידות כמו PSI ניתנות לחישוב דרך יחסים מתמטיים ידועים בין פאונד, אינצ'ים ויחידות אטמוספירה לבין היחידות המקובלות ב-SI.</p>
+
+    <h2 id="second">ההגדרה של שנייה אחת - לאורך השנים</h2>
+    <p>ההגדרה של יחידות SI מסוימות השתפרה עם הזמן. כך השתנתה ההגדרה של שנייה אחת:</p>
+    <ul class="timeline">
+      <li><b>1889 - 1956</b> - חלק אחד מתוך 86,400 של היממה הממוצעת.</li>
+      <li><b>1956 - 1967</b> - חלק אחד מתוך 31,556,925.9747 של השנה הטרופית 1900.</li>
+      <li><b>1967 - היום</b> - משך 9,192,631,770 מחזורים של הקרינה במעבר בין שתי רמות אנרגיה באטום צסיום-133.</li>
+    </ul>
+    <p>ה-SI נוצר בהחלטה של הוועידה הכללית למשקולות ומידות (CGPM) - ארגון בין-ממשלתי שנוצר באמנת המטר, שנחתמה בפריז ב-1875. האמנה יצרה גם את הוועד הבינלאומי למשקולות ומידות (CIPM), שדן, בודק ומכין דוחות על ה-SI עבור ה-CGPM וה-BIPM. בפרק הבא נכיר את מערכת שמירת הכיול הגלובלית.</p>
+
+    <div class="chap-nav">
+      <a href="knowledge.html#guide"><small>חזרה</small><b>כל פרקי המדריך</b></a>
+      <a href="article.html" style="text-align:left"><small>הפרק הבא</small><b>פרק 2: כיצד נשמרים סטנדרטים בינלאומיים?</b></a>
+    </div>
+  </article>
+</div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <span class="logo"><img src="assets/img/logo.png" alt="Gefen Electronic Services Ltd."></span>
+        <p>מעבדת כיול ותיקון לציוד בדיקה ומדידה אלקטרוני, מוסמכת ISO/IEC 17025 ו-ISO 9001 מטעם A2LA. מאז 1985.</p>
+      </div>
+      <div><h4>שירותים</h4><a href="index.html#services">כיול ותיקון</a><a href="index.html#range">יכולות DC - 40 GHz</a><a href="index.html#reps">נציגות שירות</a><a href="https://gefen.biztechoff.co.il">פורטל לקוחות</a></div>
+      <div><h4>מרכז הידע</h4><a href="knowledge.html#guide">מדריך הכיול</a><a href="knowledge.html#faq">שאלות נפוצות</a><a href="knowledge.html#tools">מחשבון וטבלאות</a><a href="knowledge.html#articles">מאמרים</a></div>
+      <div><h4>יצירת קשר</h4><a class="ltr" href="tel:0528529679">052-8529679</a><a class="ltr" href="mailto:info@gelectronic.co.il">info@gelectronic.co.il</a><span>בן ציון גליס 9, פתח תקווה</span></div>
+    </div>
+    <div class="bottom"><span>© גפן שירותי אלקטרוניקה בע"מ · ח.פ. 514846377</span><span><a style="display:inline" href="#">הצהרת נגישות</a> · <a style="display:inline" href="#">מדיניות פרטיות</a> · BizTechoff™</span></div>
+  </div>
+</footer>
+<div class="concept">קונספט v6 · Precision</div>
+
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/reveal.js"></script>
+<script src="assets/js/article.js"></script>
+</body>
+</html>

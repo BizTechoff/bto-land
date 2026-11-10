@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גפן שירותי אלקטרוניקה - כיול תקשורת בים, ביבשה, באוויר ובחלל | קונספט v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{
+  --space:#03051a; --navy:#0B1033; --navy2:#121a4d; --ink:#0F1430; --txt:#1d2228; --muted:#5c6570;
+  --blue:#1089D8; --blue-d:#0D69AD; --cyan:#3FD0FF; --teal:#2fe0c4; --amber:#FFAA07;
+  --bg:#F3F6FB; --card:#fff; --line:#E1E7EF; --r:18px;
+  --font:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--txt);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* progress + cursor glow */
+#prog{position:fixed;top:0;right:0;height:3px;width:0;z-index:60;background:linear-gradient(270deg,var(--cyan),var(--blue),var(--amber));box-shadow:0 0 12px var(--cyan)}
+#glow{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:1;left:0;top:0;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(63,208,255,.13),transparent 62%);mix-blend-mode:screen;opacity:0;transition:opacity .4s}
+@media (pointer:fine){body:hover #glow{opacity:1}}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .35s,box-shadow .35s,height .35s}
+.nav.solid{background:rgba(4,7,30,.78);backdrop-filter:blur(14px) saturate(140%);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.nav .wrap{display:flex;align-items:center;gap:26px;height:76px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:800}
+.logo .mark{position:relative;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:14px;color:#051028;background:linear-gradient(135deg,var(--cyan),var(--blue));overflow:hidden}
+.logo .mark::after{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(255,255,255,.75) 80%,transparent 90%);animation:spin 3.2s linear infinite}
+.logo .mark b{position:relative;z-index:1}
+.logo small{display:block;font-weight:400;font-size:11.5px;opacity:.65}
+.menu{position:relative;display:flex;gap:4px;margin-inline-start:auto;padding:5px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+.menu a{position:relative;z-index:1;color:#c7d2ec;font-size:15px;padding:8px 15px;border-radius:999px;transition:color .25s}
+.menu a:hover,.menu a.on{color:#fff}
+.menu a svg{position:absolute;left:12px;right:12px;bottom:3px;width:calc(100% - 24px);height:6px;overflow:visible;opacity:0;transition:opacity .2s}
+.menu a svg path{fill:none;stroke:var(--cyan);stroke-width:1.6;stroke-dasharray:60;stroke-dashoffset:60;filter:drop-shadow(0 0 4px var(--cyan))}
+.menu a:hover svg{opacity:1}.menu a:hover svg path{animation:draw .55s ease forwards,wave 1.2s linear .55s infinite}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes wave{to{transform:translateX(-12px)}}
+.menu .pill{position:absolute;top:5px;height:calc(100% - 10px);border-radius:999px;background:linear-gradient(135deg,rgba(63,208,255,.22),rgba(16,137,216,.28));box-shadow:0 0 22px rgba(63,208,255,.35),inset 0 0 0 1px rgba(63,208,255,.35);transition:transform .45s cubic-bezier(.2,.9,.25,1.2),width .45s cubic-bezier(.2,.9,.25,1.2),opacity .3s;opacity:0;pointer-events:none}
+.actions{display:flex;gap:10px;align-items:center}
+.btn{position:relative;display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:12px 24px;font-weight:700;font-size:15px;border:0;cursor:pointer;overflow:hidden;transition:transform .2s,box-shadow .25s;font-family:inherit}
+.btn::before{content:"";position:absolute;top:0;bottom:0;width:40%;right:-60%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:right .7s}
+.btn:hover::before{right:130%}
+.btn-amber{background:linear-gradient(135deg,#ffbf3a,var(--amber));color:#1a1200;box-shadow:0 10px 28px rgba(255,170,7,.38)}
+.btn-amber:hover{box-shadow:0 14px 36px rgba(255,170,7,.55)}
+.btn-ghost{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.btn .arr{transition:transform .25s}.btn:hover .arr{transform:translateX(-4px)}
+@media (max-width:980px){.menu{display:none}.actions .btn-ghost{display:none}}
+@media (max-width:520px){.logo small{display:none}.logo{font-size:14px}.nav .btn{padding:10px 15px;font-size:14px}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;background:var(--space);color:#fff;overflow:hidden}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(3,5,26,.82) 0%,rgba(3,5,26,.45) 38%,transparent 62%);pointer-events:none}
+@media (max-width:820px){.hero::after{background:linear-gradient(180deg,rgba(3,5,26,.25),rgba(3,5,26,.72) 45%,rgba(3,5,26,.4))}}
+.hero .wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-top:70px}
+.hero .copy{max-width:600px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--cyan);background:rgba(63,208,255,.08);border:1px solid rgba(63,208,255,.28);padding:7px 15px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(63,208,255,.7);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(63,208,255,0)}100%{box-shadow:0 0 0 0 rgba(63,208,255,0)}}
+.hero h1{font-size:clamp(38px,5.8vw,76px);line-height:1.04;font-weight:900;letter-spacing:-1px}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 .ln span{display:inline-block;transform:translateY(110%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .ln:nth-child(2) span{animation-delay:.15s}
+@keyframes rise{to{transform:none}}
+.rot{position:relative;display:inline-block;min-width:4.2ch;height:1.08em;vertical-align:bottom}
+.rot i{position:absolute;right:0;top:0;font-style:normal;white-space:nowrap;background:linear-gradient(90deg,var(--teal),var(--cyan) 50%,#8fb8ff);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(40%) rotateX(-70deg);transform-origin:50% 100%;transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.rot i.on{opacity:1;transform:none}
+.rot i.out{opacity:0;transform:translateY(-40%) rotateX(70deg)}
+.hero p.lead{font-size:clamp(17px,1.55vw,20px);color:#c5d0ea;max-width:50ch;margin:22px 0 32px;font-weight:300;opacity:0;animation:fade .9s .5s forwards}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;opacity:0;animation:fade .9s .7s forwards}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.chans{display:flex;flex-wrap:wrap;gap:8px;margin-top:38px;opacity:0;animation:fade .9s .9s forwards}
+.chans span{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:#cfd9f2;padding:6px 13px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);transition:all .3s}
+.chans span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.chans span.lit{background:rgba(63,208,255,.14);border-color:rgba(63,208,255,.5);color:#fff;box-shadow:0 0 18px rgba(63,208,255,.3)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;width:24px;height:38px;border:2px solid rgba(255,255,255,.35);border-radius:14px}
+.scroll-hint::after{content:"";position:absolute;top:7px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--cyan);animation:wheel 1.6s infinite}
+@keyframes wheel{to{transform:translateY(12px);opacity:0}}
+
+/* animated wave divider */
+.divider{position:relative;height:90px;margin-top:-89px;z-index:3;pointer-events:none}
+.divider svg{position:absolute;bottom:0;width:200%;height:100%;left:0}
+.divider .w1{animation:slide 14s linear infinite;fill:rgba(243,246,251,.45)}
+.divider .w2{animation:slide 9s linear infinite reverse;fill:var(--bg)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- stats ---------- */
+.stats{position:relative;z-index:4;margin-top:-10px}
+.stats .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:820px){.stats .grid4{grid-template-columns:repeat(2,1fr)}}
+.stat{position:relative;background:#fff;border-radius:var(--r);padding:26px 20px;text-align:center;border:1px solid var(--line);box-shadow:0 18px 40px rgba(16,40,90,.08);overflow:hidden}
+.stat::before{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(270deg,var(--cyan),var(--blue));transform:scaleX(0);transform-origin:right;transition:transform 1.2s .2s}
+.stat.in::before{transform:none}
+.stat .n{font-size:clamp(32px,3.6vw,46px);font-weight:900;color:var(--ink);line-height:1.05;letter-spacing:-1px}
+.stat .n small{font-size:.45em;color:var(--blue);font-weight:800}
+.stat .l{color:var(--muted);font-size:14.5px;margin-top:6px}
+
+/* ---------- sections ---------- */
+section{padding:110px 0;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:800;font-size:13.5px;letter-spacing:1.5px}
+.kicker::before{content:"";width:26px;height:2px;background:currentColor}
+h2{font-size:clamp(30px,3.8vw,48px);line-height:1.1;font-weight:900;color:var(--ink);margin:10px 0 14px;letter-spacing:-.6px}
+.sub{color:var(--muted);font-size:18px;max-width:62ch}
+.head{margin-bottom:54px}
+
+/* channels */
+.channels{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1020px){.channels{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.channels{grid-template-columns:1fr}}
+.ch{position:relative;border-radius:22px;padding:2px;background:conic-gradient(from var(--ang),transparent 0 60%,var(--cyan) 75%,var(--blue) 85%,transparent 95%);animation:spinb 6s linear infinite;transform-style:preserve-3d;transition:transform .2s}
+@keyframes spinb{to{--ang:360deg}}
+.ch .in{position:relative;height:100%;border-radius:20px;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(63,208,255,.16),transparent 55%),linear-gradient(180deg,#0d1442,#070b2a);color:#fff;padding:24px 22px 26px;overflow:hidden}
+.ch .art{height:150px;margin:-6px -6px 14px;border-radius:14px;background:radial-gradient(120% 100% at 50% 0%,#18227a,#060a26);overflow:hidden;position:relative}
+.ch .art svg{width:100%;height:100%}
+.ch h3{font-size:22px;margin-bottom:6px}
+.ch p{color:#b6c2e2;font-size:15px}
+.ch .who{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.ch .who span{font-size:12px;color:#9fe8ff;border:1px solid rgba(63,208,255,.3);border-radius:999px;padding:1px 9px}
+/* svg art animations */
+.sea1{animation:seaMove 5s linear infinite}.sea2{animation:seaMove 8s linear infinite reverse}
+@keyframes seaMove{to{transform:translateX(-120px)}}
+.bob{animation:bob 3s ease-in-out infinite;transform-origin:center}
+@keyframes bob{50%{transform:translateY(-4px) rotate(-2deg)}}
+.ring{transform-origin:center;transform-box:fill-box;animation:ringp 2.4s ease-out infinite}
+.ring.d2{animation-delay:.8s}.ring.d3{animation-delay:1.6s}
+@keyframes ringp{0%{transform:scale(.3);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+.sweep{transform-origin:100px 82px;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.plane{animation:fly 7s linear infinite}
+@keyframes fly{0%{transform:translate(-40px,20px)}100%{transform:translate(260px,-40px)}}
+.orbit{transform-origin:100px 80px;animation:spin 9s linear infinite}
+.blink{animation:blink 1.4s steps(2) infinite}@keyframes blink{50%{opacity:.2}}
+
+/* services */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;overflow:hidden;transform-style:preserve-3d;transition:transform .2s ease,box-shadow .3s,border-color .3s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%),rgba(16,137,216,.10),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover{box-shadow:0 26px 60px rgba(16,40,90,.16);border-color:#bfdcf5}
+.card:hover::before{opacity:1}
+.card .ic{position:relative;width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,var(--navy2),#1b2c8a);display:grid;place-items:center;margin-bottom:20px;box-shadow:0 10px 24px rgba(18,26,77,.25);transition:transform .4s}
+.card:hover .ic{transform:translateZ(30px) rotate(-6deg) scale(1.06)}
+.card .ic svg{width:28px;height:28px;stroke:var(--cyan);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{position:relative;font-size:21px;color:var(--ink);margin-bottom:6px}
+.card p{position:relative;color:var(--muted);font-size:15.5px}
+.card .tag{position:relative;display:inline-block;margin-top:16px;font-size:12.5px;font-weight:700;color:var(--blue-d);background:#e8f3fd;border-radius:999px;padding:3px 11px}
+
+/* spectrum */
+.band{background:linear-gradient(180deg,var(--navy),var(--space));color:#fff;overflow:hidden}
+.band h2{color:#fff}.band .sub{color:#b6c2e2}.band .kicker{color:var(--cyan)}
+.band .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+@media (max-width:920px){.band .wrap{grid-template-columns:1fr}}
+.spectrum{position:relative;height:290px;border-radius:20px;background:#04071f;overflow:hidden;box-shadow:0 0 0 1px rgba(63,208,255,.18),0 40px 80px rgba(0,0,0,.45),inset 0 0 60px rgba(63,208,255,.06)}
+#spec{width:100%;height:100%;display:block}
+.spectrum .axis{position:absolute;bottom:10px;inset-inline:16px;display:flex;justify-content:space-between;color:#6f7fae;font-size:11.5px;direction:ltr}
+.spectrum .readout{position:absolute;top:12px;left:16px;color:var(--cyan);font:12px/1.5 Consolas,monospace;direction:ltr;text-shadow:0 0 8px rgba(63,208,255,.6)}
+.spectrum .live{position:absolute;top:12px;right:16px;font:700 11px/1 Consolas,monospace;color:#ff5b5b;letter-spacing:1px}
+.spectrum .live::before{content:"● ";animation:blink 1s steps(2) infinite}
+.domains{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 15px;font-size:14.5px;color:#dbe4f7;transition:all .25s;cursor:default}
+.chip:hover{background:rgba(63,208,255,.16);border-color:var(--cyan);color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(63,208,255,.2)}
+
+/* process */
+.proc{position:relative}
+.proc svg.line{position:absolute;top:38px;right:0;width:100%;height:20px;overflow:visible}
+.proc svg.line path{fill:none;stroke:url(#lg);stroke-width:3;stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 2.2s ease}
+.proc.in svg.line path{stroke-dashoffset:0}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}.proc svg.line{display:none}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{text-align:center;padding:0 10px}
+.step .num{position:relative;width:78px;height:78px;margin:0 auto 18px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;font-size:26px;font-weight:900;color:var(--navy2);transition:all .5s}
+.proc.in .step .num{border-color:var(--blue);box-shadow:0 0 0 8px rgba(16,137,216,.08),0 14px 30px rgba(16,137,216,.22)}
+.step:nth-child(2) .num{transition-delay:.5s}.step:nth-child(3) .num{transition-delay:1s}.step:nth-child(4) .num{transition-delay:1.5s}
+.step h4{font-size:18.5px;color:var(--ink);margin-bottom:4px}
+.step p{color:var(--muted);font-size:15px}
+
+/* marquee */
+.marquee{position:relative;direction:ltr;overflow:hidden;padding:26px 0;border-block:1px solid var(--line);background:#fff;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.track{display:flex;gap:56px;width:max-content;direction:ltr;animation:mq 34s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-size:24px;font-weight:800;color:#a9b3c4;letter-spacing:.5px;white-space:nowrap;transition:color .25s}
+.track span:hover{color:var(--blue)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* portal */
+.portal{position:relative;background:radial-gradient(90% 130% at 10% 0%,#1b2470,var(--space) 62%);color:#fff;border-radius:32px;padding:64px;display:grid;grid-template-columns:1fr 1.15fr;gap:50px;align-items:center;overflow:hidden}
+.portal::before{content:"";position:absolute;width:600px;height:600px;left:-200px;bottom:-300px;background:radial-gradient(circle,rgba(63,208,255,.22),transparent 60%);animation:float 8s ease-in-out infinite}
+@keyframes float{50%{transform:translate(40px,-30px)}}
+@media (max-width:960px){.portal{grid-template-columns:1fr;padding:36px 22px}}
+.portal h2{color:#fff}.portal .sub{color:#b9c5e3}.portal .kicker{color:var(--cyan)}
+.portal ul{list-style:none;padding:0;margin:24px 0 30px;display:grid;gap:12px;position:relative}
+.portal li{display:flex;gap:12px;align-items:flex-start;color:#dbe3f5}
+.portal li b{flex:none;width:24px;height:24px;border-radius:8px;background:rgba(63,208,255,.15);display:grid;place-items:center;color:var(--cyan);font-size:13px}
+.dash{position:relative;background:#f5f7fb;color:var(--txt);border-radius:20px;padding:16px;box-shadow:0 40px 90px rgba(0,0,0,.55);transform:perspective(1300px) rotateY(10deg) rotateX(4deg);transition:transform .6s;font-size:13px;animation:hover 6s ease-in-out infinite}
+.dash:hover{transform:perspective(1300px) rotateY(0) rotateX(0)}
+@keyframes hover{50%{translate:0 -10px}}
+.dash .bar{display:flex;gap:6px;margin-bottom:12px}.dash .bar i{width:10px;height:10px;border-radius:50%;background:#d5dae0}.dash .bar i:first-child{background:#ff6b6b}.dash .bar i:nth-child(2){background:#ffc24b}.dash .bar i:nth-child(3){background:#41c98c}
+.dash .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.dash .k{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.dash .k b{display:block;font-size:24px;color:var(--ink)}.dash .k.warn b{color:#b96a0b}.dash .k.ok b{color:#178a50}
+.dash .chart{height:70px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;padding:8px}
+.dash .chart path{fill:none;stroke:var(--blue);stroke-width:2.2;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 2.5s 0.5s ease forwards}
+.dash table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dash td,.dash th{padding:7px 9px;border-bottom:1px solid var(--line);text-align:right}
+.dash th{background:#eef2f7;color:var(--muted);font-weight:600;font-size:12px}
+.pill{display:inline-block;border-radius:999px;padding:0 8px;font-size:11.5px;font-weight:700}.pill.ok{background:#e4f5ec;color:#178a50}.pill.warn{background:#fcf0dc;color:#b96a0b}
+
+/* trust */
+.trust{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:stretch}
+@media (max-width:900px){.trust{grid-template-columns:1fr}}
+.seal-wrap{position:relative;background:linear-gradient(160deg,var(--navy2),var(--space));border-radius:24px;padding:36px;color:#fff;display:grid;place-items:center;text-align:center;overflow:hidden}
+.seal{position:relative;width:210px;height:210px}
+.seal svg.txt{position:absolute;inset:0;animation:spin 22s linear infinite}
+.seal svg.txt text{fill:#9fe8ff;font:700 12.5px var(--font);letter-spacing:3px}
+.seal .core{position:absolute;inset:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2b3cb0,#0b1240);box-shadow:0 0 0 2px rgba(63,208,255,.45),0 0 50px rgba(63,208,255,.35);display:grid;place-items:center;font-weight:900;line-height:1.05}
+.seal .core b{font-size:30px}.seal .core small{font-size:11px;color:#9fe8ff;letter-spacing:2px}
+.seal-wrap p{margin-top:20px;color:#b9c5e3;font-size:15px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px}
+.panel h3{font-size:20px;color:var(--ink);margin-bottom:16px}
+.names{display:flex;flex-wrap:wrap;gap:9px}
+.names span{border:1px solid var(--line);border-radius:12px;padding:9px 15px;font-weight:800;color:#4a5568;font-size:14.5px;background:#fafcfe;transition:all .25s}
+.names span:hover{color:var(--blue-d);border-color:#bfdcf5;transform:translateY(-3px);box-shadow:0 10px 20px rgba(16,40,90,.1)}
+.quote{margin-top:24px;padding:20px 22px;border-radius:16px;background:#f5f9ff;border:1px solid #dcebfa;position:relative}
+.quote::before{content:"”";position:absolute;top:-18px;left:18px;font-size:70px;line-height:1;color:var(--blue);opacity:.35;font-family:Georgia,serif}
+.quote p{font-size:17px;color:var(--ink)}.quote small{color:var(--muted)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1.15fr;gap:28px}
+@media (max-width:900px){.contact{grid-template-columns:1fr}}
+.people{display:grid;gap:12px;align-content:start}
+.person{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;transition:all .3s}
+.person:hover{border-color:var(--blue);transform:translateX(-6px);box-shadow:0 14px 30px rgba(16,40,90,.1)}
+.person b{color:var(--ink)}.person small{display:block;color:var(--muted)}
+.person a{font-weight:700;color:var(--blue-d)}
+form.panel{display:grid;gap:13px}
+form label{font-size:13.5px;font-weight:700;color:#46484c}
+form input,form select,form textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fbfcfe;transition:border-color .2s,box-shadow .2s}
+form input:focus,form select:focus,form textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(16,137,216,.14)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+footer{background:var(--space);color:#8ea0c8;padding:44px 0;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+footer a:hover{color:#fff}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px) scale(.98);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}.hero h1 .ln span{transform:none}.hero p.lead,.hero .cta,.chans{opacity:1}
+  .rot i.on{opacity:1;transform:none}
+}
+.concept{position:fixed;bottom:14px;right:14px;z-index:70;background:rgba(255,170,7,.95);color:#1a1200;font-size:12px;font-weight:800;border-radius:8px;padding:5px 10px}
+</style>
+</head>
+<body>
+<div id="prog"></div><div id="glow"></div>
+<div class="concept">קונספט עיצובי v2 · BizTechoff</div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mark"><b>GES</b></span><span>גפן שירותי אלקטרוניקה<small>RF Service &amp; Calibration Center</small></span></a>
+    <nav class="menu" id="menu">
+      <span class="pill" id="pill"></span>
+      <a href="#channels">ערוצים<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+      <a href="#services">שירותים<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+      <a href="#spectrum">יכולות<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+      <a href="#how">איך זה עובד<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+      <a href="#portal">פורטל<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+      <a href="#about">אודות<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+      <a href="#contact">צור קשר<svg viewBox="0 0 60 6" preserveAspectRatio="none"><path d="M0 3 Q5 0 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3"/></svg></a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-ghost" href="#portal">כניסת לקוחות</a>
+      <a class="btn btn-amber" href="#contact">בקשת כיול <span class="arr">←</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="פתיח" style="padding:0">
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="copy">
+        <span class="eyebrow"><span class="dot"></span>מעבדה מוסמכת ISO/IEC 17025 · A2LA · מאז 1985</span>
+        <h1><span class="ln"><span>מכיילים את התקשורת</span></span><span class="ln"><span class="rot" id="rot"><i class="on">בים.</i><i>ביבשה.</i><i>באוויר.</i><i>ובחלל.</i></span></span></h1>
+        <p class="lead">הלקוחות שלנו מתקשרים מכל מקום - מספינות, מאנטנות, ממטוסים ומלוויינים. אנחנו דואגים שכל מכשיר שמודד את האות שלהם יהיה מדויק, מ-<bdi class="ltr">DC</bdi> ועד <bdi class="ltr">40 GHz</bdi>.</p>
+        <div class="cta">
+          <a class="btn btn-amber" href="#contact">בקשת כיול או הצעת מחיר <span class="arr">←</span></a>
+          <a class="btn btn-ghost" href="#portal">כניסה לפורטל התעודות</a>
+        </div>
+        <div class="chans" id="chans"><span style="--c:#3FD0FF">ים</span><span style="--c:#2fe0c4">יבשה</span><span style="--c:#8fb8ff">אוויר</span><span style="--c:#FFAA07">חלל</span></div>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"></div>
+  </section>
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 2400 90" preserveAspectRatio="none"><path class="w1" d="M0 50 Q150 10 300 50 T600 50 T900 50 T1200 50 T1500 50 T1800 50 T2100 50 T2400 50 V90 H0Z"/><path class="w2" d="M0 62 Q200 30 400 62 T800 62 T1200 62 T1600 62 T2000 62 T2400 62 V90 H0Z"/></svg>
+  </div>
+
+  <div class="stats">
+    <div class="wrap grid4">
+      <div class="stat rv"><div class="n" data-count="1985">1985</div><div class="l">שנת הקמה</div></div>
+      <div class="stat rv d1"><div class="n"><span data-count="40">40</span><small> GHz</small></div><div class="l">טווח כיול עליון</div></div>
+      <div class="stat rv d2"><div class="n">17025</div><div class="l">ISO/IEC · הסמכת A2LA</div></div>
+      <div class="stat rv d3"><div class="n"><span data-count="40">40</span><small>+</small></div><div class="l">שנות ניסיון בצב"ד</div></div>
+    </div>
+  </div>
+
+  <section id="channels">
+    <div class="wrap">
+      <div class="head rv"><div class="kicker">כל הערוצים</div><h2>איפה שהאות עובר - אנחנו שם</h2><p class="sub">הלקוחות שלנו מובילים את התקשורת בכל מרחב. אנחנו התמיכה שמאחוריהם: ציוד מדידה מכויל, מתוקן וזמין.</p></div>
+      <div class="channels">
+        <div class="ch rv"><div class="in">
+          <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true">
+            <g class="bob"><path d="M72 92h56l-8 14H80z" fill="#c9d6f2"/><rect x="92" y="70" width="18" height="22" fill="#dfe8fb"/><line x1="101" y1="70" x2="101" y2="48" stroke="#dfe8fb" stroke-width="2"/><circle cx="101" cy="46" r="3" fill="#FFAA07" class="blink"/>
+            <circle cx="101" cy="46" r="10" fill="none" stroke="#3FD0FF" class="ring"/><circle cx="101" cy="46" r="10" fill="none" stroke="#3FD0FF" class="ring d2"/></g>
+            <g class="sea1"><path d="M-20 110 Q0 100 20 110 T60 110 T100 110 T140 110 T180 110 T220 110 T260 110 T300 110 T340 110 V150 H-20Z" fill="rgba(16,137,216,.55)"/></g>
+            <g class="sea2"><path d="M-20 122 Q10 112 40 122 T100 122 T160 122 T220 122 T280 122 T340 122 V150 H-20Z" fill="rgba(63,208,255,.35)"/></g>
+          </svg></div>
+          <h3>ים</h3><p>תקשורת ימית, מכ"ם ומערכות ניווט - ציוד שעובד בתנאים הקשים ביותר.</p>
+          <div class="who"><span>Marine</span><span>Radar</span><span>RF</span></div>
+        </div></div>
+        <div class="ch rv d1"><div class="in">
+          <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true">
+            <path d="M0 130 Q50 110 100 122 T200 115 V150 H0Z" fill="#0f2a5a"/>
+            <g stroke="#c9d6f2" stroke-width="2.4" fill="none"><path d="M88 128 L100 50 L112 128"/><path d="M92 104h16M95 82h10"/></g>
+            <rect x="96" y="56" width="8" height="10" fill="#dfe8fb"/><circle cx="100" cy="48" r="3" fill="#FFAA07" class="blink"/>
+            <g fill="none" stroke="#2fe0c4" stroke-width="2"><path d="M80 44 A28 28 0 0 1 80 68" class="ring"/><path d="M120 44 A28 28 0 0 0 120 68" class="ring"/><circle cx="100" cy="56" r="16" class="ring d2"/><circle cx="100" cy="56" r="16" class="ring d3"/></g>
+          </svg></div>
+          <h3>יבשה</h3><p>סלולר, טלקום וסיבים אופטיים - הרשתות שמחברות את כולנו.</p>
+          <div class="who"><span>Cellular</span><span>Telecom</span><span>Fiber</span></div>
+        </div></div>
+        <div class="ch rv d2"><div class="in">
+          <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true">
+            <circle cx="100" cy="82" r="56" fill="none" stroke="rgba(143,184,255,.25)"/><circle cx="100" cy="82" r="36" fill="none" stroke="rgba(143,184,255,.25)"/><circle cx="100" cy="82" r="16" fill="none" stroke="rgba(143,184,255,.25)"/>
+            <g class="sweep"><path d="M100 82 L156 82 A56 56 0 0 0 140 42 Z" fill="url(#rg)"/></g>
+            <defs><linearGradient id="rg" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#8fb8ff" stop-opacity=".55"/><stop offset="1" stop-color="#8fb8ff" stop-opacity="0"/></linearGradient></defs>
+            <g class="plane"><path d="M10 60 l18 -3 l6 -8 l4 1 l-3 8 l12 -2 l3 -4 l3 1 l-2 5 l-38 6z" fill="#dfe8fb"/></g>
+          </svg></div>
+          <h3>אוויר</h3><p>אוויוניקה ומערכות מוטסות - הדיוק שתעשיית האוויר והביטחון דורשת.</p>
+          <div class="who"><span>Avionics</span><span>Defense</span></div>
+        </div></div>
+        <div class="ch rv d3"><div class="in">
+          <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true">
+            <circle cx="100" cy="80" r="26" fill="url(#pl)"/><defs><radialGradient id="pl" cx=".35" cy=".3"><stop offset="0" stop-color="#3FD0FF"/><stop offset="1" stop-color="#0D3A8A"/></radialGradient></defs>
+            <ellipse cx="100" cy="80" rx="70" ry="24" fill="none" stroke="rgba(255,170,7,.35)" stroke-dasharray="3 5"/>
+            <g class="orbit"><g transform="translate(170 80)"><rect x="-5" y="-4" width="10" height="8" fill="#dfe8fb"/><rect x="-19" y="-3" width="12" height="6" fill="#3a6fd8"/><rect x="7" y="-3" width="12" height="6" fill="#3a6fd8"/><circle r="12" fill="none" stroke="#FFAA07" class="ring"/></g></g>
+            <circle cx="30" cy="25" r="1.2" fill="#fff" class="blink"/><circle cx="160" cy="20" r="1" fill="#fff"/><circle cx="180" cy="130" r="1.2" fill="#fff" class="blink"/>
+          </svg></div>
+          <h3>חלל</h3><p>תקשורת לוויינית ותחנות קרקע - והעתיד, שכבר מתחיל עכשיו.</p>
+          <div class="who"><span>SATCOM</span><span>Ground Station</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="padding-top:20px">
+    <div class="wrap">
+      <div class="head rv"><div class="kicker">שירותים</div><h2>מעבדה אחת לכל ציוד הבדיקה שלכם</h2><p class="sub">מטפלים בציוד של כל יצרני הצב"ד - עם תעודה מסודרת, ותזכורת לפני מועד הכיול הבא.</p></div>
+      <div class="grid">
+        <article class="card tilt rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M5 12a7 7 0 0 1 7-7M19 12a7 7 0 0 1-7 7M2 12A10 10 0 0 1 12 2M22 12a10 10 0 0 1-10 10"/></svg></div><h3>כיול מכשירים</h3><p>כיול לפי תקנים בינלאומיים, עם תעודה ותוצאות מדידה מלאות.</p><span class="tag">ISO/IEC 17025</span></article>
+        <article class="card tilt rv d1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div><h3>תיקון ותחזוקה</h3><p>אבחון, תיקון וכיוונון, ותחזוקה שוטפת שמונעת השבתה.</p></article>
+        <article class="card tilt rv d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l4-6 4 3 4-8 6 11"/><path d="M3 21h18"/></svg></div><h3>RF ומיקרוגל</h3><p>מחוללי אותות, נתחי ספקטרום ונתחי רשת, עד <bdi class="ltr">40 GHz</bdi>.</p><span class="tag ltr">Spectrum · Network · Signal</span></article>
+        <article class="card tilt rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 2-5h8"/></svg></div><h3>תקשורת וסיבים אופטיים</h3><p>כיול OTDR, ציוד Telecom, Jitter ו-Line Simulators, ותיקון מחברים אופטיים.</p><span class="tag">מוסמך לסיבים אופטיים</span></article>
+        <article class="card tilt rv d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>ניהול צב"ד</h3><p>מלאי הציוד, מועדי כיול ותעודות - בפורטל הלקוחות.</p></article>
+        <article class="card tilt rv d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2M9 12h6"/></svg></div><h3>ציוד חלופי</h3><p>ציוד מחליף מיידי בזמן שהמכשיר שלכם בכיול או בתיקון.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="יצרנים">
+    <div class="track"><span>KEYSIGHT</span><span>ROHDE &amp; SCHWARZ</span><span>ANRITSU</span><span>TEKTRONIX</span><span>FLUKE</span><span>KEITHLEY</span><span>EXFO</span><span>VIAVI</span><span>AEROFLEX / IFR</span><span>KIKUSUI</span><span>HIOKI</span><span>LECROY</span>
+    <span>KEYSIGHT</span><span>ROHDE &amp; SCHWARZ</span><span>ANRITSU</span><span>TEKTRONIX</span><span>FLUKE</span><span>KEITHLEY</span><span>EXFO</span><span>VIAVI</span><span>AEROFLEX / IFR</span><span>KIKUSUI</span><span>HIOKI</span><span>LECROY</span></div>
+  </div>
+
+  <section class="band" id="spectrum">
+    <div class="wrap">
+      <div class="spectrum rv" aria-hidden="true"><canvas id="spec"></canvas><div class="readout" id="readout">MKR 1 · 2.400 GHz · -12.4 dBm</div><div class="live">LIVE</div><div class="axis"><span>DC</span><span>10 GHz</span><span>20 GHz</span><span>30 GHz</span><span>40 GHz</span></div></div>
+      <div class="rv d1">
+        <div class="kicker">יכולות</div>
+        <h2><bdi class="ltr">DC - 40 GHz</bdi></h2>
+        <p class="sub">כל משפחות המכשירים במעבדה אחת, עם ציוד ייחוס עדכני ונתיב עקיבות למדידה.</p>
+        <div class="domains"><span class="chip">רב-מודדים</span><span class="chip">אוסצילוסקופים</span><span class="chip">מחוללי אותות</span><span class="chip">נתחי ספקטרום</span><span class="chip">נתחי רשת</span><span class="chip">OTDR · סיבים</span><span class="chip">ספקי כוח</span><span class="chip">נתחים לוגיים</span><span class="chip">מצלמות תרמיות</span><span class="chip">תנורים</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="head rv"><div class="kicker">איך זה עובד</div><h2>מהבקשה ועד התעודה - בארבעה צעדים</h2></div>
+      <div class="proc" id="proc">
+        <svg class="line" viewBox="0 0 1200 20" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="lg"><stop offset="0" stop-color="#FFAA07"/><stop offset=".5" stop-color="#1089D8"/><stop offset="1" stop-color="#3FD0FF"/></linearGradient></defs><path d="M1080 10 Q900 -6 750 10 T450 10 T120 10"/></svg>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><h4>בקשה</h4><p>טופס קצר באתר או בפורטל, עם רשימת המכשירים.</p></div>
+          <div class="step"><div class="num">2</div><h4>איסוף או כיול באתר</h4><p>מתאמים איסוף, או מגיעים אליכם עם מעבדה ניידת.</p></div>
+          <div class="step"><div class="num">3</div><h4>כיול ותיקון</h4><p>לפי נוהלי ISO/IEC 17025, עם ציוד ייחוס מעוקב.</p></div>
+          <div class="step"><div class="num">4</div><h4>תעודה בפורטל</h4><p>התעודה מחכה לכם בפורטל, ותזכורת לפני הכיול הבא.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portal" style="padding-top:10px">
+    <div class="wrap">
+      <div class="portal rv">
+        <div style="position:relative">
+          <div class="kicker">פורטל לקוחות</div>
+          <h2>כל התעודות שלכם. במקום אחד. תמיד.</h2>
+          <p class="sub">כניסה בקוד חד-פעמי למייל - בלי סיסמאות.</p>
+          <ul>
+            <li><b>1</b>כל תעודות הכיול להורדה, לפי מכשיר ואתר</li>
+            <li><b>2</b>תוקף כל מכשיר, והתראה לפני שהוא פג</li>
+            <li><b>3</b>בקשת כיול או שירות בלחיצה</li>
+            <li><b>4</b>היסטוריית כיולים מלאה לכל מכשיר</li>
+          </ul>
+          <a class="btn btn-amber" href="#">כניסה לפורטל <span class="arr">←</span></a>
+        </div>
+        <div class="dash" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="kpis"><div class="k ok"><span>בתוקף</span><b data-count="128">128</b></div><div class="k warn"><span>לקראת תפוגה</span><b data-count="9">9</b></div><div class="k"><span>בקשות פתוחות</span><b>2</b></div></div>
+          <div class="chart"><svg viewBox="0 0 300 54" preserveAspectRatio="none" width="100%" height="100%"><path d="M0 44 L30 40 L60 42 L90 30 L120 34 L150 20 L180 24 L210 12 L240 16 L270 6 L300 10"/></svg></div>
+          <table><thead><tr><th>מכשיר</th><th>מס' רישום</th><th>בתוקף עד</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>Spectrum Analyzer</td><td class="ltr">64G14511</td><td>26.10.2028</td><td><span class="pill ok">בתוקף</span></td></tr>
+              <tr><td>Power Supply</td><td class="ltr">60G8361</td><td>26.10.2028</td><td><span class="pill ok">בתוקף</span></td></tr>
+              <tr><td>Signal Generator</td><td class="ltr">60G7508</td><td>02.12.2026</td><td><span class="pill warn">לקראת תפוגה</span></td></tr>
+            </tbody></table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="head rv"><div class="kicker">אודות</div><h2>יש כיול, ויש <span style="color:var(--blue)">כיול</span>.</h2><p class="sub">גפן שירותי אלקטרוניקה הוקמה ב-1985 בתוך ECI, והפכה לחברה עצמאית. היום אנחנו מעבדה מוסמכת שמשרתת את חברות הטכנולוגיה, התקשורת והביטחון המובילות בישראל, ונציגי שירות רשמיים של יצרנים מובילים.</p></div>
+      <div class="trust">
+        <div class="seal-wrap rv">
+          <div class="seal">
+            <svg class="txt" viewBox="0 0 210 210"><defs><path id="circ" d="M105 105 m-88 0 a88 88 0 1 1 176 0 a88 88 0 1 1 -176 0"/></defs><text><textPath href="#circ">ACCREDITED LAB · ISO/IEC 17025 · A2LA · CERT 3537.01 · </textPath></text></svg>
+            <div class="core"><div><small>ISO/IEC</small><br><b>17025</b><br><small>A2LA</small></div></div>
+          </div>
+          <p>הסמכת A2LA · תעודה 3537.01<br>ISO/IEC 17025 ו-ISO 9001</p>
+        </div>
+        <div class="panel rv d1">
+          <h3>לקוחות שסומכים עלינו</h3>
+          <div class="names ltr"><span>ECI</span><span>Elbit Systems</span><span>IAI</span><span>Rafael</span><span>Gilat</span><span>Flex</span><span>El Al</span><span>Cobham</span><span>RADWIN</span><span>Alltest</span></div>
+          <div class="quote"><p class="ltr" style="text-align:right">"Communication, expertise, dedication, accuracy and cooperation was excellent."</p><small>Efrat K., Intel</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#fff;border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head rv"><div class="kicker">צור קשר</div><h2>בכל עניין, אנחנו כאן בשבילכם</h2><p class="sub">בן ציון גליס 9, פתח תקווה · כניסה מרחוב הרב פינטו, חניון תת-קרקעי.</p></div>
+      <div class="contact">
+        <div class="people rv">
+          <div class="person"><div><b>מכירות</b><small>הצעות מחיר ושאלות יכולת</small></div><a class="ltr" href="tel:0528529679">052-8529679</a></div>
+          <div class="person"><div><b>שירות לקוחות ותפעול</b><small>סטטוס ציוד ותיאום כיולים</small></div><a class="ltr" href="tel:0556696828">055-6696828</a></div>
+          <div class="person"><div><b>מחסן ושילוח</b><small>איסופים ומשלוחים</small></div><a class="ltr" href="mailto:logistics@gelectronic.co.il">logistics@gelectronic.co.il</a></div>
+          <div class="person"><div><b>כספים</b><small>חשבוניות ותשלומים</small></div><a class="ltr" href="tel:0506696828">050-6696828</a></div>
+        </div>
+        <form class="panel rv d1" onsubmit="event.preventDefault();this.querySelector('button').textContent='הבקשה התקבלה (הדגמה)';">
+          <h3>בקשת כיול או הצעת מחיר</h3>
+          <div class="row2"><div><label>שם מלא</label><input required></div><div><label>חברה</label><input></div></div>
+          <div class="row2"><div><label>טלפון</label><input class="ltr" style="text-align:right" inputmode="tel"></div><div><label>מייל</label><input type="email" class="ltr" style="text-align:right" required></div></div>
+          <div><label>סוג השירות</label><select><option>כיול</option><option>תיקון</option><option>כיול + תיקון</option><option>כיול באתר הלקוח</option><option>ציוד חלופי</option></select></div>
+          <div><label>מכשירים (יצרן, דגם, כמות)</label><textarea rows="3"></textarea></div>
+          <button class="btn btn-amber" style="justify-self:start">שליחה <span class="arr">←</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© גפן שירותי אלקטרוניקה בע"מ · Gefen Electronic Services Ltd</span>
+    <span><a href="#">הצהרת נגישות</a> · <a href="#">מדיניות פרטיות</a> · <a href="#portal">פורטל לקוחות</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+
+  /* ---------- nav: solid on scroll, progress bar, sliding pill ---------- */
+  const nav = document.getElementById('nav'), prog = document.getElementById('prog');
+  const onScroll = () => {
+    nav.classList.toggle('solid', scrollY > 40);
+    const h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const menu = document.getElementById('menu'), pill = document.getElementById('pill');
+  const movePill = (a) => { const m = menu.getBoundingClientRect(), r = a.getBoundingClientRect(); pill.style.width = r.width + 'px'; pill.style.transform = `translateX(${r.left - m.left - 5}px)`; pill.style.left = '5px'; pill.style.opacity = 1; };
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('mouseenter', () => movePill(a)));
+  menu.addEventListener('mouseleave', () => { pill.style.opacity = 0; });
+
+  /* ---------- cursor glow ---------- */
+  const glow = document.getElementById('glow');
+  if (fine && !reduce) addEventListener('pointermove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }, { passive: true });
+
+  /* ---------- reveal ---------- */
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.14 });
+  document.querySelectorAll('.rv, .stat, #proc').forEach((el) => io.observe(el));
+
+  /* ---------- rotating word + channel chips ---------- */
+  const words = [...document.querySelectorAll('#rot i')], chips = [...document.querySelectorAll('#chans span')];
+  let wi = 0; chips[0].classList.add('lit');
+  if (!reduce) setInterval(() => {
+    words[wi].classList.remove('on'); words[wi].classList.add('out'); chips[wi].classList.remove('lit');
+    const prev = wi; setTimeout(() => words[prev].classList.remove('out'), 700);
+    wi = (wi + 1) % words.length; words[wi].classList.add('on'); chips[wi].classList.add('lit');
+  }, 2400);
+
+  /* ---------- tilt + spotlight on cards ---------- */
+  if (fine && !reduce) {
+    document.querySelectorAll('.tilt, .ch').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        el.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 8}deg) rotateY(${(x - 0.5) * 10}deg)`;
+        const t = el.querySelector('.in') || el; t.style.setProperty('--mx', x * 100 + '%'); t.style.setProperty('--my', y * 100 + '%');
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  /* ---------- HERO SCENE: sea, land, air, space - and the links between them ---------- */
+  const c = document.getElementById('scene'), x = c.getContext('2d');
+  let W, H, dpr, stars = [], mx = 0, my = 0, tmx = 0, tmy = 0, running = true, t0 = performance.now();
+  const P = {}; // node positions
+  function size() {
+    dpr = Math.min(devicePixelRatio || 1, 2); W = c.clientWidth; H = c.clientHeight;
+    c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({ length: Math.round(W * H / 3800) }, () => ({ x: Math.random() * W, y: Math.random() * H * 0.72, r: Math.random() * 1.4 + 0.2, p: Math.random() * 6.28, s: Math.random() * 0.6 + 0.2 }));
+    const m = W < 820;
+    P.horizon = H * (m ? 0.80 : 0.76);
+    P.moon = { x: W * (m ? 0.16 : 0.09), y: H * (m ? 0.14 : 0.15), r: m ? 24 : Math.max(30, W * 0.026) };
+    P.sat = { cx: W * (m ? 0.5 : 0.30), cy: H * (m ? 0.30 : 0.27), rx: W * (m ? 0.30 : 0.14), ry: H * 0.06 };
+    P.tower = { x: W * (m ? 0.78 : 0.44), y: P.horizon - H * 0.04 };
+    P.ship = { x: W * (m ? 0.2 : 0.13), y: P.horizon + H * 0.045 };
+    P.pad = { x: W * (m ? 0.62 : 0.52), y: P.horizon - H * 0.025 };
+    P.plane = { y: H * (m ? 0.5 : 0.44) };
+  }
+  addEventListener('resize', size); size();
+  if (fine) addEventListener('pointermove', (e) => { tmx = (e.clientX / innerWidth - 0.5); tmy = (e.clientY / innerHeight - 0.5); }, { passive: true });
+  new IntersectionObserver((es) => { running = es[0].isIntersecting; if (running && !reduce) requestAnimationFrame(frame); }).observe(c);
+
+  const quad = (a, cp, b, u) => ({ x: (1 - u) * (1 - u) * a.x + 2 * (1 - u) * u * cp.x + u * u * b.x, y: (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * cp.y + u * u * b.y });
+  function link(a, b, bend, color, t, speed, off) {
+    const cp = { x: (a.x + b.x) / 2, y: Math.min(a.y, b.y) - bend };
+    x.strokeStyle = color.replace('A', '.16'); x.lineWidth = 1; x.setLineDash([3, 6]);
+    x.beginPath(); x.moveTo(a.x, a.y); x.quadraticCurveTo(cp.x, cp.y, b.x, b.y); x.stroke(); x.setLineDash([]);
+    for (let k = 0; k < 2; k++) {
+      const u = ((t * speed + off + k * 0.5) % 1);
+      for (let j = 0; j < 10; j++) {
+        const uu = u - j * 0.012; if (uu < 0) continue;
+        const p = quad(a, cp, b, uu); x.fillStyle = color.replace('A', (1 - j / 10) * 0.9);
+        x.beginPath(); x.arc(p.x, p.y, j === 0 ? 2.6 : 1.8 - j * 0.12, 0, 6.28); x.fill();
+      }
+      if (u > 0.97) ripple(b, color, (u - 0.97) / 0.03);
+    }
+  }
+  function ripple(p, color, ph) { x.strokeStyle = color.replace('A', (1 - ph) * 0.8); x.lineWidth = 1.5; x.beginPath(); x.arc(p.x, p.y, 4 + ph * 22, 0, 6.28); x.stroke(); }
+
+  let rocket = null, nextLaunch = 3;
+  function frame(now) {
+    if (!running) return;
+    const t = (now - t0) / 1000; mx += (tmx - mx) * 0.05; my += (tmy - my) * 0.05;
+    x.clearRect(0, 0, W, H);
+    // sky
+    const sky = x.createLinearGradient(0, 0, 0, P.horizon);
+    sky.addColorStop(0, '#02030f'); sky.addColorStop(0.55, '#070b30'); sky.addColorStop(1, '#13307a');
+    x.fillStyle = sky; x.fillRect(0, 0, W, P.horizon + 2);
+    const neb = x.createRadialGradient(W * 0.25 - mx * 30, H * 0.2, 10, W * 0.25, H * 0.2, W * 0.4);
+    neb.addColorStop(0, 'rgba(80,70,200,.18)'); neb.addColorStop(1, 'rgba(80,70,200,0)'); x.fillStyle = neb; x.fillRect(0, 0, W, P.horizon);
+    // stars
+    for (const s of stars) { x.globalAlpha = 0.3 + 0.5 * Math.abs(Math.sin(t * s.s * 2 + s.p)); x.fillStyle = '#d6e4ff'; x.beginPath(); x.arc(s.x - mx * 8, s.y - my * 6, s.r, 0, 6.28); x.fill(); }
+    x.globalAlpha = 1;
+    // shooting star
+    const ss = (t % 9) / 9; if (ss < 0.08) { const k = ss / 0.08, sx = W * (0.15 + k * 0.35), sy = H * (0.05 + k * 0.12); const g = x.createLinearGradient(sx, sy, sx - 80, sy - 26); g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(1, 'rgba(255,255,255,0)'); x.strokeStyle = g; x.lineWidth = 1.6; x.beginPath(); x.moveTo(sx, sy); x.lineTo(sx - 80, sy - 26); x.stroke(); }
+    // moon
+    const mo = { x: P.moon.x - mx * 14, y: P.moon.y - my * 10, r: P.moon.r };
+    const mg = x.createRadialGradient(mo.x - mo.r * 0.35, mo.y - mo.r * 0.35, mo.r * 0.2, mo.x, mo.y, mo.r);
+    mg.addColorStop(0, '#f6f8ff'); mg.addColorStop(1, '#8d99be'); x.shadowColor = 'rgba(190,205,255,.55)'; x.shadowBlur = 50;
+    x.fillStyle = mg; x.beginPath(); x.arc(mo.x, mo.y, mo.r, 0, 6.28); x.fill(); x.shadowBlur = 0;
+    x.fillStyle = 'rgba(90,100,140,.32)'; [[-.3, -.1, .2], [.25, .2, .13], [.05, .4, .09], [.36, -.3, .08]].forEach(([dx, dy, rr]) => { x.beginPath(); x.arc(mo.x + dx * mo.r, mo.y + dy * mo.r, rr * mo.r, 0, 6.28); x.fill(); });
+    // satellite orbit
+    const ox = P.sat.cx - mx * 18, oy = P.sat.cy - my * 12;
+    x.strokeStyle = 'rgba(255,170,7,.18)'; x.setLineDash([2, 6]); x.beginPath(); x.ellipse(ox, oy, P.sat.rx, P.sat.ry, -0.15, 0, 6.28); x.stroke(); x.setLineDash([]);
+    const sa = t * 0.25, sat = { x: ox + Math.cos(sa) * P.sat.rx * Math.cos(-0.15) - Math.sin(sa) * P.sat.ry * Math.sin(-0.15), y: oy + Math.cos(sa) * P.sat.rx * Math.sin(-0.15) + Math.sin(sa) * P.sat.ry * Math.cos(-0.15) };
+    x.save(); x.translate(sat.x, sat.y); x.rotate(Math.sin(t * 0.5) * 0.25);
+    x.fillStyle = '#e3ebff'; x.fillRect(-6, -5, 12, 10); x.fillStyle = '#3a6fd8';
+    x.fillRect(-26, -4, 17, 8); x.fillRect(9, -4, 17, 8); x.strokeStyle = 'rgba(255,255,255,.35)'; x.lineWidth = 0.6;
+    for (let i = 0; i < 3; i++) { x.beginPath(); x.moveTo(-26 + i * 5.7, -4); x.lineTo(-26 + i * 5.7, 4); x.stroke(); x.beginPath(); x.moveTo(9 + i * 5.7, -4); x.lineTo(9 + i * 5.7, 4); x.stroke(); }
+    x.fillStyle = '#FFAA07'; x.shadowColor = '#FFAA07'; x.shadowBlur = 12; x.beginPath(); x.arc(0, -8, 2.2, 0, 6.28); x.fill(); x.shadowBlur = 0; x.restore();
+    // plane crossing
+    const pu = (t * 0.045) % 1, plane = { x: W * (1.05 - pu * 1.2) - mx * 10, y: P.plane.y + Math.sin(pu * 6) * 6 - my * 8 };
+    x.save(); x.translate(plane.x, plane.y); x.fillStyle = '#dfe8fb';
+    x.beginPath(); x.moveTo(-14, 0); x.lineTo(12, -1.5); x.lineTo(14, 0); x.lineTo(12, 1.5); x.closePath(); x.fill();
+    x.beginPath(); x.moveTo(2, 0); x.lineTo(-4, -9); x.lineTo(-1, -9); x.lineTo(6, 0); x.fill(); x.beginPath(); x.moveTo(2, 0); x.lineTo(-4, 9); x.lineTo(-1, 9); x.lineTo(6, 0); x.fill();
+    x.fillStyle = (t * 2 % 1) < 0.5 ? '#ff5b5b' : 'rgba(255,91,91,.2)'; x.beginPath(); x.arc(-14, 0, 1.8, 0, 6.28); x.fill();
+    x.restore();
+    const ct = x.createLinearGradient(plane.x + 14, 0, plane.x + 140, 0); ct.addColorStop(0, 'rgba(255,255,255,.35)'); ct.addColorStop(1, 'rgba(255,255,255,0)');
+    x.strokeStyle = ct; x.lineWidth = 1.2; x.beginPath(); x.moveTo(plane.x + 14, plane.y); x.lineTo(plane.x + 140, plane.y + 2); x.stroke();
+    // atmosphere glow on horizon
+    const ag = x.createLinearGradient(0, P.horizon - 80, 0, P.horizon); ag.addColorStop(0, 'rgba(63,208,255,0)'); ag.addColorStop(1, 'rgba(63,208,255,.22)'); x.fillStyle = ag; x.fillRect(0, P.horizon - 80, W, 80);
+    // land: hills with city lights + tower + launch pad
+    const lx = -mx * 6;
+    x.fillStyle = '#071233'; x.beginPath(); x.moveTo(W * 0.24 + lx, P.horizon + 4);
+    x.bezierCurveTo(W * 0.32 + lx, P.horizon - H * 0.07, W * 0.40 + lx, P.horizon - H * 0.09, W * 0.47 + lx, P.horizon - H * 0.055);
+    x.bezierCurveTo(W * 0.55 + lx, P.horizon - H * 0.02, W * 0.62 + lx, P.horizon - H * 0.05, W * 0.70 + lx, P.horizon + 4); x.closePath(); x.fill();
+    x.strokeStyle = 'rgba(63,208,255,.35)'; x.lineWidth = 1.2; x.stroke();
+    for (let i = 0; i < 26; i++) { const lxp = W * (0.33 + (i * 37 % 100) / 300) + lx, lyp = P.horizon - H * 0.012 - (i * 13 % 7) * 1.2; x.fillStyle = `rgba(255,196,90,${0.35 + 0.35 * Math.sin(t * 2 + i)})`; x.fillRect(lxp, lyp, 1.6, 1.6); }
+    const tw = { x: P.tower.x + lx, y: P.tower.y }, th = H * 0.13;
+    x.strokeStyle = '#c9d6f2'; x.lineWidth = 2; x.beginPath(); x.moveTo(tw.x - 11, tw.y); x.lineTo(tw.x, tw.y - th); x.lineTo(tw.x + 11, tw.y);
+    for (let i = 1; i < 5; i++) { const yy = tw.y - th * i / 5, ww = 11 * (1 - i / 5); x.moveTo(tw.x - ww, yy); x.lineTo(tw.x + ww, yy); }
+    x.stroke(); const ttop = { x: tw.x, y: tw.y - th - 4 };
+    x.fillStyle = '#FFAA07'; x.shadowColor = '#FFAA07'; x.shadowBlur = 14; x.beginPath(); x.arc(ttop.x, ttop.y, 2.8, 0, 6.28); x.fill(); x.shadowBlur = 0;
+    for (let i = 0; i < 3; i++) { const ph = ((t * 0.6 + i / 3) % 1); x.strokeStyle = `rgba(47,224,196,${(1 - ph) * 0.7})`; x.lineWidth = 1.5; x.beginPath(); x.arc(ttop.x, ttop.y, 6 + ph * 46, Math.PI * 1.08, Math.PI * 1.92); x.stroke(); }
+    // dish near tower
+    x.save(); x.translate(tw.x + 34, tw.y - 2); x.fillStyle = '#c9d6f2'; x.fillRect(-1.5, -12, 3, 12); x.rotate(-0.9 + Math.sin(t * 0.3) * 0.15); x.beginPath(); x.ellipse(0, -14, 11, 5, 0, Math.PI, 0); x.fill(); x.restore();
+    // rocket launch
+    if (!reduce && t > nextLaunch && !rocket) rocket = { s: t };
+    const pad = { x: P.pad.x + lx, y: P.pad.y };
+    x.fillStyle = '#9fb0d4'; x.fillRect(pad.x - 7, pad.y, 14, 3); x.fillRect(pad.x + 6, pad.y - 22, 2, 22);
+    if (rocket) {
+      const k = (t - rocket.s) / 7;
+      if (k > 1) { rocket = null; nextLaunch = t + 10; }
+      else {
+        const e = k * k, rx = pad.x - e * W * 0.22, ry = pad.y - 10 - e * H * 0.85, ang = Math.atan2(-H * 0.85, -W * 0.22) + Math.PI / 2;
+        for (let j = 1; j < 28; j++) { const kk = Math.max(0, k - j * 0.006), ee = kk * kk; x.fillStyle = `rgba(255,${150 + j * 3},${60 + j * 5},${(1 - j / 28) * 0.5})`; x.beginPath(); x.arc(pad.x - ee * W * 0.22 + Math.sin(j) * 2, pad.y - 10 - ee * H * 0.85, 2 + j * 0.25, 0, 6.28); x.fill(); }
+        x.save(); x.translate(rx, ry); x.rotate(ang); x.fillStyle = '#eef3ff';
+        x.beginPath(); x.moveTo(0, -12); x.quadraticCurveTo(4, -6, 3.5, 6); x.lineTo(-3.5, 6); x.quadraticCurveTo(-4, -6, 0, -12); x.fill();
+        x.fillStyle = '#FFAA07'; x.beginPath(); x.moveTo(-3, 6); x.lineTo(0, 13 + Math.random() * 6); x.lineTo(3, 6); x.fill(); x.restore();
+      }
+    } else { x.fillStyle = '#eef3ff'; x.beginPath(); x.moveTo(pad.x, pad.y - 22); x.quadraticCurveTo(pad.x + 4, pad.y - 16, pad.x + 3.5, pad.y - 4); x.lineTo(pad.x - 3.5, pad.y - 4); x.quadraticCurveTo(pad.x - 4, pad.y - 16, pad.x, pad.y - 22); x.fill(); }
+    // sea: layered waves
+    const sea = x.createLinearGradient(0, P.horizon, 0, H); sea.addColorStop(0, '#0b2a6b'); sea.addColorStop(1, '#030a26');
+    x.fillStyle = sea; x.fillRect(0, P.horizon, W, H - P.horizon);
+    const layers = [[0.0, 3, 0.012, 0.7, 'rgba(63,208,255,.10)'], [0.25, 5, 0.009, -0.9, 'rgba(16,137,216,.18)'], [0.5, 7, 0.007, 1.2, 'rgba(16,137,216,.24)'], [0.75, 10, 0.005, -1.5, 'rgba(8,40,110,.55)']];
+    for (const [f, amp, fr, sp, col] of layers) {
+      const y0 = P.horizon + (H - P.horizon) * f * 0.85;
+      x.fillStyle = col; x.beginPath(); x.moveTo(0, H);
+      for (let px = 0; px <= W + 10; px += 8) { const yy = y0 + Math.sin(px * fr + t * sp) * amp + Math.sin(px * fr * 2.3 - t * sp * 0.7) * amp * 0.4 - my * 4 * f; x.lineTo(px, yy); }
+      x.lineTo(W, H); x.closePath(); x.fill();
+      x.strokeStyle = 'rgba(120,220,255,.16)'; x.lineWidth = 1; x.stroke();
+    }
+    // moon reflection on water
+    for (let i = 0; i < 12; i++) { const ry = P.horizon + 8 + i * 7, w2 = 20 + Math.sin(t * 2 + i) * 8; x.fillStyle = `rgba(220,230,255,${0.14 - i * 0.01})`; x.fillRect(mo.x - w2 / 2 + Math.sin(t + i) * 4, ry, w2, 1.5); }
+    // ship
+    const sh = { x: P.ship.x - mx * 4, y: P.ship.y + Math.sin(t * 1.6) * 2.5 };
+    x.save(); x.translate(sh.x, sh.y); x.rotate(Math.sin(t * 1.3) * 0.03);
+    x.fillStyle = '#c9d6f2'; x.beginPath(); x.moveTo(-34, 0); x.lineTo(34, 0); x.lineTo(26, 10); x.lineTo(-28, 10); x.closePath(); x.fill();
+    x.fillStyle = '#dfe8fb'; x.fillRect(-14, -12, 26, 12); x.fillRect(-6, -20, 12, 8);
+    x.strokeStyle = '#dfe8fb'; x.lineWidth = 1.6; x.beginPath(); x.moveTo(0, -20); x.lineTo(0, -36); x.moveTo(-6, -30); x.lineTo(6, -30); x.stroke();
+    x.save(); x.translate(0, -30); x.rotate(t * 2); x.strokeStyle = '#3FD0FF'; x.beginPath(); x.moveTo(-8, 0); x.lineTo(8, 0); x.stroke(); x.restore();
+    x.fillStyle = '#FFAA07'; x.beginPath(); x.arc(0, -37, 2.2, 0, 6.28); x.fill();
+    x.restore();
+    const stop = { x: sh.x, y: sh.y - 37 };
+    for (let i = 0; i < 2; i++) { const ph = ((t * 0.5 + i / 2) % 1); x.strokeStyle = `rgba(63,208,255,${(1 - ph) * 0.6})`; x.lineWidth = 1.4; x.beginPath(); x.arc(stop.x, stop.y, 5 + ph * 34, Math.PI * 1.1, Math.PI * 1.9); x.stroke(); }
+    // links: ship -> tower, tower -> satellite, ship -> satellite, satellite -> moon, plane -> tower
+    link(stop, ttop, H * 0.10, 'rgba(63,208,255,A)', t, 0.22, 0);
+    link(ttop, sat, H * 0.06, 'rgba(47,224,196,A)', t, 0.28, 0.3);
+    link(stop, sat, H * 0.14, 'rgba(143,184,255,A)', t, 0.18, 0.6);
+    link(sat, { x: mo.x + mo.r * 0.7, y: mo.y + mo.r * 0.7 }, H * 0.04, 'rgba(255,170,7,A)', t, 0.15, 0.1);
+    if (plane.x > 0 && plane.x < W) link(plane, ttop, -H * 0.05, 'rgba(143,184,255,A)', t, 0.35, 0.5);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* ---------- spectrum analyzer ---------- */
+  const sc = document.getElementById('spec'), sx = sc.getContext('2d'), ro = document.getElementById('readout');
+  function sSize() { const d = Math.min(devicePixelRatio || 1, 2); sc.width = sc.clientWidth * d; sc.height = sc.clientHeight * d; sx.setTransform(d, 0, 0, d, 0, 0); }
+  addEventListener('resize', sSize); sSize();
+  const peaks = [[0.06, 0.55], [0.24, 0.82], [0.41, 0.45], [0.6, 0.66], [0.78, 0.4], [0.9, 0.52]];
+  let hold = null, specOn = true;
+  new IntersectionObserver((es) => { specOn = es[0].isIntersecting; }).observe(sc);
+  function spec(now) {
+    if (specOn) {
+      const t = now / 1000, w = sc.clientWidth, h = sc.clientHeight;
+      sx.clearRect(0, 0, w, h); sx.strokeStyle = 'rgba(111,127,174,.16)'; sx.lineWidth = 1;
+      for (let i = 1; i < 10; i++) { sx.beginPath(); sx.moveTo(w * i / 10, 0); sx.lineTo(w * i / 10, h); sx.stroke(); }
+      for (let i = 1; i < 6; i++) { sx.beginPath(); sx.moveTo(0, h * i / 6); sx.lineTo(w, h * i / 6); sx.stroke(); }
+      const pts = [];
+      for (let px = 0; px <= w; px += 2) { const f = px / w; let v = 0.07 + Math.random() * 0.05; for (const [pf, pa] of peaks) { const d = (f - pf) / 0.011; v += pa * (0.85 + 0.15 * Math.sin(t * 2 + pf * 20)) * Math.exp(-d * d); } pts.push([px, h - 24 - v * (h - 56)]); }
+      if (!hold || hold.length !== pts.length) hold = pts.map((p) => p.slice()); else pts.forEach((p, i) => { hold[i][1] = Math.min(hold[i][1] + 0.6, p[1]); });
+      sx.strokeStyle = 'rgba(255,170,7,.35)'; sx.lineWidth = 1; sx.beginPath(); hold.forEach(([a, b], i) => i ? sx.lineTo(a, b) : sx.moveTo(a, b)); sx.stroke();
+      const g = sx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, 'rgba(63,208,255,.4)'); g.addColorStop(1, 'rgba(63,208,255,0)');
+      sx.fillStyle = g; sx.beginPath(); sx.moveTo(0, h); pts.forEach(([a, b]) => sx.lineTo(a, b)); sx.lineTo(w, h); sx.fill();
+      sx.shadowColor = '#3FD0FF'; sx.shadowBlur = 8; sx.strokeStyle = '#3FD0FF'; sx.lineWidth = 1.6; sx.beginPath(); pts.forEach(([a, b], i) => i ? sx.lineTo(a, b) : sx.moveTo(a, b)); sx.stroke(); sx.shadowBlur = 0;
+      const pk = peaks[Math.floor(t / 2.5) % peaks.length], mxp = pk[0] * w, myp = h - 24 - (0.07 + pk[1]) * (h - 56);
+      sx.fillStyle = '#FFAA07'; sx.beginPath(); sx.moveTo(mxp, myp - 6); sx.lineTo(mxp - 6, myp - 16); sx.lineTo(mxp + 6, myp - 16); sx.fill();
+      ro.textContent = `MKR 1 · ${(pk[0] * 40).toFixed(3)} GHz · ${(-60 + pk[1] * 60).toFixed(1)} dBm`;
+      const swp = ((t * 0.22) % 1) * w; sx.strokeStyle = 'rgba(255,170,7,.55)'; sx.beginPath(); sx.moveTo(swp, 0); sx.lineTo(swp, h); sx.stroke();
+    }
+    if (!reduce) setTimeout(() => requestAnimationFrame(spec), 50);
+  }
+  requestAnimationFrame(spec);
+
+  /* ---------- count-up ---------- */
+  if (!reduce) {
+    const cio = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return; cio.unobserve(e.target);
+      const el = e.target, to = +el.dataset.count, from = to > 1000 ? to - 80 : 0, t1 = performance.now();
+      const step = (n) => { const p = Math.min(1, (n - t1) / 1600), v = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))); el.textContent = v; if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }), { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach((el) => cio.observe(el));
+  }
+})();
+</script>
+</body>
+</html>

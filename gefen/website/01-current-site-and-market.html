@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גפן - אתר נוכחי וסקר שוק</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#141948;--muted:#59617A;--line:#D5DDE8;--acc:#0D69AD;--amber:#B57800;--amberbg:#FFF6E2;--code:#eef1f6;--ok:#1F7A4D;--bad:#B03A2E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1230;--card:#161B40;--ink:#E9EEF8;--muted:#A2ABC6;--line:#2B3263;--acc:#4FA8EC;--amber:#FFB52E;--amberbg:#3A2C0E;--code:#1B2048;--ok:#6FD3A0;--bad:#FF8A7A;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI",Arial,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:26px 16px 50px}
+header{border-bottom:3px solid var(--acc);padding-bottom:12px;margin-bottom:16px}
+h1{margin:0;font-size:24px}.sub{color:var(--muted);margin-top:4px;font-size:13.5px}
+h2{font-size:18px;margin:28px 0 8px}h3{font-size:15.5px;margin:16px 0 4px}
+p{margin:6px 0;max-width:84ch}
+ul,ol{margin:6px 0;padding-inline-start:22px}li{margin:3px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:14px;margin-top:6px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{background:var(--code);font-weight:600;font-size:12.5px;color:var(--muted)}
+.v,code{font-family:Consolas,monospace;font-size:13px;direction:ltr;unicode-bidi:isolate}
+a{color:var(--acc)}
+.scroll{overflow-x:auto}
+.note{background:var(--card);border:1px solid var(--line);border-inline-start:3px solid var(--acc);border-radius:8px;padding:9px 12px;margin-top:12px;font-size:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media (max-width:720px){.two{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.box h3{margin-top:2px}
+footer{color:var(--muted);font-size:12.5px;margin-top:28px;border-top:1px solid var(--line);padding-top:10px}
+</style></head><body><div class="wrap">
+
+<header><h1>אתר הבית של גפן - האתר הנוכחי וסקר שוק</h1>
+<div class="sub">BizTechoff · 4.11.2026 · מסמך עבודה לפני הצעה</div></header>
+
+<h2>1. האתר הנוכחי - gelectronic.co.il</h2>
+<p>נקרא ב-4.11.2026: דף הבית, אודות, שירותינו, הסמכות, לקוחות וצור קשר. עמודי המידע (מאמרים, FAQ, מדריך מכשירי מדידה ב-5 פרקים, המלצות, חברות ציוד) קיימים בתפריט ולא נקראו לעומק.</p>
+<div class="scroll"><table><tbody>
+<tr><td style="width:28%">טכנולוגיה</td><td>WordPress + Elementor, מאחורי Cloudflare. ‏Google Tag Manager, תוסף נגישות. עברית בלבד</td></tr>
+<tr><td>עדכון אחרון</td><td>מרץ-אפריל 2024 (לפי תגיות העמודים)</td></tr>
+<tr><td>מסר מרכזי</td><td>"חברה מובילה המספקת שירותי כיול, תיקון, תחזוקה ושירותי עזר נוספים לציוד מדידה..." · סלוגן: "יש כיול ויש <i>כיול</i>"</td></tr>
+<tr><td>עובדות חזקות</td><td>מאז 1985 (הוקמה בתוך ECI) · ‏ISO/IEC 17025 ו-ISO 9001 מטעם A2LA, תעודה 3537.01 · ‏DC עד 40GHz: ‏RF, ‏Telecom, סיבים אופטיים · נציג שירות בלעדי ל-IFR/Marconi/Aeroflex, ‏Kikusui ועוד · השכרת ציוד חלופי · ניהול צב"ד</td></tr>
+<tr><td>לקוחות שמוצגים</td><td>ECI, ‏Elbit, ‏IAI, ‏Rafael, ‏Gilat, ‏Flex, ‏El Al, ‏Cobham, ‏RADWIN, ‏Alltest, ‏Eastronics, צה"ל, משהב"ט ועוד</td></tr>
+<tr><td>המלצות</td><td>Intel (Efrat K.), בנטב טכנולוגיות ליפוף, תדיראן תקשורת</td></tr>
+</tbody></table></div>
+<h3>חולשות שנמצאו</h3>
+<ul>
+<li>עיצוב של תבנית Elementor כללית; אין זהות ויזואלית של חברת RF.</li>
+<li>אין גרסה באנגלית, למרות לקוחות בינלאומיים ותוכן טכני באנגלית.</li>
+<li>קישור שבור בעמוד אודות (<span class="v">https://https://...</span>), כפתורי "עוד" שמובילים ל-<span class="v">#</span>, טקסט placeholder ("Button title").</li>
+<li>מספרי טלפון לא עקביים (בווידג'ט החזרה מופיע 053-5957272, שלא מופיע בשום מקום אחר), וכתובות מייל מוסתרות.</li>
+<li>שגיאת כתיב בלוגו של Fluke, ההסמכה מוצגת רק כקישור ל-PDF (קובץ מ-07.2023), אין שעות פעילות.</li>
+<li>אין כניסה ללקוחות ואין בקשת כיול מקוונת - רק "השאירו פרטים".</li>
+</ul>
+
+<h2>2. סקר שוק - האתרים החזקים בתחום</h2>
+<p>האתרים נקראו כטקסט; צבעים ואנימציה הוסקו מהקוד ולא נראו בדפדפן. לא נטענו: transcat.com/calibration-services, דף הכיול של Keysight, ‏pk-labs.com, ‏rdt.co.il.</p>
+<div class="scroll"><table>
+<thead><tr><th>חברה</th><th>מה בולט באתר</th></tr></thead>
+<tbody>
+<tr><td><a href="https://www.trescal.com">Trescal</a></td><td>וידאו ברקע, כותרת אחת חזקה ("Accuracy the world trusts"), "Request a quote" חוזר, חיפוש "האם אתם מכיילים את המכשיר שלי", כניסה לפורטל נכסים בכותרת. בדף ה-<a href="https://www.trescal.com/calibration-domains/rf-and-microwave-calibration/">RF</a>: מספרים מדויקים (עד 50GHz) ותעודות 24/7 בפורטל</td></tr>
+<tr><td><a href="https://www.simco.com">SIMCO</a></td><td>מספרים גדולים (60+ שנים, 15M+ כיולים), איסוף ומשלוח, כיול באתר הלקוח, כניסה לפורטל (CERDAAC) בכותרת, מקרי בוחן והמלצות</td></tr>
+<tr><td><a href="https://keysight.com/ch/de/products/services/support-services.html">Keysight</a></td><td>אריחי שירות, פורטל לפתיחה ומעקב, ארבע אפשרויות מסירה (שליחה, איסוף, באתר, מהנדס צמוד)</td></tr>
+<tr><td><a href="https://www.rohde-schwarz.com/us/_258111.html">Rohde &amp; Schwarz</a></td><td>"How can we help you today?" בכרטיסים, בקשת שירות וכיול מקוונת, צבע מותג אחד חזק</td></tr>
+<tr><td><a href="https://www.tek.com.cn/calibration-services/rf-calibration">Tektronix</a></td><td>כיול באתר עם תעודה במקום, מספרים (9,000+ יצרנים, עד 50GHz). עמוס טקסט, נראה מיושן</td></tr>
+<tr><td><a href="https://transcat.com/c3-asset-management">Transcat</a></td><td>פורטל C3: תעודות, סטטוס נכסים והיסטוריה, דשבורד - מוצג כיתרון מרכזי</td></tr>
+<tr><td><a href="https://fluke.com/en/support/calibration-services-electrical-rf">Fluke Calibration</a></td><td>מחיר קבוע, תעודות הסמכה שאפשר לפתוח, טופס בקשת שירות מקוון</td></tr>
+<tr><td><a href="https://www.sii.org.il/he/calibration/">מכון התקנים - מעבדות כיול</a></td><td>הסמכה ו-11 תחומי כיול, אנשי קשר בשם, בקשת הצעה במייל או וואטסאפ. סטטי, בלי טופס מקוון</td></tr>
+<tr><td><a href="https://mba.co.il/service/electronic-calibration/?lang=en">QCC (כיבוץ הזורע)</a></td><td>תחולות הסמכה, לוגו ILAC, כיול באתר, "Request for quote" ווואטסאפ. ‏WordPress עם תמונות מ-2018</td></tr>
+</tbody></table></div>
+
+<div class="two" style="margin-top:14px">
+<div class="box"><h3>מה כל אתר בתחום מציג</h3><ol>
+<li>"בקשת הצעת מחיר" ככפתור הראשי</li><li>הסמכת ISO 17025 בולטת, עם קישור לתעודה ולתחולה</li><li>רשת של תחומי כיול / סוגי מכשירים</li><li>היצרנים שמטופלים</li><li>טווחים טכניים מדויקים (GHz)</li><li>כיול במעבדה ובאתר הלקוח</li><li>איסוף ומשלוח</li><li>מספרים: שנים, כיולים</li><li>לקוחות או תעשיות</li><li>טלפון, צ'אט או וואטסאפ</li></ol></div>
+<div class="box"><h3>מה יש רק לטובים</h3><ol>
+<li><b>פורטל לקוחות</b> עם תעודות, היסטוריה ומועדי כיול</li><li>מעקב סטטוס כיול</li><li>חיפוש "האם אתם מכיילים את המכשיר שלי"</li><li>טופס בקשת שירות מקוון במקום מייל</li><li>כניסה לפורטל בכותרת האתר</li><li>אפשרויות מסירה ברורות</li><li>מקרי בוחן, המלצות ותוכן</li></ol></div>
+</div>
+<p class="note"><b>היתרון של גפן:</b> לגפן כבר יש את מה שרק הגדולים מציגים - פורטל לקוחות עם תעודות, תוקף ותזכורות. אף אתר שנקרא לא מפרסם זמן אספקה במספר; מספר אמיתי (למשל "5 ימי עבודה") יבדיל את גפן - זו מסקנה שלנו, ותלויה בנתון שגפן מאשרת.</p>
+
+<h2>3. מה המוקאפ לוקח מזה</h2>
+<ul>
+<li>כותרת אחת חזקה על רקע חי: אנטנה על כדור הארץ ששולחת גלי רדיו עד הירח, ואות מאופנן לאורך הקרן.</li>
+<li>שני כפתורים בכל מקום: <b>בקשת כיול</b> (ענבר, הצבע היחיד שבולט) ו<b>כניסת לקוחות</b>.</li>
+<li>פס מספרים: 1985, ‏40GHz, ‏ISO/IEC 17025, ‏40+ שנות ניסיון.</li>
+<li>6 כרטיסי שירות, ותצוגת נתח ספקטרום חי לתחום <bdi class="v">DC - 40 GHz</bdi> עם כל משפחות המכשירים.</li>
+<li>"איך זה עובד" בארבעה צעדים, והצגת הפורטל עם דשבורד לדוגמה.</li>
+<li>הסמכה בולטת עם מספר תעודה, יצרנים ולקוחות (בטקסט, עד שגפן מאשרת לוגואים), המלצה אמיתית מהאתר הקיים.</li>
+<li>אנשי קשר לפי תחום, וטופס בקשת כיול עם רשימת מכשירים.</li>
+</ul>
+
+<footer>מוטי דרוקמן · BizTechoff · 052-652-6063 · moti@biztechoff.co.il</footer>
+</div></body></html>

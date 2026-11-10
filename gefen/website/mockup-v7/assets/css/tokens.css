@@ -1,0 +1,7 @@
+/* v7 "Signal" - exhibition look: deep night, Gefen logo blues that glow, one amber action */
+:root{
+  --night:#020613; --deep:#061029; --navy:#0a1a44; --logo:#0d69ad; --blue:#1089d8; --sky:#4cc3ff; --ice:#d9f1ff;
+  --amber:#ffaa07; --mint:#3be8b0; --txt:#e8f0ff; --muted:#93a3c7; --line:rgba(120,170,255,.16); --glass:rgba(255,255,255,.045);
+  --nav-h:76px; --r:22px;
+  --font:'Heebo',system-ui,'Segoe UI',Arial,sans-serif; --mono:'JetBrains Mono',Consolas,monospace;
+}

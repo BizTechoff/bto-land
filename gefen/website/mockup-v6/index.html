@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+
+<title>גפן שירותי אלקטרוניקה - מעבדת כיול מוסמכת | קונספט v6</title>
+<link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+<a class="skip" href="#main">דלג לתוכן</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="גפן שירותי אלקטרוניקה - דף הבית"><img src="assets/img/logo.png" alt="Gefen Electronic Services Ltd."></a>
+    <nav class="menu" aria-label="ניווט ראשי">
+      <a href="index.html#services">שירותים</a>
+      <a href="index.html#range">יכולות</a>
+      <a href="index.html#how">איך זה עובד</a>
+      <div class="dd">
+        <button type="button" aria-haspopup="true">מרכז הידע ▾</button>
+        <div class="panel">
+          <a href="knowledge.html#guide"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h7a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H4zM20 5h-4a3 3 0 0 0-3 3"/></svg></span><span><b>מדריך כיול מכשירי מדידה</b><small>5 פרקים - מהו כיול ועד ביצוע בפועל</small></span></a>
+          <a href="knowledge.html#faq"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/></svg></span><span><b>שאלות נפוצות</b><small>כל כמה זמן לכייל, ומה זה כיוונון</small></span></a>
+          <a href="knowledge.html#tools"><span class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span><span><b>מחשבון GES וטבלאות המרה</b><small>dBm, mW, W ועוד</small></span></a>
+          <a href="knowledge.html#articles"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span><span><b>מאמרים</b><small>מטרולוגיה, אי ודאות, תקנים</small></span></a>
+        </div>
+      </div>
+      <a href="index.html#about">אודות</a>
+      <a href="index.html#contact">צור קשר</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-line" href="https://gefen.biztechoff.co.il" target="_blank" rel="noopener">פורטל לקוחות</a>
+      <a class="btn btn-amber" href="index.html#contact">בקשת כיול <span class="arr">←</span></a>
+    </div>
+    <button class="burger" type="button" aria-label="תפריט">☰</button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero gridbg">
+  <div class="wrap">
+    <div class="copy">
+      <span class="eyebrow">ISO/IEC 17025 · A2LA 3537.01 · מאז 1985</span>
+      <h1>יש כיול,<br>ויש <span class="accent">דיוק.</span></h1>
+      <p class="lead">מעבדת כיול ותיקון לציוד בדיקה ומדידה אלקטרוני - מ-DC ועד 40 GHz, Telecom, RF וסיבים אופטיים. כל מכשיר חוזר אליכם מכויל, עם תעודה ותוצאות מדידה מלאות.</p>
+      <div class="cta">
+        <a class="btn btn-amber" href="#contact">בקשת כיול או הצעת מחיר <span class="arr">←</span></a>
+        <a class="btn btn-line" href="knowledge.html">למרכז הידע</a>
+      </div>
+      <div class="facts"><span class="chip"><i></i>כיול</span><span class="chip"><i></i>תיקון</span><span class="chip"><i></i>כוונון</span><span class="chip"><i></i>בדיקה</span><span class="chip"><i></i>ציוד בהשאלה</span></div>
+    </div>
+    <div class="inst" aria-label="הדגמה: מכשיר מדידה שמכייל את עצמו">
+      <div class="face">
+        <svg id="dial" viewBox="0 0 400 400" role="img" aria-label="שעון סטייה: המחוג מתייצב באזור הסבולת">
+          <defs>
+            <radialGradient id="bezel" cx=".4" cy=".35"><stop offset="0" stop-color="#ffffff"/><stop offset=".75" stop-color="#e3ecf6"/><stop offset="1" stop-color="#c4d3e4"/></radialGradient>
+          </defs>
+          <g class="reticle"><line x1="200" y1="10" x2="200" y2="390"/><line x1="10" y1="200" x2="390" y2="200"/></g>
+          <circle cx="200" cy="200" r="182" class="dial-bezel"/>
+          <circle cx="200" cy="200" r="168" class="dial-face"/>
+          <g class="vernier" id="vernier"></g>
+          <circle cx="200" cy="200" r="150" class="dial-ring"/>
+          <g id="scale"></g>
+          <text x="200" y="268" class="unit">DEVIATION · ppm</text>
+          <text x="200" y="286" class="unit" style="fill:#1089d8">GES · REF 10 MHz</text>
+          <g class="needle" id="needle"><path d="M197 200 L200 66 L203 200 Z"/><circle class="tip" cx="200" cy="72" r="3"/></g>
+          <circle cx="200" cy="200" r="13" class="hub"/><circle cx="200" cy="200" r="5" class="hub2"/>
+        </svg>
+      </div>
+      <div class="panel-row">
+        <div class="knob-wrap">
+          <div class="knob" id="knob" role="slider" tabindex="0" aria-label="כפתור כוונון - גררו או השתמשו בחצים" aria-valuemin="-150" aria-valuemax="150"></div>
+          <small>גררו את<br>כפתור הכוונון</small>
+        </div>
+        <div class="readout" id="readout"><small>DEVIATION</small>-4.80 ppm</div>
+        <span class="lamp out" id="lamp">ADJUSTING</span>
+        <button class="cal-btn" id="calibrate" type="button">כיול</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="wrap row">
+    <div class="t rv"><b>1985</b><span>הוקמה בתוך ECI</span></div>
+    <div class="t rv d1"><b>17025</b><span>ISO/IEC · הסמכת A2LA</span></div>
+    <div class="t rv d2"><b>9001</b><span>ISO · ניהול איכות</span></div>
+    <div class="t rv d3"><b>40 GHz</b><span>טווח כיול עליון</span></div>
+    <div class="t rv"><b>30+</b><span>שנות ניסיון בצב"ד</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">שירותים</span><h2>מעבדה אחת לכל ציוד הבדיקה שלכם</h2><p class="lead">כיול ותיקון של כל סוגי הצב"ד, של כל היצרנים הגדולים - בסטנדרטים בינלאומיים, עם ציוד ייחוס חדיש ומתקדם.</p></div>
+    <div class="svc">
+      <article class="card ticks rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13l4-4M12 5V3M8 3h8"/></svg></div><h3>כיול</h3><p>השוואה מול ציוד ייחוס בדיוק גבוה, לפי ספר היצרן ולפי כל המפרט, עם תעודת כיול ותוצאות מדידה.</p><span class="tag">ISO/IEC 17025</span></article>
+      <article class="card ticks rv d1"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5L19 19M5 19l2.5-2.5M16.5 7.5L19 5"/></svg></div><h3>כוונון</h3><p>הבאת המכשיר חזרה לדיוק לפי המלצות היצרן, כשהכיול מראה סטייה מהמפרט.</p></article>
+      <article class="card ticks rv d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.2L3.5 17.4l3.1 3.1 5.7-5.7a4 4 0 0 0 5.2-5.3l-2.4 2.4-2.6-.5-.5-2.6z"/></svg></div><h3>תיקון</h3><p>אבחון ותיקון תקלות, החלפת רכיבים, ובדיקה מלאה לפני החזרה ללקוח.</p></article>
+      <article class="card ticks rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></div><h3>Telecom וסיבים אופטיים</h3><p>הסמכת ISO 17025 לכיול ציוד סיבים אופטיים, OTDR, ציוד Telecom ו-Laser Diode Drivers.</p><span class="tag">מוסמך לסיבים אופטיים</span></article>
+      <article class="card ticks rv d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h4M7 14h2M15 12h2"/></svg></div><h3>ציוד בדיקה בהשאלה</h3><p>ציוד חלופי בזמן שהמכשיר שלכם בכיול או בתיקון - כדי שהייצור לא יעצור.</p></article>
+      <article class="card ticks rv d2"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5M8 11h6M11 8v6"/></svg></div><h3>ייעוץ ובחירת ציוד</h3><p>ליווי בבחירת הציוד המתאים למדידה שלכם, ובתכנון מרווחי הכיול.</p></article>
+    </div>
+    <div class="special rv"><b>שירותים מיוחדים:</b><span class="chip">תיקון מחברים אופטיים</span><span class="chip">כיול מצלמות תרמיות</span><span class="chip">כיול JITTER</span><span class="chip">כיול Line Simulators</span><span class="chip">כיול OTDR</span><span class="chip">Fiber Adaptors</span></div>
+  </div>
+</section>
+
+<!-- RANGE -->
+<section class="range" id="range">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">יכולות</span><h2 class="ltr" style="text-align:right">DC - 40 GHz</h2><p class="lead">Cellular, Telecom, RF ועד Fiber Optics - כל התחום על סרגל אחד.</p></div>
+    <div class="ruler rv" aria-hidden="true"><svg id="ruler"></svg></div>
+    <div class="families rv">
+      <div>DMM</div><div>Oscilloscope</div><div>Signal Generators</div><div>Spectrum Analyzers</div><div>Network Analyzers</div><div>Fiber Optics</div>
+      <div>FFT Analyzers</div><div>Ovens</div><div>Logic Analyzers</div><div>Video</div><div>RF Signal Generators</div><div>Power Supplies</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXCLUSIVE SERVICE REP -->
+<section id="reps">
+  <div class="wrap reps">
+    <div class="rv"><span class="eyebrow">נציגות שירות</span><h2>נציגת השירות הבלעדית של יצרנים בינלאומיים</h2><p class="lead">שירות, כיול ותיקון מורשים - עם גישה לידע ולחלקים של היצרן.</p></div>
+    <div class="names rv d1"><span>IFR</span><span>Marconi</span><span>Aeroflex</span><span>GL</span><span>Kikusui</span><span>Sunrise</span><span>Noyes / AFL</span></div>
+  </div>
+</section>
+
+<!-- HOW + PORTAL -->
+<section id="how" class="gridbg">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">איך זה עובד</span><h2>מהבקשה ועד התעודה</h2></div>
+    <ol class="steps">
+      <li class="rv"><h4>בקשה</h4><p>טופס באתר או בפורטל, עם רשימת המכשירים וקובץ דרישות.</p></li>
+      <li class="rv d1"><h4>איסוף או מסירה</h4><p>תיאום מול המחסן - חניית משאיות ופריקה במקום.</p></li>
+      <li class="rv d2"><h4>כיול, כוונון ותיקון</h4><p>לפי נוהלי ISO/IEC 17025, עם ציוד ייחוס מעוקב.</p></li>
+      <li class="rv d3"><h4>תעודה בפורטל</h4><p>התעודה זמינה להורדה, ותזכורת לפני מועד הכיול הבא.</p></li>
+    </ol>
+    <div class="portal rv">
+      <div>
+        <h3>כל התעודות שלכם. במקום אחד.</h3>
+        <p>פורטל הלקוחות של גפן - כניסה בקוד חד-פעמי למייל, בלי סיסמאות.</p>
+        <ul><li>כל תעודות הכיול להורדה, לפי מכשיר ואתר</li><li>תוקף כל מכשיר והתראה לפני שהוא פג</li><li>בקשת כיול או שירות בלחיצה</li></ul>
+        <a class="btn btn-amber" href="https://gefen.biztechoff.co.il" target="_blank" rel="noopener">כניסה לפורטל <span class="arr">←</span></a>
+      </div>
+      <div class="mini" aria-hidden="true">
+        <table><thead><tr><th>מכשיר</th><th>מס' רישום</th><th>בתוקף עד</th><th></th></tr></thead>
+          <tbody><tr><td>Spectrum Analyzer</td><td class="ltr">64G14511</td><td>26.10.2028</td><td><span class="pill ok">בתוקף</span></td></tr>
+          <tr><td>Power Supply</td><td class="ltr">60G8361</td><td>26.10.2028</td><td><span class="pill ok">בתוקף</span></td></tr>
+          <tr><td>Signal Generator</td><td class="ltr">60G7508</td><td>02.12.2026</td><td><span class="pill warn">לקראת תפוגה</span></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE TEASER -->
+<section id="knowledge">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">מרכז הידע</span><h2>ידע שנצבר בארבעים שנות כיול</h2><p class="lead">מדריך מלא, תשובות לשאלות הנפוצות, וכלים לחישוב מהיר - פתוחים לכולם.</p></div>
+    <div class="kc">
+      <div class="course rv">
+        <span class="tag">מדריך · 5 פרקים</span>
+        <h3 style="margin-top:10px">מדריך כיול מכשירי מדידה</h3>
+        <ol>
+          <li><a href="article.html"><span class="n">1</span><span class="t">מהו כיול מכשירים?</span><span class="m">קריאה ←</span></a></li>
+          <li><a href="article.html"><span class="n">2</span><span class="t">כיצד נשמרים סטנדרטים בינלאומיים?</span><span class="m">קריאה ←</span></a></li>
+          <li><a href="article.html"><span class="n">3</span><span class="t">מדוע חשוב לכייל מכשירים?</span><span class="m">קריאה ←</span></a></li>
+          <li><a href="article.html"><span class="n">4</span><span class="t">כיצד מתמודדים עם אי ודאות?</span><span class="m">קריאה ←</span></a></li>
+          <li><a href="article.html"><span class="n">5</span><span class="t">מהו ציוד כיול ואיך מתבצע הכיול בפועל?</span><span class="m">קריאה ←</span></a></li>
+        </ol>
+      </div>
+      <div class="side">
+        <div class="tool rv d1">
+          <h3>מחשבון GES</h3><p>המרת הספק: הקלידו ערך באחד השדות.</p>
+          <div class="conv">
+            <label>dBm<input id="c-dbm" inputmode="decimal" value="0"></label>
+            <label>mW<input id="c-mw" inputmode="decimal" value="1"></label>
+            <label>W<input id="c-w" inputmode="decimal" value="0.001"></label>
+          </div>
+        </div>
+        <div class="faq rv d2">
+          <details open><summary>מהו כיול (Calibration)?</summary><p>כיול הוא השוואה בין מכשיר ייחוס בדיוק גבוה למכשיר המדידה שלכם.</p></details>
+          <details><summary>מהו כיוונון (Adjustment)?</summary><p>כיוונון הוא תהליך הבאת המכשיר לדיוק על פי המלצות היצרן.</p></details>
+          <details><summary>כל כמה זמן יש לבצע כיול?</summary><p>מומלץ להתחיל לפי המלצת היצרן ולעקוב אחר הסטטיסטיקות. אחרי לפחות שלושה כיולים רצופים רואים מגמה, ומחליטים אם להגדיל או להקטין את מרווח הכיול - בדרך כלל בשינוי של 20%-30%.</p></details>
+          <a class="btn btn-line" href="knowledge.html#faq" style="margin-top:4px">לכל השאלות <span class="arr">←</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="gridbg" style="padding-top:60px">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">המלצות</span><h2>מה אומרים עלינו</h2></div>
+    <div class="quotes">
+      <blockquote class="rv"><p class="ltr" style="text-align:right">"Communication, expertise, dedication, accuracy and cooperation was excellent."</p><cite>Efrat K., Intel</cite></blockquote>
+      <blockquote class="rv d1"><p>"תודה רבה מקרב לב על השירות המקצועי והמהיר, וכן תודה לאולג על השירות במפעלינו והסבלנות לדון אתנו בנושאים החשובים שהעלינו."</p><cite>Neriya Cohen, Q.C. Manager, Benatav Advanced Winding Technologies</cite></blockquote>
+      <blockquote class="rv d2"><p>"המקצוענות שלכם ואוריינטציית הלקוח שלכם... אני מאוד מודה לך על 'המבצע' שעשיתם עבורנו להצלחת הסיקור של הלקוח הסיני הגדול שלנו. הנני ממליץ עליכם בכל לב."</p><cite>שמעון וייצמן, מנהל אבטחת איכות, תדיראן תקשורת</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about">
+    <div class="story rv">
+      <span class="eyebrow">אודות</span>
+      <h2>מהוותיקות והמקצועיות בארץ</h2>
+      <p>מעבדת גפן שירותי אלקטרוניקה (GES) הוקמה בשנת 1985 בחברת ECI, והפכה לחברה עצמאית בהנהלת ארקדי גפן - ממייסדי המעבדה ומנהלה. לגפן למעלה מ-30 שנות ניסיון בתחום הצב"ד, ובין היתר שימש חמש שנים כאחראי מעבדת צב"ד בחיל האוויר.</p>
+      <p>צוות המעבדה מונה שבעה אנשים - מהנדסי אלקטרוניקה בכירים וטכנאים מיומנים, שמקפידים על תוצאות איכותיות ואמינות.</p>
+      <div class="clients"><span class="chip">ECI</span><span class="chip">צה"ל</span><span class="chip">משהב"ט</span><span class="chip">EL AL</span><span class="chip">Elbit</span><span class="chip">Elta</span><span class="chip">Orbit</span><span class="chip">Tadiran</span><span class="chip">Gilat</span><span class="chip">Marvell</span><span class="chip">Sanmina</span><span class="chip">Flextronics</span><span class="chip">Finisar</span><span class="chip">Alltest</span><span class="chip">Eastronics</span></div>
+    </div>
+    <div class="card rv d1" style="text-align:center">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 190 190"><defs><path id="circ" d="M95 95 m-80 0 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0"/></defs><text><textPath href="#circ">ACCREDITED LAB · ISO/IEC 17025 · A2LA · CERT 3537.01 · </textPath></text></svg>
+        <div class="core"><div><small>ISO/IEC</small><b>17025</b><small>A2LA</small></div></div>
+      </div>
+      <h3>הסמכות</h3>
+      <p class="lead" style="margin:6px auto 14px">ISO/IEC 17025 ו-ISO 9001 מטעם A2LA - הרשות האמריקאית להסמכת מעבדות כיול. תעודה מס' 3537.01.</p>
+      <a class="btn btn-line" href="#">צפייה בתעודת ההסמכה</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="gridbg">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">צור קשר</span><h2>בכל עניין, אנחנו כאן בשבילכם</h2></div>
+    <div class="contact">
+      <div class="people rv">
+        <div class="person"><b>מכירות</b><small>הצעות מחיר ובירור יכולות כיול · ישראל</small><a href="tel:0528529679">052-8529679</a><a href="mailto:sales@gelectronic.co.il">sales@gelectronic.co.il</a></div>
+        <div class="person"><b>שירות לקוחות ותפעול</b><small>סטטוס ציוד, תיאום, כיולים · אלי</small><a href="tel:0556696828">055-6696828</a><a href="mailto:Operation@gelectronic.co.il">Operation@gelectronic.co.il</a></div>
+        <div class="person"><b>מחסן וציוד</b><small>תפעול ציוד, מסירות · דני</small><a href="tel:0556696828">055-6696828</a><a href="mailto:logistics@gelectronic.co.il">logistics@gelectronic.co.il</a></div>
+        <div class="person"><b>כספים</b><small>חשבוניות ותשלומים · אורית</small><a href="tel:0506696828">050-6696828</a><a href="mailto:orit@gelectronic.co.il">orit@gelectronic.co.il</a></div>
+        <div class="visit"><b>כתובת ודרכי הגעה:</b> בן ציון גליס 9, פתח תקווה. הכניסה מרחוב הרב פינטו; הירידה לחניון התת-קרקעי מימין לשקם אלקטריק. יש חניית משאיות. · פקס <span class="ltr">03-6059949</span> · <span class="ltr">info@gelectronic.co.il</span></div>
+      </div>
+      <form class="req rv d1">
+        <h3>בקשת כיול או הצעת מחיר</h3>
+        <div class="row2"><label>שם מלא<input required></label><label>חברה<input></label></div>
+        <div class="row2"><label>טלפון<input class="ltr" inputmode="tel"></label><label>מייל<input class="ltr" type="email" required></label></div>
+        <label>סוג השירות<select><option>כיול</option><option>תיקון</option><option>כיול + תיקון</option><option>כוונון</option><option>ציוד בהשאלה</option></select></label>
+        <label>מכשירים (יצרן, דגם, כמות)<textarea rows="3"></textarea></label>
+        <div class="drop">ניתן לצרף קובץ דרישות - גררו לכאן או לחצו</div>
+        <button class="btn btn-amber" style="justify-self:start">שליחה <span class="arr">←</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <span class="logo"><img src="assets/img/logo.png" alt="Gefen Electronic Services Ltd."></span>
+        <p>מעבדת כיול ותיקון לציוד בדיקה ומדידה אלקטרוני, מוסמכת ISO/IEC 17025 ו-ISO 9001 מטעם A2LA. מאז 1985.</p>
+      </div>
+      <div><h4>שירותים</h4><a href="index.html#services">כיול ותיקון</a><a href="index.html#range">יכולות DC - 40 GHz</a><a href="index.html#reps">נציגות שירות</a><a href="https://gefen.biztechoff.co.il">פורטל לקוחות</a></div>
+      <div><h4>מרכז הידע</h4><a href="knowledge.html#guide">מדריך הכיול</a><a href="knowledge.html#faq">שאלות נפוצות</a><a href="knowledge.html#tools">מחשבון וטבלאות</a><a href="knowledge.html#articles">מאמרים</a></div>
+      <div><h4>יצירת קשר</h4><a class="ltr" href="tel:0528529679">052-8529679</a><a class="ltr" href="mailto:info@gelectronic.co.il">info@gelectronic.co.il</a><span>בן ציון גליס 9, פתח תקווה</span></div>
+    </div>
+    <div class="bottom"><span>© גפן שירותי אלקטרוניקה בע"מ · ח.פ. 514846377</span><span><a style="display:inline" href="#">הצהרת נגישות</a> · <a style="display:inline" href="#">מדיניות פרטיות</a> · BizTechoff™</span></div>
+  </div>
+</footer>
+<div class="concept">קונספט v6 · Precision</div>
+
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/reveal.js"></script>
+<script src="assets/js/dial.js"></script>
+<script src="assets/js/ruler.js"></script>
+<script src="assets/js/converter.js"></script>
+<script src="assets/js/form.js"></script>
+</body>
+</html>

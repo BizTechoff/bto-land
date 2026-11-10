@@ -1,0 +1,16 @@
+/* Exhibition mode: full screen, no chrome, the scenes play in a loop (for the booth TV) */
+.expo-bar{position:fixed;inset:auto 0 0 0;z-index:180;display:none;align-items:center;gap:22px;padding:14px 28px;background:linear-gradient(0deg,rgba(2,6,19,.95),transparent);direction:ltr}
+.expo-bar .url{font:800 clamp(18px,2vw,30px) var(--mono);letter-spacing:.12em;color:#fff;text-shadow:0 0 30px rgba(76,195,255,.8)}
+.expo-bar .track{flex:1;display:flex;gap:6px}
+.expo-bar .track i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden;position:relative}
+.expo-bar .track i.done{background:var(--sky)}
+.expo-bar .track i.now::after{content:"";position:absolute;inset:0;background:var(--sky);transform-origin:left;animation:fill var(--dur,9s) linear forwards}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.expo-bar button{background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;font-size:13px}
+body.expo{cursor:none}
+body.expo .expo-bar{display:flex}
+body.expo .nav,body.expo .footer,body.expo .concept,body.expo form.req,body.expo .hero .cta,body.expo .tiles,body.expo .dots{display:none}
+body.expo .scene{min-height:100vh;padding:40px 0 90px}
+body.expo .contact-grid{grid-template-columns:1fr;text-align:center;max-width:800px;margin:0 auto}
+body.expo .rv{opacity:1;transform:none}
+body.expo .expo-bar button{cursor:pointer}

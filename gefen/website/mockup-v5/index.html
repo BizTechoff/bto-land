@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גפן שירותי אלקטרוניקה - מעבדת כיול מוסמכת | קונספט v5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F0; --bg2:#F4EDE1; --surface:#FFFFFF;
+  --ink:#1F332C; --muted:#5C6A64; --line:#E7DED0;
+  --vine:#2E6A55; --vine-d:#22513F; --vine-soft:#E4EFE8; --sage:#9CC0AD;
+  --apricot:#D97E48; --apricot-d:#C26A36; --apricot-soft:#FBE9DC;
+  --sky:#DCEBEE; --gold:#E9B65C;
+  --r:22px; --r-sm:14px;
+  --shadow:0 1px 2px rgba(31,51,44,.04),0 10px 30px -12px rgba(31,51,44,.14);
+  --shadow-lg:0 2px 6px rgba(31,51,44,.05),0 30px 60px -24px rgba(31,51,44,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Assistant",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.serif{font-family:"Frank Ruhl Libre",serif}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.02em;color:var(--vine);background:var(--vine-soft);padding:6px 14px;border-radius:999px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--vine)}
+h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(32px,4.2vw,50px);margin:18px 0 16px}
+h2 em{font-style:normal;color:var(--vine)}
+.lead{font-size:20px;color:var(--muted);max-width:620px}
+section{padding:110px 0;position:relative}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:17px;padding:15px 28px;border-radius:999px;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.btn-primary{background:var(--apricot);color:#fff;box-shadow:0 10px 24px -10px rgba(217,126,72,.7)}
+.btn-primary:hover{background:var(--apricot-d);transform:translateY(-2px)}
+.btn-ghost{background:var(--surface);color:var(--vine-d);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--vine);transform:translateY(-2px)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(-4px)}
+
+/* nav */
+header{position:sticky;top:0;z-index:50;background:rgba(251,247,240,.82);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand b{display:block;font-size:24px;font-weight:800;line-height:1;color:var(--vine-d)}
+.brand small{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.links{display:flex;gap:30px;font-weight:600;font-size:16px;color:var(--muted)}
+.links a:hover{color:var(--vine)}
+.nav-cta{display:flex;gap:10px}
+.nav-cta .btn{padding:11px 20px;font-size:15px}
+.burger{display:none;background:none;border:0;font-size:26px;color:var(--ink);cursor:pointer}
+
+/* hero */
+.hero{padding:70px 0 90px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(42px,5.8vw,74px);margin:22px 0 22px}
+.hero h1 .serif{font-weight:700;color:var(--vine)}
+.hero h1 .under{position:relative;white-space:nowrap}
+.hero h1 .under svg{position:absolute;left:0;right:0;bottom:-10px;width:100%;height:16px}
+.hero p.lead{margin-bottom:34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
+.trust{display:flex;flex-wrap:wrap;gap:22px;color:var(--muted);font-size:15px;font-weight:600}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust i{width:22px;height:22px;border-radius:50%;background:var(--vine-soft);display:grid;place-items:center;font-style:normal;color:var(--vine);font-size:12px}
+
+.hero-art{position:relative;aspect-ratio:1/1;max-width:540px;justify-self:center;width:100%}
+.blob{position:absolute;inset:6%;border-radius:46% 54% 50% 50%/52% 46% 54% 48%;background:radial-gradient(circle at 35% 30%,#fff 0,var(--vine-soft) 55%,#d5e7dd 100%);animation:morph 14s ease-in-out infinite}
+@keyframes morph{50%{border-radius:54% 46% 44% 56%/46% 56% 44% 54%}}
+.waves{position:absolute;inset:0}
+.waves circle{fill:none;stroke:var(--vine);stroke-width:1.4;opacity:0;transform-origin:50% 50%;animation:ripple 6s ease-out infinite}
+.waves circle:nth-child(2){animation-delay:1.5s}
+.waves circle:nth-child(3){animation-delay:3s}
+.waves circle:nth-child(4){animation-delay:4.5s}
+@keyframes ripple{0%{transform:scale(.25);opacity:.55}100%{transform:scale(1);opacity:0}}
+.float-card{position:absolute;background:var(--surface);border-radius:18px;box-shadow:var(--shadow-lg);padding:16px 18px;font-size:14px;animation:bob 7s ease-in-out infinite}
+.float-card .k{color:var(--muted);font-size:12px;font-weight:600}
+.float-card .v{font-size:22px;font-weight:800;color:var(--ink);line-height:1.2}
+.float-card .ok{display:inline-flex;align-items:center;gap:6px;color:var(--vine);font-weight:700;font-size:13px}
+.float-card .ok::before{content:"";width:8px;height:8px;border-radius:50%;background:#4CAF7D;box-shadow:0 0 0 4px rgba(76,175,125,.18)}
+.fc1{top:9%;right:-2%;}
+.fc2{bottom:12%;left:-4%;animation-delay:-3s}
+.fc3{bottom:-1%;right:14%;animation-delay:-5s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.wave-line{position:absolute;left:14%;right:14%;top:43%;height:120px}
+.wave-line path{fill:none;stroke-linecap:round}
+
+/* stats */
+.stats{padding:0 0 30px}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow)}
+.stat{padding:30px 28px;border-inline-start:1px solid var(--line)}
+.stat:first-child{border:0}
+.stat .n{font-size:44px;font-weight:800;color:var(--vine-d);line-height:1}
+.stat .n small{font-size:20px;color:var(--vine)}
+.stat .t{color:var(--muted);font-size:15px;margin-top:8px}
+
+/* calm quote section */
+.promise{padding:100px 0 60px;text-align:center}
+.promise blockquote{font-family:"Frank Ruhl Libre",serif;font-size:clamp(30px,4vw,48px);line-height:1.3;max-width:860px;margin:0 auto;color:var(--ink)}
+.promise blockquote em{font-style:normal;color:var(--apricot)}
+.promise p{color:var(--muted);margin-top:18px;font-size:19px}
+
+/* services */
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--surface);border-radius:var(--r);padding:32px 30px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.card .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin-bottom:22px}
+.card h3{font-size:23px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:16.5px}
+.card .tag{display:inline-block;margin-top:16px;font-size:13px;font-weight:700;color:var(--vine);background:var(--vine-soft);padding:4px 12px;border-radius:999px}
+.ic.g{background:var(--vine-soft);color:var(--vine)}
+.ic.a{background:var(--apricot-soft);color:var(--apricot-d)}
+.ic.s{background:var(--sky);color:#2F6B7A}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;justify-content:center}
+.chip{background:var(--surface);border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-size:15px;font-weight:600;color:var(--muted)}
+
+/* spectrum */
+.spectrum{background:var(--bg2)}
+.spec-box{background:var(--surface);border-radius:28px;padding:40px;box-shadow:var(--shadow);margin-top:40px}
+.band{position:relative;height:110px;border-radius:18px;background:linear-gradient(90deg,#E4EFE8 0%,#DCEBEE 30%,#FBE9DC 70%,#F7DCC8 100%);direction:ltr;cursor:ew-resize;user-select:none;overflow:hidden}
+.band svg{position:absolute;inset:0;width:100%;height:100%}
+.zone{position:absolute;top:0;bottom:0;border-inline-end:1px dashed rgba(31,51,44,.15);display:flex;align-items:flex-end;padding:0 10px 10px;font-size:12px;font-weight:700;color:var(--muted)}
+.marker{position:absolute;top:0;bottom:0;width:2px;background:var(--apricot);left:23.5%;transition:left .05s}
+.marker::after{content:"";position:absolute;top:-2px;left:-7px;width:16px;height:16px;border-radius:50%;background:var(--apricot);box-shadow:0 0 0 6px rgba(217,126,72,.2)}
+.scale{display:flex;justify-content:space-between;direction:ltr;font-size:13px;color:var(--muted);margin-top:10px;font-weight:600}
+.spec-info{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;margin-top:30px}
+.freq{font-size:46px;font-weight:800;color:var(--apricot-d);direction:ltr;line-height:1}
+.freq small{font-size:20px}
+.freq-meta b{display:block;font-size:20px}
+.freq-meta span{color:var(--muted)}
+.inst{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;direction:ltr;justify-content:flex-end}
+.inst span{font-size:14px;font-weight:600;padding:6px 14px;border-radius:10px;background:var(--bg);color:var(--ink)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
+.steps::before{content:"";position:absolute;top:34px;right:12%;left:12%;height:2px;background:repeating-linear-gradient(90deg,var(--sage) 0 8px,transparent 8px 16px)}
+.step{text-align:center;position:relative}
+.step .num{width:68px;height:68px;border-radius:50%;margin:0 auto 20px;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center;font-size:24px;font-weight:800;color:var(--vine);position:relative;z-index:1;border:2px solid var(--vine-soft)}
+.step:last-child .num{background:var(--vine);color:#fff;border-color:var(--vine)}
+.step h3{font-size:21px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:16px;max-width:240px;margin:0 auto}
+
+/* portal */
+.portal{background:linear-gradient(180deg,var(--bg) 0,var(--vine-soft) 100%)}
+.portal-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.checks{list-style:none;margin:28px 0 34px}
+.checks li{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;font-size:18px}
+.checks li::before{content:"✓";flex:none;width:28px;height:28px;border-radius:50%;background:var(--vine);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:800;margin-top:1px}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+.screen{background:var(--surface);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;font-size:14px}
+.screen-top{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--line);background:#FCFAF6}
+.screen-top i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.screen-top .url{margin-inline-start:auto;font-size:12.5px;color:var(--muted);background:var(--bg);padding:4px 14px;border-radius:999px;direction:ltr}
+.screen-body{padding:22px}
+.hello{font-size:19px;font-weight:700;margin-bottom:16px}
+.hello span{color:var(--muted);font-weight:400;font-size:14px;display:block}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.kpi{border-radius:14px;padding:14px}
+.kpi b{display:block;font-size:28px;line-height:1.1}
+.kpi.g{background:var(--vine-soft);color:var(--vine-d)}
+.kpi.a{background:var(--apricot-soft);color:var(--apricot-d)}
+.kpi.s{background:var(--sky);color:#2F6B7A}
+table{width:100%;border-collapse:collapse}
+td,th{padding:11px 8px;text-align:right;border-bottom:1px solid var(--line)}
+th{font-size:12.5px;color:var(--muted);font-weight:600}
+.pill{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:var(--vine-soft);color:var(--vine)}
+.pill.warn{background:var(--apricot-soft);color:var(--apricot-d)}
+.pdf{color:var(--vine);font-weight:700}
+.toast{margin-top:16px;display:flex;gap:12px;align-items:center;background:var(--bg);border-radius:14px;padding:12px 14px}
+.toast .dot{width:34px;height:34px;border-radius:10px;background:var(--apricot);color:#fff;display:grid;place-items:center;font-weight:800}
+
+/* trust */
+.trust-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}
+.accr{background:var(--vine);color:#fff;border-radius:28px;padding:42px;position:relative;overflow:hidden}
+.accr::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;border:40px solid rgba(255,255,255,.06);left:-120px;bottom:-140px}
+.accr .seal{width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;text-align:center;font-weight:800;line-height:1.1;margin-bottom:24px}
+.accr h3{font-size:30px;margin-bottom:12px}
+.accr p{opacity:.88}
+.accr a{display:inline-block;margin-top:22px;font-weight:700;border-bottom:2px solid var(--gold);padding-bottom:2px}
+.clients{background:var(--surface);border-radius:28px;padding:38px;box-shadow:var(--shadow)}
+.clients h3{font-size:22px;margin-bottom:20px}
+.logos{display:flex;flex-wrap:wrap;gap:10px}
+.logos span{padding:10px 18px;border-radius:12px;background:var(--bg);font-weight:700;color:#4b5a54;font-size:15.5px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+.quote{background:var(--surface);border-radius:var(--r);padding:30px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.quote .mark{font-family:"Frank Ruhl Libre",serif;font-size:60px;line-height:.6;color:var(--apricot);height:30px}
+.quote p{font-size:18px;flex:1;margin:10px 0 20px}
+.quote .who{display:flex;gap:12px;align-items:center}
+.quote .av{width:42px;height:42px;border-radius:50%;background:var(--vine-soft);color:var(--vine);display:grid;place-items:center;font-weight:800}
+.quote .who b{display:block;font-size:15.5px}
+.quote .who span{font-size:13.5px;color:var(--muted)}
+
+/* about */
+.about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.timeline{position:relative;padding-inline-start:36px}
+.timeline::before{content:"";position:absolute;right:11px;top:10px;bottom:10px;width:2px;background:var(--sage);opacity:.6}
+.tl{position:relative;margin-bottom:34px}
+.tl::before{content:"";position:absolute;right:-33px;top:8px;width:16px;height:16px;border-radius:50%;background:var(--bg2);border:3px solid var(--vine)}
+.tl b{font-size:28px;color:var(--vine-d);display:block;line-height:1.1}
+.tl h4{font-size:19px;margin:4px 0}
+.tl p{color:var(--muted);font-size:16.5px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:start}
+.people{display:grid;gap:14px;margin-top:30px}
+.person{display:flex;gap:16px;align-items:center;background:var(--surface);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow)}
+.person .av{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
+.person b{display:block}
+.person span{color:var(--muted);font-size:14.5px}
+.person .lnk{margin-inline-start:auto;text-align:left;font-size:14.5px;font-weight:700;color:var(--vine);direction:ltr}
+.addr{margin-top:22px;color:var(--muted);font-size:16px}
+form{background:var(--surface);border-radius:28px;padding:38px;box-shadow:var(--shadow-lg)}
+form h3{font-size:26px;margin-bottom:6px}
+form .sub{color:var(--muted);margin-bottom:24px;font-size:16px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.seg label{cursor:pointer}
+.seg input{display:none}
+.seg span{display:block;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);font-weight:600;font-size:15px;color:var(--muted);transition:.2s}
+.seg input:checked+span{background:var(--vine);border-color:var(--vine);color:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
+.field input,.field textarea{width:100%;font-family:inherit;font-size:16px;padding:13px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);transition:.2s}
+.field input:focus,.field textarea:focus{outline:0;border-color:var(--vine);background:#fff;box-shadow:0 0 0 4px var(--vine-soft)}
+.field textarea{min-height:96px;resize:vertical}
+form .btn{width:100%;justify-content:center;margin-top:8px}
+.sent{display:none;margin-top:14px;padding:14px;border-radius:14px;background:var(--vine-soft);color:var(--vine-d);font-weight:700;text-align:center}
+.existing{margin-top:16px;font-size:15px;color:var(--muted);text-align:center}
+.existing a{color:var(--vine);font-weight:700}
+
+/* footer */
+footer{background:var(--vine-d);color:#d9e6df;padding:70px 0 30px;margin-top:40px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+footer h5{color:#fff;font-size:16px;margin-bottom:14px}
+footer ul{list-style:none}
+footer li{margin-bottom:8px;font-size:15.5px;opacity:.85}
+footer li a:hover{opacity:1;color:#fff}
+.foot-brand b{font-size:26px;color:#fff}
+.foot-brand p{font-size:15px;opacity:.8;margin-top:10px;max-width:300px}
+.legal{border-top:1px solid rgba(255,255,255,.12);margin-top:50px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14px;opacity:.7}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.concept{position:fixed;bottom:16px;left:16px;z-index:60;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;opacity:.75;direction:ltr}
+
+/* mobile menu */
+.mnav{display:none;position:fixed;inset:78px 0 auto 0;background:var(--bg);padding:20px 24px 30px;border-bottom:1px solid var(--line);z-index:49;flex-direction:column;gap:16px;font-size:20px;font-weight:700}
+.mnav.open{display:flex}
+
+@media (max-width:980px){
+  .links,.nav-cta .btn-ghost{display:none}
+  .burger{display:block}
+  .hero-grid,.portal-grid,.about-grid,.contact-grid,.trust-grid{grid-template-columns:1fr}
+  .hero-art{max-width:420px}
+  .cards,.quotes{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:40px}
+  .steps::before{display:none}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:620px){
+  body{font-size:17px}
+  .wrap{padding:0 16px}
+  section{padding:76px 0}
+  .nav-cta{display:none}
+  .cards,.quotes,.steps,.row2{grid-template-columns:1fr}
+  .spec-box,form,.clients,.accr{padding:26px 20px}
+  .spec-info{grid-template-columns:1fr;gap:10px}
+  .fc1{right:0}.fc2{left:0}
+  .kpis{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .kpi b{font-size:22px}
+  .foot{grid-template-columns:1fr}
+  .person{flex-wrap:wrap}
+  .person .lnk{margin-inline-start:66px;text-align:right}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="גפן - דף הבית">
+      <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">
+        <circle cx="23" cy="23" r="22" fill="#E4EFE8"/>
+        <path d="M23 31c-6-1-9-6-8-12 6 0 10 4 8 12z" fill="#2E6A55"/>
+        <path d="M23 31c1-6 5-9 10-9" stroke="#2E6A55" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M28 15a7 7 0 0 1 4 6" stroke="#D97E48" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M29 11a11 11 0 0 1 7 10" stroke="#D97E48" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"/>
+      </svg>
+      <span><b>גפן</b><small>שירותי אלקטרוניקה בע"מ</small></span>
+    </a>
+    <nav class="links">
+      <a href="#services">שירותים</a>
+      <a href="#range">יכולות</a>
+      <a href="#how">איך זה עובד</a>
+      <a href="#portal">פורטל</a>
+      <a href="#trust">הסמכות</a>
+      <a href="#contact">צור קשר</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#portal" class="btn btn-ghost">כניסת לקוחות</a>
+      <a href="#contact" class="btn btn-primary">בקשת כיול</a>
+    </div>
+    <button class="burger" aria-label="תפריט" id="burger">☰</button>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <a href="#services">שירותים</a><a href="#range">יכולות</a><a href="#how">איך זה עובד</a>
+  <a href="#portal">פורטל לקוחות</a><a href="#trust">הסמכות</a><a href="#contact">צור קשר</a>
+  <a href="#contact" class="btn btn-primary" style="justify-content:center">בקשת כיול</a>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">מעבדה מוסמכת ISO/IEC 17025 · מאז 1985</span>
+      <h1>הציוד שלכם<br>
+        <span class="serif">בידיים</span>
+        <span class="under">טובות.
+          <svg viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10 C 40 2, 70 14, 100 8 S 160 2, 198 9" stroke="#D97E48" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+        </span>
+      </h1>
+      <p class="lead">כיול, כיוונון ותיקון של ציוד בדיקה ומדידה מ-DC ועד 40 GHz. ארבעה עשורים של ניסיון, צוות שמכיר אתכם בשם, ותעודה שמחכה לכם בפורטל.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">בקשת כיול או הצעת מחיר <span class="arr">←</span></a>
+        <a href="#portal" class="btn btn-ghost">כניסה לפורטל התעודות</a>
+      </div>
+      <div class="trust">
+        <span><i>✓</i>הסמכת A2LA</span>
+        <span><i>✓</i>כיול במעבדה ובאתר הלקוח</span>
+        <span><i>✓</i>תזכורת לפני כל כיול</span>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <div class="blob"></div>
+      <svg class="waves" viewBox="0 0 400 400"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="190"/></svg>
+      <svg class="wave-line" viewBox="0 0 400 120" preserveAspectRatio="none">
+        <path id="w1" stroke="#2E6A55" stroke-width="3" d=""/>
+        <path id="w2" stroke="#D97E48" stroke-width="2" opacity=".7" d=""/>
+      </svg>
+      <div class="float-card fc1"><div class="k">תעודת כיול חדשה</div><div class="v">Spectrum Analyzer</div><span class="ok">בתוקף עד 10.2027</span></div>
+      <div class="float-card fc2"><div class="k">טווח כיול</div><div class="v ltr">DC - 40 GHz</div></div>
+      <div class="float-card fc3"><div class="k">תזכורת</div><div class="v" style="font-size:17px">הכיול הבא בעוד 30 יום</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat-row reveal">
+      <div class="stat"><div class="n">1985</div><div class="t">שנת ההקמה, בתוך ECI</div></div>
+      <div class="stat"><div class="n">40<small> GHz</small></div><div class="t">טווח הכיול, מ-DC</div></div>
+      <div class="stat"><div class="n ltr">17025</div><div class="t">ISO/IEC · הסמכת A2LA</div></div>
+      <div class="stat"><div class="n"><span class="ltr">40+</span></div><div class="t">שנים של כיול ותיקון צב"ד</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMISE -->
+<div class="promise reveal">
+  <div class="wrap">
+    <blockquote>יש כיול, ויש <em>כיול.</em><br>אצלנו כל מכשיר מקבל את הזמן שלו.</blockquote>
+    <p>כי מכשיר שלא כויל מודד - אבל לא בדיוק את מה שאתם חושבים.</p>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><span class="eyebrow">שירותים</span><h2>כל מה שהציוד שלכם צריך,<br><em>במקום אחד.</em></h2></div>
+      <p class="lead" style="max-width:420px">כיול, כיוונון, תיקון ובדיקה לכל סוגי הצב"ד, לפי סטנדרטים בינלאומיים - עם תעודה מסודרת ותזכורת לפני מועד הכיול הבא.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal"><div class="ic g"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h3l3-7 4 14 3-7h5"/></svg></div><h3>כיול מכשירים</h3><p>כיול לפי תקנים בינלאומיים, עם תעודת כיול ותוצאות מדידה מלאות.</p><span class="tag ltr">ISO/IEC 17025</span></div>
+      <div class="card reveal"><div class="ic a"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>כיוונון</h3><p>החזרת המכשיר לתוך גבולות הדיוק של היצרן, כשהכיול מראה סטייה.</p></div>
+      <div class="card reveal"><div class="ic s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></div><h3>תיקון ותחזוקה</h3><p>אבחון ותיקון של ציוד הבדיקה, ותחזוקה שוטפת שמונעת השבתה.</p></div>
+      <div class="card reveal"><div class="ic g"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>ניהול צב"ד</h3><p>מלאי הציוד, מועדי הכיול והתעודות - מרוכזים בפורטל הלקוחות.</p></div>
+      <div class="card reveal"><div class="ic a"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></div><h3>השכרת צב"ד</h3><p>ציוד בדיקה חלופי מיידי בזמן הכיול, וייעוץ בבחירת הציוד המתאים.</p></div>
+      <div class="card reveal"><div class="ic s"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>כיול באתר הלקוח</h3><p>כשהציוד לא יכול לצאת מהמפעל - הכיול מגיע אליו, והתעודה מגיעה לפורטל.</p></div>
+    </div>
+    <div class="chips reveal">
+      <span class="chip">OTDR</span><span class="chip">JITTER</span><span class="chip">Line Simulators</span><span class="chip">Laser Diode Drivers</span><span class="chip">מצלמות טרמיות</span><span class="chip">תיקון מחברים אופטיים</span><span class="chip">Fiber Adaptors</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPECTRUM -->
+<section id="range" class="spectrum">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
+      <span class="eyebrow">יכולות</span>
+      <h2>מ-DC ועד 40 GHz.<br><em>מעבדה אחת, כל הספקטרום.</em></h2>
+      <p class="lead" style="margin:0 auto">גררו את הסמן לאורך הספקטרום וראו אילו מערכות עובדות בכל תחום - וכמובן, את מי אנחנו מכיילים.</p>
+    </div>
+    <div class="spec-box reveal">
+      <div class="band" id="band">
+        <svg viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path id="specpath" fill="none" stroke="#2E6A55" stroke-width="2" opacity=".55"/></svg>
+        <div class="zone" style="left:0;width:10%">DC · L/S</div>
+        <div class="zone" style="left:10%;width:10%">C</div>
+        <div class="zone" style="left:20%;width:25%">X / Ku</div>
+        <div class="zone" style="left:45%;width:22.5%">K</div>
+        <div class="zone" style="left:67.5%;width:32.5%;border:0">Ka · SATCOM</div>
+        <div class="marker" id="marker"></div>
+      </div>
+      <div class="scale"><span>DC</span><span>10 GHz</span><span>20 GHz</span><span>30 GHz</span><span>40 GHz</span></div>
+      <div class="spec-info">
+        <div class="freq" id="freq">9.41 <small>GHz</small></div>
+        <div class="freq-meta"><b id="fname">תחום X - מכ"ם ימי ומוטס</b><span id="fdesc">ניווט, מכ"ם ותקשורת - מערכות שעובדות בתנאים הקשים ביותר.</span></div>
+      </div>
+      <div class="inst">
+        <span>DMM</span><span>Oscilloscope</span><span>Signal Generators</span><span>RF Signal Generators</span><span>Spectrum Analyzers</span><span>Network Analyzers</span><span>FFT Analyzers</span><span>Logic Analyzers</span><span>Fiber Optics</span><span>Power Supplies</span><span>Video</span><span>Ovens</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:60px">
+      <span class="eyebrow">איך זה עובד</span>
+      <h2>מהבקשה ועד התעודה - <em>בלי לרדוף אחרי אף אחד.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">1</div><h3>בקשה</h3><p>טופס קצר באתר, או בקשה מהפורטל ישירות מול המכשירים שלכם.</p></div>
+      <div class="step reveal"><div class="num">2</div><h3>מסירה</h3><p>הציוד מגיע למעבדה, או שהכיול מתבצע אצלכם באתר.</p></div>
+      <div class="step reveal"><div class="num">3</div><h3>כיול ותיקון</h3><p>לפי נוהלי ISO/IEC 17025, עם ציוד בדיקה חדיש ומתקדם.</p></div>
+      <div class="step reveal"><div class="num">✓</div><h3>תעודה בפורטל</h3><p>התעודה מחכה לכם בפורטל, ומייל קצר מעדכן שהיא שם.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL -->
+<section id="portal" class="portal">
+  <div class="wrap portal-grid">
+    <div class="reveal">
+      <span class="eyebrow">פורטל לקוחות</span>
+      <h2>כל התעודות שלכם.<br><em>במקום אחד. תמיד.</em></h2>
+      <p class="lead">לא צריך לחפש במייל או להתקשר לברר. כל מה שקשור לציוד שלכם - פתוח מולכם, מכל מקום.</p>
+      <ul class="checks">
+        <li>כל תעודות הכיול לצפייה ולהורדה, לפי מכשיר</li>
+        <li>תוקף הכיול של כל מכשיר, ותזכורת לפני שהוא פג</li>
+        <li>היסטוריית הכיולים של כל מכשיר</li>
+        <li>פתיחת קריאת כיול או שירות בלחיצה</li>
+      </ul>
+      <a href="#" class="btn btn-primary">כניסה לפורטל <span class="arr">←</span></a>
+      <p class="note">כניסה בקוד חד-פעמי למייל - בלי סיסמאות לזכור.</p>
+    </div>
+    <div class="screen reveal" aria-label="נתוני דוגמה">
+      <div class="screen-top"><i></i><i></i><i></i><span class="url">portal.gelectronic.co.il</span></div>
+      <div class="screen-body">
+        <div class="hello">בוקר טוב 👋<span>נתוני דוגמה</span></div>
+        <div class="kpis">
+          <div class="kpi g"><b>128</b>בתוקף</div>
+          <div class="kpi a"><b>9</b>לקראת תפוגה</div>
+          <div class="kpi s"><b>2</b>קריאות פתוחות</div>
+        </div>
+        <table>
+          <thead><tr><th>מכשיר</th><th>מס' רישום</th><th>בתוקף עד</th><th></th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Spectrum Analyzer</td><td class="ltr">64G14511</td><td>26.10.2027</td><td><span class="pill ok">בתוקף</span></td><td class="pdf">PDF</td></tr>
+            <tr><td>Network Analyzer</td><td class="ltr">60G8361</td><td>14.08.2027</td><td><span class="pill ok">בתוקף</span></td><td class="pdf">PDF</td></tr>
+            <tr><td>Signal Generator</td><td class="ltr">60G7508</td><td>02.12.2026</td><td><span class="pill warn">לקראת תפוגה</span></td><td class="pdf">PDF</td></tr>
+          </tbody>
+        </table>
+        <div class="toast"><div class="dot">+</div><div><b>נוספה תעודת כיול חדשה</b><br><span style="color:var(--muted);font-size:13px">Power Meter · 60G9120</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:44px">
+      <span class="eyebrow">הסמכות ולקוחות</span>
+      <h2>חברות שלא מתפשרות על דיוק<br><em>סומכות עלינו.</em></h2>
+    </div>
+    <div class="trust-grid">
+      <div class="accr reveal">
+        <div class="seal"><span>ISO/IEC<br>17025</span></div>
+        <h3>מעבדה מוסמכת</h3>
+        <p>המעבדה פועלת תחת הסמכות ISO 9001 ו-ISO/IEC 17025 מטעם A2LA - הרשות האמריקאית להסמכת מעבדות כיול.</p>
+        <p style="margin-top:10px;font-weight:700" class="ltr">Certificate No. 3537.01</p><br>
+        <a href="#">לתעודת ההסמכה ולתחולה ←</a>
+      </div>
+      <div class="clients reveal">
+        <h3>בין לקוחותינו</h3>
+        <div class="logos">
+          <span>ECI</span><span>Elbit Systems</span><span>IAI</span><span>Elta</span><span>Rafael</span><span>Gilat</span><span>Orbit</span><span>Tadiran</span><span>El Al</span><span>Cobham</span><span>RADWIN</span><span>Flex</span><span>Sanmina</span><span>Marvell</span><span>Eastronics</span><span>Alltest</span><span>צה"ל</span><span>משהב"ט</span>
+        </div>
+        <p style="margin-top:24px;color:var(--muted);font-size:15.5px">נציגת השירות הבלעדית של <b style="color:var(--ink)">IFR, Marconi, Aeroflex ו-Kikusui</b> ועוד. מכיילים ומתקנים ציוד של Keysight, Rohde &amp; Schwarz, Anritsu, Tektronix, Fluke, Keithley, EXFO ואחרים.</p>
+      </div>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal"><div class="mark">"</div><p class="ltr" style="text-align:left">Communication, expertise, dedication, accuracy and cooperation was excellent.</p><div class="who"><div class="av">E</div><div><b class="ltr">Efrat K.</b><span>Intel</span></div></div></div>
+      <div class="quote reveal"><div class="mark">"</div><p>הנני ממליץ עליכם בכל לב ללקוחות אחרים.</p><div class="who"><div class="av">ש</div><div><b>שמעון וייצמן</b><span>מנהל אבטחת איכות, תדיראן תקשורת</span></div></div></div>
+      <div class="quote reveal"><div class="mark">"</div><p>תודה רבה מקרב לב על השירות המקצועי והמהיר.</p><div class="who"><div class="av">N</div><div><b>Neriya Cohen</b><span>Q.C. Manager, Benatav</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">אודות</span>
+      <h2>ארבעה עשורים<br><em>של דיוק ושל קשר אישי.</em></h2>
+      <p class="lead">גפן נולדה כמעבדת הצב"ד של ECI, והפכה למעבדה עצמאית שמשרתת את חברות ההייטק, התעשייה והביטחון בישראל. מה שלא השתנה: אנחנו עדיין עונים לטלפון, ועדיין מכירים כל לקוח.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl"><b>1985</b><h4>המעבדה מוקמת בתוך ECI</h4><p>מעבדת הצב"ד הוקמה כחלק מחברת התקשורת ECI.</p></div>
+      <div class="tl"><b>GES</b><h4>חברה עצמאית</h4><p>גפן שירותי אלקטרוניקה בע"מ - מעבדה עצמאית לכיול, תיקון ובדיקה.</p></div>
+      <div class="tl" style="margin:0"><b>2026</b><h4>תעודות בפורטל</h4><p>כל לקוח רואה את המכשירים, התעודות ומועדי הכיול שלו - אונליין.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">צור קשר</span>
+      <h2>בכל עניין,<br><em>יש פה מישהו בשבילכם.</em></h2>
+      <div class="people">
+        <div class="person"><div class="av" style="background:var(--apricot-soft);color:var(--apricot-d)">₪</div><div><b>מכירות</b><span>הצעות מחיר ובירור יכולות כיול</span></div><div class="lnk">052-8529679<br>sales@gelectronic.co.il</div></div>
+        <div class="person"><div class="av" style="background:var(--vine-soft);color:var(--vine)">א</div><div><b>שירות לקוחות ותפעול · אלי</b><span>סטטוס ציוד, תיאום, כיולים</span></div><div class="lnk">055-6696828<br>Operation@gelectronic.co.il</div></div>
+        <div class="person"><div class="av" style="background:var(--sky);color:#2F6B7A">ד</div><div><b>מחסן וציוד · דני</b><span>תפעול ציוד, מסירות</span></div><div class="lnk">055-6696828<br>logistics@gelectronic.co.il</div></div>
+        <div class="person"><div class="av" style="background:var(--bg2);color:var(--ink)">א</div><div><b>כספים · אורית</b><span>חשבוניות ותשלומים</span></div><div class="lnk">050-6696828<br>info@gelectronic.co.il</div></div>
+      </div>
+      <p class="addr">📍 בן ציון גליס 9, פתח תקווה · הכניסה מרחוב הרב פינטו, ירידה לחניון תת-קרקעי</p>
+    </div>
+    <form class="reveal" id="form" onsubmit="event.preventDefault();document.getElementById('sent').style.display='block'">
+      <h3>בקשת כיול או הצעת מחיר</h3>
+      <p class="sub">כמה פרטים, ונחזור אליכם עוד היום.</p>
+      <div class="seg">
+        <label><input type="radio" name="t" checked><span>כיול</span></label>
+        <label><input type="radio" name="t"><span>תיקון</span></label>
+        <label><input type="radio" name="t"><span>כיול + תיקון</span></label>
+        <label><input type="radio" name="t"><span>כיול באתר</span></label>
+        <label><input type="radio" name="t"><span>השכרת צב"ד</span></label>
+      </div>
+      <div class="row2">
+        <div class="field"><label>שם מלא</label><input required></div>
+        <div class="field"><label>חברה</label><input></div>
+        <div class="field"><label>טלפון</label><input type="tel"></div>
+        <div class="field"><label>מייל</label><input type="email" required></div>
+      </div>
+      <div class="field"><label>מכשירים (יצרן, דגם, כמות)</label><textarea placeholder="לדוגמה: Keysight N9020A × 2"></textarea></div>
+      <button class="btn btn-primary">שליחת הבקשה <span class="arr">←</span></button>
+      <div class="sent" id="sent">תודה! הבקשה התקבלה, נחזור אליכם בהקדם. (הדגמה)</div>
+      <p class="existing">לקוח קיים? <a href="#portal">פתחו קריאה מהפורטל</a> - ישירות מול המכשירים שלכם.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand"><b>גפן</b><p>שירותי אלקטרוניקה בע"מ · Gefen Electronic Services Ltd. מעבדת כיול מוסמכת מ-DC ועד 40 GHz, מאז 1985.</p></div>
+      <div><h5>המעבדה</h5><ul><li><a href="#services">שירותים</a></li><li><a href="#range">יכולות</a></li><li><a href="#trust">הסמכות</a></li><li><a href="#trust">לקוחות</a></li></ul></div>
+      <div><h5>ללקוחות</h5><ul><li><a href="#portal">פורטל התעודות</a></li><li><a href="#contact">בקשת כיול</a></li><li><a href="#contact">צור קשר</a></li></ul></div>
+      <div><h5>מידע</h5><ul><li><a href="#">מאמרים</a></li><li><a href="#">מדריך מכשירי מדידה</a></li><li><a href="#">שאלות נפוצות</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© גפן שירותי אלקטרוניקה בע"מ · בן ציון גליס 9, פתח תקווה</span><span><a href="#">הצהרת נגישות</a> · <a href="#">מדיניות פרטיות</a></span></div>
+  </div>
+</footer>
+<div class="concept">CONCEPT v5 · BizTechoff</div>
+
+<script>
+// header border on scroll
+const hdr=document.querySelector('header');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>10),{passive:true});
+// mobile menu
+const mnav=document.getElementById('mnav');
+document.getElementById('burger').onclick=()=>mnav.classList.toggle('open');
+mnav.querySelectorAll('a').forEach(a=>a.onclick=()=>mnav.classList.remove('open'));
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// hero gentle modulated wave
+const w1=document.getElementById('w1'),w2=document.getElementById('w2');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function wave(t){
+  let a='',b='';
+  for(let x=0;x<=400;x+=4){
+    const env=Math.sin(Math.PI*x/400);
+    const y1=60+Math.sin(x*.045+t)*28*env;
+    const y2=60+Math.sin(x*.09-t*1.3)*16*env;
+    a+=(x?'L':'M')+x+' '+y1.toFixed(1);
+    b+=(x?'L':'M')+x+' '+y2.toFixed(1);
+  }
+  w1.setAttribute('d',a);w2.setAttribute('d',b);
+}
+let t0=0;function loop(){t0+=.02;wave(t0);if(!reduce)requestAnimationFrame(loop)}loop();
+
+// spectrum
+const sp=document.getElementById('specpath');
+(function(){let d='';for(let x=0;x<=1000;x+=3){const n=Math.sin(x*.7)*3+Math.sin(x*.13)*2;
+  const peaks=[[90,26],[180,34],[320,22],[470,40],[600,28],[820,36],[930,24]].reduce((s,[c,h])=>s+h*Math.exp(-((x-c)**2)/180),0);
+  const y=88-peaks-n-6;d+=(x?'L':'M')+x+' '+y.toFixed(1)}sp.setAttribute('d',d)})();
+const zones=[
+ [0,.5,'DC ותדרים נמוכים','מולטימטרים, ספקי כוח ואוסצילוסקופים - הבסיס של כל מעבדה.'],
+ [.5,4,'סלולר, GNSS ותחומי L / S','רשתות 4G/5G, Wi-Fi, ניווט לווייני ואוויוניקה.'],
+ [4,8,'תחום C','תקשורת לוויינית ומכ"ם מזג אוויר.'],
+ [8,18,'תחומי X / Ku - מכ"ם ותקשורת','מכ"ם ימי ומוטס ו-SATCOM - מערכות שעובדות בתנאים הקשים ביותר.'],
+ [18,27,'תחום K','קישורי מיקרוגל ורשתות backhaul.'],
+ [27,40.1,'Ka · תקשורת לוויינית','תחנות קרקע ולוויינים - ומה שמחכה מעבר להם.']];
+const band=document.getElementById('band'),mk=document.getElementById('marker');
+const fq=document.getElementById('freq'),fn=document.getElementById('fname'),fd=document.getElementById('fdesc');
+function setPos(p){p=Math.max(0,Math.min(1,p));mk.style.left=(p*100)+'%';
+  // nonlinear map so zones match the visual bands (10/15/20/25/30%)
+  const g=p*40;
+  fq.innerHTML=(g<.01?'DC':g.toFixed(2)+' <small>GHz</small>');
+  const z=zones.find(z=>g>=z[0]&&g<z[1])||zones[5];fn.textContent=z[2];fd.textContent=z[3];}
+let drag=false;
+const pos=e=>{const r=band.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX);setPos((x-r.left)/r.width)};
+band.addEventListener('pointerdown',e=>{drag=true;pos(e);band.setPointerCapture(e.pointerId)});
+band.addEventListener('pointermove',e=>drag&&pos(e));
+band.addEventListener('pointerup',()=>drag=false);
+setPos(9.41/40);
+</script>
+</body>
+</html>

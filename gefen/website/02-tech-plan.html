@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גפן - תוכנית טכנית לאתר</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#141948;--muted:#59617A;--line:#D5DDE8;--acc:#0D69AD;--amber:#B57800;--amberbg:#FFF6E2;--code:#eef1f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1230;--card:#161B40;--ink:#E9EEF8;--muted:#A2ABC6;--line:#2B3263;--acc:#4FA8EC;--amber:#FFB52E;--amberbg:#3A2C0E;--code:#1B2048;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI",Arial,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:26px 16px 50px}
+header{border-bottom:3px solid var(--acc);padding-bottom:12px;margin-bottom:16px}
+h1{margin:0;font-size:24px}.sub{color:var(--muted);margin-top:4px;font-size:13.5px}
+h2{font-size:18px;margin:28px 0 8px}
+p{margin:6px 0;max-width:84ch}
+ul,ol{margin:6px 0;padding-inline-start:22px}li{margin:3px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:14px;margin-top:6px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{background:var(--code);font-weight:600;font-size:12.5px;color:var(--muted)}
+.v,code{font-family:Consolas,monospace;font-size:13px;direction:ltr;unicode-bidi:isolate}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 14px;direction:ltr;text-align:left;font:12.5px/1.5 Consolas,monospace;overflow-x:auto}
+.scroll{overflow-x:auto}
+.note{background:var(--card);border:1px solid var(--line);border-inline-start:3px solid var(--acc);border-radius:8px;padding:9px 12px;margin-top:12px;font-size:14px}
+.warn{border-inline-start-color:var(--amber)}
+.rec{font-weight:700;color:var(--acc)}
+footer{color:var(--muted);font-size:12.5px;margin-top:28px;border-top:1px solid var(--line);padding-top:10px}
+</style></head><body><div class="wrap">
+
+<header><h1>אתר הבית של גפן - איך בונים ואיפה מתארחים</h1>
+<div class="sub">BizTechoff · 4.11.2026 · מרשים, מודרני ודינאמי, ועם זאת פשוט לתחזוקה</div></header>
+
+<h2>1. העיקרון</h2>
+<p>אתר תדמית לא צריך שרת שרץ כל הזמן. כל עמוד נבנה מראש ל-HTML סטטי, מוגש מרשת CDN, ונטען מהר בכל מקום. ה"דינאמיות" היא באנימציה ובתנועה, לא בשרת. כך האתר מהיר, מאובטח (אין מסד ואין פאנל ניהול לפרוץ אליהם) וכמעט בלי עלות אחסון.</p>
+
+<h2>2. הטכנולוגיה</h2>
+<div class="scroll"><table>
+<thead><tr><th>אפשרות</th><th>יתרונות</th><th>חסרונות</th></tr></thead>
+<tbody>
+<tr><td><span class="rec">Angular 18 + prerender (מומלץ)</span></td><td>אותו stack של הפורטל - קוד, רכיבים ומיתוג משותפים; כל עמוד נבנה ל-HTML סטטי (SEO מלא); מבנה מודולרי לפי התיקיות שלנו</td><td>מעט יותר JavaScript מ-Astro; מבוטל כמעט כשהעמודים נבנים מראש</td></tr>
+<tr><td>Astro</td><td>הכי קל ומהיר לאתרי תוכן, אפס JS כברירת מחדל</td><td>טכנולוגיה נוספת לתחזק לצד הפורטל</td></tr>
+<tr><td>WordPress (המצב היום)</td><td>עריכה עצמית בממשק</td><td>כבד, תלוי בתוספים שצריך לעדכן כל הזמן, משטח תקיפה מוכר, קשה להגיע לרמת העיצוב והביצועים שבמוקאפ</td></tr>
+</tbody></table></div>
+
+<p><b>מבנה הפרויקט</b> (באותה שיטה של הפורטל - מודול לכל נושא):</p>
+<pre>src/
+  app/
+    common/      layout (nav, footer), ui (button, card, chip), brand
+    route/       home, services, capabilities, about, accreditation, portal, contact, guide (articles)
+    service/     i18n, contact-form
+  assets/        hero/ (canvas waves - one module), images, fonts
+  content/       he/*.json, en/*.json  - all texts, per page, in one place
+  shared/        type (contact-req), enum (service-type)</pre>
+
+<ul>
+<li><b>אנימציית הגלים</b>: Canvas 2D, מודול אחד בלי ספריות. נעצרת כשהיא מחוץ למסך, ומכבדת "הפחתת תנועה" של המשתמש.</li>
+<li><b>עברית ואנגלית</b>: <span class="v">/</span> ו-<span class="v">/en/</span>, טקסטים בקבצי תוכן נפרדים; כיוון RTL/LTR אוטומטי.</li>
+<li><b>שינויי תוכן</b>: עדכון בקבצי התוכן ובנייה מחדש, דרך BizTechoff במסגרת התמיכה. אם גפן תרצה לערוך לבד - אפשר להוסיף בהמשך עורך תוכן קל.</li>
+</ul>
+
+<h2>3. איפה מתארחים</h2>
+<div class="scroll"><table>
+<thead><tr><th>אפשרות</th><th>עלות</th><th>הערות</th></tr></thead>
+<tbody>
+<tr><td><span class="rec">Cloudflare Pages (מומלץ)</span></td><td>ללא עלות לאתר בהיקף כזה</td><td>CDN עולמי, HTTPS אוטומטי, פריסה מכל שינוי בקוד. ה-DNS של gelectronic.co.il כבר ב-Cloudflare - האתר יושב באותו חשבון של גפן, אחרי שהגישה תחזור</td></tr>
+<tr><td>Railway</td><td>שירות נוסף בחשבון של הפורטל</td><td>הכול במקום אחד עם הפורטל, אבל תשלום חודשי על שירות שלא צריך שרת</td></tr>
+</tbody></table></div>
+<p class="note warn"><b>תלות:</b> האתר עולה לכתובת gelectronic.co.il רק אחרי שהגישה לניהול הדומיין חוזרת (מסמך "החזרת הגישה לניהול הדומיין"). עד אז אפשר לבנות ולהציג אותו בכתובת זמנית.</p>
+
+<h2>4. טופס "בקשת כיול"</h2>
+<ul>
+<li>הטופס שולח לשירות קטן בפורטל הקיים (נקודת קצה ציבורית חדשה), שמעביר מייל מסודר למכירות ושומר את הפנייה.</li>
+<li>הגנה: מגבלת קצב, ובדיקת "אני לא רובוט" שקופה (Cloudflare Turnstile) - בלי תמונות לבחור.</li>
+<li>לקוח קיים מופנה לפורטל, שם בקשת הכיול נפתחת ישירות מול המכשירים שלו.</li>
+</ul>
+
+<h2>5. מה חובה מעבר לעיצוב</h2>
+<ul>
+<li><b>נגישות</b>: האתר נבנה לפי התקן הישראלי לנגישות אתרים (WCAG ברמה AA), עם הצהרת נגישות. נבדק במקלדת, בקורא מסך ובניגודיות.</li>
+<li><b>SEO והמעבר מהאתר הישן</b>: כל כתובת קיימת (כולל המאמרים ומדריך מכשירי המדידה) מקבלת הפניה קבועה (301) לכתובת החדשה, כדי לא לאבד מיקום בגוגל. תוכן המדריך עובר לאתר החדש.</li>
+<li><b>ביצועים</b>: יעד 90+ ב-Lighthouse בנייד, טעינה ראשונה מתחת ל-2.5 שניות.</li>
+<li><b>מדידה</b>: שימור תגית Google Tag Manager הקיימת.</li>
+</ul>
+
+<h2>6. שלבים</h2>
+<div class="scroll"><table>
+<thead><tr><th>שלב</th><th>מה</th><th>ימי עבודה (הערכה)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>אישור קונספט ותוכן: מבנה עמודים, טקסטים, תמונות מהמעבדה, אישור לוגואים והמלצות</td><td>2-3</td></tr>
+<tr><td>2</td><td>בנייה: דף בית, שירותים, יכולות, אודות והסמכות, פורטל, צור קשר, מדריך</td><td>5-6</td></tr>
+<tr><td>3</td><td>גרסה באנגלית</td><td>2</td></tr>
+<tr><td>4</td><td>טופס, נגישות, SEO, הפניות, עלייה לאוויר</td><td>2</td></tr>
+</tbody></table></div>
+<p>ההערכה לא כוללת המתנה לתוכן או לגישה לדומיין מצד גפן.</p>
+
+<h2>7. מה צריך מגפן</h2>
+<ol>
+<li>גישה לניהול הדומיין (בתהליך).</li>
+<li>טקסטים מעודכנים, או אישור לנסח מחדש מהאתר הקיים.</li>
+<li>תמונות אמיתיות של המעבדה והציוד (אפשר לתאם צילום).</li>
+<li>אישור להציג לוגואים של לקוחות והמלצות.</li>
+<li>תעודת ההסמכה ותחולתה העדכניות (הקובץ באתר הוא מ-07.2023).</li>
+<li>נתונים לפס המספרים, אם רוצים (כיולים בשנה, זמן אספקה טיפוסי).</li>
+</ol>
+
+<footer>מוטי דרוקמן · BizTechoff · 052-652-6063 · moti@biztechoff.co.il</footer>
+</div></body></html>
