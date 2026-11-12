@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עדכון תמחור - סיכום לאישור</title>
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--accent:#E5B700;--chg:#fff3c4}
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#f6f6f4;color:var(--ink);font-family:Assistant,Arial,sans-serif;line-height:1.6;font-size:15px}
+.wrap{max-width:900px;margin:0 auto;background:#fff;padding:30px 34px;border:1px solid var(--line);border-radius:10px}
+h1{font-size:24px;margin:0 0 4px}
+h2{font-size:18px;margin:26px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--accent)}
+.sub{color:var(--mut);font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:right;vertical-align:top}
+th{background:#faf8f0;font-weight:600}
+td.n{text-align:center;white-space:nowrap}
+.box{border-right:4px solid var(--accent);background:#fffdf5;padding:10px 14px;margin:12px 0;border-radius:4px}
+
+ul{margin:5px 0;padding-right:20px}
+li{margin:4px 0}
+.bt{display:block;font-weight:700;margin-bottom:3px}
+.scroll{overflow-x:auto}
+.ex td,.ex th{font-size:13.5px}
+.ex th{text-align:center;vertical-align:middle}
+.ex tr.grp td{background:#faf8f0;font-weight:700}
+.n.down{color:#1b7f3b;font-weight:600}
+.n.up{color:#b3261e;font-weight:600}
+.foot{margin-top:28px;padding-top:10px;border-top:1px solid var(--line);color:var(--mut);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>עדכון תמחור - סיכום לאישור</h1>
+<div class="sub">לגל טקסי · לפי הדברים ששלחת ב-11-12.10 · ללא חיוב, כפי שסיכמנו</div>
+
+<p>אביחי, עברתי על שלושת הסעיפים ששלחת ובדקתי כל אחד מול איך שהמערכת מחשבת היום. זה מה שישתנה, עם דוגמאות במספרים. תעבור, ואם הכל נכון - אני מעלה.</p>
+
+<h2>1. הדפסה, כריכה ודגלון - חיוב מהעמוד הראשון</h2>
+<p>בדקתי: בהזמנת הדפסה המערכת <b>כבר היום</b> מחייבת מהעמוד הראשון. הפטור של 100 עמודים קיים רק במסירה אישית.</p>
+<p>מה שראית נובע כנראה ממקרה שבו המערכת לא הצליחה לספור את העמודים בקובץ (כמו הקובץ של 44 העמודים ששלחת) - ואז ההדפסה לא חויבה בכלל. את זה אני מתקן: המערכת תציג הודעה ברורה כשספירה נכשלת, במקום להמשיך בשקט עם 0 עמודים.</p>
+
+<h2>2. איסוף חומר מהלקוח - תוספת קבועה במקום החצי</h2>
+<p>היום, כשיש איסוף ויעד אחד: המקום הרחוק במחיר מלא, ועוד 30 ₪ אם הצד השני בגוש דן - או חצי ממחיר הצד השני. מעכשיו <b>המקום הרחוק נשאר במחיר מלא</b>, ובמקום החצי - תוספת קבועה לפי האזור של הצד הקרוב:</p>
+<table>
+<tr><th>הצד הקרוב (איסוף או מסירה)</th><th class="n">תוספת</th></tr>
+<tr><td>גוש דן · שרון קרוב · שפלה קרוב</td><td class="n"><b>30 ₪</b></td></tr>
+<tr><td>שרון רחוק · שפלה רחוק</td><td class="n"><b>50 ₪</b></td></tr>
+<tr><td>שני הצדדים מחוץ לאזורים האלה</td><td class="n"><b>לסגירה - ראה למטה</b></td></tr>
+</table>
+<ul>
+<li>חלה על מסירה אישית, הגשת כתבי דין ופעולה במשרד ממשלתי - כל מקום שבו יש "איסוף עם שליח". בכתבי דין ובמשרד ממשלתי - בית המשפט או המשרד הם הצד השני.</li>
+<li>כמה כתובות מסירה: כל כתובת במחיר מלא, ועוד תוספת לפי אזור האיסוף.</li>
+<li>שני הצדדים באותו מחיר: התוספת הנמוכה מביניהם.</li>
+<li>בהזמנה דחופה או בהולה התוספת מוכפלת, כמו שאר המחיר.</li>
+<li>לקוחות עם מחירון מיוחד - התוספת נקבעת במחירון שלהם, כמו מחיר המסירה. לא הוגדרה - חלה התוספת הרגילה.</li>
+</ul>
+<div class="box"><span class="bt">שאלה פתוחה: כששני הצדדים מחוץ לאזורים המיוחדים</span>
+לדוגמה, צפון רחוק ← ירושלים (היום 425):<br>
+א. המקום הרחוק + תוספת 100 = <b>400</b><br>
+ב. כמו היום, המקום הרחוק + חצי מהשני = 300 + 125 = <b>425</b><br>
+ג. שני האזורים במחיר מלא = 300 + 250 = <b>550</b></div>
+
+<h2>3. מסירה נוספת לאותה כתובת - 20 ₪ + הדפסה מהעמוד הראשון</h2>
+<p>היום: כל נמען נוסף באותה כתובת = 20 ₪, והעותק המודפס שלו לא מחויב. מעכשיו:</p>
+<ul>
+<li>20 ₪ לכל נמען נוסף - כמו היום.</li>
+<li><b>בנוסף</b>, כשהמסמכים מועלים להדפסה: העותק של כל נמען נוסף מחויב במלואו, מהעמוד הראשון, לפי אותו תעריף עמוד של העותק הראשי (שחור-לבן או צבע).</li>
+<li>תיקון נלווה: היום נמענים נוספים נספרים רק בכתובת הראשונה בכל אזור. מעכשיו - בכל כתובת.</li>
+</ul>
+
+
+
+<h2>דוגמאות - כל המקרים</h2>
+<p class="sub">המחירים לפני מע"מ, לפי המחירון הבסיסי: גוש דן 120 · שרון קרוב 150 · שפלה קרוב 150 · שרון רחוק 200 · שפלה רחוק 200 · ירושלים 250 · צפון רחוק 300. "המקום הרחוק" = הצד היקר מבין האיסוף והמסירה, במחיר מלא. עמודה מודגשת בהדפסה = עותקי הנמענים הנוספים, מהעמוד הראשון.</p>
+<div class="scroll"><table class="ex">
+<tr><th rowspan="2">הזמנה</th><th class="n" rowspan="2">מחיר היום</th><th class="n" colspan="4">פירוט המחיר החדש</th><th class="n" rowspan="2">מחיר חדש</th><th class="n" rowspan="2">הפרש</th></tr>
+<tr><th class="n">המקום הרחוק / מסירות</th><th class="n">תוספת</th><th class="n">נמענים נוספים</th><th class="n">הדפסה</th></tr>
+<tr class="grp"><td colspan="8">צד אחד בגוש דן · שרון קרוב · שפלה קרוב - תוספת 30</td></tr>
+<tr><td>אישית · איסוף גוש דן ← שרון רחוק</td><td class="n">230</td><td class="n">200</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>230</b></td><td class="n ">-</td></tr>
+<tr><td>אישית · איסוף שרון קרוב ← ירושלים</td><td class="n">325</td><td class="n">250</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>280</b></td><td class="n down">-45</td></tr>
+<tr><td>אישית · איסוף שרון קרוב ← צפון רחוק</td><td class="n">375</td><td class="n">300</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>330</b></td><td class="n down">-45</td></tr>
+<tr><td>אישית · איסוף צפון רחוק ← שרון קרוב</td><td class="n">375</td><td class="n">300</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>330</b></td><td class="n down">-45</td></tr>
+<tr><td>אישית · איסוף שרון רחוק ← גוש דן</td><td class="n">230</td><td class="n">200</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>230</b></td><td class="n ">-</td></tr>
+<tr><td>אישית · איסוף שרון רחוק ← שרון קרוב</td><td class="n">275</td><td class="n">200</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>230</b></td><td class="n down">-45</td></tr>
+<tr><td>אישית · איסוף שפלה קרוב ← גוש דן</td><td class="n">180</td><td class="n">150</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>180</b></td><td class="n ">-</td></tr>
+<tr><td>אישית · איסוף שרון קרוב ← שרון קרוב (אותו אזור)</td><td class="n">225</td><td class="n">150</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>180</b></td><td class="n down">-45</td></tr>
+<tr class="grp"><td colspan="8">צד אחד בשרון רחוק · שפלה רחוק - תוספת 50</td></tr>
+<tr><td>אישית · איסוף שפלה רחוק ← ירושלים</td><td class="n">350</td><td class="n">250</td><td class="n">50</td><td class="n">-</td><td class="n">-</td><td class="n"><b>300</b></td><td class="n down">-50</td></tr>
+<tr><td>אישית · איסוף צפון רחוק ← שרון רחוק</td><td class="n">400</td><td class="n">300</td><td class="n">50</td><td class="n">-</td><td class="n">-</td><td class="n"><b>350</b></td><td class="n down">-50</td></tr>
+<tr><td>אישית · איסוף שפלה רחוק ← שפלה רחוק (אותו אזור)</td><td class="n">300</td><td class="n">200</td><td class="n">50</td><td class="n">-</td><td class="n">-</td><td class="n"><b>250</b></td><td class="n down">-50</td></tr>
+<tr class="grp"><td colspan="8">שני הצדדים מחוץ לאזורים המיוחדים - שאלה פתוחה (א / ב / ג)</td></tr>
+<tr><td>אישית · איסוף צפון רחוק ← ירושלים</td><td class="n">425</td><td class="n">300</td><td class="n">א 100 · ב 125 · ג 250</td><td class="n">-</td><td class="n">-</td><td class="n"><b>400 / 425 / 550</b></td><td class="n">לפי תשובתך</td></tr>
+<tr><td>אישית · איסוף ירושלים ← ירושלים (אותו אזור)</td><td class="n">375</td><td class="n">250</td><td class="n">א 100 · ב 125 · ג 250</td><td class="n">-</td><td class="n">-</td><td class="n"><b>350 / 375 / 500</b></td><td class="n">לפי תשובתך</td></tr>
+<tr class="grp"><td colspan="8">כתבי דין ומשרד ממשלתי</td></tr>
+<tr><td>כתבי דין · איסוף שרון קרוב ← ביהמ"ש ירושלים</td><td class="n">400</td><td class="n">250</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>280</b></td><td class="n down">-120</td></tr>
+<tr><td>כתבי דין · איסוף שפלה רחוק ← ביהמ"ש גוש דן</td><td class="n">320</td><td class="n">200</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>230</b></td><td class="n down">-90</td></tr>
+<tr><td>כתבי דין · איסוף צפון רחוק ← ביהמ"ש ירושלים</td><td class="n">550</td><td class="n">300</td><td class="n">א 100 · ב 125 · ג 250</td><td class="n">-</td><td class="n">-</td><td class="n"><b>400 / 425 / 550</b></td><td class="n">לפי תשובתך</td></tr>
+<tr><td>ממשלתי · איסוף שרון רחוק ← משרד בירושלים + מסירה בשרון קרוב</td><td class="n">600</td><td class="n">250 + 150</td><td class="n">50</td><td class="n">-</td><td class="n">-</td><td class="n"><b>450</b></td><td class="n down">-150</td></tr>
+<tr class="grp"><td colspan="8">כמה כתובות - כל כתובת במחיר מלא + תוספת לפי אזור האיסוף</td></tr>
+<tr><td>אישית · איסוף גוש דן ← 2 כתובות בירושלים</td><td class="n">620</td><td class="n">500</td><td class="n">30</td><td class="n">-</td><td class="n">-</td><td class="n"><b>530</b></td><td class="n down">-90</td></tr>
+<tr><td>אישית · איסוף שרון רחוק ← 3 כתובות: ירושלים, ירושלים, צפון רחוק · נמען נוסף בכל אחת</td><td class="n">1040</td><td class="n">800</td><td class="n">50</td><td class="n">60</td><td class="n">-</td><td class="n"><b>910</b></td><td class="n down">-130</td></tr>
+<tr><td>אישית · איסוף גוש דן ← 2 כתובות בירושלים · נמענים נוספים 1 + 2</td><td class="n">640</td><td class="n">500</td><td class="n">30</td><td class="n">60</td><td class="n">-</td><td class="n"><b>590</b></td><td class="n down">-50</td></tr>
+<tr class="grp"><td colspan="8">עדיפות - התוספת מוכפלת כמו שאר המחיר (דחופה ×1.5 · בהולה ×2)</td></tr>
+<tr><td>אישית · איסוף שרון רחוק ← ירושלים · דחופה</td><td class="n">525</td><td class="n">375</td><td class="n">75</td><td class="n">-</td><td class="n">-</td><td class="n"><b>450</b></td><td class="n down">-75</td></tr>
+<tr><td>אישית · איסוף שרון רחוק ← גוש דן · בהולה</td><td class="n">460</td><td class="n">400</td><td class="n">60</td><td class="n">-</td><td class="n">-</td><td class="n"><b>460</b></td><td class="n ">-</td></tr>
+<tr><td>אישית · איסוף צפון רחוק ← ירושלים · בהולה</td><td class="n">ידני</td><td class="n" colspan="4">נקודה מחוץ למרכז בהזמנה בהולה - המשרד מתמחר ידנית, כמו היום</td><td class="n"><b>ידני</b></td><td class="n">-</td></tr>
+<tr class="grp"><td colspan="8">מסירה נוספת לאותה כתובת (מסמכים מועלים - ללא איסוף)</td></tr>
+<tr><td>אישית · 150 עמ׳ · ירושלים · 2 נמענים נוספים</td><td class="n">305</td><td class="n">250</td><td class="n">-</td><td class="n">40</td><td class="n">15 + <b>90</b></td><td class="n"><b>395</b></td><td class="n up">+90</td></tr>
+<tr><td>אישית · 60 עמ׳ · שרון קרוב · 1 נמען נוסף</td><td class="n">170</td><td class="n">150</td><td class="n">-</td><td class="n">20</td><td class="n"><b>18</b></td><td class="n"><b>188</b></td><td class="n up">+18</td></tr>
+<tr><td>אישית · 40 עמ׳ צבע · שרון קרוב · 1 נמען נוסף</td><td class="n">250</td><td class="n">150</td><td class="n">-</td><td class="n">20</td><td class="n">80 + <b>80</b></td><td class="n"><b>330</b></td><td class="n up">+80</td></tr>
+<tr><td>אישית · 50 עמ׳ · 2 כתובות בירושלים · נמענים נוספים 1 + 2</td><td class="n">520</td><td class="n">500</td><td class="n">-</td><td class="n">60</td><td class="n"><b>45</b></td><td class="n"><b>605</b></td><td class="n up">+85</td></tr>
+<tr class="grp"><td colspan="8">ללא שינוי</td></tr>
+<tr><td>הדפסה כריכה ודגלון · 150 עמ׳ · ירושלים</td><td class="n">295</td><td class="n">250</td><td class="n">-</td><td class="n">-</td><td class="n">45</td><td class="n"><b>295</b></td><td class="n ">-</td></tr>
+<tr><td>אישית · מסמכים מועלים · 150 עמ׳ · ירושלים</td><td class="n">265</td><td class="n">250</td><td class="n">-</td><td class="n">-</td><td class="n">15</td><td class="n"><b>265</b></td><td class="n ">-</td></tr>
+</table></div>
+
+<h2>מה לא משתנה</h2>
+<p>צילום תיקים, אפוסטיל, גריסה, טונר, איתור, תעריפי ההדפסה עצמם, הפטור של 100 עמודים במסירה אישית, ומחירי המסירה במחירונים המיוחדים ללקוחות.</p>
+
+<div class="foot">BizTechoff - התאמת העסק לעידן הדיגיטלי</div>
+</div>
+</body>
+</html>

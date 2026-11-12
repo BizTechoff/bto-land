@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סימולטור תמחור - לגל טקסי</title>
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--accent:#E5B700;--sel:#fffbe6;--blue:#1f5fbf;--down:#1b7f3b;--up:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;background:#f6f6f4;color:var(--ink);font-family:Assistant,Arial,sans-serif;font-size:15px;line-height:1.5}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 20px}
+header h1{margin:0;font-size:21px}
+header .sub{color:var(--mut);font-size:13.5px}
+.layout{max-width:1180px;margin:0 auto;padding:18px 16px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+.panel h2{font-size:16px;margin:0 0 10px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:6px 0}
+label.f{display:flex;flex-direction:column;font-size:13px;color:var(--mut);gap:3px}
+select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #c9c9c9;border-radius:6px;background:#fff;color:var(--ink)}
+select{min-width:220px}
+input[type=number]{width:90px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1px solid #c9c9c9;background:#fff;border-radius:7px;padding:7px 13px;cursor:pointer;font:inherit;color:var(--ink)}
+.opt.on{background:var(--sel);border-color:var(--accent);font-weight:600}
+.pt{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;border:1px solid var(--line);border-radius:8px;padding:10px;margin:8px 0}
+.pt .n{font-weight:700;min-width:22px;align-self:center}
+.lnk{background:none;border:none;color:var(--blue);cursor:pointer;font:inherit;padding:4px}
+.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
+.hint{color:var(--mut);font-size:13px}
+.rule{background:#fffdf5;border-right:4px solid var(--accent);padding:10px 12px;border-radius:4px;font-size:14px}
+aside{position:sticky;top:14px}
+.res .line{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dotted #ddd;font-size:14px}
+.res .line .v{white-space:nowrap;font-variant-numeric:tabular-nums}
+.res .tot{display:flex;justify-content:space-between;font-weight:700;font-size:18px;padding:10px 0 4px;border-top:2px solid var(--ink);margin-top:6px}
+.cmp{display:flex;justify-content:space-between;font-size:14px;padding:3px 0;color:var(--mut)}
+.d.down{color:var(--down);font-weight:700}.d.up{color:var(--up);font-weight:700}
+.manual{background:#fff3f2;border-right:4px solid var(--up);padding:10px;border-radius:4px;font-size:14px}
+.why{font-size:12.5px;color:var(--mut);margin-top:10px;line-height:1.6}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:4px 6px;text-align:right}
+th{background:#faf8f0}
+td input{width:70px}
+details summary{cursor:pointer;font-weight:600}
+.foot{text-align:center;color:var(--mut);font-size:13px;padding:10px 0 24px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}aside{position:static}select{min-width:0;width:100%}label.f{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<header>
+  <h1>סימולטור תמחור למשרד</h1>
+  <div class="sub">לגל טקסי · תחזית מחיר לפני פתיחת הזמנה · מחיר לפי הכללים החדשים, מול המחיר היום · לפני מע"מ</div>
+</header>
+
+<div class="layout">
+<main>
+
+  <div class="panel">
+    <h2>סוג השירות</h2>
+    <div class="opts" id="types"></div>
+    <div class="hint" style="margin-top:8px">צילום תיקים, אפוסטיל, גריסה, טונר ואיתור - ללא שינוי בתמחור, ולכן לא בסימולטור.</div>
+  </div>
+
+  <div class="panel">
+    <h2>עדיפות</h2>
+    <div class="opts" id="prio"></div>
+  </div>
+
+  <div class="panel" id="pPickup">
+    <h2>איך החומר מגיע</h2>
+    <div class="opts" id="pickup"></div>
+    <div class="row" id="fromRow"><label class="f">אזור האיסוף<select id="from"></select></label></div>
+  </div>
+
+  <div class="panel" id="pCourt">
+    <h2 id="courtTitle">בית המשפט</h2>
+    <div class="row"><label class="f">אזור<select id="court"></select></label></div>
+  </div>
+
+  <div class="panel" id="pTo">
+    <h2>נקודות מסירה</h2>
+    <div id="points"></div>
+    <button class="lnk" id="addPt">+ נקודת מסירה</button>
+  </div>
+
+  <div class="panel" id="pPrint">
+    <h2>הדפסה</h2>
+    <div class="row">
+      <label class="f">עמודים<input type="number" min="0" id="pages" value="0"></label>
+      <label class="f">עותקים<input type="number" min="1" id="copies" value="1"></label>
+      <label class="chk"><input type="checkbox" id="color"> הדפסה צבעונית</label>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="bind"> כריכה ודגלונים</label>
+      <label class="f">כריכות<input type="number" min="0" id="covers" value="0"></label>
+      <label class="f">נספחים / דגלונים<input type="number" min="0" id="apps" value="0"></label>
+      <label class="f">דיסקים<input type="number" min="0" id="disks" value="0"></label>
+    </div>
+    <div class="hint" id="freeHint"></div>
+  </div>
+
+  <div class="panel">
+    <h2>כששני הצדדים מחוץ לאזורים המיוחדים</h2>
+    <div class="opts" id="opt"></div>
+    <div class="hint" style="margin-top:6px">שאלה פתוחה - נסגרת מול אביחי. לדוגמה צפון רחוק ← ירושלים: א 400 · ב 425 · ג 550.</div>
+  </div>
+
+  <div class="panel">
+    <details>
+      <summary>מחירון (ניתן לעריכה - כמו מחירון לקוח)</summary>
+      <div class="hint" style="margin:6px 0">ברירת המחדל = המחירון הבסיסי. תוספת האיסוף נקבעת לפי האזור: מרכז 30 · שרון רחוק / שפלה רחוק 50 · יתר הארץ 100.</div>
+      <button class="lnk" id="resetPl">איפוס למחירון הבסיסי</button>
+      <table id="pl"></table>
+    </details>
+  </div>
+
+</main>
+
+<aside>
+  <div class="panel res">
+    <h2>תחזית מחיר</h2>
+    <div id="lines"></div>
+    <div class="tot"><span>סה"כ לפני מע"מ</span><span id="total"></span></div>
+    <div class="cmp"><span>היום</span><span id="today"></span></div>
+    <div class="cmp"><span>הפרש</span><span id="diff" class="d"></span></div>
+    <div class="why" id="why"></div>
+  </div>
+  <div class="panel rule">
+    <b>הכלל החדש באיסוף:</b> המקום הרחוק במחיר מלא, ובמקום החצי של היום - תוספת לפי האזור של הצד הקרוב: מרכז 30 · שרון רחוק / שפלה רחוק 50. כמה כתובות: כל כתובת במחיר מלא + תוספת לפי אזור האיסוף.
+  </div>
+</aside>
+</div>
+<div class="foot">BizTechoff - התאמת העסק לעידן הדיגיטלי</div>
+
+<script>
+/* ===== נתונים ===== */
+const BASE_AREAS = [
+  ['gd','גוש דן, הרצליה וראשון לציון',120,'c'],['shk','שרון קרוב',150,'c'],['spk','שפלה קרוב',150,'c'],
+  ['shr','שרון רחוק',200,'m'],['spr','שפלה רחוק',200,'m'],
+  ['jer','ירושלים ומזרח ירושלים',250,'r'],['mod','מודיעין והסביבה',200,'r'],
+  ['nm','צפון אמצע',250,'r'],['nf','צפון רחוק',300,'r'],['gol','רמה"ג',300,'r'],
+  ['sn','דרום קרוב',250,'r'],['sf','דרום רחוק',300,'r'],['ays','איו"ש',300,'r'],['gez','גוש עציון',300,'r'],
+  ['dead','ים המלח, בקעה וערבה',450,'r'],['pa','רשות פלסטינאית 1',1200,'r'],
+  ['ar1','מגזר ערבי ישראל 1',250,'r'],['tay','טייבה',250,'r'],['tir','טירה',250,'r'],['kal','קלנסווה',250,'r'],
+  ['m11','משולש 1 (א)',250,'r'],['m12','משולש 1 (ב)',250,'r'],['ars','מגזר ערבי בשרון',250,'r'],['uef','אום אל פאחם',250,'r']
+]
+const GROUP_SURCHARGE = { c: 30, m: 50, r: 100 }
+const EXT_CENTER = ['gd','shk','spk','shr','spr']           // בהולה - מחוץ לאלה = תמחור ידני
+const T = { page: 0.3, color: 2, cover: 30, app: 3, disk: 15, recipient: 20 }
+const MULT = { normal: 1, high: 1.5, urgent: 2 }
+const TYPES = {
+  private: { caption: 'מסירה אישית', pickup: true, court: null, to: true, recipients: true, free: 100, mult: true },
+  court:   { caption: 'הגשת כתבי דין', pickup: true, court: 'בית המשפט', to: false, recipients: false, free: 0, mult: true },
+  gov:     { caption: 'פעולה במשרד ממשלתי', pickup: true, court: 'המשרד הממשלתי', to: true, recipients: false, free: 0, mult: true },
+  print:   { caption: 'הדפסה כריכה ודגלון', pickup: false, court: null, to: true, recipients: false, free: 0, mult: false }
+}
+
+/* ===== מצב ===== */
+let PL = freshPricelist()
+const S = { type: 'private', prio: 'normal', pickup: 'courier', from: 'shk', court: 'jer',
+  to: [{ area: 'jer', rec: 0 }], pages: 0, copies: 1, color: false, bind: false, covers: 0, apps: 0, disks: 0, opt: 'A' }
+
+function freshPricelist() {
+  const m = {}
+  for (const [id, cap, price, g] of BASE_AREAS) m[id] = { id, cap, price, g, sur: GROUP_SURCHARGE[g] }
+  return m
+}
+const A = id => PL[id]
+const isSpecial = id => A(id).g !== 'r'
+
+/* ===== חישוב: הכללים החדשים ===== */
+function legSurcharge(nearId, farId) {
+  // תוספת הצד הקרוב. אף צד לא מיוחד - לפי תשובה א/ב/ג
+  const near = A(nearId), far = A(farId)
+  if (isSpecial(nearId)) return { v: near.sur, why: `תוספת ${near.cap}` }
+  if (isSpecial(farId)) return { v: far.sur, why: `תוספת ${far.cap}` }
+  if (OPT === 'A') return { v: near.sur, why: 'שני הצדדים מחוץ לאזורים המיוחדים - תוספת (א)' }
+  if (OPT === 'B') return { v: near.price / 2, why: 'שני הצדדים מחוץ לאזורים המיוחדים - חצי מהצד הקרוב (ב)' }
+  return { v: near.price, why: 'שני הצדדים מחוץ לאזורים המיוחדים - מחיר מלא (ג)' }
+}
+
+function farNear(a, b) {
+  // הרחוק = היקר. בשוויון - הצד הקרוב הוא זה עם התוספת הנמוכה
+  const pa = A(a).price, pb = A(b).price
+  if (pa !== pb) return pa > pb ? { far: a, near: b } : { far: b, near: a }
+  return legSurcharge(a, b).v <= legSurcharge(b, a).v ? { far: b, near: a } : { far: a, near: b }
+}
+
+function pickupOnlySurcharge(fromId) {
+  // כמה כתובות: תוספת לפי אזור האיסוף
+  const f = A(fromId)
+  if (isSpecial(fromId) || OPT === 'A') return f.sur
+  return OPT === 'B' ? f.price / 2 : f.price
+}
+
+function groupPoints(points) {
+  const g = []
+  for (const p of points) {
+    let x = g.find(i => i.area === p.area)
+    if (!x) { x = { area: p.area, count: 0, rec: 0, firstRec: p.rec }; g.push(x) }
+    x.count++; x.rec += p.rec
+  }
+  return g
+}
+const ptsCap = (id, n) => A(id).cap + (n > 1 ? ` (${n} נקודות)` : '')
+
+let OPT = 'A'
+function calcNew(s) {
+  OPT = s.opt
+  const t = TYPES[s.type], m = t.mult ? MULT[s.prio] : 1, L = [], why = []
+  const courier = t.pickup && s.pickup === 'courier'
+  const add = (d, v) => { if (v) L.push([d, v]) }
+
+  if (s.type === 'private') {
+    if (courier && s.to.length === 1) {
+      const fn = farNear(s.from, s.to[0].area), sc = legSurcharge(fn.near, fn.far)
+      add(`${A(fn.far).cap} (המקום הרחוק)`, A(fn.far).price * m)
+      add(`איסוף / צד קרוב - ${A(fn.near).cap}`, sc.v * m)
+      why.push(`יעד אחד: ${A(fn.far).cap} במחיר מלא + ${sc.why}`)
+    } else {
+      for (const g of groupPoints(s.to)) add(ptsCap(g.area, g.count), A(g.area).price * g.count * m)
+      if (courier) {
+        add(`איסוף - ${A(s.from).cap}`, pickupOnlySurcharge(s.from) * m)
+        why.push('כמה כתובות: כל כתובת במחיר מלא + תוספת לפי אזור האיסוף')
+      }
+    }
+    const rec = s.to.reduce((x, p) => x + p.rec, 0)
+    add(`נמענים נוספים לאותה כתובת (${rec})`, rec * T.recipient)
+  }
+  if (s.type === 'court' || s.type === 'gov') {
+    if (courier) {
+      const fn = farNear(s.from, s.court), sc = legSurcharge(fn.near, fn.far)
+      add(`${A(fn.far).cap} (המקום הרחוק)`, A(fn.far).price * m)
+      add(`איסוף / צד קרוב - ${A(fn.near).cap}`, sc.v * m)
+      why.push(`${t.court} כצד השני: ${A(fn.far).cap} במחיר מלא + ${sc.why}`)
+    } else add(`${t.court} - ${A(s.court).cap}`, A(s.court).price * m)
+    if (s.type === 'gov') for (const g of groupPoints(s.to)) add(ptsCap(g.area, g.count), A(g.area).price * g.count * m)
+  }
+  if (s.type === 'print') for (const g of groupPoints(s.to)) add(ptsCap(g.area, g.count), A(g.area).price * g.count)
+
+  printLines(s, t, add, true)
+  return finish(s, L, why)
+}
+
+/* ===== חישוב: היום (כמו המחשבון הקיים) ===== */
+function calcToday(s) {
+  const t = TYPES[s.type], m = t.mult ? MULT[s.prio] : 1, L = []
+  const courier = t.pickup && s.pickup === 'courier'
+  const add = (d, v) => { if (v) L.push([d, v]) }
+
+  if (s.type === 'private') {
+    if (courier && s.to.length === 1) {
+      const f = s.from, d = s.to[0], pf = A(f).price, pd = A(d.area).price
+      if (f === 'gd') { add('', pd * m); add('', 30 * m) }
+      else if (d.area === 'gd') { add('', pf * m); add('', 30 * m) }
+      else if (pf > pd) { add('', pf * m); add('', 0.5 * pd * m) }
+      else { add('', pd * m); add('', 0.5 * pf * m) }
+      add('', d.rec * T.recipient)
+    } else {
+      // קיבוץ לפי אזור, כולל אזור האיסוף. נמענים - רק מהנקודה הראשונה בכל אזור
+      const g = []
+      if (courier) g.push({ area: s.from, count: 1, rec: 0 })
+      for (const p of s.to) {
+        let x = g.find(i => i.area === p.area)
+        if (!x) { x = { area: p.area, count: 0, rec: p.rec }; g.push(x) }
+        x.count++
+      }
+      for (const x of g) { add('', A(x.area).price * x.count * m); add('', x.rec * T.recipient) }
+    }
+  }
+  if (s.type === 'court' || s.type === 'gov') {
+    add('', A(s.court).price * m)
+    if (courier) add('', A(s.from).price * m)
+    if (s.type === 'gov') for (const g of groupPoints(s.to)) add('', A(g.area).price * g.count * m)
+  }
+  if (s.type === 'print') for (const g of groupPoints(s.to)) add('', A(g.area).price * g.count)
+
+  printLines(s, t, add, false)
+  return finish(s, L, [])
+}
+
+function printLines(s, t, add, isNew) {
+  const upload = !t.pickup || s.pickup === 'upload'
+  if (!upload) return
+  const raw = s.pages * s.copies
+  if (s.color) add(`הדפסה צבעונית (${raw} עמ')`, raw * T.color)
+  else add(`הדפסה (${Math.max(0, raw - t.free)} עמ')`, Math.max(0, raw - t.free) * T.page)
+  if (s.bind) {
+    add(`כריכות (${s.covers * s.copies})`, s.covers * s.copies * T.cover)
+    add(`נספחים / דגלונים (${s.apps * s.copies})`, s.apps * s.copies * T.app)
+  }
+  add(`דיסקים (${s.disks})`, s.disks * T.disk)
+  if (isNew && t.recipients) {
+    const rec = s.to.reduce((x, p) => x + p.rec, 0), pg = raw * rec
+    if (pg) add(`הדפסה - עותקי נמענים נוספים (${pg} עמ', מהעמוד הראשון)`, pg * (s.color ? T.color : T.page))
+  }
+}
+
+function finish(s, L, why) {
+  const total = Math.round(L.reduce((x, l) => x + l[1], 0) * 100) / 100
+  let manual = false
+  if (s.prio === 'urgent') {
+    const t = TYPES[s.type], pts = s.to.map(p => p.area)
+    if (t.pickup && s.pickup === 'courier') pts.push(s.from)
+    if (t.court) pts.push(s.court)
+    manual = pts.some(id => !EXT_CENTER.includes(id))
+  }
+  return { lines: L, total: manual ? 0 : total, manual, why }
+}
+
+/* ===== תצוגה ===== */
+const $ = id => document.getElementById(id)
+const fmt = v => (Math.round(v * 100) / 100).toLocaleString('he-IL') + ' ₪'
+function areaOptions(sel) {
+  const groups = [['c', 'מרכז - תוספת 30'], ['m', 'שרון / שפלה רחוק - תוספת 50'], ['r', 'יתר הארץ']]
+  return groups.map(([g, n]) => `<optgroup label="${n}">` +
+    Object.values(PL).filter(a => a.g === g).map(a => `<option value="${a.id}" ${a.id === sel ? 'selected' : ''}>${a.cap} · ${a.price} ₪</option>`).join('') +
+    '</optgroup>').join('')
+}
+function opts(el, items, cur, key) {
+  $(el).innerHTML = items.map(([v, c]) => `<button class="opt ${v === cur ? 'on' : ''}" data-k="${key}" data-v="${v}">${c}</button>`).join('')
+}
+
+function render() {
+  const t = TYPES[S.type]
+  if (!t.pickup) S.pickup = 'upload'
+  opts('types', Object.entries(TYPES).map(([k, v]) => [k, v.caption]), S.type, 'type')
+  opts('prio', [['normal', 'רגילה'], ['high', 'דחופה ×1.5'], ['urgent', 'בהולה ×2']], S.prio, 'prio')
+  opts('pickup', [['courier', 'איסוף עם שליח'], ['upload', 'העלאת מסמכים']], S.pickup, 'pickup')
+  opts('opt', [['A', 'א - תוספת 100'], ['B', 'ב - חצי מהשני (כמו היום)'], ['C', 'ג - שני האזורים מלא']], S.opt, 'opt')
+
+  $('pPickup').style.display = t.pickup ? '' : 'none'
+  $('fromRow').style.display = t.pickup && S.pickup === 'courier' ? '' : 'none'
+  $('from').innerHTML = areaOptions(S.from)
+  $('pCourt').style.display = t.court ? '' : 'none'
+  $('courtTitle').textContent = t.court || ''
+  $('court').innerHTML = areaOptions(S.court)
+  $('pTo').style.display = t.to ? '' : 'none'
+  $('points').innerHTML = S.to.map((p, i) => `<div class="pt"><span class="n">${i + 1}</span>
+    <label class="f">אזור<select data-pt="${i}">${areaOptions(p.area)}</select></label>
+    ${t.recipients ? `<label class="f">נמענים נוספים באותה כתובת<input type="number" min="0" data-rec="${i}" value="${p.rec}"></label>` : ''}
+    ${S.to.length > 1 ? `<button class="lnk" data-del="${i}">הסר</button>` : ''}</div>`).join('')
+  $('addPt').style.display = S.to.length < 10 ? '' : 'none'
+  $('pPrint').style.display = !t.pickup || S.pickup === 'upload' ? '' : 'none'
+  $('freeHint').textContent = t.free ? `במסירה אישית ${t.free} העמודים הראשונים (שחור-לבן) ללא חיוב. עותקי הנמענים הנוספים - מהעמוד הראשון.` : 'חיוב מהעמוד הראשון.'
+  for (const k of ['pages', 'copies', 'covers', 'apps', 'disks']) $(k).value = S[k]
+  $('color').checked = S.color; $('bind').checked = S.bind
+  $('covers').disabled = $('apps').disabled = !S.bind
+  renderPl(); compute()
+}
+
+function compute() {
+  const n = calcNew(S), d = calcToday(S)
+  if (n.manual) {
+    $('lines').innerHTML = '<div class="manual">הזמנה בהולה עם נקודה מחוץ למרכז המורחב - המשרד מתמחר ידנית (כמו היום).</div>'
+    $('total').textContent = 'ידני'; $('today').textContent = 'ידני'; $('diff').textContent = '-'; $('diff').className = 'd'; $('why').textContent = ''
+    return
+  }
+  $('lines').innerHTML = n.lines.map(([k, v]) => `<div class="line"><span>${k}</span><span class="v">${fmt(v)}</span></div>`).join('') || '<div class="hint">אין שורות</div>'
+  $('total').textContent = fmt(n.total)
+  $('today').textContent = fmt(d.total)
+  const df = Math.round((n.total - d.total) * 100) / 100
+  $('diff').textContent = df === 0 ? 'ללא שינוי' : (df > 0 ? '+' : '') + fmt(df)
+  $('diff').className = 'd ' + (df < 0 ? 'down' : df > 0 ? 'up' : '')
+  $('why').innerHTML = n.why.join('<br>')
+}
+
+function renderPl() {
+  $('pl').innerHTML = '<tr><th>אזור</th><th>מחיר</th><th>תוספת איסוף</th></tr>' +
+    Object.values(PL).map(a => `<tr><td>${a.cap}</td><td><input type="number" min="0" data-pp="${a.id}" value="${a.price}"></td><td><input type="number" min="0" data-ps="${a.id}" value="${a.sur}"></td></tr>`).join('')
+}
+
+const num = v => Math.max(0, Number(v) || 0)
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-k]')
+  if (b) { S[b.dataset.k] = b.dataset.v; render(); return }
+  const del = e.target.closest('[data-del]')
+  if (del) { S.to.splice(+del.dataset.del, 1); render(); return }
+  if (e.target.id === 'addPt') { S.to.push({ area: S.to[S.to.length - 1].area, rec: 0 }); render() }
+  if (e.target.id === 'resetPl') { PL = freshPricelist(); render() }
+})
+document.addEventListener('change', e => {
+  const el = e.target, d = el.dataset
+  if (el.id === 'from') S.from = el.value
+  else if (el.id === 'court') S.court = el.value
+  else if (d.pt !== undefined) S.to[+d.pt].area = el.value
+  else if (d.rec !== undefined) S.to[+d.rec].rec = num(el.value)
+  else if (d.pp) PL[d.pp].price = num(el.value)
+  else if (d.ps) PL[d.ps].sur = num(el.value)
+  else if (['pages', 'covers', 'apps', 'disks'].includes(el.id)) S[el.id] = num(el.value)
+  else if (el.id === 'copies') S.copies = Math.max(1, num(el.value))
+  else if (el.id === 'color' || el.id === 'bind') S[el.id] = el.checked
+  else return
+  render()
+})
+document.addEventListener('input', e => {
+  const el = e.target, d = el.dataset
+  if (el.type !== 'number') return
+  if (d.rec !== undefined) S.to[+d.rec].rec = num(el.value)
+  else if (d.pp) PL[d.pp].price = num(el.value)
+  else if (d.ps) PL[d.ps].sur = num(el.value)
+  else if (['pages', 'covers', 'apps', 'disks'].includes(el.id)) S[el.id] = num(el.value)
+  else if (el.id === 'copies') S.copies = Math.max(1, num(el.value))
+  else return
+  compute()
+})
+render()
+</script>
+</body>
+</html>
