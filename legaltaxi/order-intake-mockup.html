@@ -424,7 +424,7 @@
   // =====================================================================
   //  intake.profiles.ts  (המוקאפ מרנדר הכל מכאן - אין HTML לפי סוג)
   // =====================================================================
-  const AREA = { 'גוש דן': 120, 'שרון קרוב': 150, 'שרון רחוק': 200, 'שפלה קרוב': 150, 'ירושלים': 250, 'צפון אמצע': 250 };
+  const AREA = { 'גוש דן': 120, 'שרון קרוב': 150, 'שפלה קרוב': 150, 'שרון רחוק': 200, 'שפלה רחוק': 200, 'ירושלים': 250, 'מודיעין': 200, 'צפון אמצע': 250, 'צפון רחוק': 300, 'דרום קרוב': 250, 'דרום רחוק': 300 };
   const NEAR = ['גוש דן', 'שרון קרוב', 'שפלה קרוב'];
 
   // FIELD_DEFS - כיתוב, סוג קלט, אפשרויות. במימוש האמיתי זה מגיע ממטא-דאטה של Order (data-control)
@@ -594,8 +594,26 @@
   const needStatement = () => prof().courierStatement ? eval('(' + prof().courierStatement + ')')(state.f) : false;
 
   // =====================================================================
-  //  מחיר - מראה של orderPaymentCalculator לפי סוג
+  //  מחיר - לפי התמחור החדש (איסוף, נמענים נוספים). שאר הסוגים - כמו היום
   // =====================================================================
+  // ---- תמחור איסוף - אותם כללים כמו docs/pricing-simulator.html ----
+  // המקום הרחוק במחיר מלא + תוספת לפי האזור של הצד הקרוב: מרכז 30 · שרון/שפלה רחוק 50.
+  // שני הצדדים מחוץ לאזורים המיוחדים: תוספת 100 (אפשרות א - ממתין לאישור סופי)
+  const ZONE = { 'גוש דן': 'c', 'שרון קרוב': 'c', 'שפלה קרוב': 'c', 'שרון רחוק': 'm', 'שפלה רחוק': 'm' };
+  const SURCHARGE = { c: 30, m: 50, r: 100 };
+  const zone = a => ZONE[a] || 'r';
+  const special = a => zone(a) !== 'r';
+  const legSurcharge = (near, far) => SURCHARGE[zone(special(near) || !special(far) ? near : far)];
+  const farNear = (a, b) => {
+    if (price(a) !== price(b)) return price(a) > price(b) ? { far: a, near: b } : { far: b, near: a };
+    return legSurcharge(a, b) <= legSurcharge(b, a) ? { far: b, near: a } : { far: a, near: b };   // שוויון - התוספת הנמוכה
+  };
+  const pickupLeg = (items, other, m, label) => {
+    const fn = farNear(state.from?.area || 'גוש דן', other);
+    items.push({ d: `${label} - ${fn.far}`, v: price(fn.far) * m });
+    items.push({ d: `תוספת איסוף - ${fn.near}`, v: legSurcharge(fn.near, fn.far) * m });
+  };
+
   function calc() {
     const items = [], m = mult(), t = state.type, f = state.f;
     const pts = state.points.filter(p => p.area);
@@ -610,23 +628,30 @@
       else { const pr = Math.max(0, pages - (t === 'private' ? 100 : 0)); if (pr) items.push({ d: `הדפסה (${pr} עמודים${t === 'private' ? ' מעבר ל-100' : ''})`, v: pr * 0.3 }); }
       if (state.cover) items.push({ d: `כריכה ודגלון (${copies})`, v: 30 * copies });
       if (state.scan && state.cover) items.push({ d: 'עותק נוסף לסריקה - כריכה', v: 30 });
+      if (t === 'private') {   // עותק לכל נמען נוסף - מהעמוד הראשון
+        const extra = pts.reduce((s, p) => s + (p.extras || []).length, 0), pg = pages * extra;
+        if (pg) items.push({ d: `הדפסה - עותקי נמענים נוספים (${pg} עמודים)`, v: pg * (state.color ? 2 : 0.3) });
+      }
     };
     if (t === 'private') {
-      if (state.pickup === 'courier' && pts.length === 1) { items.push({ d: `מסירה - ${pts[0].area}`, v: price(pts[0].area) * m }); items.push({ d: `איסוף מהמשרד - ${fromArea}`, v: 30 * m }); }
-      else { const arr = pts.map(p => p.area); if (state.pickup === 'courier') arr.push(fromArea); grouped(arr, m); }
+      if (state.pickup === 'courier' && pts.length === 1) pickupLeg(items, pts[0].area, m, 'מסירה');
+      else {
+        grouped(pts.map(p => p.area), m, 'מסירה');
+        if (state.pickup === 'courier') items.push({ d: `תוספת איסוף - ${fromArea}`, v: SURCHARGE[zone(fromArea)] * m });
+      }
       const extra = pts.reduce((s, p) => s + (p.extras || []).length, 0); if (extra) items.push({ d: `נמענים נוספים (${extra})`, v: extra * 20 });
       upload();
     } else if (t === 'court') {
-      if (state.court) items.push({ d: `הגשה - ${state.court.area}`, v: price(state.court.area) * m });
-      if (state.pickup === 'courier') items.push({ d: `איסוף - ${fromArea}`, v: price(fromArea) * m });
+      if (state.court && state.pickup === 'courier') pickupLeg(items, state.court.area, m, 'הגשה');
+      else if (state.court) items.push({ d: `הגשה - ${state.court.area}`, v: price(state.court.area) * m });
       upload();
     } else if (t === 'copy') {
       if (state.court) items.push({ d: `צילום - ${state.court.area}`, v: price(state.court.area) });
       if (!f.sendDocsToEmail && pts[0]) items.push({ d: `החזרה - ${pts[0].area}`, v: price(pts[0].area) });
       if (f.copyType === 'criminal') return { items: [{ d: 'תיק פלילי - תמחור ע"י המשרד', v: 0 }], total: 0, office: true };
     } else if (t === 'gov') {
-      if (state.court) items.push({ d: `${state.court.area} - משרד ממשלתי`, v: price(state.court.area) * m });
-      if (state.pickup === 'courier') items.push({ d: `איסוף - ${fromArea}`, v: price(fromArea) * m });
+      if (state.court && state.pickup === 'courier') pickupLeg(items, state.court.area, m, 'משרד ממשלתי');
+      else if (state.court) items.push({ d: `${state.court.area} - משרד ממשלתי`, v: price(state.court.area) * m });
       grouped(pts.map(p => p.area), m, 'החזרה');
       upload();
     } else if (t === 'print') {
@@ -653,7 +678,8 @@
     }
     items.forEach(i => { i.v = num(i.v); });
     let total = items.reduce((s, i) => s + i.v, 0);
-    if (state.prio === 'urgent' && pts.some(p => !['גוש דן', 'שרון קרוב', 'שרון רחוק', 'שפלה קרוב'].includes(p.area))) return { items: [{ d: 'בהולה מחוץ למרכז - תמחור ע"י המשרד', v: 0 }], total: 0, office: true };
+    const allAreas = pts.map(p => p.area).concat(state.pickup === 'courier' && showPickup() ? [fromArea] : [], state.court ? [state.court.area] : []);
+    if (state.prio === 'urgent' && allAreas.some(a => !['גוש דן', 'שרון קרוב', 'שרון רחוק', 'שפלה קרוב', 'שפלה רחוק'].includes(a))) return { items: [{ d: 'בהולה מחוץ למרכז - תמחור ע"י המשרד', v: 0 }], total: 0, office: true };
     return { items, total, office: false };
   }
 
