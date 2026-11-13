@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>גפן - בחירת גרסת מוקאפ</title>
+<title>גפן - בחירת גרסה לאתר הבית</title>
+<meta property="og:title" content="גפן - בחירת גרסה לאתר הבית">
 <style>
   *{box-sizing:border-box;margin:0}
   html,body{height:100%;background:#020613;font-family:'Segoe UI',Arial,sans-serif}
@@ -49,7 +50,7 @@ var VERSIONS = [
     var v = VERSIONS.filter(function (x) { return x.id === id; })[0] || VERSIONS[VERSIONS.length - 1];
     current = v; view.src = v.path; location.hash = v.id;
     [].forEach.call(box.children, function (b) { b.setAttribute('aria-pressed', b.dataset.id === v.id); });
-    document.title = 'גפן - מוקאפ ' + v.label;
+    document.title = 'גפן - בחירת גרסה לאתר הבית' + (v.note ? ' - ' + v.note : '');
   }
   SHOWN.forEach(function (v) {
     var b = document.createElement('button'); b.type = 'button'; b.dataset.id = v.id;
