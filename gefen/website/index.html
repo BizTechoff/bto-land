@@ -32,16 +32,18 @@
 </div>
 <script>
 // One entry per mockup folder. To add a version: add a line here.
+// hidden: true = no button (still opens by URL, e.g. index.html#v1).
 var VERSIONS = [
-  { id: 'v1', label: 'v1', note: 'ראשון', path: 'mockup/index.html' },
-  { id: 'v2', label: 'v2', note: 'ים-יבשה-חלל', path: 'mockup-v2/index.html' },
-  { id: 'v3', label: 'v3', note: '', path: 'mockup-v3/index.html' },
-  { id: 'v4', label: 'v4', note: '', path: 'mockup-v4/index.html' },
-  { id: 'v5', label: 'v5', note: 'חמים', path: 'mockup-v5/index.html' },
-  { id: 'v6', label: 'v6', note: 'Precision', path: 'mockup-v6/index.html' },
-  { id: 'v7', label: 'v7', note: 'Signal', path: 'mockup-v7/index.html' }
+  { id: 'v1', hidden: true, label: 'v1', note: 'ראשון', path: 'mockup/index.html' },
+  { id: 'v2', hidden: true, label: 'v2', note: 'ים-יבשה-חלל', path: 'mockup-v2/index.html' },
+  { id: 'v3', label: 'v3', note: 'כדור הארץ', path: 'mockup-v3/index.html' },
+  { id: 'v4', hidden: true, label: 'v4', note: '', path: 'mockup-v4/index.html' },
+  { id: 'v5', hidden: true, label: 'v5', note: 'חמים', path: 'mockup-v5/index.html' },
+  { id: 'v6', label: 'v6', note: 'תצוגה בהירה', path: 'mockup-v6/index.html' },
+  { id: 'v7', label: 'v7', note: 'תדרים', path: 'mockup-v7/index.html' }
 ];
 (function () {
+  var SHOWN = VERSIONS.filter(function (x) { return !x.hidden; });
   var view = document.getElementById('view'), box = document.getElementById('buttons'), bar = document.getElementById('switch'), current;
   function pick(id) {
     var v = VERSIONS.filter(function (x) { return x.id === id; })[0] || VERSIONS[VERSIONS.length - 1];
@@ -50,7 +52,7 @@ var VERSIONS = [
     [].forEach.call(box.children, function (b) { b.setAttribute('aria-pressed', b.dataset.id === v.id); });
     document.title = 'גפן - מוקאפ ' + v.label;
   }
-  VERSIONS.forEach(function (v) {
+  SHOWN.forEach(function (v) {
     var b = document.createElement('button'); b.type = 'button'; b.dataset.id = v.id;
     b.innerHTML = v.label + (v.note ? '<small>' + v.note + '</small>' : '');
     b.addEventListener('click', function () { pick(v.id); });
@@ -59,9 +61,10 @@ var VERSIONS = [
   document.getElementById('open').addEventListener('click', function () { window.open(current.path, '_blank'); });
   document.getElementById('min').addEventListener('click', function () { bar.classList.toggle('min'); });
   var saved; try { saved = localStorage.getItem('gefen-mockup'); } catch (e) {}
+  if (!SHOWN.some(function (x) { return x.id === saved; })) saved = '';
   pick(location.hash.slice(1) || saved || 'v7');
-  // keyboard: 1-7 picks a version
-  addEventListener('keydown', function (e) { var n = +e.key; if (n >= 1 && n <= VERSIONS.length) pick(VERSIONS[n - 1].id); });
+  // keyboard: 1..n picks a shown version
+  addEventListener('keydown', function (e) { var n = +e.key; if (n >= 1 && n <= SHOWN.length) pick(SHOWN[n - 1].id); });
 })();
 </script>
 </body>

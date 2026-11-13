@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גפן - בחירת גרסת מוקאפ</title>
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%;background:#020613;font-family:'Segoe UI',Arial,sans-serif}
+  iframe{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}
+  /* the floating version switch - one button pressed at a time */
+  .switch{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;
+    background:rgba(8,14,36,.88);backdrop-filter:blur(14px);border:1px solid rgba(120,170,255,.3);box-shadow:0 14px 44px rgba(0,0,0,.5);max-width:calc(100vw - 16px);overflow-x:auto;transition:opacity .25s,transform .25s}
+  .switch.min{opacity:.35;transform:translateX(-50%) scale(.82);transform-origin:bottom center}
+  .switch.min:hover{opacity:1;transform:translateX(-50%)}
+  .switch b{color:#8fa3cf;font-size:12px;font-weight:600;padding:0 10px;white-space:nowrap}
+  .switch button{font:inherit;font-size:14px;font-weight:700;color:#c9d6f5;background:transparent;border:0;border-radius:999px;padding:9px 15px;cursor:pointer;white-space:nowrap;transition:all .2s}
+  .switch button:hover{background:rgba(120,170,255,.14);color:#fff}
+  .switch button[aria-pressed=true]{background:linear-gradient(135deg,#1089d8,#0d69ad);color:#fff;box-shadow:0 6px 18px rgba(16,137,216,.5)}
+  .switch button small{display:block;font-size:10.5px;font-weight:500;opacity:.75}
+  .switch .tool{padding:9px 11px;font-size:15px}
+  @media (max-width:640px){.switch b,.switch button small{display:none}.switch button{padding:8px 12px}}
+</style>
+</head>
+<body>
+<iframe id="view" title="תצוגת המוקאפ"></iframe>
+<div class="switch" id="switch" role="group" aria-label="בחירת גרסה">
+  <b>גרסה</b>
+  <span id="buttons" style="display:contents"></span>
+  <button class="tool" id="open" type="button" title="פתיחה בטאב נפרד">↗</button>
+  <button class="tool" id="min" type="button" title="הקטנת הסרגל">–</button>
+</div>
+<script>
+// One entry per mockup folder. To add a version: add a line here.
+var VERSIONS = [
+  { id: 'v1', label: 'v1', note: 'ראשון', path: 'mockup/index.html' },
+  { id: 'v2', label: 'v2', note: 'ים-יבשה-חלל', path: 'mockup-v2/index.html' },
+  { id: 'v3', label: 'v3', note: '', path: 'mockup-v3/index.html' },
+  { id: 'v4', label: 'v4', note: '', path: 'mockup-v4/index.html' },
+  { id: 'v5', label: 'v5', note: 'חמים', path: 'mockup-v5/index.html' },
+  { id: 'v6', label: 'v6', note: 'Precision', path: 'mockup-v6/index.html' },
+  { id: 'v7', label: 'v7', note: 'Signal', path: 'mockup-v7/index.html' }
+];
+(function () {
+  var view = document.getElementById('view'), box = document.getElementById('buttons'), bar = document.getElementById('switch'), current;
+  function pick(id) {
+    var v = VERSIONS.filter(function (x) { return x.id === id; })[0] || VERSIONS[VERSIONS.length - 1];
+    current = v; view.src = v.path; location.hash = v.id;
+    try { localStorage.setItem('gefen-mockup', v.id); } catch (e) {}
+    [].forEach.call(box.children, function (b) { b.setAttribute('aria-pressed', b.dataset.id === v.id); });
+    document.title = 'גפן - מוקאפ ' + v.label;
+  }
+  VERSIONS.forEach(function (v) {
+    var b = document.createElement('button'); b.type = 'button'; b.dataset.id = v.id;
+    b.innerHTML = v.label + (v.note ? '<small>' + v.note + '</small>' : '');
+    b.addEventListener('click', function () { pick(v.id); });
+    box.appendChild(b);
+  });
+  document.getElementById('open').addEventListener('click', function () { window.open(current.path, '_blank'); });
+  document.getElementById('min').addEventListener('click', function () { bar.classList.toggle('min'); });
+  var saved; try { saved = localStorage.getItem('gefen-mockup'); } catch (e) {}
+  pick(location.hash.slice(1) || saved || 'v7');
+  // keyboard: 1-7 picks a version
+  addEventListener('keydown', function (e) { var n = +e.key; if (n >= 1 && n <= VERSIONS.length) pick(VERSIONS[n - 1].id); });
+})();
+</script>
+</body>
+</html>
