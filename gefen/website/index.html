@@ -57,6 +57,14 @@ var VERSIONS = [
     b.addEventListener('click', function () { pick(v.id); });
     box.appendChild(b);
   });
+  // presentation only: hide the mockup's own scrollbar (an RTL page puts it on the left). The mockups are not changed.
+  view.addEventListener('load', function () {
+    try {
+      var d = view.contentDocument, st = d.createElement('style');
+      st.textContent = 'html{scrollbar-width:none}html::-webkit-scrollbar{display:none}';
+      d.head.appendChild(st);
+    } catch (e) {}
+  });
   document.getElementById('open').addEventListener('click', function () { window.open(current.path, '_blank'); });
   document.getElementById('min').addEventListener('click', function () { bar.classList.toggle('min'); });
   // the address alone always opens the first button; #vN opens a specific version
