@@ -45,6 +45,7 @@ var VERSIONS = [
 ];
 (function () {
   var SHOWN = VERSIONS.filter(function (x) { return !x.hidden; });
+  SHOWN.forEach(function (v, i) { v.label = 'v' + (i + 1); });   // the buttons count 1, 2, 3 - the folders and #ids stay as they are
   var view = document.getElementById('view'), box = document.getElementById('buttons'), bar = document.getElementById('switch'), current;
   function pick(id) {
     var v = VERSIONS.filter(function (x) { return x.id === id; })[0] || VERSIONS[VERSIONS.length - 1];
