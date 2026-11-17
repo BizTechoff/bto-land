@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>רשימת מוזמנים - בר מצווה ניר</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --primary: #1e3a5f;
+      --primary-light: #2b5284;
+      --accent: #d97706;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px 60px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      padding: 28px 32px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 95, 0.25);
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    header h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .btn-light {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-light:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-light);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      padding: 18px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-card.confirmed .stat-value { color: var(--success); }
+    .stat-card.pending .stat-value { color: var(--warning); }
+    .stat-card.declined .stat-value { color: var(--danger); }
+
+    .controls {
+      background: var(--card);
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .search-box input, .add-form input, .add-form select {
+      width: 100%;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-box input:focus, .add-form input:focus, .add-form select:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg);
+      color: var(--text);
+      padding: 7px 14px;
+      font-size: 0.85rem;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .category-card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .category-header {
+      background: #f8fafc;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .category-badge {
+      background: #e2e8f0;
+      color: #334155;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 20px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      background: #fcfcfd;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: #f9fafb;
+    }
+
+    .guest-name {
+      font-weight: 600;
+    }
+
+    .guest-note {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .count-input {
+      width: 64px;
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .status-select {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .status-pending {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    .status-confirmed {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .status-declined {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .delete-btn {
+      background: transparent;
+      color: #9ca3af;
+      padding: 4px 8px;
+      font-size: 1rem;
+    }
+
+    .delete-btn:hover {
+      color: var(--danger);
+      background: var(--danger-bg);
+    }
+
+    .add-section {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .add-section h3 {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+      color: var(--primary);
+    }
+
+    .add-form {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 90px 1.5fr auto;
+      gap: 10px;
+    }
+
+    @media (max-width: 720px) {
+      .add-form {
+        grid-template-columns: 1fr;
+      }
+      th, td {
+        padding: 10px 12px;
+      }
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      header { background: var(--primary) !important; -webkit-print-color-adjust: exact; }
+      .controls, .add-section, .header-actions, .delete-btn { display: none !important; }
+      .category-card { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>רשימת מוזמנים – בר מצווה ניר</h1>
+        <p>אירוע בחצר האחורית • ניהול מוזמנים ואישורי הגעה</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-light" onclick="window.print()">הדפסה / שמירה כ-PDF</button>
+        <button class="btn-light" onclick="resetData()">איפוס לרשימה המקורית</button>
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">סה״כ מוזמנים ברשימה</div>
+        <div class="stat-value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card confirmed">
+        <div class="stat-label">אישרו הגעה</div>
+        <div class="stat-value" id="stat-confirmed">0</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="stat-label">ממתינים לאישור</div>
+        <div class="stat-value" id="stat-pending">0</div>
+      </div>
+      <div class="stat-card declined">
+        <div class="stat-label">לא מגיעים</div>
+        <div class="stat-value" id="stat-declined">0</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="חיפוש לפי שם או הערה..." oninput="render()" />
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">הכל</button>
+        <button class="filter-btn" data-filter="confirmed" onclick="setFilter('confirmed', this)">אישרו</button>
+        <button class="filter-btn" data-filter="pending" onclick="setFilter('pending', this)">ממתינים</button>
+        <button class="filter-btn" data-filter="declined" onclick="setFilter('declined', this)">לא מגיעים</button>
+      </div>
+    </div>
+
+    <div id="listsContainer"></div>
+
+    <div class="add-section">
+      <h3>הוספת מוזמן חדש</h3>
+      <form class="add-form" onsubmit="addGuest(event)">
+        <input type="text" id="newName" placeholder="שם המוזמן / משפחה" required />
+        <select id="newCategory">
+          <option value="לנזנר">משפחת לנזנר</option>
+          <option value="דרוקמן">משפחת דרוקמן</option>
+          <option value="נוצניקים">נוצניקים / ניצני עוז</option>
+          <option value="חברים ונוספים" selected>חברים ונוספים</option>
+        </select>
+        <input type="number" id="newCount" value="2" min="1" max="20" required />
+        <input type="text" id="newNote" placeholder="הערה (אופציונלי)" />
+        <button type="submit" class="btn-primary">+ הוסף</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "nir_bar_mitzvah_guests_v1";
+
+    const defaultGuests = [
+      // לנזנר (סה"כ 13)
+      { id: 1, category: "לנזנר", name: "הורים", count: 2, note: "", status: "confirmed" },
+      { id: 2, category: "לנזנר", name: "אחות", count: 4, note: "2 + 2", status: "pending" },
+      { id: 3, category: "לנזנר", name: "אח", count: 3, note: "2 + 1", status: "pending" },
+      { id: 4, category: "לנזנר", name: "חיה", count: 2, note: "", status: "pending" },
+      { id: 5, category: "לנזנר", name: "שמוליק", count: 1, note: "", status: "pending" },
+      { id: 6, category: "לנזנר", name: "אלי", count: 1, note: "סומן לתיקון בדף", status: "pending" },
+
+      // דרוקמן (סה"כ 12)
+      { id: 7, category: "דרוקמן", name: "דודים", count: 2, note: "", status: "pending" },
+      { id: 8, category: "דרוקמן", name: "יצחק", count: 2, note: "", status: "pending" },
+      { id: 9, category: "דרוקמן", name: "ירון (ירון ורונן)", count: 2, note: "", status: "pending" },
+      { id: 10, category: "דרוקמן", name: "גדי", count: 2, note: "", status: "pending" },
+      { id: 11, category: "דרוקמן", name: "נדב", count: 1, note: "", status: "pending" },
+      { id: 12, category: "דרוקמן", name: "אלי סופר", count: 3, note: "השלמה לסיכום 12 בקבוצה", status: "pending" },
+
+      // נוצניקים (סה"כ 15)
+      { id: 13, category: "נוצניקים", name: "גפן", count: 3, note: "חלוקה משוערת מתוך 15", status: "pending" },
+      { id: 14, category: "נוצניקים", name: "נוי", count: 3, note: "", status: "pending" },
+      { id: 15, category: "נוצניקים", name: "ששון", count: 3, note: "", status: "pending" },
+      { id: 16, category: "נוצניקים", name: "רגב", count: 3, note: "", status: "pending" },
+      { id: 17, category: "נוצניקים", name: "אבי", count: 3, note: "", status: "pending" },
+
+      // חברים ונוספים (עמוד 2 - סה"כ 18)
+      { id: 18, category: "חברים ונוספים", name: "נחמה + ירב / ירדן", count: 2, note: "", status: "pending" },
+      { id: 19, category: "חברים ונוספים", name: "סער, דניאל, גיא, מני, אורן", count: 2, note: "רשום 2 ליד קבוצת השמות", status: "pending" },
+      { id: 20, category: "חברים ונוספים", name: "אביחי אביב", count: 2, note: "", status: "pending" },
+      { id: 21, category: "חברים ונוספים", name: "קמפינג", count: 2, note: "", status: "pending" },
+      { id: 22, category: "חברים ונוספים", name: "דורון / רון חרות", count: 1, note: "", status: "pending" },
+      { id: 23, category: "חברים ונוספים", name: "אורן", count: 2, note: "", status: "pending" },
+      { id: 24, category: "חברים ונוספים", name: "עידן", count: 4, note: "", status: "pending" },
+      { id: 25, category: "חברים ונוספים", name: "שחר", count: 1, note: "", status: "pending" },
+      { id: 26, category: "חברים ונוספים", name: "דוסליק", count: 1, note: "", status: "pending" },
+      { id: 27, category: "חברים ונוספים", name: "מור / מאור", count: 1, note: "", status: "pending" }
+    ];
+
+    let guests = JSON.parse(localStorage.getItem(STORAGE_KEY)) || structuredClone(defaultGuests);
+    let currentFilter = "all";
+
+    const categoryLabels = {
+      "לנזנר": "משפחת לנזנר",
+      "דרוקמן": "משפחת דרוקמן",
+      "נוצניקים": "נוצניקים / ניצני עוז",
+      "חברים ונוספים": "חברים ונוספים"
+    };
+
+    function save() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(guests));
+    }
+
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      render();
+    }
+
+    function updateStatus(id, newStatus) {
+      const g = guests.find(x => x.id === id);
+      if (g) {
+        g.status = newStatus;
+        save();
+        render();
+      }
+    }
+
+    function updateCount(id, val) {
+      const num = parseInt(val, 10);
+      if (!isNaN(num) && num >= 0) {
+        const g = guests.find(x => x.id === id);
+        if (g) {
+          g.count = num;
+          save();
+          render();
+        }
+      }
+    }
+
+    function deleteGuest(id) {
+      guests = guests.filter(x => x.id !== id);
+      save();
+      render();
+    }
+
+    function addGuest(e) {
+      e.preventDefault();
+      const name = document.getElementById("newName").value.trim();
+      const category = document.getElementById("newCategory").value;
+      const count = parseInt(document.getElementById("newCount").value, 10) || 1;
+      const note = document.getElementById("newNote").value.trim();
+      if (!name) return;
+
+      guests.push({
+        id: Date.now(),
+        category,
+        name,
+        count,
+        note,
+        status: "pending"
+      });
+      save();
+      e.target.reset();
+      document.getElementById("newCount").value = 2;
+      render();
+    }
+
+    function resetData() {
+      if (confirm("האם לאפס את כל השינויים ולחזור לרשימה המקורית?")) {
+        guests = structuredClone(defaultGuests);
+        save();
+        render();
+      }
+    }
+
+    function render() {
+      const search = document.getElementById("searchInput").value.trim().toLowerCase();
+
+      // Calculate stats
+      let total = 0, confirmed = 0, pending = 0, declined = 0;
+      guests.forEach(g => {
+        total += g.count;
+        if (g.status === "confirmed") confirmed += g.count;
+        else if (g.status === "pending") pending += g.count;
+        else if (g.status === "declined") declined += g.count;
+      });
+
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-confirmed").textContent = confirmed;
+      document.getElementById("stat-pending").textContent = pending;
+      document.getElementById("stat-declined").textContent = declined;
+
+      const container = document.getElementById("listsContainer");
+      container.innerHTML = "";
+
+      const categories = ["לנזנר", "דרוקמן", "נוצניקים", "חברים ונוספים"];
+      categories.forEach(cat => {
+        const catGuests = guests.filter(g => {
+          const matchCat = g.category === cat;
+          const matchFilter = currentFilter === "all" || g.status === currentFilter;
+          const matchSearch = !search || g.name.toLowerCase().includes(search) || (g.note && g.note.toLowerCase().includes(search));
+          return matchCat && matchFilter && matchSearch;
+        });
+
+        if (catGuests.length === 0) return;
+
+        const catSum = catGuests.reduce((sum, g) => sum + g.count, 0);
+
+        const card = document.createElement("div");
+        card.className = "category-card";
+        card.innerHTML = `
+          <div class="category-header">
+            <span class="category-title">${categoryLabels[cat] || cat}</span>
+            <span class="category-badge">${catSum} מוזמנים</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>שם / משפחה</th>
+                <th style="width: 110px;">מס׳ נפשות</th>
+                <th style="width: 150px;">סטטוס הגעה</th>
+                <th style="width: 50px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              ${catGuests.map(g => `
+                <tr>
+                  <td>
+                    <span class="guest-name">${g.name}</span>
+                    ${g.note ? `<span class="guest-note">${g.note}</span>` : ""}
+                  </td>
+                  <td>
+                    <input type="number" class="count-input" value="${g.count}" min="0" max="50" onchange="updateCount(${g.id}, this.value)" />
+                  </td>
+                  <td>
+                    <select class="status-select status-${g.status}" onchange="updateStatus(${g.id}, this.value)">
+                      <option value="pending" ${g.status === "pending" ? "selected" : ""}>ממתין לאישור</option>
+                      <option value="confirmed" ${g.status === "confirmed" ? "selected" : ""}>מגיעים ✓</option>
+                      <option value="declined" ${g.status === "declined" ? "selected" : ""}>לא מגיעים ✕</option>
+                    </select>
+                  </td>
+                  <td>
+                    <button class="delete-btn" title="מחק שורה" onclick="deleteGuest(${g.id})">✕</button>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>
