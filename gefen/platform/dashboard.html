@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גפן - לוח הבקרה של החברה</title>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --page:#0b1024; --panel:#101736; --panel-2:#151d44; --well:#0c1230; --line:#24305c; --line-2:#3a4a86;
+  --ink:#e8ecf5; --ink-2:#9fb0cf; --ink-3:#7f8db3; --navy:#141948;
+  --wait:#ffc53d; --done:#2ecc71; --auto:#4db3ff; --frame:#8fd0ff;
+}
+
+/* ---------- page ---------- */
+*{box-sizing:border-box}
+body{font-family:Heebo,'Segoe UI',Arial,sans-serif;direction:rtl;margin:0;background:var(--page);color:var(--ink);line-height:1.45;font-size:14px}
+.wrap{max-width:1100px;margin:0 auto;padding:14px}
+h1{font-size:21px;margin:0}
+.wrap{position:relative}
+.bsd{position:absolute;top:2px;right:14px;font-size:11px;color:var(--ink-2);line-height:1}
+h2,h3{margin:0}
+.sub{color:var(--ink-2);font-size:13px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px}
+.brand{direction:ltr;font-weight:800;color:var(--ink-2)}
+.who{display:inline-block;background:var(--line);color:#9fd0ff;border-radius:99px;padding:0 9px;font-size:12px;font-weight:700}
+
+/* ---------- status strip: who are we waiting for (stays on top while scrolling) ---------- */
+.strip{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:12px 0;box-shadow:0 6px 18px #0007}
+.now{color:var(--ink-2)}
+.now b{color:var(--wait);font-size:16px;margin-inline-start:6px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap}
+.ctl button{font:inherit;border:1px solid var(--line-2);background:#18214a;color:var(--ink);border-radius:99px;padding:5px 14px;cursor:pointer}
+.ctl button:hover{background:#22306a}
+.end{display:none;margin-inline-start:14px;background:#123a25;border:1px solid var(--done);border-radius:99px;padding:1px 12px;color:#c9f3da;font-size:13px}
+
+/* ---------- zones: the customer on top, the company under it, control at the bottom ---------- */
+.zone{border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0;background:linear-gradient(var(--panel-2),var(--panel))}
+.zh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.zh h2,.zt{font-size:17px;color:#fff}
+.zt{margin:18px 2px 10px}
+[data-dept]{transition:border-color .2s,box-shadow .2s}
+[data-dept].act{border-color:var(--wait);box-shadow:0 0 0 2px #ffc53d33}
+
+/* ---------- zone 1: the customer ---------- */
+.cust{background:linear-gradient(#1b2757,#131b40);border-color:#33427c}
+.chan{display:flex;gap:6px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.chan li{border:1px solid var(--line-2);border-radius:99px;padding:1px 10px;font-size:12px;color:var(--ink-2)}
+.chan li.main{background:var(--ink);color:var(--navy);border-color:var(--ink);font-weight:700}
+.cz{display:grid;grid-template-columns:360px minmax(0,1fr);gap:14px}
+.opts{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#0f1638;align-self:start}
+.oc{display:flex;flex-direction:column;gap:10px;min-width:0}
+/* the call as the customer sees it: one line of steps, done / now / ahead */
+.jr{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);counter-reset:j}
+.jr li{position:relative;text-align:center;font-size:12px;color:var(--ink-3);padding-top:22px}
+.jr li::before{content:'';position:absolute;top:5px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#2a355f;z-index:1}
+/* each step's line runs back to the step before it (to the right, in RTL) */
+.jr li::after{content:'';position:absolute;top:10px;left:50%;width:100%;height:2px;background:#2a355f}
+.jr li:first-child::after{display:none}
+.jr li.d{color:var(--ink-2)}.jr li.d::before{background:var(--done)}.jr li.d::after{background:var(--done)}
+/* the mails sent at a step, under its dot */
+.jr ul{list-style:none;margin:6px 4px 0;padding:0;font-size:11px;font-weight:400;color:var(--ink-2);display:flex;flex-direction:column;align-items:center;gap:3px}
+.jr ul li{position:static;padding:3px 6px;border-radius:6px;background:#16204d;text-align:center;width:auto;max-width:100%;color:var(--ink-2);font-weight:400}
+.jr ul li::before{content:'✉ ';position:static;transform:none;width:auto;height:auto;border-radius:0;background:none;box-shadow:none;color:var(--auto)}
+.jr ul li::after{display:none}
+.jr li.c{color:#fff;font-weight:800}.jr li.c::before{background:var(--wait);box-shadow:0 0 0 4px #ffc53d33}.jr li.c::after{background:var(--done)}
+.rc{display:flex;flex-direction:column;gap:10px;min-width:0}
+/* the portal screen as wide as the customer's buttons under it */
+.rc>.scr{align-self:stretch}
+.act{display:flex;flex-direction:column;justify-content:center;gap:6px;background:#0c1230;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.actt{font-size:11.5px;color:var(--ink-2)}
+.idle{color:var(--ink-3);font-size:13px;padding:6px 0}
+@media(max-width:700px){.jr li{font-size:10.5px;min-width:0;overflow-wrap:anywhere}.ob .bt{flex:1 1 100%}.opts,.oc,.act{min-width:0}}
+.opts h3{font-size:14px;color:#fff;margin-bottom:4px}
+.ob{display:flex;flex-wrap:wrap;gap:10px}
+.ob:empty{display:none}
+.ob .bt{width:auto;flex:1 1 150px;margin:0;font-size:15px;font-weight:700}
+
+/* the portal screen the customer sees */
+.scr{align-self:start;background:#f4f6f9;border-radius:12px;overflow:hidden;border:2px solid var(--line-2);color:var(--navy);box-shadow:0 8px 24px #0008}
+.sb{display:flex;align-items:center;gap:4px;background:#dfe4ea;padding:5px 8px;direction:ltr}
+.sb i{flex:none;width:8px;height:8px;border-radius:50%;background:#ff6b5f}
+.sb i:nth-child(2){background:#ffc53d}
+.sb i:nth-child(3){background:#2ecc71}
+.sb span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px;color:#5c6570;margin-left:8px;background:#fff;border-radius:99px;padding:0 10px}
+.sb .sbl{direction:rtl;margin-left:8px;white-space:nowrap;background:var(--navy);color:#fff;font-size:12px;font-weight:800;border-radius:99px;padding:1px 12px}
+.hd{display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:5px 10px}
+.hd b{letter-spacing:.14em;font-size:13px;direction:ltr}
+.hd span{flex:1;font-size:11px;color:var(--ink-2)}
+.hd em{font-style:normal;width:20px;height:20px;border-radius:50%;background:#1089d8;font-size:11px;display:grid;place-items:center}
+.tabs{display:flex;background:#fff;border-bottom:1px solid #dfe4ea}
+.tabs span{flex:1;text-align:center;font-size:10.5px;padding:5px 2px;color:#7a8592;border-bottom:3px solid transparent;transition:.3s}
+.tabs span.on{color:var(--navy);font-weight:800;border-color:var(--pc,#1089d8);background:#f4f8fc}
+.cd{margin:8px;background:#fff;border-radius:10px;border:1px solid #dfe4ea;border-right:5px solid var(--pc,#1089d8);padding:7px 10px;display:grid;gap:5px;transition:border-color .3s}
+.cd.fl{animation:fl .5s}
+@keyframes fl{from{transform:translateY(4px);opacity:.3}}
+.dn b{display:block;font-size:12.5px}
+.dn small{color:#7a8592;font-size:10.5px}
+.chip{justify-self:start;background:var(--pc,#1089d8);color:var(--navy);font-weight:800;font-size:12px;border-radius:99px;padding:2px 12px;transition:background .3s}
+.dots{display:flex;gap:3px}
+.dots i{flex:1;height:4px;border-radius:2px;background:#dfe4ea}
+.dots i.v{background:var(--pc,#1089d8)}
+
+/* ---------- zone 2: the company - one panel per department ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.contents{display:contents}
+.p{background:linear-gradient(var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:12px}
+.p h3{font-size:15.5px;color:#fff}
+.p .who{margin:3px 0 9px}
+.note{display:inline-block;border:1px dashed var(--ink-3);color:var(--ink-2);border-radius:99px;padding:0 9px;font-size:12px;margin-inline-start:4px}
+
+/* buttons: off / blinking (waiting) / done / done by itself / the last action (running frame) */
+.bt{display:flex;align-items:center;gap:9px;width:100%;font:inherit;text-align:right;background:var(--well);border:1px solid var(--line);color:var(--ink-3);border-radius:10px;padding:8px 10px;margin:6px 0;cursor:default;min-height:44px}
+.bt.hid{display:none}
+.bt:focus-visible{outline:2px solid var(--frame);outline-offset:2px}
+.bt i{flex:none;width:16px;height:16px;border-radius:50%;background:#2a355f;box-shadow:inset 0 0 0 2px #0006}
+.bt small{display:block;color:var(--ink-3);font-size:11px}
+.bt.au small{color:var(--auto)}
+.bt.wait{color:#fff;border-color:var(--wait);cursor:pointer;animation:bl 1s infinite}
+.bt.wait i{background:var(--wait);box-shadow:0 0 10px var(--wait)}
+.bt.done{color:#c9f3da}
+.bt.done i{background:var(--done);box-shadow:0 0 6px var(--done)}
+.bt.auto{color:#fff;border-color:var(--auto)}
+.bt.auto i{background:var(--auto);box-shadow:0 0 12px var(--auto)}
+.bt.src{border-color:transparent;color:#fff;background-image:linear-gradient(90deg,var(--frame) 50%,transparent 50%),linear-gradient(90deg,var(--frame) 50%,transparent 50%),linear-gradient(0deg,var(--frame) 50%,transparent 50%),linear-gradient(0deg,var(--frame) 50%,transparent 50%);background-size:14px 2px,14px 2px,2px 14px,2px 14px;background-repeat:repeat-x,repeat-x,repeat-y,repeat-y;background-position:0 0,0 100%,0 0,100% 0;animation:ants 1.8s linear infinite}
+@keyframes bl{50%{background:#3a3110}}
+@keyframes ants{to{background-position:14px 0,-14px 100%,0 -14px,100% 14px}}
+
+/* legend - sits in the free cell of the company grid */
+.zth{display:flex;align-items:center;justify-content:space-between;gap:6px 16px;flex-wrap:wrap}
+.lgd{color:var(--ink-2);font-size:12.5px}
+.lgd ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px}
+.lgd li{display:flex;align-items:flex-start;gap:7px}
+.lgd i{flex:none;width:12px;height:12px;border-radius:50%;margin-top:3px}
+.lgd i.fr{border:2px dashed var(--frame);border-radius:3px}
+
+/* ---------- zone 3: control (Slavik) ---------- */
+.ctrl{background:linear-gradient(#17204a,#0f1533);border-color:#2f3d74}
+.sec{font-size:12.5px;font-weight:700;color:var(--ink-2);margin:0 2px 6px}
+/* readouts: the device on one side, the counters facing it */
+.ro{display:flex;justify-content:space-between;align-items:center;gap:10px 24px;flex-wrap:wrap;background:var(--well);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px}
+.rg{display:flex;flex-wrap:wrap;gap:8px 0;margin:0}
+.rg>div{padding:0 16px;border-inline-start:1px solid var(--line)}
+.rg>div:first-child{padding-inline-start:0;border-inline-start:0}
+.rg>div:last-child{padding-inline-end:0}
+.rg dt{font-size:11.5px;color:var(--ink-2)}
+.rg dt i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-inline-end:5px}
+.rg dd{margin:0;font-size:15px;font-weight:700;color:#fff}
+.rg.num dd{font-size:22px;font-weight:800;line-height:1.15}
+/* device lifecycle */
+.lc{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-bottom:14px}
+.lc div{border-radius:8px;padding:6px 4px;text-align:center;font-size:12px;background:var(--well);color:#5d6a90;border:2px solid transparent;border-bottom:4px solid var(--c);opacity:.55}
+.lc div small{display:block;font-size:10.5px}
+.lc div.v{opacity:1;color:#fff;background:color-mix(in srgb,var(--c) 22%,var(--well))}
+.lc div.c{opacity:1;color:var(--navy);background:var(--c);font-weight:800;border-color:#fff}
+/* log + business output, side by side */
+.lower{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 18px}
+.log{margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--ink-2);max-height:150px;overflow:auto}
+.log li{display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid #1b2550}
+.log li:first-child{color:#fff}
+.log li i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--done)}
+.log li.au i{background:var(--auto)}
+.log:empty::after{content:'היומן מתמלא עם הלחיצה הראשונה';color:var(--ink-3)}
+.out{margin:0;border-inline-start:1px solid var(--line);padding-inline-start:18px}
+.oh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.oh .sec{margin:0}
+.tag{font-size:11px;color:var(--ink-3);border:1px solid var(--line);border-radius:99px;padding:0 8px}
+.seg{margin-inline-start:auto;display:inline-flex;border:1px solid var(--line-2);border-radius:99px;overflow:hidden}
+.seg button{font:inherit;font-size:12px;border:0;background:transparent;color:var(--ink-2);padding:2px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--navy);font-weight:700}
+.dnts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}
+.dnt{display:flex;align-items:center;gap:10px;min-width:0}
+.dnt>div{flex:1;min-width:0}
+.dnt svg{flex:none}
+.dnt circle{transition:stroke-width .15s}
+.dnt circle:hover{stroke-width:11}
+.dnt text{fill:var(--ink);font-size:15px;font-weight:800}
+.dnt .t{font-size:12.5px;font-weight:700;color:var(--ink)}
+.dnt ul{list-style:none;margin:2px 0 0;padding:0;font-size:12px;color:var(--ink-2);display:grid;grid-template-columns:auto auto auto;justify-content:start;align-items:center;gap:1px 6px}
+.dnt li{display:contents}
+.dnt li i{width:9px;height:9px;border-radius:2px}
+.dnt li b{padding-inline-start:8px;color:var(--ink);font-variant-numeric:tabular-nums;text-align:end}
+
+
+/* ---------- one screen: the whole board fits the window, no scrolling (wide screens) ---------- */
+.fit{overflow:hidden}
+.fit .wrap{width:1600px;max-width:none;margin:0;padding:8px 14px}
+.fit .strip{position:static;margin:8px 0;padding:6px 12px}
+.fit .zone{padding:10px 14px;margin:8px 0}
+.fit .zh{margin-bottom:8px}
+.fit .zt{margin:4px 2px 6px}
+.fit .grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.fit .p{padding:10px}
+.fit .bt{min-height:36px;padding:6px 9px;margin:5px 0;font-size:13.5px}
+.fit .cb{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.fit .lc{margin-bottom:0}
+.fit .log{height:150px;max-height:none}
+.fit .dnts{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}
+.fit .lower{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+
+/* ---------- small screens, reduced motion ---------- */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cz{grid-template-columns:1fr}
+  .rc{width:100%;max-width:420px}
+  .lower{grid-template-columns:1fr}
+  .out{border-inline-start:0;padding-inline-start:0;border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+}
+@media(max-width:700px){.lc{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:480px){.grid,.ob,.dnts{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.bt.src,.cd.fl{animation:none}.bt.wait{animation:none;background:#3a3110}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <div class="bsd">בס"ד</div>
+    <h1>גפן - לוח הבקרה של החברה</h1>
+    <div class="sub">למעלה הלקוח, מתחתיו החברה: כל מחלקה, מי שאחראי עליה, והכפתורים שלה. הכפתור שמהבהב: שם מחכים עכשיו.</div>
+  </div>
+  <div class="brand">BizTechoff™</div>
+</header>
+
+<div class="strip" aria-live="polite">
+  <div class="now">עכשיו מחכים ל:<b id="now">-</b><span class="end" id="end"></span></div>
+  <div class="ctl"><button id="auto">הרץ לבד</button><button id="reset">התחל מחדש</button></div>
+</div>
+
+<!-- zone 1: the customer - what he sees in the portal, and what he can do -->
+<section class="zone cust">
+  <div class="zh">
+    <h2>הלקוח</h2>
+    <ul class="chan" aria-label="איפה הלקוח פוגש את גפן"><li class="main">הפורטל</li><li>אתר הבית</li><li>דף התיקונים</li><li>מיילים</li></ul>
+  </div>
+  <div class="cz">
+    <div class="rc">
+    <div class="scr" aria-label="מה הלקוח רואה בפורטל">
+      <div class="sb"><i></i><i></i><i></i><span>portal.gelectronic.co.il</span><b class="sbl">מה הלקוח רואה בפורטל</b></div>
+      <div class="hd"><b>GEFEN</b><span>פורטל השירות והכיולים</span><em>י</em></div>
+      <div class="tabs"><span data-t="calls">הקריאות שלי</span><span data-t="quotes">הצעות מחיר</span><span data-t="certs">הכיולים שלי</span><span data-t="docs">מסמכים</span></div>
+      <div class="cd" id="cd"><div class="dn"><b>מולטימטר 34401A</b><small>Register No 12345 · אתר חדרה</small></div><div class="chip" id="see">-</div><div class="dots" id="dots"></div></div>
+    </div>
+    <div class="act" data-dept="customer">
+      <div class="ob" id="custb"></div>
+      <div class="idle" id="idle">אין פעולה שמחכה ללקוח - גפן מטפלת</div>
+    </div>
+    </div>
+    <div class="opts">
+      <div class="oc">
+        <h3>הקריאה של הלקוח</h3>
+        <ol class="jr" id="jr"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- zone 2: the company - the departments are built from DEPTS, the legend takes the free cell -->
+<div class="zth">
+  <h2 class="zt">החברה</h2>
+  <aside class="lgd" aria-label="מקרא">
+    <ul>
+      <li><i style="background:var(--wait)"></i>מהבהב: מחכה ללחיצה</li>
+      <li><i style="background:var(--done)"></i>בוצע</li>
+      <li><i style="background:var(--auto)"></i>נעשה לבד, בלי אדם</li>
+      <li><i class="fr"></i>מסגרת רצה: הפעולה שבגללה מחכים עכשיו</li>
+      <li><i style="background:#2a355f"></i>כבוי</li>
+    </ul>
+  </aside>
+</div>
+<div class="grid">
+  <div class="contents" id="depts"></div>
+</div>
+
+<!-- zone 3: control -->
+<section class="zone ctrl">
+  <div class="zh"><h2>בקרה</h2><span class="who">סלביק</span><span class="sub">מה קורה בחברה עכשיו</span></div>
+  <div class="cb">
+  <div class="cl">
+  <div class="ro">
+    <dl class="rg">
+      <div><dt>המכשיר עכשיו</dt><dd id="wh">-</dd></div>
+      <div><dt>סטטוס</dt><dd id="stt">-</dd></div>
+      <div><dt>מסלול</dt><dd id="route">-</dd></div>
+    </dl>
+    <dl class="rg num">
+      <div><dt><i style="background:var(--done)"></i>פעולות של אנשים</dt><dd id="k1">0</dd></div>
+      <div><dt><i style="background:var(--auto)"></i>נעשו לבד</dt><dd id="k2">0</dd></div>
+    </dl>
+  </div>
+  <h3 class="sec">מחזור החיים של הקריאה</h3>
+  <div class="lc" id="lc"></div>
+  </div>
+  <div class="lower">
+    <div>
+      <h3 class="sec">יומן</h3>
+      <ol class="log" id="log"></ol>
+    </div>
+    <figure class="out">
+      <div class="oh">
+        <h3 class="sec">סטטוס שוטף בעסק</h3><span class="tag">נתוני דוגמה</span>
+        <span class="seg" role="group" aria-label="תקופה"><button data-per="day" aria-pressed="true">היום</button><button data-per="month" aria-pressed="false">החודש</button></span>
+      </div>
+      <div class="dnts" id="dnts"></div>
+    </figure>
+  </div>
+  </div>
+</section>
+
+</div>
+<script>
+/* =====================================================================
+   1. DATA - departments and their buttons: [id, label, done by itself?]
+   ===================================================================== */
+const DEPTS=[
+ {id:'customer',t:'הלקוח',who:'בפורטל',top:1,b:[['newcal','+ קריאת כיול'],['newrep','+ קריאת תיקון'],['send','שולח מכשיר'],['site','מזמין כיול אצלו'],['approve','מאשר הצעה'],['silent','לא עונה 3 ימים'],['got','קיבל את המכשיר']]},
+ {id:'dani',t:'קליטה ויציאה',who:'דני',b:[['in','קליטה (Work In)'],['cal','Came For: Calibration'],['rep','Came For: Diagnosis'],['desc','תיאור התקלה'],['out','יציאה (Work Out)'],['visit','תיאום ביקור אצל הלקוח']]},
+ {id:'quotes',t:'הצעות ותזכורות',who:'סוכן',note:'נעשה לבד',b:[['diagq','הצעת דיאגנוסטיקה ללקוח',1],['remind','תזכורת ללקוח, כל 3 ימים',1],['eta','צפי החזרה: עד 42 ימים',1],['ok','מאשר',0,'אדם מאשר']]},
+ {id:'sasha',t:'תיקונים',who:'סשה',b:[['diag','דיאגנוסטיקה'],['rq','הצעת תיקון ללקוח'],['fix','תיקון'],['parts','מחכה לחלק'],['arrived','החלק הגיע'],['pass','תוקן, עובר לכיול'],['nocal','תוקן, יוצא בלי כיול'],['call','להתקשר ללקוח']]},
+ {id:'lab',t:'המעבדה',who:'הטכנאים',b:[['start','התחלת כיול'],['done','הכיול הסתיים']]},
+ {id:'site',t:'כיול אצל הלקוח',who:'טכנאי שטח',note:'אופליין: עובד בלי אינטרנט',b:[['kit','רשימת ציוד לביקור',1],['go','יציאה ללקוח'],['done','הכיול הסתיים'],['sync','התוצאות עולות כשהטכנאי חוזר',1],['ok','מאשר',0,'אדם מאשר']]},
+ {id:'quality',t:'תעודות',who:'איכות',b:[['sign','הנפקת תעודה'],['send','תעודה לפורטל',1]]},
+ {id:'naama',t:'חיוב',who:'נעמה',b:[['inv','חשבונית']]}
+];
+
+/* =====================================================================
+   2. DATA - the flow, step by step.
+      b = the buttons that blink, auto = a button that works by itself,
+      next = the next step (per button when there is a choice, '@ret' = back to the step that asked),
+      see = what the customer sees in the portal
+   ===================================================================== */
+const FLOW={
+ start:{b:['customer.newcal','customer.newrep'],next:{'customer.newcal':'calhow','customer.newrep':'repsend'}},
+ calhow:{b:['customer.send','customer.site'],next:{'customer.send':'in','customer.site':'visit'},see:'נפתחה קריאת כיול'},
+ repsend:{b:['customer.send'],next:'in',see:'נפתחה קריאת תיקון'},
+ in:{b:['dani.in'],next:'choose',see:'המכשיר נקלט, נפתחה קריאה'},
+ choose:{b:['dani.cal','dani.rep'],byCall:{cal:['dani.cal'],rep:['dani.rep']},next:{'dani.cal':'lab1','dani.rep':'desc'}},
+ desc:{b:['dani.desc'],next:'dq'},
+ dq:{auto:'quotes.diagq',next:'ap1',see:'הצעת דיאגנוסטיקה מחכה לאישור'},
+ ap1:{b:['customer.approve','customer.silent'],next:{'customer.approve':'diag','customer.silent':'rem'},ret:'ap1'},
+ diag:{b:['sasha.diag'],next:'rq',see:'בדיאגנוסטיקה'},
+ rq:{b:['sasha.rq'],next:'ap2',see:'הצעת תיקון מחכה לאישור'},
+ ap2:{b:['customer.approve','customer.silent'],next:{'customer.approve':'eta','customer.silent':'rem'},ret:'ap2'},
+ rem:{noOk:1,auto:'quotes.remind',next:'@ret',see:'נשלחה תזכורת'},
+ call:{b:['sasha.call'],next:'@ret',see:'סשה יוצר קשר'},
+ eta:{auto:'quotes.eta',next:'fix',see:'אושר לתיקון · צפי החזרה: עד 42 ימים'},
+ fix:{b:['sasha.fix','sasha.parts'],next:{'sasha.fix':'pass','sasha.parts':'partwait'},see:'אושר לתיקון · צפי החזרה: עד 42 ימים'},
+ partwait:{b:['sasha.arrived'],next:'fix',see:'מחכה לחלק · צפי החזרה: עד 42 ימים'},
+ pass:{b:['sasha.pass','sasha.nocal'],next:{'sasha.pass':'lab1','sasha.nocal':'out'},see:'בתיקון · צפי החזרה: עד 14 ימים'},
+ lab1:{b:['lab.start'],next:'lab2',see:'בכיול'},
+ lab2:{b:['lab.done'],next:'sign',see:'הכיול הסתיים, התעודה בהכנה'},
+ // calibration at the customer's site: the technician works without internet, the results go up when he is back
+ visit:{b:['dani.visit'],next:'kit',see:'בקשת הכיול התקבלה, מתאמים ביקור'},
+ kit:{auto:'site.kit',next:'trip',see:'נקבע מועד לביקור'},
+ trip:{b:['site.go'],next:'sitecal'},
+ sitecal:{b:['site.done'],next:'sync'},
+ sync:{auto:'site.sync',next:'sign',see:'הכיול הסתיים, התעודה בהכנה'},
+ sign:{b:['quality.sign'],next:'cert'},
+ cert:{noOk:1,auto:'quality.send',next:'out',see:'תעודה חדשה בפורטל'},
+ out:{b:['dani.out'],next:'inv',see:'המכשיר בדרך אליך, תעודת משלוח בפורטל'},
+ inv:{b:['naama.inv'],next:'got'},
+ got:{b:['customer.got'],next:'end',see:'הקריאה נסגרה'}
+};
+
+/* =====================================================================
+   3. DATA - what each step means for the device
+   ===================================================================== */
+// device lifecycle: [stage, owner, color, owner on the on-site route]
+const STAGES=[['קליטה','דני','#2bb3a3'],['הצעה ואישור','הלקוח','#ffc53d'],['תיקון','סשה','#ff8a4c'],['כיול','המעבדה','#4db3ff','טכנאי שטח'],['תעודה','איכות','#b48cff'],['יציאה','דני','#2bb3a3'],['חיוב','נעמה','#ff7ab6'],['אצל הלקוח','','#2ecc71']];
+const STAGE_OF={in:0,choose:0,desc:0,partwait:2,dq:1,ap1:1,rem:1,call:1,diag:2,rq:1,ap2:1,eta:1,fix:2,pass:2,lab1:3,lab2:3,kit:3,trip:3,sitecal:3,sync:3,sign:4,cert:4,out:5,inv:6,got:7};
+// where the device is, per lifecycle stage
+const WHERE=['אצל דני, בקליטה','על המדף, מחכה לתשובת הלקוח','אצל סשה, בתיקונים','במעבדה','באיכות, לתעודה','אצל דני, ליציאה','נשלח ללקוח','אצל הלקוח'];
+// statuses as QualiTest names them (Addition Status), with a short Hebrew note
+const STATUS={start:'אצל הלקוח',calhow:'נפתחה קריאת כיול',repsend:'נפתחה קריאת תיקון, המכשיר בדרך',in:'מחכה לקליטה',choose:'In the lab (נקלט)',dq:'Wait for OK (אישור דיאגנוסטיקה)',ap1:'Wait for OK (אישור דיאגנוסטיקה)',rem:'Wait for OK (נשלחה תזכורת)',call:'Wait for OK (5 תזכורות בלי תשובה)',diag:'In the lab (מחכה לדיאגנוסטיקה)',rq:'In work (בדיאגנוסטיקה)',ap2:'Wait for OK (אישור תיקון)',eta:'In the lab (אושר לתיקון)',fix:'In the lab (מחכה לתיקון)',pass:'In work (בתיקון)',lab1:'In the lab (מחכה לכיול)',lab2:'In work (בכיול)',sign:'מחכה להנפקת התעודה',cert:'התעודה הופקה',out:'מוכן ליציאה',inv:'נשלח, מחכה לחיוב',got:'בדרך ללקוח',visit:'מחכה לתיאום ביקור',kit:'הביקור תואם',trip:'מחכה ליציאת הטכנאי',sitecal:'בכיול אצל הלקוח, בלי אינטרנט',sync:'התוצאות עולות למערכת',desc:'In the lab (Came For: Diagnosis)',partwait:'Wait for parts (מחכה לחלק)'};
+// portal screen: [active tab, color]
+const PORTAL_TAB={partwait:['calls','#ffc53d'],calhow:['calls','#4db3ff'],repsend:['calls','#4db3ff'],in:['calls','#4db3ff'],dq:['quotes','#ffc53d'],rem:['quotes','#ffc53d'],call:['calls','#ff8a4c'],diag:['calls','#4db3ff'],rq:['quotes','#ffc53d'],eta:['calls','#2ecc71'],fix:['calls','#4db3ff'],pass:['calls','#4db3ff'],lab1:['calls','#4db3ff'],lab2:['calls','#4db3ff'],cert:['certs','#2ecc71'],out:['docs','#4db3ff'],got:['calls','#b8c2d0'],visit:['calls','#4db3ff'],kit:['calls','#2ecc71'],sync:['calls','#4db3ff']};
+// on-site calibration: same stations, but the device never leaves the customer - no shipment, nothing to receive
+// mails to the customer: on intake and on exit (certificate, or shipment note when no calibration), and the quote reminders
+// the customer's view of his call - six steps in his words
+const JOURNEY=['נפתחה קריאה','המכשיר נקלט','הצעה ואישור','בטיפול','מוכן','אצלך'];
+const JOURNEY_OF={calhow:0,repsend:0,visit:0,in:0,kit:1,choose:1,desc:1,dq:2,ap1:2,rem:2,call:2,diag:2,rq:2,ap2:2,eta:3,fix:3,partwait:3,pass:3,lab1:3,lab2:3,trip:3,sitecal:3,sync:3,sign:4,cert:4,out:4,inv:4,got:4,end:6};
+const MAILS={choose:'המכשיר נקלט, נפתחה קריאה',cert:'תעודת כיול חדשה בפורטל'};
+const ON_SITE={skip:['out','got'],where:'אצל הלקוח, באתר שלו',status:{inv:'כויל אצל הלקוח, מחכה לחיוב'}};
+// the route the device is on, set by the button that chose it
+const ROUTE={'customer.newcal':'קריאת כיול','customer.newrep':'קריאת תיקון','dani.cal':'כיול במעבדה','dani.rep':'תיקון','customer.site':'כיול אצל הלקוח','sasha.pass':'תיקון, ואחריו כיול','sasha.nocal':'תיקון, בלי כיול'};
+
+/* =====================================================================
+   4. DATA - business output in the control (sample numbers, not Gefen's data)
+   ===================================================================== */
+const OUTPUT={
+ day:{cal:{lab:32,site:9},calls:{done:38,work:6,wait:2},due:{yes:6,no:9,notyet:3},quotes:{diag:1290,rep:6800,recal:4350}},
+ month:{cal:{lab:712,site:198},calls:{done:941,work:41,wait:22},due:{yes:112,no:236,notyet:71},quotes:{diag:18500,rep:96400,recal:61200}}
+};
+// each chart: title + [key, label, color]
+const CHARTS={
+ cal:{t:'כיולים שבוצעו',parts:[['lab','במעבדה','#338ced'],['site','אצל הלקוח','#9dc8f7']]},
+ calls:{t:'קריאות',parts:[['done','בוצעו','#00a888'],['work','בעבודה','#9887ef'],['wait','מחכות ללקוח','#d28e05']]},
+ // money coming in: devices whose calibration falls due (tomorrow / next month) - who already confirmed, and whom to call
+ due:{t:{day:'כיולים צפויים מחר',month:'כיולים צפויים בחודש הבא'},parts:[['yes','אישרו','#00a888'],['no','לא ענו - להתקשר','#9887ef'],['notyet','עוד לא תוזכרו','#d28e05']]},
+ // money on the table: quotes sent and not yet approved, in shekels
+ quotes:{t:'הצעות שמחכות לאישור',money:1,parts:[['diag','דיאגנוסטיקה','#338ced'],['rep','תיקון','#e76624'],['recal','כיול חוזר','#00a888']]}
+};
+// steps where the call is waiting for the customer's answer
+const WAITS_FOR_CUSTOMER=['ap1','ap2','rem','call'];
+
+/* =====================================================================
+   5. STATE
+   ===================================================================== */
+// human in the loop: after every step that runs by itself (except noOk - processes 1-3 of the night run, through the agent), a person approves it (the panel's "מאשר"), and only then
+// it takes effect for the customer (the mail, what he sees in the portal)
+for(const [k,n] of Object.entries({...FLOW})) if(n.auto&&!n.noOk){FLOW[k+'_ok']={b:[n.auto.split('.')[0]+'.ok'],next:n.next,base:k};n.next=k+'_ok'}
+const baseOf=k=>(FLOW[k]&&FLOW[k].base)||k;
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let sent={};  // mails per step of the customer's call: {step index: [text]}
+let callType='',cur,ret,man,aut,rem,timer,last,cal,site,route,seen,playing=false,period='day';
+// what the simulated devices added to the output - kept across "start over", the day goes on
+const live={lab:0,site:0,done:0};
+
+/* =====================================================================
+   6. VIEW
+   ===================================================================== */
+const el=id=>document.getElementById('b-'+id);
+function name(id){const[d,b]=id.split('.');const dep=DEPTS.find(x=>x.id===d);return dep.who+' - '+dep.b.find(x=>x[0]===b)[1]}
+const button=(d,b)=>`<button class="bt${b[2]?' au':''}" id="b-${d.id}.${b[0]}" disabled><i></i><span>${b[1]}${b[3]?`<small>${b[3]}</small>`:b[2]?'<small>נעשה לבד</small>':''}</span></button>`;
+
+// built once: the customer's options go to the top zone, every other department gets a panel
+function build(){
+ const customer=DEPTS.find(d=>d.top);
+ $('#custb').innerHTML=customer.b.map(b=>button(customer,b)).join('');
+ $('#depts').innerHTML=DEPTS.filter(d=>!d.top).map(d=>`<section class="p" data-dept="${d.id}"><h3>${d.t}</h3><span class="who">${d.who}</span>${d.note?`<span class="note">${d.note}</span>`:''}${d.b.map(b=>button(d,b)).join('')}</section>`).join('');
+ $$('.bt').forEach(e=>e.addEventListener('click',()=>press(e.id.slice(2))));
+}
+
+function portal(tab,color){const sc=$('.scr');sc.style.setProperty('--pc',color);sc.querySelectorAll('.tabs span').forEach(e=>e.classList.toggle('on',e.dataset.t===tab));const cd=$('#cd');cd.classList.remove('fl');void cd.offsetWidth;cd.classList.add('fl')}
+
+// the device: lifecycle, where it is, its status, and the portal screen
+function journey(k){
+ const at=k in JOURNEY_OF?JOURNEY_OF[k]:-1;
+ $('#jr').innerHTML=JOURNEY.map((t,i)=>`<li class="${i<at?'d':i===at?'c':''}">${i===1&&site?'תואם ביקור':i===4&&!site?'מוכן + תעודת משלוח':t}${sent[i]?`<ul>${sent[i].map(m=>`<li>${m}</li>`).join('')}</ul>`:''}</li>`).join('');
+}
+// the customer sees only what he can do now; when nothing waits for him, a quiet line says so
+function custView(){
+ $$('#custb .bt').forEach(e=>e.classList.toggle('hid',!e.classList.contains('wait')));
+ $('#idle').hidden=!!$('#custb .bt.wait');
+}
+function life(k,hold){ journey(k);
+ const c=k==='end'?8:(k in STAGE_OF?STAGE_OF[k]:-1); if(c>=0&&c<8)seen.add(c); if(k==='end')seen.add(7);
+ $('#lc').innerHTML=STAGES.map((x,i)=>`<div style="--c:${x[2]}" class="${i===c?'c':seen.has(i)?'v':''}">${x[0]}<small>${(site&&x[3])||x[1]||'&nbsp;'}</small></div>`).join('');
+ $('#wh').textContent=k==='end'?'אצל הלקוח':site?ON_SITE.where:c<0?'אצל הלקוח':WHERE[c];
+ $('#stt').textContent=k==='end'?'העבודה נסגרה':((site&&ON_SITE.status[k])||STATUS[k]||'-');
+ if(PORTAL_TAB[k]&&!hold)portal(PORTAL_TAB[k][0],PORTAL_TAB[k][1]);
+ $('#dots').innerHTML=STAGES.map((x,i)=>`<i class="${seen.has(i)?'v':''}"></i>`).join('');
+}
+
+// the output right now: the sample numbers + what the simulated devices added + the call that is open now
+function outputNow(){
+ const base=OUTPUT[period], open=!cur||cur==='start'||cur==='end'?'':WAITS_FOR_CUSTOMER.includes(cur)?'wait':'work';
+ return {...base,cal:{lab:base.cal.lab+live.lab,site:base.cal.site+live.site},
+         calls:{done:base.calls.done+live.done,work:base.calls.work+(open==='work'),wait:base.calls.wait+(open==='wait')}};
+}
+const num=n=>n.toLocaleString('en-US');
+// one small donut: 2px gaps between the parts, the total in the middle, every value in the list next to it
+const shekel=n=>'₪'+num(n), shekelShort=n=>'₪'+(n>=100000?Math.round(n/1000)+'K':n>=1000?(n/1000).toFixed(1)+'K':n);
+function donut(title,parts,money){
+ const v=money?shekel:num;
+ const total=parts.reduce((s,p)=>s+p[1],0), R=28, C=2*Math.PI*R, GAP=2; let at=0;
+ const arcs=parts.filter(p=>p[1]>0).map(p=>{const len=p[1]/total*C, dash=Math.max(len-GAP,1), from=at; at+=len;
+  return `<circle cx="36" cy="36" r="${R}" fill="none" stroke="${p[2]}" stroke-width="9" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-from).toFixed(2)}"><title>${p[0]}: ${v(p[1])} (${Math.round(p[1]/total*100)}%)</title></circle>`}).join('');
+ return `<div class="dnt"><svg viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="${title}: ${parts.map(p=>p[0]+' '+v(p[1])).join(', ')}"><g transform="rotate(-90 36 36)">${arcs}</g><text x="36" y="37" text-anchor="middle" dominant-baseline="middle" direction="ltr"${money?' style="font-size:12.5px"':''}>${money?shekelShort(total):num(total)}</text></svg>`+
+  `<div><div class="t">${title}</div><ul>${parts.map(p=>`<li><i style="background:${p[2]}"></i><span>${p[0]}</span><b>${v(p[1])}</b></li>`).join('')}</ul></div></div>`;
+}
+function output(){const now=outputNow();$('#dnts').innerHTML=Object.entries(CHARTS).map(([k,ch])=>donut(typeof ch.t==='string'?ch.t:ch.t[period],ch.parts.map(p=>[p[1],now[k][p[0]],p[2]]),ch.money)).join('')}
+
+function control(){$('#k1').textContent=man;$('#k2').textContent=aut;$('#route').textContent=route||'-';output()}
+function log(text,byItself){const li=document.createElement('li');if(byItself)li.className='au';li.append(document.createElement('i'),text);$('#log').prepend(li);control()}
+// a mail is written under the step of the call it was sent at; a new reminder replaces the one before it
+function mail(text){const k=baseOf(cur),i=JOURNEY_OF[k]??0;const l=(sent[i]||[]).filter(m=>!(m.startsWith('תזכורת')&&text.startsWith('תזכורת')));sent[i]=[...l,text];journey(k)}
+// what an approved step does for the customer
+function approved(b){
+ const n=FLOW[b]; if(n.see)$('#see').textContent=n.see; if(PORTAL_TAB[b])portal(PORTAL_TAB[b][0],PORTAL_TAB[b][1]);
+ if(b==='rem'){$('#see').textContent=`נשלחה תזכורת ${rem} מתוך 5`;mail(`תזכורת ${rem} מתוך 5 - הצעה מחכה לאישור`)}
+ if(MAILS[b])mail(MAILS[b]);
+}
+function mark(){$$('.bt.src').forEach(e=>e.classList.remove('src'));if(last)last.classList.add('src')}
+function clearWait(){$$('.bt.wait').forEach(e=>{e.classList.remove('wait');e.disabled=true});$$('[data-dept].act').forEach(e=>e.classList.remove('act'))}
+
+/* =====================================================================
+   7. ENGINE
+   ===================================================================== */
+// the buttons that blink at a step: per call type when the step says so
+const btnsOf=n=>n.byCall?n.byCall[callType]:n.b;
+const nextOf=(n,id)=>{const nx=typeof n.next==='string'?n.next:n.next[id];return nx==='@ret'?ret:nx};
+
+function go(k){
+ if(site&&ON_SITE.skip.includes(k))return go(FLOW[k].next);
+ clearTimeout(timer);clearWait();cur=k;mark();
+ if(k==='visit')site=true;
+ if(k==='cert'){cal=true;live[site?'site':'lab']++}
+ if(k==='end')live.done++;
+ life(baseOf(k),!!(FLOW[k]&&(FLOW[k].auto||FLOW[k].base)));control();   // the portal changes only after approval
+ if(MAILS[k]&&!FLOW[k]?.auto)mail(MAILS[k]);
+ if(k==='out'&&!cal)mail('המכשיר בדרך אליך - תעודת משלוח');
+ if(k==='end'){$$('.bt.src').forEach(e=>e.classList.remove('src'));$('#now').textContent='אף אחד - הסתיים';$('#end').innerHTML='<b>הגלגל הושלם.</b> המכשיר אצל הלקוח, והעבודה חויבה.'+(cal?' בעוד שנה תצא תזכורת כיול.':' לא נעשה כיול, ולכן לא נקבעה תזכורת כיול.');$('#end').style.display='inline-block';playing=false;$('#auto').textContent='הרץ לבד';custView();return}
+ const n=FLOW[k]; if(n.ret)ret=n.ret; if(n.see&&!n.auto)$('#see').textContent=n.see;
+ if(n.auto){const e=el(n.auto);e.classList.add('auto');e.closest('[data-dept]').classList.add('act');const what=name(n.auto)+(k==='rem'?` - ${rem} מתוך 5`:'');
+  $('#now').textContent=what+' (לבד)';aut++;log('לבד: '+what,true);custView();
+  timer=setTimeout(()=>{e.classList.remove('auto');e.classList.add('done');last=e;if(n.noOk)approved(k);go(nextOf(n))},1100);return}
+ btnsOf(n).forEach(id=>{const e=el(id);e.classList.remove('done','hid');e.classList.add('wait');e.disabled=false;e.closest('[data-dept]').classList.add('act')});
+ $('#now').textContent=n.base?'אישור: '+name(FLOW[n.base].auto):btnsOf(n).map(name).join('  או  ');
+ custView();
+ if(playing)timer=setTimeout(()=>press(btnsOf(n)[0]),1300);
+}
+
+function press(id){
+ const n=FLOW[cur]; if(!n||!n.b||!btnsOf(n).includes(id))return;
+ if(id==='customer.newcal')callType='cal'; if(id==='customer.newrep')callType='rep';
+ man++; if(ROUTE[id])route=ROUTE[id]; log(n.base?'מאשר: '+name(FLOW[n.base].auto):name(id));
+ if(n.base)approved(n.base);
+ const e=el(id);clearWait();e.classList.add('done');last=e;
+ // 5 reminders, 3 days apart; no answer after the 5th - Sasha calls
+ if(id==='customer.silent'){if(rem>=5){rem=0;return go('call')} rem++}
+ go(nextOf(n,id));
+}
+
+function reset(){
+ clearTimeout(timer);man=aut=rem=0;last=null;cal=false;site=false;route='';seen=new Set();playing=false;
+ $('#auto').textContent='הרץ לבד';$('#end').style.display='none';
+ $$('.bt').forEach(e=>{e.classList.remove('wait','done','auto','src');e.disabled=true});
+ // the customer sees only what is relevant: his buttons appear when the flow reaches them
+ $$('#custb .bt').forEach(e=>e.classList.add('hid'));
+ $$('[data-dept].act').forEach(e=>e.classList.remove('act'));
+ $('#log').innerHTML='';sent={};$('#see').textContent='-';portal('calls','#4db3ff');
+ callType='';
+ go('start');
+}
+
+$('#reset').onclick=reset;
+$('#auto').onclick=()=>{playing=!playing;$('#auto').textContent=playing?'עצור':'הרץ לבד';if(playing){if(cur==='end')reset(),playing=true,$('#auto').textContent='עצור';const n=FLOW[cur];if(n&&n.b)timer=setTimeout(()=>press(btnsOf(n)[0]),600)}else clearTimeout(timer)};
+$$('.seg button').forEach(b=>b.onclick=()=>{period=b.dataset.per;$$('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));output()});
+
+// one screen: scale the whole board to the window; narrow screens keep the normal scrolling layout
+// when the height decides the scale, the board widens to fill the window instead of leaving empty sides
+function fit(){
+ const w=$('.wrap'), on=innerWidth>900;
+ document.body.classList.toggle('fit',on); w.style.zoom=''; w.style.width='';
+ if(!on)return;
+ let z=1;
+ for(let i=0;i<3;i++){z=Math.min(innerWidth/w.offsetWidth,innerHeight/w.offsetHeight)*0.995; w.style.width=Math.max(1600,Math.floor(innerWidth/z))+'px'}
+ w.style.zoom=Math.min(innerWidth/w.offsetWidth,innerHeight/w.offsetHeight)*0.995;
+}
+addEventListener('resize',fit);
+
+build();
+reset();
+fit();
+</script>
+</body>
+</html>
