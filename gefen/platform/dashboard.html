@@ -67,10 +67,10 @@ h2,h3{margin:0}
 .rc{display:flex;flex-direction:column;gap:10px;min-width:0}
 /* the portal screen as wide as the customer's buttons under it */
 .rc>.scr{align-self:stretch}
-.act{display:flex;flex-direction:column;justify-content:center;gap:6px;background:#0c1230;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.cact{display:flex;flex-direction:column;justify-content:center;gap:6px;background:#0c1230;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
 .actt{font-size:11.5px;color:var(--ink-2)}
 .idle{color:var(--ink-3);font-size:13px;padding:6px 0}
-@media(max-width:700px){.jr li{font-size:10.5px;min-width:0;overflow-wrap:anywhere}.ob .bt{flex:1 1 100%}.opts,.oc,.act{min-width:0}}
+@media(max-width:700px){.jr li{font-size:10.5px;min-width:0;overflow-wrap:anywhere}.ob .bt{flex:1 1 100%}.opts,.oc,.cact{min-width:0}}
 .opts h3{font-size:14px;color:#fff;margin-bottom:4px}
 .ob{display:flex;flex-wrap:wrap;gap:10px}
 .ob:empty{display:none}
@@ -112,6 +112,14 @@ h2,h3{margin:0}
 /* buttons: off / blinking (waiting) / done / done by itself / the last action (running frame) */
 .bt{display:flex;align-items:center;gap:9px;width:100%;font:inherit;text-align:right;background:var(--well);border:1px solid var(--line);color:var(--ink-3);border-radius:10px;padding:8px 10px;margin:6px 0;cursor:default;min-height:44px}
 .bt.hid{display:none}
+/* a step done by itself, and next to it the person who approves it */
+.row{display:flex;gap:6px;align-items:stretch}
+.row>.bt:first-child{flex:1;min-width:0}
+.bt.ok,.okgap{width:58px;flex:none}
+.bt.ok{justify-content:center;gap:6px;padding:6px 10px;font-size:12.5px}
+/* no dot on the approve button: its frame shows the state */
+.bt.ok i{display:none}
+.bt.ok.done{border-color:var(--done)}
 .bt:focus-visible{outline:2px solid var(--frame);outline-offset:2px}
 .bt i{flex:none;width:16px;height:16px;border-radius:50%;background:#2a355f;box-shadow:inset 0 0 0 2px #0006}
 .bt small{display:block;color:var(--ink-3);font-size:11px}
@@ -120,7 +128,9 @@ h2,h3{margin:0}
 .bt.wait i{background:var(--wait);box-shadow:0 0 10px var(--wait)}
 .bt.done{color:#c9f3da}
 .bt.done i{background:var(--done);box-shadow:0 0 6px var(--done)}
-.bt.auto{color:#fff;border-color:var(--auto)}
+/* a step that works by itself still waits for a click to move on (in "run by itself" it moves alone) */
+.bt.auto{color:#fff;border-color:var(--auto);cursor:pointer;animation:ab 1s infinite}
+@keyframes ab{50%{background:#0f2f52}}
 .bt.auto i{background:var(--auto);box-shadow:0 0 12px var(--auto)}
 .bt.src{border-color:transparent;color:#fff;background-image:linear-gradient(90deg,var(--frame) 50%,transparent 50%),linear-gradient(90deg,var(--frame) 50%,transparent 50%),linear-gradient(0deg,var(--frame) 50%,transparent 50%),linear-gradient(0deg,var(--frame) 50%,transparent 50%);background-size:14px 2px,14px 2px,2px 14px,2px 14px;background-repeat:repeat-x,repeat-x,repeat-y,repeat-y;background-position:0 0,0 100%,0 0,100% 0;animation:ants 1.8s linear infinite}
 @keyframes bl{50%{background:#3a3110}}
@@ -208,7 +218,7 @@ h2,h3{margin:0}
 }
 @media(max-width:700px){.lc{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:480px){.grid,.ob,.dnts{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.bt.src,.cd.fl{animation:none}.bt.wait{animation:none;background:#3a3110}}
+@media (prefers-reduced-motion:reduce){.bt.src,.cd.fl,.bt.auto{animation:none}.bt.wait{animation:none;background:#3a3110}}
 </style>
 </head>
 <body>
@@ -242,7 +252,7 @@ h2,h3{margin:0}
       <div class="tabs"><span data-t="calls">הקריאות שלי</span><span data-t="quotes">הצעות מחיר</span><span data-t="certs">הכיולים שלי</span><span data-t="docs">מסמכים</span></div>
       <div class="cd" id="cd"><div class="dn"><b>מולטימטר 34401A</b><small>Register No 12345 · אתר חדרה</small></div><div class="chip" id="see">-</div><div class="dots" id="dots"></div></div>
     </div>
-    <div class="act" data-dept="customer">
+    <div class="cact" data-dept="customer">
       <div class="ob" id="custb"></div>
       <div class="idle" id="idle">אין פעולה שמחכה ללקוח - גפן מטפלת</div>
     </div>
@@ -316,10 +326,10 @@ h2,h3{margin:0}
 const DEPTS=[
  {id:'customer',t:'הלקוח',who:'בפורטל',top:1,b:[['newcal','+ קריאת כיול'],['newrep','+ קריאת תיקון'],['send','שולח מכשיר'],['site','מזמין כיול אצלו'],['approve','מאשר הצעה'],['silent','לא עונה 3 ימים'],['got','קיבל את המכשיר']]},
  {id:'dani',t:'קליטה ויציאה',who:'דני',b:[['in','קליטה (Work In)'],['cal','Came For: Calibration'],['rep','Came For: Diagnosis'],['desc','תיאור התקלה'],['out','יציאה (Work Out)'],['visit','תיאום ביקור אצל הלקוח']]},
- {id:'quotes',t:'הצעות ותזכורות',who:'סוכן',note:'נעשה לבד',b:[['diagq','הצעת דיאגנוסטיקה ללקוח',1],['remind','תזכורת ללקוח, כל 3 ימים',1],['eta','צפי החזרה: עד 42 ימים',1],['ok','מאשר',0,'אדם מאשר']]},
  {id:'sasha',t:'תיקונים',who:'סשה',b:[['diag','דיאגנוסטיקה'],['rq','הצעת תיקון ללקוח'],['fix','תיקון'],['parts','מחכה לחלק'],['arrived','החלק הגיע'],['pass','תוקן, עובר לכיול'],['nocal','תוקן, יוצא בלי כיול'],['call','להתקשר ללקוח']]},
+ {id:'quotes',t:'הצעות ותזכורות',who:'סוכן',b:[['diagq','הצעת דיאגנוסטיקה ללקוח',1],['remind','תזכורת ללקוח, כל 3 ימים',1],['eta','צפי החזרה: עד 42 ימים',1]]},
  {id:'lab',t:'המעבדה',who:'הטכנאים',b:[['start','התחלת כיול'],['done','הכיול הסתיים']]},
- {id:'site',t:'כיול אצל הלקוח',who:'טכנאי שטח',note:'אופליין: עובד בלי אינטרנט',b:[['kit','רשימת ציוד לביקור',1],['go','יציאה ללקוח'],['done','הכיול הסתיים'],['sync','התוצאות עולות כשהטכנאי חוזר',1],['ok','מאשר',0,'אדם מאשר']]},
+ {id:'site',t:'כיול אצל הלקוח',who:'טכנאי שטח',note:'אופליין: עובד בלי אינטרנט',b:[['kit','רשימת ציוד לביקור',1],['go','יציאה ללקוח'],['done','הכיול הסתיים'],['sync','התוצאות עולות כשהטכנאי חוזר',1]]},
  {id:'quality',t:'תעודות',who:'איכות',b:[['sign','הנפקת תעודה'],['send','תעודה לפורטל',1]]},
  {id:'naama',t:'חיוב',who:'נעמה',b:[['inv','חשבונית']]}
 ];
@@ -334,33 +344,33 @@ const FLOW={
  start:{b:['customer.newcal','customer.newrep'],next:{'customer.newcal':'calhow','customer.newrep':'repsend'}},
  calhow:{b:['customer.send','customer.site'],next:{'customer.send':'in','customer.site':'visit'},see:'נפתחה קריאת כיול'},
  repsend:{b:['customer.send'],next:'in',see:'נפתחה קריאת תיקון'},
- in:{b:['dani.in'],next:'choose',see:'המכשיר נקלט, נפתחה קריאה'},
- choose:{b:['dani.cal','dani.rep'],byCall:{cal:['dani.cal'],rep:['dani.rep']},next:{'dani.cal':'lab1','dani.rep':'desc'}},
+ in:{b:['dani.in'],next:'choose',see:'המכשיר בדרך לגפן'},
+ choose:{see:'המכשיר נקלט, נפתחה קריאה',b:['dani.cal','dani.rep'],byCall:{cal:['dani.cal'],rep:['dani.rep']},next:{'dani.cal':'lab1','dani.rep':'desc'}},
  desc:{b:['dani.desc'],next:'dq'},
  dq:{auto:'quotes.diagq',next:'ap1',see:'הצעת דיאגנוסטיקה מחכה לאישור'},
  ap1:{b:['customer.approve','customer.silent'],next:{'customer.approve':'diag','customer.silent':'rem'},ret:'ap1'},
- diag:{b:['sasha.diag'],next:'rq',see:'בדיאגנוסטיקה'},
- rq:{b:['sasha.rq'],next:'ap2',see:'הצעת תיקון מחכה לאישור'},
- ap2:{b:['customer.approve','customer.silent'],next:{'customer.approve':'eta','customer.silent':'rem'},ret:'ap2'},
+ diag:{b:['sasha.diag'],next:'rq',see:'אושר, מחכה לדיאגנוסטיקה'},
+ rq:{b:['sasha.rq'],next:'ap2',see:'בדיאגנוסטיקה'},
+ ap2:{see:'הצעת תיקון מחכה לאישור',b:['customer.approve','customer.silent'],next:{'customer.approve':'eta','customer.silent':'rem'},ret:'ap2'},
  rem:{noOk:1,auto:'quotes.remind',next:'@ret',see:'נשלחה תזכורת'},
  call:{b:['sasha.call'],next:'@ret',see:'סשה יוצר קשר'},
  eta:{auto:'quotes.eta',next:'fix',see:'אושר לתיקון · צפי החזרה: עד 42 ימים'},
  fix:{b:['sasha.fix','sasha.parts'],next:{'sasha.fix':'pass','sasha.parts':'partwait'},see:'אושר לתיקון · צפי החזרה: עד 42 ימים'},
  partwait:{b:['sasha.arrived'],next:'fix',see:'מחכה לחלק · צפי החזרה: עד 42 ימים'},
  pass:{b:['sasha.pass','sasha.nocal'],next:{'sasha.pass':'lab1','sasha.nocal':'out'},see:'בתיקון · צפי החזרה: עד 14 ימים'},
- lab1:{b:['lab.start'],next:'lab2',see:'בכיול'},
- lab2:{b:['lab.done'],next:'sign',see:'הכיול הסתיים, התעודה בהכנה'},
+ lab1:{b:['lab.start'],next:'lab2',see:'מחכה לכיול'},
+ lab2:{b:['lab.done'],next:'sign',see:'בכיול'},
  // calibration at the customer's site: the technician works without internet, the results go up when he is back
  visit:{b:['dani.visit'],next:'kit',see:'בקשת הכיול התקבלה, מתאמים ביקור'},
  kit:{auto:'site.kit',next:'trip',see:'נקבע מועד לביקור'},
  trip:{b:['site.go'],next:'sitecal'},
- sitecal:{b:['site.done'],next:'sync'},
+ sitecal:{b:['site.done'],next:'sync',see:'בכיול אצלך'},
  sync:{auto:'site.sync',next:'sign',see:'הכיול הסתיים, התעודה בהכנה'},
- sign:{b:['quality.sign'],next:'cert'},
+ sign:{b:['quality.sign'],next:'cert',see:'הכיול הסתיים, התעודה בהכנה'},
  cert:{noOk:1,auto:'quality.send',next:'out',see:'תעודה חדשה בפורטל'},
- out:{b:['dani.out'],next:'inv',see:'המכשיר בדרך אליך, תעודת משלוח בפורטל'},
- inv:{b:['naama.inv'],next:'got'},
- got:{b:['customer.got'],next:'end',see:'הקריאה נסגרה'}
+ out:{b:['dani.out'],next:'inv',see:'מוכן, מחכה למשלוח'},
+ inv:{b:['naama.inv'],next:'got',see:'המכשיר בדרך אליך, תעודת משלוח בפורטל'},
+ got:{b:['customer.got'],next:'end'}
 };
 
 /* =====================================================================
@@ -381,7 +391,7 @@ const PORTAL_TAB={partwait:['calls','#ffc53d'],calhow:['calls','#4db3ff'],repsen
 const JOURNEY=['נפתחה קריאה','המכשיר נקלט','הצעה ואישור','בטיפול','מוכן','אצלך'];
 const JOURNEY_OF={calhow:0,repsend:0,visit:0,in:0,kit:1,choose:1,desc:1,dq:2,ap1:2,rem:2,call:2,diag:2,rq:2,ap2:2,eta:3,fix:3,partwait:3,pass:3,lab1:3,lab2:3,trip:3,sitecal:3,sync:3,sign:4,cert:4,out:4,inv:4,got:4,end:6};
 const MAILS={choose:'המכשיר נקלט, נפתחה קריאה',cert:'תעודת כיול חדשה בפורטל'};
-const ON_SITE={skip:['out','got'],where:'אצל הלקוח, באתר שלו',status:{inv:'כויל אצל הלקוח, מחכה לחיוב'}};
+const ON_SITE={skip:['out','got'],see:{inv:'הכיול הסתיים, התעודה בפורטל'},where:'אצל הלקוח, באתר שלו',status:{inv:'כויל אצל הלקוח, מחכה לחיוב'}};
 // the route the device is on, set by the button that chose it
 const ROUTE={'customer.newcal':'קריאת כיול','customer.newrep':'קריאת תיקון','dani.cal':'כיול במעבדה','dani.rep':'תיקון','customer.site':'כיול אצל הלקוח','sasha.pass':'תיקון, ואחריו כיול','sasha.nocal':'תיקון, בלי כיול'};
 
@@ -409,7 +419,9 @@ const WAITS_FOR_CUSTOMER=['ap1','ap2','rem','call'];
    ===================================================================== */
 // human in the loop: after every step that runs by itself (except noOk - processes 1-3 of the night run, through the agent), a person approves it (the panel's "מאשר"), and only then
 // it takes effect for the customer (the mail, what he sees in the portal)
-for(const [k,n] of Object.entries({...FLOW})) if(n.auto&&!n.noOk){FLOW[k+'_ok']={b:[n.auto.split('.')[0]+'.ok'],next:n.next,base:k};n.next=k+'_ok'}
+for(const [k,n] of Object.entries({...FLOW})) if(n.auto&&!n.noOk){FLOW[k+'_ok']={b:[n.auto+'.ok'],next:n.next,base:k};n.next=k+'_ok'}
+// the steps done by themselves that wait for a person's approval: their row gets an "approve" button
+const NEEDS_OK=new Set(Object.values(FLOW).filter(n=>n.auto&&!n.noOk).map(n=>n.auto));
 const baseOf=k=>(FLOW[k]&&FLOW[k].base)||k;
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 let sent={};  // mails per step of the customer's call: {step index: [text]}
@@ -421,8 +433,10 @@ const live={lab:0,site:0,done:0};
    6. VIEW
    ===================================================================== */
 const el=id=>document.getElementById('b-'+id);
-function name(id){const[d,b]=id.split('.');const dep=DEPTS.find(x=>x.id===d);return dep.who+' - '+dep.b.find(x=>x[0]===b)[1]}
-const button=(d,b)=>`<button class="bt${b[2]?' au':''}" id="b-${d.id}.${b[0]}" disabled><i></i><span>${b[1]}${b[3]?`<small>${b[3]}</small>`:b[2]?'<small>נעשה לבד</small>':''}</span></button>`;
+function name(id){const[d,b,ok]=id.split('.');const dep=DEPTS.find(x=>x.id===d);return dep.who+' - '+(ok?'מאשר: ':'')+dep.b.find(x=>x[0]===b)[1]}
+const button=(d,b)=>{const one=`<button class="bt${b[2]?' au':''}" id="b-${d.id}.${b[0]}" disabled><i></i><span>${b[1]}${b[3]?`<small>${b[3]}</small>`:b[2]?'<small>נעשה לבד</small>':''}</span></button>`;
+ if(NEEDS_OK.has(d.id+'.'+b[0]))return `<div class="row">${one}<button class="bt ok" id="b-${d.id}.${b[0]}.ok" disabled title="אדם מאשר"><i></i><span>מאשר</span></button></div>`;
+ return d.b.some(x=>NEEDS_OK.has(d.id+'.'+x[0]))?`<div class="row">${one}<span class="okgap"></span></div>`:one};
 
 // built once: the customer's options go to the top zone, every other department gets a panel
 function build(){
@@ -500,12 +514,14 @@ function go(k){
  if(k==='end')live.done++;
  life(baseOf(k),!!(FLOW[k]&&(FLOW[k].auto||FLOW[k].base)));control();   // the portal changes only after approval
  if(MAILS[k]&&!FLOW[k]?.auto)mail(MAILS[k]);
- if(k==='out'&&!cal)mail('המכשיר בדרך אליך - תעודת משלוח');
- if(k==='end'){$$('.bt.src').forEach(e=>e.classList.remove('src'));$('#now').textContent='אף אחד - הסתיים';$('#end').innerHTML='<b>הגלגל הושלם.</b> המכשיר אצל הלקוח, והעבודה חויבה.'+(cal?' בעוד שנה תצא תזכורת כיול.':' לא נעשה כיול, ולכן לא נקבעה תזכורת כיול.');$('#end').style.display='inline-block';playing=false;$('#auto').textContent='הרץ לבד';custView();return}
- const n=FLOW[k]; if(n.ret)ret=n.ret; if(n.see&&!n.auto)$('#see').textContent=n.see;
+ if(k==='inv'&&!site)mail('המכשיר בדרך אליך - תעודת משלוח');
+ if(k==='end'){$('#see').textContent='הקריאה נסגרה';$$('.bt.src').forEach(e=>e.classList.remove('src'));$('#now').textContent='אף אחד - הסתיים';$('#end').innerHTML='<b>הגלגל הושלם.</b> המכשיר אצל הלקוח, והעבודה חויבה.'+(cal?' בעוד שנה תצא תזכורת כיול.':' לא נעשה כיול, ולכן לא נקבעה תזכורת כיול.');$('#end').style.display='inline-block';playing=false;$('#auto').textContent='הרץ לבד';custView();return}
+ const n=FLOW[k], see=(site&&ON_SITE.see[k])||n.see; if(n.ret)ret=n.ret; if(see&&!n.auto)$('#see').textContent=see;
  if(n.auto){const e=el(n.auto);e.classList.add('auto');e.closest('[data-dept]').classList.add('act');const what=name(n.auto)+(k==='rem'?` - ${rem} מתוך 5`:'');
   $('#now').textContent=what+' (לבד)';aut++;log('לבד: '+what,true);custView();
-  timer=setTimeout(()=>{e.classList.remove('auto');e.classList.add('done');last=e;if(n.noOk)approved(k);go(nextOf(n))},1100);return}
+  // a step that a person approves next to it: no click of its own - the approve button blinks right away
+  if(!n.noOk)return press(n.auto);
+  e.disabled=false; if(playing)timer=setTimeout(()=>press(n.auto),1100); return}
  btnsOf(n).forEach(id=>{const e=el(id);e.classList.remove('done','hid');e.classList.add('wait');e.disabled=false;e.closest('[data-dept]').classList.add('act')});
  $('#now').textContent=n.base?'אישור: '+name(FLOW[n.base].auto):btnsOf(n).map(name).join('  או  ');
  custView();
@@ -513,7 +529,10 @@ function go(k){
 }
 
 function press(id){
- const n=FLOW[cur]; if(!n||!n.b||!btnsOf(n).includes(id))return;
+ const n=FLOW[cur];
+ // a step done by itself: the click moves it on
+ if(n&&n.auto===id){clearTimeout(timer);const e=el(id);e.classList.remove('auto');e.disabled=true;e.classList.add('done');last=e;if(n.noOk)approved(cur);return go(nextOf(n))}
+ if(!n||!n.b||!btnsOf(n).includes(id))return;
  if(id==='customer.newcal')callType='cal'; if(id==='customer.newrep')callType='rep';
  man++; if(ROUTE[id])route=ROUTE[id]; log(n.base?'מאשר: '+name(FLOW[n.base].auto):name(id));
  if(n.base)approved(n.base);
